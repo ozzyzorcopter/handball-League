@@ -802,7 +802,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
   const defenders = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => a.GA - b.GA || a.name.localeCompare(b.name)).slice(0, 3), [rows]);
   const allAttackers = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => b.GF - a.GF || a.name.localeCompare(b.name)), [rows]);
   const allDefenders = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => a.GA - b.GA || a.name.localeCompare(b.name)), [rows]);
-  const [rankingPanel, setRankingPanel] = useState(null); // null | "attackers" | "defenders" | "tough"
+  const [rankingPanel, setRankingPanel] = useState(null); // null | "attackers" | "defenders" | "tough" | "home" | "away"
   const MEDALS = ["🥇", "🥈", "🥉"];
 
   // Tough team rankings
@@ -836,6 +836,30 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
 
   // Top 3 tough for mini card
   const topTough = toughRanking.slice(0, 3);
+
+  // Home GD ranking: sum of (homeScore - awayScore) for every played home fixture per team
+  const homeGDRanking = useMemo(() => {
+    const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
+    const N = teams.length;
+    const gd = new Array(N).fill(0);
+    played.forEach(f => {
+      if (f.homeIdx < N) gd[f.homeIdx] += (+f.homeScore - +f.awayScore);
+    });
+    return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
+  }, [fixtures, teams]);
+  const topHome = homeGDRanking.slice(0, 3);
+
+  // Away GD ranking: sum of (awayScore - homeScore) for every played away fixture per team
+  const awayGDRanking = useMemo(() => {
+    const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
+    const N = teams.length;
+    const gd = new Array(N).fill(0);
+    played.forEach(f => {
+      if (f.awayIdx < N) gd[f.awayIdx] += (+f.awayScore - +f.homeScore);
+    });
+    return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
+  }, [fixtures, teams]);
+  const topAway = awayGDRanking.slice(0, 3);
 
   function rowBg(i, r) {
     if (confirmedTop && confirmedTop.has(r.id)) return "rgba(22,163,74,.45)";
@@ -934,22 +958,65 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                   </div>
                 ))}
               </div>
+              <div className="mini-box">
+                <div className="mini-ttl" style={{ color: "#fb923c", cursor: "pointer", userSelect: "none" }}
+                  onClick={() => setRankingPanel(rankingPanel === "home" ? null : "home")}>
+                  {"🏠 Strongest Home " + (rankingPanel === "home" ? "▲" : "▼")}
+                </div>
+                {topHome.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mini-box">
+                <div className="mini-ttl" style={{ color: "#a78bfa", cursor: "pointer", userSelect: "none" }}
+                  onClick={() => setRankingPanel(rankingPanel === "away" ? null : "away")}>
+                  {"✈️ Strongest Away " + (rankingPanel === "away" ? "▲" : "▼")}
+                </div>
+                {topAway.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
           {rankingPanel && (
             <div className="mini-box" style={{ marginTop: ".75rem" }}>
-              <div className="mini-ttl" style={{ color: ["attackers","tough"].includes(rankingPanel) ? "#f87171" : "#4ade80", marginBottom: ".65rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <span>{rankingPanel === "attackers" ? "⚽ Full Attacking Ranking" : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking" : "💀 Full Toughest Ranking"}</span>
+              <div className="mini-ttl" style={{
+                color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : "#a78bfa",
+                marginBottom: ".65rem", display: "flex", justifyContent: "space-between", alignItems: "center"
+              }}>
+                <span>
+                  {rankingPanel === "attackers" ? "⚽ Full Attacking Ranking"
+                    : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking"
+                    : rankingPanel === "tough" ? "💀 Full Toughest Ranking"
+                    : rankingPanel === "home" ? "🏠 Full Strongest Home Ranking"
+                    : "✈️ Full Strongest Away Ranking"}
+                </span>
                 <button className="btn-rm" onClick={() => setRankingPanel(null)} style={{ fontSize: ".9rem" }}>✕</button>
               </div>
-              {(rankingPanel === "attackers" ? allAttackers : rankingPanel === "defenders" ? allDefenders : toughRanking).map((r, i) => (
+              {(rankingPanel === "attackers" ? allAttackers
+                : rankingPanel === "defenders" ? allDefenders
+                : rankingPanel === "tough" ? toughRanking
+                : rankingPanel === "home" ? homeGDRanking
+                : awayGDRanking
+              ).map((r, i) => (
                 <div key={r.id} className="mini-row">
-                  <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? (["attackers","tough"].includes(rankingPanel) ? "#f87171" : "#4ade80") : "#3a3f50" }}>
+                  <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? (rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : "#f87171") : "#3a3f50" }}>
                     {i < 3 ? MEDALS[i] : (i + 1) + "."}
                   </span>
                   <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : "#f87171" }}>
-                    {rankingPanel === "attackers" ? r.GF + " GF" : rankingPanel === "defenders" ? r.GA + " GA" : r.pts + " pts"}
+                  <span className="mini-val" style={{ color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : "#a78bfa" }}>
+                    {rankingPanel === "attackers" ? r.GF + " GF"
+                      : rankingPanel === "defenders" ? r.GA + " GA"
+                      : rankingPanel === "tough" ? r.pts + " pts"
+                      : (r.gd > 0 ? "+" : "") + r.gd + " GD"}
                   </span>
                   {(rankingPanel === "attackers" || rankingPanel === "defenders") && (
                     <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.P + " games)"}</span>
