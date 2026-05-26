@@ -1,3 +1,22 @@
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 const { useState, useMemo, useRef, useEffect } = React;
 function saveData(data) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -14,7 +33,7 @@ function loadData() {
       reader.onload = (e) => {
         try {
           resolve(JSON.parse(e.target.result));
-        } catch {
+        } catch (e2) {
           reject("Invalid file");
         }
       };
@@ -83,7 +102,8 @@ function generateTournament(sourceStats, settings, isPlaydown) {
   let prevRoundRefs = [];
   for (let i = 0; i < numByes; i++) prevRoundRefs.push({ type: "team", teamIdx: i, seed: i });
   r1Pairs.forEach(([seedA, seedB], pi) => {
-    const duelId = rounds[0]?.matches[pi * 2]?.duelId || "d" + pi;
+    var _a, _b;
+    const duelId = ((_b = (_a = rounds[0]) == null ? void 0 : _a.matches[pi * 2]) == null ? void 0 : _b.duelId) || "d" + pi;
     prevRoundRefs.push({ type: "duel_winner", duelId, seed: numByes + pi });
   });
   let roundNum = 2;
@@ -111,7 +131,8 @@ function generateTournament(sourceStats, settings, isPlaydown) {
   if (isPlaydown) {
     let loserRefs = [];
     r1Pairs.forEach(([seedA, seedB], pi) => {
-      const duelId = rounds[0]?.matches[pi * 2]?.duelId || "d" + pi;
+      var _a, _b;
+      const duelId = ((_b = (_a = rounds[0]) == null ? void 0 : _a.matches[pi * 2]) == null ? void 0 : _b.duelId) || "d" + pi;
       loserRefs.push({ type: "duel_loser", duelId, seed: numByes + pi });
     });
     rounds.filter((r) => r.type === "winners").forEach((r) => {
@@ -141,8 +162,8 @@ function generateTournament(sourceStats, settings, isPlaydown) {
   return { teams: phTeams, rounds };
 }
 function calcProbsNeutral(homeIdx, awayIdx, teams, settings) {
-  const neutralSettings = { ...settings, homeBonus: 0 };
-  const neutralTeams = teams.map((t) => ({ ...t, homeBonus: "" }));
+  const neutralSettings = __spreadProps(__spreadValues({}, settings), { homeBonus: 0 });
+  const neutralTeams = teams.map((t) => __spreadProps(__spreadValues({}, t), { homeBonus: "" }));
   return calcProbs(homeIdx, awayIdx, neutralTeams, [], neutralSettings);
 }
 function resolveRef(ref, teams, rounds) {
@@ -198,9 +219,10 @@ function calcStats(teams, fixtures) {
     s[t.id] = { id: t.id, name: t.name, basePts: t.points, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0 };
   });
   played.forEach((f) => {
+    var _a, _b;
     const hg = +f.homeScore, ag = +f.awayScore;
     if (isNaN(hg) || isNaN(ag)) return;
-    const h = s[teams[f.homeIdx]?.id], a = s[teams[f.awayIdx]?.id];
+    const h = s[(_a = teams[f.homeIdx]) == null ? void 0 : _a.id], a = s[(_b = teams[f.awayIdx]) == null ? void 0 : _b.id];
     if (!h || !a) return;
     h.P++;
     a.P++;
@@ -219,14 +241,15 @@ function calcStats(teams, fixtures) {
       a.D++;
     }
   });
-  const rows = Object.values(s).map((r) => ({ ...r, GD: r.GF - r.GA, totalPts: r.basePts + r.W * 2 + r.D }));
+  const rows = Object.values(s).map((r) => __spreadProps(__spreadValues({}, r), { GD: r.GF - r.GA, totalPts: r.basePts + r.W * 2 + r.D }));
   function h2h(ids) {
     const h = {};
     ids.forEach((id) => {
       h[id] = { pts: 0, GF: 0, GA: 0, awayGF: 0 };
     });
     played.forEach((f) => {
-      const hid = teams[f.homeIdx]?.id, aid = teams[f.awayIdx]?.id;
+      var _a, _b;
+      const hid = (_a = teams[f.homeIdx]) == null ? void 0 : _a.id, aid = (_b = teams[f.awayIdx]) == null ? void 0 : _b.id;
       if (!ids.includes(hid) || !ids.includes(aid)) return;
       const hg = +f.homeScore, ag = +f.awayScore;
       if (isNaN(hg) || isNaN(ag)) return;
@@ -265,8 +288,8 @@ function calcProbs(homeIdx, awayIdx, teams, fixtures, settings) {
   const ht = teams[homeIdx], at = teams[awayIdx];
   const hBonus = ht && ht.homeBonus !== "" && ht.homeBonus != null ? parseFloat(ht.homeBonus) || 0 : settings.homeBonus;
   const table = calcStats(teams, fixtures);
-  const homeRow = table.find((r) => r.id === ht?.id);
-  const awayRow = table.find((r) => r.id === at?.id);
+  const homeRow = table.find((r) => r.id === (ht == null ? void 0 : ht.id));
+  const awayRow = table.find((r) => r.id === (at == null ? void 0 : at.id));
   const hp = table.indexOf(homeRow);
   const ap = table.indexOf(awayRow);
   let gap = 0;
@@ -369,25 +392,31 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
     { k: "lossScore", l: "Loss score", n: "Goals for loser" },
     { k: "drawScore", l: "Draw score", n: "Goals each side" }
   ];
-  return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Probability settings"), /* @__PURE__ */ React.createElement("div", { className: "sgrid", style: { gridTemplateColumns: "1fr 1fr 1fr 1fr" } }, pf.map(({ k, l, n }) => /* @__PURE__ */ React.createElement("div", { key: k, className: "sfield" }, /* @__PURE__ */ React.createElement("span", { className: "lbl" }, l), /* @__PURE__ */ React.createElement("input", { className: "sinp", type: "number", min: "0", max: "100", value: settings[k] || 0, onChange: (e) => onChange(k, parseFloat(e.target.value) || 0) }), /* @__PURE__ */ React.createElement("span", { className: "snote" }, n)))), /* @__PURE__ */ React.createElement("hr", { className: "sdivider" }), /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Quick result scores"), /* @__PURE__ */ React.createElement("div", { className: "sgrid", style: { gridTemplateColumns: "1fr 1fr 1fr" } }, sf.map(({ k, l, n }) => /* @__PURE__ */ React.createElement("div", { key: k, className: "sfield" }, /* @__PURE__ */ React.createElement("span", { className: "lbl" }, l), /* @__PURE__ */ React.createElement("input", { className: "sinp", type: "number", min: "0", value: settings[k] || 0, onChange: (e) => onChange(k, parseFloat(e.target.value) || 0) }), /* @__PURE__ */ React.createElement("span", { className: "snote" }, n))))), league && league.type !== "playoff" && onLeagueChange && /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Highlight zones"), /* @__PURE__ */ React.createElement("div", { className: "config-row", style: { marginBottom: ".6rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".82rem", color: "#4ade80", minWidth: "140px" } }, "Promotion (top):"), /* @__PURE__ */ React.createElement("div", { className: "config-opts" }, [0, 1, 2, 3, 4].map((n) => /* @__PURE__ */ React.createElement(
-    "span",
-    {
-      key: n,
-      className: "config-opt" + ((league.promoTop ?? 2) === n ? " sel" : ""),
-      style: (league.promoTop ?? 2) === n ? { borderColor: "#4ade80", background: "rgba(74,222,128,.1)", color: "#4ade80" } : {},
-      onClick: () => onLeagueChange((lg) => ({ ...lg, promoTop: n }))
-    },
-    n
-  )))), /* @__PURE__ */ React.createElement("div", { className: "config-row" }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".82rem", color: "#f87171", minWidth: "140px" } }, "Relegation (bottom):"), /* @__PURE__ */ React.createElement("div", { className: "config-opts" }, [0, 1, 2, 3, 4].map((n) => /* @__PURE__ */ React.createElement(
-    "span",
-    {
-      key: n,
-      className: "config-opt" + ((league.demotBot ?? 2) === n ? " sel" : ""),
-      style: (league.demotBot ?? 2) === n ? { borderColor: "#f87171", background: "rgba(248,113,113,.1)", color: "#f87171" } : {},
-      onClick: () => onLeagueChange((lg) => ({ ...lg, demotBot: n }))
-    },
-    n
-  ))))), showTiebreakers && /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "End-of-season tiebreakers (always applied)"), /* @__PURE__ */ React.createElement("ul", { className: "tb-list" }, [
+  return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Probability settings"), /* @__PURE__ */ React.createElement("div", { className: "sgrid", style: { gridTemplateColumns: "1fr 1fr 1fr 1fr" } }, pf.map(({ k, l, n }) => /* @__PURE__ */ React.createElement("div", { key: k, className: "sfield" }, /* @__PURE__ */ React.createElement("span", { className: "lbl" }, l), /* @__PURE__ */ React.createElement("input", { className: "sinp", type: "number", min: "0", max: "100", value: settings[k] || 0, onChange: (e) => onChange(k, parseFloat(e.target.value) || 0) }), /* @__PURE__ */ React.createElement("span", { className: "snote" }, n)))), /* @__PURE__ */ React.createElement("hr", { className: "sdivider" }), /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Quick result scores"), /* @__PURE__ */ React.createElement("div", { className: "sgrid", style: { gridTemplateColumns: "1fr 1fr 1fr" } }, sf.map(({ k, l, n }) => /* @__PURE__ */ React.createElement("div", { key: k, className: "sfield" }, /* @__PURE__ */ React.createElement("span", { className: "lbl" }, l), /* @__PURE__ */ React.createElement("input", { className: "sinp", type: "number", min: "0", value: settings[k] || 0, onChange: (e) => onChange(k, parseFloat(e.target.value) || 0) }), /* @__PURE__ */ React.createElement("span", { className: "snote" }, n))))), league && league.type !== "playoff" && onLeagueChange && /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Highlight zones"), /* @__PURE__ */ React.createElement("div", { className: "config-row", style: { marginBottom: ".6rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".82rem", color: "#4ade80", minWidth: "140px" } }, "Promotion (top):"), /* @__PURE__ */ React.createElement("div", { className: "config-opts" }, [0, 1, 2, 3, 4].map((n) => {
+    var _a, _b;
+    return /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        key: n,
+        className: "config-opt" + (((_a = league.promoTop) != null ? _a : 2) === n ? " sel" : ""),
+        style: ((_b = league.promoTop) != null ? _b : 2) === n ? { borderColor: "#4ade80", background: "rgba(74,222,128,.1)", color: "#4ade80" } : {},
+        onClick: () => onLeagueChange((lg) => __spreadProps(__spreadValues({}, lg), { promoTop: n }))
+      },
+      n
+    );
+  }))), /* @__PURE__ */ React.createElement("div", { className: "config-row" }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".82rem", color: "#f87171", minWidth: "140px" } }, "Relegation (bottom):"), /* @__PURE__ */ React.createElement("div", { className: "config-opts" }, [0, 1, 2, 3, 4].map((n) => {
+    var _a, _b;
+    return /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        key: n,
+        className: "config-opt" + (((_a = league.demotBot) != null ? _a : 2) === n ? " sel" : ""),
+        style: ((_b = league.demotBot) != null ? _b : 2) === n ? { borderColor: "#f87171", background: "rgba(248,113,113,.1)", color: "#f87171" } : {},
+        onClick: () => onLeagueChange((lg) => __spreadProps(__spreadValues({}, lg), { demotBot: n }))
+      },
+      n
+    );
+  })))), showTiebreakers && /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "End-of-season tiebreakers (always applied)"), /* @__PURE__ */ React.createElement("ul", { className: "tb-list" }, [
     "Most wins overall",
     "Most points in head-to-head matches among tied teams",
     "Best goal difference in those head-to-head matches",
@@ -422,14 +451,15 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
   return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "card-grid" }, leagues.map((lg) => /* @__PURE__ */ React.createElement("div", { key: lg.id, className: "card", onClick: () => onOpen(lg.id) }, /* @__PURE__ */ React.createElement("button", { className: "card-del", onClick: (e) => {
     e.stopPropagation();
     onDelete(lg.id);
-  } }, "\u2715"), /* @__PURE__ */ React.createElement("div", { className: "card-badge " + (lg.type === "playoff" ? "badge-po" : "badge-std") }, lg.type === "playoff" ? "Play-off League" : "Standard League"), /* @__PURE__ */ React.createElement("div", { className: "card-name" }, lg.name), /* @__PURE__ */ React.createElement("div", { className: "card-meta" }, (lg.teams || []).length, " teams \xB7 ", (lg.fixtures || []).filter((f) => !f.played).length, " pending \xB7 ", (lg.fixtures || []).filter((f) => f.played).length, " played", lg.type === "playoff" && (() => {
-    const poPlayed = (lg.playoffs?.fixtures || []).filter((f) => f.played).length;
-    const poPending = (lg.playoffs?.fixtures || []).filter((f) => !f.played).length;
-    const pdPlayed = (lg.playdowns?.fixtures || []).filter((f) => f.played).length;
-    const pdPending = (lg.playdowns?.fixtures || []).filter((f) => !f.played).length;
+  } }, "✕"), /* @__PURE__ */ React.createElement("div", { className: "card-badge " + (lg.type === "playoff" ? "badge-po" : "badge-std") }, lg.type === "playoff" ? "Play-off League" : "Standard League"), /* @__PURE__ */ React.createElement("div", { className: "card-name" }, lg.name), /* @__PURE__ */ React.createElement("div", { className: "card-meta" }, (lg.teams || []).length, " teams · ", (lg.fixtures || []).filter((f) => !f.played).length, " pending · ", (lg.fixtures || []).filter((f) => f.played).length, " played", lg.type === "playoff" && (() => {
+    var _a, _b, _c, _d;
+    const poPlayed = (((_a = lg.playoffs) == null ? void 0 : _a.fixtures) || []).filter((f) => f.played).length;
+    const poPending = (((_b = lg.playoffs) == null ? void 0 : _b.fixtures) || []).filter((f) => !f.played).length;
+    const pdPlayed = (((_c = lg.playdowns) == null ? void 0 : _c.fixtures) || []).filter((f) => f.played).length;
+    const pdPending = (((_d = lg.playdowns) == null ? void 0 : _d.fixtures) || []).filter((f) => !f.played).length;
     const poNotGen = !lg.playoffs;
     const pdNotGen = !lg.playdowns;
-    return /* @__PURE__ */ React.createElement("span", null, " \xB7 ", /* @__PURE__ */ React.createElement("span", { style: { color: poNotGen ? "#f87171" : poPending > 0 ? "#facc15" : "#4ade80" } }, "PO: ", poNotGen ? "not generated" : poPending > 0 ? poPending + " pending" : "done"), " \xB7 ", /* @__PURE__ */ React.createElement("span", { style: { color: pdNotGen ? "#f87171" : pdPending > 0 ? "#facc15" : "#4ade80" } }, "PD: ", pdNotGen ? "not generated" : pdPending > 0 ? pdPending + " pending" : "done"));
+    return /* @__PURE__ */ React.createElement("span", null, " · ", /* @__PURE__ */ React.createElement("span", { style: { color: poNotGen ? "#f87171" : poPending > 0 ? "#facc15" : "#4ade80" } }, "PO: ", poNotGen ? "not generated" : poPending > 0 ? poPending + " pending" : "done"), " · ", /* @__PURE__ */ React.createElement("span", { style: { color: pdNotGen ? "#f87171" : pdPending > 0 ? "#facc15" : "#4ade80" } }, "PD: ", pdNotGen ? "not generated" : pdPending > 0 ? pdPending + " pending" : "done"));
   })()))), /* @__PURE__ */ React.createElement("div", { className: "card card-new", onClick: () => setModal(true) }, "+ New League")), modal && /* @__PURE__ */ React.createElement("div", { className: "overlay-c", onClick: () => setModal(false) }, /* @__PURE__ */ React.createElement("div", { className: "modal", onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("h3", null, "New League"), /* @__PURE__ */ React.createElement("input", { className: "inp", autoFocus: true, value: name, onChange: (e) => setName(e.target.value), onKeyDown: (e) => e.key === "Enter" && submit(), placeholder: "League name", style: { marginBottom: ".85rem" } }), /* @__PURE__ */ React.createElement("div", { className: "type-cards" }, /* @__PURE__ */ React.createElement("div", { className: "type-card" + (type === "standard" ? " sel" : ""), onClick: () => setType("standard") }, /* @__PURE__ */ React.createElement("div", { className: "type-card-title" }, "Standard"), /* @__PURE__ */ React.createElement("div", { className: "type-card-desc" }, "Regular season only. Top 2 promoted, bottom 2 relegated.")), /* @__PURE__ */ React.createElement("div", { className: "type-card" + (type === "playoff" ? " sel po" : ""), onClick: () => setType("playoff") }, /* @__PURE__ */ React.createElement("div", { className: "type-card-title" }, "Play-off"), /* @__PURE__ */ React.createElement("div", { className: "type-card-desc" }, "Regular season with post-season phases."))), type === "playoff" && /* @__PURE__ */ React.createElement("div", { className: "phase-config", style: { marginTop: ".75rem" } }, /* @__PURE__ */ React.createElement("div", { className: "phase-config-title" }, "Phase configuration"), /* @__PURE__ */ React.createElement("div", { className: "config-row" }, /* @__PURE__ */ React.createElement("span", { className: "config-label" }, "Play-off teams:"), /* @__PURE__ */ React.createElement("div", { className: "config-opts" }, [4, 6, 8].map((n) => /* @__PURE__ */ React.createElement("span", { key: n, className: "config-opt" + (poSize === n && customPo === "" ? " sel" : ""), onClick: () => {
     setPoSize(n);
     setCustomPo("");
@@ -441,7 +471,8 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
 function TeamDetail({ team, teamIdx, teams, fixtures, onClose }) {
   const mine = fixtures.filter((f) => f.homeIdx === teamIdx || f.awayIdx === teamIdx);
   const sorted = [...mine].sort((a, b) => {
-    const wa = a.week ?? 99999, wb = b.week ?? 99999;
+    var _a, _b;
+    const wa = (_a = a.week) != null ? _a : 99999, wb = (_b = b.week) != null ? _b : 99999;
     return wa - wb;
   });
   const homePlayed = mine.filter((f) => f.homeIdx === teamIdx && f.played && f.homeScore != null);
@@ -470,9 +501,10 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose }) {
   const oppStats = (() => {
     const byOpp = {};
     mine.filter((f) => f.played && f.homeScore != null).forEach((f) => {
+      var _a;
       const isHome = f.homeIdx === teamIdx;
       const oppIdx = isHome ? f.awayIdx : f.homeIdx;
-      const oppName = teams[oppIdx]?.name || "Unknown";
+      const oppName = ((_a = teams[oppIdx]) == null ? void 0 : _a.name) || "Unknown";
       const gf = isHome ? +f.homeScore : +f.awayScore;
       const ga = isHome ? +f.awayScore : +f.homeScore;
       if (!byOpp[oppName]) byOpp[oppName] = { gf: 0, ga: 0, games: 0 };
@@ -486,10 +518,11 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose }) {
   const weakest = oppStats.length > 1 ? oppStats.reduce((a, b) => a.gd > b.gd ? a : b) : null;
   const playedWithScore = mine.filter((f) => f.played && f.homeScore != null);
   const fixtureGD = playedWithScore.map((f) => {
+    var _a, _b;
     const isHome = f.homeIdx === teamIdx;
     const gf = isHome ? +f.homeScore : +f.awayScore;
     const ga = isHome ? +f.awayScore : +f.homeScore;
-    const opp = isHome ? teams[f.awayIdx]?.name : teams[f.homeIdx]?.name;
+    const opp = isHome ? (_a = teams[f.awayIdx]) == null ? void 0 : _a.name : (_b = teams[f.homeIdx]) == null ? void 0 : _b.name;
     return { f, gd: gf - ga, gf, ga, opp, isHome };
   });
   const worstGD = fixtureGD.length > 0 ? Math.min(...fixtureGD.map((x) => x.gd)) : null;
@@ -497,9 +530,9 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose }) {
   const bestGD = fixtureGD.length > 0 ? Math.max(...fixtureGD.map((x) => x.gd)) : null;
   const bestFixtures = bestGD != null ? fixtureGD.filter((x) => x.gd === bestGD).sort((a, b) => b.gf - a.gf) : [];
   function StatRow({ label, homeVal, awayVal, color }) {
-    return /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: ".3rem", padding: ".28rem 0", borderBottom: "1px solid #1c1f27", fontSize: ".78rem", alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070" } }, label), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontWeight: 600, color: homeVal != null ? color : "#3a3f50" } }, homeVal != null ? homeVal : "\u2014"), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontWeight: 600, color: awayVal != null ? color : "#3a3f50" } }, awayVal != null ? awayVal : "\u2014"));
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: ".3rem", padding: ".28rem 0", borderBottom: "1px solid #1c1f27", fontSize: ".78rem", alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070" } }, label), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontWeight: 600, color: homeVal != null ? color : "#3a3f50" } }, homeVal != null ? homeVal : "—"), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontWeight: 600, color: awayVal != null ? color : "#3a3f50" } }, awayVal != null ? awayVal : "—"));
   }
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "detail-overlay", onClick: onClose }), /* @__PURE__ */ React.createElement("div", { className: "detail-panel", style: { width: "600px" } }, /* @__PURE__ */ React.createElement("div", { className: "detail-h" }, /* @__PURE__ */ React.createElement("h3", null, team?.name), /* @__PURE__ */ React.createElement("button", { className: "detail-close", onClick: onClose }, "\u2715")), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "detail-sec", style: { marginBottom: ".5rem" } }, "Statistics"), !hasStats && /* @__PURE__ */ React.createElement("div", { className: "muted", style: { fontSize: ".8rem" } }, "No played games yet."), hasStats && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: ".3rem", padding: ".2rem 0", marginBottom: ".15rem" } }, /* @__PURE__ */ React.createElement("span", null), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#22d3ee", fontWeight: 700 } }, "HOME"), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#a78bfa", fontWeight: 700 } }, "AWAY")), /* @__PURE__ */ React.createElement(StatRow, { label: "Games", homeVal: homePlayed.length || null, awayVal: awayPlayed.length || null, color: "#d4d8e0" }), /* @__PURE__ */ React.createElement(StatRow, { label: "Win %", homeVal: homeWinPct != null ? homeWinPct + "%" : null, awayVal: awayWinPct != null ? awayWinPct + "%" : null, color: "#4ade80" }), /* @__PURE__ */ React.createElement(StatRow, { label: "Avg GF", homeVal: homeGFavg, awayVal: awayGFavg, color: "#4ade80" }), /* @__PURE__ */ React.createElement(StatRow, { label: "Avg GA", homeVal: homeGAavg, awayVal: awayGAavg, color: "#f87171" }), (toughest || weakest) && /* @__PURE__ */ React.createElement("div", { style: { marginTop: ".6rem", borderTop: "1px solid #1c1f27", paddingTop: ".45rem" } }, oppStats.length > 0 && (() => {
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "detail-overlay", onClick: onClose }), /* @__PURE__ */ React.createElement("div", { className: "detail-panel", style: { width: "600px" } }, /* @__PURE__ */ React.createElement("div", { className: "detail-h" }, /* @__PURE__ */ React.createElement("h3", null, team == null ? void 0 : team.name), /* @__PURE__ */ React.createElement("button", { className: "detail-close", onClick: onClose }, "✕")), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", alignItems: "start" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "detail-sec", style: { marginBottom: ".5rem" } }, "Statistics"), !hasStats && /* @__PURE__ */ React.createElement("div", { className: "muted", style: { fontSize: ".8rem" } }, "No played games yet."), hasStats && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: ".3rem", padding: ".2rem 0", marginBottom: ".15rem" } }, /* @__PURE__ */ React.createElement("span", null), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#22d3ee", fontWeight: 700 } }, "HOME"), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "center", fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#a78bfa", fontWeight: 700 } }, "AWAY")), /* @__PURE__ */ React.createElement(StatRow, { label: "Games", homeVal: homePlayed.length || null, awayVal: awayPlayed.length || null, color: "#d4d8e0" }), /* @__PURE__ */ React.createElement(StatRow, { label: "Win %", homeVal: homeWinPct != null ? homeWinPct + "%" : null, awayVal: awayWinPct != null ? awayWinPct + "%" : null, color: "#4ade80" }), /* @__PURE__ */ React.createElement(StatRow, { label: "Avg GF", homeVal: homeGFavg, awayVal: awayGFavg, color: "#4ade80" }), /* @__PURE__ */ React.createElement(StatRow, { label: "Avg GA", homeVal: homeGAavg, awayVal: awayGAavg, color: "#f87171" }), (toughest || weakest) && /* @__PURE__ */ React.createElement("div", { style: { marginTop: ".6rem", borderTop: "1px solid #1c1f27", paddingTop: ".45rem" } }, oppStats.length > 0 && (() => {
     const [oppOpen, setOppOpen] = useState(false);
     const sorted2 = [...oppStats].sort((a, b) => a.gd - b.gd);
     return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement(
@@ -508,13 +541,14 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose }) {
         style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: ".25rem 0", cursor: "pointer", userSelect: "none" },
         onClick: () => setOppOpen((o) => !o)
       },
-      /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070" } }, "Opponents ", oppOpen ? "\u25B2" : "\u25BC"),
+      /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070" } }, "Opponents ", oppOpen ? "▲" : "▼"),
       !oppOpen && toughest && /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".78rem" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "#f87171", fontWeight: 600 } }, toughest.name), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".3rem" } }, toughest.gd > 0 ? "+" : "", toughest.gd), weakest && weakest.name !== toughest.name && /* @__PURE__ */ React.createElement("span", { style: { marginLeft: ".5rem" } }, /* @__PURE__ */ React.createElement("span", { style: { color: "#4ade80", fontWeight: 600 } }, weakest.name), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".3rem" } }, weakest.gd > 0 ? "+" : "", weakest.gd)))
     ), oppOpen && /* @__PURE__ */ React.createElement("div", { style: { borderTop: "1px solid #1c1f27", paddingTop: ".25rem" } }, sorted2.map((o, i) => /* @__PURE__ */ React.createElement("div", { key: o.name, style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: ".2rem 0", borderBottom: i < sorted2.length - 1 ? "1px solid #1c1f27" : "none" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50", minWidth: "1.4rem" } }, i + 1, "."), /* @__PURE__ */ React.createElement("span", { style: { flex: 1, fontSize: ".78rem", color: o.gd < 0 ? "#f87171" : o.gd > 0 ? "#4ade80" : "#d4d8e0", fontWeight: 600 } }, o.name), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".72rem", color: "#3a3f50" } }, o.gd > 0 ? "+" : "", o.gd, " GD"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#3a3f50", marginLeft: ".35rem" } }, "(", o.games, "g)")))));
-  })()), (bestFixtures.length > 0 || worstFixtures.length > 0) && /* @__PURE__ */ React.createElement("div", { style: { marginTop: ".6rem", borderTop: "1px solid #1c1f27", paddingTop: ".45rem" } }, bestFixtures.map((x, i) => /* @__PURE__ */ React.createElement("div", { key: x.f.id, style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: ".22rem 0", borderBottom: i < bestFixtures.length - 1 ? "1px solid #1c1f27" : "none" } }, i === 0 && /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070", minWidth: "3rem" } }, "Best"), i > 0 && /* @__PURE__ */ React.createElement("span", { style: { minWidth: "3rem" } }), /* @__PURE__ */ React.createElement("span", { style: { flex: 1, fontSize: ".78rem", color: "#4ade80", fontWeight: 600 } }, x.opp), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".75rem", color: "#4ade80" } }, x.gf, "\u2014", x.ga), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".4rem" } }, x.gd > 0 ? "+" : "", x.gd))), worstFixtures.map((x, i) => /* @__PURE__ */ React.createElement("div", { key: x.f.id, style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: ".22rem 0", borderBottom: i < worstFixtures.length - 1 ? "1px solid #1c1f27" : "none", marginTop: bestFixtures.length > 0 && i === 0 ? ".35rem" : 0 } }, i === 0 && /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070", minWidth: "3rem" } }, "Worst"), i > 0 && /* @__PURE__ */ React.createElement("span", { style: { minWidth: "3rem" } }), /* @__PURE__ */ React.createElement("span", { style: { flex: 1, fontSize: ".78rem", color: "#f87171", fontWeight: 600 } }, x.opp), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".75rem", color: "#f87171" } }, x.gf, "\u2014", x.ga), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".4rem" } }, x.gd > 0 ? "+" : "", x.gd)))))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "detail-sec", style: { marginBottom: ".5rem" } }, "Fixtures (", mine.filter((f) => f.played).length, " played, ", mine.filter((f) => !f.played).length, " pending)"), sorted.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "empty", style: { padding: ".5rem" } }, "No fixtures yet."), sorted.map((f) => {
+  })()), (bestFixtures.length > 0 || worstFixtures.length > 0) && /* @__PURE__ */ React.createElement("div", { style: { marginTop: ".6rem", borderTop: "1px solid #1c1f27", paddingTop: ".45rem" } }, bestFixtures.map((x, i) => /* @__PURE__ */ React.createElement("div", { key: x.f.id, style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: ".22rem 0", borderBottom: i < bestFixtures.length - 1 ? "1px solid #1c1f27" : "none" } }, i === 0 && /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070", minWidth: "3rem" } }, "Best"), i > 0 && /* @__PURE__ */ React.createElement("span", { style: { minWidth: "3rem" } }), /* @__PURE__ */ React.createElement("span", { style: { flex: 1, fontSize: ".78rem", color: "#4ade80", fontWeight: 600 } }, x.opp), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".75rem", color: "#4ade80" } }, x.gf, "—", x.ga), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".4rem" } }, x.gd > 0 ? "+" : "", x.gd))), worstFixtures.map((x, i) => /* @__PURE__ */ React.createElement("div", { key: x.f.id, style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: ".22rem 0", borderBottom: i < worstFixtures.length - 1 ? "1px solid #1c1f27" : "none", marginTop: bestFixtures.length > 0 && i === 0 ? ".35rem" : 0 } }, i === 0 && /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#5a6070", minWidth: "3rem" } }, "Worst"), i > 0 && /* @__PURE__ */ React.createElement("span", { style: { minWidth: "3rem" } }), /* @__PURE__ */ React.createElement("span", { style: { flex: 1, fontSize: ".78rem", color: "#f87171", fontWeight: 600 } }, x.opp), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".75rem", color: "#f87171" } }, x.gf, "—", x.ga), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".4rem" } }, x.gd > 0 ? "+" : "", x.gd)))))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "detail-sec", style: { marginBottom: ".5rem" } }, "Fixtures (", mine.filter((f) => f.played).length, " played, ", mine.filter((f) => !f.played).length, " pending)"), sorted.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "empty", style: { padding: ".5rem" } }, "No fixtures yet."), sorted.map((f) => {
+    var _a, _b;
     const isHome = f.homeIdx === teamIdx;
-    const opp = isHome ? teams[f.awayIdx]?.name : teams[f.homeIdx]?.name;
-    return /* @__PURE__ */ React.createElement("div", { key: f.id, className: "detail-match", style: { opacity: f.played ? 1 : 0.6 } }, f.week != null && /* @__PURE__ */ React.createElement("span", { className: "week-badge", style: { fontSize: ".6rem", padding: ".08rem .3rem" } }, "W", f.week), /* @__PURE__ */ React.createElement(HaBadge, { isHome }), /* @__PURE__ */ React.createElement("span", { className: "detail-opp", style: { color: f.played ? "#d4d8e0" : "#5a6070" } }, opp), f.played && f.homeScore != null ? /* @__PURE__ */ React.createElement("span", { className: "detail-score", style: { color: resColor(f) } }, f.homeScore, "\u2014", f.awayScore) : /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50" } }, "pending"));
+    const opp = isHome ? (_a = teams[f.awayIdx]) == null ? void 0 : _a.name : (_b = teams[f.homeIdx]) == null ? void 0 : _b.name;
+    return /* @__PURE__ */ React.createElement("div", { key: f.id, className: "detail-match", style: { opacity: f.played ? 1 : 0.6 } }, f.week != null && /* @__PURE__ */ React.createElement("span", { className: "week-badge", style: { fontSize: ".6rem", padding: ".08rem .3rem" } }, "W", f.week), /* @__PURE__ */ React.createElement(HaBadge, { isHome }), /* @__PURE__ */ React.createElement("span", { className: "detail-opp", style: { color: f.played ? "#d4d8e0" : "#5a6070" } }, opp), f.played && f.homeScore != null ? /* @__PURE__ */ React.createElement("span", { className: "detail-score", style: { color: resColor(f) } }, f.homeScore, "—", f.awayScore) : /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50" } }, "pending"));
   })))));
 }
 function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom }) {
@@ -526,7 +560,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
   const allAttackers = useMemo(() => rows.filter((r) => r.P > 0).sort((a, b) => b.GF - a.GF || a.name.localeCompare(b.name)), [rows]);
   const allDefenders = useMemo(() => rows.filter((r) => r.P > 0).sort((a, b) => a.GA - b.GA || a.name.localeCompare(b.name)), [rows]);
   const [rankingPanel, setRankingPanel] = useState(null);
-  const MEDALS = ["\u{1F947}", "\u{1F948}", "\u{1F949}"];
+  const MEDALS = ["🥇", "🥈", "🥉"];
   const toughRanking = useMemo(() => {
     const played = fixtures.filter((f) => f.played && f.homeScore != null && f.awayScore != null);
     const N = teams.length;
@@ -588,8 +622,8 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
       style: { color: "#f87171", cursor: "pointer", userSelect: "none" },
       onClick: () => setRankingPanel(rankingPanel === "attackers" ? null : "attackers")
     },
-    "\u26BD Top Attackers ",
-    rankingPanel === "attackers" ? "\u25B2" : "\u25BC"
+    "⚽ Top Attackers ",
+    rankingPanel === "attackers" ? "▲" : "▼"
   ), attackers.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, MEDALS[i]), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#f87171" } }, r.GF, " GF")))), /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -597,8 +631,8 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
       style: { color: "#4ade80", cursor: "pointer", userSelect: "none" },
       onClick: () => setRankingPanel(rankingPanel === "defenders" ? null : "defenders")
     },
-    "\u{1F6E1} Top Defenders ",
-    rankingPanel === "defenders" ? "\u25B2" : "\u25BC"
+    "🛡 Top Defenders ",
+    rankingPanel === "defenders" ? "▲" : "▼"
   ), defenders.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, MEDALS[i]), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#4ade80" } }, r.GA, " GA"))))), hasPlayed && /* @__PURE__ */ React.createElement("div", { className: "mini-rankings", style: { marginTop: "1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
     "div",
     {
@@ -606,34 +640,34 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
       style: { color: "#f87171", cursor: "pointer", userSelect: "none" },
       onClick: () => setRankingPanel(rankingPanel === "tough" ? null : "tough")
     },
-    "\u{1F480} Toughest Teams " + (rankingPanel === "tough" ? "\u25B2" : "\u25BC")
-  ), topTough.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "\u200E"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#f87171" } }, r.pts, " pts")))), /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
+    "💀 Toughest Teams " + (rankingPanel === "tough" ? "▲" : "▼")
+  ), topTough.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#f87171" } }, r.pts, " pts")))), /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
     "div",
     {
       className: "mini-ttl",
       style: { color: "#fb923c", cursor: "pointer", userSelect: "none" },
       onClick: () => setRankingPanel(rankingPanel === "home" ? null : "home")
     },
-    "\u{1F3E0} Strongest Home " + (rankingPanel === "home" ? "\u25B2" : "\u25BC")
-  ), topHome.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "\u200E"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#fb923c" } }, r.gd > 0 ? "+" : "", r.gd, " GD")))), /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
+    "🏠 Strongest Home " + (rankingPanel === "home" ? "▲" : "▼")
+  ), topHome.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#fb923c" } }, r.gd > 0 ? "+" : "", r.gd, " GD")))), /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
     "div",
     {
       className: "mini-ttl",
       style: { color: "#a78bfa", cursor: "pointer", userSelect: "none" },
       onClick: () => setRankingPanel(rankingPanel === "away" ? null : "away")
     },
-    "\u2708\uFE0F Strongest Away " + (rankingPanel === "away" ? "\u25B2" : "\u25BC")
-  ), topAway.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "\u200E"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#a78bfa" } }, r.gd > 0 ? "+" : "", r.gd, " GD"))))), rankingPanel && /* @__PURE__ */ React.createElement("div", { className: "mini-box", style: { marginTop: ".75rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-ttl", style: {
+    "✈️ Strongest Away " + (rankingPanel === "away" ? "▲" : "▼")
+  ), topAway.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#a78bfa" } }, r.gd > 0 ? "+" : "", r.gd, " GD"))))), rankingPanel && /* @__PURE__ */ React.createElement("div", { className: "mini-box", style: { marginTop: ".75rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-ttl", style: {
     color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : "#a78bfa",
     marginBottom: ".65rem",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
-  } }, /* @__PURE__ */ React.createElement("span", null, rankingPanel === "attackers" ? "\u26BD Full Attacking Ranking" : rankingPanel === "defenders" ? "\u{1F6E1} Full Defensive Ranking" : rankingPanel === "tough" ? "\u{1F480} Full Toughest Ranking" : rankingPanel === "home" ? "\u{1F3E0} Full Strongest Home Ranking" : "\u2708\uFE0F Full Strongest Away Ranking"), /* @__PURE__ */ React.createElement("button", { className: "btn-rm", onClick: () => setRankingPanel(null), style: { fontSize: ".9rem" } }, "\u2715")), (rankingPanel === "attackers" ? allAttackers : rankingPanel === "defenders" ? allDefenders : rankingPanel === "tough" ? toughRanking : rankingPanel === "home" ? homeGDRanking : awayGDRanking).map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos", style: { minWidth: "1.8rem", color: i < 3 ? rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : "#f87171" : "#3a3f50" } }, i < 3 ? MEDALS[i] : i + 1 + "."), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : "#a78bfa" } }, rankingPanel === "attackers" ? r.GF + " GF" : rankingPanel === "defenders" ? r.GA + " GA" : rankingPanel === "tough" ? r.pts + " pts" : (r.gd > 0 ? "+" : "") + r.gd + " GD"), (rankingPanel === "attackers" || rankingPanel === "defenders") && /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".72rem", marginLeft: ".25rem" } }, "(" + r.P + " games)"))))));
+  } }, /* @__PURE__ */ React.createElement("span", null, rankingPanel === "attackers" ? "⚽ Full Attacking Ranking" : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking" : rankingPanel === "tough" ? "💀 Full Toughest Ranking" : rankingPanel === "home" ? "🏠 Full Strongest Home Ranking" : "✈️ Full Strongest Away Ranking"), /* @__PURE__ */ React.createElement("button", { className: "btn-rm", onClick: () => setRankingPanel(null), style: { fontSize: ".9rem" } }, "✕")), (rankingPanel === "attackers" ? allAttackers : rankingPanel === "defenders" ? allDefenders : rankingPanel === "tough" ? toughRanking : rankingPanel === "home" ? homeGDRanking : awayGDRanking).map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos", style: { minWidth: "1.8rem", color: i < 3 ? rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : "#f87171" : "#3a3f50" } }, i < 3 ? MEDALS[i] : i + 1 + "."), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : "#a78bfa" } }, rankingPanel === "attackers" ? r.GF + " GF" : rankingPanel === "defenders" ? r.GA + " GA" : rankingPanel === "tough" ? r.pts + " pts" : (r.gd > 0 ? "+" : "") + r.gd + " GD"), (rankingPanel === "attackers" || rankingPanel === "defenders") && /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".72rem", marginLeft: ".25rem" } }, "(" + r.P + " games)"))))));
 }
 function TeamsStep({ teams, fixtures, setTeams, leagueType, onNext }) {
   function update(id, field, val) {
-    setTeams((prev) => prev.map((t) => t.id === id ? { ...t, [field]: val } : t));
+    setTeams((prev) => prev.map((t) => t.id === id ? __spreadProps(__spreadValues({}, t), { [field]: val }) : t));
   }
   function addTeam() {
     setTeams((prev) => [...prev, makeTeam(prev.length)]);
@@ -646,10 +680,11 @@ function TeamsStep({ teams, fixtures, setTeams, leagueType, onNext }) {
   const minTeams = leagueType === "playoff" ? 10 : 2;
   return /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "ph" }, /* @__PURE__ */ React.createElement("span", { className: "ph-num" }, "01"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", null, "League Setup"), /* @__PURE__ */ React.createElement("p", null, "Name, starting points, optional home advantage override (H%) per team.", leagueType === "playoff" ? " Min 10 teams." : ""))), teams.map((t, i) => {
     const hasF = fixtures.some((f) => f.homeIdx === i || f.awayIdx === i);
-    return /* @__PURE__ */ React.createElement("div", { key: t.id }, /* @__PURE__ */ React.createElement("div", { className: "team-row" }, /* @__PURE__ */ React.createElement("span", { className: "team-num" }, "#", i + 1), /* @__PURE__ */ React.createElement("input", { className: "inp team-name-inp", value: t.name, autoComplete: "off", onChange: (e) => update(t.id, "name", e.target.value), placeholder: "Team " + (i + 1) }), /* @__PURE__ */ React.createElement("div", { className: "team-extras" }, /* @__PURE__ */ React.createElement("input", { className: "inp inp-sm team-pts-inp", type: "number", min: "0", value: t.points, onChange: (e) => update(t.id, "points", parseInt(e.target.value) || 0), placeholder: "0", title: "Starting points" }), /* @__PURE__ */ React.createElement("span", { className: "muted team-pts-lbl", style: { fontSize: ".7rem", whiteSpace: "nowrap" } }, "pts"), /* @__PURE__ */ React.createElement("input", { className: "inp inp-sm team-hbonus-inp", type: "number", min: "0", max: "100", value: t.homeBonus, onChange: (e) => update(t.id, "homeBonus", e.target.value), placeholder: "H%", title: "Home advantage override" }), /* @__PURE__ */ React.createElement("span", { className: "muted team-hbonus-lbl", style: { fontSize: ".7rem" } }, "H%"), /* @__PURE__ */ React.createElement("button", { className: "btn-rm team-del", onClick: () => removeTeam(t.id), style: { color: hasF ? "#3a3f50" : void 0, cursor: hasF ? "not-allowed" : "pointer" } }, "\u2715"))), hasF && /* @__PURE__ */ React.createElement("div", { className: "warn-txt" }, "This team has fixtures \u2014 remove them first to delete this team."));
-  }), /* @__PURE__ */ React.createElement("button", { className: "btn-add", style: { marginTop: ".6rem" }, onClick: addTeam }, "+ Add Team"), /* @__PURE__ */ React.createElement("div", { className: "nav-row" }, /* @__PURE__ */ React.createElement("button", { className: "btn btn-cyan", onClick: onNext, disabled: teams.length < minTeams }, "Set Fixtures ", teams.length < minTeams ? "(need " + (minTeams - teams.length) + " more)" : "\u2192")));
+    return /* @__PURE__ */ React.createElement("div", { key: t.id }, /* @__PURE__ */ React.createElement("div", { className: "team-row" }, /* @__PURE__ */ React.createElement("span", { className: "team-num" }, "#", i + 1), /* @__PURE__ */ React.createElement("input", { className: "inp team-name-inp", value: t.name, autoComplete: "off", onChange: (e) => update(t.id, "name", e.target.value), placeholder: "Team " + (i + 1) }), /* @__PURE__ */ React.createElement("div", { className: "team-extras" }, /* @__PURE__ */ React.createElement("input", { className: "inp inp-sm team-pts-inp", type: "number", min: "0", value: t.points, onChange: (e) => update(t.id, "points", parseInt(e.target.value) || 0), placeholder: "0", title: "Starting points" }), /* @__PURE__ */ React.createElement("span", { className: "muted team-pts-lbl", style: { fontSize: ".7rem", whiteSpace: "nowrap" } }, "pts"), /* @__PURE__ */ React.createElement("input", { className: "inp inp-sm team-hbonus-inp", type: "number", min: "0", max: "100", value: t.homeBonus, onChange: (e) => update(t.id, "homeBonus", e.target.value), placeholder: "H%", title: "Home advantage override" }), /* @__PURE__ */ React.createElement("span", { className: "muted team-hbonus-lbl", style: { fontSize: ".7rem" } }, "H%"), /* @__PURE__ */ React.createElement("button", { className: "btn-rm team-del", onClick: () => removeTeam(t.id), style: { color: hasF ? "#3a3f50" : void 0, cursor: hasF ? "not-allowed" : "pointer" } }, "✕"))), hasF && /* @__PURE__ */ React.createElement("div", { className: "warn-txt" }, "This team has fixtures — remove them first to delete this team."));
+  }), /* @__PURE__ */ React.createElement("button", { className: "btn-add", style: { marginTop: ".6rem" }, onClick: addTeam }, "+ Add Team"), /* @__PURE__ */ React.createElement("div", { className: "nav-row" }, /* @__PURE__ */ React.createElement("button", { className: "btn btn-cyan", onClick: onNext, disabled: teams.length < minTeams }, "Set Fixtures ", teams.length < minTeams ? "(need " + (minTeams - teams.length) + " more)" : "→")));
 }
 function FixturesStep({ teams, fixtures, setFixtures, settings, setSettings, onBack, onNext }) {
+  var _a, _b;
   const [hi, setHi] = useState(0);
   const [ai, setAi] = useState(Math.min(1, teams.length - 1));
   const [week, setWeek] = useState(1);
@@ -674,7 +709,8 @@ function FixturesStep({ teams, fixtures, setFixtures, settings, setSettings, onB
   function remove(id) {
     setFixtures((prev) => prev.filter((f) => f.id !== id));
   }
-  return /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "ph" }, /* @__PURE__ */ React.createElement("span", { className: "ph-num" }, "02"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", null, "Fixtures"), /* @__PURE__ */ React.createElement("p", null, "Probabilities are calculated automatically from current standings."))), /* @__PURE__ */ React.createElement(SettingsPanel, { settings, onChange: (k, v) => setSettings((s) => ({ ...s, [k]: v })), showTiebreakers: false }), /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "1.1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "row", style: { marginBottom: ".6rem" } }, /* @__PURE__ */ React.createElement("select", { className: "inp sel", value: hi, onChange: (e) => setHi(+e.target.value) }, teams.map((t, i) => /* @__PURE__ */ React.createElement("option", { key: i, value: i }, t.name))), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("select", { className: "inp sel", value: ai, onChange: (e) => setAi(+e.target.value) }, teams.map((t, i) => /* @__PURE__ */ React.createElement("option", { key: i, value: i }, t.name)))), /* @__PURE__ */ React.createElement("div", { className: "prob-bar" }, /* @__PURE__ */ React.createElement("span", { className: "muted" }, "Auto:"), /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, preview.homeWin, "% ", teams[hi]?.name), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "\xB7"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, preview.draw, "% Draw"), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "\xB7"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, preview.awayWin, "% ", teams[ai]?.name)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: ".5rem", marginTop: ".65rem", flexWrap: "wrap", alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { className: "lbl", style: { marginBottom: 0, whiteSpace: "nowrap" } }, "Week:"), /* @__PURE__ */ React.createElement("input", { className: "inp", type: "number", min: "1", max: "999", value: week, onChange: (e) => setWeek(parseInt(e.target.value) || 1), style: { width: "4rem", textAlign: "center", fontFamily: "DM Mono,monospace" } }), /* @__PURE__ */ React.createElement("button", { className: "btn-add", onClick: addOne, disabled: !ok }, "+ Add Match"), /* @__PURE__ */ React.createElement("button", { className: "btn-add-pu", onClick: autoGenerate, disabled: teams.length < 2 }, "\u26A1 Auto 2-round robin"))), fixtures.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Scheduled (", fixtures.length, ")"), fixtures.map((f) => {
+  return /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "ph" }, /* @__PURE__ */ React.createElement("span", { className: "ph-num" }, "02"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", null, "Fixtures"), /* @__PURE__ */ React.createElement("p", null, "Probabilities are calculated automatically from current standings."))), /* @__PURE__ */ React.createElement(SettingsPanel, { settings, onChange: (k, v) => setSettings((s) => __spreadProps(__spreadValues({}, s), { [k]: v })), showTiebreakers: false }), /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "1.1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "row", style: { marginBottom: ".6rem" } }, /* @__PURE__ */ React.createElement("select", { className: "inp sel", value: hi, onChange: (e) => setHi(+e.target.value) }, teams.map((t, i) => /* @__PURE__ */ React.createElement("option", { key: i, value: i }, t.name))), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("select", { className: "inp sel", value: ai, onChange: (e) => setAi(+e.target.value) }, teams.map((t, i) => /* @__PURE__ */ React.createElement("option", { key: i, value: i }, t.name)))), /* @__PURE__ */ React.createElement("div", { className: "prob-bar" }, /* @__PURE__ */ React.createElement("span", { className: "muted" }, "Auto:"), /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, preview.homeWin, "% ", (_a = teams[hi]) == null ? void 0 : _a.name), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "·"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, preview.draw, "% Draw"), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "·"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, preview.awayWin, "% ", (_b = teams[ai]) == null ? void 0 : _b.name)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: ".5rem", marginTop: ".65rem", flexWrap: "wrap", alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { className: "lbl", style: { marginBottom: 0, whiteSpace: "nowrap" } }, "Week:"), /* @__PURE__ */ React.createElement("input", { className: "inp", type: "number", min: "1", max: "999", value: week, onChange: (e) => setWeek(parseInt(e.target.value) || 1), style: { width: "4rem", textAlign: "center", fontFamily: "DM Mono,monospace" } }), /* @__PURE__ */ React.createElement("button", { className: "btn-add", onClick: addOne, disabled: !ok }, "+ Add Match"), /* @__PURE__ */ React.createElement("button", { className: "btn-add-pu", onClick: autoGenerate, disabled: teams.length < 2 }, "⚡ Auto 2-round robin"))), fixtures.length > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "Scheduled (", fixtures.length, ")"), fixtures.map((f) => {
+    var _a2, _b2, _c;
     const p = liveProbs[f.id] || f;
     return /* @__PURE__ */ React.createElement("div", { key: f.id, className: "fix-item" }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".3rem", flexShrink: 0 } }, /* @__PURE__ */ React.createElement("span", { className: "lbl", style: { marginBottom: 0, fontSize: ".65rem" } }, "W"), /* @__PURE__ */ React.createElement(
       "input",
@@ -682,58 +718,59 @@ function FixturesStep({ teams, fixtures, setFixtures, settings, setSettings, onB
         type: "number",
         min: "1",
         max: "999",
-        value: f.week ?? "",
-        placeholder: "\u2014",
+        value: (_a2 = f.week) != null ? _a2 : "",
+        placeholder: "—",
         onChange: (e) => {
           const v = e.target.value === "" ? null : parseInt(e.target.value) || null;
-          setFixtures((prev) => prev.map((x) => x.id === f.id ? { ...x, week: v } : x));
+          setFixtures((prev) => prev.map((x) => x.id === f.id ? __spreadProps(__spreadValues({}, x), { week: v }) : x));
         },
         style: { width: "3rem", textAlign: "center", padding: ".22rem .3rem", fontFamily: "DM Mono,monospace", fontSize: ".8rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }
       }
-    )), /* @__PURE__ */ React.createElement("div", { className: "fix-teams" }, /* @__PURE__ */ React.createElement("b", null, teams[f.homeIdx]?.name), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("b", null, teams[f.awayIdx]?.name)), /* @__PURE__ */ React.createElement("div", { className: "fix-probs" }, /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, p.homeWin, "%"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, p.draw, "%"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, p.awayWin, "%")), /* @__PURE__ */ React.createElement("button", { className: "btn-rm", onClick: () => remove(f.id) }, "\u2715"));
-  })), /* @__PURE__ */ React.createElement("div", { className: "nav-row" }, /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: onBack }, "\u2190 Back"), /* @__PURE__ */ React.createElement("button", { className: "btn btn-cyan", onClick: onNext, disabled: fixtures.length === 0 }, "Continue \u2192")));
+    )), /* @__PURE__ */ React.createElement("div", { className: "fix-teams" }, /* @__PURE__ */ React.createElement("b", null, (_b2 = teams[f.homeIdx]) == null ? void 0 : _b2.name), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("b", null, (_c = teams[f.awayIdx]) == null ? void 0 : _c.name)), /* @__PURE__ */ React.createElement("div", { className: "fix-probs" }, /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, p.homeWin, "%"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, p.draw, "%"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, p.awayWin, "%")), /* @__PURE__ */ React.createElement("button", { className: "btn-rm", onClick: () => remove(f.id) }, "✕"));
+  })), /* @__PURE__ */ React.createElement("div", { className: "nav-row" }, /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: onBack }, "← Back"), /* @__PURE__ */ React.createElement("button", { className: "btn btn-cyan", onClick: onNext, disabled: fixtures.length === 0 }, "Continue →")));
 }
 function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange }) {
+  var _a, _b, _c, _d;
   const [hg, setHg] = useState("");
   const [ag, setAg] = useState("");
-  const hn = teams[f.homeIdx]?.name || "?";
-  const an = teams[f.awayIdx]?.name || "?";
-  const ws = settings?.winScore || 30;
-  const ls = settings?.lossScore || 25;
-  const ds = settings?.drawScore || 25;
+  const hn = ((_a = teams[f.homeIdx]) == null ? void 0 : _a.name) || "?";
+  const an = ((_b = teams[f.awayIdx]) == null ? void 0 : _b.name) || "?";
+  const ws = (settings == null ? void 0 : settings.winScore) || 30;
+  const ls = (settings == null ? void 0 : settings.lossScore) || 25;
+  const ds = (settings == null ? void 0 : settings.drawScore) || 25;
   const probs = f.overrideOn && f.ovHW !== "" ? { homeWin: parseFloat(f.ovHW) || 0, draw: parseFloat(f.ovD) || 0, awayWin: parseFloat(f.ovAW) || 0 } : liveP || f;
   if (f.played && f.homeScore != null) {
     const hs = +f.homeScore, as_ = +f.awayScore;
     const res = hs > as_ ? "home" : hs < as_ ? "away" : "draw";
     const lbl = res === "home" ? hn + " Win" : res === "away" ? an + " Win" : "Draw";
     const col = res === "home" ? "#4ade80" : res === "away" ? "#f87171" : "#facc15";
-    return /* @__PURE__ */ React.createElement("div", { className: "outcome done" }, f.week != null && /* @__PURE__ */ React.createElement("span", { className: "week-badge", style: { fontSize: ".6rem" } }, "W", f.week), /* @__PURE__ */ React.createElement("div", { className: "oteams" }, /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.homeIdx) }, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.awayIdx) }, an)), /* @__PURE__ */ React.createElement("div", { className: "score-done" }, /* @__PURE__ */ React.createElement("span", { style: { color: res === "home" ? "#4ade80" : res === "draw" ? "#facc15" : "#d4d8e0" } }, f.homeScore), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "\u2014"), /* @__PURE__ */ React.createElement("span", { style: { color: res === "away" ? "#f87171" : res === "draw" ? "#facc15" : "#d4d8e0" } }, f.awayScore)), /* @__PURE__ */ React.createElement("span", { className: "res-lbl", style: { color: col } }, lbl), onWeekChange && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".3rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50" } }, "W"), /* @__PURE__ */ React.createElement(
+    return /* @__PURE__ */ React.createElement("div", { className: "outcome done" }, f.week != null && /* @__PURE__ */ React.createElement("span", { className: "week-badge", style: { fontSize: ".6rem" } }, "W", f.week), /* @__PURE__ */ React.createElement("div", { className: "oteams" }, /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.homeIdx) }, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.awayIdx) }, an)), /* @__PURE__ */ React.createElement("div", { className: "score-done" }, /* @__PURE__ */ React.createElement("span", { style: { color: res === "home" ? "#4ade80" : res === "draw" ? "#facc15" : "#d4d8e0" } }, f.homeScore), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "—"), /* @__PURE__ */ React.createElement("span", { style: { color: res === "away" ? "#f87171" : res === "draw" ? "#facc15" : "#d4d8e0" } }, f.awayScore)), /* @__PURE__ */ React.createElement("span", { className: "res-lbl", style: { color: col } }, lbl), onWeekChange && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".3rem" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50" } }, "W"), /* @__PURE__ */ React.createElement(
       "input",
       {
         type: "number",
         min: "1",
         max: "999",
-        value: f.week ?? "",
-        placeholder: "\u2014",
+        value: (_c = f.week) != null ? _c : "",
+        placeholder: "—",
         onChange: (e) => onWeekChange(f.id, e.target.value === "" ? null : parseInt(e.target.value) || null),
         style: { width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }
       }
-    )), /* @__PURE__ */ React.createElement("button", { className: "btn-undo", onClick: () => onUndo(f.id) }, "\u21A9 Undo"));
+    )), /* @__PURE__ */ React.createElement("button", { className: "btn-undo", onClick: () => onUndo(f.id) }, "↩ Undo"));
   }
   const ovrTotal = (parseFloat(f.ovHW) || 0) + (parseFloat(f.ovD) || 0) + (parseFloat(f.ovAW) || 0);
   const ovrOk = !f.overrideOn || Math.abs(ovrTotal - 100) <= 0.5;
-  return /* @__PURE__ */ React.createElement("div", { className: "outcome", style: { flexDirection: "column", alignItems: "stretch", gap: ".42rem" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".5rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("div", { className: "oteams" }, /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.homeIdx) }, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.awayIdx) }, an)), /* @__PURE__ */ React.createElement("div", { className: "fix-probs" }, f.overrideOn && f.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { className: "ovr-tag" }, "override"), /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, probs.homeWin, "%"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, probs.draw, "%"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, probs.awayWin, "%")), /* @__PURE__ */ React.createElement("button", { className: "ovr-btn" + (f.overrideOn ? " active" : ""), onClick: () => onOverride(f.id, "toggle") }, f.overrideOn ? "\u2713 Override" : "Override %"), onWeekChange && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".3rem", marginLeft: "auto" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50" } }, "W"), /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ React.createElement("div", { className: "outcome", style: { flexDirection: "column", alignItems: "stretch", gap: ".42rem" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".5rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("div", { className: "oteams" }, /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.homeIdx) }, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("button", { className: "otbtn", onClick: () => onTeamClick && onTeamClick(f.awayIdx) }, an)), /* @__PURE__ */ React.createElement("div", { className: "fix-probs" }, f.overrideOn && f.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { className: "ovr-tag" }, "override"), /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, probs.homeWin, "%"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, probs.draw, "%"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, probs.awayWin, "%")), /* @__PURE__ */ React.createElement("button", { className: "ovr-btn" + (f.overrideOn ? " active" : ""), onClick: () => onOverride(f.id, "toggle") }, f.overrideOn ? "✓ Override" : "Override %"), onWeekChange && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".3rem", marginLeft: "auto" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50" } }, "W"), /* @__PURE__ */ React.createElement(
     "input",
     {
       type: "number",
       min: "1",
       max: "999",
-      value: f.week ?? "",
-      placeholder: "\u2014",
+      value: (_d = f.week) != null ? _d : "",
+      placeholder: "—",
       onChange: (e) => onWeekChange(f.id, e.target.value === "" ? null : parseInt(e.target.value) || null),
       style: { width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }
     }
-  ))), f.overrideOn && /* @__PURE__ */ React.createElement("div", { className: "ovr-row" }, /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, hn.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: f.ovHW, onChange: (e) => onOverride(f.id, "hw", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "Draw:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: f.ovD, onChange: (e) => onOverride(f.id, "d", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, an.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: f.ovAW, onChange: (e) => onOverride(f.id, "aw", e.target.value), placeholder: "0" }), f.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".7rem", color: ovrOk ? "#22d3ee" : "#f87171", fontFamily: "DM Mono,monospace" } }, ovrTotal, "% ", ovrOk ? "\u2713" : "\u26A0 must = 100")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".38rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("button", { className: "qbtn hw", onClick: () => onConfirm(f.id, ws, ls) }, hn.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("button", { className: "qbtn dr", onClick: () => onConfirm(f.id, ds, ds) }, "Draw"), /* @__PURE__ */ React.createElement("button", { className: "qbtn aw", onClick: () => onConfirm(f.id, ls, ws) }, an.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: hg, onChange: (e) => setHg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "\u2014"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: ag, onChange: (e) => setAg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("button", { className: "confirm-btn", disabled: hg === "" || ag === "", onClick: () => {
+  ))), f.overrideOn && /* @__PURE__ */ React.createElement("div", { className: "ovr-row" }, /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, hn.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: f.ovHW, onChange: (e) => onOverride(f.id, "hw", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "Draw:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: f.ovD, onChange: (e) => onOverride(f.id, "d", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, an.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: f.ovAW, onChange: (e) => onOverride(f.id, "aw", e.target.value), placeholder: "0" }), f.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".7rem", color: ovrOk ? "#22d3ee" : "#f87171", fontFamily: "DM Mono,monospace" } }, ovrTotal, "% ", ovrOk ? "✓" : "⚠ must = 100")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".38rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("button", { className: "qbtn hw", onClick: () => onConfirm(f.id, ws, ls) }, hn.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("button", { className: "qbtn dr", onClick: () => onConfirm(f.id, ds, ds) }, "Draw"), /* @__PURE__ */ React.createElement("button", { className: "qbtn aw", onClick: () => onConfirm(f.id, ls, ws) }, an.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: hg, onChange: (e) => setHg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "—"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: ag, onChange: (e) => setAg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("button", { className: "confirm-btn", disabled: hg === "" || ag === "", onClick: () => {
     if (hg !== "" && ag !== "") onConfirm(f.id, +hg, +ag);
   } }, "Confirm")));
 }
@@ -745,7 +782,7 @@ function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onCon
   const pendingRef = useRef([]);
   const teamsRef = useRef([]);
   const playedRef = useRef([]);
-  pendingRef.current = pending.map((f) => ({ ...f, ...fixProbs(f, teams, fixtures, settings) }));
+  pendingRef.current = pending.map((f) => __spreadValues(__spreadValues({}, f), fixProbs(f, teams, fixtures, settings)));
   teamsRef.current = teams;
   playedRef.current = playedFixtures;
   useEffect(() => {
@@ -773,9 +810,9 @@ function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onCon
   const n = teams.length;
   const sorted = useMemo(() => {
     if (!results) return [];
-    return teams.map((t, i) => ({ ...t, idx: i, avg: results[i].reduce((s, p, pos) => s + p / 100 * (pos + 1), 0) })).sort((a, b) => a.avg - b.avg);
+    return teams.map((t, i) => __spreadProps(__spreadValues({}, t), { idx: i, avg: results[i].reduce((s, p, pos) => s + p / 100 * (pos + 1), 0) })).sort((a, b) => a.avg - b.avg);
   }, [results, teams]);
-  return /* @__PURE__ */ React.createElement("div", null, running && /* @__PURE__ */ React.createElement("div", { className: "empty" }, "Running 100,000 simulations\u2026"), !running && pending.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "empty" }, "All fixtures played \u2014 nothing to simulate."), !running && results && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "tbl-wrap" }, /* @__PURE__ */ React.createElement("table", { className: "stbl" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "tl" }, "Team"), /* @__PURE__ */ React.createElement("th", null, "Pts"), Array.from({ length: n }, (_, i) => /* @__PURE__ */ React.createElement("th", { key: i }, "#", i + 1)))), /* @__PURE__ */ React.createElement("tbody", null, sorted.map((t) => /* @__PURE__ */ React.createElement("tr", { key: t.idx }, /* @__PURE__ */ React.createElement("td", { className: "tl" }, t.name), /* @__PURE__ */ React.createElement("td", { className: "dm" }, t.points), results[t.idx].map((p, pos) => /* @__PURE__ */ React.createElement("td", { key: pos, style: { background: heatColor(p) } }, fmtPct(p)))))))), /* @__PURE__ */ React.createElement("div", { className: "legend" }, /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, "Low"), /* @__PURE__ */ React.createElement("div", { className: "leg-grad" }), /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, "High"))));
+  return /* @__PURE__ */ React.createElement("div", null, running && /* @__PURE__ */ React.createElement("div", { className: "empty" }, "Running 100,000 simulations…"), !running && pending.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "empty" }, "All fixtures played — nothing to simulate."), !running && results && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "tbl-wrap" }, /* @__PURE__ */ React.createElement("table", { className: "stbl" }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", null, /* @__PURE__ */ React.createElement("th", { className: "tl" }, "Team"), /* @__PURE__ */ React.createElement("th", null, "Pts"), Array.from({ length: n }, (_, i) => /* @__PURE__ */ React.createElement("th", { key: i }, "#", i + 1)))), /* @__PURE__ */ React.createElement("tbody", null, sorted.map((t) => /* @__PURE__ */ React.createElement("tr", { key: t.idx }, /* @__PURE__ */ React.createElement("td", { className: "tl" }, t.name), /* @__PURE__ */ React.createElement("td", { className: "dm" }, t.points), results[t.idx].map((p, pos) => /* @__PURE__ */ React.createElement("td", { key: pos, style: { background: heatColor(p) } }, fmtPct(p)))))))), /* @__PURE__ */ React.createElement("div", { className: "legend" }, /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, "Low"), /* @__PURE__ */ React.createElement("div", { className: "leg-grad" }), /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, "High"))));
 }
 function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange }) {
   const [selectedTeam, setSelectedTeam] = useState("all");
@@ -793,14 +830,16 @@ function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, on
   }, [fixtures, selectedTeam, selectedWeek]);
   const grouped = useMemo(() => {
     const sorted = [...filtered].sort((a, b) => {
-      const wa = a.week ?? 99999, wb = b.week ?? 99999;
+      var _a, _b;
+      const wa = (_a = a.week) != null ? _a : 99999, wb = (_b = b.week) != null ? _b : 99999;
       if (wa !== wb) return wa - wb;
       return 0;
     });
     const groups = [];
     let cur = null;
     sorted.forEach((f) => {
-      const w = f.week ?? null;
+      var _a;
+      const w = (_a = f.week) != null ? _a : null;
       if (!cur || cur.week !== w) {
         cur = { week: w, fixtures: [] };
         groups.push(cur);
@@ -814,9 +853,10 @@ function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, on
   return /* @__PURE__ */ React.createElement("div", null, fixtures.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "empty" }, "No fixtures added."), fixtures.length > 0 && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".6rem", marginBottom: "1rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("span", { className: "lbl", style: { marginBottom: 0, whiteSpace: "nowrap" } }, "Team:"), /* @__PURE__ */ React.createElement("select", { className: "inp", style: { maxWidth: "200px", flex: 1 }, value: selectedTeam, onChange: (e) => setSelectedTeam(e.target.value) }, /* @__PURE__ */ React.createElement("option", { value: "all" }, "All teams"), teams.map((t, i) => /* @__PURE__ */ React.createElement("option", { key: i, value: i }, t.name))), hasWeeks && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { className: "lbl", style: { marginBottom: 0, whiteSpace: "nowrap" } }, "Week:"), /* @__PURE__ */ React.createElement("select", { className: "inp", style: { maxWidth: "120px" }, value: selectedWeek, onChange: (e) => setSelectedWeek(e.target.value) }, /* @__PURE__ */ React.createElement("option", { value: "all" }, "All weeks"), weeks.map((w) => /* @__PURE__ */ React.createElement("option", { key: w, value: w }, "Week ", w))))), fixtures.length > 0 && filtered.length === 0 && /* @__PURE__ */ React.createElement("div", { className: "empty" }, "No fixtures for this selection."), (() => {
     if (selectedWeek !== "all" || !hasWeeks) {
       return grouped.map((group) => {
+        var _a;
         const gPending = group.fixtures.filter((f) => !f.played);
         const gPlayed = group.fixtures.filter((f) => f.played);
-        return /* @__PURE__ */ React.createElement("div", { key: group.week ?? "none" }, group.week != null && /* @__PURE__ */ React.createElement("div", { className: "week-header" }, "Week ", group.week), gPending.map((f) => /* @__PURE__ */ React.createElement(
+        return /* @__PURE__ */ React.createElement("div", { key: (_a = group.week) != null ? _a : "none" }, group.week != null && /* @__PURE__ */ React.createElement("div", { className: "week-header" }, "Week ", group.week), gPending.map((f) => /* @__PURE__ */ React.createElement(
           ScoreRow,
           {
             key: f.id,
@@ -852,10 +892,11 @@ function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, on
     const lastCompleted = completedGroups.length > 0 ? completedGroups[completedGroups.length - 1] : null;
     const olderCompleted = completedGroups.slice(0, -1).reverse();
     function renderGroup(group) {
+      var _a;
       const gPending = group.fixtures.filter((f) => !f.played);
       const gPlayed = group.fixtures.filter((f) => f.played);
       const allDone = gPending.length === 0;
-      return /* @__PURE__ */ React.createElement("div", { key: group.week ?? "none" }, group.week != null && /* @__PURE__ */ React.createElement("div", { className: "week-header", style: allDone ? { color: "#4ade80" } : {} }, "Week ", group.week, allDone ? " \u2713" : ""), gPending.map((f) => /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ React.createElement("div", { key: (_a = group.week) != null ? _a : "none" }, group.week != null && /* @__PURE__ */ React.createElement("div", { className: "week-header", style: allDone ? { color: "#4ade80" } : {} }, "Week ", group.week, allDone ? " ✓" : ""), gPending.map((f) => /* @__PURE__ */ React.createElement(
         ScoreRow,
         {
           key: f.id,
@@ -889,16 +930,17 @@ function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, on
   })());
 }
 function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm, onUndo, onOverride, isTwoLeg }) {
+  var _a, _b, _c, _d;
   const [hg, setHg] = useState("");
   const [ag, setAg] = useState("");
   const hIdx = resolveRef(match.homeRef, teams, rounds);
   const aIdx = resolveRef(match.awayRef, teams, rounds);
-  const hn = hIdx != null ? teams[hIdx]?.name || "?" : "TBD";
-  const an = aIdx != null ? teams[aIdx]?.name || "?" : "TBD";
+  const hn = hIdx != null ? ((_a = teams[hIdx]) == null ? void 0 : _a.name) || "?" : "TBD";
+  const an = aIdx != null ? ((_b = teams[aIdx]) == null ? void 0 : _b.name) || "?" : "TBD";
   const isTbd = hIdx == null || aIdx == null;
-  const ws = settings?.winScore || 30;
-  const ls = settings?.lossScore || 25;
-  const ds = settings?.drawScore || 25;
+  const ws = (settings == null ? void 0 : settings.winScore) || 30;
+  const ls = (settings == null ? void 0 : settings.lossScore) || 25;
+  const ds = (settings == null ? void 0 : settings.drawScore) || 25;
   const probs = liveProbs && liveProbs[match.id] ? liveProbs[match.id] : null;
   const pairedMatch = match.leg && match.pairedLegId ? rounds.flatMap((r) => r.matches).find((m) => m.id === match.pairedLegId) : null;
   let aggText = null;
@@ -910,9 +952,9 @@ function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm, onUndo
     const aggA = (leg1.played ? +leg1.homeScore : 0) + (leg2.played ? +leg2.awayScore : 0);
     const aggB = (leg1.played ? +leg1.awayScore : 0) + (leg2.played ? +leg2.homeScore : 0);
     if (leg1.played || leg2.played) {
-      const nameA = teams[seedAIdx]?.name || "?";
-      const nameB = teams[seedBIdx]?.name || "?";
-      aggText = nameA + " " + aggA + " \u2014 " + aggB + " " + nameB + " (agg)";
+      const nameA = ((_c = teams[seedAIdx]) == null ? void 0 : _c.name) || "?";
+      const nameB = ((_d = teams[seedBIdx]) == null ? void 0 : _d.name) || "?";
+      aggText = nameA + " " + aggA + " — " + aggB + " " + nameB + " (agg)";
     }
   }
   const legLabel = match.leg ? "Leg " + match.leg : null;
@@ -921,7 +963,7 @@ function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm, onUndo
     const hs = +match.homeScore, as_ = +match.awayScore;
     const res = hs > as_ ? "home" : hs < as_ ? "away" : "draw";
     const col = res === "home" ? "#4ade80" : res === "away" ? "#f87171" : "#facc15";
-    return /* @__PURE__ */ React.createElement("div", { className: "bracket-match done" + (match.neutral ? " neutral" : "") + (isTbd ? " tbd" : "") }, /* @__PURE__ */ React.createElement("div", { className: "bm-teams" }, /* @__PURE__ */ React.createElement("span", { style: { color: res === "home" ? "#4ade80" : "#d4d8e0" } }, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("span", { style: { color: res === "away" ? "#f87171" : "#d4d8e0" } }, an)), /* @__PURE__ */ React.createElement("div", { className: "bm-score" }, /* @__PURE__ */ React.createElement("span", { style: { color: res === "home" ? "#4ade80" : res === "draw" ? "#facc15" : "#d4d8e0" } }, match.homeScore), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "\u2014"), /* @__PURE__ */ React.createElement("span", { style: { color: res === "away" ? "#f87171" : res === "draw" ? "#facc15" : "#d4d8e0" } }, match.awayScore), aggText && /* @__PURE__ */ React.createElement("span", { className: "bm-agg" }, aggText)), legLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label" }, legLabel), neutralLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label", style: { color: "#a78bfa", borderColor: "#a78bfa" } }, neutralLabel), /* @__PURE__ */ React.createElement("button", { className: "btn-undo", onClick: () => onUndo(match.id) }, "\u21A9"));
+    return /* @__PURE__ */ React.createElement("div", { className: "bracket-match done" + (match.neutral ? " neutral" : "") + (isTbd ? " tbd" : "") }, /* @__PURE__ */ React.createElement("div", { className: "bm-teams" }, /* @__PURE__ */ React.createElement("span", { style: { color: res === "home" ? "#4ade80" : "#d4d8e0" } }, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("span", { style: { color: res === "away" ? "#f87171" : "#d4d8e0" } }, an)), /* @__PURE__ */ React.createElement("div", { className: "bm-score" }, /* @__PURE__ */ React.createElement("span", { style: { color: res === "home" ? "#4ade80" : res === "draw" ? "#facc15" : "#d4d8e0" } }, match.homeScore), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "—"), /* @__PURE__ */ React.createElement("span", { style: { color: res === "away" ? "#f87171" : res === "draw" ? "#facc15" : "#d4d8e0" } }, match.awayScore), aggText && /* @__PURE__ */ React.createElement("span", { className: "bm-agg" }, aggText)), legLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label" }, legLabel), neutralLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label", style: { color: "#a78bfa", borderColor: "#a78bfa" } }, neutralLabel), /* @__PURE__ */ React.createElement("button", { className: "btn-undo", onClick: () => onUndo(match.id) }, "↩"));
   }
   if (isTbd) {
     return /* @__PURE__ */ React.createElement("div", { className: "bracket-match tbd" }, /* @__PURE__ */ React.createElement("div", { className: "bm-teams" }, /* @__PURE__ */ React.createElement("span", { className: "muted" }, "TBD"), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "TBD")), legLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label" }, legLabel), neutralLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label", style: { color: "#a78bfa", borderColor: "#a78bfa" } }, neutralLabel));
@@ -929,7 +971,7 @@ function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm, onUndo
   const ovrTotal = (parseFloat(match.ovHW) || 0) + (parseFloat(match.ovD) || 0) + (parseFloat(match.ovAW) || 0);
   const ovrOk = !match.overrideOn || Math.abs(ovrTotal - 100) <= 0.5;
   const displayProbs = match.overrideOn && match.ovHW !== "" ? { homeWin: parseFloat(match.ovHW) || 0, draw: parseFloat(match.ovD) || 0, awayWin: parseFloat(match.ovAW) || 0 } : probs;
-  return /* @__PURE__ */ React.createElement("div", { className: "bracket-match" + (match.neutral ? " neutral" : ""), style: { flexDirection: "column", alignItems: "stretch", gap: ".38rem" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".5rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("div", { className: "bm-teams" }, /* @__PURE__ */ React.createElement("span", null, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("span", null, an)), displayProbs && /* @__PURE__ */ React.createElement("div", { className: "fix-probs" }, match.overrideOn && match.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { className: "ovr-tag" }, "override"), /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, displayProbs.homeWin, "%"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, displayProbs.draw, "%"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, displayProbs.awayWin, "%")), legLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label" }, legLabel), neutralLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label", style: { color: "#a78bfa", borderColor: "#a78bfa" } }, neutralLabel), /* @__PURE__ */ React.createElement("button", { className: "ovr-btn" + (match.overrideOn ? " active" : ""), onClick: () => onOverride(match.id, "toggle") }, match.overrideOn ? "\u2713 Ovr" : "Ovr %")), match.overrideOn && /* @__PURE__ */ React.createElement("div", { className: "ovr-row" }, /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, hn.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: match.ovHW, onChange: (e) => onOverride(match.id, "hw", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "D:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: match.ovD, onChange: (e) => onOverride(match.id, "d", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, an.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: match.ovAW, onChange: (e) => onOverride(match.id, "aw", e.target.value), placeholder: "0" }), match.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".7rem", color: ovrOk ? "#22d3ee" : "#f87171", fontFamily: "DM Mono,monospace" } }, ovrTotal, "% ", ovrOk ? "\u2713" : "\u26A0")), aggText && /* @__PURE__ */ React.createElement("div", { style: { fontSize: ".72rem", color: "#a78bfa", fontFamily: "DM Mono,monospace" } }, aggText), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".35rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("button", { className: "qbtn hw", onClick: () => onConfirm(match.id, ws, ls) }, hn.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("button", { className: "qbtn dr", onClick: () => onConfirm(match.id, ds, ds) }, "Draw"), /* @__PURE__ */ React.createElement("button", { className: "qbtn aw", onClick: () => onConfirm(match.id, ls, ws) }, an.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: hg, onChange: (e) => setHg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "\u2014"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: ag, onChange: (e) => setAg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("button", { className: "confirm-btn", disabled: hg === "" || ag === "", onClick: () => {
+  return /* @__PURE__ */ React.createElement("div", { className: "bracket-match" + (match.neutral ? " neutral" : ""), style: { flexDirection: "column", alignItems: "stretch", gap: ".38rem" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".5rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("div", { className: "bm-teams" }, /* @__PURE__ */ React.createElement("span", null, hn), /* @__PURE__ */ React.createElement("span", { className: "vs" }, "vs"), /* @__PURE__ */ React.createElement("span", null, an)), displayProbs && /* @__PURE__ */ React.createElement("div", { className: "fix-probs" }, match.overrideOn && match.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { className: "ovr-tag" }, "override"), /* @__PURE__ */ React.createElement("span", { className: "ph-col" }, displayProbs.homeWin, "%"), /* @__PURE__ */ React.createElement("span", { className: "pd-col" }, displayProbs.draw, "%"), /* @__PURE__ */ React.createElement("span", { className: "pa-col" }, displayProbs.awayWin, "%")), legLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label" }, legLabel), neutralLabel && /* @__PURE__ */ React.createElement("span", { className: "bm-label", style: { color: "#a78bfa", borderColor: "#a78bfa" } }, neutralLabel), /* @__PURE__ */ React.createElement("button", { className: "ovr-btn" + (match.overrideOn ? " active" : ""), onClick: () => onOverride(match.id, "toggle") }, match.overrideOn ? "✓ Ovr" : "Ovr %")), match.overrideOn && /* @__PURE__ */ React.createElement("div", { className: "ovr-row" }, /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".7rem" } }, hn.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: match.ovHW, onChange: (e) => onOverride(match.id, "hw", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, "D:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: match.ovD, onChange: (e) => onOverride(match.id, "d", e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "muted" }, an.split(" ")[0], " W:"), /* @__PURE__ */ React.createElement("input", { className: "ovr-inp", type: "number", min: "0", max: "100", value: match.ovAW, onChange: (e) => onOverride(match.id, "aw", e.target.value), placeholder: "0" }), match.ovHW !== "" && /* @__PURE__ */ React.createElement("span", { style: { fontSize: ".7rem", color: ovrOk ? "#22d3ee" : "#f87171", fontFamily: "DM Mono,monospace" } }, ovrTotal, "% ", ovrOk ? "✓" : "⚠")), aggText && /* @__PURE__ */ React.createElement("div", { style: { fontSize: ".72rem", color: "#a78bfa", fontFamily: "DM Mono,monospace" } }, aggText), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: ".35rem", flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("button", { className: "qbtn hw", onClick: () => onConfirm(match.id, ws, ls) }, hn.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("button", { className: "qbtn dr", onClick: () => onConfirm(match.id, ds, ds) }, "Draw"), /* @__PURE__ */ React.createElement("button", { className: "qbtn aw", onClick: () => onConfirm(match.id, ls, ws) }, an.split(" ")[0], " W"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: hg, onChange: (e) => setHg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("span", { className: "score-sep" }, "—"), /* @__PURE__ */ React.createElement("input", { className: "score-inp", type: "number", min: "0", value: ag, onChange: (e) => setAg(e.target.value), placeholder: "0" }), /* @__PURE__ */ React.createElement("button", { className: "confirm-btn", disabled: hg === "" || ag === "", onClick: () => {
     if (hg !== "" && ag !== "") onConfirm(match.id, +hg, +ag);
   } }, "OK")));
 }
@@ -977,7 +1019,7 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
         earned[f.awayIdx]++;
       }
     });
-    return baseTeams.map((t, i) => ({ ...t, points: t.points + earned[i] }));
+    return baseTeams.map((t, i) => __spreadProps(__spreadValues({}, t), { points: t.points + earned[i] }));
   }, [baseTeams, played]);
   const liveProbs = useMemo(() => {
     if (!phaseData) return {};
@@ -1015,31 +1057,34 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
   function updateMatch(id, updater) {
     setPhaseData((prev) => {
       if (prev.format === "tournament") {
-        return { ...prev, rounds: prev.rounds.map((r) => ({ ...r, matches: r.matches.map((m) => m.id === id ? updater(m) : m) })) };
+        return __spreadProps(__spreadValues({}, prev), { rounds: prev.rounds.map((r) => __spreadProps(__spreadValues({}, r), { matches: r.matches.map((m) => m.id === id ? updater(m) : m) })) });
       }
-      return { ...prev, fixtures: prev.fixtures.map((f) => f.id === id ? updater(f) : f) };
+      return __spreadProps(__spreadValues({}, prev), { fixtures: prev.fixtures.map((f) => f.id === id ? updater(f) : f) });
     });
   }
   function confirmScore(id, hg, ag) {
-    updateMatch(id, (m) => ({ ...m, played: true, homeScore: hg, awayScore: ag, tbd: false }));
+    updateMatch(id, (m) => __spreadProps(__spreadValues({}, m), { played: true, homeScore: hg, awayScore: ag, tbd: false }));
   }
   function unplay(id) {
-    updateMatch(id, (m) => ({ ...m, played: false, homeScore: null, awayScore: null }));
+    updateMatch(id, (m) => __spreadProps(__spreadValues({}, m), { played: false, homeScore: null, awayScore: null }));
   }
   function handleOverride(id, field, val) {
     updateMatch(id, (m) => {
-      if (field === "toggle") return { ...m, overrideOn: !m.overrideOn };
-      if (field === "hw") return { ...m, ovHW: val };
-      if (field === "d") return { ...m, ovD: val };
-      if (field === "aw") return { ...m, ovAW: val };
+      if (field === "toggle") return __spreadProps(__spreadValues({}, m), { overrideOn: !m.overrideOn });
+      if (field === "hw") return __spreadProps(__spreadValues({}, m), { ovHW: val });
+      if (field === "d") return __spreadProps(__spreadValues({}, m), { ovD: val });
+      if (field === "aw") return __spreadProps(__spreadValues({}, m), { ovAW: val });
       return m;
     });
   }
   const htop = phase === "playoff" ? 2 : 0;
   const hbot = phase === "playdown" ? 2 : 0;
-  return /* @__PURE__ */ React.createElement("div", { className: "panel", style: { borderColor: color, borderWidth: 2 } }, /* @__PURE__ */ React.createElement("div", { className: "ph" }, /* @__PURE__ */ React.createElement("span", { className: "ph-num", style: { color } }, label[0]), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", null, label), /* @__PURE__ */ React.createElement("p", null, "2-round robin \xB7 ", teams.length, " teams \xB7 Starting points locked at generation")), /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", style: { marginLeft: "auto", fontSize: ".72rem" }, onClick: () => {
+  return /* @__PURE__ */ React.createElement("div", { className: "panel", style: { borderColor: color, borderWidth: 2 } }, /* @__PURE__ */ React.createElement("div", { className: "ph" }, /* @__PURE__ */ React.createElement("span", { className: "ph-num", style: { color } }, label[0]), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", null, label), /* @__PURE__ */ React.createElement("p", null, "2-round robin · ", teams.length, " teams · Starting points locked at generation")), /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", style: { marginLeft: "auto", fontSize: ".72rem" }, onClick: () => {
     if (confirm("Regenerate? This clears all entered results.")) setPhaseData(null);
-  } }, "\u21BA Reset")), /* @__PURE__ */ React.createElement("div", { className: "tabs" }, (isTournament ? ["bracket", "monte"] : ["table", "scores", "monte"]).map((t) => /* @__PURE__ */ React.createElement("button", { key: t, className: "tab" + (tab === t ? " on" : ""), onClick: () => setTab(t) }, t === "bracket" ? "Bracket" : t === "table" ? "Table" : t === "scores" ? "Scores" + (pending.length ? " (" + pending.length + ")" : "") : "Monte Carlo"))), tab === "table" && /* @__PURE__ */ React.createElement(LeagueTable, { teams: baseTeams, fixtures, onTeamClick: (i) => onTeamClick && onTeamClick(baseTeams[i]?.id), highlightTop: htop, highlightBottom: hbot, confirmedTop, confirmedBottom }), tab === "scores" && /* @__PURE__ */ React.createElement(
+  } }, "↺ Reset")), /* @__PURE__ */ React.createElement("div", { className: "tabs" }, (isTournament ? ["bracket", "monte"] : ["table", "scores", "monte"]).map((t) => /* @__PURE__ */ React.createElement("button", { key: t, className: "tab" + (tab === t ? " on" : ""), onClick: () => setTab(t) }, t === "bracket" ? "Bracket" : t === "table" ? "Table" : t === "scores" ? "Scores" + (pending.length ? " (" + pending.length + ")" : "") : "Monte Carlo"))), tab === "table" && /* @__PURE__ */ React.createElement(LeagueTable, { teams: baseTeams, fixtures, onTeamClick: (i) => {
+    var _a;
+    return onTeamClick && onTeamClick((_a = baseTeams[i]) == null ? void 0 : _a.id);
+  }, highlightTop: htop, highlightBottom: hbot, confirmedTop, confirmedBottom }), tab === "scores" && /* @__PURE__ */ React.createElement(
     ScoresTab,
     {
       teams,
@@ -1049,8 +1094,11 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
       onConfirm: confirmScore,
       onUndo: unplay,
       onOverride: handleOverride,
-      onTeamClick: (i) => onTeamClick && onTeamClick(teams[i]?.id),
-      onWeekChange: (id, w) => updateMatch(id, (m) => ({ ...m, week: w }))
+      onTeamClick: (i) => {
+        var _a;
+        return onTeamClick && onTeamClick((_a = teams[i]) == null ? void 0 : _a.id);
+      },
+      onWeekChange: (id, w) => updateMatch(id, (m) => __spreadProps(__spreadValues({}, m), { week: w }))
     }
   ), tab === "bracket" && /* @__PURE__ */ React.createElement(
     TournamentBracket,
@@ -1063,7 +1111,10 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
       onConfirm: confirmScore,
       onUndo: unplay,
       onOverride: handleOverride,
-      onTeamClick: (i) => onTeamClick && onTeamClick(baseTeams[i]?.id)
+      onTeamClick: (i) => {
+        var _a;
+        return onTeamClick && onTeamClick((_a = baseTeams[i]) == null ? void 0 : _a.id);
+      }
     }
   ), tab === "monte" && /* @__PURE__ */ React.createElement(
     MCTab,
@@ -1100,7 +1151,7 @@ function SimStep({ league, setLeague, onBack }) {
         earned[f.awayIdx]++;
       }
     });
-    return initTeams.map((t, i) => ({ ...t, points: t.points + earned[i] }));
+    return initTeams.map((t, i) => __spreadProps(__spreadValues({}, t), { points: t.points + earned[i] }));
   }, [initTeams, initFixtures]);
   const pending = initFixtures.filter((f) => !f.played);
   const played = initFixtures.filter((f) => f.played);
@@ -1112,30 +1163,30 @@ function SimStep({ league, setLeague, onBack }) {
     return m;
   }, [pending, teams, initFixtures, settings]);
   function setFixtures(u) {
-    setLeague((lg) => ({ ...lg, fixtures: typeof u === "function" ? u(lg.fixtures) : u }));
+    setLeague((lg) => __spreadProps(__spreadValues({}, lg), { fixtures: typeof u === "function" ? u(lg.fixtures) : u }));
   }
   function setSettings(u) {
-    setLeague((lg) => ({ ...lg, settings: typeof u === "function" ? u(lg.settings) : u }));
+    setLeague((lg) => __spreadProps(__spreadValues({}, lg), { settings: typeof u === "function" ? u(lg.settings) : u }));
   }
   function setPlayoffs(u) {
-    setLeague((lg) => ({ ...lg, playoffs: typeof u === "function" ? u(lg.playoffs) : u }));
+    setLeague((lg) => __spreadProps(__spreadValues({}, lg), { playoffs: typeof u === "function" ? u(lg.playoffs) : u }));
   }
   function setPlaydowns(u) {
-    setLeague((lg) => ({ ...lg, playdowns: typeof u === "function" ? u(lg.playdowns) : u }));
+    setLeague((lg) => __spreadProps(__spreadValues({}, lg), { playdowns: typeof u === "function" ? u(lg.playdowns) : u }));
   }
   function confirmScore(id, hg, ag) {
-    setFixtures((prev) => prev.map((f) => f.id === id ? { ...f, played: true, homeScore: hg, awayScore: ag } : f));
+    setFixtures((prev) => prev.map((f) => f.id === id ? __spreadProps(__spreadValues({}, f), { played: true, homeScore: hg, awayScore: ag }) : f));
   }
   function unplay(id) {
-    setFixtures((prev) => prev.map((f) => f.id === id ? { ...f, played: false, homeScore: null, awayScore: null } : f));
+    setFixtures((prev) => prev.map((f) => f.id === id ? __spreadProps(__spreadValues({}, f), { played: false, homeScore: null, awayScore: null }) : f));
   }
   function handleOverride(id, field, val) {
     setFixtures((prev) => prev.map((f) => {
       if (f.id !== id) return f;
-      if (field === "toggle") return { ...f, overrideOn: !f.overrideOn };
-      if (field === "hw") return { ...f, ovHW: val };
-      if (field === "d") return { ...f, ovD: val };
-      if (field === "aw") return { ...f, ovAW: val };
+      if (field === "toggle") return __spreadProps(__spreadValues({}, f), { overrideOn: !f.overrideOn });
+      if (field === "hw") return __spreadProps(__spreadValues({}, f), { ovHW: val });
+      if (field === "d") return __spreadProps(__spreadValues({}, f), { ovD: val });
+      if (field === "aw") return __spreadProps(__spreadValues({}, f), { ovAW: val });
       return f;
     }));
   }
@@ -1144,8 +1195,8 @@ function SimStep({ league, setLeague, onBack }) {
   const poSz = _poSize || 6;
   const pdSz = _pdSize || 4;
   const pfmt = _pfmt || "round-robin";
-  const playoffSource = useMemo(() => regStats.slice(0, poSz).map((r, i) => ({ ...r, startingPts: poSz - i })), [regStats, poSz]);
-  const playdownSource = useMemo(() => regStats.slice(Math.max(0, n - pdSz)).map((r, i) => ({ ...r, startingPts: pdSz - i })), [regStats, n, pdSz]);
+  const playoffSource = useMemo(() => regStats.slice(0, poSz).map((r, i) => __spreadProps(__spreadValues({}, r), { startingPts: poSz - i })), [regStats, poSz]);
+  const playdownSource = useMemo(() => regStats.slice(Math.max(0, n - pdSz)).map((r, i) => __spreadProps(__spreadValues({}, r), { startingPts: pdSz - i })), [regStats, n, pdSz]);
   const isPlayoff = type === "playoff";
   const stdPromo = league.promoTop != null ? league.promoTop : 2;
   const stdDemot = league.demotBot != null ? league.demotBot : 2;
@@ -1168,8 +1219,8 @@ function SimStep({ league, setLeague, onBack }) {
       color: "#a78bfa",
       infoText: "Top " + poSz + " from regular season. Starting pts: rank 1 = " + poSz + " pts, rank 2 = " + (poSz - 1) + " pts, etc.",
       onTeamClick: (id) => {
-        const t = (playoffs?.teams || []).find((t2) => t2.id === id);
-        const i = (playoffs?.teams || []).indexOf(t);
+        const t = ((playoffs == null ? void 0 : playoffs.teams) || []).find((t2) => t2.id === id);
+        const i = ((playoffs == null ? void 0 : playoffs.teams) || []).indexOf(t);
         if (t) setDetail({ source: "playoff", idx: i });
       }
     }
@@ -1186,12 +1237,12 @@ function SimStep({ league, setLeague, onBack }) {
       color: "#f87171",
       infoText: "Bottom " + pdSz + " from regular season. Starting pts: rank 1 = " + pdSz + " pts, rank 2 = " + (pdSz - 1) + " pts, etc.",
       onTeamClick: (id) => {
-        const t = (playdowns?.teams || []).find((t2) => t2.id === id);
-        const i = (playdowns?.teams || []).indexOf(t);
+        const t = ((playdowns == null ? void 0 : playdowns.teams) || []).find((t2) => t2.id === id);
+        const i = ((playdowns == null ? void 0 : playdowns.teams) || []).indexOf(t);
         if (t) setDetail({ source: "playdown", idx: i });
       }
     }
-  ), phase === "regular" && /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "ph" }, /* @__PURE__ */ React.createElement("span", { className: "ph-num" }, "03"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", null, isPlayoff ? "Regular Season" : "Match Day & Results"), /* @__PURE__ */ React.createElement("p", null, "Enter scores \u2014 table updates automatically."))), /* @__PURE__ */ React.createElement("div", { className: "tabs" }, ["table", "scores", "monte", "settings"].map((t) => /* @__PURE__ */ React.createElement("button", { key: t, className: "tab" + (tab === t ? " on" : ""), onClick: () => setTab(t) }, t === "table" ? "League Table" : t === "scores" ? "Scores" + (pending.length ? " (" + pending.length + ")" : "") : t === "monte" ? "Monte Carlo" : "Settings"))), tab === "table" && /* @__PURE__ */ React.createElement(
+  ), phase === "regular" && /* @__PURE__ */ React.createElement("div", { className: "panel" }, /* @__PURE__ */ React.createElement("div", { className: "ph" }, /* @__PURE__ */ React.createElement("span", { className: "ph-num" }, "03"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h2", null, isPlayoff ? "Regular Season" : "Match Day & Results"), /* @__PURE__ */ React.createElement("p", null, "Enter scores — table updates automatically."))), /* @__PURE__ */ React.createElement("div", { className: "tabs" }, ["table", "scores", "monte", "settings"].map((t) => /* @__PURE__ */ React.createElement("button", { key: t, className: "tab" + (tab === t ? " on" : ""), onClick: () => setTab(t) }, t === "table" ? "League Table" : t === "scores" ? "Scores" + (pending.length ? " (" + pending.length + ")" : "") : t === "monte" ? "Monte Carlo" : "Settings"))), tab === "table" && /* @__PURE__ */ React.createElement(
     LeagueTable,
     {
       teams: initTeams,
@@ -1213,7 +1264,7 @@ function SimStep({ league, setLeague, onBack }) {
       onUndo: unplay,
       onOverride: handleOverride,
       onTeamClick: openDetail,
-      onWeekChange: (id, w) => setFixtures((prev) => prev.map((f) => f.id === id ? { ...f, week: w } : f))
+      onWeekChange: (id, w) => setFixtures((prev) => prev.map((f) => f.id === id ? __spreadProps(__spreadValues({}, f), { week: w }) : f))
     }
   ), tab === "monte" && /* @__PURE__ */ React.createElement(
     MCTab,
@@ -1229,7 +1280,7 @@ function SimStep({ league, setLeague, onBack }) {
         setConfirmedBottom(cb);
       }
     }
-  ), tab === "settings" && /* @__PURE__ */ React.createElement(SettingsPanel, { settings, onChange: (k, v) => setSettings((s) => ({ ...s, [k]: v })), showTiebreakers: true, league, onLeagueChange: setLeague }), /* @__PURE__ */ React.createElement("div", { className: "nav-row" }, /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: onBack }, "\u2190 Edit Fixtures"))), detail && (() => {
+  ), tab === "settings" && /* @__PURE__ */ React.createElement(SettingsPanel, { settings, onChange: (k, v) => setSettings((s) => __spreadProps(__spreadValues({}, s), { [k]: v })), showTiebreakers: true, league, onLeagueChange: setLeague }), /* @__PURE__ */ React.createElement("div", { className: "nav-row" }, /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: onBack }, "← Edit Fixtures"))), detail && (() => {
     let t = null, idx = null, fx = initFixtures, tms = teams;
     if (detail.source === "regular") {
       idx = detail.idx;
@@ -1252,14 +1303,14 @@ function SimStep({ league, setLeague, onBack }) {
 function LeagueEditor({ league, onChange }) {
   const [step, setStep] = useState(league.step || 0);
   function set(field) {
-    return (u) => onChange((lg) => ({ ...lg, [field]: typeof u === "function" ? u(lg[field]) : u }));
+    return (u) => onChange((lg) => __spreadProps(__spreadValues({}, lg), { [field]: typeof u === "function" ? u(lg[field]) : u }));
   }
   function setSettings(u) {
-    onChange((lg) => ({ ...lg, settings: typeof u === "function" ? u(lg.settings || defaultSettings()) : u }));
+    onChange((lg) => __spreadProps(__spreadValues({}, lg), { settings: typeof u === "function" ? u(lg.settings || defaultSettings()) : u }));
   }
   function goStep(s) {
     setStep(s);
-    onChange((lg) => ({ ...lg, step: s }));
+    onChange((lg) => __spreadProps(__spreadValues({}, lg), { step: s }));
   }
   const LABELS = ["Teams", "Fixtures", "Simulate"];
   return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "steps" }, LABELS.map((l, i) => /* @__PURE__ */ React.createElement(
@@ -1271,7 +1322,7 @@ function LeagueEditor({ league, onChange }) {
         if (i <= step) goStep(i);
       }
     },
-    step > i ? "\u2713 " : "",
+    step > i ? "✓ " : "",
     l
   ))), step === 0 && /* @__PURE__ */ React.createElement(TeamsStep, { teams: league.teams, fixtures: league.fixtures, setTeams: set("teams"), leagueType: league.type, onNext: () => goStep(1) }), step === 1 && /* @__PURE__ */ React.createElement(
     FixturesStep,
@@ -1299,7 +1350,7 @@ function App() {
   }
   function handleSave() {
     saveData(store);
-    flash("Downloading\u2026");
+    flash("Downloading…");
   }
   function handleLoad() {
     loadData().then((data) => {
@@ -1311,17 +1362,17 @@ function App() {
   }
   function createLeague(name, type, poSize, pdSize, phaseFormat) {
     const lg = makeLeague(name, type, poSize, pdSize, phaseFormat);
-    setStore((s) => ({ ...s, leagues: [...s.leagues, lg] }));
+    setStore((s) => __spreadProps(__spreadValues({}, s), { leagues: [...s.leagues, lg] }));
     setActiveId(lg.id);
   }
   function deleteLeague(id) {
     if (!confirm("Delete this league?")) return;
-    setStore((s) => ({ ...s, leagues: s.leagues.filter((lg) => lg.id !== id) }));
+    setStore((s) => __spreadProps(__spreadValues({}, s), { leagues: s.leagues.filter((lg) => lg.id !== id) }));
     if (activeId === id) setActiveId(null);
   }
   function updateLeague(id, u) {
-    setStore((s) => ({ ...s, leagues: s.leagues.map((lg) => lg.id === id ? typeof u === "function" ? u(lg) : u : lg) }));
+    setStore((s) => __spreadProps(__spreadValues({}, s), { leagues: s.leagues.map((lg) => lg.id === id ? typeof u === "function" ? u(lg) : u : lg) }));
   }
-  return /* @__PURE__ */ React.createElement("div", { className: "app" }, /* @__PURE__ */ React.createElement("div", { className: "masthead" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "logo" }, "League", /* @__PURE__ */ React.createElement("span", null, "Sim")), /* @__PURE__ */ React.createElement("div", { className: "sub" }, active ? active.name : store.leagues.length + " league" + (store.leagues.length !== 1 ? "s" : ""))), /* @__PURE__ */ React.createElement("div", { className: "top-btns" }, msg && /* @__PURE__ */ React.createElement("span", { className: "muted" }, msg), /* @__PURE__ */ React.createElement("button", { className: "btn btn-cyan", onClick: handleSave }, "\u{1F4BE} Save"), /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: handleLoad }, "\u{1F4C2} Load"), active && /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: () => setActiveId(null) }, "\u2190 All Leagues"))), !active && /* @__PURE__ */ React.createElement(HomeScreen, { leagues: store.leagues, onOpen: setActiveId, onCreate: createLeague, onDelete: deleteLeague }), active && /* @__PURE__ */ React.createElement(LeagueEditor, { key: active.id, league: active, onChange: (u) => updateLeague(active.id, u) }));
+  return /* @__PURE__ */ React.createElement("div", { className: "app" }, /* @__PURE__ */ React.createElement("div", { className: "masthead" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "logo" }, "League", /* @__PURE__ */ React.createElement("span", null, "Sim")), /* @__PURE__ */ React.createElement("div", { className: "sub" }, active ? active.name : store.leagues.length + " league" + (store.leagues.length !== 1 ? "s" : ""))), /* @__PURE__ */ React.createElement("div", { className: "top-btns" }, msg && /* @__PURE__ */ React.createElement("span", { className: "muted" }, msg), /* @__PURE__ */ React.createElement("button", { className: "btn btn-cyan", onClick: handleSave }, "💾 Save"), /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: handleLoad }, "📂 Load"), active && /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: () => setActiveId(null) }, "← All Leagues"))), !active && /* @__PURE__ */ React.createElement(HomeScreen, { leagues: store.leagues, onOpen: setActiveId, onCreate: createLeague, onDelete: deleteLeague }), active && /* @__PURE__ */ React.createElement(LeagueEditor, { key: active.id, league: active, onChange: (u) => updateLeague(active.id, u) }));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(App, null));
