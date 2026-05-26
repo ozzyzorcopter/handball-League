@@ -1317,7 +1317,7 @@ function App() {
   const [store, setStore] = useState({ leagues: [] });
   const [loadStatus, setLoadStatus] = useState("loading");
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/Leaguesim-data.json").then((r) => {
+    fetch("https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/leaguesim-data.json").then((r) => {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     }).then((data) => {
