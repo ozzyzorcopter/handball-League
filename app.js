@@ -842,10 +842,11 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
     const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
     const N = teams.length;
     const gd = new Array(N).fill(0);
+    const games = new Array(N).fill(0);
     played.forEach(f => {
-      if (f.homeIdx < N) gd[f.homeIdx] += (+f.homeScore - +f.awayScore);
+      if (f.homeIdx < N) { gd[f.homeIdx] += (+f.homeScore - +f.awayScore); games[f.homeIdx]++; }
     });
-    return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
+    return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i], P: games[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
   }, [fixtures, teams]);
   const topHome = homeGDRanking.slice(0, 3);
 
@@ -854,10 +855,11 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
     const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
     const N = teams.length;
     const gd = new Array(N).fill(0);
+    const games = new Array(N).fill(0);
     played.forEach(f => {
-      if (f.awayIdx < N) gd[f.awayIdx] += (+f.awayScore - +f.homeScore);
+      if (f.awayIdx < N) { gd[f.awayIdx] += (+f.awayScore - +f.homeScore); games[f.awayIdx]++; }
     });
-    return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
+    return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i], P: games[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
   }, [fixtures, teams]);
   const topAway = awayGDRanking.slice(0, 3);
 
@@ -1065,7 +1067,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                   <div key={r.id} className="mini-row">
                     <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
                     <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1}L1 {r.losses2}L2</span>
+                    <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
                   </div>
                 ))}
               </div>
@@ -1137,9 +1139,9 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                       : rankingPanel === "home" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
                       : rankingPanel === "away" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
                       : rankingPanel === "clutch" ? r.wins + "W"
-                      : r.draws + "D " + r.losses1 + "L1 " + r.losses2 + "L2"}
+                      : r.draws + "D " + (r.losses1 + r.losses2) + "L"}
                   </span>
-                  {(rankingPanel === "attackers" || rankingPanel === "defenders") && (
+                  {(rankingPanel === "attackers" || rankingPanel === "defenders" || rankingPanel === "home" || rankingPanel === "away") && (
                     <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.P + " games)"}</span>
                   )}
                   {rankingPanel === "unlucky" && (
