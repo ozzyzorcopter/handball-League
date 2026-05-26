@@ -882,30 +882,32 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
   const topClutch = clutchRanking.slice(0, 3);
 
   // Unlucky ranking: draws and losses by 1 or 2 GD
-  // hidden points = (2 x draws) + losses. Tiebreak: more draws first, then least total GD in those games, then alphabetical
+  // points: draw = 3, loss by 1GD = 2, loss by 2GD = 1. Tiebreak: more draws first, then least total GD in those games, then alphabetical
   const unluckyRanking = useMemo(() => {
     const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
     const N = teams.length;
-    const data = teams.map(() => ({ draws: 0, losses: 0, gdSum: 0 }));
+    const data = teams.map(() => ({ draws: 0, losses1: 0, losses2: 0, gdSum: 0 }));
     played.forEach(f => {
       const gd = +f.homeScore - +f.awayScore;
       const absGd = Math.abs(gd);
       if (gd === 0) {
-        // draw — only count if scores aren't 0-0 (actual game played)
-        if (f.homeIdx < N) { data[f.homeIdx].draws++; data[f.homeIdx].gdSum += 0; }
-        if (f.awayIdx < N) { data[f.awayIdx].draws++; data[f.awayIdx].gdSum += 0; }
-      } else if (absGd === 1 || absGd === 2) {
-        // close loss for the losing side
-        if (gd > 0 && f.awayIdx < N) { data[f.awayIdx].losses++; data[f.awayIdx].gdSum += absGd; }
-        if (gd < 0 && f.homeIdx < N) { data[f.homeIdx].losses++; data[f.homeIdx].gdSum += absGd; }
+        if (f.homeIdx < N) { data[f.homeIdx].draws++; }
+        if (f.awayIdx < N) { data[f.awayIdx].draws++; }
+      } else if (absGd === 1) {
+        if (gd > 0 && f.awayIdx < N) { data[f.awayIdx].losses1++; data[f.awayIdx].gdSum += 1; }
+        if (gd < 0 && f.homeIdx < N) { data[f.homeIdx].losses1++; data[f.homeIdx].gdSum += 1; }
+      } else if (absGd === 2) {
+        if (gd > 0 && f.awayIdx < N) { data[f.awayIdx].losses2++; data[f.awayIdx].gdSum += 2; }
+        if (gd < 0 && f.homeIdx < N) { data[f.homeIdx].losses2++; data[f.homeIdx].gdSum += 2; }
       }
     });
     return teams.map((t, i) => ({
       id: t.id, name: t.name,
       draws: data[i].draws,
-      losses: data[i].losses,
+      losses1: data[i].losses1,
+      losses2: data[i].losses2,
       gdSum: data[i].gdSum,
-      pts: (2 * data[i].draws) + data[i].losses
+      pts: (3 * data[i].draws) + (2 * data[i].losses1) + data[i].losses2
     })).sort((a, b) =>
       b.pts - a.pts ||
       b.draws - a.draws ||
@@ -1001,19 +1003,6 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
             <React.Fragment>
             <div className="mini-rankings" style={{ marginTop: "1rem" }}>
               <div className="mini-box">
-                <div className="mini-ttl" style={{ color: "#f87171", cursor: "pointer", userSelect: "none" }}
-                  onClick={() => setRankingPanel(rankingPanel === "tough" ? null : "tough")}>
-                  {"💀 Toughest Teams " + (rankingPanel === "tough" ? "▲" : "▼")}
-                </div>
-                {topTough.map((r, i) => (
-                  <div key={r.id} className="mini-row">
-                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                    <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mini-box">
                 <div className="mini-ttl" style={{ color: "#fb923c", cursor: "pointer", userSelect: "none" }}
                   onClick={() => setRankingPanel(rankingPanel === "home" ? null : "home")}>
                   {"🏠 Strongest Home " + (rankingPanel === "home" ? "▲" : "▼")}
@@ -1036,6 +1025,19 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                     <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
                     <span className="mini-name">{r.name}</span>
                     <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mini-box">
+                <div className="mini-ttl" style={{ color: "#f87171", cursor: "pointer", userSelect: "none" }}
+                  onClick={() => setRankingPanel(rankingPanel === "tough" ? null : "tough")}>
+                  {"💀 Toughest Teams " + (rankingPanel === "tough" ? "▲" : "▼")}
+                </div>
+                {topTough.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
                   </div>
                 ))}
               </div>
@@ -1063,7 +1065,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                   <div key={r.id} className="mini-row">
                     <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
                     <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses}L</span>
+                    <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1}L1 {r.losses2}L2</span>
                   </div>
                 ))}
               </div>
@@ -1092,6 +1094,15 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                     : "😤 Full Most Unlucky Ranking"}
                 </span>
                 <button className="btn-rm" onClick={() => setRankingPanel(null)} style={{ fontSize: ".9rem" }}>✕</button>
+              </div>
+              <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".75rem", lineHeight: "1.4" }}>
+                {rankingPanel === "attackers" && "Total goals scored across all played fixtures."}
+                {rankingPanel === "defenders" && "Total goals conceded across all played fixtures."}
+                {rankingPanel === "tough" && "How tough a team is to beat."}
+                {rankingPanel === "home" && "Combined goal difference across all home fixtures."}
+                {rankingPanel === "away" && "Combined goal difference across all away fixtures."}
+                {rankingPanel === "clutch" && "Number of wins by 1 or 2 goals."}
+                {rankingPanel === "unlucky" && "Number of Draws and Losses by 1 or 2 goals."}
               </div>
               {(rankingPanel === "attackers" ? allAttackers
                 : rankingPanel === "defenders" ? allDefenders
@@ -1126,7 +1137,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                       : rankingPanel === "home" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
                       : rankingPanel === "away" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
                       : rankingPanel === "clutch" ? r.wins + "W"
-                      : r.draws + "D " + r.losses + "L"}
+                      : r.draws + "D " + r.losses1 + "L1 " + r.losses2 + "L2"}
                   </span>
                   {(rankingPanel === "attackers" || rankingPanel === "defenders") && (
                     <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.P + " games)"}</span>
@@ -1136,6 +1147,16 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                   )}
                 </div>
               ))}
+              {rankingPanel === "tough" && (
+                <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
+                  Comparison for teams by other teams. Decided by total GD over Home and Away Fixture.
+                </div>
+              )}
+              {rankingPanel === "unlucky" && (
+                <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
+                  Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt. Ties broken by total GD of these fixtures.
+                </div>
+              )}
             </div>
           )}
         </>
