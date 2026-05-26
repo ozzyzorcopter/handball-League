@@ -579,6 +579,64 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
     return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
   }, [fixtures, teams]);
   const topAway = awayGDRanking.slice(0, 3);
+  const clutchRanking = useMemo(() => {
+    const played = fixtures.filter((f) => f.played && f.homeScore != null && f.awayScore != null);
+    const N = teams.length;
+    const wins = new Array(N).fill(0);
+    played.forEach((f) => {
+      const gd = +f.homeScore - +f.awayScore;
+      if (gd === 1 || gd === 2) {
+        if (f.homeIdx < N) wins[f.homeIdx]++;
+      }
+      if (gd === -1 || gd === -2) {
+        if (f.awayIdx < N) wins[f.awayIdx]++;
+      }
+    });
+    const sorted = teams.map((t, i) => ({ id: t.id, name: t.name, wins: wins[i] })).sort((a, b) => b.wins - a.wins || a.name.localeCompare(b.name));
+    return sorted.map((r, i, arr) => __spreadProps(__spreadValues({}, r), {
+      tied: i > 0 && arr[i].wins === arr[i - 1].wins && arr[i - 1].wins > 0
+    }));
+  }, [fixtures, teams]);
+  const topClutch = clutchRanking.slice(0, 3);
+  const unluckyRanking = useMemo(() => {
+    const played = fixtures.filter((f) => f.played && f.homeScore != null && f.awayScore != null);
+    const N = teams.length;
+    const data = teams.map(() => ({ draws: 0, losses: 0, gdSum: 0 }));
+    played.forEach((f) => {
+      const gd = +f.homeScore - +f.awayScore;
+      const absGd = Math.abs(gd);
+      if (gd === 0) {
+        if (f.homeIdx < N) {
+          data[f.homeIdx].draws++;
+          data[f.homeIdx].gdSum += 0;
+        }
+        if (f.awayIdx < N) {
+          data[f.awayIdx].draws++;
+          data[f.awayIdx].gdSum += 0;
+        }
+      } else if (absGd === 1 || absGd === 2) {
+        if (gd > 0 && f.awayIdx < N) {
+          data[f.awayIdx].losses++;
+          data[f.awayIdx].gdSum += absGd;
+        }
+        if (gd < 0 && f.homeIdx < N) {
+          data[f.homeIdx].losses++;
+          data[f.homeIdx].gdSum += absGd;
+        }
+      }
+    });
+    return teams.map((t, i) => ({
+      id: t.id,
+      name: t.name,
+      draws: data[i].draws,
+      losses: data[i].losses,
+      gdSum: data[i].gdSum,
+      pts: 2 * data[i].draws + data[i].losses
+    })).sort(
+      (a, b) => b.pts - a.pts || b.draws - a.draws || a.gdSum - b.gdSum || a.name.localeCompare(b.name)
+    );
+  }, [fixtures, teams]);
+  const topUnlucky = unluckyRanking.slice(0, 3);
   function rowBg(i, r) {
     if (confirmedTop && confirmedTop.has(r.id)) return "rgba(22,163,74,.45)";
     if (confirmedBottom && confirmedBottom.has(r.id)) return "rgba(185,28,28,.45)";
@@ -609,7 +667,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
     },
     "🛡 Top Defenders ",
     rankingPanel === "defenders" ? "▲" : "▼"
-  ), defenders.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, MEDALS[i]), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#4ade80" } }, r.GA, " GA"))))), hasPlayed && /* @__PURE__ */ React.createElement("div", { className: "mini-rankings", style: { marginTop: "1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
+  ), defenders.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, MEDALS[i]), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#4ade80" } }, r.GA, " GA"))))), hasPlayed && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "mini-rankings", style: { marginTop: "1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
     "div",
     {
       className: "mini-ttl",
@@ -633,13 +691,29 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
       onClick: () => setRankingPanel(rankingPanel === "away" ? null : "away")
     },
     "✈️ Strongest Away " + (rankingPanel === "away" ? "▲" : "▼")
-  ), topAway.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#a78bfa" } }, r.gd > 0 ? "+" : "", r.gd, " GD"))))), rankingPanel && /* @__PURE__ */ React.createElement("div", { className: "mini-box", style: { marginTop: ".75rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-ttl", style: {
-    color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : "#a78bfa",
+  ), topAway.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#a78bfa" } }, r.gd > 0 ? "+" : "", r.gd, " GD"))))), /* @__PURE__ */ React.createElement("div", { className: "mini-rankings", style: { marginTop: "1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      className: "mini-ttl",
+      style: { color: "#facc15", cursor: "pointer", userSelect: "none" },
+      onClick: () => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")
+    },
+    "🎯 Most Clutch " + (rankingPanel === "clutch" ? "▲" : "▼")
+  ), topClutch.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, r.tied ? "—" : i < 3 ? MEDALS[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#facc15" } }, r.wins, "W")))), /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      className: "mini-ttl",
+      style: { color: "#94a3b8", cursor: "pointer", userSelect: "none" },
+      onClick: () => setRankingPanel(rankingPanel === "unlucky" ? null : "unlucky")
+    },
+    "😤 Most Unlucky " + (rankingPanel === "unlucky" ? "▲" : "▼")
+  ), topUnlucky.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#94a3b8" } }, r.draws, "D ", r.losses, "L")))))), rankingPanel && /* @__PURE__ */ React.createElement("div", { className: "mini-box", style: { marginTop: ".75rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-ttl", style: {
+    color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : rankingPanel === "clutch" ? "#facc15" : "#94a3b8",
     marginBottom: ".65rem",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
-  } }, /* @__PURE__ */ React.createElement("span", null, rankingPanel === "attackers" ? "⚽ Full Attacking Ranking" : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking" : rankingPanel === "tough" ? "💀 Full Toughest Ranking" : rankingPanel === "home" ? "🏠 Full Strongest Home Ranking" : "✈️ Full Strongest Away Ranking"), /* @__PURE__ */ React.createElement("button", { className: "btn-rm", onClick: () => setRankingPanel(null), style: { fontSize: ".9rem" } }, "✕")), (rankingPanel === "attackers" ? allAttackers : rankingPanel === "defenders" ? allDefenders : rankingPanel === "tough" ? toughRanking : rankingPanel === "home" ? homeGDRanking : awayGDRanking).map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos", style: { minWidth: "1.8rem", color: i < 3 ? rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : "#f87171" : "#3a3f50" } }, i < 3 ? MEDALS[i] : i + 1 + "."), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : "#a78bfa" } }, rankingPanel === "attackers" ? r.GF + " GF" : rankingPanel === "defenders" ? r.GA + " GA" : rankingPanel === "tough" ? r.pts + " pts" : (r.gd > 0 ? "+" : "") + r.gd + " GD"), (rankingPanel === "attackers" || rankingPanel === "defenders") && /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".72rem", marginLeft: ".25rem" } }, "(" + r.P + " games)"))))));
+  } }, /* @__PURE__ */ React.createElement("span", null, rankingPanel === "attackers" ? "⚽ Full Attacking Ranking" : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking" : rankingPanel === "tough" ? "💀 Full Toughest Ranking" : rankingPanel === "home" ? "🏠 Full Strongest Home Ranking" : rankingPanel === "away" ? "✈️ Full Strongest Away Ranking" : rankingPanel === "clutch" ? "🎯 Full Most Clutch Ranking" : "😤 Full Most Unlucky Ranking"), /* @__PURE__ */ React.createElement("button", { className: "btn-rm", onClick: () => setRankingPanel(null), style: { fontSize: ".9rem" } }, "✕")), (rankingPanel === "attackers" ? allAttackers : rankingPanel === "defenders" ? allDefenders : rankingPanel === "tough" ? toughRanking : rankingPanel === "home" ? homeGDRanking : rankingPanel === "away" ? awayGDRanking : rankingPanel === "clutch" ? clutchRanking : unluckyRanking).map((r, i, arr) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos", style: { minWidth: "1.8rem", color: i < 3 ? rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : rankingPanel === "clutch" ? "#facc15" : rankingPanel === "unlucky" ? "#94a3b8" : "#f87171" : "#3a3f50" } }, rankingPanel === "clutch" && r.tied ? "—" : i < 3 ? MEDALS[i] : i + 1 + "."), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "tough" ? "#f87171" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : rankingPanel === "clutch" ? "#facc15" : "#94a3b8" } }, rankingPanel === "attackers" ? r.GF + " GF" : rankingPanel === "defenders" ? r.GA + " GA" : rankingPanel === "tough" ? r.pts + " pts" : rankingPanel === "home" ? (r.gd > 0 ? "+" : "") + r.gd + " GD" : rankingPanel === "away" ? (r.gd > 0 ? "+" : "") + r.gd + " GD" : rankingPanel === "clutch" ? r.wins + "W" : r.draws + "D " + r.losses + "L"), (rankingPanel === "attackers" || rankingPanel === "defenders") && /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".72rem", marginLeft: ".25rem" } }, "(" + r.P + " games)"), rankingPanel === "unlucky" && /* @__PURE__ */ React.createElement("span", { className: "muted", style: { fontSize: ".72rem", marginLeft: ".25rem" } }, "(" + r.pts + " pts)"))))));
 }
 function TeamsStep({ teams, fixtures, setTeams, leagueType, onNext }) {
   function update(id, field, val) {
