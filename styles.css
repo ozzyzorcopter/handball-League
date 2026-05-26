@@ -120,6 +120,7 @@ body{font-family:'DM Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;back
 .ltbl td.gd0{color:#5a6070;}
 .ltbl tr:hover td{filter:brightness(1.15);}
 .mini-rankings{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem;}
+@media(max-width:600px){.mini-rankings{grid-template-columns:1fr;}.type-cards{grid-template-columns:1fr;}}
 .mini-box{background:#08090c;border:1px solid #1c1f27;border-radius:8px;padding:.85rem;}
 .mini-ttl{font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;}
 .mini-row{display:flex;align-items:center;gap:.5rem;padding:.3rem 0;border-bottom:1px solid #1c1f27;font-size:.82rem;}
