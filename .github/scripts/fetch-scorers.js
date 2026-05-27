@@ -20,7 +20,6 @@ function parseScorers(html) {
     const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
     let cellMatch;
     while ((cellMatch = cellRe.exec(rowMatch[1])) !== null) {
-      // Strip all HTML tags, then strip [number] prefixes like [75105]
       const text = cellMatch[1]
         .replace(/<[^>]+>/g, "")
         .replace(/\[\d+\]\s*/g, "")
@@ -39,7 +38,7 @@ function parseScorers(html) {
   return results;
 }
 
-async function fetchLeague(league) {
+async function fetchLeague(league, debug = false) {
   try {
     const res = await fetch(league.url, {
       headers: {
@@ -50,6 +49,13 @@ async function fetchLeague(league) {
     });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
+
+    if (debug) {
+      console.log("\n--- DEBUG: first 1000 chars of HTML ---");
+      console.log(html.substring(0, 1000));
+      console.log("--- END DEBUG ---\n");
+    }
+
     const scorers = parseScorers(html);
     if (scorers.length === 0) throw new Error("Parsed 0 scorers — page may have changed structure");
     console.log(`  ✓ ${league.name}: ${scorers.length} scorers — #1: ${scorers[0].player} (${scorers[0].goals} goals, ${scorers[0].club})`);
@@ -62,7 +68,12 @@ async function fetchLeague(league) {
 
 async function main() {
   console.log(`\nFetching scorer data at ${new Date().toUTCString()}\n`);
-  const results = await Promise.all(LEAGUES.map(fetchLeague));
+
+  // Fetch first league with debug to see raw HTML structure
+  const debugResult = await fetchLeague(LEAGUES[0], true);
+  const rest = await Promise.all(LEAGUES.slice(1).map(l => fetchLeague(l, false)));
+  const results = [debugResult, ...rest];
+
   const total = results.reduce((s, l) => s + l.scorers.length, 0);
   const failed = results.filter(l => l.error).length;
 
@@ -71,7 +82,7 @@ async function main() {
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
 
   console.log(`\nDone — ${total} scorers across ${results.length - failed}/${results.length} leagues`);
-  if (failed === results.length) process.exit(1); // only fail if ALL leagues failed
+  if (failed === results.length) process.exit(1);
 }
 
 main().catch(err => { console.error(err); process.exit(1); });
