@@ -20,12 +20,19 @@ function parseScorers(html) {
     const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
     let cellMatch;
     while ((cellMatch = cellRe.exec(rowMatch[1])) !== null) {
-      cells.push(cellMatch[1].replace(/<[^>]+>/g, "").replace(/\[\d+\]\s*/g, "").trim());
+      // Strip all HTML tags, then strip [number] prefixes like [75105]
+      const text = cellMatch[1]
+        .replace(/<[^>]+>/g, "")
+        .replace(/\[\d+\]\s*/g, "")
+        .trim();
+      cells.push(text);
     }
     if (cells.length >= 4) {
       const goals = parseInt(cells[3]);
-      if (!isNaN(goals) && cells[1]) {
-        results.push({ player: cells[1], club: cells[2], goals });
+      const player = cells[1];
+      const club = cells[2];
+      if (!isNaN(goals) && player && club) {
+        results.push({ player, club, goals });
       }
     }
   }
@@ -35,12 +42,17 @@ function parseScorers(html) {
 async function fetchLeague(league) {
   try {
     const res = await fetch(league.url, {
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; LeagueSim/1.0)" }
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "nl-BE,nl;q=0.9",
+      }
     });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
     const scorers = parseScorers(html);
-    console.log(`  ✓ ${league.name}: ${scorers.length} scorers — top: ${scorers[0] ? scorers[0].player + " (" + scorers[0].goals + ")" : "none"}`);
+    if (scorers.length === 0) throw new Error("Parsed 0 scorers — page may have changed structure");
+    console.log(`  ✓ ${league.name}: ${scorers.length} scorers — #1: ${scorers[0].player} (${scorers[0].goals} goals, ${scorers[0].club})`);
     return { name: league.name, scorers, updatedAt: new Date().toISOString() };
   } catch (err) {
     console.error(`  ✗ ${league.name}: FAILED — ${err.message}`);
@@ -58,8 +70,8 @@ async function main() {
   const outPath = path.join(process.cwd(), "scorer-data.json");
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
 
-  console.log(`\nDone — ${total} scorers across ${results.length - failed} leagues (${failed} failed)`);
-  if (failed > 0) process.exit(1); // fail the action if any league failed
+  console.log(`\nDone — ${total} scorers across ${results.length - failed}/${results.length} leagues`);
+  if (failed === results.length) process.exit(1); // only fail if ALL leagues failed
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

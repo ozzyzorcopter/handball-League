@@ -912,6 +912,41 @@ function TeamScorers({ leagueName, teamName }) {
   return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={teamName + " Scorers"} maxRows={5} />;
 }
 
+function ToughPanel({ ranking }) {
+  const [expanded, setExpanded] = useState(false);
+  const shown = expanded ? ranking : ranking.slice(0, 5);
+  return (
+    <div className="mini-box" style={{ marginTop: "1rem" }}>
+      <div className="mini-ttl" style={{ color: "#f87171", marginBottom: ".6rem" }}>💀 Toughest Teams</div>
+      <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".6rem" }}>How tough a team is to beat.</div>
+      {shown.map((r, i) => (
+        <div key={r.id} className="mini-row">
+          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+          <span className="mini-name">{r.name}</span>
+          <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
+        </div>
+      ))}
+      {ranking.length > 5 && (
+        <div style={{ marginTop: ".4rem", textAlign: "center" }}>
+          <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
+            {expanded ? "Show less ▲" : "Show all " + ranking.length + " ▼"}
+          </button>
+        </div>
+      )}
+      <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
+        Comparison for teams by other teams. Decided by total GD over Home and Away Fixture.
+      </div>
+    </div>
+  );
+}
+
+function LeagueScorers({ leagueName, teams }) {
+  const { scorers, error } = useScorers(leagueName);
+  const clubNames = useMemo(() => new Set(teams.map(t => resolveClubName(t.name))), [teams]);
+  const filtered = useMemo(() => scorers ? scorers.filter(s => clubNames.has(s.club)) : null, [scorers, clubNames]);
+  return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} />;
+}
+
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
 function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueName }) {
   const rows = useMemo(() => calcStats(teams, fixtures), [teams, fixtures]);
@@ -1348,41 +1383,6 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
       )}
     </div>
   );
-}
-
-function ToughPanel({ ranking }) {
-  const [expanded, setExpanded] = useState(false);
-  const shown = expanded ? ranking : ranking.slice(0, 5);
-  return (
-    <div className="mini-box" style={{ marginTop: "1rem" }}>
-      <div className="mini-ttl" style={{ color: "#f87171", marginBottom: ".6rem" }}>💀 Toughest Teams</div>
-      <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".6rem" }}>How tough a team is to beat.</div>
-      {shown.map((r, i) => (
-        <div key={r.id} className="mini-row">
-          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-          <span className="mini-name">{r.name}</span>
-          <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
-        </div>
-      ))}
-      {ranking.length > 5 && (
-        <div style={{ marginTop: ".4rem", textAlign: "center" }}>
-          <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
-            {expanded ? "Show less ▲" : "Show all " + ranking.length + " ▼"}
-          </button>
-        </div>
-      )}
-      <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
-        Comparison for teams by other teams. Decided by total GD over Home and Away Fixture.
-      </div>
-    </div>
-  );
-}
-
-function LeagueScorers({ leagueName, teams }) {
-  const { scorers, error } = useScorers(leagueName);
-  const clubNames = useMemo(() => new Set(teams.map(t => resolveClubName(t.name))), [teams]);
-  const filtered = useMemo(() => scorers ? scorers.filter(s => clubNames.has(s.club)) : null, [scorers, clubNames]);
-  return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} />;
 }
 
 // ── STEP 1: TEAMS ─────────────────────────────────────────────────────────────
