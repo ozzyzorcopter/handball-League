@@ -51,9 +51,16 @@ async function fetchLeague(league, debug = false) {
     const html = await res.text();
 
     if (debug) {
-      console.log("\n--- DEBUG: first 1000 chars of HTML ---");
-      console.log(html.substring(0, 1000));
-      console.log("--- END DEBUG ---\n");
+      // Find first <tr> and show surrounding context
+      const trIdx = html.indexOf("<tr");
+      const tdIdx = html.indexOf("<td");
+      console.log(`\n--- DEBUG ---`);
+      console.log(`Total HTML length: ${html.length} chars`);
+      console.log(`First <tr> at index: ${trIdx}`);
+      console.log(`First <td> at index: ${tdIdx}`);
+      if (trIdx >= 0) console.log(`First <tr> context:\n${html.substring(trIdx, trIdx + 300)}`);
+      if (tdIdx >= 0) console.log(`First <td> context:\n${html.substring(tdIdx, tdIdx + 300)}`);
+      console.log(`--- END DEBUG ---\n`);
     }
 
     const scorers = parseScorers(html);
@@ -68,19 +75,13 @@ async function fetchLeague(league, debug = false) {
 
 async function main() {
   console.log(`\nFetching scorer data at ${new Date().toUTCString()}\n`);
-
-  // Fetch first league with debug to see raw HTML structure
   const debugResult = await fetchLeague(LEAGUES[0], true);
   const rest = await Promise.all(LEAGUES.slice(1).map(l => fetchLeague(l, false)));
   const results = [debugResult, ...rest];
-
   const total = results.reduce((s, l) => s + l.scorers.length, 0);
   const failed = results.filter(l => l.error).length;
-
   const output = { updatedAt: new Date().toISOString(), leagues: results };
-  const outPath = path.join(process.cwd(), "scorer-data.json");
-  fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
-
+  fs.writeFileSync(path.join(process.cwd(), "scorer-data.json"), JSON.stringify(output, null, 2));
   console.log(`\nDone — ${total} scorers across ${results.length - failed}/${results.length} leagues`);
   if (failed === results.length) process.exit(1);
 }
