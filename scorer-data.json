@@ -1,11 +1,35 @@
 {
-  "updatedAt": "2026-01-01T00:00:00.000Z",
+  "updatedAt": "2026-05-27T20:25:07.909Z",
   "leagues": [
-    { "name": "VHV Regio OWv", "scorers": [], "updatedAt": "2026-01-01T00:00:00.000Z" },
-    { "name": "VHV Liga 1",    "scorers": [], "updatedAt": "2026-01-01T00:00:00.000Z" },
-    { "name": "VHV Liga 2",    "scorers": [], "updatedAt": "2026-01-01T00:00:00.000Z" },
-    { "name": "VHV Liga 3",    "scorers": [], "updatedAt": "2026-01-01T00:00:00.000Z" },
-    { "name": "1e Nationale",  "scorers": [], "updatedAt": "2026-01-01T00:00:00.000Z" },
-    { "name": "2e Nationale",  "scorers": [], "updatedAt": "2026-01-01T00:00:00.000Z" }
+    {
+      "name": "VHV Regio OWv",
+      "scorers": [],
+      "updatedAt": "2026-05-27T20:25:07.858Z"
+    },
+    {
+      "name": "VHV Liga 1",
+      "scorers": [],
+      "updatedAt": "2026-05-27T20:25:07.847Z"
+    },
+    {
+      "name": "VHV Liga 2",
+      "scorers": [],
+      "updatedAt": "2026-05-27T20:25:07.909Z"
+    },
+    {
+      "name": "VHV Liga 3",
+      "scorers": [],
+      "updatedAt": "2026-05-27T20:25:07.889Z"
+    },
+    {
+      "name": "1e Nationale",
+      "scorers": [],
+      "updatedAt": "2026-05-27T20:25:07.859Z"
+    },
+    {
+      "name": "2e Nationale",
+      "scorers": [],
+      "updatedAt": "2026-05-27T20:25:07.883Z"
+    }
   ]
 }
