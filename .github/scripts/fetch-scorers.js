@@ -13,13 +13,13 @@ const LEAGUES = [
 
 function parseScorers(html) {
   const results = [];
-  const rowRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-  let rowMatch;
-  while ((rowMatch = rowRe.exec(html)) !== null) {
+  // Split on <tr> since rows end with <tr> instead of </tr> (malformed HTML)
+  const segments = html.split(/<tr>/i);
+  for (const seg of segments) {
     const cells = [];
     const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
     let cellMatch;
-    while ((cellMatch = cellRe.exec(rowMatch[1])) !== null) {
+    while ((cellMatch = cellRe.exec(seg)) !== null) {
       const text = cellMatch[1]
         .replace(/<[^>]+>/g, "")
         .replace(/\[\d+\]\s*/g, "")
@@ -38,7 +38,7 @@ function parseScorers(html) {
   return results;
 }
 
-async function fetchLeague(league, debug = false) {
+async function fetchLeague(league) {
   try {
     const res = await fetch(league.url, {
       headers: {
@@ -49,20 +49,6 @@ async function fetchLeague(league, debug = false) {
     });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
-
-    if (debug) {
-      // Find first <tr> and show surrounding context
-      const trIdx = html.indexOf("<tr");
-      const tdIdx = html.indexOf("<td");
-      console.log(`\n--- DEBUG ---`);
-      console.log(`Total HTML length: ${html.length} chars`);
-      console.log(`First <tr> at index: ${trIdx}`);
-      console.log(`First <td> at index: ${tdIdx}`);
-      if (trIdx >= 0) console.log(`First <tr> context:\n${html.substring(trIdx, trIdx + 300)}`);
-      if (tdIdx >= 0) console.log(`First <td> context:\n${html.substring(tdIdx, tdIdx + 300)}`);
-      console.log(`--- END DEBUG ---\n`);
-    }
-
     const scorers = parseScorers(html);
     if (scorers.length === 0) throw new Error("Parsed 0 scorers — page may have changed structure");
     console.log(`  ✓ ${league.name}: ${scorers.length} scorers — #1: ${scorers[0].player} (${scorers[0].goals} goals, ${scorers[0].club})`);
@@ -75,9 +61,7 @@ async function fetchLeague(league, debug = false) {
 
 async function main() {
   console.log(`\nFetching scorer data at ${new Date().toUTCString()}\n`);
-  const debugResult = await fetchLeague(LEAGUES[0], true);
-  const rest = await Promise.all(LEAGUES.slice(1).map(l => fetchLeague(l, false)));
-  const results = [debugResult, ...rest];
+  const results = await Promise.all(LEAGUES.map(fetchLeague));
   const total = results.reduce((s, l) => s + l.scorers.length, 0);
   const failed = results.filter(l => l.error).length;
   const output = { updatedAt: new Date().toISOString(), leagues: results };
