@@ -1090,9 +1090,10 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
+      {SCORER_LEAGUE_MAP[leagueName] && <LeagueScorers leagueName={leagueName} teams={teams} />}
       {hasPlayed && (
         <>
-          <div className="mini-rankings">
+          <div className="mini-rankings" style={{ marginTop: "1rem" }}>
             <div className="mini-box">
               <div className="mini-ttl" style={{ color: "#f87171", cursor: "pointer", userSelect: "none" }}
                 onClick={() => setRankingPanel(rankingPanel === "attackers" ? null : "attackers")}>
@@ -1149,19 +1150,6 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                   </div>
                 ))}
               </div>
-              <div className="mini-box">
-                <div className="mini-ttl" style={{ color: "#f87171", cursor: "pointer", userSelect: "none" }}
-                  onClick={() => setRankingPanel(rankingPanel === "tough" ? null : "tough")}>
-                  {"💀 Toughest Teams " + (rankingPanel === "tough" ? "▲" : "▼")}
-                </div>
-                {topTough.map((r, i) => (
-                  <div key={r.id} className="mini-row">
-                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                    <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
-                  </div>
-                ))}
-              </div>
             </div>
             <div className="mini-rankings" style={{ marginTop: "1rem" }}>
               <div className="mini-box">
@@ -1191,9 +1179,85 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                 ))}
               </div>
             </div>
+            <ToughPanel ranking={toughRanking} />
             </React.Fragment>
           )}
-          {rankingPanel && (
+          {rankingPanel && rankingPanel !== "tough" && (
+            <div className="mini-box" style={{ marginTop: ".75rem" }}>
+              <div className="mini-ttl" style={{
+                color: rankingPanel === "attackers" ? "#f87171"
+                  : rankingPanel === "defenders" ? "#4ade80"
+                  : rankingPanel === "home" ? "#fb923c"
+                  : rankingPanel === "away" ? "#a78bfa"
+                  : rankingPanel === "clutch" ? "#facc15"
+                  : "#94a3b8",
+                marginBottom: ".65rem", display: "flex", justifyContent: "space-between", alignItems: "center"
+              }}>
+                <span>
+                  {rankingPanel === "attackers" ? "⚽ Full Attacking Ranking"
+                    : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking"
+                    : rankingPanel === "home" ? "🏠 Full Strongest Home Ranking"
+                    : rankingPanel === "away" ? "✈️ Full Strongest Away Ranking"
+                    : rankingPanel === "clutch" ? "🎯 Full Most Clutch Ranking"
+                    : "😤 Full Most Unlucky Ranking"}
+                </span>
+                <button className="btn-rm" onClick={() => setRankingPanel(null)} style={{ fontSize: ".9rem" }}>✕</button>
+              </div>
+              <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".75rem", lineHeight: "1.4" }}>
+                {rankingPanel === "attackers" && "Total goals scored across all played fixtures."}
+                {rankingPanel === "defenders" && "Total goals conceded across all played fixtures."}
+                {rankingPanel === "home" && "Combined goal difference across all home fixtures."}
+                {rankingPanel === "away" && "Combined goal difference across all away fixtures."}
+                {rankingPanel === "clutch" && "Number of wins by 1 or 2 goals."}
+                {rankingPanel === "unlucky" && "Number of Draws and Losses by 1 or 2 goals."}
+              </div>
+              {(rankingPanel === "attackers" ? allAttackers
+                : rankingPanel === "defenders" ? allDefenders
+                : rankingPanel === "home" ? homeGDRanking
+                : rankingPanel === "away" ? awayGDRanking
+                : rankingPanel === "clutch" ? clutchRanking
+                : unluckyRanking
+              ).map((r, i, arr) => (
+                <div key={r.id} className="mini-row">
+                  <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? (
+                    rankingPanel === "defenders" ? "#4ade80"
+                    : rankingPanel === "home" ? "#fb923c"
+                    : rankingPanel === "away" ? "#a78bfa"
+                    : rankingPanel === "clutch" ? "#facc15"
+                    : rankingPanel === "unlucky" ? "#94a3b8"
+                    : "#f87171") : "#3a3f50" }}>
+                    {rankingPanel === "clutch" && r.tied ? "—" : (i < 3 ? MEDALS[i] : (i + 1) + ".")}
+                  </span>
+                  <span className="mini-name">{r.name}</span>
+                  <span className="mini-val" style={{ color:
+                    rankingPanel === "attackers" ? "#f87171"
+                    : rankingPanel === "defenders" ? "#4ade80"
+                    : rankingPanel === "home" ? "#fb923c"
+                    : rankingPanel === "away" ? "#a78bfa"
+                    : rankingPanel === "clutch" ? "#facc15"
+                    : "#94a3b8" }}>
+                    {rankingPanel === "attackers" ? r.GF + " GF"
+                      : rankingPanel === "defenders" ? r.GA + " GA"
+                      : rankingPanel === "home" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
+                      : rankingPanel === "away" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
+                      : rankingPanel === "clutch" ? r.wins + "W"
+                      : r.draws + "D " + (r.losses1 + r.losses2) + "L"}
+                  </span>
+                  {(rankingPanel === "attackers" || rankingPanel === "defenders" || rankingPanel === "home" || rankingPanel === "away") && (
+                    <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.P + " games)"}</span>
+                  )}
+                  {rankingPanel === "unlucky" && (
+                    <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.pts + " pts)"}</span>
+                  )}
+                </div>
+              ))}
+              {rankingPanel === "unlucky" && (
+                <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
+                  Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt. Ties broken by total GD of these fixtures.
+                </div>
+              )}
+            </div>
+          )}
             <div className="mini-box" style={{ marginTop: ".75rem" }}>
               <div className="mini-ttl" style={{
                 color: rankingPanel === "attackers" ? "#f87171"
@@ -1282,7 +1346,34 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
           )}
         </>
       )}
-      {SCORER_LEAGUE_MAP[leagueName] && <LeagueScorers leagueName={leagueName} teams={teams} />}
+    </div>
+  );
+}
+
+function ToughPanel({ ranking }) {
+  const [expanded, setExpanded] = useState(false);
+  const shown = expanded ? ranking : ranking.slice(0, 5);
+  return (
+    <div className="mini-box" style={{ marginTop: "1rem" }}>
+      <div className="mini-ttl" style={{ color: "#f87171", marginBottom: ".6rem" }}>💀 Toughest Teams</div>
+      <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".6rem" }}>How tough a team is to beat.</div>
+      {shown.map((r, i) => (
+        <div key={r.id} className="mini-row">
+          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+          <span className="mini-name">{r.name}</span>
+          <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
+        </div>
+      ))}
+      {ranking.length > 5 && (
+        <div style={{ marginTop: ".4rem", textAlign: "center" }}>
+          <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
+            {expanded ? "Show less ▲" : "Show all " + ranking.length + " ▼"}
+          </button>
+        </div>
+      )}
+      <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
+        Comparison for teams by other teams. Decided by total GD over Home and Away Fixture.
+      </div>
     </div>
   );
 }
