@@ -24,7 +24,123 @@ function loadData() {
   });
 }
 
-// ── DEFAULTS ─────────────────────────────────────────────────────────────────
+// ── SCORER DATA ──────────────────────────────────────────────────────────────
+const SCORER_LEAGUE_MAP = {
+  "VHV Regio OWv": "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=655",
+  "VHV Liga 3":    "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=652",
+  "VHV Liga 2":    "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=651",
+  "VHV Liga 1":    "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=650",
+  "1e Nationale":  "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=URBH-KBHB&serie=655",
+  "2e Nationale":  "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=URBH-KBHB&serie=646",
+};
+
+const SCORER_TEAM_MAP = {
+  "HBC Evergem B":     "Handbalclub Evergem",
+  "HBC Evergem":       "Handbalclub Evergem",
+  "Besox HC Izegem":   "Besox Handbalclub Izegem",
+  "Besox HBC Izegem":  "Besox Handbalclub Izegem",
+  "Apolloon Spurs B":  "HBC Apolloon Spurs",
+  "Apolloon Spurs":    "HBC Apolloon Spurs",
+  "HC Roeselare B":    "Handbalclub Roeselare",
+  "HC Roeselare":      "Handbalclub Roeselare",
+  "HBC Dendermonde B": "HBC Dendermonde",
+  "Elita Lebbeke B":   "Elita Lebbeke",
+  "Desselgemse HC B":  "Desselgemse Handbalclub",
+  "Desselgemse HC":    "Desselgemse Handbalclub",
+  "HC Thor":           "Handbalclub Thor",
+  "Handbal Lokeren B": "Handbal Lokeren",
+  "HC Eeklo":          "Handbalclub Eeklo",
+  "Hestia Bilzen":     "Handbal Hestia Bilzen",
+  "HC Schoten":        "Handbalclub Schoten",
+  "Brasschaat HC":     "Brasschaat Handbalclub",
+};
+
+function resolveClubName(leagueSimName) {
+  return SCORER_TEAM_MAP[leagueSimName] || leagueSimName;
+}
+
+// Parse scorer HTML table into [{rank, player, club, goals}]
+function parseScorerHtml(html) {
+  const results = [];
+  const rowRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+  const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+  let rowMatch;
+  while ((rowMatch = rowRe.exec(html)) !== null) {
+    const cells = [];
+    let cellMatch;
+    const cellRe2 = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+    while ((cellMatch = cellRe2.exec(rowMatch[1])) !== null) {
+      cells.push(cellMatch[1].replace(/<[^>]+>/g, "").replace(/\[[\d]+\]\s*/g, "").trim());
+    }
+    if (cells.length >= 4) {
+      const goals = parseInt(cells[3]);
+      if (!isNaN(goals)) {
+        results.push({ rank: cells[0] || "", player: cells[1], club: cells[2], goals });
+      }
+    }
+  }
+  return results;
+}
+
+function useScorers(leagueName) {
+  const [scorers, setScorers] = useState(null); // null=loading, []= loaded
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    const url = SCORER_LEAGUE_MAP[leagueName];
+    if (!url) { setScorers([]); return; }
+    setScorers(null);
+    setError(false);
+    fetch(url)
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+      .then(html => setScorers(parseScorerHtml(html)))
+      .catch(() => { setError(true); setScorers([]); });
+  }, [leagueName]);
+  return { scorers, error };
+}
+
+function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10 }) {
+  const [expanded, setExpanded] = useState(false);
+  const loading = scorers === null;
+
+  const filtered = useMemo(() => {
+    if (!scorers) return [];
+    if (!filterClub) return scorers;
+    const club = resolveClubName(filterClub);
+    return scorers.filter(s => s.club === club);
+  }, [scorers, filterClub]);
+
+  const shown = expanded ? filtered : filtered.slice(0, maxRows);
+
+  return (
+    <div className="mini-box" style={{ marginTop: "1rem" }}>
+      <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".6rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span>⚽ {title || "Top Scorers"}</span>
+        {loading && <span className="muted" style={{ fontSize: ".7rem", fontWeight: 400 }}>loading…</span>}
+        {error && <span style={{ color: "#f87171", fontSize: ".7rem", fontWeight: 400 }}>unavailable</span>}
+      </div>
+      {!loading && !error && filtered.length === 0 && (
+        <div className="muted" style={{ fontSize: ".78rem" }}>No scorer data found.</div>
+      )}
+      {shown.map((s, i) => (
+        <div key={i} className="mini-row">
+          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fbbf24" : "#3a3f50" }}>{i < 3 ? ["🥇","🥈","🥉"][i] : (i+1)+"."}</span>
+          <span className="mini-name" style={{ flex: 1 }}>{s.player}</span>
+          {!filterClub && <span className="muted" style={{ fontSize: ".68rem", marginRight: ".4rem" }}>{s.club}</span>}
+          <span className="mini-val" style={{ color: "#fbbf24" }}>{s.goals}</span>
+        </div>
+      ))}
+      {!loading && filtered.length > maxRows && (
+        <div style={{ marginTop: ".4rem", textAlign: "center" }}>
+          <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
+            {expanded ? "Show less ▲" : "Show all " + filtered.length + " ▼"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 function defaultSettings() {
   return { baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 };
 }
@@ -574,7 +690,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
 }
 
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
-function TeamDetail({ team, teamIdx, teams, fixtures, onClose }) {
+function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueName }) {
   const mine = fixtures.filter(f => f.homeIdx === teamIdx || f.awayIdx === teamIdx);
 
   const sorted = [...mine].sort((a, b) => {
@@ -788,13 +904,21 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose }) {
           </div>
 
         </div>
+
+        {SCORER_LEAGUE_MAP[leagueName] && <TeamScorers leagueName={leagueName} teamName={team?.name} />}
+
       </div>
     </>
   );
 }
 
+function TeamScorers({ leagueName, teamName }) {
+  const { scorers, error } = useScorers(leagueName);
+  return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={teamName + " Scorers"} maxRows={5} />;
+}
+
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom }) {
+function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueName }) {
   const rows = useMemo(() => calcStats(teams, fixtures), [teams, fixtures]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
@@ -1163,8 +1287,16 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
           )}
         </>
       )}
+      {SCORER_LEAGUE_MAP[leagueName] && <LeagueScorers leagueName={leagueName} teams={teams} />}
     </div>
   );
+}
+
+function LeagueScorers({ leagueName, teams }) {
+  const { scorers, error } = useScorers(leagueName);
+  const clubNames = useMemo(() => new Set(teams.map(t => resolveClubName(t.name))), [teams]);
+  const filtered = useMemo(() => scorers ? scorers.filter(s => clubNames.has(s.club)) : null, [scorers, clubNames]);
+  return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} />;
 }
 
 // ── STEP 1: TEAMS ─────────────────────────────────────────────────────────────
@@ -2030,7 +2162,8 @@ function SimStep({ league, setLeague, onBack }) {
           {tab === "table" && (
             <LeagueTable teams={initTeams} fixtures={initFixtures} onTeamClick={openDetail}
               highlightTop={hlTop} highlightBottom={hlBot}
-              confirmedTop={confirmedTop} confirmedBottom={confirmedBottom} />
+              confirmedTop={confirmedTop} confirmedBottom={confirmedBottom}
+              leagueName={league.name} />
           )}
 
           {tab === "scores" && (
@@ -2061,7 +2194,7 @@ function SimStep({ league, setLeague, onBack }) {
         else if (detail.source === "playoff" && playoffs) { tms = playoffs.teams; fx = playoffs.fixtures; idx = detail.idx; t = playoffs.teams[idx]; }
         else if (detail.source === "playdown" && playdowns) { tms = playdowns.teams; fx = playdowns.fixtures; idx = detail.idx; t = playdowns.teams[idx]; }
         if (!t) return null;
-        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} />;
+        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueName={league.name} />;
       })()}
     </div>
   );
