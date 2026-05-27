@@ -60,39 +60,34 @@ function resolveClubName(leagueSimName) {
 }
 
 // Parse scorer HTML table into [{rank, player, club, goals}]
-function parseScorerHtml(html) {
-  const results = [];
-  const rowRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-  const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-  let rowMatch;
-  while ((rowMatch = rowRe.exec(html)) !== null) {
-    const cells = [];
-    let cellMatch;
-    const cellRe2 = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-    while ((cellMatch = cellRe2.exec(rowMatch[1])) !== null) {
-      cells.push(cellMatch[1].replace(/<[^>]+>/g, "").replace(/\[[\d]+\]\s*/g, "").trim());
-    }
-    if (cells.length >= 4) {
-      const goals = parseInt(cells[3]);
-      if (!isNaN(goals)) {
-        results.push({ rank: cells[0] || "", player: cells[1], club: cells[2], goals });
-      }
-    }
-  }
-  return results;
+
+const SCORER_JSON_URL = "https://ozzyzorcopter.github.io/handball-League/scorer-data.json";
+
+// Cache the scorer JSON so we only fetch it once per session
+let scorerDataCache = null;
+let scorerDataPromise = null;
+
+function fetchScorerData() {
+  if (scorerDataCache) return Promise.resolve(scorerDataCache);
+  if (scorerDataPromise) return scorerDataPromise;
+  scorerDataPromise = fetch(SCORER_JSON_URL)
+    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then(data => { scorerDataCache = data; return data; });
+  return scorerDataPromise;
 }
 
 function useScorers(leagueName) {
-  const [scorers, setScorers] = useState(null); // null=loading, []= loaded
+  const [scorers, setScorers] = useState(null);
   const [error, setError] = useState(false);
   useEffect(() => {
-    const url = SCORER_LEAGUE_MAP[leagueName];
-    if (!url) { setScorers([]); return; }
+    if (!SCORER_LEAGUE_MAP[leagueName]) { setScorers([]); return; }
     setScorers(null);
     setError(false);
-    fetch(url)
-      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
-      .then(html => setScorers(parseScorerHtml(html)))
+    fetchScorerData()
+      .then(data => {
+        const league = data.leagues.find(l => l.name === leagueName);
+        setScorers(league ? league.scorers : []);
+      })
       .catch(() => { setError(true); setScorers([]); });
   }, [leagueName]);
   return { scorers, error };
