@@ -1241,7 +1241,7 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
   } }, "↺ Reset")), /* @__PURE__ */ React.createElement("div", { className: "tabs" }, (isTournament ? ["bracket", "monte"] : ["table", "scores", "monte"]).map((t) => /* @__PURE__ */ React.createElement("button", { key: t, className: "tab" + (tab === t ? " on" : ""), onClick: () => setTab(t) }, t === "bracket" ? "Bracket" : t === "table" ? "Table" : t === "scores" ? "Scores" + (pending.length ? " (" + pending.length + ")" : "") : "Monte Carlo"))), tab === "table" && /* @__PURE__ */ React.createElement(LeagueTable, { teams: baseTeams, fixtures, onTeamClick: (i) => {
     var _a;
     return onTeamClick && onTeamClick((_a = baseTeams[i]) == null ? void 0 : _a.id);
-  }, highlightTop: htop, highlightBottom: hbot, confirmedTop, confirmedBottom }), tab === "scores" && /* @__PURE__ */ React.createElement(
+  }, highlightTop: htop, highlightBottom: hbot, confirmedTop, confirmedBottom, leagueName: "" }), tab === "scores" && /* @__PURE__ */ React.createElement(
     ScoresTab,
     {
       teams,

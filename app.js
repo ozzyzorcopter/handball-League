@@ -2107,7 +2107,7 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
         ))}
       </div>
       {tab === "table" && (
-        <LeagueTable teams={baseTeams} fixtures={fixtures} onTeamClick={i => onTeamClick && onTeamClick(baseTeams[i]?.id)} highlightTop={htop} highlightBottom={hbot} confirmedTop={confirmedTop} confirmedBottom={confirmedBottom} />
+        <LeagueTable teams={baseTeams} fixtures={fixtures} onTeamClick={i => onTeamClick && onTeamClick(baseTeams[i]?.id)} highlightTop={htop} highlightBottom={hbot} confirmedTop={confirmedTop} confirmedBottom={confirmedBottom} leagueName="" />
       )}
       {tab === "scores" && (
         <ScoresTab teams={teams} fixtures={fixtures} liveProbs={liveProbs} settings={settings}
