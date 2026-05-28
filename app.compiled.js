@@ -800,7 +800,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
     },
     "🛡 Top Defenders ",
     rankingPanel === "defenders" ? "▲" : "▼"
-  ), defenders.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, MEDALS2[i]), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#4ade80" } }, r.GA, " GA"))))), hasPlayed && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "mini-rankings", style: { marginTop: "1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
+  ), defenders.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, MEDALS2[i]), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#4ade80" } }, r.GA, " GA"))))), /* @__PURE__ */ React.createElement("div", { className: "mini-rankings", style: { marginTop: "1rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-box" }, /* @__PURE__ */ React.createElement(
     "div",
     {
       className: "mini-ttl",
@@ -832,7 +832,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
       onClick: () => setRankingPanel(rankingPanel === "unlucky" ? null : "unlucky")
     },
     "😤 Most Unlucky " + (rankingPanel === "unlucky" ? "▲" : "▼")
-  ), topUnlucky.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS2[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#94a3b8" } }, r.draws, "D ", r.losses1 + r.losses2, "L"))))), /* @__PURE__ */ React.createElement(ToughPanel, { ranking: toughRanking })), rankingPanel && rankingPanel !== "tough" && /* @__PURE__ */ React.createElement("div", { className: "mini-box", style: { marginTop: ".75rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-ttl", style: {
+  ), topUnlucky.map((r, i) => /* @__PURE__ */ React.createElement("div", { key: r.id, className: "mini-row" }, /* @__PURE__ */ React.createElement("span", { className: "mini-pos" }, i < 3 ? MEDALS2[i] : i + 1 + ".", "‎"), /* @__PURE__ */ React.createElement("span", { className: "mini-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "mini-val", style: { color: "#94a3b8" } }, r.draws, "D ", r.losses1 + r.losses2, "L"))))), /* @__PURE__ */ React.createElement(ToughPanel, { ranking: toughRanking }), rankingPanel && rankingPanel !== "tough" && /* @__PURE__ */ React.createElement("div", { className: "mini-box", style: { marginTop: ".75rem" } }, /* @__PURE__ */ React.createElement("div", { className: "mini-ttl", style: {
     color: rankingPanel === "attackers" ? "#f87171" : rankingPanel === "defenders" ? "#4ade80" : rankingPanel === "home" ? "#fb923c" : rankingPanel === "away" ? "#a78bfa" : rankingPanel === "clutch" ? "#facc15" : "#94a3b8",
     marginBottom: ".65rem",
     display: "flex",

@@ -1156,67 +1156,63 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
               ))}
             </div>
           </div>
-          {hasPlayed && (
-            <React.Fragment>
-            <div className="mini-rankings" style={{ marginTop: "1rem" }}>
-              <div className="mini-box">
-                <div className="mini-ttl" style={{ color: "#fb923c", cursor: "pointer", userSelect: "none" }}
-                  onClick={() => setRankingPanel(rankingPanel === "home" ? null : "home")}>
-                  {"🏠 Strongest Home " + (rankingPanel === "home" ? "▲" : "▼")}
-                </div>
-                {topHome.map((r, i) => (
-                  <div key={r.id} className="mini-row">
-                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                    <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
-                  </div>
-                ))}
+          <div className="mini-rankings" style={{ marginTop: "1rem" }}>
+            <div className="mini-box">
+              <div className="mini-ttl" style={{ color: "#fb923c", cursor: "pointer", userSelect: "none" }}
+                onClick={() => setRankingPanel(rankingPanel === "home" ? null : "home")}>
+                {"🏠 Strongest Home " + (rankingPanel === "home" ? "▲" : "▼")}
               </div>
-              <div className="mini-box">
-                <div className="mini-ttl" style={{ color: "#a78bfa", cursor: "pointer", userSelect: "none" }}
-                  onClick={() => setRankingPanel(rankingPanel === "away" ? null : "away")}>
-                  {"✈️ Strongest Away " + (rankingPanel === "away" ? "▲" : "▼")}
+              {topHome.map((r, i) => (
+                <div key={r.id} className="mini-row">
+                  <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
+                  <span className="mini-name">{r.name}</span>
+                  <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                 </div>
-                {topAway.map((r, i) => (
-                  <div key={r.id} className="mini-row">
-                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                    <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
-            <div className="mini-rankings" style={{ marginTop: "1rem" }}>
-              <div className="mini-box">
-                <div className="mini-ttl" style={{ color: "#facc15", cursor: "pointer", userSelect: "none" }}
-                  onClick={() => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")}>
-                  {"🎯 Most Clutch " + (rankingPanel === "clutch" ? "▲" : "▼")}
-                </div>
-                {topClutch.map((r, i) => (
-                  <div key={r.id} className="mini-row">
-                    <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}‎</span>
-                    <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
-                  </div>
-                ))}
+            <div className="mini-box">
+              <div className="mini-ttl" style={{ color: "#a78bfa", cursor: "pointer", userSelect: "none" }}
+                onClick={() => setRankingPanel(rankingPanel === "away" ? null : "away")}>
+                {"✈️ Strongest Away " + (rankingPanel === "away" ? "▲" : "▼")}
               </div>
-              <div className="mini-box">
-                <div className="mini-ttl" style={{ color: "#94a3b8", cursor: "pointer", userSelect: "none" }}
-                  onClick={() => setRankingPanel(rankingPanel === "unlucky" ? null : "unlucky")}>
-                  {"😤 Most Unlucky " + (rankingPanel === "unlucky" ? "▲" : "▼")}
+              {topAway.map((r, i) => (
+                <div key={r.id} className="mini-row">
+                  <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
+                  <span className="mini-name">{r.name}</span>
+                  <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                 </div>
-                {topUnlucky.map((r, i) => (
-                  <div key={r.id} className="mini-row">
-                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                    <span className="mini-name">{r.name}</span>
-                    <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
-            <ToughPanel ranking={toughRanking} />
-            </React.Fragment>
-          )}
+          </div>
+          <div className="mini-rankings" style={{ marginTop: "1rem" }}>
+            <div className="mini-box">
+              <div className="mini-ttl" style={{ color: "#facc15", cursor: "pointer", userSelect: "none" }}
+                onClick={() => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")}>
+                {"🎯 Most Clutch " + (rankingPanel === "clutch" ? "▲" : "▼")}
+              </div>
+              {topClutch.map((r, i) => (
+                <div key={r.id} className="mini-row">
+                  <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}‎</span>
+                  <span className="mini-name">{r.name}</span>
+                  <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
+                </div>
+              ))}
+            </div>
+            <div className="mini-box">
+              <div className="mini-ttl" style={{ color: "#94a3b8", cursor: "pointer", userSelect: "none" }}
+                onClick={() => setRankingPanel(rankingPanel === "unlucky" ? null : "unlucky")}>
+                {"😤 Most Unlucky " + (rankingPanel === "unlucky" ? "▲" : "▼")}
+              </div>
+              {topUnlucky.map((r, i) => (
+                <div key={r.id} className="mini-row">
+                  <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
+                  <span className="mini-name">{r.name}</span>
+                  <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <ToughPanel ranking={toughRanking} />
           {rankingPanel && rankingPanel !== "tough" && (
             <div className="mini-box" style={{ marginTop: ".75rem" }}>
               <div className="mini-ttl" style={{
