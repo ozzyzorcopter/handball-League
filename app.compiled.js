@@ -1606,9 +1606,8 @@ function ArchiveLeagueView({ league, scorers, season, onBack }) {
   }, [scorers, league.name]);
   const currentTeams = phase === "playoff" && playoffs ? playoffs.teams : phase === "playdown" && playdowns ? playdowns.teams : teams;
   const currentFixtures = phase === "playoff" && playoffs ? playoffs.fixtures : phase === "playdown" && playdowns ? playdowns.fixtures : fixtures;
-  function openDetail(teamId) {
-    const idx = currentTeams.findIndex((t) => t.id === teamId);
-    if (idx >= 0) setDetail({ idx, phase });
+  function openDetail(idx) {
+    if (idx >= 0 && idx < currentTeams.length) setDetail({ idx, phase });
   }
   return /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "masthead", style: { marginBottom: "1rem" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { className: "logo", style: { fontSize: "1rem" } }, league.name), /* @__PURE__ */ React.createElement("div", { className: "sub", style: { color: "#fbbf24" } }, "📦 ", season, " — read only")), /* @__PURE__ */ React.createElement("button", { className: "btn btn-ghost", onClick: onBack }, "← Back")), /* @__PURE__ */ React.createElement("div", { className: "archive-banner" }, "📦 Archive — ", season, " · Read only"), type === "playoff" && /* @__PURE__ */ React.createElement("div", { className: "tabs", style: { marginBottom: "1rem" } }, ["regular", "playoff", "playdown"].map((p) => /* @__PURE__ */ React.createElement("button", { key: p, className: "tab" + (phase === p ? " on" : ""), onClick: () => setPhase(p) }, p === "regular" ? "Regular Season" : p === "playoff" ? "Play-offs" : "Play-downs"))), /* @__PURE__ */ React.createElement(
     LeagueTable,

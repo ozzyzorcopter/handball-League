@@ -2389,9 +2389,8 @@ function ArchiveLeagueView({ league, scorers, season, onBack }) {
     : phase === "playdown" && playdowns ? playdowns.fixtures
     : fixtures;
 
-  function openDetail(teamId) {
-    const idx = currentTeams.findIndex(t => t.id === teamId);
-    if (idx >= 0) setDetail({ idx, phase });
+  function openDetail(idx) {
+    if (idx >= 0 && idx < currentTeams.length) setDetail({ idx, phase });
   }
 
   return (
