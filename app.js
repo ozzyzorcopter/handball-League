@@ -810,13 +810,13 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueName, archi
   return (
     <>
       <div className="detail-overlay" onClick={onClose} />
-      <div className="detail-panel" style={{ width: "600px" }}>
+      <div className="detail-panel">
         <div className="detail-h">
           <h3>{team?.name}</h3>
           <button className="detail-close" onClick={onClose}>✕</button>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", alignItems: "start" }}>
+        <div className="detail-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", alignItems: "start" }}>
 
           {/* Left column: stats */}
           <div>
