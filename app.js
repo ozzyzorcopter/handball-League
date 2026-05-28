@@ -26,54 +26,8 @@ function loadData() {
 }
 
 // ── SCORER DATA ──────────────────────────────────────────────────────────────
-const SCORER_LEAGUE_MAP = {
-  "VHV Regio OWv": "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=655",
-  "VHV Liga 3":    "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=652",
-  "VHV Liga 2":    "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=651",
-  "VHV Liga 1":    "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=650",
-  "1e Nationale":  "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=URBH-KBHB&serie=655",
-  "2e Nationale":  "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=URBH-KBHB&serie=646",
-};
-
-const SCORER_TEAM_MAP = {
-  "HBC Evergem B":     "Handbalclub Evergem",
-  "HBC Evergem":       "Handbalclub Evergem",
-  "Besox HC Izegem":   "Besox Handbalclub Izegem",
-  "Besox HBC Izegem":  "Besox Handbalclub Izegem",
-  "Apolloon Spurs B":  "HBC Apolloon Spurs",
-  "Apolloon Spurs":    "HBC Apolloon Spurs",
-  "HC Roeselare B":    "Handbalclub Roeselare",
-  "HC Roeselare":      "Handbalclub Roeselare",
-  "HBC Dendermonde B": "HBC Dendermonde",
-  "Elita Lebbeke B":   "Elita Lebbeke",
-  "Desselgemse HC B":  "Desselgemse Handbalclub",
-  "Desselgemse HC":    "Desselgemse Handbalclub",
-  "HC Thor":           "Handbalclub Thor",
-  "Handbal Lokeren B": "Handbal Lokeren",
-  "HC Eeklo":          "Handbalclub Eeklo",
-  "Hestia Bilzen":     "Handbal Hestia Bilzen",
-  "HC Schoten":        "Handbalclub Schoten",
-  "Brasschaat HC":     "Brasschaat Handbalclub",
-  "HC Attila Temse":   "Handbalclub Attila Temse",
-  "HC Atomix":         "HC AtomiX",
-  "DB Gent":           "HC Don Bosco Gent",
-  "Heist-ODB":         "HC Heist o/d Berg",
-  "HC Aalst":          "Handbalclub Aalst",
-  "Achilles Bocholt":  "Sezoens Achilles Bocholt",
-  "Kortessem":         "HC Pentagoon Kortessem",
-  "Sporting Pelt":     "Derdaele Sporting Pelt",
-  "Eynatten-Raeren":   "HC Eynatten-Raeren",
-};
-
-function resolveClubName(leagueSimName) {
-  return SCORER_TEAM_MAP[leagueSimName] || leagueSimName;
-}
-
-// Parse scorer HTML table into [{rank, player, club, goals}]
-
 const SCORER_JSON_URL = "https://ozzyzorcopter.github.io/handball-League/scorer-data.json";
 
-// Cache the scorer JSON so we only fetch it once per session
 let scorerDataCache = null;
 let scorerDataPromise = null;
 
@@ -82,37 +36,44 @@ function fetchScorerData() {
   if (scorerDataPromise) return scorerDataPromise;
   scorerDataPromise = fetch(SCORER_JSON_URL)
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-    .then(data => { scorerDataCache = data; return data; });
+    .then(data => { scorerDataCache = data; return data; })
+    .catch(e => { scorerDataPromise = null; throw e; });
   return scorerDataPromise;
 }
 
-function useScorers(leagueName) {
+function resolveClubName(leagueSimName, aliases) {
+  if (aliases && aliases[leagueSimName]) return aliases[leagueSimName];
+  return leagueSimName;
+}
+
+function useScorers(leagueId) {
   const [scorers, setScorers] = useState(null);
   const [error, setError] = useState(false);
   useEffect(() => {
-    if (!leagueName || !SCORER_LEAGUE_MAP[leagueName]) { setScorers([]); return; }
+    if (!leagueId) { setScorers([]); return; }
     setScorers(null);
     setError(false);
     fetchScorerData()
       .then(data => {
-        const league = data.leagues.find(l => l.name === leagueName);
+        const league = (data.leagues || []).find(l => l.leagueId === leagueId);
         setScorers(league ? league.scorers : []);
       })
       .catch(() => { setError(true); setScorers([]); });
-  }, [leagueName]);
+  }, [leagueId]);
   return { scorers, error };
 }
 
-function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10 }) {
+
+function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases }) {
   const [expanded, setExpanded] = useState(false);
   const loading = scorers === null;
 
   const filtered = useMemo(() => {
     if (!scorers) return [];
     if (!filterClub) return scorers;
-    const club = resolveClubName(filterClub);
+    const club = resolveClubName(filterClub, aliases);
     return scorers.filter(s => s.club === club);
-  }, [scorers, filterClub]);
+  }, [scorers, filterClub, aliases]);
 
   const shown = expanded ? filtered : filtered.slice(0, maxRows);
 
@@ -132,6 +93,11 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10 }) {
           <span className="mini-name" style={{ flex: 1 }}>{s.player}</span>
           {!filterClub && <span className="muted" style={{ fontSize: ".68rem", marginRight: ".4rem" }}>{s.club}</span>}
           <span className="mini-val" style={{ color: "#fbbf24" }}>{s.goals}</span>
+          {s.delta != null && (
+            <span style={{ fontSize: ".68rem", marginLeft: ".3rem", color: s.delta > 0 ? "#4ade80" : "#5a6070" }}>
+              ({s.delta > 0 ? "+" : ""}{s.delta})
+            </span>
+          )}
         </div>
       ))}
       {!loading && filtered.length > maxRows && (
@@ -166,6 +132,8 @@ function makeLeague(name, type, poSize, pdSize, phaseFormat, archivable = false)
     promoTop: 2,
     demotBot: 2,
     archivable,
+    scorerUrl: "",
+    scorerAliases: {},
   };
 }
 
@@ -563,7 +531,38 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
           </div>
         </div>
       )}
-      {showTiebreakers && (
+      {showTiebreakers && league && onLeagueChange && (
+        <div className="sbox">
+          <div className="sub-ttl">Scorer data</div>
+          <div style={{ marginBottom: ".75rem" }}>
+            <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".35rem" }}>Scorer URL from handballbelgium.be</div>
+            <input
+              className="inp"
+              value={league.scorerUrl || ""}
+              onChange={e => onLeagueChange(lg => ({ ...lg, scorerUrl: e.target.value.trim() }))}
+              placeholder="https://admin.handballbelgium.be/...?organization=VHV&serie=655"
+              style={{ fontSize: ".78rem", padding: ".4rem .6rem" }}
+            />
+          </div>
+          <div>
+            <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".35rem" }}>Team name aliases (leaguesim name → scorer club name)</div>
+            {(league.teams || []).map(t => (
+              <div key={t.id} className="config-row" style={{ marginBottom: ".4rem", alignItems: "center" }}>
+                <span style={{ fontSize: ".75rem", color: "#cdd6f4", minWidth: "140px", flexShrink: 0 }}>{t.name}</span>
+                <span style={{ fontSize: ".75rem", color: "#5a6070", margin: "0 .4rem" }}>→</span>
+                <input
+                  className="sinp"
+                  value={(league.scorerAliases || {})[t.name] || ""}
+                  onChange={e => onLeagueChange(lg => ({ ...lg, scorerAliases: { ...(lg.scorerAliases || {}), [t.name]: e.target.value } }))}
+                  placeholder={t.name}
+                  style={{ flex: 1, fontSize: ".75rem" }}
+                />
+              </div>
+            ))}
+            <div style={{ fontSize: ".7rem", color: "#3a3f50", marginTop: ".4rem" }}>Leave blank if the name already matches the scorer data exactly.</div>
+          </div>
+        </div>
+      )}
         <div className="sbox">
           <div className="sub-ttl">End-of-season tiebreakers (always applied)</div>
           <ul className="tb-list">
@@ -714,7 +713,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, o
 }
 
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
-function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueName, archiveScorers }) {
+function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers }) {
   const mine = fixtures.filter(f => f.homeIdx === teamIdx || f.awayIdx === teamIdx);
 
   const sorted = [...mine].sort((a, b) => {
@@ -929,18 +928,18 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueName, archi
 
         </div>
 
-        {(SCORER_LEAGUE_MAP[leagueName] || archiveScorers !== undefined) && <TeamScorers leagueName={leagueName} teamName={team?.name} archiveScorers={archiveScorers} />}
+        {(leagueId || archiveScorers !== undefined) && <TeamScorers leagueId={leagueId} teamName={team?.name} aliases={aliases} archiveScorers={archiveScorers} />}
 
       </div>
     </>
   );
 }
 
-function TeamScorers({ leagueName, teamName, archiveScorers }) {
-  const live = useScorers(archiveScorers !== undefined ? null : leagueName);
+function TeamScorers({ leagueId, teamName, aliases, archiveScorers }) {
+  const live = useScorers(archiveScorers !== undefined ? null : leagueId);
   const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
   const error = archiveScorers !== undefined ? false : live.error;
-  return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={teamName + " Scorers"} maxRows={5} />;
+  return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={teamName + " Scorers"} maxRows={5} aliases={aliases} />;
 }
 
 function ToughPanel({ ranking }) {
@@ -971,17 +970,18 @@ function ToughPanel({ ranking }) {
   );
 }
 
-function LeagueScorers({ leagueName, teams, archiveScorers }) {
-  const live = useScorers(archiveScorers !== undefined ? null : leagueName);
+function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams }) {
+  const live = useScorers(archiveScorers !== undefined ? null : leagueId);
   const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
   const error = archiveScorers !== undefined ? false : live.error;
-  const clubNames = useMemo(() => new Set(teams.map(t => resolveClubName(t.name))), [teams]);
+  const relevantTeams = phaseTeams || teams;
+  const clubNames = useMemo(() => new Set(relevantTeams.map(t => resolveClubName(t.name, aliases))), [relevantTeams, aliases]);
   const filtered = useMemo(() => scorers ? scorers.filter(s => clubNames.has(s.club)) : null, [scorers, clubNames]);
-  return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} />;
+  return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} aliases={aliases} />;
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueName, archiveScorers }) {
+function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams }) {
   const rows = useMemo(() => calcStats(teams, fixtures), [teams, fixtures]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
@@ -1157,7 +1157,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
-      {(SCORER_LEAGUE_MAP[leagueName] || archiveScorers !== undefined) && <LeagueScorers leagueName={leagueName} teams={teams} archiveScorers={archiveScorers} />}
+      {(leagueId || archiveScorers !== undefined) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} />}
       {hasPlayed && (
         <>
           <div className="mini-rankings" style={{ marginTop: "1rem" }}>
@@ -1939,7 +1939,7 @@ function TournamentBracket({ rounds, teams, liveProbs, settings, phase, onConfir
 }
 
 // ── PHASE VIEW (playoffs or playdowns) ────────────────────────────────────────
-function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phaseFormat, label, color, infoText, onTeamClick }) {
+function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phaseFormat, label, color, infoText, onTeamClick, leagueId, aliases }) {
   const [tab, setTab] = useState(phaseFormat === "tournament" ? "bracket" : "table");
   const [confirmedTop, setConfirmedTop] = useState(null);
   const [confirmedBottom, setConfirmedBottom] = useState(null);
@@ -2053,7 +2053,7 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
         ))}
       </div>
       {tab === "table" && (
-        <LeagueTable teams={baseTeams} fixtures={fixtures} onTeamClick={i => onTeamClick && onTeamClick(baseTeams[i]?.id)} highlightTop={htop} highlightBottom={hbot} confirmedTop={confirmedTop} confirmedBottom={confirmedBottom} leagueName="" />
+        <LeagueTable teams={baseTeams} fixtures={fixtures} onTeamClick={i => onTeamClick && onTeamClick(baseTeams[i]?.id)} highlightTop={htop} highlightBottom={hbot} confirmedTop={confirmedTop} confirmedBottom={confirmedBottom} leagueId={leagueId} aliases={aliases} phaseTeams={baseTeams} />
       )}
       {tab === "scores" && (
         <ScoresTab teams={teams} fixtures={fixtures} liveProbs={liveProbs} settings={settings}
@@ -2160,6 +2160,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-offs" color="#a78bfa"
           infoText={"Top " + poSz + " from regular season. Starting pts: rank 1 = " + poSz + " pts, rank 2 = " + (poSz-1) + " pts, etc."}
+          leagueId={league.id} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playoffs?.teams || []).find(t => t.id === id); const i = (playoffs?.teams || []).indexOf(t); if (t) setDetail({ source: "playoff", idx: i }); }} />
       )}
       {phase === "playdown" && (
@@ -2167,6 +2168,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-downs" color="#f87171"
           infoText={"Bottom " + pdSz + " from regular season. Starting pts: rank 1 = " + pdSz + " pts, rank 2 = " + (pdSz-1) + " pts, etc."}
+          leagueId={league.id} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playdowns?.teams || []).find(t => t.id === id); const i = (playdowns?.teams || []).indexOf(t); if (t) setDetail({ source: "playdown", idx: i }); }} />
       )}
 
@@ -2191,7 +2193,7 @@ function SimStep({ league, setLeague, onBack }) {
             <LeagueTable teams={initTeams} fixtures={initFixtures} onTeamClick={openDetail}
               highlightTop={hlTop} highlightBottom={hlBot}
               confirmedTop={confirmedTop} confirmedBottom={confirmedBottom}
-              leagueName={league.name} />
+              leagueId={league.scorerUrl ? league.id : null} aliases={league.scorerAliases || {}} />
           )}
 
           {tab === "scores" && (
@@ -2222,7 +2224,7 @@ function SimStep({ league, setLeague, onBack }) {
         else if (detail.source === "playoff" && playoffs) { tms = playoffs.teams; fx = playoffs.fixtures; idx = detail.idx; t = playoffs.teams[idx]; }
         else if (detail.source === "playdown" && playdowns) { tms = playdowns.teams; fx = playdowns.fixtures; idx = detail.idx; t = playdowns.teams[idx]; }
         if (!t) return null;
-        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueName={league.name} />;
+        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={league.scorerUrl ? league.id : null} aliases={league.scorerAliases || {}} />;
       })()}
     </div>
   );
@@ -2423,7 +2425,8 @@ function ArchiveLeagueView({ league, scorers, season, onBack }) {
         highlightBottom={phase === "playdown" ? 2 : league.demotBot ?? 2}
         confirmedTop={null}
         confirmedBottom={null}
-        leagueName={league.name}
+        leagueId={null}
+        aliases={league.scorerAliases || {}}
         archiveScorers={archiveScorers}
       />
 
@@ -2436,7 +2439,7 @@ function ArchiveLeagueView({ league, scorers, season, onBack }) {
           : fixtures;
         const t = tms[detail.idx];
         if (!t) return null;
-        return <TeamDetail team={t} teamIdx={detail.idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueName={league.name} archiveScorers={archiveScorers} />;
+        return <TeamDetail team={t} teamIdx={detail.idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={null} aliases={league.scorerAliases || {}} archiveScorers={archiveScorers} />;
       })()}
     </div>
   );

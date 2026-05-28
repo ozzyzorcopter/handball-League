@@ -1,19 +1,39 @@
 // .github/scripts/fetch-scorers.js
+// Reads scorer URLs from leaguesim-data.json, fetches each, stores by leagueId
+// Computes goal delta per player per team (0 if team was updated but player didn't score)
+
 const fs = require("fs");
 const path = require("path");
 
-const LEAGUES = [
-  { name: "VHV Regio OWv", url: "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=655" },
-  { name: "VHV Liga 1",    url: "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=650" },
-  { name: "VHV Liga 2",    url: "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=651" },
-  { name: "VHV Liga 3",    url: "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=VHV&serie=652" },
-  { name: "1e Nationale",  url: "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=URBH-KBHB&serie=655" },
-  { name: "2e Nationale",  url: "https://admin.handballbelgium.be/lms_league_ws/scripts/urbh_goals_rankings.php?organization=URBH-KBHB&serie=646" },
-];
+const root = process.cwd();
+const leaguesimPath = path.join(root, "leaguesim-data.json");
+const scorerPath = path.join(root, "scorer-data.json");
+
+if (!fs.existsSync(leaguesimPath)) {
+  console.error("leaguesim-data.json not found");
+  process.exit(1);
+}
+
+const leaguesimData = JSON.parse(fs.readFileSync(leaguesimPath, "utf8"));
+const leagues = (leaguesimData.leagues || []).filter(lg => lg.scorerUrl && lg.scorerUrl.trim());
+
+if (leagues.length === 0) {
+  console.log("No leagues with scorerUrl set — nothing to fetch");
+  process.exit(0);
+}
+
+// Load previous scorer data for delta calculation
+let prevData = { leagues: [] };
+if (fs.existsSync(scorerPath)) {
+  prevData = JSON.parse(fs.readFileSync(scorerPath, "utf8"));
+}
+const prevByLeagueId = {};
+for (const l of (prevData.leagues || [])) {
+  if (l.leagueId) prevByLeagueId[l.leagueId] = l.scorers || [];
+}
 
 function parseScorers(html) {
   const results = [];
-  // Split on <tr> since rows end with <tr> instead of </tr> (malformed HTML)
   const segments = html.split(/<tr>/i);
   for (const seg of segments) {
     const cells = [];
@@ -30,17 +50,60 @@ function parseScorers(html) {
       const goals = parseInt(cells[3]);
       const player = cells[1];
       const club = cells[2];
-      if (!isNaN(goals) && player && club) {
-        results.push({ player, club, goals });
-      }
+      if (!isNaN(goals) && player && club) results.push({ player, club, goals });
     }
   }
   return results;
 }
 
+function computeDeltas(newScorers, prevScorers) {
+  // Build previous goals by player
+  const prevByPlayer = {};
+  for (const s of prevScorers) prevByPlayer[s.player] = s.goals;
+
+  // Find which clubs had any change
+  const prevByClub = {};
+  for (const s of prevScorers) {
+    if (!prevByClub[s.club]) prevByClub[s.club] = {};
+    prevByClub[s.club][s.player] = s.goals;
+  }
+  const newByClub = {};
+  for (const s of newScorers) {
+    if (!newByClub[s.club]) newByClub[s.club] = {};
+    newByClub[s.club][s.player] = s.goals;
+  }
+
+  // For each club, check if any player increased — if so, club was updated
+  const updatedClubs = new Set();
+  for (const club of Object.keys(newByClub)) {
+    const newPlayers = newByClub[club];
+    const oldPlayers = prevByClub[club] || {};
+    for (const [player, goals] of Object.entries(newPlayers)) {
+      if (goals > (oldPlayers[player] ?? goals)) {
+        updatedClubs.add(club);
+        break;
+      }
+    }
+    // Also check if total goals for club changed
+    const newTotal = Object.values(newPlayers).reduce((a, b) => a + b, 0);
+    const oldTotal = Object.values(oldPlayers).reduce((a, b) => a + b, 0);
+    if (newTotal > oldTotal) updatedClubs.add(club);
+  }
+
+  return newScorers.map(s => {
+    const prev = prevByPlayer[s.player];
+    let delta = null;
+    if (updatedClubs.has(s.club)) {
+      // Club was updated this round — show delta (0 if player didn't score)
+      delta = prev != null ? s.goals - prev : null;
+    }
+    return { ...s, delta };
+  });
+}
+
 async function fetchLeague(league) {
   try {
-    const res = await fetch(league.url, {
+    const res = await fetch(league.scorerUrl.trim(), {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -49,25 +112,36 @@ async function fetchLeague(league) {
     });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
-    const scorers = parseScorers(html);
-    if (scorers.length === 0) throw new Error("Parsed 0 scorers — page may have changed structure");
-    console.log(`  ✓ ${league.name}: ${scorers.length} scorers — #1: ${scorers[0].player} (${scorers[0].goals} goals, ${scorers[0].club})`);
-    return { name: league.name, scorers, updatedAt: new Date().toISOString() };
+    const rawScorers = parseScorers(html);
+    if (rawScorers.length === 0) throw new Error("Parsed 0 scorers");
+
+    const prevScorers = prevByLeagueId[league.id] || [];
+    const scorers = computeDeltas(rawScorers, prevScorers);
+
+    const updatedClubs = [...new Set(scorers.filter(s => s.delta != null && s.delta > 0).map(s => s.club))];
+    console.log(`  ✓ ${league.name}: ${scorers.length} scorers — #1: ${scorers[0].player} (${scorers[0].goals}g, ${scorers[0].club})${updatedClubs.length ? " — updated: " + updatedClubs.join(", ") : ""}`);
+    return { leagueId: league.id, name: league.name, scorers, updatedAt: new Date().toISOString() };
   } catch (err) {
     console.error(`  ✗ ${league.name}: FAILED — ${err.message}`);
-    return { name: league.name, scorers: [], error: err.message, updatedAt: new Date().toISOString() };
+    // Keep previous data on failure
+    const prev = prevByLeagueId[league.id] || [];
+    return { leagueId: league.id, name: league.name, scorers: prev, error: err.message, updatedAt: new Date().toISOString() };
   }
 }
 
 async function main() {
-  console.log(`\nFetching scorer data at ${new Date().toUTCString()}\n`);
-  const results = await Promise.all(LEAGUES.map(fetchLeague));
+  console.log(`\nFetching scorer data at ${new Date().toUTCString()}`);
+  console.log(`Found ${leagues.length} league(s) with scorer URLs\n`);
+
+  const results = await Promise.all(leagues.map(fetchLeague));
   const total = results.reduce((s, l) => s + l.scorers.length, 0);
   const failed = results.filter(l => l.error).length;
+
   const output = { updatedAt: new Date().toISOString(), leagues: results };
-  fs.writeFileSync(path.join(process.cwd(), "scorer-data.json"), JSON.stringify(output, null, 2));
+  fs.writeFileSync(scorerPath, JSON.stringify(output, null, 2));
+
   console.log(`\nDone — ${total} scorers across ${results.length - failed}/${results.length} leagues`);
-  if (failed === results.length) process.exit(1);
+  if (failed === results.length && results.length > 0) process.exit(1);
 }
 
 main().catch(err => { console.error(err); process.exit(1); });
