@@ -54,6 +54,15 @@ const SCORER_TEAM_MAP = {
   "Hestia Bilzen":     "Handbal Hestia Bilzen",
   "HC Schoten":        "Handbalclub Schoten",
   "Brasschaat HC":     "Brasschaat Handbalclub",
+  "HC Attila Temse":   "Handbalclub Attila Temse",
+  "HC Atomix":         "HC AtomiX",
+  "DB Gent":           "HC Don Bosco Gent",
+  "Heist-ODB":         "HC Heist o/d Berg",
+  "HC Aalst":          "Handbalclub Aalst",
+  "Achilles Bocholt":  "Sezoens Achilles Bocholt",
+  "Kortessem":         "HC Pentagoon Kortessem",
+  "Sporting Pelt":     "Derdaele Sporting Pelt",
+  "Eynatten-Raeren":   "HC Eynatten-Raeren",
 };
 
 function resolveClubName(leagueSimName) {
