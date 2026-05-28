@@ -1418,7 +1418,8 @@
         "drawScore": 25
       },
       "demotBot": 0,
-      "promoTop": 1
+      "promoTop": 1,
+      "archivable": true
     },
     {
       "id": "1775058743447",
@@ -3082,7 +3083,8 @@
         "drawScore": 25
       },
       "demotBot": 3,
-      "promoTop": 1
+      "promoTop": 1,
+      "archivable": true
     },
     {
       "id": "1775059302135",
@@ -5057,7 +5059,8 @@
         "lossScore": 25,
         "drawScore": 25
       },
-      "promoTop": 1
+      "promoTop": 1,
+      "archivable": true
     },
     {
       "id": "1775059902862",
@@ -5345,7 +5348,8 @@
         "lossScore": 25,
         "drawScore": 25
       },
-      "promoTop": 1
+      "promoTop": 1,
+      "archivable": true
     },
     {
       "id": "1775309430426",
@@ -7580,7 +7584,8 @@
             "awayScore": 26
           }
         ]
-      }
+      },
+      "archivable": true
     },
     {
       "id": "1775317568211",
@@ -13228,7 +13233,8 @@
       },
       "poSize": 8,
       "pdSize": 4,
-      "phaseFormat": "tournament"
+      "phaseFormat": "tournament",
+      "archivable": true
     },
     {
       "id": "1778859227860",
