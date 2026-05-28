@@ -90,7 +90,7 @@ function useScorers(leagueName) {
   const [scorers, setScorers] = useState(null);
   const [error, setError] = useState(false);
   useEffect(() => {
-    if (!SCORER_LEAGUE_MAP[leagueName]) { setScorers([]); return; }
+    if (!leagueName || !SCORER_LEAGUE_MAP[leagueName]) { setScorers([]); return; }
     setScorers(null);
     setError(false);
     fetchScorerData()
@@ -154,7 +154,7 @@ function makeTeam(index) {
   return { id: "t" + Date.now() + index, name: "Team " + (index + 1), points: 0, homeBonus: "" };
 }
 
-function makeLeague(name, type, poSize, pdSize, phaseFormat) {
+function makeLeague(name, type, poSize, pdSize, phaseFormat, archivable = false) {
   return {
     id: String(Date.now()), name, type: type || "standard",
     teams: [makeTeam(0)], fixtures: [], step: 0,
@@ -165,6 +165,7 @@ function makeLeague(name, type, poSize, pdSize, phaseFormat) {
     phaseFormat: phaseFormat || "round-robin",
     promoTop: 2,
     demotBot: 2,
+    archivable,
   };
 }
 
@@ -584,7 +585,7 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
 }
 
 // ── HOME SCREEN ───────────────────────────────────────────────────────────────
-function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
+function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, onOpenArchive }) {
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
   const [type, setType] = useState("standard");
@@ -593,14 +594,15 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
   const [phaseFormat, setPhaseFormat] = useState("round-robin");
   const [customPo, setCustomPo] = useState("");
   const [customPd, setCustomPd] = useState("");
+  const [archivable, setArchivable] = useState(false);
   const effPoSize = customPo !== "" ? (parseInt(customPo) || 6) : poSize;
   const effPdSize = customPd !== "" ? (parseInt(customPd) || 4) : pdSize;
 
   function submit() {
     if (!name.trim()) return;
-    onCreate(name.trim(), type, effPoSize, effPdSize, phaseFormat);
+    onCreate(name.trim(), type, effPoSize, effPdSize, phaseFormat, archivable);
     setName(""); setType("standard"); setPoSize(6); setPdSize(4);
-    setPhaseFormat("round-robin"); setCustomPo(""); setCustomPd("");
+    setPhaseFormat("round-robin"); setCustomPo(""); setCustomPd(""); setArchivable(false);
     setModal(false);
   }
 
@@ -608,7 +610,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
     <div>
       <div className="card-grid">
         {leagues.map(lg => (
-          <div key={lg.id} className="card" onClick={() => onOpen(lg.id)}>
+          <div key={lg.id} className="card" style={{ position: "relative" }} onClick={() => onOpen(lg.id)}>
             <button className="card-del" onClick={e => { e.stopPropagation(); onDelete(lg.id); }}>✕</button>
             <div className={"card-badge " + (lg.type === "playoff" ? "badge-po" : "badge-std")}>
               {lg.type === "playoff" ? "Play-off League" : "Standard League"}
@@ -637,9 +639,16 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
                 );
               })()}
             </div>
+            <button
+              className={"card-archive-btn" + (lg.archivable ? " active" : "")}
+              title={lg.archivable ? "Tagged for archive — click to remove" : "Tag for archive"}
+              onClick={e => { e.stopPropagation(); onToggleArchivable(lg.id); }}>
+              📦
+            </button>
           </div>
         ))}
         <div className="card card-new" onClick={() => setModal(true)}>+ New League</div>
+        <div className="card card-new" style={{ borderColor: "#fbbf24", color: "#fbbf24" }} onClick={onOpenArchive}>📦 Archive</div>
       </div>
 
       {modal && (
@@ -683,6 +692,16 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
                 </div>
               </div>
             )}
+            <div className="config-row" style={{ marginTop: ".85rem" }}>
+              <span className="config-label">Include in archive:</span>
+              <div className="config-opts">
+                <span className={"config-opt" + (archivable ? " active" : "")}
+                  style={archivable ? { borderColor: "#fbbf24", background: "rgba(251,191,36,.1)", color: "#fbbf24" } : {}}
+                  onClick={() => setArchivable(a => !a)}>
+                  📦 {archivable ? "Yes" : "No"}
+                </span>
+              </div>
+            </div>
             <div className="modal-btns">
               <button className="btn btn-cyan" onClick={submit} disabled={!name.trim()}>Create</button>
               <button className="btn btn-ghost" onClick={() => setModal(false)}>Cancel</button>
@@ -695,7 +714,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete }) {
 }
 
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
-function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueName }) {
+function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueName, archiveScorers }) {
   const mine = fixtures.filter(f => f.homeIdx === teamIdx || f.awayIdx === teamIdx);
 
   const sorted = [...mine].sort((a, b) => {
@@ -910,15 +929,17 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueName }) {
 
         </div>
 
-        {SCORER_LEAGUE_MAP[leagueName] && <TeamScorers leagueName={leagueName} teamName={team?.name} />}
+        {(SCORER_LEAGUE_MAP[leagueName] || archiveScorers !== undefined) && <TeamScorers leagueName={leagueName} teamName={team?.name} archiveScorers={archiveScorers} />}
 
       </div>
     </>
   );
 }
 
-function TeamScorers({ leagueName, teamName }) {
-  const { scorers, error } = useScorers(leagueName);
+function TeamScorers({ leagueName, teamName, archiveScorers }) {
+  const live = useScorers(archiveScorers !== undefined ? null : leagueName);
+  const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
+  const error = archiveScorers !== undefined ? false : live.error;
   return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={teamName + " Scorers"} maxRows={5} />;
 }
 
@@ -950,15 +971,17 @@ function ToughPanel({ ranking }) {
   );
 }
 
-function LeagueScorers({ leagueName, teams }) {
-  const { scorers, error } = useScorers(leagueName);
+function LeagueScorers({ leagueName, teams, archiveScorers }) {
+  const live = useScorers(archiveScorers !== undefined ? null : leagueName);
+  const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
+  const error = archiveScorers !== undefined ? false : live.error;
   const clubNames = useMemo(() => new Set(teams.map(t => resolveClubName(t.name))), [teams]);
   const filtered = useMemo(() => scorers ? scorers.filter(s => clubNames.has(s.club)) : null, [scorers, clubNames]);
   return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} />;
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueName }) {
+function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueName, archiveScorers }) {
   const rows = useMemo(() => calcStats(teams, fixtures), [teams, fixtures]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
@@ -1134,7 +1157,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
-      {SCORER_LEAGUE_MAP[leagueName] && <LeagueScorers leagueName={leagueName} teams={teams} />}
+      {(SCORER_LEAGUE_MAP[leagueName] || archiveScorers !== undefined) && <LeagueScorers leagueName={leagueName} teams={teams} archiveScorers={archiveScorers} />}
       {hasPlayed && (
         <>
           <div className="mini-rankings" style={{ marginTop: "1rem" }}>
@@ -2244,10 +2267,187 @@ function LeagueEditor({ league, onChange }) {
   );
 }
 
+// ── ARCHIVE SCREEN ────────────────────────────────────────────────────────────
+const ARCHIVE_INDEX_URL = "https://ozzyzorcopter.github.io/handball-League/archive/index.json";
+
+function useArchiveIndex() {
+  const [index, setIndex] = useState(null);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    fetch(ARCHIVE_INDEX_URL)
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(data => setIndex(data))
+      .catch(() => { setError(true); setIndex([]); });
+  }, []);
+  return { index, error };
+}
+
+function useArchiveSeason(filename) {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    if (!filename) return;
+    const url = "https://ozzyzorcopter.github.io/handball-League/archive/" + filename;
+    fetch(url)
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(d => setData(d))
+      .catch(() => setError(true));
+  }, [filename]);
+  return { data, error };
+}
+
+function ArchiveScreen({ onBack }) {
+  const { index, error } = useArchiveIndex();
+  const [selected, setSelected] = useState(null);
+
+  if (selected) return <ArchiveSeasonView filename={selected} onBack={() => setSelected(null)} />;
+
+  return (
+    <div className="panel">
+      <div className="ph">
+        <div>
+          <h2>📦 Archive</h2>
+          <p style={{ color: "#5a6070", fontSize: ".82rem" }}>Past seasons — read only</p>
+        </div>
+        <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
+      </div>
+      {index === null && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading archive…</div>}
+      {error && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load archive.</div>}
+      {index && index.length === 0 && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>No archived seasons yet.</div>}
+      {index && index.length > 0 && (
+        <div className="card-grid" style={{ marginTop: "1rem" }}>
+          {index.map(s => (
+            <div key={s.filename} className="season-card" onClick={() => setSelected(s.filename)}>
+              <div className="season-card-title">{s.season}</div>
+              <div className="season-card-meta">{s.leagueCount} leagues · archived {new Date(s.archivedAt).toLocaleDateString("nl-BE")}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ArchiveSeasonView({ filename, onBack }) {
+  const { data, error } = useArchiveSeason(filename);
+  const [activeLeague, setActiveLeague] = useState(null);
+
+  if (error) return (
+    <div className="panel">
+      <button className="btn btn-ghost" onClick={onBack}>← Back</button>
+      <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load season data.</div>
+    </div>
+  );
+
+  if (!data) return <div className="muted" style={{ padding: "3rem", textAlign: "center" }}>Loading season…</div>;
+
+  if (activeLeague !== null) {
+    const lg = data.leagues[activeLeague];
+    return <ArchiveLeagueView league={lg} scorers={data.scorers} season={data.season} onBack={() => setActiveLeague(null)} />;
+  }
+
+  return (
+    <div className="panel">
+      <div className="ph">
+        <div>
+          <h2>📦 {data.season}</h2>
+          <p style={{ color: "#5a6070", fontSize: ".82rem" }}>Archived {new Date(data.archivedAt).toLocaleDateString("nl-BE")} · read only</p>
+        </div>
+        <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
+      </div>
+      <div className="card-grid" style={{ marginTop: "1rem" }}>
+        {data.leagues.map((lg, i) => (
+          <div key={lg.id} className="card" onClick={() => setActiveLeague(i)}>
+            <div className={"card-badge " + (lg.type === "playoff" ? "badge-po" : "badge-std")}>
+              {lg.type === "playoff" ? "Play-off League" : "Standard League"}
+            </div>
+            <div className="card-name">{lg.name}</div>
+            <div className="card-meta">{(lg.teams || []).length} teams · {(lg.fixtures || []).filter(f => f.played).length} played</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ArchiveLeagueView({ league, scorers, season, onBack }) {
+  const [detail, setDetail] = useState(null);
+  const { teams, fixtures, settings, type, playoffs, playdowns } = league;
+  const [phase, setPhase] = useState("regular");
+
+  // Cached scorer data from archive
+  const archiveScorers = useMemo(() => {
+    if (!scorers) return null;
+    const leagueData = scorers[league.name];
+    return leagueData || null;
+  }, [scorers, league.name]);
+
+  const currentTeams = phase === "playoff" && playoffs ? playoffs.teams
+    : phase === "playdown" && playdowns ? playdowns.teams
+    : teams;
+  const currentFixtures = phase === "playoff" && playoffs ? playoffs.fixtures
+    : phase === "playdown" && playdowns ? playdowns.fixtures
+    : fixtures;
+
+  function openDetail(teamId) {
+    const idx = currentTeams.findIndex(t => t.id === teamId);
+    if (idx >= 0) setDetail({ idx, phase });
+  }
+
+  return (
+    <div>
+      <div className="masthead" style={{ marginBottom: "1rem" }}>
+        <div>
+          <div className="logo" style={{ fontSize: "1rem" }}>{league.name}</div>
+          <div className="sub" style={{ color: "#fbbf24" }}>📦 {season} — read only</div>
+        </div>
+        <button className="btn btn-ghost" onClick={onBack}>← Back</button>
+      </div>
+
+      <div className="archive-banner">📦 Archive — {season} · Read only</div>
+
+      {type === "playoff" && (
+        <div className="tabs" style={{ marginBottom: "1rem" }}>
+          {["regular", "playoff", "playdown"].map(p => (
+            <button key={p} className={"tab" + (phase === p ? " on" : "")} onClick={() => setPhase(p)}>
+              {p === "regular" ? "Regular Season" : p === "playoff" ? "Play-offs" : "Play-downs"}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <LeagueTable
+        teams={currentTeams}
+        fixtures={currentFixtures}
+        onTeamClick={id => openDetail(id)}
+        highlightTop={phase === "playoff" ? 2 : league.promoTop ?? 2}
+        highlightBottom={phase === "playdown" ? 2 : league.demotBot ?? 2}
+        confirmedTop={null}
+        confirmedBottom={null}
+        leagueName={league.name}
+        archiveScorers={archiveScorers}
+      />
+
+      {detail && (() => {
+        const tms = detail.phase === "playoff" && playoffs ? playoffs.teams
+          : detail.phase === "playdown" && playdowns ? playdowns.teams
+          : teams;
+        const fx = detail.phase === "playoff" && playoffs ? playoffs.fixtures
+          : detail.phase === "playdown" && playdowns ? playdowns.fixtures
+          : fixtures;
+        const t = tms[detail.idx];
+        if (!t) return null;
+        return <TeamDetail team={t} teamIdx={detail.idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueName={league.name} archiveScorers={archiveScorers} />;
+      })()}
+    </div>
+  );
+}
+
 // ── ROOT APP ──────────────────────────────────────────────────────────────────
 function App() {
   const [store, setStore] = useState({ leagues: [] });
   const [activeId, setActiveId] = useState(null);
+  const [showArchive, setShowArchive] = useState(false);
   const [msg, setMsg] = useState("");
   const msgTimer = useRef(null);
   const active = store.leagues.find(lg => lg.id === activeId) || null;
@@ -2260,9 +2460,12 @@ function App() {
       setStore(data); setActiveId(null); flash("Loaded!");
     }).catch(e => alert("Could not load: " + e));
   }
-  function createLeague(name, type, poSize, pdSize, phaseFormat) { const lg = makeLeague(name, type, poSize, pdSize, phaseFormat); setStore(s => ({ ...s, leagues: [...s.leagues, lg] })); setActiveId(lg.id); }
+  function createLeague(name, type, poSize, pdSize, phaseFormat, archivable) { const lg = makeLeague(name, type, poSize, pdSize, phaseFormat, archivable); setStore(s => ({ ...s, leagues: [...s.leagues, lg] })); setActiveId(lg.id); }
   function deleteLeague(id) { if (!confirm("Delete this league?")) return; setStore(s => ({ ...s, leagues: s.leagues.filter(lg => lg.id !== id) })); if (activeId === id) setActiveId(null); }
   function updateLeague(id, u) { setStore(s => ({ ...s, leagues: s.leagues.map(lg => lg.id === id ? (typeof u === "function" ? u(lg) : u) : lg) })); }
+  function toggleArchivable(id) { updateLeague(id, lg => ({ ...lg, archivable: !lg.archivable })); }
+
+  if (showArchive) return <ArchiveScreen onBack={() => setShowArchive(false)} />;
 
   return (
     <div className="app">
@@ -2278,7 +2481,7 @@ function App() {
           {active && <button className="btn btn-ghost" onClick={() => setActiveId(null)}>← All Leagues</button>}
         </div>
       </div>
-      {!active && <HomeScreen leagues={store.leagues} onOpen={setActiveId} onCreate={createLeague} onDelete={deleteLeague} />}
+      {!active && <HomeScreen leagues={store.leagues} onOpen={setActiveId} onCreate={createLeague} onDelete={deleteLeague} onToggleArchivable={toggleArchivable} onOpenArchive={() => setShowArchive(true)} />}
       {active && <LeagueEditor key={active.id} league={active} onChange={u => updateLeague(active.id, u)} />}
     </div>
   );
