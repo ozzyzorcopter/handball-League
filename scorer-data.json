@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T21:27:22.853Z",
+  "updatedAt": "2026-05-28T00:17:15.369Z",
   "leagues": [
     {
       "name": "VHV Regio OWv",
@@ -130,6 +130,11 @@
           "goals": 50
         },
         {
+          "player": "Van De Voorde Daan",
+          "club": "HBC Dendermonde",
+          "goals": 49
+        },
+        {
           "player": "Van Verdegem Jari",
           "club": "HBC Dendermonde",
           "goals": 49
@@ -137,11 +142,6 @@
         {
           "player": "Vereeken Mees",
           "club": "Elita Lebbeke",
-          "goals": 49
-        },
-        {
-          "player": "Van De Voorde Daan",
-          "club": "HBC Dendermonde",
           "goals": 49
         },
         {
@@ -320,6 +320,11 @@
           "goals": 27
         },
         {
+          "player": "Van Moorleghem Jari",
+          "club": "Desselgemse Handbalclub",
+          "goals": 26
+        },
+        {
           "player": "Nollet Sverre",
           "club": "Handbalclub Roeselare",
           "goals": 26
@@ -337,11 +342,6 @@
         {
           "player": "Aers Jonas",
           "club": "Handbalclub Evergem",
-          "goals": 26
-        },
-        {
-          "player": "Van Moorleghem Jari",
-          "club": "Desselgemse Handbalclub",
           "goals": 26
         },
         {
@@ -415,13 +415,13 @@
           "goals": 21
         },
         {
-          "player": "Merens Maxim",
-          "club": "Elita Lebbeke",
+          "player": "Vanhoutteghem Lucas",
+          "club": "Desselgemse Handbalclub",
           "goals": 21
         },
         {
-          "player": "Vanhoutteghem Lucas",
-          "club": "Desselgemse Handbalclub",
+          "player": "Merens Maxim",
+          "club": "Elita Lebbeke",
           "goals": 21
         },
         {
@@ -445,19 +445,24 @@
           "goals": 21
         },
         {
-          "player": "Veyt Jelle",
-          "club": "HBC Dendermonde",
+          "player": "Braes Dylan",
+          "club": "Handbal Lokeren",
           "goals": 21
         },
         {
-          "player": "Braes Dylan",
-          "club": "Handbal Lokeren",
+          "player": "Veyt Jelle",
+          "club": "HBC Dendermonde",
           "goals": 21
         },
         {
           "player": "De Neve Mathieu",
           "club": "Handbalclub Thor",
           "goals": 20
+        },
+        {
+          "player": "Declercq Timo",
+          "club": "Handbalclub Roeselare",
+          "goals": 19
         },
         {
           "player": "Vandenbulcke Kobe",
@@ -472,11 +477,6 @@
         {
           "player": "D'Hoye Tim",
           "club": "HBC Dendermonde",
-          "goals": 19
-        },
-        {
-          "player": "Declercq Timo",
-          "club": "Handbalclub Roeselare",
           "goals": 19
         },
         {
@@ -535,13 +535,13 @@
           "goals": 15
         },
         {
-          "player": "Vandamme Bart",
-          "club": "HBC Apolloon Spurs",
+          "player": "De Bock Misha",
+          "club": "Handbal Lokeren",
           "goals": 14
         },
         {
-          "player": "De Bock Misha",
-          "club": "Handbal Lokeren",
+          "player": "Vandamme Bart",
+          "club": "HBC Apolloon Spurs",
           "goals": 14
         },
         {
@@ -650,12 +650,12 @@
           "goals": 11
         },
         {
-          "player": "De Wispelaere Aiko",
+          "player": "De Veirman Stan",
           "club": "Handbalclub Evergem",
           "goals": 10
         },
         {
-          "player": "De Veirman Stan",
+          "player": "De Wispelaere Aiko",
           "club": "Handbalclub Evergem",
           "goals": 10
         },
@@ -690,6 +690,11 @@
           "goals": 9
         },
         {
+          "player": "Vanhaverbeke Liam",
+          "club": "Besox Handbalclub Izegem",
+          "goals": 8
+        },
+        {
           "player": "Verhaeghe Sam",
           "club": "Besox Handbalclub Izegem",
           "goals": 8
@@ -720,9 +725,9 @@
           "goals": 8
         },
         {
-          "player": "Vanhaverbeke Liam",
-          "club": "Besox Handbalclub Izegem",
-          "goals": 8
+          "player": "De Bremaeker Lenko",
+          "club": "Handbalclub Thor",
+          "goals": 7
         },
         {
           "player": "Boudrez Rube",
@@ -760,18 +765,18 @@
           "goals": 7
         },
         {
-          "player": "De Bremaeker Lenko",
-          "club": "Handbalclub Thor",
-          "goals": 7
+          "player": "Bellens Bjorn",
+          "club": "Handbal Lokeren",
+          "goals": 6
+        },
+        {
+          "player": "Desmet Louis",
+          "club": "Besox Handbalclub Izegem",
+          "goals": 6
         },
         {
           "player": "Daenekindt Joachim",
           "club": "HBC Apolloon Spurs",
-          "goals": 6
-        },
-        {
-          "player": "Van Gaever Hans",
-          "club": "HBC Dendermonde",
           "goals": 6
         },
         {
@@ -780,17 +785,22 @@
           "goals": 6
         },
         {
+          "player": "Van Gaever Hans",
+          "club": "HBC Dendermonde",
+          "goals": 6
+        },
+        {
           "player": "Weyns Tim",
           "club": "Handbal Lokeren",
           "goals": 6
         },
         {
-          "player": "Deweirdt Mathis",
+          "player": "Durieux Xander",
           "club": "Handbalclub Evergem",
           "goals": 6
         },
         {
-          "player": "Durieux Xander",
+          "player": "Deweirdt Mathis",
           "club": "Handbalclub Evergem",
           "goals": 6
         },
@@ -817,16 +827,6 @@
         {
           "player": "De Graef Kenyo",
           "club": "HBC Dendermonde",
-          "goals": 6
-        },
-        {
-          "player": "Bellens Bjorn",
-          "club": "Handbal Lokeren",
-          "goals": 6
-        },
-        {
-          "player": "Desmet Louis",
-          "club": "Besox Handbalclub Izegem",
           "goals": 6
         },
         {
@@ -945,6 +945,16 @@
           "goals": 4
         },
         {
+          "player": "Cleynens Bram",
+          "club": "HBC Dendermonde",
+          "goals": 3
+        },
+        {
+          "player": "Van der Elst Sven",
+          "club": "Elita Lebbeke",
+          "goals": 3
+        },
+        {
           "player": "Felies Emiel",
           "club": "HBC Dendermonde",
           "goals": 3
@@ -975,16 +985,6 @@
           "goals": 3
         },
         {
-          "player": "Cleynens Bram",
-          "club": "HBC Dendermonde",
-          "goals": 3
-        },
-        {
-          "player": "Van der Elst Sven",
-          "club": "Elita Lebbeke",
-          "goals": 3
-        },
-        {
           "player": "Guns Xyro",
           "club": "Handbal Lokeren",
           "goals": 2
@@ -1000,8 +1000,8 @@
           "goals": 2
         },
         {
-          "player": "Verheyde Tibe",
-          "club": "Handbalclub Roeselare",
+          "player": "Lerou Matti",
+          "club": "Handbalclub Evergem",
           "goals": 2
         },
         {
@@ -1010,8 +1010,8 @@
           "goals": 2
         },
         {
-          "player": "Lerou Matti",
-          "club": "Handbalclub Evergem",
+          "player": "Verheyde Tibe",
+          "club": "Handbalclub Roeselare",
           "goals": 2
         },
         {
@@ -1050,6 +1050,16 @@
           "goals": 2
         },
         {
+          "player": "Vandenbogaerde Arthur",
+          "club": "HBC Apolloon Spurs",
+          "goals": 1
+        },
+        {
+          "player": "Heynssens Ilyas",
+          "club": "HBC Dendermonde",
+          "goals": 1
+        },
+        {
           "player": "Daeninck Jens",
           "club": "Handbal Lokeren",
           "goals": 1
@@ -1085,13 +1095,13 @@
           "goals": 1
         },
         {
-          "player": "Sercu Warre",
-          "club": "Handbalclub Roeselare",
+          "player": "Van Hoyweghen Wouter",
+          "club": "Elita Lebbeke",
           "goals": 1
         },
         {
-          "player": "Van Hoyweghen Wouter",
-          "club": "Elita Lebbeke",
+          "player": "Sercu Warre",
+          "club": "Handbalclub Roeselare",
           "goals": 1
         },
         {
@@ -1103,19 +1113,9 @@
           "player": "Lambert Alexander",
           "club": "Handbalclub Thor",
           "goals": 1
-        },
-        {
-          "player": "Vandenbogaerde Arthur",
-          "club": "HBC Apolloon Spurs",
-          "goals": 1
-        },
-        {
-          "player": "Heynssens Ilyas",
-          "club": "HBC Dendermonde",
-          "goals": 1
         }
       ],
-      "updatedAt": "2026-05-27T21:27:22.795Z"
+      "updatedAt": "2026-05-28T00:17:15.312Z"
     },
     {
       "name": "VHV Liga 1",
@@ -1166,13 +1166,13 @@
           "goals": 103
         },
         {
-          "player": "De Greef Arnout",
-          "club": "Handbal Hestia Bilzen",
+          "player": "Van Winckel Robbe",
+          "club": "Brasschaat Handbalclub",
           "goals": 102
         },
         {
-          "player": "Van Winckel Robbe",
-          "club": "Brasschaat Handbalclub",
+          "player": "De Greef Arnout",
+          "club": "Handbal Hestia Bilzen",
           "goals": 102
         },
         {
@@ -1216,6 +1216,11 @@
           "goals": 83
         },
         {
+          "player": "Coomans Lukas",
+          "club": "Handbalclub Evergem",
+          "goals": 78
+        },
+        {
           "player": "De Pauw Eber",
           "club": "Handbalclub Eeklo",
           "goals": 78
@@ -1223,11 +1228,6 @@
         {
           "player": "Elgali Wasem",
           "club": "Handbal Hestia Bilzen",
-          "goals": 78
-        },
-        {
-          "player": "Coomans Lukas",
-          "club": "Handbalclub Evergem",
           "goals": 78
         },
         {
@@ -1271,11 +1271,6 @@
           "goals": 73
         },
         {
-          "player": "Savat Bob",
-          "club": "Handbalclub Eeklo",
-          "goals": 72
-        },
-        {
           "player": "Horré Rune",
           "club": "Besox Handbalclub Izegem",
           "goals": 72
@@ -1283,6 +1278,11 @@
         {
           "player": "Gevers Nick",
           "club": "Brasschaat Handbalclub",
+          "goals": 72
+        },
+        {
+          "player": "Savat Bob",
+          "club": "Handbalclub Eeklo",
           "goals": 72
         },
         {
@@ -1316,6 +1316,11 @@
           "goals": 65
         },
         {
+          "player": "Hendrickx Michael",
+          "club": "Handbalclub Schoten",
+          "goals": 63
+        },
+        {
           "player": "Hendrickx Kobe",
           "club": "Handbal Hestia Bilzen",
           "goals": 63
@@ -1328,11 +1333,6 @@
         {
           "player": "Tack Robbe",
           "club": "Besox Handbalclub Izegem",
-          "goals": 63
-        },
-        {
-          "player": "Hendrickx Michael",
-          "club": "Handbalclub Schoten",
           "goals": 63
         },
         {
@@ -1371,23 +1371,23 @@
           "goals": 58
         },
         {
-          "player": "Durieux Xander",
-          "club": "Handbalclub Evergem",
-          "goals": 57
-        },
-        {
           "player": "Vanheule Maarten",
           "club": "Handbalclub Evergem",
           "goals": 57
         },
         {
-          "player": "Dhaene Mathis",
-          "club": "HBC Dendermonde",
-          "goals": 56
+          "player": "Durieux Xander",
+          "club": "Handbalclub Evergem",
+          "goals": 57
         },
         {
           "player": "Quarin Thomas",
           "club": "GBSK Handbal",
+          "goals": 56
+        },
+        {
+          "player": "Dhaene Mathis",
+          "club": "HBC Dendermonde",
           "goals": 56
         },
         {
@@ -1506,6 +1506,11 @@
           "goals": 35
         },
         {
+          "player": "Dries Nathan",
+          "club": "HC Welta",
+          "goals": 34
+        },
+        {
           "player": "Antonissen Junior",
           "club": "Uilenspiegel HV",
           "goals": 34
@@ -1516,9 +1521,9 @@
           "goals": 34
         },
         {
-          "player": "Dries Nathan",
-          "club": "HC Welta",
-          "goals": 34
+          "player": "Lerou Joren",
+          "club": "Handbalclub Evergem",
+          "goals": 33
         },
         {
           "player": "Bortolin Tybe",
@@ -1526,18 +1531,13 @@
           "goals": 33
         },
         {
-          "player": "Lerou Joren",
-          "club": "Handbalclub Evergem",
-          "goals": 33
+          "player": "De Schepper Tim",
+          "club": "Brasschaat Handbalclub",
+          "goals": 32
         },
         {
           "player": "Krohn Senne",
           "club": "Besox Handbalclub Izegem",
-          "goals": 32
-        },
-        {
-          "player": "De Schepper Tim",
-          "club": "Brasschaat Handbalclub",
           "goals": 32
         },
         {
@@ -1561,6 +1561,16 @@
           "goals": 28
         },
         {
+          "player": "Baetsle Jasper",
+          "club": "Handbalclub Evergem",
+          "goals": 27
+        },
+        {
+          "player": "De Meyer Dieter",
+          "club": "Brasschaat Handbalclub",
+          "goals": 27
+        },
+        {
           "player": "Vanhaverbeke Liam",
           "club": "Besox Handbalclub Izegem",
           "goals": 27
@@ -1576,16 +1586,6 @@
           "goals": 27
         },
         {
-          "player": "Baetsle Jasper",
-          "club": "Handbalclub Evergem",
-          "goals": 27
-        },
-        {
-          "player": "De Meyer Dieter",
-          "club": "Brasschaat Handbalclub",
-          "goals": 27
-        },
-        {
           "player": "De Roo Miel",
           "club": "Handbalclub Eeklo",
           "goals": 26
@@ -1596,11 +1596,6 @@
           "goals": 26
         },
         {
-          "player": "Braeckman Yarne",
-          "club": "Handbalclub Evergem",
-          "goals": 25
-        },
-        {
           "player": "Banken Jesper",
           "club": "HUBO Handbal",
           "goals": 25
@@ -1608,6 +1603,11 @@
         {
           "player": "Kerstens Stijn",
           "club": "Brasschaat Handbalclub",
+          "goals": 25
+        },
+        {
+          "player": "Braeckman Yarne",
+          "club": "Handbalclub Evergem",
           "goals": 25
         },
         {
@@ -1621,17 +1621,12 @@
           "goals": 23
         },
         {
-          "player": "De Doncker Ruben",
-          "club": "Olse Merksem HC",
-          "goals": 22
-        },
-        {
-          "player": "Maertens Alexander",
-          "club": "Besox Handbalclub Izegem",
-          "goals": 22
-        },
-        {
           "player": "Glorieux Antoine",
+          "club": "GBSK Handbal",
+          "goals": 22
+        },
+        {
+          "player": "Quarin Nicolas",
           "club": "GBSK Handbal",
           "goals": 22
         },
@@ -1641,14 +1636,14 @@
           "goals": 22
         },
         {
-          "player": "Quarin Nicolas",
-          "club": "GBSK Handbal",
+          "player": "De Doncker Ruben",
+          "club": "Olse Merksem HC",
           "goals": 22
         },
         {
-          "player": "De Waele Tuur",
-          "club": "Handbalclub Eeklo",
-          "goals": 21
+          "player": "Maertens Alexander",
+          "club": "Besox Handbalclub Izegem",
+          "goals": 22
         },
         {
           "player": "Daems Jelle",
@@ -1666,6 +1661,16 @@
           "goals": 21
         },
         {
+          "player": "De Waele Tuur",
+          "club": "Handbalclub Eeklo",
+          "goals": 21
+        },
+        {
+          "player": "Vinckevleugel Jarno",
+          "club": "Olse Merksem HC",
+          "goals": 20
+        },
+        {
           "player": "De Vlieger Jelle",
           "club": "Handbalclub Evergem",
           "goals": 20
@@ -1681,9 +1686,14 @@
           "goals": 20
         },
         {
-          "player": "Vinckevleugel Jarno",
-          "club": "Olse Merksem HC",
-          "goals": 20
+          "player": "Souiddi Alae",
+          "club": "GBSK Handbal",
+          "goals": 19
+        },
+        {
+          "player": "Vandebeek Daan",
+          "club": "HUBO Handbal",
+          "goals": 19
         },
         {
           "player": "Oosterbosch Thomas",
@@ -1696,21 +1706,6 @@
           "goals": 19
         },
         {
-          "player": "Souiddi Alae",
-          "club": "GBSK Handbal",
-          "goals": 19
-        },
-        {
-          "player": "Vandebeek Daan",
-          "club": "HUBO Handbal",
-          "goals": 19
-        },
-        {
-          "player": "Van Beveren Sepp",
-          "club": "HBC Dendermonde",
-          "goals": 18
-        },
-        {
           "player": "Begdouri Harfouch Anouar",
           "club": "GBSK Handbal",
           "goals": 18
@@ -1718,6 +1713,11 @@
         {
           "player": "Merken Jarne",
           "club": "Handbal Hestia Bilzen",
+          "goals": 18
+        },
+        {
+          "player": "Van Beveren Sepp",
+          "club": "HBC Dendermonde",
           "goals": 18
         },
         {
@@ -1756,13 +1756,13 @@
           "goals": 16
         },
         {
-          "player": "Mertens Sean",
-          "club": "Handbalclub Schoten",
+          "player": "Van Praag Lars",
+          "club": "Brasschaat Handbalclub",
           "goals": 15
         },
         {
-          "player": "Van Praag Lars",
-          "club": "Brasschaat Handbalclub",
+          "player": "Mertens Sean",
+          "club": "Handbalclub Schoten",
           "goals": 15
         },
         {
@@ -1786,13 +1786,13 @@
           "goals": 13
         },
         {
-          "player": "Roeffelaer Tuur",
-          "club": "HUBO Handbal",
+          "player": "Bammens Simon",
+          "club": "Handbalclub Schoten",
           "goals": 13
         },
         {
-          "player": "Bammens Simon",
-          "club": "Handbalclub Schoten",
+          "player": "Roeffelaer Tuur",
+          "club": "HUBO Handbal",
           "goals": 13
         },
         {
@@ -1831,14 +1831,19 @@
           "goals": 12
         },
         {
+          "player": "Desmet Louis",
+          "club": "Besox Handbalclub Izegem",
+          "goals": 11
+        },
+        {
           "player": "Van Den Abeele Nikolas",
           "club": "HBC Dendermonde",
           "goals": 11
         },
         {
-          "player": "Desmet Louis",
-          "club": "Besox Handbalclub Izegem",
-          "goals": 11
+          "player": "Saradaku Erion",
+          "club": "Handbal Hestia Bilzen",
+          "goals": 10
         },
         {
           "player": "Adnak Hicham",
@@ -1846,9 +1851,9 @@
           "goals": 10
         },
         {
-          "player": "Saradaku Erion",
-          "club": "Handbal Hestia Bilzen",
-          "goals": 10
+          "player": "Jagers Cas",
+          "club": "Handbalclub Schoten",
+          "goals": 9
         },
         {
           "player": "De Schepper Jorre",
@@ -1876,9 +1881,19 @@
           "goals": 9
         },
         {
-          "player": "Jagers Cas",
+          "player": "Meerbergen Thibaut",
           "club": "Handbalclub Schoten",
-          "goals": 9
+          "goals": 8
+        },
+        {
+          "player": "Willekens Bas",
+          "club": "Brasschaat Handbalclub",
+          "goals": 8
+        },
+        {
+          "player": "Stautemas Tjorven",
+          "club": "Handbalclub Evergem",
+          "goals": 8
         },
         {
           "player": "Deweirdt Mathis",
@@ -1896,26 +1911,6 @@
           "goals": 8
         },
         {
-          "player": "Meerbergen Thibaut",
-          "club": "Handbalclub Schoten",
-          "goals": 8
-        },
-        {
-          "player": "Willekens Bas",
-          "club": "Brasschaat Handbalclub",
-          "goals": 8
-        },
-        {
-          "player": "Stautemas Tjorven",
-          "club": "Handbalclub Evergem",
-          "goals": 8
-        },
-        {
-          "player": "Baert Eliot",
-          "club": "Uilenspiegel HV",
-          "goals": 7
-        },
-        {
           "player": "Vandyck Wannes",
           "club": "Olse Merksem HC",
           "goals": 7
@@ -1923,6 +1918,11 @@
         {
           "player": "Quintiens Jules",
           "club": "HUBO Handbal",
+          "goals": 7
+        },
+        {
+          "player": "Baert Eliot",
+          "club": "Uilenspiegel HV",
           "goals": 7
         },
         {
@@ -1941,13 +1941,13 @@
           "goals": 6
         },
         {
-          "player": "Heeren Rob",
-          "club": "HUBO Handbal",
+          "player": "De Pauw Matteo",
+          "club": "Handbalclub Eeklo",
           "goals": 6
         },
         {
-          "player": "De Pauw Matteo",
-          "club": "Handbalclub Eeklo",
+          "player": "Heeren Rob",
+          "club": "HUBO Handbal",
           "goals": 6
         },
         {
@@ -1959,6 +1959,11 @@
           "player": "De Roock Rune",
           "club": "GBSK Handbal",
           "goals": 6
+        },
+        {
+          "player": "Esposito Nico",
+          "club": "GBSK Handbal",
+          "goals": 5
         },
         {
           "player": "Verbeeck Alwin",
@@ -1976,9 +1981,14 @@
           "goals": 5
         },
         {
-          "player": "Esposito Nico",
-          "club": "GBSK Handbal",
-          "goals": 5
+          "player": "Beerten Warre",
+          "club": "Besox Handbalclub Izegem",
+          "goals": 4
+        },
+        {
+          "player": "Baart Jakke",
+          "club": "HUBO Handbal",
+          "goals": 4
         },
         {
           "player": "Vanwulpen Siebe",
@@ -2021,14 +2031,24 @@
           "goals": 4
         },
         {
-          "player": "Beerten Warre",
-          "club": "Besox Handbalclub Izegem",
-          "goals": 4
+          "player": "Van Vooren Ewoud",
+          "club": "Handbalclub Eeklo",
+          "goals": 3
         },
         {
-          "player": "Baart Jakke",
-          "club": "HUBO Handbal",
-          "goals": 4
+          "player": "Scholliers Bart",
+          "club": "HC Welta",
+          "goals": 3
+        },
+        {
+          "player": "Lac Adlane",
+          "club": "GBSK Handbal",
+          "goals": 3
+        },
+        {
+          "player": "Dieriks Jeff",
+          "club": "HBC Dendermonde",
+          "goals": 3
         },
         {
           "player": "Lecluyse Kobe",
@@ -2061,24 +2081,9 @@
           "goals": 3
         },
         {
-          "player": "Van Vooren Ewoud",
-          "club": "Handbalclub Eeklo",
-          "goals": 3
-        },
-        {
-          "player": "Scholliers Bart",
-          "club": "HC Welta",
-          "goals": 3
-        },
-        {
-          "player": "Lac Adlane",
-          "club": "GBSK Handbal",
-          "goals": 3
-        },
-        {
-          "player": "Dieriks Jeff",
-          "club": "HBC Dendermonde",
-          "goals": 3
+          "player": "Van Borm Cas",
+          "club": "Uilenspiegel HV",
+          "goals": 2
         },
         {
           "player": "Nikolaev Niko",
@@ -2121,9 +2126,34 @@
           "goals": 2
         },
         {
-          "player": "Van Borm Cas",
-          "club": "Uilenspiegel HV",
-          "goals": 2
+          "player": "Knevels Basiel",
+          "club": "HUBO Handbal",
+          "goals": 1
+        },
+        {
+          "player": "De Bie Iyani",
+          "club": "Handbalclub Eeklo",
+          "goals": 1
+        },
+        {
+          "player": "Van Der Sman Joffry",
+          "club": "HUBO Handbal",
+          "goals": 1
+        },
+        {
+          "player": "AYKIN ERKIN",
+          "club": "Handbalclub Schoten",
+          "goals": 1
+        },
+        {
+          "player": "Loete Niels",
+          "club": "Handbalclub Evergem",
+          "goals": 1
+        },
+        {
+          "player": "Cleynens Bram",
+          "club": "HBC Dendermonde",
+          "goals": 1
         },
         {
           "player": "Kelders Wolf",
@@ -2164,39 +2194,9 @@
           "player": "Truyens Robin",
           "club": "GBSK Handbal",
           "goals": 1
-        },
-        {
-          "player": "Knevels Basiel",
-          "club": "HUBO Handbal",
-          "goals": 1
-        },
-        {
-          "player": "De Bie Iyani",
-          "club": "Handbalclub Eeklo",
-          "goals": 1
-        },
-        {
-          "player": "Van Der Sman Joffry",
-          "club": "HUBO Handbal",
-          "goals": 1
-        },
-        {
-          "player": "AYKIN ERKIN",
-          "club": "Handbalclub Schoten",
-          "goals": 1
-        },
-        {
-          "player": "Cleynens Bram",
-          "club": "HBC Dendermonde",
-          "goals": 1
-        },
-        {
-          "player": "Loete Niels",
-          "club": "Handbalclub Evergem",
-          "goals": 1
         }
       ],
-      "updatedAt": "2026-05-27T21:27:22.834Z"
+      "updatedAt": "2026-05-28T00:17:15.369Z"
     },
     {
       "name": "VHV Liga 2",
@@ -2962,13 +2962,13 @@
           "goals": 10
         },
         {
-          "player": "Riské Jos",
-          "club": "Biobest Sasja HC",
+          "player": "Verwulgen Nio",
+          "club": "HC AtomiX",
           "goals": 10
         },
         {
-          "player": "Verwulgen Nio",
-          "club": "HC AtomiX",
+          "player": "Riské Jos",
+          "club": "Biobest Sasja HC",
           "goals": 10
         },
         {
@@ -2992,13 +2992,13 @@
           "goals": 9
         },
         {
-          "player": "Verbinnen Jelle",
-          "club": "HC Heist o/d Berg",
+          "player": "Vanmeerbeek Jens",
+          "club": "HC AtomiX",
           "goals": 9
         },
         {
-          "player": "Vanmeerbeek Jens",
-          "club": "HC AtomiX",
+          "player": "Verbinnen Jelle",
+          "club": "HC Heist o/d Berg",
           "goals": 9
         },
         {
@@ -3082,13 +3082,13 @@
           "goals": 7
         },
         {
-          "player": "De Coster Mats",
-          "club": "Biobest Sasja HC",
+          "player": "De Witte Tuur",
+          "club": "Handbalclub Aalst",
           "goals": 6
         },
         {
-          "player": "De Witte Tuur",
-          "club": "Handbalclub Aalst",
+          "player": "De Coster Mats",
+          "club": "Biobest Sasja HC",
           "goals": 6
         },
         {
@@ -3172,11 +3172,6 @@
           "goals": 4
         },
         {
-          "player": "Bornauw Iban",
-          "club": "Elita Lebbeke",
-          "goals": 4
-        },
-        {
           "player": "Hendrickx Ruben",
           "club": "HC Heist o/d Berg",
           "goals": 4
@@ -3184,6 +3179,11 @@
         {
           "player": "Czyrnek Igor",
           "club": "Handbalclub Aalst",
+          "goals": 4
+        },
+        {
+          "player": "Bornauw Iban",
+          "club": "Elita Lebbeke",
           "goals": 4
         },
         {
@@ -3222,11 +3222,6 @@
           "goals": 2
         },
         {
-          "player": "Verhoeven Johannes",
-          "club": "Biobest Sasja HC",
-          "goals": 2
-        },
-        {
           "player": "Zazai Arif",
           "club": "Hv Arena",
           "goals": 2
@@ -3237,13 +3232,18 @@
           "goals": 2
         },
         {
-          "player": "Moens Michele",
-          "club": "Elita Lebbeke",
+          "player": "Verhoeven Johannes",
+          "club": "Biobest Sasja HC",
           "goals": 2
         },
         {
           "player": "Rigolle Milo",
           "club": "Desselgemse Handbalclub",
+          "goals": 2
+        },
+        {
+          "player": "Moens Michele",
+          "club": "Elita Lebbeke",
           "goals": 2
         },
         {
@@ -3272,8 +3272,18 @@
           "goals": 1
         },
         {
+          "player": "Dekempeneer Jarno",
+          "club": "HC AtomiX",
+          "goals": 1
+        },
+        {
           "player": "Tielens Jens",
           "club": "HC Overpelt",
+          "goals": 1
+        },
+        {
+          "player": "Vandenbulcke Kobe",
+          "club": "Handbalclub Roeselare",
           "goals": 1
         },
         {
@@ -3282,17 +3292,7 @@
           "goals": 1
         },
         {
-          "player": "Dekempeneer Jarno",
-          "club": "HC AtomiX",
-          "goals": 1
-        },
-        {
           "player": "Laureins Arne",
-          "club": "Handbalclub Roeselare",
-          "goals": 1
-        },
-        {
-          "player": "Vandenbulcke Kobe",
           "club": "Handbalclub Roeselare",
           "goals": 1
         },
@@ -3342,7 +3342,7 @@
           "goals": 1
         }
       ],
-      "updatedAt": "2026-05-27T21:27:22.853Z"
+      "updatedAt": "2026-05-28T00:17:15.328Z"
     },
     {
       "name": "VHV Liga 3",
@@ -3463,13 +3463,13 @@
           "goals": 88
         },
         {
-          "player": "Stas Frederik",
-          "club": "Uilenspiegel HV",
+          "player": "Yarti Bjorn",
+          "club": "Handbalclub Attila Temse",
           "goals": 85
         },
         {
-          "player": "Yarti Bjorn",
-          "club": "Handbalclub Attila Temse",
+          "player": "Stas Frederik",
+          "club": "Uilenspiegel HV",
           "goals": 85
         },
         {
@@ -3703,6 +3703,11 @@
           "goals": 38
         },
         {
+          "player": "Nijssen Niels",
+          "club": "Handbal Hestia Bilzen",
+          "goals": 36
+        },
+        {
           "player": "Abrath Mauro",
           "club": "Olse Merksem HC",
           "goals": 36
@@ -3710,11 +3715,6 @@
         {
           "player": "Descamps Kamiel",
           "club": "Handbalclub Evergem",
-          "goals": 36
-        },
-        {
-          "player": "Nijssen Niels",
-          "club": "Handbal Hestia Bilzen",
           "goals": 36
         },
         {
@@ -3903,6 +3903,11 @@
           "goals": 21
         },
         {
+          "player": "Van Nieuwenhove Jannes",
+          "club": "Handbalclub Evergem",
+          "goals": 21
+        },
+        {
           "player": "Cleiren Arne",
           "club": "HK Waasmunster",
           "goals": 21
@@ -3913,19 +3918,9 @@
           "goals": 21
         },
         {
-          "player": "Van Nieuwenhove Jannes",
-          "club": "Handbalclub Evergem",
-          "goals": 21
-        },
-        {
           "player": "Drappier Arne",
           "club": "Handbalclub Eeklo",
           "goals": 21
-        },
-        {
-          "player": "T'Jonck Niels",
-          "club": "Handbal Brugge",
-          "goals": 20
         },
         {
           "player": "Van Tichelen Mats",
@@ -3935,6 +3930,11 @@
         {
           "player": "Snijders Yens",
           "club": "HC 't Noorden",
+          "goals": 20
+        },
+        {
+          "player": "T'Jonck Niels",
+          "club": "Handbal Brugge",
           "goals": 20
         },
         {
@@ -3948,6 +3948,11 @@
           "goals": 19
         },
         {
+          "player": "Urkens Warre",
+          "club": "Olse Merksem HC",
+          "goals": 17
+        },
+        {
           "player": "De Wit Thibo",
           "club": "Olse Merksem HC",
           "goals": 17
@@ -3955,11 +3960,6 @@
         {
           "player": "Vandael Wannes",
           "club": "Uilenspiegel HV",
-          "goals": 17
-        },
-        {
-          "player": "Urkens Warre",
-          "club": "Olse Merksem HC",
           "goals": 17
         },
         {
@@ -3988,6 +3988,16 @@
           "goals": 16
         },
         {
+          "player": "Chinitor Haldan",
+          "club": "Handbalclub Eeklo",
+          "goals": 15
+        },
+        {
+          "player": "Van De Voorde Lukas",
+          "club": "Handbalclub Eeklo",
+          "goals": 15
+        },
+        {
           "player": "Baert Kamiel",
           "club": "HC AtomiX",
           "goals": 15
@@ -4003,14 +4013,9 @@
           "goals": 15
         },
         {
-          "player": "Chinitor Haldan",
-          "club": "Handbalclub Eeklo",
-          "goals": 15
-        },
-        {
-          "player": "Van De Voorde Lukas",
-          "club": "Handbalclub Eeklo",
-          "goals": 15
+          "player": "Dils Jero",
+          "club": "HC AtomiX",
+          "goals": 14
         },
         {
           "player": "De Bondt Dries",
@@ -4018,13 +4023,8 @@
           "goals": 14
         },
         {
-          "player": "Dils Jero",
+          "player": "Verwulgen Nio",
           "club": "HC AtomiX",
-          "goals": 14
-        },
-        {
-          "player": "Van Haverbeke Alex",
-          "club": "Handbal Brugge",
           "goals": 13
         },
         {
@@ -4033,8 +4033,8 @@
           "goals": 13
         },
         {
-          "player": "Verwulgen Nio",
-          "club": "HC AtomiX",
+          "player": "Van Haverbeke Alex",
+          "club": "Handbal Brugge",
           "goals": 13
         },
         {
@@ -4083,13 +4083,13 @@
           "goals": 11
         },
         {
-          "player": "Goossens Jasper",
-          "club": "Olse Merksem HC",
+          "player": "De Keyser Lucas",
+          "club": "HK Waasmunster",
           "goals": 11
         },
         {
-          "player": "De Keyser Lucas",
-          "club": "HK Waasmunster",
+          "player": "Goossens Jasper",
+          "club": "Olse Merksem HC",
           "goals": 11
         },
         {
@@ -4113,6 +4113,11 @@
           "goals": 11
         },
         {
+          "player": "Merken Jarne",
+          "club": "Handbal Hestia Bilzen",
+          "goals": 10
+        },
+        {
           "player": "Maenhout Jarne",
           "club": "Handbalclub Eeklo",
           "goals": 10
@@ -4120,11 +4125,6 @@
         {
           "player": "Jacobs Maximiliaan Heinrich",
           "club": "Handbal Brugge",
-          "goals": 10
-        },
-        {
-          "player": "Merken Jarne",
-          "club": "Handbal Hestia Bilzen",
           "goals": 10
         },
         {
@@ -4138,6 +4138,11 @@
           "goals": 9
         },
         {
+          "player": "Vrancx Kristjan",
+          "club": "Olse Merksem HC",
+          "goals": 9
+        },
+        {
           "player": "De Pauw Eber",
           "club": "Handbalclub Eeklo",
           "goals": 9
@@ -4148,9 +4153,9 @@
           "goals": 9
         },
         {
-          "player": "Vrancx Kristjan",
-          "club": "Olse Merksem HC",
-          "goals": 9
+          "player": "Brackx Dieder",
+          "club": "Handbalclub Thor",
+          "goals": 8
         },
         {
           "player": "Lerou Joren",
@@ -4170,11 +4175,6 @@
         {
           "player": "Vandeghinste Maurits",
           "club": "HC AtomiX",
-          "goals": 8
-        },
-        {
-          "player": "Brackx Dieder",
-          "club": "Handbalclub Thor",
           "goals": 8
         },
         {
@@ -4238,13 +4238,8 @@
           "goals": 6
         },
         {
-          "player": "Baetsle Jasper",
-          "club": "Handbalclub Evergem",
-          "goals": 5
-        },
-        {
-          "player": "Lerou Matti",
-          "club": "Handbalclub Evergem",
+          "player": "Adriaensens Tuur",
+          "club": "Olse Merksem HC",
           "goals": 5
         },
         {
@@ -4258,6 +4253,16 @@
           "goals": 5
         },
         {
+          "player": "Baetsle Jasper",
+          "club": "Handbalclub Evergem",
+          "goals": 5
+        },
+        {
+          "player": "Lerou Matti",
+          "club": "Handbalclub Evergem",
+          "goals": 5
+        },
+        {
           "player": "Lefever Andres",
           "club": "Handbal Leuven",
           "goals": 5
@@ -4268,33 +4273,13 @@
           "goals": 5
         },
         {
-          "player": "Adriaensens Tuur",
-          "club": "Olse Merksem HC",
-          "goals": 5
+          "player": "Panis Jonathan",
+          "club": "Uilenspiegel HV",
+          "goals": 4
         },
         {
           "player": "Colson Jesse",
           "club": "Handbal Hestia Bilzen",
-          "goals": 4
-        },
-        {
-          "player": "Van Assche Arthur",
-          "club": "Handbalclub Evergem",
-          "goals": 4
-        },
-        {
-          "player": "Neulens Kai",
-          "club": "Handbal Hestia Bilzen",
-          "goals": 4
-        },
-        {
-          "player": "Neyrinck Tijs",
-          "club": "Handbalclub Thor",
-          "goals": 4
-        },
-        {
-          "player": "Dekempeneer Jarno",
-          "club": "HC AtomiX",
           "goals": 4
         },
         {
@@ -4303,8 +4288,8 @@
           "goals": 4
         },
         {
-          "player": "Verbist Timo",
-          "club": "Uilenspiegel HV",
+          "player": "Neulens Kai",
+          "club": "Handbal Hestia Bilzen",
           "goals": 4
         },
         {
@@ -4313,38 +4298,38 @@
           "goals": 4
         },
         {
+          "player": "Dekempeneer Jarno",
+          "club": "HC AtomiX",
+          "goals": 4
+        },
+        {
+          "player": "Neyrinck Tijs",
+          "club": "Handbalclub Thor",
+          "goals": 4
+        },
+        {
+          "player": "Verbist Timo",
+          "club": "Uilenspiegel HV",
+          "goals": 4
+        },
+        {
+          "player": "Van Assche Arthur",
+          "club": "Handbalclub Evergem",
+          "goals": 4
+        },
+        {
           "player": "Van Gestel Pieter-Jan",
           "club": "HC 't Noorden",
           "goals": 4
         },
         {
-          "player": "Panis Jonathan",
-          "club": "Uilenspiegel HV",
-          "goals": 4
+          "player": "Snoeren Willem",
+          "club": "Olse Merksem HC",
+          "goals": 3
         },
         {
           "player": "Calluij Brian",
           "club": "HC 't Noorden",
-          "goals": 3
-        },
-        {
-          "player": "Oosterbosch Thomas",
-          "club": "Handbal Hestia Bilzen",
-          "goals": 3
-        },
-        {
-          "player": "Vercammen Jitse",
-          "club": "HK Waasmunster",
-          "goals": 3
-        },
-        {
-          "player": "Niec Szczepan",
-          "club": "Handbalclub Thor",
-          "goals": 3
-        },
-        {
-          "player": "De Taeye Michiel",
-          "club": "Handbalclub Evergem",
           "goals": 3
         },
         {
@@ -4353,8 +4338,8 @@
           "goals": 3
         },
         {
-          "player": "Van De Vyver Killian",
-          "club": "Handbalclub Attila Temse",
+          "player": "Oosterbosch Thomas",
+          "club": "Handbal Hestia Bilzen",
           "goals": 3
         },
         {
@@ -4368,23 +4353,38 @@
           "goals": 3
         },
         {
-          "player": "Berthet Ruben",
-          "club": "HC AtomiX",
-          "goals": 3
-        },
-        {
           "player": "Aers Jonas",
           "club": "Handbalclub Evergem",
           "goals": 3
         },
         {
-          "player": "Snoeren Willem",
-          "club": "Olse Merksem HC",
+          "player": "Vercammen Jitse",
+          "club": "HK Waasmunster",
           "goals": 3
         },
         {
-          "player": "Desloovere Jonas",
+          "player": "De Taeye Michiel",
           "club": "Handbalclub Evergem",
+          "goals": 3
+        },
+        {
+          "player": "Niec Szczepan",
+          "club": "Handbalclub Thor",
+          "goals": 3
+        },
+        {
+          "player": "Van De Vyver Killian",
+          "club": "Handbalclub Attila Temse",
+          "goals": 3
+        },
+        {
+          "player": "Berthet Ruben",
+          "club": "HC AtomiX",
+          "goals": 3
+        },
+        {
+          "player": "Schuster Tariku",
+          "club": "Olse Merksem HC",
           "goals": 2
         },
         {
@@ -4418,13 +4418,18 @@
           "goals": 2
         },
         {
-          "player": "Van Meerssche Louis",
-          "club": "HK Waasmunster",
+          "player": "Verbist Robbe",
+          "club": "Olse Merksem HC",
           "goals": 2
         },
         {
           "player": "Meere Kamiel",
           "club": "Handbal Leuven",
+          "goals": 2
+        },
+        {
+          "player": "Van Meerssche Louis",
+          "club": "HK Waasmunster",
           "goals": 2
         },
         {
@@ -4438,13 +4443,13 @@
           "goals": 2
         },
         {
-          "player": "Schuster Tariku",
-          "club": "Olse Merksem HC",
+          "player": "Bleyen Jan",
+          "club": "Handbal Leuven",
           "goals": 2
         },
         {
-          "player": "Bleyen Jan",
-          "club": "Handbal Leuven",
+          "player": "Braeckman Yarne",
+          "club": "Handbalclub Evergem",
           "goals": 2
         },
         {
@@ -4458,7 +4463,12 @@
           "goals": 2
         },
         {
-          "player": "Braeckman Yarne",
+          "player": "Aers Jasper",
+          "club": "Handbalclub Evergem",
+          "goals": 2
+        },
+        {
+          "player": "Teirlynck Ian",
           "club": "Handbalclub Evergem",
           "goals": 2
         },
@@ -4468,8 +4478,8 @@
           "goals": 2
         },
         {
-          "player": "Verbist Robbe",
-          "club": "Olse Merksem HC",
+          "player": "Desloovere Jonas",
+          "club": "Handbalclub Evergem",
           "goals": 2
         },
         {
@@ -4488,36 +4498,6 @@
           "goals": 2
         },
         {
-          "player": "Aers Jasper",
-          "club": "Handbalclub Evergem",
-          "goals": 2
-        },
-        {
-          "player": "Teirlynck Ian",
-          "club": "Handbalclub Evergem",
-          "goals": 2
-        },
-        {
-          "player": "Boury Hans",
-          "club": "Handbal Brugge",
-          "goals": 1
-        },
-        {
-          "player": "De Veirman Stan",
-          "club": "Handbalclub Evergem",
-          "goals": 1
-        },
-        {
-          "player": "Verbruggen Chiel",
-          "club": "Handbalclub Attila Temse",
-          "goals": 1
-        },
-        {
-          "player": "De Wispelaere Aiko",
-          "club": "Handbalclub Evergem",
-          "goals": 1
-        },
-        {
           "player": "Paesmans Yoeri",
           "club": "HK Waasmunster",
           "goals": 1
@@ -4533,6 +4513,26 @@
           "goals": 1
         },
         {
+          "player": "Boury Hans",
+          "club": "Handbal Brugge",
+          "goals": 1
+        },
+        {
+          "player": "Verbruggen Chiel",
+          "club": "Handbalclub Attila Temse",
+          "goals": 1
+        },
+        {
+          "player": "De Wispelaere Aiko",
+          "club": "Handbalclub Evergem",
+          "goals": 1
+        },
+        {
+          "player": "Gebruers Sander",
+          "club": "Olse Merksem HC",
+          "goals": 1
+        },
+        {
           "player": "Buysse Jonas",
           "club": "Handbal Leuven",
           "goals": 1
@@ -4543,8 +4543,8 @@
           "goals": 1
         },
         {
-          "player": "Gebruers Sander",
-          "club": "Olse Merksem HC",
+          "player": "De Veirman Stan",
+          "club": "Handbalclub Evergem",
           "goals": 1
         },
         {
@@ -4553,7 +4553,7 @@
           "goals": 1
         }
       ],
-      "updatedAt": "2026-05-27T21:27:22.830Z"
+      "updatedAt": "2026-05-28T00:17:15.346Z"
     },
     {
       "name": "1e Nationale",
@@ -4614,17 +4614,17 @@
           "goals": 69
         },
         {
-          "player": "Van Ransbeeck Koenraad",
-          "club": "Biobest Sasja HC",
-          "goals": 68
-        },
-        {
           "player": "De Wit Nathan",
           "club": "HC Kraainem",
           "goals": 68
         },
         {
           "player": "Nakos Telemachos",
+          "club": "Biobest Sasja HC",
+          "goals": 68
+        },
+        {
+          "player": "Van Ransbeeck Koenraad",
           "club": "Biobest Sasja HC",
           "goals": 68
         },
@@ -4644,16 +4644,6 @@
           "goals": 66
         },
         {
-          "player": "Cornelis Quinten",
-          "club": "Elita Lebbeke",
-          "goals": 61
-        },
-        {
-          "player": "Depoortere Titouan",
-          "club": "EHC Tournai",
-          "goals": 61
-        },
-        {
           "player": "Kerhousse Maxime",
           "club": "HC Kraainem",
           "goals": 61
@@ -4669,13 +4659,23 @@
           "goals": 61
         },
         {
-          "player": "Van Oudenhove Pieterjan",
+          "player": "Cornelis Quinten",
           "club": "Elita Lebbeke",
-          "goals": 58
+          "goals": 61
+        },
+        {
+          "player": "Depoortere Titouan",
+          "club": "EHC Tournai",
+          "goals": 61
         },
         {
           "player": "Brebels Ibe",
           "club": "HUBO Handbal",
+          "goals": 58
+        },
+        {
+          "player": "Van Oudenhove Pieterjan",
+          "club": "Elita Lebbeke",
           "goals": 58
         },
         {
@@ -4689,13 +4689,13 @@
           "goals": 57
         },
         {
-          "player": "D'Haese Robin",
-          "club": "Elita Lebbeke",
+          "player": "Lorré Gustave",
+          "club": "HC Don Bosco Gent",
           "goals": 56
         },
         {
-          "player": "Lorré Gustave",
-          "club": "HC Don Bosco Gent",
+          "player": "D'Haese Robin",
+          "club": "Elita Lebbeke",
           "goals": 56
         },
         {
@@ -4704,13 +4704,13 @@
           "goals": 55
         },
         {
-          "player": "Voglaire Adrien",
-          "club": "EHC Tournai",
+          "player": "Lesage Thomas",
+          "club": "HC Don Bosco Gent",
           "goals": 54
         },
         {
-          "player": "Lesage Thomas",
-          "club": "HC Don Bosco Gent",
+          "player": "Voglaire Adrien",
+          "club": "EHC Tournai",
           "goals": 54
         },
         {
@@ -4764,6 +4764,11 @@
           "goals": 48
         },
         {
+          "player": "Leeman Maxence",
+          "club": "HBC Apolloon Spurs",
+          "goals": 46
+        },
+        {
           "player": "Federspiel Hugo",
           "club": "EHC Tournai",
           "goals": 46
@@ -4771,11 +4776,6 @@
         {
           "player": "Guermouche Sofiane",
           "club": "EHC Tournai",
-          "goals": 46
-        },
-        {
-          "player": "Leeman Maxence",
-          "club": "HBC Apolloon Spurs",
           "goals": 46
         },
         {
@@ -4787,11 +4787,6 @@
           "player": "Colson Robben",
           "club": "Elita Lebbeke",
           "goals": 44
-        },
-        {
-          "player": "Pieters Gerben",
-          "club": "Elita Lebbeke",
-          "goals": 43
         },
         {
           "player": "Devemy Simon",
@@ -4806,6 +4801,11 @@
         {
           "player": "Fransen Louis",
           "club": "HC Sprimont",
+          "goals": 43
+        },
+        {
+          "player": "Pieters Gerben",
+          "club": "Elita Lebbeke",
           "goals": 43
         },
         {
@@ -4844,11 +4844,6 @@
           "goals": 39
         },
         {
-          "player": "Cornelis Lennert",
-          "club": "Elita Lebbeke",
-          "goals": 38
-        },
-        {
           "player": "Desnouck Patrick",
           "club": "EHC Tournai",
           "goals": 38
@@ -4859,9 +4854,9 @@
           "goals": 38
         },
         {
-          "player": "Broekaert Gilles",
-          "club": "HC Don Bosco Gent",
-          "goals": 36
+          "player": "Cornelis Lennert",
+          "club": "Elita Lebbeke",
+          "goals": 38
         },
         {
           "player": "Hougardy Yuri",
@@ -4869,9 +4864,9 @@
           "goals": 36
         },
         {
-          "player": "Roullet Lucien",
-          "club": "EHC Tournai",
-          "goals": 35
+          "player": "Broekaert Gilles",
+          "club": "HC Don Bosco Gent",
+          "goals": 36
         },
         {
           "player": "Top Sekou",
@@ -4884,9 +4879,9 @@
           "goals": 35
         },
         {
-          "player": "Maier Daniel Derin",
-          "club": "HC Eynatten-Raeren",
-          "goals": 33
+          "player": "Roullet Lucien",
+          "club": "EHC Tournai",
+          "goals": 35
         },
         {
           "player": "Rouffignon Gatien",
@@ -4896,6 +4891,11 @@
         {
           "player": "Baart Jakke",
           "club": "HUBO Handbal",
+          "goals": 33
+        },
+        {
+          "player": "Maier Daniel Derin",
+          "club": "HC Eynatten-Raeren",
           "goals": 33
         },
         {
@@ -4964,11 +4964,6 @@
           "goals": 25
         },
         {
-          "player": "Coppens Victor",
-          "club": "HBC Apolloon Spurs",
-          "goals": 24
-        },
-        {
           "player": "Desnouck Nicolas",
           "club": "EHC Tournai",
           "goals": 24
@@ -4989,19 +4984,9 @@
           "goals": 24
         },
         {
-          "player": "Meulders Robin",
-          "club": "HC Kraainem",
-          "goals": 23
-        },
-        {
-          "player": "Mwamba Marc",
-          "club": "EHC Tournai",
-          "goals": 23
-        },
-        {
-          "player": "Borowiak Yann",
-          "club": "HC Sprimont",
-          "goals": 23
+          "player": "Coppens Victor",
+          "club": "HBC Apolloon Spurs",
+          "goals": 24
         },
         {
           "player": "Dedobbeleer Lars",
@@ -5034,19 +5019,24 @@
           "goals": 23
         },
         {
+          "player": "Meulders Robin",
+          "club": "HC Kraainem",
+          "goals": 23
+        },
+        {
+          "player": "Mwamba Marc",
+          "club": "EHC Tournai",
+          "goals": 23
+        },
+        {
+          "player": "Borowiak Yann",
+          "club": "HC Sprimont",
+          "goals": 23
+        },
+        {
           "player": "Mokhtari Elias",
           "club": "HBC Apolloon Spurs",
           "goals": 22
-        },
-        {
-          "player": "Stienen Evert",
-          "club": "Elita Lebbeke",
-          "goals": 21
-        },
-        {
-          "player": "Jacobs Emil",
-          "club": "HC Eynatten-Raeren",
-          "goals": 21
         },
         {
           "player": "Moerman Tom",
@@ -5055,6 +5045,16 @@
         },
         {
           "player": "Kedziora Bartosz",
+          "club": "HC Eynatten-Raeren",
+          "goals": 21
+        },
+        {
+          "player": "Stienen Evert",
+          "club": "Elita Lebbeke",
+          "goals": 21
+        },
+        {
+          "player": "Jacobs Emil",
           "club": "HC Eynatten-Raeren",
           "goals": 21
         },
@@ -5124,16 +5124,6 @@
           "goals": 12
         },
         {
-          "player": "Zimmermann Wim",
-          "club": "HC Eynatten-Raeren",
-          "goals": 11
-        },
-        {
-          "player": "De Vriendt Thijs",
-          "club": "HC Don Bosco Gent",
-          "goals": 11
-        },
-        {
           "player": "Beudet Louis",
           "club": "EHC Tournai",
           "goals": 11
@@ -5154,18 +5144,28 @@
           "goals": 11
         },
         {
+          "player": "Zimmermann Wim",
+          "club": "HC Eynatten-Raeren",
+          "goals": 11
+        },
+        {
+          "player": "De Vriendt Thijs",
+          "club": "HC Don Bosco Gent",
+          "goals": 11
+        },
+        {
           "player": "Broers Tibe",
           "club": "Derdaele Sporting Pelt",
           "goals": 10
         },
         {
-          "player": "Vérin Samuel",
-          "club": "HBC Apolloon Spurs",
+          "player": "Delcour Louis",
+          "club": "EHC Tournai",
           "goals": 9
         },
         {
-          "player": "Delcour Louis",
-          "club": "EHC Tournai",
+          "player": "Vérin Samuel",
+          "club": "HBC Apolloon Spurs",
           "goals": 9
         },
         {
@@ -5189,21 +5189,6 @@
           "goals": 8
         },
         {
-          "player": "Larit Victor",
-          "club": "HBC Apolloon Spurs",
-          "goals": 7
-        },
-        {
-          "player": "Meurisse Sacha",
-          "club": "EHC Tournai",
-          "goals": 7
-        },
-        {
-          "player": "Verbeiren Elias",
-          "club": "Elita Lebbeke",
-          "goals": 7
-        },
-        {
           "player": "Deekens Nils",
           "club": "Derdaele Sporting Pelt",
           "goals": 7
@@ -5224,9 +5209,19 @@
           "goals": 7
         },
         {
-          "player": "Christiaens Stian",
-          "club": "HC Don Bosco Gent",
-          "goals": 6
+          "player": "Larit Victor",
+          "club": "HBC Apolloon Spurs",
+          "goals": 7
+        },
+        {
+          "player": "Meurisse Sacha",
+          "club": "EHC Tournai",
+          "goals": 7
+        },
+        {
+          "player": "Verbeiren Elias",
+          "club": "Elita Lebbeke",
+          "goals": 7
         },
         {
           "player": "Cruypenninck Simon",
@@ -5239,19 +5234,9 @@
           "goals": 6
         },
         {
-          "player": "Obarcanin Alen",
-          "club": "HC Kraainem",
-          "goals": 5
-        },
-        {
-          "player": "Forment Gaëtan",
-          "club": "HC Kraainem",
-          "goals": 5
-        },
-        {
-          "player": "Thoelen Keaton",
+          "player": "Christiaens Stian",
           "club": "HC Don Bosco Gent",
-          "goals": 5
+          "goals": 6
         },
         {
           "player": "Shpak Yehor",
@@ -5269,9 +5254,19 @@
           "goals": 5
         },
         {
-          "player": "Van Gestel Geert",
-          "club": "Biobest Sasja HC",
-          "goals": 4
+          "player": "Obarcanin Alen",
+          "club": "HC Kraainem",
+          "goals": 5
+        },
+        {
+          "player": "Forment Gaëtan",
+          "club": "HC Kraainem",
+          "goals": 5
+        },
+        {
+          "player": "Thoelen Keaton",
+          "club": "HC Don Bosco Gent",
+          "goals": 5
         },
         {
           "player": "Jurdan Sébastien",
@@ -5304,14 +5299,9 @@
           "goals": 4
         },
         {
-          "player": "Nyckees Mattis",
+          "player": "Van Gestel Geert",
           "club": "Biobest Sasja HC",
-          "goals": 3
-        },
-        {
-          "player": "Roeffelaer Tuur",
-          "club": "HUBO Handbal",
-          "goals": 3
+          "goals": 4
         },
         {
           "player": "Meyer Tom",
@@ -5344,9 +5334,14 @@
           "goals": 3
         },
         {
-          "player": "Koppen Wouter",
-          "club": "HC Don Bosco Gent",
-          "goals": 2
+          "player": "Nyckees Mattis",
+          "club": "Biobest Sasja HC",
+          "goals": 3
+        },
+        {
+          "player": "Roeffelaer Tuur",
+          "club": "HUBO Handbal",
+          "goals": 3
         },
         {
           "player": "Vanakker Simon",
@@ -5364,24 +5359,9 @@
           "goals": 2
         },
         {
-          "player": "Van Dorpe Dimitri",
-          "club": "HBC Apolloon Spurs",
-          "goals": 1
-        },
-        {
-          "player": "De Loose Ferdinand",
-          "club": "Biobest Sasja HC",
-          "goals": 1
-        },
-        {
-          "player": "Verhoeven Bas",
-          "club": "Biobest Sasja HC",
-          "goals": 1
-        },
-        {
-          "player": "Schreurs Ethan",
-          "club": "HC Eynatten-Raeren",
-          "goals": 1
+          "player": "Koppen Wouter",
+          "club": "HC Don Bosco Gent",
+          "goals": 2
         },
         {
           "player": "Dubuc Lucas",
@@ -5442,9 +5422,29 @@
           "player": "Van Thielen Ilias",
           "club": "Biobest Sasja HC",
           "goals": 1
+        },
+        {
+          "player": "Van Dorpe Dimitri",
+          "club": "HBC Apolloon Spurs",
+          "goals": 1
+        },
+        {
+          "player": "De Loose Ferdinand",
+          "club": "Biobest Sasja HC",
+          "goals": 1
+        },
+        {
+          "player": "Verhoeven Bas",
+          "club": "Biobest Sasja HC",
+          "goals": 1
+        },
+        {
+          "player": "Schreurs Ethan",
+          "club": "HC Eynatten-Raeren",
+          "goals": 1
         }
       ],
-      "updatedAt": "2026-05-27T21:27:22.761Z"
+      "updatedAt": "2026-05-28T00:17:15.310Z"
     },
     {
       "name": "2e Nationale",
@@ -5595,11 +5595,6 @@
           "goals": 54
         },
         {
-          "player": "Devyver Sam",
-          "club": "Biobest Sasja HC",
-          "goals": 52
-        },
-        {
           "player": "Buteneers Jef",
           "club": "Sezoens Achilles Bocholt",
           "goals": 52
@@ -5607,6 +5602,11 @@
         {
           "player": "Pascon Nemo",
           "club": "HC Sprimont",
+          "goals": 52
+        },
+        {
+          "player": "Devyver Sam",
+          "club": "Biobest Sasja HC",
           "goals": 52
         },
         {
@@ -5675,13 +5675,13 @@
           "goals": 39
         },
         {
-          "player": "De Novellis Maël",
-          "club": "HC Visé BM",
+          "player": "Puchkouski Dzmitry",
+          "club": "Biobest Sasja HC",
           "goals": 38
         },
         {
-          "player": "Puchkouski Dzmitry",
-          "club": "Biobest Sasja HC",
+          "player": "De Novellis Maël",
+          "club": "HC Visé BM",
           "goals": 38
         },
         {
@@ -5750,13 +5750,13 @@
           "goals": 34
         },
         {
-          "player": "Vanheusden Christiaan",
-          "club": "HC Pentagoon Kortessem",
+          "player": "Van De Velde Mathieu",
+          "club": "HK Waasmunster",
           "goals": 33
         },
         {
-          "player": "Van De Velde Mathieu",
-          "club": "HK Waasmunster",
+          "player": "Vanheusden Christiaan",
+          "club": "HC Pentagoon Kortessem",
           "goals": 33
         },
         {
@@ -5895,11 +5895,6 @@
           "goals": 17
         },
         {
-          "player": "Cuppens Kobe",
-          "club": "HC Pentagoon Kortessem",
-          "goals": 16
-        },
-        {
           "player": "Fiorello Riina Lucas",
           "club": "Renaissance Montegnée HC",
           "goals": 16
@@ -5912,6 +5907,11 @@
         {
           "player": "Schroven Wouter",
           "club": "HC AtomiX",
+          "goals": 16
+        },
+        {
+          "player": "Cuppens Kobe",
+          "club": "HC Pentagoon Kortessem",
           "goals": 16
         },
         {
@@ -5950,13 +5950,13 @@
           "goals": 14
         },
         {
-          "player": "Leeman Ferre",
-          "club": "Biobest Sasja HC",
+          "player": "Dils Jero",
+          "club": "HC AtomiX",
           "goals": 13
         },
         {
-          "player": "Dils Jero",
-          "club": "HC AtomiX",
+          "player": "Leeman Ferre",
+          "club": "Biobest Sasja HC",
           "goals": 13
         },
         {
@@ -5975,13 +5975,13 @@
           "goals": 12
         },
         {
-          "player": "Vaes Victor",
-          "club": "Sezoens Achilles Bocholt",
+          "player": "Seghers Tim",
+          "club": "HK Waasmunster",
           "goals": 12
         },
         {
-          "player": "Seghers Tim",
-          "club": "HK Waasmunster",
+          "player": "Vaes Victor",
+          "club": "Sezoens Achilles Bocholt",
           "goals": 12
         },
         {
@@ -5993,16 +5993,6 @@
           "player": "Meale Matthieu",
           "club": "HC Sprimont",
           "goals": 10
-        },
-        {
-          "player": "Brands Cisse",
-          "club": "Sezoens Achilles Bocholt",
-          "goals": 9
-        },
-        {
-          "player": "Determe William",
-          "club": "Renaissance Montegnée HC",
-          "goals": 9
         },
         {
           "player": "Boriau Tibe",
@@ -6022,6 +6012,16 @@
         {
           "player": "Van Damme Luca",
           "club": "HK Waasmunster",
+          "goals": 9
+        },
+        {
+          "player": "Brands Cisse",
+          "club": "Sezoens Achilles Bocholt",
+          "goals": 9
+        },
+        {
+          "player": "Determe William",
+          "club": "Renaissance Montegnée HC",
           "goals": 9
         },
         {
@@ -6060,11 +6060,6 @@
           "goals": 7
         },
         {
-          "player": "Slegers Giel",
-          "club": "HC Pentagoon Kortessem",
-          "goals": 6
-        },
-        {
           "player": "Schouterden Lars",
           "club": "HB Sint-Truiden",
           "goals": 6
@@ -6085,9 +6080,9 @@
           "goals": 6
         },
         {
-          "player": "Creemers Dieter",
-          "club": "Sezoens Achilles Bocholt",
-          "goals": 5
+          "player": "Slegers Giel",
+          "club": "HC Pentagoon Kortessem",
+          "goals": 6
         },
         {
           "player": "Maes Pierre-Loup",
@@ -6110,14 +6105,9 @@
           "goals": 5
         },
         {
-          "player": "Bodson Lowie",
-          "club": "HC Pentagoon Kortessem",
-          "goals": 4
-        },
-        {
-          "player": "Al-Shamsi Hasan",
-          "club": "HC Visé BM",
-          "goals": 4
+          "player": "Creemers Dieter",
+          "club": "Sezoens Achilles Bocholt",
+          "goals": 5
         },
         {
           "player": "Beelen Kasper",
@@ -6137,6 +6127,16 @@
         {
           "player": "Borowiak Yann",
           "club": "HC Sprimont",
+          "goals": 4
+        },
+        {
+          "player": "Bodson Lowie",
+          "club": "HC Pentagoon Kortessem",
+          "goals": 4
+        },
+        {
+          "player": "Al-Shamsi Hasan",
+          "club": "HC Visé BM",
           "goals": 4
         },
         {
@@ -6163,11 +6163,6 @@
           "player": "Heyndrickx Bram",
           "club": "Sezoens Achilles Bocholt",
           "goals": 3
-        },
-        {
-          "player": "Stienen Dries",
-          "club": "Biobest Sasja HC",
-          "goals": 2
         },
         {
           "player": "Bon Jeremy",
@@ -6205,14 +6200,9 @@
           "goals": 2
         },
         {
-          "player": "Keukelinck Milan",
-          "club": "HK Waasmunster",
-          "goals": 1
-        },
-        {
-          "player": "Daeninck Tim",
-          "club": "Handbal Lokeren",
-          "goals": 1
+          "player": "Stienen Dries",
+          "club": "Biobest Sasja HC",
+          "goals": 2
         },
         {
           "player": "Van De Velde Christophe",
@@ -6263,9 +6253,19 @@
           "player": "Maes Mirco",
           "club": "HC AtomiX",
           "goals": 1
+        },
+        {
+          "player": "Keukelinck Milan",
+          "club": "HK Waasmunster",
+          "goals": 1
+        },
+        {
+          "player": "Daeninck Tim",
+          "club": "Handbal Lokeren",
+          "goals": 1
         }
       ],
-      "updatedAt": "2026-05-27T21:27:22.799Z"
+      "updatedAt": "2026-05-28T00:17:15.314Z"
     }
   ]
 }
