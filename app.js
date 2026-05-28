@@ -1,4 +1,5 @@
 const { useState, useMemo, useRef, useEffect } = React;
+const MEDALS = ["🥇", "🥈", "🥉"];
 
 // ── SAVE / LOAD ──────────────────────────────────────────────────────────────
 function saveData(data) {
@@ -957,7 +958,6 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
   const allAttackers = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => b.GF - a.GF || a.name.localeCompare(b.name)), [rows]);
   const allDefenders = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => a.GA - b.GA || a.name.localeCompare(b.name)), [rows]);
   const [rankingPanel, setRankingPanel] = useState(null); // null | "attackers" | "defenders" | "tough" | "home" | "away" | "clutch" | "unlucky"
-  const MEDALS = ["🥇", "🥈", "🥉"];
 
   // Tough team rankings
   // For each team T, build oppGD map: opponent name -> total GD for T vs that opponent
@@ -1282,92 +1282,6 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
                   )}
                 </div>
               ))}
-              {rankingPanel === "unlucky" && (
-                <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
-                  Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt. Ties broken by total GD of these fixtures.
-                </div>
-              )}
-            </div>
-          )}
-            <div className="mini-box" style={{ marginTop: ".75rem" }}>
-              <div className="mini-ttl" style={{
-                color: rankingPanel === "attackers" ? "#f87171"
-                  : rankingPanel === "defenders" ? "#4ade80"
-                  : rankingPanel === "tough" ? "#f87171"
-                  : rankingPanel === "home" ? "#fb923c"
-                  : rankingPanel === "away" ? "#a78bfa"
-                  : rankingPanel === "clutch" ? "#facc15"
-                  : "#94a3b8",
-                marginBottom: ".65rem", display: "flex", justifyContent: "space-between", alignItems: "center"
-              }}>
-                <span>
-                  {rankingPanel === "attackers" ? "⚽ Full Attacking Ranking"
-                    : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking"
-                    : rankingPanel === "tough" ? "💀 Full Toughest Ranking"
-                    : rankingPanel === "home" ? "🏠 Full Strongest Home Ranking"
-                    : rankingPanel === "away" ? "✈️ Full Strongest Away Ranking"
-                    : rankingPanel === "clutch" ? "🎯 Full Most Clutch Ranking"
-                    : "😤 Full Most Unlucky Ranking"}
-                </span>
-                <button className="btn-rm" onClick={() => setRankingPanel(null)} style={{ fontSize: ".9rem" }}>✕</button>
-              </div>
-              <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".75rem", lineHeight: "1.4" }}>
-                {rankingPanel === "attackers" && "Total goals scored across all played fixtures."}
-                {rankingPanel === "defenders" && "Total goals conceded across all played fixtures."}
-                {rankingPanel === "tough" && "How tough a team is to beat."}
-                {rankingPanel === "home" && "Combined goal difference across all home fixtures."}
-                {rankingPanel === "away" && "Combined goal difference across all away fixtures."}
-                {rankingPanel === "clutch" && "Number of wins by 1 or 2 goals."}
-                {rankingPanel === "unlucky" && "Number of Draws and Losses by 1 or 2 goals."}
-              </div>
-              {(rankingPanel === "attackers" ? allAttackers
-                : rankingPanel === "defenders" ? allDefenders
-                : rankingPanel === "tough" ? toughRanking
-                : rankingPanel === "home" ? homeGDRanking
-                : rankingPanel === "away" ? awayGDRanking
-                : rankingPanel === "clutch" ? clutchRanking
-                : unluckyRanking
-              ).map((r, i, arr) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? (
-                    rankingPanel === "defenders" ? "#4ade80"
-                    : rankingPanel === "home" ? "#fb923c"
-                    : rankingPanel === "away" ? "#a78bfa"
-                    : rankingPanel === "clutch" ? "#facc15"
-                    : rankingPanel === "unlucky" ? "#94a3b8"
-                    : "#f87171") : "#3a3f50" }}>
-                    {rankingPanel === "clutch" && r.tied ? "—" : (i < 3 ? MEDALS[i] : (i + 1) + ".")}
-                  </span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color:
-                    rankingPanel === "attackers" ? "#f87171"
-                    : rankingPanel === "defenders" ? "#4ade80"
-                    : rankingPanel === "tough" ? "#f87171"
-                    : rankingPanel === "home" ? "#fb923c"
-                    : rankingPanel === "away" ? "#a78bfa"
-                    : rankingPanel === "clutch" ? "#facc15"
-                    : "#94a3b8" }}>
-                    {rankingPanel === "attackers" ? r.GF + " GF"
-                      : rankingPanel === "defenders" ? r.GA + " GA"
-                      : rankingPanel === "tough" ? r.pts + " pts"
-                      : rankingPanel === "home" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
-                      : rankingPanel === "away" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
-                      : rankingPanel === "clutch" ? r.wins + "W"
-                      : r.draws + "D " + (r.losses1 + r.losses2) + "L"}
-                  </span>
-                  {(rankingPanel === "attackers" || rankingPanel === "defenders" || rankingPanel === "home" || rankingPanel === "away") && (
-                    <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.P + " games)"}</span>
-                  )}
-                  {rankingPanel === "unlucky" && (
-                    <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.pts + " pts)"}</span>
-                  )}
-                </div>
-              ))}
-              {rankingPanel === "tough" && (
-                <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
-                  Comparison for teams by other teams. Decided by total GD over Home and Away Fixture.
-                </div>
-              )}
               {rankingPanel === "unlucky" && (
                 <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
                   Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt. Ties broken by total GD of these fixtures.
