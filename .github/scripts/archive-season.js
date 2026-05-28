@@ -7,18 +7,22 @@
 const fs = require("fs");
 const path = require("path");
 
-const season = process.argv[2];
-if (!season || !/^\d{4}-\d{4}$/.test(season)) {
-  console.error("Usage: node archive-season.js YYYY-YYYY");
+const season = process.argv[2]?.trim();
+if (!season || !/^\d{4}\s*-\s*\d{4}$/.test(season)) {
+  console.error("Usage: node archive-season.js \"YYYY-YYYY\" or \"YYYY - YYYY\"");
   process.exit(1);
 }
+
+// Normalize to YYYY-YYYY for filename, keep original for display
+const seasonNorm = season.replace(/\s*-\s*/, "-");
+const seasonDisplay = season;
 
 const root = process.cwd();
 const leaguesimPath = path.join(root, "leaguesim-data.json");
 const scorerPath = path.join(root, "scorer-data.json");
 const archiveDir = path.join(root, "archive");
 const indexPath = path.join(archiveDir, "index.json");
-const outPath = path.join(archiveDir, `season-${season}.json`);
+const outPath = path.join(archiveDir, `season-${seasonNorm}.json`);
 
 // Read leaguesim data
 if (!fs.existsSync(leaguesimPath)) {
@@ -51,7 +55,7 @@ if (fs.existsSync(scorerPath)) {
 
 // Build archive object
 const archive = {
-  season,
+  season: seasonDisplay,
   archivedAt: new Date().toISOString(),
   leagues: archivableLeagues,
   scorers,
@@ -62,7 +66,7 @@ if (!fs.existsSync(archiveDir)) fs.mkdirSync(archiveDir);
 
 // Write season file
 fs.writeFileSync(outPath, JSON.stringify(archive, null, 2));
-console.log(`Written: archive/season-${season}.json`);
+console.log(`Written: archive/season-${seasonNorm}.json`);
 
 // Update index
 let index = [];
@@ -71,10 +75,10 @@ if (fs.existsSync(indexPath)) {
 }
 
 // Remove existing entry for this season if re-archiving
-index = index.filter(s => s.season !== season);
+index = index.filter(s => s.season !== seasonDisplay);
 index.unshift({
-  season,
-  filename: `season-${season}.json`,
+  season: seasonDisplay,
+  filename: `season-${seasonNorm}.json`,
   leagueCount: archivableLeagues.length,
   archivedAt: archive.archivedAt,
 });
@@ -84,4 +88,4 @@ index.sort((a, b) => b.season.localeCompare(a.season));
 
 fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
 console.log(`Updated: archive/index.json (${index.length} seasons total)`);
-console.log(`\nDone! Season ${season} archived successfully.`);
+console.log(`\nDone! Season ${seasonDisplay} archived successfully.`);
