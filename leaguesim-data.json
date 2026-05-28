@@ -9213,9 +9213,10 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null
+            "played": true,
+            "homeScore": 37,
+            "awayScore": 28,
+            "tbd": false
           },
           {
             "id": "f5",
@@ -9305,9 +9306,10 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null
+            "played": true,
+            "homeScore": 10,
+            "awayScore": 0,
+            "tbd": false
           },
           {
             "id": "f11",
@@ -9598,9 +9600,10 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null
+            "played": true,
+            "homeScore": 28,
+            "awayScore": 28,
+            "tbd": false
           }
         ]
       },
