@@ -1,0 +1,32 @@
+name: Archive Season
+
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: 'Season label (e.g. 2025-2026)'
+        required: true
+        type: string
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Run archive script
+        run: node .github/scripts/archive-season.js "${{ github.event.inputs.season }}"
+
+      - name: Commit archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add archive/
+          git diff --cached --quiet && echo "Nothing to archive" || (git commit -m "archive: season ${{ github.event.inputs.season }}" && git push)
