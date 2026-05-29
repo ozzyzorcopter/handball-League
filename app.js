@@ -42,7 +42,7 @@ function fetchScorerData() {
 }
 
 function resolveClubName(leagueSimName, aliases) {
-  if (aliases && aliases[leagueSimName]) return aliases[leagueSimName];
+  if (aliases && aliases[leagueSimName] && aliases[leagueSimName].trim()) return aliases[leagueSimName].trim();
   return leagueSimName;
 }
 
@@ -55,7 +55,8 @@ function useScorers(leagueId) {
     setError(false);
     fetchScorerData()
       .then(data => {
-        const league = (data.leagues || []).find(l => l.leagueId === leagueId);
+        // Match by leagueId first, fall back to name for backwards compat
+        const league = (data.leagues || []).find(l => l.leagueId === leagueId || l.name === leagueId);
         setScorers(league ? league.scorers : []);
       })
       .catch(() => { setError(true); setScorers([]); });
@@ -563,6 +564,7 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
           </div>
         </div>
       )}
+      {showTiebreakers && (
         <div className="sbox">
           <div className="sub-ttl">End-of-season tiebreakers (always applied)</div>
           <ul className="tb-list">
@@ -2160,7 +2162,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-offs" color="#a78bfa"
           infoText={"Top " + poSz + " from regular season. Starting pts: rank 1 = " + poSz + " pts, rank 2 = " + (poSz-1) + " pts, etc."}
-          leagueId={league.id} aliases={league.scorerAliases || {}}
+          leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playoffs?.teams || []).find(t => t.id === id); const i = (playoffs?.teams || []).indexOf(t); if (t) setDetail({ source: "playoff", idx: i }); }} />
       )}
       {phase === "playdown" && (
@@ -2168,7 +2170,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-downs" color="#f87171"
           infoText={"Bottom " + pdSz + " from regular season. Starting pts: rank 1 = " + pdSz + " pts, rank 2 = " + (pdSz-1) + " pts, etc."}
-          leagueId={league.id} aliases={league.scorerAliases || {}}
+          leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playdowns?.teams || []).find(t => t.id === id); const i = (playdowns?.teams || []).indexOf(t); if (t) setDetail({ source: "playdown", idx: i }); }} />
       )}
 
@@ -2193,7 +2195,7 @@ function SimStep({ league, setLeague, onBack }) {
             <LeagueTable teams={initTeams} fixtures={initFixtures} onTeamClick={openDetail}
               highlightTop={hlTop} highlightBottom={hlBot}
               confirmedTop={confirmedTop} confirmedBottom={confirmedBottom}
-              leagueId={league.scorerUrl ? league.id : null} aliases={league.scorerAliases || {}} />
+              leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}} />
           )}
 
           {tab === "scores" && (
@@ -2224,7 +2226,7 @@ function SimStep({ league, setLeague, onBack }) {
         else if (detail.source === "playoff" && playoffs) { tms = playoffs.teams; fx = playoffs.fixtures; idx = detail.idx; t = playoffs.teams[idx]; }
         else if (detail.source === "playdown" && playdowns) { tms = playdowns.teams; fx = playdowns.fixtures; idx = detail.idx; t = playdowns.teams[idx]; }
         if (!t) return null;
-        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={league.scorerUrl ? league.id : null} aliases={league.scorerAliases || {}} />;
+        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}} />;
       })()}
     </div>
   );

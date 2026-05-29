@@ -38,7 +38,7 @@ function fetchScorerData() {
   return scorerDataPromise;
 }
 function resolveClubName(leagueSimName, aliases) {
-  if (aliases && aliases[leagueSimName]) return aliases[leagueSimName];
+  if (aliases && aliases[leagueSimName] && aliases[leagueSimName].trim()) return aliases[leagueSimName].trim();
   return leagueSimName;
 }
 function useScorers(leagueId) {
@@ -52,7 +52,7 @@ function useScorers(leagueId) {
     setScorers(null);
     setError(false);
     fetchScorerData().then((data) => {
-      const league = (data.leagues || []).find((l) => l.leagueId === leagueId);
+      const league = (data.leagues || []).find((l) => l.leagueId === leagueId || l.name === leagueId);
       setScorers(league ? league.scorers : []);
     }).catch(() => {
       setError(true);
@@ -468,14 +468,14 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
       placeholder: t.name,
       style: { flex: 1, fontSize: ".75rem" }
     }
-  ))), /* @__PURE__ */ React.createElement("div", { style: { fontSize: ".7rem", color: "#3a3f50", marginTop: ".4rem" } }, "Leave blank if the name already matches the scorer data exactly."))), /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "End-of-season tiebreakers (always applied)"), /* @__PURE__ */ React.createElement("ul", { className: "tb-list" }, [
+  ))), /* @__PURE__ */ React.createElement("div", { style: { fontSize: ".7rem", color: "#3a3f50", marginTop: ".4rem" } }, "Leave blank if the name already matches the scorer data exactly."))), showTiebreakers && /* @__PURE__ */ React.createElement("div", { className: "sbox" }, /* @__PURE__ */ React.createElement("div", { className: "sub-ttl" }, "End-of-season tiebreakers (always applied)"), /* @__PURE__ */ React.createElement("ul", { className: "tb-list" }, [
     "Most wins overall",
     "Most points in head-to-head matches among tied teams",
     "Best goal difference in those head-to-head matches",
     "Most goals scored as away team in tied opponents home fixtures",
     "Best overall goal difference",
     "Alphabetical (final fallback)"
-  ].map((tb, i) => /* @__PURE__ */ React.createElement("li", { key: i }, /* @__PURE__ */ React.createElement("span", { className: "tb-num" }, i + 1, "."), tb)))), ")}");
+  ].map((tb, i) => /* @__PURE__ */ React.createElement("li", { key: i }, /* @__PURE__ */ React.createElement("span", { className: "tb-num" }, i + 1, "."), tb)))));
 }
 function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, onOpenArchive }) {
   const [modal, setModal] = useState(false);
@@ -1393,7 +1393,7 @@ function SimStep({ league, setLeague, onBack }) {
       label: "Play-offs",
       color: "#a78bfa",
       infoText: "Top " + poSz + " from regular season. Starting pts: rank 1 = " + poSz + " pts, rank 2 = " + (poSz - 1) + " pts, etc.",
-      leagueId: league.id,
+      leagueId: league.scorerUrl ? league.id : league.name,
       aliases: league.scorerAliases || {},
       onTeamClick: (id) => {
         const t = ((playoffs == null ? void 0 : playoffs.teams) || []).find((t2) => t2.id === id);
@@ -1413,7 +1413,7 @@ function SimStep({ league, setLeague, onBack }) {
       label: "Play-downs",
       color: "#f87171",
       infoText: "Bottom " + pdSz + " from regular season. Starting pts: rank 1 = " + pdSz + " pts, rank 2 = " + (pdSz - 1) + " pts, etc.",
-      leagueId: league.id,
+      leagueId: league.scorerUrl ? league.id : league.name,
       aliases: league.scorerAliases || {},
       onTeamClick: (id) => {
         const t = ((playdowns == null ? void 0 : playdowns.teams) || []).find((t2) => t2.id === id);
@@ -1431,7 +1431,7 @@ function SimStep({ league, setLeague, onBack }) {
       highlightBottom: hlBot,
       confirmedTop,
       confirmedBottom,
-      leagueId: league.scorerUrl ? league.id : null,
+      leagueId: league.scorerUrl ? league.id : league.name,
       aliases: league.scorerAliases || {}
     }
   ), tab === "scores" && /* @__PURE__ */ React.createElement(
@@ -1478,7 +1478,7 @@ function SimStep({ league, setLeague, onBack }) {
       t = playdowns.teams[idx];
     }
     if (!t) return null;
-    return /* @__PURE__ */ React.createElement(TeamDetail, { team: t, teamIdx: idx, teams: tms, fixtures: fx, onClose: () => setDetail(null), leagueId: league.scorerUrl ? league.id : null, aliases: league.scorerAliases || {} });
+    return /* @__PURE__ */ React.createElement(TeamDetail, { team: t, teamIdx: idx, teams: tms, fixtures: fx, onClose: () => setDetail(null), leagueId: league.scorerUrl ? league.id : league.name, aliases: league.scorerAliases || {} });
   })());
 }
 function LeagueEditor({ league, onChange }) {
