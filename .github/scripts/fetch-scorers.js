@@ -1,7 +1,4 @@
 // .github/scripts/fetch-scorers.js
-// Reads scorer URLs from leaguesim-data.json, fetches each, stores by leagueId
-// Computes goal delta per player per team (0 if team was updated but player didn't score)
-
 const fs = require("fs");
 const path = require("path");
 
@@ -15,21 +12,28 @@ if (!fs.existsSync(leaguesimPath)) {
 }
 
 const leaguesimData = JSON.parse(fs.readFileSync(leaguesimPath, "utf8"));
-const leagues = (leaguesimData.leagues || []).filter(lg => lg.scorerUrl && lg.scorerUrl.trim());
 
-if (leagues.length === 0) {
-  console.log("No leagues with scorerUrl set — nothing to fetch");
+// Build list of fetch tasks: regular, playoff, playdown
+const tasks = [];
+for (const lg of (leaguesimData.leagues || [])) {
+  if (lg.scorerUrl?.trim())        tasks.push({ leagueId: lg.id, name: lg.name, phase: "regular",  url: lg.scorerUrl.trim() });
+  if (lg.playoffScorerUrl?.trim()) tasks.push({ leagueId: lg.id, name: lg.name, phase: "playoff",  url: lg.playoffScorerUrl.trim() });
+  if (lg.playdownScorerUrl?.trim())tasks.push({ leagueId: lg.id, name: lg.name, phase: "playdown", url: lg.playdownScorerUrl.trim() });
+}
+
+if (tasks.length === 0) {
+  console.log("No scorer URLs configured — nothing to fetch");
   process.exit(0);
 }
 
-// Load previous scorer data for delta calculation
+// Load previous scorer data for delta
 let prevData = { leagues: [] };
-if (fs.existsSync(scorerPath)) {
-  prevData = JSON.parse(fs.readFileSync(scorerPath, "utf8"));
-}
-const prevByLeagueId = {};
+if (fs.existsSync(scorerPath)) prevData = JSON.parse(fs.readFileSync(scorerPath, "utf8"));
+
+function prevKey(leagueId, phase) { return leagueId + ":" + phase; }
+const prevByKey = {};
 for (const l of (prevData.leagues || [])) {
-  if (l.leagueId) prevByLeagueId[l.leagueId] = l.scorers || [];
+  prevByKey[prevKey(l.leagueId, l.phase || "regular")] = l.scorers || [];
 }
 
 function parseScorers(html) {
@@ -38,72 +42,44 @@ function parseScorers(html) {
   for (const seg of segments) {
     const cells = [];
     const cellRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-    let cellMatch;
-    while ((cellMatch = cellRe.exec(seg)) !== null) {
-      const text = cellMatch[1]
-        .replace(/<[^>]+>/g, "")
-        .replace(/\[\d+\]\s*/g, "")
-        .trim();
-      cells.push(text);
+    let m;
+    while ((m = cellRe.exec(seg)) !== null) {
+      cells.push(m[1].replace(/<[^>]+>/g, "").replace(/\[\d+\]\s*/g, "").trim());
     }
     if (cells.length >= 4) {
       const goals = parseInt(cells[3]);
-      const player = cells[1];
-      const club = cells[2];
-      if (!isNaN(goals) && player && club) results.push({ player, club, goals });
+      if (!isNaN(goals) && cells[1] && cells[2]) results.push({ player: cells[1], club: cells[2], goals });
     }
   }
   return results;
 }
 
 function computeDeltas(newScorers, prevScorers) {
-  // Build previous goals by player
   const prevByPlayer = {};
   for (const s of prevScorers) prevByPlayer[s.player] = s.goals;
 
-  // Find which clubs had any change
-  const prevByClub = {};
-  for (const s of prevScorers) {
-    if (!prevByClub[s.club]) prevByClub[s.club] = {};
-    prevByClub[s.club][s.player] = s.goals;
-  }
-  const newByClub = {};
-  for (const s of newScorers) {
-    if (!newByClub[s.club]) newByClub[s.club] = {};
-    newByClub[s.club][s.player] = s.goals;
-  }
+  const prevByClub = {}, newByClub = {};
+  for (const s of prevScorers) { if (!prevByClub[s.club]) prevByClub[s.club] = {}; prevByClub[s.club][s.player] = s.goals; }
+  for (const s of newScorers)  { if (!newByClub[s.club])  newByClub[s.club]  = {}; newByClub[s.club][s.player]  = s.goals; }
 
-  // For each club, check if any player increased — if so, club was updated
   const updatedClubs = new Set();
   for (const club of Object.keys(newByClub)) {
-    const newPlayers = newByClub[club];
-    const oldPlayers = prevByClub[club] || {};
-    for (const [player, goals] of Object.entries(newPlayers)) {
-      if (goals > (oldPlayers[player] ?? goals)) {
-        updatedClubs.add(club);
-        break;
-      }
-    }
-    // Also check if total goals for club changed
-    const newTotal = Object.values(newPlayers).reduce((a, b) => a + b, 0);
-    const oldTotal = Object.values(oldPlayers).reduce((a, b) => a + b, 0);
+    const newTotal = Object.values(newByClub[club]).reduce((a, b) => a + b, 0);
+    const oldTotal = Object.values(prevByClub[club] || {}).reduce((a, b) => a + b, 0);
     if (newTotal > oldTotal) updatedClubs.add(club);
   }
 
   return newScorers.map(s => {
     const prev = prevByPlayer[s.player];
-    let delta = null;
-    if (updatedClubs.has(s.club)) {
-      // Club was updated this round — show delta (0 if player didn't score)
-      delta = prev != null ? s.goals - prev : null;
-    }
+    const delta = updatedClubs.has(s.club) ? (prev != null ? s.goals - prev : null) : null;
     return { ...s, delta };
   });
 }
 
-async function fetchLeague(league) {
+async function fetchTask(task) {
+  const key = prevKey(task.leagueId, task.phase);
   try {
-    const res = await fetch(league.scorerUrl.trim(), {
+    const res = await fetch(task.url, {
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -112,35 +88,27 @@ async function fetchLeague(league) {
     });
     if (!res.ok) throw new Error("HTTP " + res.status);
     const html = await res.text();
-    const rawScorers = parseScorers(html);
-    if (rawScorers.length === 0) throw new Error("Parsed 0 scorers");
-
-    const prevScorers = prevByLeagueId[league.id] || [];
-    const scorers = computeDeltas(rawScorers, prevScorers);
-
-    const updatedClubs = [...new Set(scorers.filter(s => s.delta != null && s.delta > 0).map(s => s.club))];
-    console.log(`  ✓ ${league.name}: ${scorers.length} scorers — #1: ${scorers[0].player} (${scorers[0].goals}g, ${scorers[0].club})${updatedClubs.length ? " — updated: " + updatedClubs.join(", ") : ""}`);
-    return { leagueId: league.id, name: league.name, scorers, updatedAt: new Date().toISOString() };
+    const raw = parseScorers(html);
+    if (raw.length === 0) throw new Error("Parsed 0 scorers");
+    const scorers = computeDeltas(raw, prevByKey[key] || []);
+    const updated = [...new Set(scorers.filter(s => s.delta > 0).map(s => s.club))];
+    console.log(`  ✓ ${task.name} [${task.phase}]: ${scorers.length} scorers — #1: ${scorers[0].player} (${scorers[0].goals}g)${updated.length ? " — updated: " + updated.join(", ") : ""}`);
+    return { leagueId: task.leagueId, name: task.name, phase: task.phase, scorers, updatedAt: new Date().toISOString() };
   } catch (err) {
-    console.error(`  ✗ ${league.name}: FAILED — ${err.message}`);
-    // Keep previous data on failure
-    const prev = prevByLeagueId[league.id] || [];
-    return { leagueId: league.id, name: league.name, scorers: prev, error: err.message, updatedAt: new Date().toISOString() };
+    console.error(`  ✗ ${task.name} [${task.phase}]: FAILED — ${err.message}`);
+    return { leagueId: task.leagueId, name: task.name, phase: task.phase, scorers: prevByKey[key] || [], error: err.message, updatedAt: new Date().toISOString() };
   }
 }
 
 async function main() {
   console.log(`\nFetching scorer data at ${new Date().toUTCString()}`);
-  console.log(`Found ${leagues.length} league(s) with scorer URLs\n`);
-
-  const results = await Promise.all(leagues.map(fetchLeague));
+  console.log(`${tasks.length} task(s): ${tasks.map(t => t.name + " [" + t.phase + "]").join(", ")}\n`);
+  const results = await Promise.all(tasks.map(fetchTask));
   const total = results.reduce((s, l) => s + l.scorers.length, 0);
   const failed = results.filter(l => l.error).length;
-
   const output = { updatedAt: new Date().toISOString(), leagues: results };
   fs.writeFileSync(scorerPath, JSON.stringify(output, null, 2));
-
-  console.log(`\nDone — ${total} scorers across ${results.length - failed}/${results.length} leagues`);
+  console.log(`\nDone — ${total} scorers, ${results.length - failed}/${results.length} tasks succeeded`);
   if (failed === results.length && results.length > 0) process.exit(1);
 }
 

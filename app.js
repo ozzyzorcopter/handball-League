@@ -1,5 +1,6 @@
 const { useState, useMemo, useRef, useEffect } = React;
 const MEDALS = ["🥇", "🥈", "🥉"];
+const IS_SHARE = false; // set to true in share version
 
 // ── SAVE / LOAD ──────────────────────────────────────────────────────────────
 function saveData(data) {
@@ -41,12 +42,43 @@ function fetchScorerData() {
   return scorerDataPromise;
 }
 
-function resolveClubName(leagueSimName, aliases) {
+// Strip common handball club prefixes to get the meaningful part (usually city name)
+const CLUB_PREFIXES = /^(handbalclub|handbal|hbc|hc|khc|ktsv|hv|shc|ehc|kh|hvv|sezoens|besox|derdaele|db|uilenspiegel|olse)\s+/i;
+
+function stripPrefix(name) {
+  return name.replace(CLUB_PREFIXES, "").replace(CLUB_PREFIXES, "").trim().toLowerCase();
+}
+
+// Build a lookup from scorer club names indexed by their stripped form
+// Called once per scorer list
+function buildClubIndex(scorers) {
+  const index = {}; // stripped -> original club name
+  for (const s of (scorers || [])) {
+    const stripped = stripPrefix(s.club);
+    if (!index[stripped]) index[stripped] = s.club;
+  }
+  return index;
+}
+
+function resolveClubName(leagueSimName, aliases, clubIndex) {
+  // 1. Explicit alias takes priority
   if (aliases && aliases[leagueSimName] && aliases[leagueSimName].trim()) return aliases[leagueSimName].trim();
+  // 2. Exact match
+  if (!clubIndex) return leagueSimName;
+  if (clubIndex[leagueSimName]) return leagueSimName; // already exact
+  // 3. Fuzzy: strip prefix from leaguesim name, find matching scorer club
+  const stripped = stripPrefix(leagueSimName);
+  if (clubIndex[stripped]) return clubIndex[stripped];
+  // 4. Partial: check if stripped leaguesim name is contained in any scorer club stripped name or vice versa
+  for (const [scorerStripped, scorerClub] of Object.entries(clubIndex)) {
+    if (scorerStripped.includes(stripped) || stripped.includes(scorerStripped)) {
+      return scorerClub;
+    }
+  }
   return leagueSimName;
 }
 
-function useScorers(leagueId) {
+function useScorers(leagueId, phase) {
   const [scorers, setScorers] = useState(null);
   const [error, setError] = useState(false);
   useEffect(() => {
@@ -55,12 +87,16 @@ function useScorers(leagueId) {
     setError(false);
     fetchScorerData()
       .then(data => {
-        // Match by leagueId first, fall back to name for backwards compat
-        const league = (data.leagues || []).find(l => l.leagueId === leagueId || l.name === leagueId);
+        const ph = phase || "regular";
+        // Match by leagueId+phase first, fall back to name for backwards compat
+        const league = (data.leagues || []).find(l =>
+          (l.leagueId === leagueId && (l.phase || "regular") === ph) ||
+          (l.name === leagueId && (l.phase || "regular") === ph)
+        );
         setScorers(league ? league.scorers : []);
       })
       .catch(() => { setError(true); setScorers([]); });
-  }, [leagueId]);
+  }, [leagueId, phase]);
   return { scorers, error };
 }
 
@@ -69,12 +105,14 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
   const [expanded, setExpanded] = useState(false);
   const loading = scorers === null;
 
+  const clubIndex = useMemo(() => buildClubIndex(scorers), [scorers]);
+
   const filtered = useMemo(() => {
     if (!scorers) return [];
     if (!filterClub) return scorers;
-    const club = resolveClubName(filterClub, aliases);
+    const club = resolveClubName(filterClub, aliases, clubIndex);
     return scorers.filter(s => s.club === club);
-  }, [scorers, filterClub, aliases]);
+  }, [scorers, filterClub, aliases, clubIndex]);
 
   const shown = expanded ? filtered : filtered.slice(0, maxRows);
 
@@ -134,6 +172,8 @@ function makeLeague(name, type, poSize, pdSize, phaseFormat, archivable = false)
     demotBot: 2,
     archivable,
     scorerUrl: "",
+    playoffScorerUrl: "",
+    playdownScorerUrl: "",
     scorerAliases: {},
   };
 }
@@ -470,7 +510,7 @@ function fixProbs(f, teams, fixtures, settings) {
 }
 
 // ── SETTINGS PANEL ────────────────────────────────────────────────────────────
-function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueChange }) {
+function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueChange, readOnly }) {
   const pf = [
     { k: "baseWin",   l: "Base Win %",      n: "Starting win % per side" },
     { k: "baseDraw",  l: "Base Draw %",      n: "Fixed, never adjusted" },
@@ -532,11 +572,11 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
           </div>
         </div>
       )}
-      {showTiebreakers && league && onLeagueChange && (
+      {showTiebreakers && league && onLeagueChange && !readOnly && (
         <div className="sbox">
           <div className="sub-ttl">Scorer data</div>
           <div style={{ marginBottom: ".75rem" }}>
-            <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".35rem" }}>Scorer URL from handballbelgium.be</div>
+            <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".35rem" }}>Regular season scorer URL</div>
             <input
               className="inp"
               value={league.scorerUrl || ""}
@@ -545,6 +585,30 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
               style={{ fontSize: ".78rem", padding: ".4rem .6rem" }}
             />
           </div>
+          {league.type === "playoff" && (
+            <>
+              <div style={{ marginBottom: ".75rem" }}>
+                <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".35rem" }}>Play-off scorer URL</div>
+                <input
+                  className="inp"
+                  value={league.playoffScorerUrl || ""}
+                  onChange={e => onLeagueChange(lg => ({ ...lg, playoffScorerUrl: e.target.value.trim() }))}
+                  placeholder="https://admin.handballbelgium.be/...?organization=VHV&serie=869"
+                  style={{ fontSize: ".78rem", padding: ".4rem .6rem" }}
+                />
+              </div>
+              <div style={{ marginBottom: ".75rem" }}>
+                <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".35rem" }}>Play-down scorer URL</div>
+                <input
+                  className="inp"
+                  value={league.playdownScorerUrl || ""}
+                  onChange={e => onLeagueChange(lg => ({ ...lg, playdownScorerUrl: e.target.value.trim() }))}
+                  placeholder="https://admin.handballbelgium.be/...?organization=VHV&serie=870"
+                  style={{ fontSize: ".78rem", padding: ".4rem .6rem" }}
+                />
+              </div>
+            </>
+          )}
           <div>
             <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".35rem" }}>Team name aliases (leaguesim name → scorer club name)</div>
             {(league.teams || []).map(t => (
@@ -715,7 +779,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, o
 }
 
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
-function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers }) {
+function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers, phase }) {
   const mine = fixtures.filter(f => f.homeIdx === teamIdx || f.awayIdx === teamIdx);
 
   const sorted = [...mine].sort((a, b) => {
@@ -930,15 +994,15 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases
 
         </div>
 
-        {(leagueId || archiveScorers !== undefined) && <TeamScorers leagueId={leagueId} teamName={team?.name} aliases={aliases} archiveScorers={archiveScorers} />}
+        {(leagueId || archiveScorers !== undefined) && <TeamScorers leagueId={leagueId} teamName={team?.name} aliases={aliases} archiveScorers={archiveScorers} phase={phase} />}
 
       </div>
     </>
   );
 }
 
-function TeamScorers({ leagueId, teamName, aliases, archiveScorers }) {
-  const live = useScorers(archiveScorers !== undefined ? null : leagueId);
+function TeamScorers({ leagueId, teamName, aliases, archiveScorers, phase }) {
+  const live = useScorers(archiveScorers !== undefined ? null : leagueId, phase);
   const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
   const error = archiveScorers !== undefined ? false : live.error;
   return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={teamName + " Scorers"} maxRows={5} aliases={aliases} />;
@@ -972,18 +1036,19 @@ function ToughPanel({ ranking }) {
   );
 }
 
-function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams }) {
-  const live = useScorers(archiveScorers !== undefined ? null : leagueId);
+function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, phase }) {
+  const live = useScorers(archiveScorers !== undefined ? null : leagueId, phase);
   const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
   const error = archiveScorers !== undefined ? false : live.error;
   const relevantTeams = phaseTeams || teams;
-  const clubNames = useMemo(() => new Set(relevantTeams.map(t => resolveClubName(t.name, aliases))), [relevantTeams, aliases]);
+  const clubIndex = useMemo(() => buildClubIndex(scorers), [scorers]);
+  const clubNames = useMemo(() => new Set(relevantTeams.map(t => resolveClubName(t.name, aliases, clubIndex))), [relevantTeams, aliases, clubIndex]);
   const filtered = useMemo(() => scorers ? scorers.filter(s => clubNames.has(s.club)) : null, [scorers, clubNames]);
   return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} aliases={aliases} />;
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams }) {
+function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase }) {
   const rows = useMemo(() => calcStats(teams, fixtures), [teams, fixtures]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
@@ -1159,7 +1224,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
-      {(leagueId || archiveScorers !== undefined) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} />}
+      {(leagueId || archiveScorers !== undefined) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
           <div className="mini-rankings" style={{ marginTop: "1rem" }}>
@@ -1415,7 +1480,7 @@ function FixturesStep({ teams, fixtures, setFixtures, settings, setSettings, onB
         <span className="ph-num">02</span>
         <div><h2>Fixtures</h2><p>Probabilities are calculated automatically from current standings.</p></div>
       </div>
-      <SettingsPanel settings={settings} onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))} showTiebreakers={false} />
+      <SettingsPanel settings={settings} onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))} showTiebreakers={false} readOnly={IS_SHARE} />
       <div style={{ marginBottom: "1.1rem" }}>
         <div className="row" style={{ marginBottom: ".6rem" }}>
           <select className="inp sel" value={hi} onChange={e => setHi(+e.target.value)}>
@@ -2055,7 +2120,7 @@ function PhaseView({ phase, phaseData, setPhaseData, settings, sourceStats, phas
         ))}
       </div>
       {tab === "table" && (
-        <LeagueTable teams={baseTeams} fixtures={fixtures} onTeamClick={i => onTeamClick && onTeamClick(baseTeams[i]?.id)} highlightTop={htop} highlightBottom={hbot} confirmedTop={confirmedTop} confirmedBottom={confirmedBottom} leagueId={leagueId} aliases={aliases} phaseTeams={baseTeams} />
+        <LeagueTable teams={baseTeams} fixtures={fixtures} onTeamClick={i => onTeamClick && onTeamClick(baseTeams[i]?.id)} highlightTop={htop} highlightBottom={hbot} confirmedTop={confirmedTop} confirmedBottom={confirmedBottom} leagueId={leagueId} aliases={aliases} phaseTeams={baseTeams} phase={phase} />
       )}
       {tab === "scores" && (
         <ScoresTab teams={teams} fixtures={fixtures} liveProbs={liveProbs} settings={settings}
@@ -2211,7 +2276,7 @@ function SimStep({ league, setLeague, onBack }) {
           )}
 
           {tab === "settings" && (
-            <SettingsPanel settings={settings} onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))} showTiebreakers={true} league={league} onLeagueChange={setLeague} />
+            <SettingsPanel settings={settings} onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))} showTiebreakers={true} league={league} onLeagueChange={setLeague} readOnly={IS_SHARE} />
           )}
 
           <div className="nav-row">
@@ -2226,7 +2291,7 @@ function SimStep({ league, setLeague, onBack }) {
         else if (detail.source === "playoff" && playoffs) { tms = playoffs.teams; fx = playoffs.fixtures; idx = detail.idx; t = playoffs.teams[idx]; }
         else if (detail.source === "playdown" && playdowns) { tms = playdowns.teams; fx = playdowns.fixtures; idx = detail.idx; t = playdowns.teams[idx]; }
         if (!t) return null;
-        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}} />;
+        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}} phase={detail.source === "playoff" ? "playoff" : detail.source === "playdown" ? "playdown" : "regular"} />;
       })()}
     </div>
   );
