@@ -137,6 +137,11 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
               ({s.delta > 0 ? "+" : ""}{s.delta})
             </span>
           )}
+          {s.matchesPlayed > 0 && (
+            <span className="muted" style={{ fontSize: ".66rem", marginLeft: ".4rem", whiteSpace: "nowrap" }}>
+              {s.matchesPlayed}g · {s.avg != null ? s.avg + "/g" : "—"}
+            </span>
+          )}
         </div>
       ))}
       {!loading && filtered.length > maxRows && (

@@ -56,7 +56,7 @@ function parseScorers(html) {
 
 function computeDeltas(newScorers, prevScorers) {
   const prevByPlayer = {};
-  for (const s of prevScorers) prevByPlayer[s.player] = s.goals;
+  for (const s of prevScorers) prevByPlayer[s.player] = { goals: s.goals, matchesPlayed: s.matchesPlayed || 0 };
 
   const prevByClub = {}, newByClub = {};
   for (const s of prevScorers) { if (!prevByClub[s.club]) prevByClub[s.club] = {}; prevByClub[s.club][s.player] = s.goals; }
@@ -71,8 +71,13 @@ function computeDeltas(newScorers, prevScorers) {
 
   return newScorers.map(s => {
     const prev = prevByPlayer[s.player];
-    const delta = updatedClubs.has(s.club) ? (prev != null ? s.goals - prev : null) : null;
-    return { ...s, delta };
+    const prevGoals = prev?.goals ?? s.goals;
+    const delta = updatedClubs.has(s.club) ? (prev != null ? s.goals - prevGoals : null) : null;
+    // Increment matchesPlayed when the club was updated (even if player scored 0 that match)
+    const prevMatches = prev?.matchesPlayed ?? 0;
+    const matchesPlayed = updatedClubs.has(s.club) ? prevMatches + 1 : prevMatches;
+    const avg = matchesPlayed > 0 ? Math.round((s.goals / matchesPlayed) * 10) / 10 : null;
+    return { ...s, delta, matchesPlayed, avg };
   });
 }
 
