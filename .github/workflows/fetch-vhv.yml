@@ -1,0 +1,34 @@
+name: Fetch VHV Data
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # every hour
+  workflow_dispatch:        # manual trigger
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Playwright + Chromium
+        run: |
+          npm install playwright-core
+          npx playwright install chromium --with-deps
+
+      - name: Fetch VHV data
+        run: node .github/scripts/fetch-vhv.js
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add vhv-data.json leaguesim-data.json
+          git diff --cached --quiet && echo "No changes to commit" || (git commit -m "chore: update VHV data [$(date -u '+%Y-%m-%d %H:%M UTC')]" && git push)

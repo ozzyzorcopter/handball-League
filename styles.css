@@ -207,3 +207,13 @@ body{font-family:'DM Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;back
 .season-card:hover{border-color:#fbbf24;}
 .season-card-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fbbf24;margin-bottom:.3rem;}
 .season-card-meta{font-size:.78rem;color:#5a6070;}
+
+/* ── VHV inline ranking expansion ───────────────────────────────────────── */
+.ranking-expand {
+  background: #0d1117;
+  border: 1px solid #1c1f27;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: .6rem .75rem .75rem;
+  margin-bottom: .5rem;
+}

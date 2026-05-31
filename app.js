@@ -115,13 +115,21 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
   }, [scorers, filterClub, aliases, clubIndex]);
 
   const shown = expanded ? filtered : filtered.slice(0, maxRows);
+  const collapsible = !loading && filtered.length > maxRows;
 
   return (
     <div className="mini-box" style={{ marginTop: "1rem" }}>
       <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".6rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <span>⚽ {title || "Top Scorers"}</span>
-        {loading && <span className="muted" style={{ fontSize: ".7rem", fontWeight: 400 }}>loading…</span>}
-        {error && <span style={{ color: "#f87171", fontSize: ".7rem", fontWeight: 400 }}>unavailable</span>}
+        <div style={{ display: "flex", gap: ".4rem", alignItems: "center" }}>
+          {loading && <span className="muted" style={{ fontSize: ".7rem", fontWeight: 400 }}>loading…</span>}
+          {error && <span style={{ color: "#f87171", fontSize: ".7rem", fontWeight: 400 }}>unavailable</span>}
+          {collapsible && (
+            <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
+              {expanded ? "▲" : "▼ " + filtered.length}
+            </button>
+          )}
+        </div>
       </div>
       {!loading && !error && filtered.length === 0 && (
         <div className="muted" style={{ fontSize: ".78rem" }}>No scorer data found.</div>
@@ -144,7 +152,7 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
           )}
         </div>
       ))}
-      {!loading && filtered.length > maxRows && (
+      {collapsible && (
         <div style={{ marginTop: ".4rem", textAlign: "center" }}>
           <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
             {expanded ? "Show less ▲" : "Show all " + filtered.length + " ▼"}
@@ -688,6 +696,9 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, o
             <div className="card-name">{lg.name}</div>
             <div className="card-meta">
               {(lg.teams || []).length} teams · {(lg.fixtures || []).filter(f => !f.played).length} pending · {(lg.fixtures || []).filter(f => f.played).length} played
+              {lg.vhvLive && (
+                <span style={{ display: "inline-block", marginLeft: ".4rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
+              )}
               {lg.type === "playoff" && (() => {
                 const poPlayed = (lg.playoffs?.fixtures || []).filter(f => f.played).length;
                 const poPending = (lg.playoffs?.fixtures || []).filter(f => !f.played).length;
@@ -1232,167 +1243,208 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
       {(leagueId || archiveScorers !== undefined) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
+          {/* Row 1: Attackers + Defenders */}
           <div className="mini-rankings" style={{ marginTop: "1rem" }}>
-            <div className="mini-box">
-              <div className="mini-ttl" style={{ color: "#f87171", cursor: "pointer", userSelect: "none" }}
-                onClick={() => setRankingPanel(rankingPanel === "attackers" ? null : "attackers")}>
-                ⚽ Top Attackers {rankingPanel === "attackers" ? "▲" : "▼"}
-              </div>
-              {attackers.map((r, i) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos">{MEDALS[i]}</span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color: "#f87171" }}>{r.GF} GF</span>
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "attackers" ? null : "attackers")}>
+                <div className="mini-ttl" style={{ color: "#f87171", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>⚽ Top Attackers</span><span>{rankingPanel === "attackers" ? "▲" : "▼"}</span>
                 </div>
-              ))}
-            </div>
-            <div className="mini-box">
-              <div className="mini-ttl" style={{ color: "#4ade80", cursor: "pointer", userSelect: "none" }}
-                onClick={() => setRankingPanel(rankingPanel === "defenders" ? null : "defenders")}>
-                🛡 Top Defenders {rankingPanel === "defenders" ? "▲" : "▼"}
+                {attackers.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{MEDALS[i]}</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#f87171" }}>{r.GF} GF</span>
+                  </div>
+                ))}
               </div>
-              {defenders.map((r, i) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos">{MEDALS[i]}</span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color: "#4ade80" }}>{r.GA} GA</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="mini-rankings" style={{ marginTop: "1rem" }}>
-            <div className="mini-box">
-              <div className="mini-ttl" style={{ color: "#fb923c", cursor: "pointer", userSelect: "none" }}
-                onClick={() => setRankingPanel(rankingPanel === "home" ? null : "home")}>
-                {"🏠 Strongest Home " + (rankingPanel === "home" ? "▲" : "▼")}
-              </div>
-              {topHome.map((r, i) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
-                </div>
-              ))}
-            </div>
-            <div className="mini-box">
-              <div className="mini-ttl" style={{ color: "#a78bfa", cursor: "pointer", userSelect: "none" }}
-                onClick={() => setRankingPanel(rankingPanel === "away" ? null : "away")}>
-                {"✈️ Strongest Away " + (rankingPanel === "away" ? "▲" : "▼")}
-              </div>
-              {topAway.map((r, i) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="mini-rankings" style={{ marginTop: "1rem" }}>
-            <div className="mini-box">
-              <div className="mini-ttl" style={{ color: "#facc15", cursor: "pointer", userSelect: "none" }}
-                onClick={() => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")}>
-                {"🎯 Most Clutch " + (rankingPanel === "clutch" ? "▲" : "▼")}
-              </div>
-              {topClutch.map((r, i) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}‎</span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
-                </div>
-              ))}
-            </div>
-            <div className="mini-box">
-              <div className="mini-ttl" style={{ color: "#94a3b8", cursor: "pointer", userSelect: "none" }}
-                onClick={() => setRankingPanel(rankingPanel === "unlucky" ? null : "unlucky")}>
-                {"😤 Most Unlucky " + (rankingPanel === "unlucky" ? "▲" : "▼")}
-              </div>
-              {topUnlucky.map((r, i) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}‎</span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <ToughPanel ranking={toughRanking} />
-          {rankingPanel && rankingPanel !== "tough" && (
-            <div className="mini-box" style={{ marginTop: ".75rem" }}>
-              <div className="mini-ttl" style={{
-                color: rankingPanel === "attackers" ? "#f87171"
-                  : rankingPanel === "defenders" ? "#4ade80"
-                  : rankingPanel === "home" ? "#fb923c"
-                  : rankingPanel === "away" ? "#a78bfa"
-                  : rankingPanel === "clutch" ? "#facc15"
-                  : "#94a3b8",
-                marginBottom: ".65rem", display: "flex", justifyContent: "space-between", alignItems: "center"
-              }}>
-                <span>
-                  {rankingPanel === "attackers" ? "⚽ Full Attacking Ranking"
-                    : rankingPanel === "defenders" ? "🛡 Full Defensive Ranking"
-                    : rankingPanel === "home" ? "🏠 Full Strongest Home Ranking"
-                    : rankingPanel === "away" ? "✈️ Full Strongest Away Ranking"
-                    : rankingPanel === "clutch" ? "🎯 Full Most Clutch Ranking"
-                    : "😤 Full Most Unlucky Ranking"}
-                </span>
-                <button className="btn-rm" onClick={() => setRankingPanel(null)} style={{ fontSize: ".9rem" }}>✕</button>
-              </div>
-              <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".75rem", lineHeight: "1.4" }}>
-                {rankingPanel === "attackers" && "Total goals scored across all played fixtures."}
-                {rankingPanel === "defenders" && "Total goals conceded across all played fixtures."}
-                {rankingPanel === "home" && "Combined goal difference across all home fixtures."}
-                {rankingPanel === "away" && "Combined goal difference across all away fixtures."}
-                {rankingPanel === "clutch" && "Number of wins by 1 or 2 goals."}
-                {rankingPanel === "unlucky" && "Number of Draws and Losses by 1 or 2 goals."}
-              </div>
-              {(rankingPanel === "attackers" ? allAttackers
-                : rankingPanel === "defenders" ? allDefenders
-                : rankingPanel === "home" ? homeGDRanking
-                : rankingPanel === "away" ? awayGDRanking
-                : rankingPanel === "clutch" ? clutchRanking
-                : unluckyRanking
-              ).map((r, i, arr) => (
-                <div key={r.id} className="mini-row">
-                  <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? (
-                    rankingPanel === "defenders" ? "#4ade80"
-                    : rankingPanel === "home" ? "#fb923c"
-                    : rankingPanel === "away" ? "#a78bfa"
-                    : rankingPanel === "clutch" ? "#facc15"
-                    : rankingPanel === "unlucky" ? "#94a3b8"
-                    : "#f87171") : "#3a3f50" }}>
-                    {rankingPanel === "clutch" && r.tied ? "—" : (i < 3 ? MEDALS[i] : (i + 1) + ".")}
-                  </span>
-                  <span className="mini-name">{r.name}</span>
-                  <span className="mini-val" style={{ color:
-                    rankingPanel === "attackers" ? "#f87171"
-                    : rankingPanel === "defenders" ? "#4ade80"
-                    : rankingPanel === "home" ? "#fb923c"
-                    : rankingPanel === "away" ? "#a78bfa"
-                    : rankingPanel === "clutch" ? "#facc15"
-                    : "#94a3b8" }}>
-                    {rankingPanel === "attackers" ? r.GF + " GF"
-                      : rankingPanel === "defenders" ? r.GA + " GA"
-                      : rankingPanel === "home" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
-                      : rankingPanel === "away" ? (r.gd > 0 ? "+" : "") + r.gd + " GD"
-                      : rankingPanel === "clutch" ? r.wins + "W"
-                      : r.draws + "D " + (r.losses1 + r.losses2) + "L"}
-                  </span>
-                  {(rankingPanel === "attackers" || rankingPanel === "defenders" || rankingPanel === "home" || rankingPanel === "away") && (
-                    <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.P + " games)"}</span>
-                  )}
-                  {rankingPanel === "unlucky" && (
-                    <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{"(" + r.pts + " pts)"}</span>
-                  )}
-                </div>
-              ))}
-              {rankingPanel === "unlucky" && (
-                <div style={{ fontSize: ".7rem", color: "#4a5060", marginTop: ".75rem", lineHeight: "1.4", borderTop: "1px solid #1c1f27", paddingTop: ".6rem" }}>
-                  Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt. Ties broken by total GD of these fixtures.
+              {rankingPanel === "attackers" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Total goals scored across all played fixtures.</div>
+                  {allAttackers.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-val" style={{ color: "#f87171" }}>{r.GF} GF</span>
+                      <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
-          )}
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "defenders" ? null : "defenders")}>
+                <div className="mini-ttl" style={{ color: "#4ade80", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>🛡 Top Defenders</span><span>{rankingPanel === "defenders" ? "▲" : "▼"}</span>
+                </div>
+                {defenders.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{MEDALS[i]}</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#4ade80" }}>{r.GA} GA</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "defenders" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Fewest goals conceded across all played fixtures.</div>
+                  {allDefenders.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#4ade80" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-val" style={{ color: "#4ade80" }}>{r.GA} GA</span>
+                      <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Row 2: Home + Away */}
+          <div className="mini-rankings" style={{ marginTop: ".75rem" }}>
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "home" ? null : "home")}>
+                <div className="mini-ttl" style={{ color: "#fb923c", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>🏠 Strongest Home</span><span>{rankingPanel === "home" ? "▲" : "▼"}</span>
+                </div>
+                {topHome.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "home" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Combined goal difference across all home fixtures.</div>
+                  {homeGDRanking.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fb923c" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
+                      <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "away" ? null : "away")}>
+                <div className="mini-ttl" style={{ color: "#a78bfa", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>✈️ Strongest Away</span><span>{rankingPanel === "away" ? "▲" : "▼"}</span>
+                </div>
+                {topAway.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "away" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Combined goal difference across all away fixtures.</div>
+                  {awayGDRanking.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#a78bfa" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
+                      <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Row 3: Tough + Clutch */}
+          <div className="mini-rankings" style={{ marginTop: ".75rem" }}>
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "tough" ? null : "tough")}>
+                <div className="mini-ttl" style={{ color: "#f87171", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>💀 Toughest Teams</span><span>{rankingPanel === "tough" ? "▲" : "▼"}</span>
+                </div>
+                {toughRanking.slice(0, 3).map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{MEDALS[i]}</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "tough" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>How tough a team is to beat, scored by total GD opponents face against them.</div>
+                  {toughRanking.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")}>
+                <div className="mini-ttl" style={{ color: "#facc15", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>🎯 Most Clutch</span><span>{rankingPanel === "clutch" ? "▲" : "▼"}</span>
+                </div>
+                {topClutch.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "clutch" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Number of wins by 1 or 2 goals.</div>
+                  {clutchRanking.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#3a3f50" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
+                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Row 4: Unlucky (full width) */}
+          <div className="mini-rankings" style={{ marginTop: ".75rem" }}>
+            <div style={{ gridColumn: "1 / -1" }}>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "unlucky" ? null : "unlucky")}>
+                <div className="mini-ttl" style={{ color: "#94a3b8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>😤 Most Unlucky</span><span>{rankingPanel === "unlucky" ? "▲" : "▼"}</span>
+                </div>
+                {topUnlucky.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "unlucky" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt.</div>
+                  {unluckyRanking.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
+                      <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.pts} pts)</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </>
       )}
     </div>
@@ -2232,7 +2284,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-offs" color="#a78bfa"
           infoText={"Top " + poSz + " from regular season. Starting pts: rank 1 = " + poSz + " pts, rank 2 = " + (poSz-1) + " pts, etc."}
-          leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}}
+          leagueId={league.id} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playoffs?.teams || []).find(t => t.id === id); const i = (playoffs?.teams || []).indexOf(t); if (t) setDetail({ source: "playoff", idx: i }); }} />
       )}
       {phase === "playdown" && (
@@ -2240,7 +2292,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-downs" color="#f87171"
           infoText={"Bottom " + pdSz + " from regular season. Starting pts: rank 1 = " + pdSz + " pts, rank 2 = " + (pdSz-1) + " pts, etc."}
-          leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}}
+          leagueId={league.id} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playdowns?.teams || []).find(t => t.id === id); const i = (playdowns?.teams || []).indexOf(t); if (t) setDetail({ source: "playdown", idx: i }); }} />
       )}
 
@@ -2265,7 +2317,7 @@ function SimStep({ league, setLeague, onBack }) {
             <LeagueTable teams={initTeams} fixtures={initFixtures} onTeamClick={openDetail}
               highlightTop={hlTop} highlightBottom={hlBot}
               confirmedTop={confirmedTop} confirmedBottom={confirmedBottom}
-              leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}} />
+              leagueId={league.id} aliases={league.scorerAliases || {}} />
           )}
 
           {tab === "scores" && (
