@@ -88,12 +88,9 @@ function useScorers(leagueId, phase) {
     fetchScorerData()
       .then(data => {
         const ph = phase || "regular";
-        // Match by: leagueId field, OR name field (backwards compat with scorer-data where leagueId is null)
         const league = (data.leagues || []).find(l =>
-          (l.phase || "regular") === ph && (
-            l.leagueId === leagueId ||
-            l.name === leagueId
-          )
+          (l.phase || "regular") === ph &&
+          (l.leagueId === leagueId || l.name === leagueId)
         );
         setScorers(league ? league.scorers : []);
       })
@@ -2286,7 +2283,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-offs" color="#a78bfa"
           infoText={"Top " + poSz + " from regular season. Starting pts: rank 1 = " + poSz + " pts, rank 2 = " + (poSz-1) + " pts, etc."}
-          leagueId={league.id} aliases={league.scorerAliases || {}}
+          leagueId={league.name} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playoffs?.teams || []).find(t => t.id === id); const i = (playoffs?.teams || []).indexOf(t); if (t) setDetail({ source: "playoff", idx: i }); }} />
       )}
       {phase === "playdown" && (
@@ -2294,7 +2291,7 @@ function SimStep({ league, setLeague, onBack }) {
           phaseFormat={pfmt}
           label="Play-downs" color="#f87171"
           infoText={"Bottom " + pdSz + " from regular season. Starting pts: rank 1 = " + pdSz + " pts, rank 2 = " + (pdSz-1) + " pts, etc."}
-          leagueId={league.id} aliases={league.scorerAliases || {}}
+          leagueId={league.name} aliases={league.scorerAliases || {}}
           onTeamClick={id => { const t = (playdowns?.teams || []).find(t => t.id === id); const i = (playdowns?.teams || []).indexOf(t); if (t) setDetail({ source: "playdown", idx: i }); }} />
       )}
 
