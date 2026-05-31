@@ -88,10 +88,12 @@ function useScorers(leagueId, phase) {
     fetchScorerData()
       .then(data => {
         const ph = phase || "regular";
-        // Match by leagueId+phase first, fall back to name for backwards compat
+        // Match by: leagueId field, OR name field (backwards compat with scorer-data where leagueId is null)
         const league = (data.leagues || []).find(l =>
-          (l.leagueId === leagueId && (l.phase || "regular") === ph) ||
-          (l.name === leagueId && (l.phase || "regular") === ph)
+          (l.phase || "regular") === ph && (
+            l.leagueId === leagueId ||
+            l.name === leagueId
+          )
         );
         setScorers(league ? league.scorers : []);
       })
@@ -2317,7 +2319,7 @@ function SimStep({ league, setLeague, onBack }) {
             <LeagueTable teams={initTeams} fixtures={initFixtures} onTeamClick={openDetail}
               highlightTop={hlTop} highlightBottom={hlBot}
               confirmedTop={confirmedTop} confirmedBottom={confirmedBottom}
-              leagueId={league.id} aliases={league.scorerAliases || {}} />
+              leagueId={league.name} aliases={league.scorerAliases || {}} />
           )}
 
           {tab === "scores" && (
@@ -2337,7 +2339,7 @@ function SimStep({ league, setLeague, onBack }) {
           )}
 
           <div className="nav-row">
-            <button className="btn btn-ghost" onClick={onBack}>← Edit Fixtures</button>
+            {onBack && <button className="btn btn-ghost" onClick={onBack}>← Edit Fixtures</button>}
           </div>
         </div>
       )}
@@ -2348,7 +2350,7 @@ function SimStep({ league, setLeague, onBack }) {
         else if (detail.source === "playoff" && playoffs) { tms = playoffs.teams; fx = playoffs.fixtures; idx = detail.idx; t = playoffs.teams[idx]; }
         else if (detail.source === "playdown" && playdowns) { tms = playdowns.teams; fx = playdowns.fixtures; idx = detail.idx; t = playdowns.teams[idx]; }
         if (!t) return null;
-        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={league.scorerUrl ? league.id : league.name} aliases={league.scorerAliases || {}} phase={detail.source === "playoff" ? "playoff" : detail.source === "playdown" ? "playdown" : "regular"} />;
+        return <TeamDetail team={t} teamIdx={idx} teams={tms} fixtures={fx} onClose={() => setDetail(null)} leagueId={league.name} aliases={league.scorerAliases || {}} phase={detail.source === "playoff" ? "playoff" : detail.source === "playdown" ? "playdown" : "regular"} />;
       })()}
     </div>
   );
@@ -2356,7 +2358,8 @@ function SimStep({ league, setLeague, onBack }) {
 
 // ── LEAGUE EDITOR ─────────────────────────────────────────────────────────────
 function LeagueEditor({ league, onChange }) {
-  const [step, setStep] = useState(league.step || 0);
+  const isLive = !!league.vhvLive;
+  const [step, setStep] = useState(isLive ? 2 : (league.step || 0));
 
   function set(field) {
     return u => onChange(lg => ({ ...lg, [field]: typeof u === "function" ? u(lg[field]) : u }));
@@ -2370,24 +2373,26 @@ function LeagueEditor({ league, onChange }) {
 
   return (
     <div>
-      <div className="steps">
-        {LABELS.map((l, i) => (
-          <div key={i} className={"step" + (step === i ? " on" : step > i ? " done" : "")}
-            onClick={() => { if (i <= step) goStep(i); }}>
-            {step > i ? "✓ " : ""}{l}
-          </div>
-        ))}
-      </div>
-      {step === 0 && (
+      {!isLive && (
+        <div className="steps">
+          {LABELS.map((l, i) => (
+            <div key={i} className={"step" + (step === i ? " on" : step > i ? " done" : "")}
+              onClick={() => { if (i <= step) goStep(i); }}>
+              {step > i ? "✓ " : ""}{l}
+            </div>
+          ))}
+        </div>
+      )}
+      {!isLive && step === 0 && (
         <TeamsStep teams={league.teams} fixtures={league.fixtures} setTeams={set("teams")} leagueType={league.type} onNext={() => goStep(1)} />
       )}
-      {step === 1 && (
+      {!isLive && step === 1 && (
         <FixturesStep teams={league.teams} fixtures={league.fixtures} setFixtures={set("fixtures")}
           settings={league.settings || defaultSettings()} setSettings={setSettings}
           onBack={() => goStep(0)} onNext={() => goStep(2)} />
       )}
-      {step === 2 && (
-        <SimStep league={league} setLeague={onChange} onBack={() => goStep(1)} />
+      {(isLive || step === 2) && (
+        <SimStep league={league} setLeague={onChange} onBack={isLive ? null : () => goStep(1)} />
       )}
     </div>
   );
@@ -2570,14 +2575,31 @@ function ArchiveLeagueView({ league, scorers, season, onBack }) {
 }
 
 // ── ROOT APP ──────────────────────────────────────────────────────────────────
+const LEAGUESIM_DATA_URL = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/leaguesim-data.json";
+
 function App() {
   const [store, setStore] = useState({ leagues: [] });
   const [activeId, setActiveId] = useState(null);
   const [showArchive, setShowArchive] = useState(false);
+
+  // ── Share mode: auto-load from repo ──────────────────────────────────────
+  const [loadStatus, setLoadStatus] = useState(IS_SHARE ? "loading" : "ok");
+  useEffect(() => {
+    if (!IS_SHARE) return;
+    fetch(LEAGUESIM_DATA_URL)
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(data => {
+        if (!data.leagues) throw new Error("Not a LeagueSim file");
+        setStore(data);
+        setActiveId(data.leagues.length === 1 ? data.leagues[0].id : null);
+        setLoadStatus("ok");
+      })
+      .catch(e => { console.error(e); setLoadStatus("error"); });
+  }, []);
+
+  // ── Edit mode: manual save/load ───────────────────────────────────────────
   const [msg, setMsg] = useState("");
   const msgTimer = useRef(null);
-  const active = store.leagues.find(lg => lg.id === activeId) || null;
-
   function flash(m) { setMsg(m); clearTimeout(msgTimer.current); msgTimer.current = setTimeout(() => setMsg(""), 2500); }
   function handleSave() { saveData(store); flash("Downloading…"); }
   function handleLoad() {
@@ -2586,10 +2608,13 @@ function App() {
       setStore(data); setActiveId(null); flash("Loaded!");
     }).catch(e => alert("Could not load: " + e));
   }
+
   function createLeague(name, type, poSize, pdSize, phaseFormat, archivable) { const lg = makeLeague(name, type, poSize, pdSize, phaseFormat, archivable); setStore(s => ({ ...s, leagues: [...s.leagues, lg] })); setActiveId(lg.id); }
   function deleteLeague(id) { if (!confirm("Delete this league?")) return; setStore(s => ({ ...s, leagues: s.leagues.filter(lg => lg.id !== id) })); if (activeId === id) setActiveId(null); }
   function updateLeague(id, u) { setStore(s => ({ ...s, leagues: s.leagues.map(lg => lg.id === id ? (typeof u === "function" ? u(lg) : u) : lg) })); }
   function toggleArchivable(id) { updateLeague(id, lg => ({ ...lg, archivable: !lg.archivable })); }
+
+  const active = store.leagues.find(lg => lg.id === activeId) || null;
 
   if (showArchive) return <ArchiveScreen onBack={() => setShowArchive(false)} />;
 
@@ -2601,10 +2626,20 @@ function App() {
           <div className="sub">{active ? active.name : store.leagues.length + " league" + (store.leagues.length !== 1 ? "s" : "")}</div>
         </div>
         <div className="top-btns">
-          {msg && <span className="muted">{msg}</span>}
-          <button className="btn btn-cyan" onClick={handleSave}>💾 Save</button>
-          <button className="btn btn-ghost" onClick={handleLoad}>📂 Load</button>
-          {active && <button className="btn btn-ghost" onClick={() => setActiveId(null)}>← All Leagues</button>}
+          {IS_SHARE ? (
+            <>
+              {loadStatus === "loading" && <span className="muted">⏳ Loading data…</span>}
+              {loadStatus === "error" && <span style={{ color: "#f87171" }}>⚠️ Could not load data</span>}
+              {active && <button className="btn btn-ghost" onClick={() => setActiveId(null)}>← All Leagues</button>}
+            </>
+          ) : (
+            <>
+              {msg && <span className="muted">{msg}</span>}
+              <button className="btn btn-cyan" onClick={handleSave}>💾 Save</button>
+              <button className="btn btn-ghost" onClick={handleLoad}>📂 Load</button>
+              {active && <button className="btn btn-ghost" onClick={() => setActiveId(null)}>← All Leagues</button>}
+            </>
+          )}
         </div>
       </div>
       {!active && <HomeScreen leagues={store.leagues} onOpen={setActiveId} onCreate={createLeague} onDelete={deleteLeague} onToggleArchivable={toggleArchivable} onOpenArchive={() => setShowArchive(true)} />}
