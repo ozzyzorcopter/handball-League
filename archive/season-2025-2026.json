@@ -1,6 +1,6 @@
 {
   "season": "2025 - 2026",
-  "archivedAt": "2026-05-28T11:18:04.985Z",
+  "archivedAt": "2026-06-01T19:05:50.008Z",
   "leagues": [
     {
       "id": "1774979494220",
@@ -7590,6 +7590,2250 @@
       "archivable": true
     },
     {
+      "id": "1775317568211",
+      "name": "2e Nationale",
+      "type": "playoff",
+      "teams": [
+        {
+          "id": "t17753175682110",
+          "name": "HC Sprimont",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753175809551",
+          "name": "Renaissance Montegnée HC",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176064672",
+          "name": "Achilles Bocholt",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176198593",
+          "name": "HB Sint-Truiden",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176325074",
+          "name": "Biobest Sasja HC",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176473155",
+          "name": "HC Visé BM",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176603636",
+          "name": "Handbal Lokeren",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176726677",
+          "name": "Kortessem",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176823878",
+          "name": "HC Atomix",
+          "points": 0,
+          "homeBonus": ""
+        },
+        {
+          "id": "t17753176920599",
+          "name": "HK Waasmunster",
+          "points": 0,
+          "homeBonus": ""
+        }
+      ],
+      "fixtures": [
+        {
+          "id": "rr_0",
+          "homeIdx": 0,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 27,
+          "awayScore": 24,
+          "round": 1
+        },
+        {
+          "id": "rr_1",
+          "homeIdx": 0,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 27,
+          "awayScore": 19,
+          "round": 1
+        },
+        {
+          "id": "rr_2",
+          "homeIdx": 0,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_3",
+          "homeIdx": 0,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 26,
+          "awayScore": 23,
+          "round": 1
+        },
+        {
+          "id": "rr_4",
+          "homeIdx": 0,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 34,
+          "awayScore": 25,
+          "round": 1
+        },
+        {
+          "id": "rr_5",
+          "homeIdx": 0,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 38,
+          "awayScore": 35,
+          "round": 1
+        },
+        {
+          "id": "rr_6",
+          "homeIdx": 0,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 21,
+          "round": 1
+        },
+        {
+          "id": "rr_7",
+          "homeIdx": 0,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 38,
+          "awayScore": 19,
+          "round": 1
+        },
+        {
+          "id": "rr_8",
+          "homeIdx": 0,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 36,
+          "awayScore": 30,
+          "round": 1
+        },
+        {
+          "id": "rr_9",
+          "homeIdx": 1,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 31,
+          "awayScore": 19,
+          "round": 1
+        },
+        {
+          "id": "rr_10",
+          "homeIdx": 1,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 25,
+          "awayScore": 22,
+          "round": 1
+        },
+        {
+          "id": "rr_11",
+          "homeIdx": 1,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 39,
+          "awayScore": 23,
+          "round": 1
+        },
+        {
+          "id": "rr_12",
+          "homeIdx": 1,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 10,
+          "awayScore": 0,
+          "round": 1
+        },
+        {
+          "id": "rr_13",
+          "homeIdx": 1,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 31,
+          "awayScore": 24,
+          "round": 1
+        },
+        {
+          "id": "rr_14",
+          "homeIdx": 1,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 27,
+          "round": 1
+        },
+        {
+          "id": "rr_15",
+          "homeIdx": 1,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 38,
+          "awayScore": 21,
+          "round": 1
+        },
+        {
+          "id": "rr_16",
+          "homeIdx": 1,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_17",
+          "homeIdx": 1,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 24,
+          "round": 1
+        },
+        {
+          "id": "rr_18",
+          "homeIdx": 2,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 28,
+          "awayScore": 28,
+          "round": 1
+        },
+        {
+          "id": "rr_19",
+          "homeIdx": 2,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 29,
+          "round": 1
+        },
+        {
+          "id": "rr_20",
+          "homeIdx": 2,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 39,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_21",
+          "homeIdx": 2,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 30,
+          "round": 1
+        },
+        {
+          "id": "rr_22",
+          "homeIdx": 2,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 38,
+          "awayScore": 30,
+          "round": 1
+        },
+        {
+          "id": "rr_23",
+          "homeIdx": 2,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 17,
+          "round": 1
+        },
+        {
+          "id": "rr_24",
+          "homeIdx": 2,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 31,
+          "awayScore": 23,
+          "round": 1
+        },
+        {
+          "id": "rr_25",
+          "homeIdx": 2,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 39,
+          "awayScore": 22,
+          "round": 1
+        },
+        {
+          "id": "rr_26",
+          "homeIdx": 2,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 39,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_27",
+          "homeIdx": 3,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 27,
+          "awayScore": 33,
+          "round": 1
+        },
+        {
+          "id": "rr_28",
+          "homeIdx": 3,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 22,
+          "awayScore": 31,
+          "round": 1
+        },
+        {
+          "id": "rr_29",
+          "homeIdx": 3,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 25,
+          "awayScore": 27,
+          "round": 1
+        },
+        {
+          "id": "rr_30",
+          "homeIdx": 3,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 28,
+          "round": 1
+        },
+        {
+          "id": "rr_31",
+          "homeIdx": 3,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 31,
+          "awayScore": 32,
+          "round": 1
+        },
+        {
+          "id": "rr_32",
+          "homeIdx": 3,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 36,
+          "awayScore": 35,
+          "round": 1
+        },
+        {
+          "id": "rr_33",
+          "homeIdx": 3,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 34,
+          "awayScore": 28,
+          "round": 1
+        },
+        {
+          "id": "rr_34",
+          "homeIdx": 3,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_35",
+          "homeIdx": 3,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 24,
+          "round": 1
+        },
+        {
+          "id": "rr_36",
+          "homeIdx": 4,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 25,
+          "awayScore": 31,
+          "round": 1
+        },
+        {
+          "id": "rr_37",
+          "homeIdx": 4,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 34,
+          "awayScore": 34,
+          "round": 1
+        },
+        {
+          "id": "rr_38",
+          "homeIdx": 4,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 28,
+          "awayScore": 24,
+          "round": 1
+        },
+        {
+          "id": "rr_39",
+          "homeIdx": 4,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 27,
+          "awayScore": 31,
+          "round": 1
+        },
+        {
+          "id": "rr_40",
+          "homeIdx": 4,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 29,
+          "awayScore": 19,
+          "round": 1
+        },
+        {
+          "id": "rr_41",
+          "homeIdx": 4,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 36,
+          "awayScore": 29,
+          "round": 1
+        },
+        {
+          "id": "rr_42",
+          "homeIdx": 4,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 41,
+          "awayScore": 34,
+          "round": 1
+        },
+        {
+          "id": "rr_43",
+          "homeIdx": 4,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 24,
+          "awayScore": 16,
+          "round": 1
+        },
+        {
+          "id": "rr_44",
+          "homeIdx": 4,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 33,
+          "awayScore": 29,
+          "round": 1
+        },
+        {
+          "id": "rr_45",
+          "homeIdx": 5,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 22,
+          "awayScore": 25,
+          "round": 1
+        },
+        {
+          "id": "rr_46",
+          "homeIdx": 5,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 25,
+          "awayScore": 31,
+          "round": 1
+        },
+        {
+          "id": "rr_47",
+          "homeIdx": 5,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 24,
+          "awayScore": 33,
+          "round": 1
+        },
+        {
+          "id": "rr_48",
+          "homeIdx": 5,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 28,
+          "awayScore": 30,
+          "round": 1
+        },
+        {
+          "id": "rr_49",
+          "homeIdx": 5,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 26,
+          "awayScore": 25,
+          "round": 1
+        },
+        {
+          "id": "rr_50",
+          "homeIdx": 5,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 29,
+          "awayScore": 32,
+          "round": 1
+        },
+        {
+          "id": "rr_51",
+          "homeIdx": 5,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 21,
+          "awayScore": 30,
+          "round": 1
+        },
+        {
+          "id": "rr_52",
+          "homeIdx": 5,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 19,
+          "round": 1
+        },
+        {
+          "id": "rr_53",
+          "homeIdx": 5,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 27,
+          "round": 1
+        },
+        {
+          "id": "rr_54",
+          "homeIdx": 6,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 26,
+          "awayScore": 37,
+          "round": 1
+        },
+        {
+          "id": "rr_55",
+          "homeIdx": 6,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 19,
+          "awayScore": 34,
+          "round": 1
+        },
+        {
+          "id": "rr_56",
+          "homeIdx": 6,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 34,
+          "awayScore": 32,
+          "round": 1
+        },
+        {
+          "id": "rr_57",
+          "homeIdx": 6,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 31,
+          "awayScore": 32,
+          "round": 1
+        },
+        {
+          "id": "rr_58",
+          "homeIdx": 6,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 35,
+          "round": 1
+        },
+        {
+          "id": "rr_59",
+          "homeIdx": 6,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 28,
+          "awayScore": 29,
+          "round": 1
+        },
+        {
+          "id": "rr_60",
+          "homeIdx": 6,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 28,
+          "round": 1
+        },
+        {
+          "id": "rr_61",
+          "homeIdx": 6,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 36,
+          "awayScore": 30,
+          "round": 1
+        },
+        {
+          "id": "rr_62",
+          "homeIdx": 6,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 28,
+          "awayScore": 29,
+          "round": 1
+        },
+        {
+          "id": "rr_63",
+          "homeIdx": 7,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 20,
+          "awayScore": 27,
+          "round": 1
+        },
+        {
+          "id": "rr_64",
+          "homeIdx": 7,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 19,
+          "awayScore": 35,
+          "round": 1
+        },
+        {
+          "id": "rr_65",
+          "homeIdx": 7,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 22,
+          "awayScore": 17,
+          "round": 1
+        },
+        {
+          "id": "rr_66",
+          "homeIdx": 7,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 26,
+          "awayScore": 28,
+          "round": 1
+        },
+        {
+          "id": "rr_67",
+          "homeIdx": 7,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 25,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_68",
+          "homeIdx": 7,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 25,
+          "awayScore": 25,
+          "round": 1
+        },
+        {
+          "id": "rr_69",
+          "homeIdx": 7,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 33,
+          "awayScore": 28,
+          "round": 1
+        },
+        {
+          "id": "rr_70",
+          "homeIdx": 7,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 33,
+          "awayScore": 24,
+          "round": 1
+        },
+        {
+          "id": "rr_71",
+          "homeIdx": 7,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 23,
+          "awayScore": 27,
+          "round": 1
+        },
+        {
+          "id": "rr_72",
+          "homeIdx": 8,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 35,
+          "round": 1
+        },
+        {
+          "id": "rr_73",
+          "homeIdx": 8,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 35,
+          "round": 1
+        },
+        {
+          "id": "rr_74",
+          "homeIdx": 8,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 23,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_75",
+          "homeIdx": 8,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 20,
+          "awayScore": 34,
+          "round": 1
+        },
+        {
+          "id": "rr_76",
+          "homeIdx": 8,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 21,
+          "awayScore": 18,
+          "round": 1
+        },
+        {
+          "id": "rr_77",
+          "homeIdx": 8,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 26,
+          "awayScore": 33,
+          "round": 1
+        },
+        {
+          "id": "rr_78",
+          "homeIdx": 8,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 21,
+          "awayScore": 33,
+          "round": 1
+        },
+        {
+          "id": "rr_79",
+          "homeIdx": 8,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 28,
+          "awayScore": 26,
+          "round": 1
+        },
+        {
+          "id": "rr_80",
+          "homeIdx": 8,
+          "awayIdx": 9,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 24,
+          "round": 1
+        },
+        {
+          "id": "rr_81",
+          "homeIdx": 9,
+          "awayIdx": 0,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 21,
+          "awayScore": 30,
+          "round": 1
+        },
+        {
+          "id": "rr_82",
+          "homeIdx": 9,
+          "awayIdx": 1,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 21,
+          "awayScore": 25,
+          "round": 1
+        },
+        {
+          "id": "rr_83",
+          "homeIdx": 9,
+          "awayIdx": 2,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 27,
+          "awayScore": 29,
+          "round": 1
+        },
+        {
+          "id": "rr_84",
+          "homeIdx": 9,
+          "awayIdx": 3,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 26,
+          "awayScore": 32,
+          "round": 1
+        },
+        {
+          "id": "rr_85",
+          "homeIdx": 9,
+          "awayIdx": 4,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 31,
+          "awayScore": 33,
+          "round": 1
+        },
+        {
+          "id": "rr_86",
+          "homeIdx": 9,
+          "awayIdx": 5,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 30,
+          "awayScore": 31,
+          "round": 1
+        },
+        {
+          "id": "rr_87",
+          "homeIdx": 9,
+          "awayIdx": 6,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 32,
+          "round": 1
+        },
+        {
+          "id": "rr_88",
+          "homeIdx": 9,
+          "awayIdx": 7,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 32,
+          "awayScore": 32,
+          "round": 1
+        },
+        {
+          "id": "rr_89",
+          "homeIdx": 9,
+          "awayIdx": 8,
+          "homeWin": 57,
+          "draw": 6,
+          "awayWin": 37,
+          "overrideOn": false,
+          "ovHW": "",
+          "ovD": "",
+          "ovAW": "",
+          "played": true,
+          "homeScore": 23,
+          "awayScore": 26,
+          "round": 1
+        }
+      ],
+      "step": 2,
+      "settings": {
+        "baseWin": 47,
+        "baseDraw": 6,
+        "homeBonus": 10,
+        "rankBonus": 3,
+        "winScore": 30,
+        "lossScore": 25,
+        "drawScore": 25
+      },
+      "playoffs": {
+        "teams": [
+          {
+            "id": "t17753175682110",
+            "name": "HC Sprimont",
+            "points": 6,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753175809551",
+            "name": "Renaissance Montegnée HC",
+            "points": 5,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753176064672",
+            "name": "Achilles Bocholt",
+            "points": 4,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753176198593",
+            "name": "HB Sint-Truiden",
+            "points": 3,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753176325074",
+            "name": "Biobest Sasja HC",
+            "points": 2,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753176473155",
+            "name": "HC Visé BM",
+            "points": 1,
+            "homeBonus": ""
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "f0",
+            "homeIdx": 0,
+            "awayIdx": 1,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 32,
+            "awayScore": 28,
+            "tbd": false
+          },
+          {
+            "id": "f1",
+            "homeIdx": 1,
+            "awayIdx": 0,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 23,
+            "awayScore": 28,
+            "tbd": false
+          },
+          {
+            "id": "f2",
+            "homeIdx": 0,
+            "awayIdx": 2,
+            "homeWin": 63,
+            "draw": 6,
+            "awayWin": 31,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 29,
+            "awayScore": 25,
+            "tbd": false
+          },
+          {
+            "id": "f3",
+            "homeIdx": 2,
+            "awayIdx": 0,
+            "homeWin": 51,
+            "draw": 6,
+            "awayWin": 43,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 33,
+            "awayScore": 29
+          },
+          {
+            "id": "f4",
+            "homeIdx": 0,
+            "awayIdx": 3,
+            "homeWin": 66,
+            "draw": 6,
+            "awayWin": 28,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 37,
+            "awayScore": 28,
+            "tbd": false
+          },
+          {
+            "id": "f5",
+            "homeIdx": 3,
+            "awayIdx": 0,
+            "homeWin": 48,
+            "draw": 6,
+            "awayWin": 46,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 25,
+            "awayScore": 24
+          },
+          {
+            "id": "f6",
+            "homeIdx": 0,
+            "awayIdx": 4,
+            "homeWin": 69,
+            "draw": 6,
+            "awayWin": 25,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 31,
+            "awayScore": 21
+          },
+          {
+            "id": "f7",
+            "homeIdx": 4,
+            "awayIdx": 0,
+            "homeWin": 45,
+            "draw": 6,
+            "awayWin": 49,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 25,
+            "awayScore": 30,
+            "tbd": false
+          },
+          {
+            "id": "f8",
+            "homeIdx": 0,
+            "awayIdx": 5,
+            "homeWin": 72,
+            "draw": 6,
+            "awayWin": 22,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 40,
+            "awayScore": 29,
+            "tbd": false
+          },
+          {
+            "id": "f9",
+            "homeIdx": 5,
+            "awayIdx": 0,
+            "homeWin": 42,
+            "draw": 6,
+            "awayWin": 52,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 22,
+            "awayScore": 30
+          },
+          {
+            "id": "f10",
+            "homeIdx": 1,
+            "awayIdx": 2,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 10,
+            "awayScore": 0,
+            "tbd": false
+          },
+          {
+            "id": "f11",
+            "homeIdx": 2,
+            "awayIdx": 1,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 22,
+            "awayScore": 26
+          },
+          {
+            "id": "f12",
+            "homeIdx": 1,
+            "awayIdx": 3,
+            "homeWin": 63,
+            "draw": 6,
+            "awayWin": 31,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 33,
+            "awayScore": 26,
+            "tbd": false
+          },
+          {
+            "id": "f13",
+            "homeIdx": 3,
+            "awayIdx": 1,
+            "homeWin": 51,
+            "draw": 6,
+            "awayWin": 43,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 28,
+            "awayScore": 34
+          },
+          {
+            "id": "f14",
+            "homeIdx": 1,
+            "awayIdx": 4,
+            "homeWin": 66,
+            "draw": 6,
+            "awayWin": 28,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 32,
+            "awayScore": 28
+          },
+          {
+            "id": "f15",
+            "homeIdx": 4,
+            "awayIdx": 1,
+            "homeWin": 48,
+            "draw": 6,
+            "awayWin": 46,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 29,
+            "awayScore": 40,
+            "tbd": false
+          },
+          {
+            "id": "f16",
+            "homeIdx": 1,
+            "awayIdx": 5,
+            "homeWin": 69,
+            "draw": 6,
+            "awayWin": 25,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 39,
+            "awayScore": 19
+          },
+          {
+            "id": "f17",
+            "homeIdx": 5,
+            "awayIdx": 1,
+            "homeWin": 45,
+            "draw": 6,
+            "awayWin": 49,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 23,
+            "awayScore": 40,
+            "tbd": false
+          },
+          {
+            "id": "f18",
+            "homeIdx": 2,
+            "awayIdx": 3,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 34,
+            "awayScore": 20
+          },
+          {
+            "id": "f19",
+            "homeIdx": 3,
+            "awayIdx": 2,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 29,
+            "awayScore": 26,
+            "tbd": false
+          },
+          {
+            "id": "f20",
+            "homeIdx": 2,
+            "awayIdx": 4,
+            "homeWin": 63,
+            "draw": 6,
+            "awayWin": 31,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 39,
+            "awayScore": 25,
+            "tbd": false
+          },
+          {
+            "id": "f21",
+            "homeIdx": 4,
+            "awayIdx": 2,
+            "homeWin": 51,
+            "draw": 6,
+            "awayWin": 43,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 25,
+            "awayScore": 26
+          },
+          {
+            "id": "f22",
+            "homeIdx": 2,
+            "awayIdx": 5,
+            "homeWin": 66,
+            "draw": 6,
+            "awayWin": 28,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 27,
+            "awayScore": 27,
+            "tbd": false
+          },
+          {
+            "id": "f23",
+            "homeIdx": 5,
+            "awayIdx": 2,
+            "homeWin": 48,
+            "draw": 6,
+            "awayWin": 46,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 32,
+            "awayScore": 32,
+            "tbd": false
+          },
+          {
+            "id": "f24",
+            "homeIdx": 3,
+            "awayIdx": 4,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 29,
+            "awayScore": 29,
+            "tbd": false
+          },
+          {
+            "id": "f25",
+            "homeIdx": 4,
+            "awayIdx": 3,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 28,
+            "awayScore": 32,
+            "tbd": false
+          },
+          {
+            "id": "f26",
+            "homeIdx": 3,
+            "awayIdx": 5,
+            "homeWin": 63,
+            "draw": 6,
+            "awayWin": 31,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 35,
+            "awayScore": 34,
+            "tbd": false
+          },
+          {
+            "id": "f27",
+            "homeIdx": 5,
+            "awayIdx": 3,
+            "homeWin": 51,
+            "draw": 6,
+            "awayWin": 43,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 29,
+            "awayScore": 28
+          },
+          {
+            "id": "f28",
+            "homeIdx": 4,
+            "awayIdx": 5,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 36,
+            "awayScore": 29
+          },
+          {
+            "id": "f29",
+            "homeIdx": 5,
+            "awayIdx": 4,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 28,
+            "awayScore": 28,
+            "tbd": false
+          }
+        ]
+      },
+      "playdowns": {
+        "teams": [
+          {
+            "id": "t17753176603636",
+            "name": "Handbal Lokeren",
+            "points": 4,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753176726677",
+            "name": "Kortessem",
+            "points": 3,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753176823878",
+            "name": "HC Atomix",
+            "points": 2,
+            "homeBonus": ""
+          },
+          {
+            "id": "t17753176920599",
+            "name": "HK Waasmunster",
+            "points": 1,
+            "homeBonus": ""
+          }
+        ],
+        "fixtures": [
+          {
+            "id": "f0",
+            "homeIdx": 0,
+            "awayIdx": 1,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 35,
+            "awayScore": 31
+          },
+          {
+            "id": "f1",
+            "homeIdx": 1,
+            "awayIdx": 0,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 22,
+            "awayScore": 31
+          },
+          {
+            "id": "f2",
+            "homeIdx": 0,
+            "awayIdx": 2,
+            "homeWin": 63,
+            "draw": 6,
+            "awayWin": 31,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 36,
+            "awayScore": 28
+          },
+          {
+            "id": "f3",
+            "homeIdx": 2,
+            "awayIdx": 0,
+            "homeWin": 51,
+            "draw": 6,
+            "awayWin": 43,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 36,
+            "awayScore": 30,
+            "tbd": false
+          },
+          {
+            "id": "f4",
+            "homeIdx": 0,
+            "awayIdx": 3,
+            "homeWin": 66,
+            "draw": 6,
+            "awayWin": 28,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 37,
+            "awayScore": 27
+          },
+          {
+            "id": "f5",
+            "homeIdx": 3,
+            "awayIdx": 0,
+            "homeWin": 48,
+            "draw": 6,
+            "awayWin": 46,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 28,
+            "awayScore": 34,
+            "tbd": false
+          },
+          {
+            "id": "f6",
+            "homeIdx": 1,
+            "awayIdx": 2,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 22,
+            "awayScore": 27,
+            "tbd": false
+          },
+          {
+            "id": "f7",
+            "homeIdx": 2,
+            "awayIdx": 1,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 22,
+            "awayScore": 24
+          },
+          {
+            "id": "f8",
+            "homeIdx": 1,
+            "awayIdx": 3,
+            "homeWin": 63,
+            "draw": 6,
+            "awayWin": 31,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 35,
+            "awayScore": 25
+          },
+          {
+            "id": "f9",
+            "homeIdx": 3,
+            "awayIdx": 1,
+            "homeWin": 51,
+            "draw": 6,
+            "awayWin": 43,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 21,
+            "awayScore": 20,
+            "tbd": false
+          },
+          {
+            "id": "f10",
+            "homeIdx": 2,
+            "awayIdx": 3,
+            "homeWin": 60,
+            "draw": 6,
+            "awayWin": 34,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 27,
+            "awayScore": 27
+          },
+          {
+            "id": "f11",
+            "homeIdx": 3,
+            "awayIdx": 2,
+            "homeWin": 54,
+            "draw": 6,
+            "awayWin": 40,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 28,
+            "awayScore": 26
+          }
+        ]
+      },
+      "archivable": true
+    },
+    {
       "id": "1776012563362",
       "name": "SHL",
       "type": "playoff",
@@ -11647,12 +13891,12 @@
         "goals": 11
       },
       {
-        "player": "De Veirman Stan",
+        "player": "De Wispelaere Aiko",
         "club": "Handbalclub Evergem",
         "goals": 10
       },
       {
-        "player": "De Wispelaere Aiko",
+        "player": "De Veirman Stan",
         "club": "Handbalclub Evergem",
         "goals": 10
       },
@@ -11792,12 +14036,12 @@
         "goals": 6
       },
       {
-        "player": "Durieux Xander",
+        "player": "Deweirdt Mathis",
         "club": "Handbalclub Evergem",
         "goals": 6
       },
       {
-        "player": "Deweirdt Mathis",
+        "player": "Durieux Xander",
         "club": "Handbalclub Evergem",
         "goals": 6
       },
@@ -11997,11 +14241,6 @@
         "goals": 2
       },
       {
-        "player": "Lerou Matti",
-        "club": "Handbalclub Evergem",
-        "goals": 2
-      },
-      {
         "player": "Pauwels Vic",
         "club": "Besox Handbalclub Izegem",
         "goals": 2
@@ -12014,6 +14253,11 @@
       {
         "player": "Vanaudenaerde Juul",
         "club": "Handbalclub Roeselare",
+        "goals": 2
+      },
+      {
+        "player": "Lerou Matti",
+        "club": "Handbalclub Evergem",
         "goals": 2
       },
       {
@@ -13306,13 +15550,13 @@
         "goals": 81
       },
       {
-        "player": "Martens Wannes",
-        "club": "Hv Arena",
+        "player": "Claeys Seppe",
+        "club": "HBC Apolloon Spurs",
         "goals": 79
       },
       {
-        "player": "Claeys Seppe",
-        "club": "HBC Apolloon Spurs",
+        "player": "Martens Wannes",
+        "club": "Hv Arena",
         "goals": 79
       },
       {
@@ -13376,13 +15620,13 @@
         "goals": 62
       },
       {
-        "player": "Beke Michiel",
-        "club": "Desselgemse Handbalclub",
+        "player": "Vanwing Sander",
+        "club": "HC AtomiX",
         "goals": 61
       },
       {
-        "player": "Vanwing Sander",
-        "club": "HC AtomiX",
+        "player": "Beke Michiel",
+        "club": "Desselgemse Handbalclub",
         "goals": 61
       },
       {
@@ -13396,12 +15640,12 @@
         "goals": 58
       },
       {
-        "player": "Martens Thomas",
+        "player": "Koppen Wouter",
         "club": "HC Don Bosco Gent",
         "goals": 57
       },
       {
-        "player": "Koppen Wouter",
+        "player": "Martens Thomas",
         "club": "HC Don Bosco Gent",
         "goals": 57
       },
@@ -13426,6 +15670,11 @@
         "goals": 51
       },
       {
+        "player": "Witkowski Brecht",
+        "club": "HHV Meeuwen",
+        "goals": 50
+      },
+      {
         "player": "Lauwers Kobe",
         "club": "HBC Apolloon Spurs",
         "goals": 50
@@ -13439,21 +15688,6 @@
         "player": "Fruyt Christophe",
         "club": "HC AtomiX",
         "goals": 50
-      },
-      {
-        "player": "Witkowski Brecht",
-        "club": "HHV Meeuwen",
-        "goals": 50
-      },
-      {
-        "player": "Demets Matisse",
-        "club": "Desselgemse Handbalclub",
-        "goals": 49
-      },
-      {
-        "player": "Dhaene Jakob",
-        "club": "HBC Apolloon Spurs",
-        "goals": 49
       },
       {
         "player": "Haex Bert",
@@ -13471,6 +15705,16 @@
         "goals": 49
       },
       {
+        "player": "Demets Matisse",
+        "club": "Desselgemse Handbalclub",
+        "goals": 49
+      },
+      {
+        "player": "Dhaene Jakob",
+        "club": "HBC Apolloon Spurs",
+        "goals": 49
+      },
+      {
         "player": "Kindt Robin",
         "club": "Handbalclub Roeselare",
         "goals": 46
@@ -13479,6 +15723,11 @@
         "player": "Bernaerts Yentof",
         "club": "HC Heist o/d Berg",
         "goals": 45
+      },
+      {
+        "player": "Debergh Lukas",
+        "club": "HC Don Bosco Gent",
+        "goals": 44
       },
       {
         "player": "Sarwar Michiel",
@@ -13491,24 +15740,9 @@
         "goals": 44
       },
       {
-        "player": "Debergh Lukas",
-        "club": "HC Don Bosco Gent",
-        "goals": 44
-      },
-      {
         "player": "Schets Michaël",
         "club": "Biobest Sasja HC",
         "goals": 43
-      },
-      {
-        "player": "Van Malderen Lars",
-        "club": "Handbalclub Aalst",
-        "goals": 42
-      },
-      {
-        "player": "Theunis Joeri",
-        "club": "HC Overpelt",
-        "goals": 42
       },
       {
         "player": "Smekens Yarne",
@@ -13518,6 +15752,16 @@
       {
         "player": "Lefever Jenten",
         "club": "Desselgemse Handbalclub",
+        "goals": 42
+      },
+      {
+        "player": "Van Malderen Lars",
+        "club": "Handbalclub Aalst",
+        "goals": 42
+      },
+      {
+        "player": "Theunis Joeri",
+        "club": "HC Overpelt",
         "goals": 42
       },
       {
@@ -13531,6 +15775,11 @@
         "goals": 41
       },
       {
+        "player": "Vandenberk Dries",
+        "club": "Hv Arena",
+        "goals": 40
+      },
+      {
         "player": "Van Loock Lars",
         "club": "HC Heist o/d Berg",
         "goals": 40
@@ -13538,11 +15787,6 @@
       {
         "player": "Ait Daoud Faycal",
         "club": "HC Overpelt",
-        "goals": 40
-      },
-      {
-        "player": "Vandenberk Dries",
-        "club": "Hv Arena",
         "goals": 40
       },
       {
@@ -13631,29 +15875,14 @@
         "goals": 29
       },
       {
-        "player": "Cracco Sam",
-        "club": "Handbalclub Roeselare",
-        "goals": 28
-      },
-      {
         "player": "Ravach Lucas",
         "club": "Hv Arena",
         "goals": 28
       },
       {
-        "player": "Lavens Louis",
-        "club": "Desselgemse Handbalclub",
-        "goals": 27
-      },
-      {
-        "player": "Christiaens Tibo",
-        "club": "HC Overpelt",
-        "goals": 27
-      },
-      {
-        "player": "Vanpoucke Lukas Bruno",
-        "club": "HC AtomiX",
-        "goals": 27
+        "player": "Cracco Sam",
+        "club": "Handbalclub Roeselare",
+        "goals": 28
       },
       {
         "player": "Hellings Arthur",
@@ -13671,9 +15900,19 @@
         "goals": 27
       },
       {
-        "player": "Despeghel Kobe",
-        "club": "Handbalclub Roeselare",
-        "goals": 26
+        "player": "Lavens Louis",
+        "club": "Desselgemse Handbalclub",
+        "goals": 27
+      },
+      {
+        "player": "Christiaens Tibo",
+        "club": "HC Overpelt",
+        "goals": 27
+      },
+      {
+        "player": "Vanpoucke Lukas Bruno",
+        "club": "HC AtomiX",
+        "goals": 27
       },
       {
         "player": "Van den bossche Jordy",
@@ -13691,6 +15930,11 @@
         "goals": 26
       },
       {
+        "player": "Despeghel Kobe",
+        "club": "Handbalclub Roeselare",
+        "goals": 26
+      },
+      {
         "player": "Vanakker Simon",
         "club": "HC Don Bosco Gent",
         "goals": 25
@@ -13701,11 +15945,6 @@
         "goals": 25
       },
       {
-        "player": "Van Overvelt Arne",
-        "club": "HC Don Bosco Gent",
-        "goals": 24
-      },
-      {
         "player": "Van Moorleghem Jordy",
         "club": "Desselgemse Handbalclub",
         "goals": 24
@@ -13713,6 +15952,11 @@
       {
         "player": "Van Herle Tom",
         "club": "Biobest Sasja HC",
+        "goals": 24
+      },
+      {
+        "player": "Van Overvelt Arne",
+        "club": "HC Don Bosco Gent",
         "goals": 24
       },
       {
@@ -13736,17 +15980,17 @@
         "goals": 22
       },
       {
-        "player": "De Loyer Jarne",
-        "club": "Hv Arena",
-        "goals": 21
-      },
-      {
         "player": "Christiaens Stian",
         "club": "HC Don Bosco Gent",
         "goals": 21
       },
       {
-        "player": "Temperville Ward",
+        "player": "De Loyer Jarne",
+        "club": "Hv Arena",
+        "goals": 21
+      },
+      {
+        "player": "Lavolé Mikaël",
         "club": "HC AtomiX",
         "goals": 20
       },
@@ -13756,9 +16000,14 @@
         "goals": 20
       },
       {
-        "player": "Lavolé Mikaël",
+        "player": "Temperville Ward",
         "club": "HC AtomiX",
         "goals": 20
+      },
+      {
+        "player": "Declercq Timo",
+        "club": "Handbalclub Roeselare",
+        "goals": 19
       },
       {
         "player": "Lagrou Ilian",
@@ -13773,11 +16022,6 @@
       {
         "player": "Dubois Cédric",
         "club": "Biobest Sasja HC",
-        "goals": 19
-      },
-      {
-        "player": "Declercq Timo",
-        "club": "Handbalclub Roeselare",
         "goals": 19
       },
       {
@@ -13821,12 +16065,12 @@
         "goals": 16
       },
       {
-        "player": "Thoelen Keaton",
+        "player": "Derave Ferre",
         "club": "HC Don Bosco Gent",
         "goals": 15
       },
       {
-        "player": "Derave Ferre",
+        "player": "Thoelen Keaton",
         "club": "HC Don Bosco Gent",
         "goals": 15
       },
@@ -13844,11 +16088,6 @@
         "player": "Biesmans Berre",
         "club": "HHV Meeuwen",
         "goals": 15
-      },
-      {
-        "player": "Peeters Thomas",
-        "club": "HC AtomiX",
-        "goals": 14
       },
       {
         "player": "Poldervaart Dylan",
@@ -13871,6 +16110,11 @@
         "goals": 14
       },
       {
+        "player": "Peeters Thomas",
+        "club": "HC AtomiX",
+        "goals": 14
+      },
+      {
         "player": "Kiekens Joerie",
         "club": "Handbalclub Aalst",
         "goals": 13
@@ -13879,21 +16123,6 @@
         "player": "Vanstiphout Emile",
         "club": "HHV Meeuwen",
         "goals": 13
-      },
-      {
-        "player": "De Brucker Senne",
-        "club": "Handbalclub Aalst",
-        "goals": 12
-      },
-      {
-        "player": "Vanthournout Joren",
-        "club": "Desselgemse Handbalclub",
-        "goals": 12
-      },
-      {
-        "player": "Boriau Tibe",
-        "club": "HC AtomiX",
-        "goals": 12
       },
       {
         "player": "Leeman Maxence",
@@ -13911,9 +16140,19 @@
         "goals": 12
       },
       {
-        "player": "Mommerency Tjorre",
-        "club": "Handbalclub Roeselare",
-        "goals": 11
+        "player": "De Brucker Senne",
+        "club": "Handbalclub Aalst",
+        "goals": 12
+      },
+      {
+        "player": "Vanthournout Joren",
+        "club": "Desselgemse Handbalclub",
+        "goals": 12
+      },
+      {
+        "player": "Boriau Tibe",
+        "club": "HC AtomiX",
+        "goals": 12
       },
       {
         "player": "Lenoir Lenne",
@@ -13936,6 +16175,26 @@
         "goals": 11
       },
       {
+        "player": "Mommerency Tjorre",
+        "club": "Handbalclub Roeselare",
+        "goals": 11
+      },
+      {
+        "player": "Riské Jos",
+        "club": "Biobest Sasja HC",
+        "goals": 10
+      },
+      {
+        "player": "Masquelier Thibaut",
+        "club": "HBC Apolloon Spurs",
+        "goals": 10
+      },
+      {
+        "player": "Antunovic Luka",
+        "club": "HC Heist o/d Berg",
+        "goals": 10
+      },
+      {
         "player": "Janssens Glenn",
         "club": "HHV Meeuwen",
         "goals": 10
@@ -13956,38 +16215,8 @@
         "goals": 10
       },
       {
-        "player": "Riské Jos",
-        "club": "Biobest Sasja HC",
-        "goals": 10
-      },
-      {
-        "player": "Masquelier Thibaut",
-        "club": "HBC Apolloon Spurs",
-        "goals": 10
-      },
-      {
-        "player": "Antunovic Luka",
-        "club": "HC Heist o/d Berg",
-        "goals": 10
-      },
-      {
-        "player": "Van Caeter Arno",
-        "club": "HC Don Bosco Gent",
-        "goals": 9
-      },
-      {
-        "player": "Goerlandt Mathias",
-        "club": "Desselgemse Handbalclub",
-        "goals": 9
-      },
-      {
         "player": "Vanmeerbeek Jens",
         "club": "HC AtomiX",
-        "goals": 9
-      },
-      {
-        "player": "Verbinnen Jelle",
-        "club": "HC Heist o/d Berg",
         "goals": 9
       },
       {
@@ -14006,6 +16235,11 @@
         "goals": 9
       },
       {
+        "player": "Verbinnen Jelle",
+        "club": "HC Heist o/d Berg",
+        "goals": 9
+      },
+      {
         "player": "Dedain Wannes",
         "club": "HC Don Bosco Gent",
         "goals": 9
@@ -14018,6 +16252,16 @@
       {
         "player": "Ampe Sven",
         "club": "HBC Apolloon Spurs",
+        "goals": 9
+      },
+      {
+        "player": "Van Caeter Arno",
+        "club": "HC Don Bosco Gent",
+        "goals": 9
+      },
+      {
+        "player": "Goerlandt Mathias",
+        "club": "Desselgemse Handbalclub",
         "goals": 9
       },
       {
@@ -14071,18 +16315,8 @@
         "goals": 7
       },
       {
-        "player": "De Witte Tuur",
-        "club": "Handbalclub Aalst",
-        "goals": 6
-      },
-      {
         "player": "De Coster Mats",
         "club": "Biobest Sasja HC",
-        "goals": 6
-      },
-      {
-        "player": "Deschuymer Michiel",
-        "club": "Handbalclub Roeselare",
         "goals": 6
       },
       {
@@ -14099,6 +16333,36 @@
         "player": "Paesmans Yoran",
         "club": "HC AtomiX",
         "goals": 6
+      },
+      {
+        "player": "De Witte Tuur",
+        "club": "Handbalclub Aalst",
+        "goals": 6
+      },
+      {
+        "player": "Deschuymer Michiel",
+        "club": "Handbalclub Roeselare",
+        "goals": 6
+      },
+      {
+        "player": "Maes Jesse",
+        "club": "HC AtomiX",
+        "goals": 5
+      },
+      {
+        "player": "Granada Muhoz Carlos",
+        "club": "Biobest Sasja HC",
+        "goals": 5
+      },
+      {
+        "player": "Detrez Lev",
+        "club": "Biobest Sasja HC",
+        "goals": 5
+      },
+      {
+        "player": "Jauquet Gabriel",
+        "club": "HC AtomiX",
+        "goals": 5
       },
       {
         "player": "Ghijselinck Joske",
@@ -14121,24 +16385,14 @@
         "goals": 5
       },
       {
-        "player": "Maes Jesse",
-        "club": "HC AtomiX",
-        "goals": 5
+        "player": "Bornauw Iban",
+        "club": "Elita Lebbeke",
+        "goals": 4
       },
       {
-        "player": "Granada Muhoz Carlos",
-        "club": "Biobest Sasja HC",
-        "goals": 5
-      },
-      {
-        "player": "Detrez Lev",
-        "club": "Biobest Sasja HC",
-        "goals": 5
-      },
-      {
-        "player": "Jauquet Gabriel",
-        "club": "HC AtomiX",
-        "goals": 5
+        "player": "Mizuki Sanji",
+        "club": "HC Don Bosco Gent",
+        "goals": 4
       },
       {
         "player": "Vandersanden Mike",
@@ -14171,16 +16425,6 @@
         "goals": 4
       },
       {
-        "player": "Bornauw Iban",
-        "club": "Elita Lebbeke",
-        "goals": 4
-      },
-      {
-        "player": "Mizuki Sanji",
-        "club": "HC Don Bosco Gent",
-        "goals": 4
-      },
-      {
         "player": "Berthet Ruben",
         "club": "HC AtomiX",
         "goals": 3
@@ -14194,6 +16438,36 @@
         "player": "Kerkhofs Yente",
         "club": "HHV Meeuwen",
         "goals": 3
+      },
+      {
+        "player": "Verhoeven Johannes",
+        "club": "Biobest Sasja HC",
+        "goals": 2
+      },
+      {
+        "player": "Rigolle Milo",
+        "club": "Desselgemse Handbalclub",
+        "goals": 2
+      },
+      {
+        "player": "Van Der Gucht Gust",
+        "club": "Elita Lebbeke",
+        "goals": 2
+      },
+      {
+        "player": "Moens Michele",
+        "club": "Elita Lebbeke",
+        "goals": 2
+      },
+      {
+        "player": "Neirynck Artuur",
+        "club": "HC Don Bosco Gent",
+        "goals": 2
+      },
+      {
+        "player": "Janssens Lesly",
+        "club": "Biobest Sasja HC",
+        "goals": 2
       },
       {
         "player": "Gryp Benoit",
@@ -14221,48 +16495,8 @@
         "goals": 2
       },
       {
-        "player": "Verhoeven Johannes",
-        "club": "Biobest Sasja HC",
-        "goals": 2
-      },
-      {
-        "player": "Rigolle Milo",
-        "club": "Desselgemse Handbalclub",
-        "goals": 2
-      },
-      {
-        "player": "Moens Michele",
-        "club": "Elita Lebbeke",
-        "goals": 2
-      },
-      {
-        "player": "Van Der Gucht Gust",
-        "club": "Elita Lebbeke",
-        "goals": 2
-      },
-      {
-        "player": "Neirynck Artuur",
-        "club": "HC Don Bosco Gent",
-        "goals": 2
-      },
-      {
-        "player": "Janssens Lesly",
-        "club": "Biobest Sasja HC",
-        "goals": 2
-      },
-      {
-        "player": "Benali Noureddine",
-        "club": "Handbalclub Aalst",
-        "goals": 1
-      },
-      {
-        "player": "De Werdt Gijs",
-        "club": "Hv Arena",
-        "goals": 1
-      },
-      {
-        "player": "Dekempeneer Jarno",
-        "club": "HC AtomiX",
+        "player": "Vandenbulcke Kobe",
+        "club": "Handbalclub Roeselare",
         "goals": 1
       },
       {
@@ -14271,23 +16505,8 @@
         "goals": 1
       },
       {
-        "player": "Vandenbulcke Kobe",
-        "club": "Handbalclub Roeselare",
-        "goals": 1
-      },
-      {
         "player": "Vercammen Jarne",
         "club": "Elita Lebbeke",
-        "goals": 1
-      },
-      {
-        "player": "Laureins Arne",
-        "club": "Handbalclub Roeselare",
-        "goals": 1
-      },
-      {
-        "player": "Janssens Jenno",
-        "club": "HC Heist o/d Berg",
         "goals": 1
       },
       {
@@ -14301,8 +16520,18 @@
         "goals": 1
       },
       {
+        "player": "Laureins Arne",
+        "club": "Handbalclub Roeselare",
+        "goals": 1
+      },
+      {
         "player": "Bouzoumita Felix",
         "club": "HC Don Bosco Gent",
+        "goals": 1
+      },
+      {
+        "player": "Janssens Jenno",
+        "club": "HC Heist o/d Berg",
         "goals": 1
       },
       {
@@ -14328,6 +16557,21 @@
       {
         "player": "Hilven Liam",
         "club": "Biobest Sasja HC",
+        "goals": 1
+      },
+      {
+        "player": "Benali Noureddine",
+        "club": "Handbalclub Aalst",
+        "goals": 1
+      },
+      {
+        "player": "De Werdt Gijs",
+        "club": "Hv Arena",
+        "goals": 1
+      },
+      {
+        "player": "Dekempeneer Jarno",
+        "club": "HC AtomiX",
         "goals": 1
       }
     ],
@@ -15513,13 +17757,13 @@
         "goals": 1
       },
       {
-        "player": "Gebruers Sander",
-        "club": "Olse Merksem HC",
+        "player": "Buysse Jonas",
+        "club": "Handbal Leuven",
         "goals": 1
       },
       {
-        "player": "Buysse Jonas",
-        "club": "Handbal Leuven",
+        "player": "Gebruers Sander",
+        "club": "Olse Merksem HC",
         "goals": 1
       },
       {
@@ -16572,6 +18816,11 @@
         "goals": 54
       },
       {
+        "player": "Devyver Sam",
+        "club": "Biobest Sasja HC",
+        "goals": 52
+      },
+      {
         "player": "Buteneers Jef",
         "club": "Sezoens Achilles Bocholt",
         "goals": 52
@@ -16579,11 +18828,6 @@
       {
         "player": "Pascon Nemo",
         "club": "HC Sprimont",
-        "goals": 52
-      },
-      {
-        "player": "Devyver Sam",
-        "club": "Biobest Sasja HC",
         "goals": 52
       },
       {
@@ -16652,13 +18896,13 @@
         "goals": 39
       },
       {
-        "player": "Puchkouski Dzmitry",
-        "club": "Biobest Sasja HC",
+        "player": "De Novellis Maël",
+        "club": "HC Visé BM",
         "goals": 38
       },
       {
-        "player": "De Novellis Maël",
-        "club": "HC Visé BM",
+        "player": "Puchkouski Dzmitry",
+        "club": "Biobest Sasja HC",
         "goals": 38
       },
       {
@@ -16727,13 +18971,13 @@
         "goals": 34
       },
       {
-        "player": "Van De Velde Mathieu",
-        "club": "HK Waasmunster",
+        "player": "Vanheusden Christiaan",
+        "club": "HC Pentagoon Kortessem",
         "goals": 33
       },
       {
-        "player": "Vanheusden Christiaan",
-        "club": "HC Pentagoon Kortessem",
+        "player": "Van De Velde Mathieu",
+        "club": "HK Waasmunster",
         "goals": 33
       },
       {
@@ -16872,6 +19116,11 @@
         "goals": 17
       },
       {
+        "player": "Cuppens Kobe",
+        "club": "HC Pentagoon Kortessem",
+        "goals": 16
+      },
+      {
         "player": "Fiorello Riina Lucas",
         "club": "Renaissance Montegnée HC",
         "goals": 16
@@ -16884,11 +19133,6 @@
       {
         "player": "Schroven Wouter",
         "club": "HC AtomiX",
-        "goals": 16
-      },
-      {
-        "player": "Cuppens Kobe",
-        "club": "HC Pentagoon Kortessem",
         "goals": 16
       },
       {
@@ -16927,13 +19171,13 @@
         "goals": 14
       },
       {
-        "player": "Dils Jero",
-        "club": "HC AtomiX",
+        "player": "Leeman Ferre",
+        "club": "Biobest Sasja HC",
         "goals": 13
       },
       {
-        "player": "Leeman Ferre",
-        "club": "Biobest Sasja HC",
+        "player": "Dils Jero",
+        "club": "HC AtomiX",
         "goals": 13
       },
       {
@@ -16952,13 +19196,13 @@
         "goals": 12
       },
       {
-        "player": "Seghers Tim",
-        "club": "HK Waasmunster",
+        "player": "Vaes Victor",
+        "club": "Sezoens Achilles Bocholt",
         "goals": 12
       },
       {
-        "player": "Vaes Victor",
-        "club": "Sezoens Achilles Bocholt",
+        "player": "Seghers Tim",
+        "club": "HK Waasmunster",
         "goals": 12
       },
       {
@@ -16970,6 +19214,16 @@
         "player": "Meale Matthieu",
         "club": "HC Sprimont",
         "goals": 10
+      },
+      {
+        "player": "Brands Cisse",
+        "club": "Sezoens Achilles Bocholt",
+        "goals": 9
+      },
+      {
+        "player": "Determe William",
+        "club": "Renaissance Montegnée HC",
+        "goals": 9
       },
       {
         "player": "Boriau Tibe",
@@ -16989,16 +19243,6 @@
       {
         "player": "Van Damme Luca",
         "club": "HK Waasmunster",
-        "goals": 9
-      },
-      {
-        "player": "Brands Cisse",
-        "club": "Sezoens Achilles Bocholt",
-        "goals": 9
-      },
-      {
-        "player": "Determe William",
-        "club": "Renaissance Montegnée HC",
         "goals": 9
       },
       {
@@ -17037,6 +19281,11 @@
         "goals": 7
       },
       {
+        "player": "Slegers Giel",
+        "club": "HC Pentagoon Kortessem",
+        "goals": 6
+      },
+      {
         "player": "Schouterden Lars",
         "club": "HB Sint-Truiden",
         "goals": 6
@@ -17057,9 +19306,9 @@
         "goals": 6
       },
       {
-        "player": "Slegers Giel",
-        "club": "HC Pentagoon Kortessem",
-        "goals": 6
+        "player": "Creemers Dieter",
+        "club": "Sezoens Achilles Bocholt",
+        "goals": 5
       },
       {
         "player": "Maes Pierre-Loup",
@@ -17082,9 +19331,14 @@
         "goals": 5
       },
       {
-        "player": "Creemers Dieter",
-        "club": "Sezoens Achilles Bocholt",
-        "goals": 5
+        "player": "Bodson Lowie",
+        "club": "HC Pentagoon Kortessem",
+        "goals": 4
+      },
+      {
+        "player": "Al-Shamsi Hasan",
+        "club": "HC Visé BM",
+        "goals": 4
       },
       {
         "player": "Beelen Kasper",
@@ -17104,16 +19358,6 @@
       {
         "player": "Borowiak Yann",
         "club": "HC Sprimont",
-        "goals": 4
-      },
-      {
-        "player": "Bodson Lowie",
-        "club": "HC Pentagoon Kortessem",
-        "goals": 4
-      },
-      {
-        "player": "Al-Shamsi Hasan",
-        "club": "HC Visé BM",
         "goals": 4
       },
       {
@@ -17140,6 +19384,11 @@
         "player": "Heyndrickx Bram",
         "club": "Sezoens Achilles Bocholt",
         "goals": 3
+      },
+      {
+        "player": "Stienen Dries",
+        "club": "Biobest Sasja HC",
+        "goals": 2
       },
       {
         "player": "Bon Jeremy",
@@ -17177,9 +19426,14 @@
         "goals": 2
       },
       {
-        "player": "Stienen Dries",
-        "club": "Biobest Sasja HC",
-        "goals": 2
+        "player": "Keukelinck Milan",
+        "club": "HK Waasmunster",
+        "goals": 1
+      },
+      {
+        "player": "Daeninck Tim",
+        "club": "Handbal Lokeren",
+        "goals": 1
       },
       {
         "player": "Van De Velde Christophe",
@@ -17229,16 +19483,6 @@
       {
         "player": "Maes Mirco",
         "club": "HC AtomiX",
-        "goals": 1
-      },
-      {
-        "player": "Keukelinck Milan",
-        "club": "HK Waasmunster",
-        "goals": 1
-      },
-      {
-        "player": "Daeninck Tim",
-        "club": "Handbal Lokeren",
         "goals": 1
       }
     ]
