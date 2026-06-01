@@ -662,7 +662,7 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
 }
 
 // ── HOME SCREEN ───────────────────────────────────────────────────────────────
-function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, onOpenArchive }) {
+function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, onOpenArchive, onOpenBelgian }) {
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
   const [type, setType] = useState("standard");
@@ -728,6 +728,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, o
           </div>
         ))}
         <div className="card card-new" onClick={() => setModal(true)}>+ New League</div>
+        <div className="card card-new" style={{ borderColor: "#4ade80", color: "#4ade80" }} onClick={onOpenBelgian}>🇧🇪 Belgian Handball</div>
         <div className="card card-new" style={{ borderColor: "#fbbf24", color: "#fbbf24" }} onClick={onOpenArchive}>📦 Archive</div>
       </div>
 
@@ -2395,6 +2396,229 @@ function LeagueEditor({ league, onChange }) {
   );
 }
 
+// ── BELGIAN HANDBALL SCREEN ───────────────────────────────────────────────────
+const VHV_DATA_URL = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/vhv-data.json";
+
+const FED_META = {
+  "VHV":       { label: "VHV",       color: "#22d3ee", desc: "Vlaamse Handbalfederatie" },
+  "LFH":       { label: "LFH",       color: "#a78bfa", desc: "Ligue Francophone de Handball" },
+  "URBH-KBHB": { label: "URBH-KBHB", color: "#fbbf24", desc: "Union Royale Belge de Handball" },
+};
+
+function useVhvData() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    fetch(VHV_DATA_URL)
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(d => setData(d))
+      .catch(() => setError(true));
+  }, []);
+  return { data, error };
+}
+
+// The top-level Belgian screen — federation picker
+function BelgianScreen({ onBack }) {
+  const { data, error } = useVhvData();
+  const [fed, setFed]   = useState(null);   // selected federation
+  const [league, setLeague] = useState(null); // selected league object
+
+  if (league) return <BelgianLeagueView league={league} onBack={() => setLeague(null)} />;
+
+  const feds = data ? Object.keys(data.federations || {}) : [];
+
+  return (
+    <div className="panel">
+      <div className="ph">
+        <div>
+          <h2>🇧🇪 Belgian Handball</h2>
+          <p style={{ color: "#5a6070", fontSize: ".82rem" }}>
+            Live competition data
+            {data?.updatedAt && (
+              <span> · updated {new Date(data.updatedAt).toLocaleString("nl-BE", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>
+            )}
+          </p>
+        </div>
+        <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
+      </div>
+
+      {!data && !error && (
+        <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading data…</div>
+      )}
+      {error && (
+        <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load data.</div>
+      )}
+
+      {data && (
+        <>
+          {/* Federation tabs */}
+          <div style={{ display: "flex", gap: ".5rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+            {Object.keys(FED_META).map(f => {
+              const available = feds.includes(f);
+              const meta = FED_META[f];
+              return (
+                <button key={f}
+                  className={"btn" + (fed === f ? "" : " btn-ghost")}
+                  style={fed === f
+                    ? { background: meta.color, color: "#08090c", border: "none" }
+                    : { opacity: available ? 1 : 0.35 }}
+                  disabled={!available}
+                  onClick={() => setFed(fed === f ? null : f)}>
+                  {meta.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* League cards for selected federation */}
+          {fed && (() => {
+            const leagues = Object.values(data.federations[fed] || {});
+            const meta = FED_META[fed];
+            if (leagues.length === 0) return (
+              <div className="muted" style={{ padding: "1.5rem", textAlign: "center" }}>No leagues available yet for {meta.label}.</div>
+            );
+            return (
+              <div className="card-grid">
+                {leagues.map(lg => {
+                  const played  = (lg.fixtures || []).filter(f => f.played).length;
+                  const pending = (lg.fixtures || []).filter(f => !f.played).length;
+                  return (
+                    <div key={lg.serieId} className="card" onClick={() => setLeague(lg)}>
+                      <div className="card-badge badge-std" style={{ borderColor: meta.color + "44", color: meta.color, background: meta.color + "18" }}>
+                        {meta.label}
+                      </div>
+                      <div className="card-name">{lg.name}</div>
+                      <div className="card-meta" style={{ marginBottom: ".3rem" }}>{lg.region}</div>
+                      <div className="card-meta">
+                        {(lg.teams || []).length} teams · {played} played · {pending} pending
+                        {lg.live && (
+                          <span style={{ display: "inline-block", marginLeft: ".4rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+
+          {!fed && feds.length === 0 && (
+            <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>No competition data fetched yet — run the fetch-vhv workflow first.</div>
+          )}
+          {!fed && feds.length > 0 && (
+            <div className="muted" style={{ padding: "1rem", textAlign: "center" }}>Select a federation above to browse leagues.</div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+// Read-only league view — reuses ArchiveLeagueView structure with live data
+function BelgianLeagueView({ league, onBack }) {
+  const [detail, setDetail] = useState(null);
+  const { teams, fixtures, settings, ranking } = league;
+
+  // Build a settings object the LeagueTable expects
+  const effectiveSettings = settings || { baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 };
+
+  const played  = (fixtures || []).filter(f => f.played).length;
+  const pending = (fixtures || []).filter(f => !f.played).length;
+
+  return (
+    <div>
+      <div className="masthead" style={{ marginBottom: "1rem" }}>
+        <div>
+          <div className="logo" style={{ fontSize: "1.1rem" }}>{league.name}</div>
+          <div className="sub" style={{ color: "#22d3ee" }}>
+            {league.federation} · {league.region}
+            {league.live && (
+              <span style={{ display: "inline-block", marginLeft: ".5rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
+            )}
+          </div>
+        </div>
+        <button className="btn btn-ghost" onClick={onBack}>← All Leagues</button>
+      </div>
+
+      {/* API ranking table — shown at top as ground truth */}
+      {ranking && ranking.length > 0 && (
+        <div style={{ marginBottom: "1.5rem" }}>
+          <div className="sub-ttl" style={{ marginBottom: ".6rem" }}>🏆 Official Standings</div>
+          <div className="tbl-wrap">
+            <table className="ltbl">
+              <thead>
+                <tr>
+                  <th style={{ width: "2rem" }}>#</th>
+                  <th className="tl">Team</th>
+                  <th>P</th>
+                  <th>W</th>
+                  <th>D</th>
+                  <th>L</th>
+                  <th>GF</th>
+                  <th>GA</th>
+                  <th className="tgd">GD</th>
+                  <th className="tpts">Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ranking.map((r, i) => {
+                  const gd = (r.gf || 0) - (r.ga || 0);
+                  return (
+                    <tr key={i}>
+                      <td className="tpos">{r.pos}</td>
+                      <td className="tl">{r.name}</td>
+                      <td>{r.played}</td>
+                      <td>{r.won}</td>
+                      <td>{r.drawn}</td>
+                      <td>{r.lost}</td>
+                      <td>{r.gf}</td>
+                      <td>{r.ga}</td>
+                      <td className={gd > 0 ? "gdp" : gd < 0 ? "gdn" : "gd0"}>{gd > 0 ? "+" : ""}{gd}</td>
+                      <td className="tpts">{r.points}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Simulator table + fixtures using the existing LeagueTable component */}
+      {teams && teams.length > 0 && fixtures && fixtures.length > 0 && (
+        <LeagueTable
+          teams={teams}
+          fixtures={fixtures}
+          settings={effectiveSettings}
+          onTeamClick={idx => setDetail(idx)}
+          highlightTop={2}
+          highlightBottom={2}
+          confirmedTop={[]}
+          confirmedBottom={[]}
+          leagueId={null}
+          aliases={{}}
+          archiveScorers={null}
+          phaseTeams={null}
+          phase="regular"
+        />
+      )}
+
+      {detail != null && (
+        <TeamDetail
+          team={teams[detail]}
+          teamIdx={detail}
+          teams={teams}
+          fixtures={fixtures}
+          onClose={() => setDetail(null)}
+          leagueId={null}
+          aliases={{}}
+          phase="regular"
+        />
+      )}
+    </div>
+  );
+}
+
 // ── ARCHIVE SCREEN ────────────────────────────────────────────────────────────
 const ARCHIVE_INDEX_URL = "https://ozzyzorcopter.github.io/handball-League/archive/index.json";
 
@@ -2578,6 +2802,7 @@ function App() {
   const [store, setStore] = useState({ leagues: [] });
   const [activeId, setActiveId] = useState(null);
   const [showArchive, setShowArchive] = useState(false);
+  const [showBelgian, setShowBelgian] = useState(false);
 
   // ── Share mode: auto-load from repo ──────────────────────────────────────
   const [loadStatus, setLoadStatus] = useState(IS_SHARE ? "loading" : "ok");
@@ -2613,6 +2838,7 @@ function App() {
 
   const active = store.leagues.find(lg => lg.id === activeId) || null;
 
+  if (showBelgian) return <BelgianScreen onBack={() => setShowBelgian(false)} />;
   if (showArchive) return <ArchiveScreen onBack={() => setShowArchive(false)} />;
 
   return (
@@ -2639,7 +2865,7 @@ function App() {
           )}
         </div>
       </div>
-      {!active && <HomeScreen leagues={store.leagues} onOpen={setActiveId} onCreate={createLeague} onDelete={deleteLeague} onToggleArchivable={toggleArchivable} onOpenArchive={() => setShowArchive(true)} />}
+      {!active && <HomeScreen leagues={store.leagues} onOpen={setActiveId} onCreate={createLeague} onDelete={deleteLeague} onToggleArchivable={toggleArchivable} onOpenArchive={() => setShowArchive(true)} onOpenBelgian={() => setShowBelgian(true)} />}
       {active && <LeagueEditor key={active.id} league={active} onChange={u => updateLeague(active.id, u)} />}
     </div>
   );

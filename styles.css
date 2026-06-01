@@ -208,6 +208,15 @@ body{font-family:'DM Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;back
 .season-card-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;color:#fbbf24;margin-bottom:.3rem;}
 .season-card-meta{font-size:.78rem;color:#5a6070;}
 
+/* ── Belgian Handball screen ─────────────────────────────────────────────── */
+.fed-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.fed-btn{padding:.5rem 1.2rem;border-radius:6px;font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;border:1px solid #252830;background:#10121a;color:#5a6070;transition:all .15s;}
+.fed-btn:hover:not(:disabled){color:#d4d8e0;border-color:#5a6070;}
+.fed-btn:disabled{opacity:.35;cursor:not-allowed;}
+.fed-btn.active-vhv{background:#22d3ee;color:#08090c;border-color:#22d3ee;}
+.fed-btn.active-lfh{background:#a78bfa;color:#08090c;border-color:#a78bfa;}
+.fed-btn.active-kbhb{background:#fbbf24;color:#08090c;border-color:#fbbf24;}
+
 /* ── VHV inline ranking expansion ───────────────────────────────────────── */
 .ranking-expand {
   background: #0d1117;
