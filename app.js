@@ -727,7 +727,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, o
             </button>
           </div>
         ))}
-        <div className="card card-new" onClick={() => setModal(true)}>+ New League</div>
+        {!IS_SHARE && <div className="card card-new" onClick={() => setModal(true)}>+ New League</div>}
         <div className="card card-new" style={{ borderColor: "#4ade80", color: "#4ade80" }} onClick={onOpenBelgian}>🇧🇪 Belgian Handball</div>
         <div className="card card-new" style={{ borderColor: "#fbbf24", color: "#fbbf24" }} onClick={onOpenArchive}>📦 Archive</div>
       </div>
@@ -2514,16 +2514,16 @@ function BelgianScreen({ onBack }) {
   );
 }
 
-// Read-only league view — reuses ArchiveLeagueView structure with live data
+// Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
   const [detail, setDetail] = useState(null);
-  const { teams, fixtures, settings, ranking } = league;
+  const [tab, setTab] = useState("table");
+  const { teams = [], fixtures = [], ranking } = league;
 
-  // Build a settings object the LeagueTable expects
-  const effectiveSettings = settings || { baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 };
+  const effectiveSettings = { baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 };
 
-  const played  = (fixtures || []).filter(f => f.played).length;
-  const pending = (fixtures || []).filter(f => !f.played).length;
+  const played  = fixtures.filter(f => f.played).length;
+  const pending = fixtures.filter(f => !f.played).length;
 
   return (
     <div>
@@ -2540,66 +2540,90 @@ function BelgianLeagueView({ league, onBack }) {
         <button className="btn btn-ghost" onClick={onBack}>← All Leagues</button>
       </div>
 
-      {/* API ranking table — shown at top as ground truth */}
-      {ranking && ranking.length > 0 && (
-        <div style={{ marginBottom: "1.5rem" }}>
-          <div className="sub-ttl" style={{ marginBottom: ".6rem" }}>🏆 Official Standings</div>
-          <div className="tbl-wrap">
-            <table className="ltbl">
-              <thead>
-                <tr>
-                  <th style={{ width: "2rem" }}>#</th>
-                  <th className="tl">Team</th>
-                  <th>P</th>
-                  <th>W</th>
-                  <th>D</th>
-                  <th>L</th>
-                  <th>GF</th>
-                  <th>GA</th>
-                  <th className="tgd">GD</th>
-                  <th className="tpts">Pts</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ranking.map((r, i) => {
-                  const gd = (r.gf || 0) - (r.ga || 0);
-                  return (
-                    <tr key={i}>
-                      <td className="tpos">{r.pos}</td>
-                      <td className="tl">{r.name}</td>
-                      <td>{r.played}</td>
-                      <td>{r.won}</td>
-                      <td>{r.drawn}</td>
-                      <td>{r.lost}</td>
-                      <td>{r.gf}</td>
-                      <td>{r.ga}</td>
-                      <td className={gd > 0 ? "gdp" : gd < 0 ? "gdn" : "gd0"}>{gd > 0 ? "+" : ""}{gd}</td>
-                      <td className="tpts">{r.points}</td>
+      {/* Tab bar */}
+      <div className="steps" style={{ marginBottom: "1rem" }}>
+        {[["table", "📊 Table"], ["fixtures", "📅 Fixtures"]].map(([id, label]) => (
+          <div key={id} className={"step" + (tab === id ? " on" : "")} onClick={() => setTab(id)}>{label}</div>
+        ))}
+      </div>
+
+      {tab === "table" && (
+        <>
+          {/* Official Standings from API */}
+          {ranking && ranking.length > 0 && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <div className="sub-ttl" style={{ marginBottom: ".6rem" }}>🏆 Official Standings</div>
+              <div className="tbl-wrap">
+                <table className="ltbl">
+                  <thead>
+                    <tr>
+                      <th style={{ width: "2rem" }}>#</th>
+                      <th className="tl">Team</th>
+                      <th title="Played">P</th>
+                      <th title="Won">W</th>
+                      <th title="Draw">D</th>
+                      <th title="Lost">L</th>
+                      <th title="Goals For">GF</th>
+                      <th title="Goals Against">GA</th>
+                      <th className="tgd" title="Goal Difference">GD</th>
+                      <th className="tpts" title="Points">Pts</th>
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                  </thead>
+                  <tbody>
+                    {ranking.map((r, i) => {
+                      const gd = (r.gf || 0) - (r.ga || 0);
+                      return (
+                        <tr key={i}>
+                          <td className="tpos">{r.pos}</td>
+                          <td className="tl">{r.name}</td>
+                          <td>{r.played}</td>
+                          <td style={{ color: "#4ade80" }}>{r.won}</td>
+                          <td style={{ color: "#facc15" }}>{r.drawn}</td>
+                          <td style={{ color: "#f87171" }}>{r.lost}</td>
+                          <td>{r.gf}</td>
+                          <td>{r.ga}</td>
+                          <td className={gd > 0 ? "gdp" : gd < 0 ? "gdn" : "gd0"}>{gd > 0 ? "+" : ""}{gd}</td>
+                          <td className="tpts">{r.points}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* Sim-based table + mini-rankings */}
+          {teams.length > 0 && fixtures.length > 0 && (
+            <LeagueTable
+              teams={teams}
+              fixtures={fixtures}
+              onTeamClick={idx => setDetail(idx)}
+              highlightTop={2}
+              highlightBottom={2}
+              confirmedTop={new Set()}
+              confirmedBottom={new Set()}
+              leagueId={null}
+              aliases={{}}
+              archiveScorers={null}
+              phaseTeams={null}
+              phase="regular"
+            />
+          )}
+        </>
       )}
 
-      {/* Simulator table + fixtures using the existing LeagueTable component */}
-      {teams && teams.length > 0 && fixtures && fixtures.length > 0 && (
-        <LeagueTable
+      {tab === "fixtures" && (
+        <ScoresTab
           teams={teams}
           fixtures={fixtures}
+          liveProbs={{}}
           settings={effectiveSettings}
+          onConfirm={null}
+          onUndo={null}
+          onOverride={null}
           onTeamClick={idx => setDetail(idx)}
-          highlightTop={2}
-          highlightBottom={2}
-          confirmedTop={[]}
-          confirmedBottom={[]}
-          leagueId={null}
-          aliases={{}}
-          archiveScorers={null}
-          phaseTeams={null}
-          phase="regular"
+          onWeekChange={null}
         />
       )}
 

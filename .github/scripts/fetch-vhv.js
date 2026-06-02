@@ -10,16 +10,45 @@ const root        = process.cwd();
 const vhvDataPath = path.join(root, "vhv-data.json");
 
 // ── LEAGUE CONFIG ─────────────────────────────────────────────────────────────
-// federation: "VHV" | "URBH-KBHB" | "LFH"
-// region: shown as subtitle on the league card (e.g. "Antwerpen", "Oost-Vlaanderen")
+// To find serie_id for a league:
+// 1. Open the competition page in browser
+// 2. DevTools → Network → XHR/Fetch → reload
+// 3. Find the request to wp-json/bpleagues/v1/proxy?...&serie_id=NNN
+//
+// organizationId: 1 = URBH-KBHB, 2 = VHV, 3 = LFH
+// Page URLs per federation:
+//   VHV:       https://www.handballbelgium.be/index.php/competition/vhv-competitions/
+//   URBH-KBHB: https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/
+//   LFH:       https://www.handballbelgium.be/index.php/competition/lfh-competitions/
+//   LFH Liège: https://www.handballbelgium.be/index.php/competition/lfh-competitions/cpl-competitions/
+//   LFH BH:    https://www.handballbelgium.be/index.php/competition/lfh-competitions/cpbh-competitions/
+//   SHL:       https://www.handballbelgium.be/index.php/competition/beneleague/
+
 const VHV_LEAGUES = [
-  { serieId: 652, seasonId: 5, organizationId: 2, name: "Liga 3",    federation: "VHV", region: "Oost-Vlaanderen",
+  // ── VHV ──────────────────────────────────────────────────────────────────
+  { serieId: 652, seasonId: 5, organizationId: 2, name: "Liga 3", federation: "VHV", region: "Oost-Vlaanderen",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=652" },
-  // Add more:
-  // { serieId: 653, seasonId: 5, organizationId: 2, name: "Liga 2", federation: "VHV", region: "...",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=653" },
-  // { serieId: 700, seasonId: 5, organizationId: 1, name: "Division 1", federation: "URBH-KBHB", region: "National",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=1&serie_id=700" },
+  // Add more VHV leagues — replace 0 with the actual serie_id from DevTools:
+  // { serieId: 0, seasonId: 5, organizationId: 2, name: "Liga 2", federation: "VHV", region: "...",
+  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=0" },
+  // { serieId: 0, seasonId: 5, organizationId: 2, name: "Liga 1", federation: "VHV", region: "...",
+  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=0" },
+  // { serieId: 0, seasonId: 5, organizationId: 2, name: "Regio OWv", federation: "VHV", region: "Oost-Vlaanderen",
+  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=0" },
+
+  // ── URBH-KBHB ────────────────────────────────────────────────────────────
+  // { serieId: 0, seasonId: 5, organizationId: 1, name: "1e Nationale", federation: "URBH-KBHB", region: "National",
+  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=0" },
+  // { serieId: 0, seasonId: 5, organizationId: 1, name: "2e Nationale", federation: "URBH-KBHB", region: "National",
+  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=0" },
+
+  // ── LFH ──────────────────────────────────────────────────────────────────
+  // { serieId: 0, seasonId: 5, organizationId: 3, name: "Division 1", federation: "LFH", region: "Liège",
+  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/lfh-competitions/cpl-competitions/?season_id=5&organization_id=3&serie_id=0" },
+
+  // ── SHL ───────────────────────────────────────────────────────────────────
+  // { serieId: 0, seasonId: 5, organizationId: 1, name: "Super Handball League", federation: "URBH-KBHB", region: "National",
+  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/beneleague/?season_id=5&organization_id=1&serie_id=0" },
 ];
 
 const BASE_URL = "https://www.handballbelgium.be/index.php/wp-json/bpleagues/v1/proxy";
