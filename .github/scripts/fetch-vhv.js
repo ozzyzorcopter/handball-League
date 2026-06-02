@@ -61,16 +61,8 @@ function normalizeWeeks(fixtures) {
 const STRIP_RE = /^(handbalclub|handbal|hbc|hc|khc|ktsv|hv|shc|ehc|kh|hvv|sezoens|besox|derdaele|db|uilenspiegel|olse|biobest\s+sasja|sasja)\s+/i;
 function norm(name) { return name.replace(STRIP_RE, "").replace(STRIP_RE, "").trim().toLowerCase(); }
 
-function buildTeamsFromRanking(rawRanking) {
-  return rawRanking.map((r, i) => ({
-    id: `t${r.team?.id ?? i}`,
-    name: r.team?.name || r.team_name || r.name || `Team ${i + 1}`,
-    points: 0,
-    homeBonus: "",
-  }));
-}
 
-function buildFixturesFromGames(rawGames, teams) {
+function buildFixturesFromGames(rawGames, teams, gameTeamName) {
   // Build name → index both exact and normalised
   const nameToIdx = new Map();
   teams.forEach((t, i) => {
@@ -94,16 +86,16 @@ function buildFixturesFromGames(rawGames, teams) {
   let counter = 0;
   const fixtures = [];
   for (const g of rawGames) {
-    const homeName = g.home_team?.name || g.home?.name || g.team_home || "";
-    const awayName = g.away_team?.name || g.away?.name || g.team_away || "";
+    const homeName = gameTeamName(g, "home") || "";
+    const awayName = gameTeamName(g, "away") || "";
     const homeIdx = resolve(homeName);
     const awayIdx = resolve(awayName);
     if (homeIdx < 0 || awayIdx < 0) {
       if (homeName || awayName) warn(`  Unmatched: "${homeName}" vs "${awayName}"`);
       continue;
     }
-    const sh = g.score_home ?? g.home_score ?? g.result?.home ?? null;
-    const sa = g.score_away ?? g.away_score ?? g.result?.away ?? null;
+    const sh = g.score_home ?? g.home_score ?? g.scoreHome ?? g.result?.home ?? g.goals_home ?? g.goalsHome ?? null;
+    const sa = g.score_away ?? g.away_score ?? g.scoreAway ?? g.result?.away ?? g.goals_away ?? g.goalsAway ?? null;
     const played = sh != null && sa != null && String(sh) !== "" && String(sa) !== "";
     fixtures.push({
       id: `f${counter++}`,
@@ -127,8 +119,10 @@ async function main() {
   // Load existing vhv-data to preserve leagues we're not fetching this run
   let existing = { updatedAt: null, federations: {} };
   if (fs.existsSync(vhvDataPath)) {
-    try { existing = JSON.parse(fs.readFileSync(vhvDataPath, "utf8")); }
-    catch { warn("Could not parse existing vhv-data.json — starting fresh"); }
+    try {
+      const parsed = JSON.parse(fs.readFileSync(vhvDataPath, "utf8"));
+      existing = { updatedAt: parsed.updatedAt || null, federations: parsed.federations || {} };
+    } catch { warn("Could not parse existing vhv-data.json — starting fresh"); }
   }
 
   const browser = await chromium.launch({ headless: true });
@@ -168,30 +162,89 @@ async function main() {
       log(`  Fetching ranking + games…`);
       const [rankingData, gamesData] = await Promise.all([fetchJson(rankingUrl), fetchJson(gamesUrl)]);
 
-      const rawRanking = Array.isArray(rankingData) ? rankingData : (rankingData.data || rankingData.ranking || Object.values(rankingData).find(Array.isArray) || []);
-      const rawGames   = Array.isArray(gamesData)   ? gamesData   : (gamesData.data   || gamesData.games   || Object.values(gamesData).find(Array.isArray)   || []);
+      // Unwrap the response — the bpleagues proxy wraps in { success, data } or returns array directly
+      function unwrapArray(resp) {
+        if (Array.isArray(resp)) return resp;
+        if (resp && Array.isArray(resp.data)) return resp.data;
+        if (resp && Array.isArray(resp.results)) return resp.results;
+        if (resp && Array.isArray(resp.ranking)) return resp.ranking;
+        if (resp && Array.isArray(resp.games)) return resp.games;
+        if (resp && typeof resp === "object") {
+          const found = Object.values(resp).find(v => Array.isArray(v) && v.length > 0);
+          if (found) return found;
+        }
+        return [];
+      }
+      const rawRanking = unwrapArray(rankingData);
+      const rawGames   = unwrapArray(gamesData);
 
       log(`  ${rawRanking.length} teams · ${rawGames.length} games`);
-      log(`  Teams: ${rawRanking.map(r => r.team?.name || r.name || "?").join(", ")}`);
 
-      const teams    = buildTeamsFromRanking(rawRanking);
-      const fixtures = buildFixturesFromGames(rawGames, teams);
+      // Log first ranking entry shape so we can see field names
+      if (rawRanking.length > 0) {
+        log(`  Ranking entry keys: ${Object.keys(rawRanking[0]).join(", ")}`);
+        const first = rawRanking[0];
+        log(`  First team sample: ${JSON.stringify(first).slice(0, 200)}`);
+      }
+      if (rawGames.length > 0) {
+        log(`  Game entry keys: ${Object.keys(rawGames[0]).join(", ")}`);
+        log(`  First game sample: ${JSON.stringify(rawGames[0]).slice(0, 200)}`);
+      }
+
+      // Extract team name from ranking entry — try every known shape
+      function rankingTeamName(r) {
+        return r.team_name
+          || r.teamName
+          || r.name
+          || r.club_name
+          || r.clubName
+          || r.team?.name
+          || r.club?.name
+          || (r.team ? (typeof r.team === "string" ? r.team : null) : null)
+          || null;
+      }
+
+      log(`  Teams: ${rawRanking.map(r => rankingTeamName(r) || "?").join(", ")}`);
+
+      const teams    = rawRanking.map((r, i) => ({
+        id: `t${r.team_id || r.id || r.team?.id || i}`,
+        name: rankingTeamName(r) || `Team ${i + 1}`,
+        points: 0,
+        homeBonus: "",
+      }));
+      // Extract team names from game entry — try every known shape
+      function gameTeamName(g, side) {
+        // side: "home" or "away"
+        const t = side === "home"
+          ? (g.home_team || g.home || g.homeTeam || {})
+          : (g.away_team || g.away || g.awayTeam || {});
+        return (typeof t === "string" ? t : null)
+          || t?.name || t?.team_name || t?.club_name
+          || g[side + "_team_name"] || g[side + "TeamName"]
+          || g["team_" + side] || g[side + "Team"]
+          || null;
+      }
+
+      const fixtures = buildFixturesFromGames(rawGames, teams, gameTeamName);
       const played   = fixtures.filter(f => f.played).length;
       const pending  = fixtures.filter(f => !f.played).length;
       log(`  Fixtures: ${fixtures.length} (${played} played, ${pending} pending)`);
 
-      // Build ranking table from raw API data
-      const ranking = rawRanking.map((r, i) => ({
-        pos:    r.rank || r.position || (i + 1),
-        name:   r.team?.name || r.team_name || r.name || `Team ${i + 1}`,
-        played: r.games_played ?? r.played ?? r.gp ?? 0,
-        won:    r.wins  ?? r.won   ?? r.w   ?? 0,
-        drawn:  r.draws ?? r.draw  ?? r.d   ?? 0,
-        lost:   r.losses ?? r.lost ?? r.l   ?? 0,
-        gf:     r.goals_for     ?? r.gf ?? 0,
-        ga:     r.goals_against ?? r.ga ?? 0,
-        points: r.points ?? r.pts ?? 0,
-      }));
+      // Build ranking table from raw API data using flexible field extraction
+      const ranking = rawRanking.map((r, i) => {
+        const gf = r.goals_for  ?? r.gf ?? r.goalsFor  ?? r.scored  ?? 0;
+        const ga = r.goals_against ?? r.ga ?? r.goalsAgainst ?? r.conceded ?? 0;
+        return {
+          pos:    r.rank || r.position || r.pos || (i + 1),
+          name:   rankingTeamName(r) || `Team ${i + 1}`,
+          played: r.games_played ?? r.played ?? r.gp ?? r.games ?? 0,
+          won:    r.wins  ?? r.won   ?? r.w  ?? 0,
+          drawn:  r.draws ?? r.draw  ?? r.d  ?? 0,
+          lost:   r.losses ?? r.lost ?? r.l  ?? 0,
+          gf, ga,
+          points: r.points ?? r.pts ?? r.point ?? 0,
+        };
+      });
 
       // Store under federation → league key
       const leagueKey = `${cfg.serieId}`;
