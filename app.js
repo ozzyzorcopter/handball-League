@@ -2488,7 +2488,6 @@ function BelgianScreen({ onBack }) {
                         {meta.label}
                       </div>
                       <div className="card-name">{lg.name}</div>
-                      <div className="card-meta" style={{ marginBottom: ".3rem" }}>{lg.region}</div>
                       <div className="card-meta">
                         {(lg.teams || []).length} teams · {played} played · {pending} pending
                         {lg.live && (
@@ -2516,14 +2515,11 @@ function BelgianScreen({ onBack }) {
 
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
-  const [detail, setDetail] = useState(null);
-  const [tab, setTab] = useState("table");
-  const { teams = [], fixtures = [], ranking } = league;
-
-  const effectiveSettings = { baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 };
-
-  const played  = fixtures.filter(f => f.played).length;
-  const pending = fixtures.filter(f => !f.played).length;
+  const [detail, setDetail]     = useState(null);
+  const [tab, setTab]           = useState("table");
+  const [settings, setSettings] = useState(league.settings || { baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
+  const [mcKey, setMcKey]       = useState(0);
+  const { teams = [], fixtures = [] } = league;
 
   return (
     <div>
@@ -2531,7 +2527,7 @@ function BelgianLeagueView({ league, onBack }) {
         <div>
           <div className="logo" style={{ fontSize: "1.1rem" }}>{league.name}</div>
           <div className="sub" style={{ color: "#22d3ee" }}>
-            {league.federation} · {league.region}
+            {league.federation}
             {league.live && (
               <span style={{ display: "inline-block", marginLeft: ".5rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
             )}
@@ -2540,77 +2536,27 @@ function BelgianLeagueView({ league, onBack }) {
         <button className="btn btn-ghost" onClick={onBack}>← All Leagues</button>
       </div>
 
-      {/* Tab bar */}
       <div className="steps" style={{ marginBottom: "1rem" }}>
-        {[["table", "📊 Table"], ["fixtures", "📅 Fixtures"]].map(([id, label]) => (
+        {[["table", "📊 Table"], ["fixtures", "📅 Fixtures"], ["sim", "🎲 Simulate"], ["settings", "⚙️ Settings"]].map(([id, label]) => (
           <div key={id} className={"step" + (tab === id ? " on" : "")} onClick={() => setTab(id)}>{label}</div>
         ))}
       </div>
 
-      {tab === "table" && (
-        <>
-          {/* Official Standings from API */}
-          {ranking && ranking.length > 0 && (
-            <div style={{ marginBottom: "1.5rem" }}>
-              <div className="sub-ttl" style={{ marginBottom: ".6rem" }}>🏆 Official Standings</div>
-              <div className="tbl-wrap">
-                <table className="ltbl">
-                  <thead>
-                    <tr>
-                      <th style={{ width: "2rem" }}>#</th>
-                      <th className="tl">Team</th>
-                      <th title="Played">P</th>
-                      <th title="Won">W</th>
-                      <th title="Draw">D</th>
-                      <th title="Lost">L</th>
-                      <th title="Goals For">GF</th>
-                      <th title="Goals Against">GA</th>
-                      <th className="tgd" title="Goal Difference">GD</th>
-                      <th className="tpts" title="Points">Pts</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {ranking.map((r, i) => {
-                      const gd = (r.gf || 0) - (r.ga || 0);
-                      return (
-                        <tr key={i}>
-                          <td className="tpos">{r.pos}</td>
-                          <td className="tl">{r.name}</td>
-                          <td>{r.played}</td>
-                          <td style={{ color: "#4ade80" }}>{r.won}</td>
-                          <td style={{ color: "#facc15" }}>{r.drawn}</td>
-                          <td style={{ color: "#f87171" }}>{r.lost}</td>
-                          <td>{r.gf}</td>
-                          <td>{r.ga}</td>
-                          <td className={gd > 0 ? "gdp" : gd < 0 ? "gdn" : "gd0"}>{gd > 0 ? "+" : ""}{gd}</td>
-                          <td className="tpts">{r.points}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          {/* Sim-based table + mini-rankings */}
-          {teams.length > 0 && fixtures.length > 0 && (
-            <LeagueTable
-              teams={teams}
-              fixtures={fixtures}
-              onTeamClick={idx => setDetail(idx)}
-              highlightTop={2}
-              highlightBottom={2}
-              confirmedTop={new Set()}
-              confirmedBottom={new Set()}
-              leagueId={null}
-              aliases={{}}
-              archiveScorers={null}
-              phaseTeams={null}
-              phase="regular"
-            />
-          )}
-        </>
+      {tab === "table" && teams.length > 0 && fixtures.length > 0 && (
+        <LeagueTable
+          teams={teams}
+          fixtures={fixtures}
+          onTeamClick={idx => setDetail(idx)}
+          highlightTop={2}
+          highlightBottom={2}
+          confirmedTop={new Set()}
+          confirmedBottom={new Set()}
+          leagueId={null}
+          aliases={{}}
+          archiveScorers={null}
+          phaseTeams={null}
+          phase="regular"
+        />
       )}
 
       {tab === "fixtures" && (
@@ -2618,13 +2564,41 @@ function BelgianLeagueView({ league, onBack }) {
           teams={teams}
           fixtures={fixtures}
           liveProbs={{}}
-          settings={effectiveSettings}
+          settings={settings}
           onConfirm={null}
           onUndo={null}
           onOverride={null}
           onTeamClick={idx => setDetail(idx)}
           onWeekChange={null}
         />
+      )}
+
+      {tab === "sim" && (
+        <MCTab
+          key={mcKey}
+          teams={teams}
+          fixtures={fixtures}
+          settings={settings}
+          highlightTop={2}
+          highlightBottom={2}
+          onConfirmed={null}
+        />
+      )}
+
+      {tab === "settings" && (
+        <div>
+          <SettingsPanel
+            settings={settings}
+            onChange={setSettings}
+            showTiebreakers={false}
+            readOnly={false}
+          />
+          <div style={{ marginTop: "1rem" }}>
+            <button className="btn btn-cyan" onClick={() => { setMcKey(k => k + 1); setTab("sim"); }}>
+              ▶ Re-run simulation with new settings
+            </button>
+          </div>
+        </div>
       )}
 
       {detail != null && (

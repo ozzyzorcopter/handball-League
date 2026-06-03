@@ -10,45 +10,49 @@ const root        = process.cwd();
 const vhvDataPath = path.join(root, "vhv-data.json");
 
 // ── LEAGUE CONFIG ─────────────────────────────────────────────────────────────
-// To find serie_id for a league:
-// 1. Open the competition page in browser
-// 2. DevTools → Network → XHR/Fetch → reload
-// 3. Find the request to wp-json/bpleagues/v1/proxy?...&serie_id=NNN
-//
+// serie_ids extracted from the competition URLs provided.
+// Names marked with ? need confirmation after first fetch (check the Actions log).
 // organizationId: 1 = URBH-KBHB, 2 = VHV, 3 = LFH
-// Page URLs per federation:
-//   VHV:       https://www.handballbelgium.be/index.php/competition/vhv-competitions/
-//   URBH-KBHB: https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/
-//   LFH:       https://www.handballbelgium.be/index.php/competition/lfh-competitions/
-//   LFH Liège: https://www.handballbelgium.be/index.php/competition/lfh-competitions/cpl-competitions/
-//   LFH BH:    https://www.handballbelgium.be/index.php/competition/lfh-competitions/cpbh-competitions/
-//   SHL:       https://www.handballbelgium.be/index.php/competition/beneleague/
-
 const VHV_LEAGUES = [
   // ── VHV ──────────────────────────────────────────────────────────────────
-  { serieId: 652, seasonId: 5, organizationId: 2, name: "Liga 3", federation: "VHV", region: "Oost-Vlaanderen",
+  { serieId: 650, seasonId: 5, organizationId: 2, name: "Regio OWv A",   federation: "VHV", region: "Oost-Vlaanderen",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=650" },
+  { serieId: 651, seasonId: 5, organizationId: 2, name: "Regio OWv B",   federation: "VHV", region: "Oost-Vlaanderen",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=651" },
+  { serieId: 652, seasonId: 5, organizationId: 2, name: "Liga 3",        federation: "VHV", region: "Oost-Vlaanderen",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=652" },
-  // Add more VHV leagues — replace 0 with the actual serie_id from DevTools:
-  // { serieId: 0, seasonId: 5, organizationId: 2, name: "Liga 2", federation: "VHV", region: "...",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=0" },
-  // { serieId: 0, seasonId: 5, organizationId: 2, name: "Liga 1", federation: "VHV", region: "...",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=0" },
-  // { serieId: 0, seasonId: 5, organizationId: 2, name: "Regio OWv", federation: "VHV", region: "Oost-Vlaanderen",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=0" },
+  { serieId: 653, seasonId: 5, organizationId: 2, name: "Liga 2",        federation: "VHV", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=653" },
+  { serieId: 654, seasonId: 5, organizationId: 2, name: "VHV 654 ?",    federation: "VHV", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=654" },
+  { serieId: 655, seasonId: 5, organizationId: 2, name: "VHV 655 ?",    federation: "VHV", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=655" },
+  { serieId: 656, seasonId: 5, organizationId: 2, name: "VHV 656 ?",    federation: "VHV", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=656" },
 
   // ── URBH-KBHB ────────────────────────────────────────────────────────────
-  // { serieId: 0, seasonId: 5, organizationId: 1, name: "1e Nationale", federation: "URBH-KBHB", region: "National",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=0" },
-  // { serieId: 0, seasonId: 5, organizationId: 1, name: "2e Nationale", federation: "URBH-KBHB", region: "National",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=0" },
-
-  // ── LFH ──────────────────────────────────────────────────────────────────
-  // { serieId: 0, seasonId: 5, organizationId: 3, name: "Division 1", federation: "LFH", region: "Liège",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/lfh-competitions/cpl-competitions/?season_id=5&organization_id=3&serie_id=0" },
-
-  // ── SHL ───────────────────────────────────────────────────────────────────
-  // { serieId: 0, seasonId: 5, organizationId: 1, name: "Super Handball League", federation: "URBH-KBHB", region: "National",
-  //   pageUrl: "https://www.handballbelgium.be/index.php/competition/beneleague/?season_id=5&organization_id=1&serie_id=0" },
+  { serieId: 645, seasonId: 5, organizationId: 1, name: "KBHB 645 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=645" },
+  { serieId: 646, seasonId: 5, organizationId: 1, name: "KBHB 646 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=646" },
+  { serieId: 647, seasonId: 5, organizationId: 1, name: "KBHB 647 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=647" },
+  { serieId: 649, seasonId: 5, organizationId: 1, name: "KBHB 649 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=649" },
+  { serieId: 868, seasonId: 5, organizationId: 1, name: "KBHB 868 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=868" },
+  { serieId: 869, seasonId: 5, organizationId: 1, name: "KBHB 869 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=869" },
+  { serieId: 870, seasonId: 5, organizationId: 1, name: "KBHB 870 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=870" },
+  { serieId: 872, seasonId: 5, organizationId: 1, name: "KBHB 872 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=872" },
+  { serieId: 873, seasonId: 5, organizationId: 1, name: "KBHB 873 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=873" },
+  { serieId: 874, seasonId: 5, organizationId: 1, name: "KBHB 874 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=874" },
+  { serieId: 878, seasonId: 5, organizationId: 1, name: "KBHB 878 ?",   federation: "URBH-KBHB", region: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=878" },
 ];
 
 const BASE_URL = "https://www.handballbelgium.be/index.php/wp-json/bpleagues/v1/proxy";
@@ -209,6 +213,17 @@ async function main() {
 
       log(`  ${rawRanking.length} teams · ${rawGames.length} games`);
 
+      // Auto-detect name from API response if config name ends with ?
+      let leagueName = cfg.name;
+      if (cfg.name.endsWith("?")) {
+        const apiName = rankingData?.competition_name || rankingData?.serie_name
+          || rankingData?.name || rankingData?.data?.name
+          || gamesData?.competition_name || gamesData?.serie_name || gamesData?.name
+          || null;
+        if (apiName) { leagueName = apiName; log(`  Auto-name: "${apiName}"`); }
+        else log(`  Could not auto-detect name — keeping "${cfg.name}"`);
+      }
+
       // Log first ranking entry shape so we can see field names
       if (rawRanking.length > 0) {
         log(`  Ranking entry keys: ${Object.keys(rawRanking[0]).join(", ")}`);
@@ -279,10 +294,10 @@ async function main() {
       const leagueKey = `${cfg.serieId}`;
       if (!existing.federations[cfg.federation]) existing.federations[cfg.federation] = {};
       existing.federations[cfg.federation][leagueKey] = {
-        serieId:     cfg.serieId,
-        name:        cfg.name,
-        federation:  cfg.federation,
-        region:      cfg.region,
+        serieId:    cfg.serieId,
+        name:       leagueName,
+        federation: cfg.federation,
+        region:     cfg.region,
         updatedAt:   new Date().toISOString(),
         live:        pending > 0,
         teams,
