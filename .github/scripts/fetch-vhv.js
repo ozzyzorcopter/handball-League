@@ -83,6 +83,36 @@ async function extractNonce(page) {
   });
 }
 
+// Load a page and extract nonce — uses domcontentloaded (fast) + short wait
+async function loadPageAndGetNonce(page, url) {
+  log(`  Loading page…`);
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+  // Wait up to 5s for nonce to appear in DOM (injected by inline script)
+  let nonce = null;
+  for (let i = 0; i < 10; i++) {
+    nonce = await extractNonce(page);
+    if (nonce) break;
+    await page.waitForTimeout(500);
+  }
+  // Fallback: intercept network requests for nonce header
+  if (!nonce) {
+    warn("  Nonce not in DOM — intercepting network requests");
+    let intercepted = null;
+    const handler = req => { const h = req.headers(); if (h["x-wp-nonce"]) intercepted = h["x-wp-nonce"]; };
+    page.on("request", handler);
+    // Trigger a fetch from within the page to any bpleagues endpoint
+    await page.evaluate(async () => {
+      try {
+        await fetch("/index.php/wp-json/bpleagues/v1/proxy?_path=ping", { credentials: "include" });
+      } catch {}
+    });
+    await page.waitForTimeout(2000);
+    page.off("request", handler);
+    nonce = intercepted;
+  }
+  return nonce;
+}
+
 // ── DATA PARSING ──────────────────────────────────────────────────────────────
 // Both ranking and games are wrapped: { elements: [...], total: N }
 function getElements(resp) {
@@ -205,83 +235,98 @@ async function main() {
   const browser = await chromium.launch({ headless: true });
   const results  = [];
 
+  // Group leagues by federation base URL — one page load per federation
+  const pageGroups = new Map();
   for (const cfg of VHV_LEAGUES) {
-    log(`\n${cfg.federation} serie ${cfg.serieId}`);
+    const baseUrl = cfg.pageUrl.split("?")[0];
+    if (!pageGroups.has(baseUrl)) pageGroups.set(baseUrl, []);
+    pageGroups.get(baseUrl).push(cfg);
+  }
+
+  for (const [, leagues] of pageGroups) {
+    const firstCfg = leagues[0];
     const context = await browser.newContext({
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0",
     });
     const page = await context.newPage();
 
+    log(`\nLoading ${firstCfg.federation} page (${leagues.length} leagues)…`);
+    let nonce;
     try {
-      log(`  Loading page…`);
-      await page.goto(cfg.pageUrl, { waitUntil: "networkidle", timeout: 30000 });
-      let nonce = await extractNonce(page);
-
-      if (!nonce) {
-        warn("  Nonce not in DOM — intercepting network");
-        let intercepted = null;
-        page.on("request", req => { const h = req.headers(); if (h["x-wp-nonce"]) intercepted = h["x-wp-nonce"]; });
-        await page.reload({ waitUntil: "networkidle", timeout: 30000 });
-        nonce = intercepted;
-      }
-      if (!nonce) throw new Error("Could not extract nonce");
-
-      const fetchJson = (url) => page.evaluate(async ({ url, nonce }) => {
-        const r = await fetch(url, {
-          headers: { Accept: "application/json", "X-WP-Nonce": nonce },
-          credentials: "include",
-        });
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.json();
-      }, { url, nonce });
-
-      const rankingUrl = `${BASE_URL}?serie_id=${cfg.serieId}&_path=ranking/byMyLeague`;
-      const gamesUrl   = `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${cfg.seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
-
-      const [rankingData, gamesData] = await Promise.all([
-        fetchJson(rankingUrl),
-        fetchJson(gamesUrl),
-      ]);
-
-      const rankingElements = getElements(rankingData);
-      const gameElements    = getElements(gamesData);
-
-      // Auto-detect league name from serie_name in game entries
-      const serieName = gameElements[0]?.serie_name
-        || gameElements[0]?.serie_short_name
-        || `Serie ${cfg.serieId}`;
-
-      log(`  Name: "${serieName}" · ${rankingElements.length} teams · ${gameElements.length} games`);
-
-      const teams    = buildTeams(rankingElements);
-      const ranking  = buildRanking(rankingElements);
-      const fixtures = buildFixtures(gameElements, teams);
-
-      const played  = fixtures.filter(f => f.played).length;
-      const pending = fixtures.filter(f => !f.played).length;
-      log(`  Fixtures: ${fixtures.length} (${played} played, ${pending} pending)`);
-      log(`  Teams: ${teams.map(t => t.name).join(", ")}`);
-
-      if (!existing.federations[cfg.federation]) existing.federations[cfg.federation] = {};
-      existing.federations[cfg.federation][String(cfg.serieId)] = {
-        serieId:    cfg.serieId,
-        name:       serieName,
-        federation: cfg.federation,
-        updatedAt:  new Date().toISOString(),
-        live:       pending > 0,
-        teams,
-        fixtures,
-        ranking,
-      };
-
-      results.push({ serieId: cfg.serieId, name: serieName, ok: true, played, pending });
-
+      nonce = await loadPageAndGetNonce(page, firstCfg.pageUrl);
+      if (!nonce) throw new Error("Could not extract nonce from page");
+      log(`  Nonce: ${nonce}`);
     } catch (err) {
-      console.error(`  ✗ FAILED: ${err.message}`);
-      results.push({ serieId: cfg.serieId, ok: false, error: err.message });
-    } finally {
+      console.error(`  ✗ Failed to load ${firstCfg.federation} page: ${err.message}`);
+      for (const cfg of leagues) results.push({ serieId: cfg.serieId, ok: false, error: err.message });
       await context.close();
+      continue;
     }
+
+    const fetchJson = (url) => page.evaluate(async ({ url, nonce }) => {
+      const r = await fetch(url, {
+        headers: { Accept: "application/json", "X-WP-Nonce": nonce },
+        credentials: "include",
+      });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }, { url, nonce });
+
+    for (const cfg of leagues) {
+      log(`\n  Serie ${cfg.serieId}`);
+      try {
+        const rankingUrl = `${BASE_URL}?serie_id=${cfg.serieId}&_path=ranking/byMyLeague`;
+        const gamesUrl   = `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${cfg.seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
+
+        const [rankingData, gamesData] = await Promise.all([
+          fetchJson(rankingUrl),
+          fetchJson(gamesUrl),
+        ]);
+
+        const rankingElements = getElements(rankingData);
+        const gameElements    = getElements(gamesData);
+
+        if (rankingElements.length === 0 && gameElements.length === 0) {
+          throw new Error("Empty response — serie may not exist or have no data yet");
+        }
+
+        const serieName = gameElements[0]?.serie_name
+          || gameElements[0]?.serie_short_name
+          || rankingElements[0]?.serie_name
+          || `Serie ${cfg.serieId}`;
+
+        log(`    "${serieName}" · ${rankingElements.length} teams · ${gameElements.length} games`);
+
+        const teams    = buildTeams(rankingElements);
+        const ranking  = buildRanking(rankingElements);
+        const fixtures = buildFixtures(gameElements, teams);
+
+        const played  = fixtures.filter(f => f.played).length;
+        const pending = fixtures.filter(f => !f.played).length;
+        log(`    Fixtures: ${fixtures.length} (${played} played, ${pending} pending)`);
+        log(`    Teams: ${teams.map(t => t.name).join(", ")}`);
+
+        if (!existing.federations[cfg.federation]) existing.federations[cfg.federation] = {};
+        existing.federations[cfg.federation][String(cfg.serieId)] = {
+          serieId:    cfg.serieId,
+          name:       serieName,
+          federation: cfg.federation,
+          updatedAt:  new Date().toISOString(),
+          live:       pending > 0,
+          teams,
+          fixtures,
+          ranking,
+        };
+
+        results.push({ serieId: cfg.serieId, name: serieName, ok: true, played, pending });
+
+      } catch (err) {
+        console.error(`    ✗ FAILED: ${err.message}`);
+        results.push({ serieId: cfg.serieId, ok: false, error: err.message });
+      }
+    }
+
+    await context.close();
   }
 
   await browser.close();
