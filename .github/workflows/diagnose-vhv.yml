@@ -1,0 +1,29 @@
+name: Diagnose VHV API
+
+on:
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Playwright + Chromium
+        run: |
+          npm install playwright-core
+          npx playwright install chromium --with-deps
+
+      - name: Run diagnose script
+        run: node .github/scripts/diagnose-vhv.js
+
+      - name: Upload diagnose output
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnose-output
+          path: diagnose-output.json
