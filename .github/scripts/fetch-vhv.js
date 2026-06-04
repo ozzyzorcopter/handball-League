@@ -1,6 +1,16 @@
 // .github/scripts/fetch-vhv.js
-// Fetches live VHV handball data via Playwright (headless browser for nonce).
-// Writes vhv-data.json — grouped by federation. Does NOT touch leaguesim-data.json.
+// Fetches live VHV/KBHB handball data via Playwright.
+// Writes vhv-data.json grouped by federation. Does NOT touch leaguesim-data.json.
+//
+// API response shape (confirmed from diagnose-output.json):
+//   ranking: { elements: [...], total: N }
+//     entry fields: team_name, team_short_name, position, played, wins, losses,
+//                   draws, score_for, score_against, points, team_id
+//   games: { elements: [...], total: N }
+//     entry fields: home_team_name, home_team_short_name, away_team_name,
+//                   away_team_short_name, home_score, away_score,
+//                   round (match round 1-N), week (calendar week),
+//                   date, time, game_status_id (2=validated), serie_name
 
 const { chromium } = require("playwright-core");
 const fs   = require("fs");
@@ -10,48 +20,48 @@ const root        = process.cwd();
 const vhvDataPath = path.join(root, "vhv-data.json");
 
 // ── LEAGUE CONFIG ─────────────────────────────────────────────────────────────
-// serie_ids extracted from the competition URLs provided.
-// Names marked with ? need confirmation after first fetch (check the Actions log).
-// organizationId: 1 = URBH-KBHB, 2 = VHV, 3 = LFH
+// serie_ids confirmed from competition URLs.
+// name will be auto-detected from serie_name in the API response.
+// organizationId: 1=URBH-KBHB, 2=VHV, 3=LFH
 const VHV_LEAGUES = [
-  // ── VHV ──────────────────────────────────────────────────────────────────
-  { serieId: 650, seasonId: 5, organizationId: 2, name: "Regio OWv A",   federation: "VHV", region: "Oost-Vlaanderen",
+  // ── VHV ────────────────────────────────────────────────────────────────
+  { serieId: 650, seasonId: 5, organizationId: 2, federation: "VHV",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=650" },
-  { serieId: 651, seasonId: 5, organizationId: 2, name: "Regio OWv B",   federation: "VHV", region: "Oost-Vlaanderen",
+  { serieId: 651, seasonId: 5, organizationId: 2, federation: "VHV",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=651" },
-  { serieId: 652, seasonId: 5, organizationId: 2, name: "Liga 3",        federation: "VHV", region: "Oost-Vlaanderen",
+  { serieId: 652, seasonId: 5, organizationId: 2, federation: "VHV",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=652" },
-  { serieId: 653, seasonId: 5, organizationId: 2, name: "Liga 2",        federation: "VHV", region: "",
+  { serieId: 653, seasonId: 5, organizationId: 2, federation: "VHV",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=653" },
-  { serieId: 654, seasonId: 5, organizationId: 2, name: "VHV 654 ?",    federation: "VHV", region: "",
+  { serieId: 654, seasonId: 5, organizationId: 2, federation: "VHV",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=654" },
-  { serieId: 655, seasonId: 5, organizationId: 2, name: "VHV 655 ?",    federation: "VHV", region: "",
+  { serieId: 655, seasonId: 5, organizationId: 2, federation: "VHV",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=655" },
-  { serieId: 656, seasonId: 5, organizationId: 2, name: "VHV 656 ?",    federation: "VHV", region: "",
+  { serieId: 656, seasonId: 5, organizationId: 2, federation: "VHV",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=656" },
 
-  // ── URBH-KBHB ────────────────────────────────────────────────────────────
-  { serieId: 645, seasonId: 5, organizationId: 1, name: "KBHB 645 ?",   federation: "URBH-KBHB", region: "",
+  // ── URBH-KBHB ──────────────────────────────────────────────────────────
+  { serieId: 645, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=645" },
-  { serieId: 646, seasonId: 5, organizationId: 1, name: "KBHB 646 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 646, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=646" },
-  { serieId: 647, seasonId: 5, organizationId: 1, name: "KBHB 647 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 647, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=647" },
-  { serieId: 649, seasonId: 5, organizationId: 1, name: "KBHB 649 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 649, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=649" },
-  { serieId: 868, seasonId: 5, organizationId: 1, name: "KBHB 868 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 868, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=868" },
-  { serieId: 869, seasonId: 5, organizationId: 1, name: "KBHB 869 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 869, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=869" },
-  { serieId: 870, seasonId: 5, organizationId: 1, name: "KBHB 870 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 870, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=870" },
-  { serieId: 872, seasonId: 5, organizationId: 1, name: "KBHB 872 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 872, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=872" },
-  { serieId: 873, seasonId: 5, organizationId: 1, name: "KBHB 873 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 873, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=873" },
-  { serieId: 874, seasonId: 5, organizationId: 1, name: "KBHB 874 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 874, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=874" },
-  { serieId: 878, seasonId: 5, organizationId: 1, name: "KBHB 878 ?",   federation: "URBH-KBHB", region: "",
+  { serieId: 878, seasonId: 5, organizationId: 1, federation: "URBH-KBHB",
     pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=878" },
 ];
 
@@ -60,7 +70,7 @@ const BASE_URL = "https://www.handballbelgium.be/index.php/wp-json/bpleagues/v1/
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-// ── NONCE ─────────────────────────────────────────────────────────────────────
+// ── NONCE EXTRACTION ──────────────────────────────────────────────────────────
 async function extractNonce(page) {
   return page.evaluate(() => {
     if (window.bpleagues?.nonce) return window.bpleagues.nonce;
@@ -73,83 +83,117 @@ async function extractNonce(page) {
   });
 }
 
-// ── WEEK NORMALISATION ────────────────────────────────────────────────────────
-function normalizeWeeks(fixtures) {
-  const sorted = [...fixtures].sort((a, b) => {
-    if (a.date && b.date) return a.date.localeCompare(b.date);
-    return (a.week ?? 9999) - (b.week ?? 9999);
-  });
-  const groups = []; let lastKey = null;
-  for (const f of sorted) {
-    const key = f.week != null ? `w${f.week}` : (f.date?.slice(0, 10) ?? null);
-    if (key !== lastKey) { groups.push([]); lastKey = key; }
-    groups[groups.length - 1].push(f);
+// ── DATA PARSING ──────────────────────────────────────────────────────────────
+// Both ranking and games are wrapped: { elements: [...], total: N }
+function getElements(resp) {
+  if (Array.isArray(resp)) return resp;
+  if (Array.isArray(resp?.elements)) return resp.elements;
+  // Fallback: find any array value
+  if (resp && typeof resp === "object") {
+    const found = Object.values(resp).find(v => Array.isArray(v));
+    if (found) return found;
   }
-  const weekMap = new Map();
-  groups.forEach((g, i) => g.forEach(f => weekMap.set(f.id, i + 1)));
-  return fixtures.map(f => ({ ...f, week: weekMap.get(f.id) ?? f.week }));
+  return [];
 }
 
-// ── FUZZY TEAM MATCHING ───────────────────────────────────────────────────────
-const STRIP_RE = /^(handbalclub|handbal|hbc|hc|khc|ktsv|hv|shc|ehc|kh|hvv|sezoens|besox|derdaele|db|uilenspiegel|olse|biobest\s+sasja|sasja)\s+/i;
-function norm(name) { return name.replace(STRIP_RE, "").replace(STRIP_RE, "").trim().toLowerCase(); }
+function buildTeams(rankingElements) {
+  // Sort by position ascending
+  const sorted = [...rankingElements].sort((a, b) => (a.position || 0) - (b.position || 0));
+  return sorted.map(r => ({
+    id:        `t${r.team_id}`,
+    name:      r.team_short_name || r.team_name,
+    points:    0,
+    homeBonus: "",
+  }));
+}
 
+function buildRanking(rankingElements) {
+  const sorted = [...rankingElements].sort((a, b) => (a.position || 0) - (b.position || 0));
+  return sorted.map(r => ({
+    pos:    r.position,
+    name:   r.team_short_name || r.team_name,
+    played: r.played       || 0,
+    won:    r.wins         || 0,
+    drawn:  r.draws        || 0,
+    lost:   r.losses       || 0,
+    gf:     r.score_for    || 0,
+    ga:     r.score_against || 0,
+    points: r.points       || 0,
+  }));
+}
 
-function buildFixturesFromGames(rawGames, teams, gameTeamName) {
-  // Build name → index both exact and normalised
+function buildFixtures(gameElements, teams) {
+  // Build lookup: short_name → index, full_name → index
   const nameToIdx = new Map();
   teams.forEach((t, i) => {
     nameToIdx.set(t.name.toLowerCase(), i);
-    nameToIdx.set(norm(t.name), i);
   });
 
-  const resolve = (apiName) => {
-    if (!apiName) return -1;
-    const exact = nameToIdx.get(apiName.toLowerCase());
-    if (exact != null) return exact;
-    const normalised = nameToIdx.get(norm(apiName));
-    if (normalised != null) return normalised;
-    // Substring fallback
-    for (const [k, v] of nameToIdx) {
-      if (k.includes(norm(apiName)) || norm(apiName).includes(k)) return v;
+  // Also index by team_id via ranking — but we only have short_name in games
+  // Use short_name first, fall back to full name
+  function resolve(shortName, fullName) {
+    const s = shortName?.toLowerCase();
+    const f = fullName?.toLowerCase();
+    if (s && nameToIdx.has(s)) return nameToIdx.get(s);
+    if (f && nameToIdx.has(f)) return nameToIdx.get(f);
+    // Partial match fallback
+    if (s) {
+      for (const [k, v] of nameToIdx) {
+        if (k.includes(s) || s.includes(k)) return v;
+      }
     }
     return -1;
-  };
+  }
 
   let counter = 0;
   const fixtures = [];
-  for (const g of rawGames) {
-    const homeName = gameTeamName(g, "home") || "";
-    const awayName = gameTeamName(g, "away") || "";
-    const homeIdx = resolve(homeName);
-    const awayIdx = resolve(awayName);
-    if (homeIdx < 0 || awayIdx < 0) {
-      if (homeName || awayName) warn(`  Unmatched: "${homeName}" vs "${awayName}"`);
-      continue;
-    }
-    const sh = g.score_home ?? g.home_score ?? g.scoreHome ?? g.result?.home ?? g.goals_home ?? g.goalsHome ?? null;
-    const sa = g.score_away ?? g.away_score ?? g.scoreAway ?? g.result?.away ?? g.goals_away ?? g.goalsAway ?? null;
-    const played = sh != null && sa != null && String(sh) !== "" && String(sa) !== "";
+  const unmatched = new Set();
+
+  for (const g of gameElements) {
+    const homeIdx = resolve(g.home_team_short_name, g.home_team_name);
+    const awayIdx = resolve(g.away_team_short_name, g.away_team_name);
+
+    if (homeIdx < 0) { unmatched.add(g.home_team_short_name || g.home_team_name); continue; }
+    if (awayIdx < 0) { unmatched.add(g.away_team_short_name || g.away_team_name); continue; }
+
+    // game_status_id=2 means validated/played. score_status_id=2 means score confirmed.
+    // A game is "played" if it has a game_status_id of 2 AND scores are present.
+    const played = g.game_status_id === 2
+      && g.home_score != null && g.away_score != null;
+
     fixtures.push({
-      id: `f${counter++}`,
-      homeIdx, awayIdx,
-      homeWin: 50, draw: 6, awayWin: 44,
-      overrideOn: false, ovHW: "", ovD: "", ovAW: "",
+      id:        `f${counter++}`,
+      homeIdx,
+      awayIdx,
+      homeWin:   50,
+      draw:      6,
+      awayWin:   44,
+      overrideOn: false,
+      ovHW: "", ovD: "", ovAW: "",
       played,
-      homeScore: played ? Number(sh) : null,
-      awayScore: played ? Number(sa) : null,
-      week: g.round_number ?? g.round ?? g.week ?? null,
-      date:  g.date || g.game_date || g.datetime || null,
+      homeScore: played ? Number(g.home_score) : null,
+      awayScore: played ? Number(g.away_score) : null,
+      week:      Number(g.round),   // round = match round (1-N), not calendar week
+      date:      g.date || null,
     });
   }
-  return normalizeWeeks(fixtures);
+
+  if (unmatched.size > 0) {
+    warn(`  Unmatched team names: ${[...unmatched].join(", ")}`);
+    warn(`  Known team names: ${teams.map(t => t.name).join(", ")}`);
+  }
+
+  // Sort by round then date
+  fixtures.sort((a, b) => (a.week || 0) - (b.week || 0) || (a.date || "").localeCompare(b.date || ""));
+  return fixtures;
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
   log(`Starting at ${new Date().toUTCString()}`);
+  log(`${VHV_LEAGUES.length} league(s) configured`);
 
-  // Load existing vhv-data to preserve leagues we're not fetching this run
+  // Load existing vhv-data to preserve leagues not being re-fetched
   let existing = { updatedAt: null, federations: {} };
   if (fs.existsSync(vhvDataPath)) {
     try {
@@ -159,10 +203,10 @@ async function main() {
   }
 
   const browser = await chromium.launch({ headless: true });
-  const results  = [];   // per-league fetch results for logging
+  const results  = [];
 
   for (const cfg of VHV_LEAGUES) {
-    log(`\n${cfg.federation} · ${cfg.name} (${cfg.region}) — serie ${cfg.serieId}`);
+    log(`\n${cfg.federation} serie ${cfg.serieId}`);
     const context = await browser.newContext({
       userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0",
     });
@@ -181,135 +225,60 @@ async function main() {
         nonce = intercepted;
       }
       if (!nonce) throw new Error("Could not extract nonce");
-      log(`  Nonce: ${nonce}`);
 
       const fetchJson = (url) => page.evaluate(async ({ url, nonce }) => {
-        const r = await fetch(url, { headers: { Accept: "application/json", "X-WP-Nonce": nonce }, credentials: "include" });
+        const r = await fetch(url, {
+          headers: { Accept: "application/json", "X-WP-Nonce": nonce },
+          credentials: "include",
+        });
         if (!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
       }, { url, nonce });
 
-      const gamesUrl   = `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${cfg.seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
       const rankingUrl = `${BASE_URL}?serie_id=${cfg.serieId}&_path=ranking/byMyLeague`;
+      const gamesUrl   = `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${cfg.seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
 
-      log(`  Fetching ranking + games…`);
-      const [rankingData, gamesData] = await Promise.all([fetchJson(rankingUrl), fetchJson(gamesUrl)]);
+      const [rankingData, gamesData] = await Promise.all([
+        fetchJson(rankingUrl),
+        fetchJson(gamesUrl),
+      ]);
 
-      // Unwrap the response — the bpleagues proxy wraps in { success, data } or returns array directly
-      function unwrapArray(resp) {
-        if (Array.isArray(resp)) return resp;
-        if (resp && Array.isArray(resp.data)) return resp.data;
-        if (resp && Array.isArray(resp.results)) return resp.results;
-        if (resp && Array.isArray(resp.ranking)) return resp.ranking;
-        if (resp && Array.isArray(resp.games)) return resp.games;
-        if (resp && typeof resp === "object") {
-          const found = Object.values(resp).find(v => Array.isArray(v) && v.length > 0);
-          if (found) return found;
-        }
-        return [];
-      }
-      const rawRanking = unwrapArray(rankingData);
-      const rawGames   = unwrapArray(gamesData);
+      const rankingElements = getElements(rankingData);
+      const gameElements    = getElements(gamesData);
 
-      log(`  ${rawRanking.length} teams · ${rawGames.length} games`);
+      // Auto-detect league name from serie_name in game entries
+      const serieName = gameElements[0]?.serie_name
+        || gameElements[0]?.serie_short_name
+        || `Serie ${cfg.serieId}`;
 
-      // Auto-detect name from API response if config name ends with ?
-      let leagueName = cfg.name;
-      if (cfg.name.endsWith("?")) {
-        const apiName = rankingData?.competition_name || rankingData?.serie_name
-          || rankingData?.name || rankingData?.data?.name
-          || gamesData?.competition_name || gamesData?.serie_name || gamesData?.name
-          || null;
-        if (apiName) { leagueName = apiName; log(`  Auto-name: "${apiName}"`); }
-        else log(`  Could not auto-detect name — keeping "${cfg.name}"`);
-      }
+      log(`  Name: "${serieName}" · ${rankingElements.length} teams · ${gameElements.length} games`);
 
-      // Log first ranking entry shape so we can see field names
-      if (rawRanking.length > 0) {
-        log(`  Ranking entry keys: ${Object.keys(rawRanking[0]).join(", ")}`);
-        const first = rawRanking[0];
-        log(`  First team sample: ${JSON.stringify(first).slice(0, 200)}`);
-      }
-      if (rawGames.length > 0) {
-        log(`  Game entry keys: ${Object.keys(rawGames[0]).join(", ")}`);
-        log(`  First game sample: ${JSON.stringify(rawGames[0]).slice(0, 200)}`);
-      }
+      const teams    = buildTeams(rankingElements);
+      const ranking  = buildRanking(rankingElements);
+      const fixtures = buildFixtures(gameElements, teams);
 
-      // Extract team name from ranking entry — try every known shape
-      function rankingTeamName(r) {
-        return r.team_name
-          || r.teamName
-          || r.name
-          || r.club_name
-          || r.clubName
-          || r.team?.name
-          || r.club?.name
-          || (r.team ? (typeof r.team === "string" ? r.team : null) : null)
-          || null;
-      }
-
-      log(`  Teams: ${rawRanking.map(r => rankingTeamName(r) || "?").join(", ")}`);
-
-      const teams    = rawRanking.map((r, i) => ({
-        id: `t${r.team_id || r.id || r.team?.id || i}`,
-        name: rankingTeamName(r) || `Team ${i + 1}`,
-        points: 0,
-        homeBonus: "",
-      }));
-      // Extract team names from game entry — try every known shape
-      function gameTeamName(g, side) {
-        // side: "home" or "away"
-        const t = side === "home"
-          ? (g.home_team || g.home || g.homeTeam || {})
-          : (g.away_team || g.away || g.awayTeam || {});
-        return (typeof t === "string" ? t : null)
-          || t?.name || t?.team_name || t?.club_name
-          || g[side + "_team_name"] || g[side + "TeamName"]
-          || g["team_" + side] || g[side + "Team"]
-          || null;
-      }
-
-      const fixtures = buildFixturesFromGames(rawGames, teams, gameTeamName);
-      const played   = fixtures.filter(f => f.played).length;
-      const pending  = fixtures.filter(f => !f.played).length;
+      const played  = fixtures.filter(f => f.played).length;
+      const pending = fixtures.filter(f => !f.played).length;
       log(`  Fixtures: ${fixtures.length} (${played} played, ${pending} pending)`);
+      log(`  Teams: ${teams.map(t => t.name).join(", ")}`);
 
-      // Build ranking table from raw API data using flexible field extraction
-      const ranking = rawRanking.map((r, i) => {
-        const gf = r.goals_for  ?? r.gf ?? r.goalsFor  ?? r.scored  ?? 0;
-        const ga = r.goals_against ?? r.ga ?? r.goalsAgainst ?? r.conceded ?? 0;
-        return {
-          pos:    r.rank || r.position || r.pos || (i + 1),
-          name:   rankingTeamName(r) || `Team ${i + 1}`,
-          played: r.games_played ?? r.played ?? r.gp ?? r.games ?? 0,
-          won:    r.wins  ?? r.won   ?? r.w  ?? 0,
-          drawn:  r.draws ?? r.draw  ?? r.d  ?? 0,
-          lost:   r.losses ?? r.lost ?? r.l  ?? 0,
-          gf, ga,
-          points: r.points ?? r.pts ?? r.point ?? 0,
-        };
-      });
-
-      // Store under federation → league key
-      const leagueKey = `${cfg.serieId}`;
       if (!existing.federations[cfg.federation]) existing.federations[cfg.federation] = {};
-      existing.federations[cfg.federation][leagueKey] = {
+      existing.federations[cfg.federation][String(cfg.serieId)] = {
         serieId:    cfg.serieId,
-        name:       leagueName,
+        name:       serieName,
         federation: cfg.federation,
-        region:     cfg.region,
-        updatedAt:   new Date().toISOString(),
-        live:        pending > 0,
+        updatedAt:  new Date().toISOString(),
+        live:       pending > 0,
         teams,
         fixtures,
         ranking,
       };
 
-      results.push({ key: leagueKey, name: cfg.name, ok: true, played, pending });
+      results.push({ serieId: cfg.serieId, name: serieName, ok: true, played, pending });
 
     } catch (err) {
       console.error(`  ✗ FAILED: ${err.message}`);
-      results.push({ key: `${cfg.serieId}`, name: cfg.name, ok: false, error: err.message });
+      results.push({ serieId: cfg.serieId, ok: false, error: err.message });
     } finally {
       await context.close();
     }
@@ -322,7 +291,9 @@ async function main() {
 
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;
-  log(`\nDone — ${ok}/${results.length} succeeded · vhv-data.json written`);
+  log(`\nDone — ${ok}/${results.length} succeeded`);
+  results.filter(r => r.ok).forEach(r => log(`  ✓ ${r.name} (${r.played} played, ${r.pending} pending)`));
+  results.filter(r => !r.ok).forEach(r => log(`  ✗ serie ${r.serieId}: ${r.error}`));
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
