@@ -2517,9 +2517,11 @@ function BelgianScreen({ onBack }) {
 function BelgianLeagueView({ league, onBack }) {
   const [detail, setDetail]     = useState(null);
   const [tab, setTab]           = useState("table");
-  const [settings, setSettings] = useState(league.settings || { baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
-  const [mcKey, setMcKey]       = useState(0);
+  const [settings, setSettings] = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
   const { teams = [], fixtures = [] } = league;
+
+  const played  = fixtures.filter(f => f.played);
+  const pending = fixtures.filter(f => !f.played);
 
   return (
     <div>
@@ -2553,7 +2555,6 @@ function BelgianLeagueView({ league, onBack }) {
           confirmedBottom={new Set()}
           leagueId={null}
           aliases={{}}
-          archiveScorers={null}
           phaseTeams={null}
           phase="regular"
         />
@@ -2575,7 +2576,7 @@ function BelgianLeagueView({ league, onBack }) {
 
       {tab === "sim" && (
         <MCTab
-          key={mcKey}
+          key={played.length}
           teams={teams}
           fixtures={fixtures}
           settings={settings}
@@ -2586,19 +2587,14 @@ function BelgianLeagueView({ league, onBack }) {
       )}
 
       {tab === "settings" && (
-        <div>
-          <SettingsPanel
-            settings={settings}
-            onChange={setSettings}
-            showTiebreakers={false}
-            readOnly={false}
-          />
-          <div style={{ marginTop: "1rem" }}>
-            <button className="btn btn-cyan" onClick={() => { setMcKey(k => k + 1); setTab("sim"); }}>
-              ▶ Re-run simulation with new settings
-            </button>
-          </div>
-        </div>
+        <SettingsPanel
+          settings={settings}
+          onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))}
+          showTiebreakers={false}
+          league={null}
+          onLeagueChange={null}
+          readOnly={false}
+        />
       )}
 
       {detail != null && (
