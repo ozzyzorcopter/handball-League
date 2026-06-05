@@ -2515,13 +2515,43 @@ function BelgianScreen({ onBack }) {
 
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
-  const [detail, setDetail]     = useState(null);
-  const [tab, setTab]           = useState("table");
-  const [settings, setSettings] = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
-  const { teams = [], fixtures = [] } = league;
+  const { teams: initTeams = [], fixtures = [] } = league;
+  const [detail, setDetail]           = useState(null);
+  const [tab, setTab]                 = useState("table");
+  const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
+  const [confirmedTop, setConfirmedTop]       = useState(null);
+  const [confirmedBottom, setConfirmedBottom] = useState(null);
+  // Local league state for SettingsPanel (highlight zones, aliases) — not persisted
+  const [leagueState, setLeagueState] = useState({
+    type: "standard", promoTop: 2, demotBot: 2,
+    scorerUrl: "", playoffScorerUrl: "", playdownScorerUrl: "",
+    scorerAliases: {}, teams: initTeams,
+  });
 
-  const played  = fixtures.filter(f => f.played);
+  // Derive live points from played fixtures — same as SimStep
+  const teams = useMemo(() => {
+    const earned = initTeams.map(() => 0);
+    fixtures.filter(f => f.played && f.homeScore != null).forEach(f => {
+      const hg = +f.homeScore, ag = +f.awayScore;
+      if (isNaN(hg) || isNaN(ag)) return;
+      if (hg > ag) earned[f.homeIdx] += 2;
+      else if (hg < ag) earned[f.awayIdx] += 2;
+      else { earned[f.homeIdx]++; earned[f.awayIdx]++; }
+    });
+    return initTeams.map((t, i) => ({ ...t, points: t.points + earned[i] }));
+  }, [initTeams, fixtures]);
+
   const pending = fixtures.filter(f => !f.played);
+  const played  = fixtures.filter(f => f.played);
+
+  const liveProbs = useMemo(() => {
+    const m = {};
+    pending.forEach(f => { m[f.id] = fixProbs(f, teams, fixtures, settings); });
+    return m;
+  }, [pending, teams, fixtures, settings]);
+
+  const hlTop = leagueState.promoTop ?? 2;
+  const hlBot = leagueState.demotBot ?? 2;
 
   return (
     <div>
@@ -2551,12 +2581,12 @@ function BelgianLeagueView({ league, onBack }) {
           <LeagueTable
             teams={teams}
             fixtures={fixtures}
-            onTeamClick={idx => setDetail(idx)}
-            highlightTop={2}
-            highlightBottom={2}
-            confirmedTop={new Set()}
-            confirmedBottom={new Set()}
-            leagueId={league.name}
+            onTeamClick={idx => setDetail({ idx })}
+            highlightTop={hlTop}
+            highlightBottom={hlBot}
+            confirmedTop={confirmedTop}
+            confirmedBottom={confirmedBottom}
+            leagueId={null}
             aliases={{}}
             phaseTeams={null}
             phase="regular"
@@ -2567,12 +2597,12 @@ function BelgianLeagueView({ league, onBack }) {
           <ScoresTab
             teams={teams}
             fixtures={fixtures}
-            liveProbs={{}}
+            liveProbs={liveProbs}
             settings={settings}
             onConfirm={null}
             onUndo={null}
             onOverride={null}
-            onTeamClick={idx => setDetail(idx)}
+            onTeamClick={idx => setDetail({ idx })}
             onWeekChange={null}
           />
         )}
@@ -2583,9 +2613,9 @@ function BelgianLeagueView({ league, onBack }) {
             teams={teams}
             fixtures={fixtures}
             settings={settings}
-            highlightTop={2}
-            highlightBottom={2}
-            onConfirmed={null}
+            highlightTop={hlTop}
+            highlightBottom={hlBot}
+            onConfirmed={(ct, cb) => { setConfirmedTop(ct); setConfirmedBottom(cb); }}
           />
         )}
 
@@ -2594,8 +2624,8 @@ function BelgianLeagueView({ league, onBack }) {
             settings={settings}
             onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))}
             showTiebreakers={true}
-            league={null}
-            onLeagueChange={null}
+            league={leagueState}
+            onLeagueChange={u => setLeagueState(s => typeof u === "function" ? u(s) : u)}
             readOnly={false}
           />
         )}
@@ -2603,12 +2633,12 @@ function BelgianLeagueView({ league, onBack }) {
 
       {detail != null && (
         <TeamDetail
-          team={teams[detail]}
-          teamIdx={detail}
+          team={teams[detail.idx]}
+          teamIdx={detail.idx}
           teams={teams}
           fixtures={fixtures}
           onClose={() => setDetail(null)}
-          leagueId={league.name}
+          leagueId={null}
           aliases={{}}
           phase="regular"
         />
