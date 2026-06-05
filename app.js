@@ -2538,64 +2538,68 @@ function BelgianLeagueView({ league, onBack }) {
         <button className="btn btn-ghost" onClick={onBack}>← All Leagues</button>
       </div>
 
-      <div className="steps" style={{ marginBottom: "1rem" }}>
-        {[["table", "📊 Table"], ["fixtures", "📅 Fixtures"], ["sim", "🎲 Simulate"], ["settings", "⚙️ Settings"]].map(([id, label]) => (
-          <div key={id} className={"step" + (tab === id ? " on" : "")} onClick={() => setTab(id)}>{label}</div>
-        ))}
+      <div className="panel">
+        <div className="tabs">
+          {["table", "scores", "monte", "settings"].map(t => (
+            <button key={t} className={"tab" + (tab === t ? " on" : "")} onClick={() => setTab(t)}>
+              {t === "table" ? "League Table" : t === "scores" ? "Scores" + (pending.length ? " (" + pending.length + ")" : "") : t === "monte" ? "Monte Carlo" : "Settings"}
+            </button>
+          ))}
+        </div>
+
+        {tab === "table" && (
+          <LeagueTable
+            teams={teams}
+            fixtures={fixtures}
+            onTeamClick={idx => setDetail(idx)}
+            highlightTop={2}
+            highlightBottom={2}
+            confirmedTop={new Set()}
+            confirmedBottom={new Set()}
+            leagueId={league.name}
+            aliases={{}}
+            phaseTeams={null}
+            phase="regular"
+          />
+        )}
+
+        {tab === "scores" && (
+          <ScoresTab
+            teams={teams}
+            fixtures={fixtures}
+            liveProbs={{}}
+            settings={settings}
+            onConfirm={null}
+            onUndo={null}
+            onOverride={null}
+            onTeamClick={idx => setDetail(idx)}
+            onWeekChange={null}
+          />
+        )}
+
+        {tab === "monte" && (
+          <MCTab
+            key={played.length}
+            teams={teams}
+            fixtures={fixtures}
+            settings={settings}
+            highlightTop={2}
+            highlightBottom={2}
+            onConfirmed={null}
+          />
+        )}
+
+        {tab === "settings" && (
+          <SettingsPanel
+            settings={settings}
+            onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))}
+            showTiebreakers={true}
+            league={null}
+            onLeagueChange={null}
+            readOnly={false}
+          />
+        )}
       </div>
-
-      {tab === "table" && teams.length > 0 && fixtures.length > 0 && (
-        <LeagueTable
-          teams={teams}
-          fixtures={fixtures}
-          onTeamClick={idx => setDetail(idx)}
-          highlightTop={2}
-          highlightBottom={2}
-          confirmedTop={new Set()}
-          confirmedBottom={new Set()}
-          leagueId={null}
-          aliases={{}}
-          phaseTeams={null}
-          phase="regular"
-        />
-      )}
-
-      {tab === "fixtures" && (
-        <ScoresTab
-          teams={teams}
-          fixtures={fixtures}
-          liveProbs={{}}
-          settings={settings}
-          onConfirm={null}
-          onUndo={null}
-          onOverride={null}
-          onTeamClick={idx => setDetail(idx)}
-          onWeekChange={null}
-        />
-      )}
-
-      {tab === "sim" && (
-        <MCTab
-          key={played.length}
-          teams={teams}
-          fixtures={fixtures}
-          settings={settings}
-          highlightTop={2}
-          highlightBottom={2}
-          onConfirmed={null}
-        />
-      )}
-
-      {tab === "settings" && (
-        <SettingsPanel
-          settings={settings}
-          onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))}
-          showTiebreakers={false}
-          league={null}
-          onLeagueChange={null}
-          readOnly={false}
-        />
-      )}
 
       {detail != null && (
         <TeamDetail
@@ -2604,7 +2608,7 @@ function BelgianLeagueView({ league, onBack }) {
           teams={teams}
           fixtures={fixtures}
           onClose={() => setDetail(null)}
-          leagueId={null}
+          leagueId={league.name}
           aliases={{}}
           phase="regular"
         />
