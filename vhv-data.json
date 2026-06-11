@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-06-11T12:35:02.969Z",
+  "updatedAt": "2026-06-11T15:59:18.808Z",
   "federations": {
     "VHV": {
       "650": {
         "serieId": 650,
         "name": "Heren Liga 1",
         "federation": "VHV",
-        "updatedAt": "2026-06-11T12:34:05.346Z",
+        "updatedAt": "2026-06-11T15:58:16.599Z",
         "live": false,
         "teams": [
           {
@@ -2461,13 +2461,14 @@
             "ga": 674,
             "points": 5
           }
-        ]
+        ],
+        "scorers": []
       },
       "651": {
         "serieId": 651,
         "name": "Heren Liga 2",
         "federation": "VHV",
-        "updatedAt": "2026-06-11T12:34:10.887Z",
+        "updatedAt": "2026-06-11T15:58:23.863Z",
         "live": false,
         "teams": [
           {
@@ -4922,13 +4923,14 @@
             "ga": 599,
             "points": 10
           }
-        ]
+        ],
+        "scorers": []
       },
       "652": {
         "serieId": 652,
         "name": "Heren Liga 3",
         "federation": "VHV",
-        "updatedAt": "2026-06-11T12:34:16.792Z",
+        "updatedAt": "2026-06-11T15:58:30.194Z",
         "live": false,
         "teams": [
           {
@@ -7383,13 +7385,14 @@
             "ga": 638,
             "points": 15
           }
-        ]
+        ],
+        "scorers": []
       },
       "653": {
         "serieId": 653,
         "name": "Dames Liga",
         "federation": "VHV",
-        "updatedAt": "2026-06-11T12:34:20.806Z",
+        "updatedAt": "2026-06-11T15:58:34.067Z",
         "live": true,
         "teams": [
           {
@@ -9096,13 +9099,14 @@
             "ga": 658,
             "points": 1
           }
-        ]
+        ],
+        "scorers": []
       },
       "654": {
         "serieId": 654,
         "name": "Heren Regio AVB",
         "federation": "VHV",
-        "updatedAt": "2026-06-11T12:34:22.667Z",
+        "updatedAt": "2026-06-11T15:58:36.119Z",
         "live": false,
         "teams": [
           {
@@ -9721,13 +9725,14 @@
             "ga": 0,
             "points": 0
           }
-        ]
+        ],
+        "scorers": []
       },
       "655": {
         "serieId": 655,
         "name": "Heren senioren OWV",
         "federation": "VHV",
-        "updatedAt": "2026-06-11T12:34:26.245Z",
+        "updatedAt": "2026-06-11T15:58:40.178Z",
         "live": false,
         "teams": [
           {
@@ -11451,13 +11456,14 @@
             "ga": 0,
             "points": 0
           }
-        ]
+        ],
+        "scorers": []
       },
       "656": {
         "serieId": 656,
         "name": "Heren Regio Limburg",
         "federation": "VHV",
-        "updatedAt": "2026-06-11T12:34:31.504Z",
+        "updatedAt": "2026-06-11T15:58:46.054Z",
         "live": true,
         "teams": [
           {
@@ -13929,7 +13935,8 @@
             "ga": 722,
             "points": 4
           }
-        ]
+        ],
+        "scorers": []
       }
     },
     "URBH-KBHB": {
@@ -13937,7 +13944,7 @@
         "serieId": 645,
         "name": "First Division Men",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:38.077Z",
+        "updatedAt": "2026-06-11T15:58:53.190Z",
         "live": false,
         "teams": [
           {
@@ -15644,13 +15651,14 @@
             "ga": 541,
             "points": 6
           }
-        ]
+        ],
+        "scorers": []
       },
       "646": {
         "serieId": 646,
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:42.277Z",
+        "updatedAt": "2026-06-11T15:58:58.187Z",
         "live": false,
         "teams": [
           {
@@ -17357,13 +17365,14 @@
             "ga": 553,
             "points": 6
           }
-        ]
+        ],
+        "scorers": []
       },
       "647": {
         "serieId": 647,
         "name": "First Division Women",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:46.596Z",
+        "updatedAt": "2026-06-11T15:59:02.785Z",
         "live": false,
         "teams": [
           {
@@ -19070,13 +19079,14 @@
             "ga": 576,
             "points": 5
           }
-        ]
+        ],
+        "scorers": []
       },
       "649": {
         "serieId": 649,
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:51.965Z",
+        "updatedAt": "2026-06-11T15:59:08.090Z",
         "live": false,
         "teams": [
           {
@@ -21531,13 +21541,14 @@
             "ga": 652,
             "points": 0
           }
-        ]
+        ],
+        "scorers": []
       },
       "868": {
         "serieId": 868,
         "name": "First Division Women Play-offs",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:53.858Z",
+        "updatedAt": "2026-06-11T15:59:09.549Z",
         "live": false,
         "teams": [
           {
@@ -21816,13 +21827,14 @@
             "ga": 168,
             "points": 2
           }
-        ]
+        ],
+        "scorers": []
       },
       "869": {
         "serieId": 869,
         "name": "First Division Men Play-offs",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:55.930Z",
+        "updatedAt": "2026-06-11T15:59:11.588Z",
         "live": false,
         "teams": [
           {
@@ -22441,13 +22453,14 @@
             "ga": 339,
             "points": 2
           }
-        ]
+        ],
+        "scorers": []
       },
       "870": {
         "serieId": 870,
         "name": "First Division Men Play-downs",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:57.261Z",
+        "updatedAt": "2026-06-11T15:59:13.242Z",
         "live": false,
         "teams": [
           {
@@ -22726,13 +22739,14 @@
             "ga": 173,
             "points": 6
           }
-        ]
+        ],
+        "scorers": []
       },
       "872": {
         "serieId": 872,
         "name": "Second Division Men Play-offs",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:34:59.039Z",
+        "updatedAt": "2026-06-11T15:59:15.235Z",
         "live": false,
         "teams": [
           {
@@ -23351,13 +23365,14 @@
             "ga": 335,
             "points": 6
           }
-        ]
+        ],
+        "scorers": []
       },
       "873": {
         "serieId": 873,
         "name": "Second Division Men Play-downs",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:35:00.328Z",
+        "updatedAt": "2026-06-11T15:59:16.584Z",
         "live": false,
         "teams": [
           {
@@ -23636,13 +23651,14 @@
             "ga": 179,
             "points": 6
           }
-        ]
+        ],
+        "scorers": []
       },
       "874": {
         "serieId": 874,
         "name": "First Division Women Play-downs (Poule A)",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:35:01.736Z",
+        "updatedAt": "2026-06-11T15:59:17.641Z",
         "live": false,
         "teams": [
           {
@@ -23802,13 +23818,14 @@
             "ga": 139,
             "points": 0
           }
-        ]
+        ],
+        "scorers": []
       },
       "878": {
         "serieId": 878,
         "name": "First Division Women Play-downs (Poule B)",
         "federation": "URBH-KBHB",
-        "updatedAt": "2026-06-11T12:35:02.939Z",
+        "updatedAt": "2026-06-11T15:59:18.782Z",
         "live": false,
         "teams": [
           {
@@ -23968,7 +23985,8 @@
             "ga": 129,
             "points": 3
           }
-        ]
+        ],
+        "scorers": []
       }
     }
   }
