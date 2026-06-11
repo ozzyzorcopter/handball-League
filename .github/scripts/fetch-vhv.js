@@ -277,14 +277,32 @@ async function main() {
       try {
         const rankingUrl = `${BASE_URL}?serie_id=${cfg.serieId}&_path=ranking/byMyLeague`;
         const gamesUrl   = `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${cfg.seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
+        const scorerUrl  = `${BASE_URL}?serie_id=${cfg.serieId}&_path=topscorer/byMyLeague`;
 
-        const [rankingData, gamesData] = await Promise.all([
+        const [rankingData, gamesData, scorerData] = await Promise.all([
           fetchJson(rankingUrl),
           fetchJson(gamesUrl),
+          fetchJson(scorerUrl).catch(e => { warn(`    Scorer fetch failed: ${e.message}`); return null; }),
         ]);
 
         const rankingElements = getElements(rankingData);
         const gameElements    = getElements(gamesData);
+        const scorerElements  = scorerData ? getElements(scorerData) : [];
+
+        // Log scorer shape on first run so we can verify field names
+        if (scorerElements.length > 0) {
+          log(`    Scorer keys: ${Object.keys(scorerElements[0]).join(", ")}`);
+          log(`    First scorer: ${JSON.stringify(scorerElements[0]).slice(0, 150)}`);
+        } else {
+          log(`    No scorer data returned`);
+        }
+
+        // Build scorers array — try all known field name shapes
+        const scorers = scorerElements.map(s => ({
+          player: s.player_name || s.playerName || s.name || s.full_name || `${s.first_name || ""} ${s.last_name || ""}`.trim() || "?",
+          club:   s.team_short_name || s.team_name || s.club_name || s.club || "?",
+          goals:  s.goals || s.scored || s.total_goals || s.total || 0,
+        })).filter(s => s.goals > 0).sort((a, b) => b.goals - a.goals);
 
         if (rankingElements.length === 0 && gameElements.length === 0) {
           throw new Error("Empty response — serie may not exist or have no data yet");
@@ -316,6 +334,7 @@ async function main() {
           teams,
           fixtures,
           ranking,
+          scorers,
         };
 
         results.push({ serieId: cfg.serieId, name: serieName, ok: true, played, pending });
