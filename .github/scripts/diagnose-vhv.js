@@ -131,46 +131,24 @@ async function main() {
   const sampleGame = gamesArr[0];
   console.log(`Game id: ${sampleGame.id}, scoresheet_summary_id: ${sampleGame.scoresheet_summary_id}`);
 
-  const endpoints = [
-    `${BASE_URL}?_path=scoresheet/summary/${sampleGame.scoresheet_summary_id}`,
-    `${BASE_URL}?_path=scoresheet/${sampleGame.scoresheet_summary_id}`,
-    `${BASE_URL}?_path=game/${sampleGame.id}/scoresheet`,
-    `${BASE_URL}?_path=game/scoresheet&game_id=${sampleGame.id}`,
-    `${BASE_URL}?_path=scoresheet/byGame&game_id=${sampleGame.id}`,
-    `${BASE_URL}?game_id=${sampleGame.id}&_path=scoresheet/byMyLeague`,
-    `${BASE_URL}?scoresheet_summary_id=${sampleGame.scoresheet_summary_id}&_path=scoresheet/byMyLeague`,
-    `${BASE_URL}?_path=topscorer/byMyLeague&serie_id=652`,
-  ];
+  const scoresheetUrl = `${BASE_URL}?game_id=${sampleGame.id}&_path=game/scoresheet`;
+  console.log(`\nProbing game/scoresheet for game ${sampleGame.id}...`);
+  const scoresheetDetail = await page.evaluate(async ({ url, nonce }) => {
+    const r = await fetch(url, {
+      headers: { Accept: "application/json", "X-WP-Nonce": nonce },
+      credentials: "include",
+    });
+    return { status: r.status, body: await r.json() };
+  }, { url: scoresheetUrl, nonce });
 
-  const scoresheetResults = {};
-  for (const url of endpoints) {
-    try {
-      const result = await page.evaluate(async ({ url, nonce }) => {
-        const r = await fetch(url, {
-          headers: { Accept: "application/json", "X-WP-Nonce": nonce },
-          credentials: "include",
-        });
-        return { status: r.status, body: r.ok ? await r.json() : await r.text() };
-      }, { url, nonce });
-      const path = url.split("_path=")[1]?.split("&")[0] || url;
-      console.log(`\n  ${result.status} → ${path}`);
-      if (result.status === 200) {
-        console.log("  KEYS:", Array.isArray(result.body) ? `array[${result.body.length}]` : Object.keys(result.body || {}).join(", "));
-        if (Array.isArray(result.body) && result.body.length > 0) {
-          console.log("  FIRST ENTRY:", JSON.stringify(result.body[0]).slice(0, 300));
-        } else if (result.body?.elements) {
-          console.log("  elements[0]:", JSON.stringify(result.body.elements[0]).slice(0, 300));
-        }
-        scoresheetResults[path] = result.body;
-      } else {
-        console.log("  BODY:", String(result.body).slice(0, 100));
-      }
-    } catch (e) {
-      console.log(`  ERROR → ${url}: ${e.message}`);
-    }
-  }
+  console.log("Status:", scoresheetDetail.status);
+  console.log("Top-level keys:", Object.keys(scoresheetDetail.body));
+  console.log("\n--- data ---");
+  console.log(JSON.stringify(scoresheetDetail.body.data, null, 2).slice(0, 3000));
+  console.log("\n--- structure ---");
+  console.log(JSON.stringify(scoresheetDetail.body.structure, null, 2).slice(0, 3000));
 
-  fs.writeFileSync(OUT, JSON.stringify({ rankingRaw, gamesRaw, scoresheetResults }, null, 2));
+  fs.writeFileSync(OUT, JSON.stringify({ rankingRaw, gamesRaw, scoresheet: scoresheetDetail.body }, null, 2));
   await browser.close();
   console.log(`\n✓ Full raw response written to diagnose-output.json`);
   console.log("  Share this file or the console output above so the field names can be mapped correctly.");
