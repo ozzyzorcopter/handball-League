@@ -21,6 +21,19 @@ for (const lg of (leaguesimData.leagues || [])) {
   if (lg.playdownScorerUrl?.trim())tasks.push({ leagueId: lg.id, name: lg.name, phase: "playdown", url: lg.playdownScorerUrl.trim() });
 }
 
+// Also fetch scorer URLs configured in fetch-vhv.js for Belgian Handball leagues.
+// leagueId is "vhv:<serieId>" so BelgianLeagueView can look it up by serieId.
+try {
+  const { VHV_LEAGUES } = require("./fetch-vhv.js");
+  for (const cfg of (VHV_LEAGUES || [])) {
+    if (cfg.scorerUrl?.trim()) {
+      tasks.push({ leagueId: `vhv:${cfg.serieId}`, name: `VHV serie ${cfg.serieId}`, phase: "regular", url: cfg.scorerUrl.trim() });
+    }
+  }
+} catch (e) {
+  console.log("Could not load fetch-vhv.js config for scorer URLs:", e.message);
+}
+
 if (tasks.length === 0) {
   console.log("No scorer URLs configured — nothing to fetch");
   process.exit(0);
