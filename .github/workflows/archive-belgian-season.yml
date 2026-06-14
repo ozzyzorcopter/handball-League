@@ -1,0 +1,29 @@
+name: Archive Belgian Season
+
+on:
+  schedule:
+    - cron: "0 23 31 5 *"   # 31 May at 23:00 UTC every year
+  workflow_dispatch:          # also allow manual trigger
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Archive Belgian season
+        run: node .github/scripts/archive-belgian-season.js
+
+      - name: Commit archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add archive/
+          git diff --cached --quiet && echo "Nothing to commit" || (git commit -m "archive: Belgian season $(date +'%Y')" && git push)

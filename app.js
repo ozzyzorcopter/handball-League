@@ -2,6 +2,36 @@ const { useState, useMemo, useRef, useEffect } = React;
 const MEDALS = ["🥇", "🥈", "🥉"];
 const IS_SHARE = false; // set to true in share version
 
+// ── GITHUB DISPATCH ──────────────────────────────────────────────────────────
+// To enable archive-from-app, set GITHUB_PAT and GITHUB_REPO in your repo's
+// GitHub secrets, then expose them via a small env inject or hardcode here.
+// The PAT needs: repo scope (to trigger workflow_dispatch / repo_dispatch).
+const GITHUB_REPO = "ozzyzorcopter/handball-League";
+const GITHUB_PAT_KEY = "LEAGUESIM_PAT"; // name of the secret exposed to the page
+
+async function githubDispatch(eventType, payload) {
+  // The PAT must be injected into the page. Options:
+  // 1. Store in localStorage (user pastes it once in Settings)
+  // 2. Hardcode (not safe for public repos)
+  // We use localStorage so it's never in the source.
+  const pat = localStorage.getItem(GITHUB_PAT_KEY);
+  if (!pat) throw new Error("No GitHub PAT configured. Go to Settings → GitHub PAT to add it.");
+
+  const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/dispatches`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${pat}`,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ event_type: eventType, client_payload: payload }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`GitHub API error ${res.status}: ${body}`);
+  }
+}
+
 // ── SAVE / LOAD ──────────────────────────────────────────────────────────────
 function saveData(data) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -521,6 +551,41 @@ function fixProbs(f, teams, fixtures, settings) {
   return calcProbs(f.homeIdx, f.awayIdx, teams, fixtures, settings);
 }
 
+// ── PAT SETTINGS ─────────────────────────────────────────────────────────────
+function PATSettings() {
+  const [pat, setPat] = useState(() => localStorage.getItem(GITHUB_PAT_KEY) || "");
+  const [saved, setSaved] = useState(false);
+
+  function save() {
+    if (pat.trim()) {
+      localStorage.setItem(GITHUB_PAT_KEY, pat.trim());
+    } else {
+      localStorage.removeItem(GITHUB_PAT_KEY);
+    }
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  }
+
+  return (
+    <div style={{ display: "flex", gap: ".5rem", alignItems: "center", flexWrap: "wrap" }}>
+      <input
+        className="inp"
+        type="password"
+        value={pat}
+        onChange={e => { setPat(e.target.value); setSaved(false); }}
+        placeholder="github_pat_..."
+        style={{ flex: 1, minWidth: "200px", fontSize: ".78rem", padding: ".4rem .6rem", fontFamily: "var(--font-mono)" }}
+      />
+      <button className="btn btn-ghost" onClick={save} style={{ whiteSpace: "nowrap" }}>
+        {saved ? "✓ Saved" : "Save PAT"}
+      </button>
+      {pat && (
+        <button className="btn-rm" onClick={() => { setPat(""); localStorage.removeItem(GITHUB_PAT_KEY); }}>✕</button>
+      )}
+    </div>
+  );
+}
+
 // ── SETTINGS PANEL ────────────────────────────────────────────────────────────
 function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueChange, readOnly }) {
   const pf = [
@@ -657,12 +722,21 @@ function SettingsPanel({ settings, onChange, showTiebreakers, league, onLeagueCh
           </ul>
         </div>
       )}
+      {!IS_SHARE && (
+        <div className="sbox">
+          <div className="sub-ttl">GitHub PAT <span style={{ fontSize: ".72rem", fontWeight: 400, color: "#5a6070" }}>— required for archiving leagues</span></div>
+          <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".6rem" }}>
+            Create a Personal Access Token with <strong>repo</strong> scope at github.com/settings/tokens and paste it here. Stored locally in your browser only.
+          </div>
+          <PATSettings />
+        </div>
+      )}
     </div>
   );
 }
 
 // ── HOME SCREEN ───────────────────────────────────────────────────────────────
-function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, onOpenArchive, onOpenBelgian }) {
+function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, onOpenArchive, onOpenBelgian, onArchiveLeague }) {
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
   const [type, setType] = useState("standard");
@@ -720,9 +794,9 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, o
               })()}
             </div>
             <button
-              className={"card-archive-btn" + (lg.archivable ? " active" : "")}
-              title={lg.archivable ? "Tagged for archive — click to remove" : "Tag for archive"}
-              onClick={e => { e.stopPropagation(); onToggleArchivable(lg.id); }}>
+              className="card-archive-btn"
+              title="Archive this league"
+              onClick={e => { e.stopPropagation(); onArchiveLeague(lg); }}>
               📦
             </button>
           </div>
@@ -2738,7 +2812,9 @@ function BelgianLeagueView({ league, onBack }) {
 }
 
 // ── ARCHIVE SCREEN ────────────────────────────────────────────────────────────
-const ARCHIVE_INDEX_URL = "https://ozzyzorcopter.github.io/handball-League/archive/index.json";
+// ── ARCHIVE DATA HOOKS ────────────────────────────────────────────────────────
+const ARCHIVE_INDEX_URL = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/archive/index.json";
+const ARCHIVE_BASE_URL  = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/archive/";
 
 function useArchiveIndex() {
   const [index, setIndex] = useState(null);
@@ -2746,19 +2822,30 @@ function useArchiveIndex() {
   useEffect(() => {
     fetch(ARCHIVE_INDEX_URL)
       .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-      .then(data => setIndex(data))
-      .catch(() => { setError(true); setIndex([]); });
+      .then(data => {
+        if (Array.isArray(data)) {
+          // Old format: flat array of manual season entries { season, filename, leagueCount, archivedAt }
+          // These are manual-league seasons, not Belgian API seasons — treat as "legacySeasons"
+          setIndex({ belgianSeasons: [], standaloneLeagues: [], legacySeasons: data });
+        } else {
+          setIndex({
+            belgianSeasons:   data.belgianSeasons   || [],
+            standaloneLeagues: data.standaloneLeagues || [],
+            legacySeasons:    data.legacySeasons    || [],
+          });
+        }
+      })
+      .catch(() => { setError(true); setIndex({ belgianSeasons: [], standaloneLeagues: [], legacySeasons: [] }); });
   }, []);
   return { index, error };
 }
 
-function useArchiveSeason(filename) {
+function useArchiveFile(filename) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   useEffect(() => {
     if (!filename) return;
-    const url = "https://ozzyzorcopter.github.io/handball-League/archive/" + filename;
-    fetch(url)
+    fetch(ARCHIVE_BASE_URL + filename)
       .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(d => setData(d))
       .catch(() => setError(true));
@@ -2766,38 +2853,192 @@ function useArchiveSeason(filename) {
   return { data, error };
 }
 
-function ArchiveScreen({ onBack }) {
-  const { index, error } = useArchiveIndex();
-  const [selected, setSelected] = useState(null);
+// Alias for legacy season files (same shape)
+const useArchiveSeason = useArchiveFile;
 
-  if (selected) return <ArchiveSeasonView filename={selected} onBack={() => setSelected(null)} />;
+function useStandaloneLeagues() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    fetch(ARCHIVE_BASE_URL + "standalone-leagues.json")
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(d => setData(d.leagues || []))
+      .catch(() => { setError(true); setData([]); });
+  }, []);
+  return { data, error };
+}
+
+// ── ARCHIVE OPTIONS MENU ──────────────────────────────────────────────────────
+function ArchiveOptionsMenu({ label, onOpen, onDelete, style }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handler(e) { if (ref.current && !ref.current.contains(e.target)) setOpen(false); }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
-    <div className="panel">
-      <div className="ph">
-        <div>
-          <h2>📦 Archive</h2>
-          <p style={{ color: "#5a6070", fontSize: ".82rem" }}>Past seasons — read only</p>
-        </div>
-        <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
-      </div>
-      {index === null && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading archive…</div>}
-      {error && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load archive.</div>}
-      {index && index.length === 0 && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>No archived seasons yet.</div>}
-      {index && index.length > 0 && (
-        <div className="card-grid" style={{ marginTop: "1rem" }}>
-          {index.map(s => (
-            <div key={s.filename} className="season-card" onClick={() => setSelected(s.filename)}>
-              <div className="season-card-title">{s.season}</div>
-              <div className="season-card-meta">{s.leagueCount} leagues · archived {new Date(s.archivedAt).toLocaleDateString("nl-BE")}</div>
-            </div>
-          ))}
+    <div ref={ref} style={{ position: "relative", ...style }} onClick={e => e.stopPropagation()}>
+      <button
+        className="btn btn-ghost"
+        style={{ fontSize: ".8rem", padding: ".2rem .5rem", opacity: 0, transition: "opacity .15s" }}
+        data-options-btn
+        onClick={e => { e.stopPropagation(); setOpen(o => !o); }}>
+        •••
+      </button>
+      {open && (
+        <div style={{
+          position: "absolute", right: 0, top: "calc(100% + 4px)", zIndex: 100,
+          background: "#10121a", border: "1px solid #252830", borderRadius: "6px",
+          minWidth: "130px", boxShadow: "0 4px 16px rgba(0,0,0,.4)", overflow: "hidden",
+        }}>
+          <button className="btn-ghost" style={{ display: "block", width: "100%", textAlign: "left", padding: ".55rem .85rem", fontSize: ".82rem", borderRadius: 0 }}
+            onClick={() => { setOpen(false); onOpen(); }}>
+            📂 Open
+          </button>
+          <button className="btn-ghost" style={{ display: "block", width: "100%", textAlign: "left", padding: ".55rem .85rem", fontSize: ".82rem", borderRadius: 0, color: "#f87171" }}
+            onClick={() => { setOpen(false); onDelete(); }}>
+            🗑 Delete
+          </button>
         </div>
       )}
     </div>
   );
 }
 
+// Make the options button visible on card hover via CSS
+const archiveCardHoverStyle = `
+.archive-card:hover [data-options-btn] { opacity: 1 !important; }
+.archive-card [data-options-btn]:focus { opacity: 1 !important; }
+`;
+
+// ── ARCHIVE SCREEN ────────────────────────────────────────────────────────────
+function ArchiveScreen({ onBack }) {
+  const { index, error } = useArchiveIndex();
+  const { data: standaloneData } = useStandaloneLeagues();
+  const [view, setView] = useState(null);
+  // view: { type: "belgian", filename, season }
+  //     | { type: "standalone", league, scorers }
+  //     | { type: "legacy", filename }
+  const [dispatchStatus, setDispatchStatus] = useState(null);
+
+  async function handleDelete(type, identifier, displayName) {
+    if (!confirm(`Are you sure you want to delete "${displayName}"?`)) return;
+    setDispatchStatus("pending");
+    try {
+      const payload = type === "belgian"
+        ? { type: "belgian", season: identifier }
+        : { type: "standalone", id: identifier };
+      await githubDispatch("delete-archive-entry", payload);
+      setDispatchStatus("done");
+      setTimeout(() => setDispatchStatus(null), 4000);
+    } catch (e) {
+      alert("Could not delete: " + e.message);
+      setDispatchStatus("error");
+      setTimeout(() => setDispatchStatus(null), 4000);
+    }
+  }
+
+  if (view?.type === "belgian")    return <ArchiveBelgianSeasonView filename={view.filename} season={view.season} onBack={() => setView(null)} />;
+  if (view?.type === "standalone") return <ArchiveLeagueView league={view.league} scorers={view.scorers} season={view.league.name} onBack={() => setView(null)} />;
+  if (view?.type === "legacy")     return <ArchiveSeasonView filename={view.filename} onBack={() => setView(null)} />;
+
+  const loading      = index === null;
+  const hasStandalone = index?.standaloneLeagues?.length > 0;
+  const hasBelgian   = index?.belgianSeasons?.length > 0;
+  const hasLegacy    = index?.legacySeasons?.length > 0;
+  const hasAny       = hasStandalone || hasBelgian || hasLegacy;
+
+  return (
+    <div className="panel">
+      <style>{archiveCardHoverStyle}</style>
+      <div className="ph">
+        <div>
+          <h2>📦 Archive</h2>
+          <p style={{ color: "#5a6070", fontSize: ".82rem" }}>Archived leagues and seasons — read only</p>
+        </div>
+        <div style={{ marginLeft: "auto", display: "flex", gap: ".5rem", alignItems: "center" }}>
+          {dispatchStatus === "pending" && <span className="muted" style={{ fontSize: ".78rem" }}>⏳ Working…</span>}
+          {dispatchStatus === "done"    && <span style={{ color: "#4ade80", fontSize: ".78rem" }}>✓ Done — reload to see changes</span>}
+          {dispatchStatus === "error"   && <span style={{ color: "#f87171", fontSize: ".78rem" }}>✗ Error</span>}
+          <button className="btn btn-ghost" onClick={onBack}>← Back</button>
+        </div>
+      </div>
+
+      {loading && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading archive…</div>}
+      {error   && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load archive.</div>}
+      {index && !hasAny && (
+        <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>No archived leagues or seasons yet.</div>
+      )}
+
+      {/* Standalone leagues — shown at top */}
+      {hasStandalone && (
+        <>
+          <div className="sub-ttl" style={{ marginTop: "1.5rem", marginBottom: ".75rem" }}>Standalone Leagues</div>
+          <div className="card-grid">
+            {index.standaloneLeagues.map(entry => {
+              const leagueData = standaloneData?.find(l => l.id === entry.id);
+              return (
+                <div key={entry.id} className="card archive-card" style={{ position: "relative" }}
+                  onClick={() => leagueData && setView({ type: "standalone", league: leagueData.league, scorers: leagueData.scorers })}>
+                  <div className="card-badge badge-std">Standalone</div>
+                  <div className="card-name">{entry.name}</div>
+                  <div className="card-meta">archived {new Date(entry.archivedAt).toLocaleDateString("nl-BE")}</div>
+                  <ArchiveOptionsMenu
+                    style={{ position: "absolute", top: ".5rem", right: ".5rem" }}
+                    onOpen={() => leagueData && setView({ type: "standalone", league: leagueData.league, scorers: leagueData.scorers })}
+                    onDelete={() => handleDelete("standalone", entry.id, entry.name)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+
+      {/* Belgian API seasons */}
+      {hasBelgian && (
+        <>
+          <div className="sub-ttl" style={{ marginTop: "1.5rem", marginBottom: ".75rem" }}>Belgian Handball Seasons</div>
+          <div className="card-grid">
+            {index.belgianSeasons.map(s => (
+              <div key={s.filename} className="card archive-card season-card" style={{ position: "relative" }}
+                onClick={() => setView({ type: "belgian", filename: s.filename, season: s.season })}>
+                <div className="season-card-title">{s.season}</div>
+                <div className="season-card-meta">{s.leagueCount} leagues · archived {new Date(s.archivedAt).toLocaleDateString("nl-BE")}</div>
+                <ArchiveOptionsMenu
+                  style={{ position: "absolute", top: ".5rem", right: ".5rem" }}
+                  onOpen={() => setView({ type: "belgian", filename: s.filename, season: s.season })}
+                  onDelete={() => handleDelete("belgian", s.season, s.season)}
+                />
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Legacy manual seasons (old archive format) */}
+      {hasLegacy && (
+        <>
+          <div className="sub-ttl" style={{ marginTop: "1.5rem", marginBottom: ".75rem" }}>Previous Seasons</div>
+          <div className="card-grid">
+            {index.legacySeasons.map(s => (
+              <div key={s.filename} className="card archive-card season-card" style={{ position: "relative" }}
+                onClick={() => setView({ type: "legacy", filename: s.filename })}>
+                <div className="season-card-title">{s.season}</div>
+                <div className="season-card-meta">{s.leagueCount} leagues · archived {new Date(s.archivedAt).toLocaleDateString("nl-BE")}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// Legacy season view — reads old { season, leagues: [...], scorers: {} } format
 function ArchiveSeasonView({ filename, onBack }) {
   const { data, error } = useArchiveSeason(filename);
   const [activeLeague, setActiveLeague] = useState(null);
@@ -2808,7 +3049,6 @@ function ArchiveSeasonView({ filename, onBack }) {
       <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load season data.</div>
     </div>
   );
-
   if (!data) return <div className="muted" style={{ padding: "3rem", textAlign: "center" }}>Loading season…</div>;
 
   if (activeLeague !== null) {
@@ -2826,7 +3066,7 @@ function ArchiveSeasonView({ filename, onBack }) {
         <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
       </div>
       <div className="card-grid" style={{ marginTop: "1rem" }}>
-        {data.leagues.map((lg, i) => (
+        {(data.leagues || []).map((lg, i) => (
           <div key={lg.id} className="card" onClick={() => setActiveLeague(i)}>
             <div className={"card-badge " + (lg.type === "playoff" ? "badge-po" : "badge-std")}>
               {lg.type === "playoff" ? "Play-off League" : "Standard League"}
@@ -2835,6 +3075,52 @@ function ArchiveSeasonView({ filename, onBack }) {
             <div className="card-meta">{(lg.teams || []).length} teams · {(lg.fixtures || []).filter(f => f.played).length} played</div>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+// Belgian season view — reads new { season, federations: { FED: { serieId: league } } } format
+function ArchiveBelgianSeasonView({ filename, season, onBack }) {
+  const { data, error } = useArchiveFile(filename);
+  const [league, setLeague] = useState(null);
+
+  if (league) return <BelgianLeagueView league={league} onBack={() => setLeague(null)} />;
+
+  if (error) return (
+    <div className="panel">
+      <button className="btn btn-ghost" onClick={onBack}>← Back</button>
+      <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load season data.</div>
+    </div>
+  );
+  if (!data) return <div className="muted" style={{ padding: "3rem", textAlign: "center" }}>Loading season…</div>;
+
+  const feds = Object.keys(data.federations || {});
+  const allLeagues = feds.flatMap(fed => Object.values(data.federations[fed] || {}));
+
+  return (
+    <div className="panel">
+      <div className="ph">
+        <div>
+          <h2>📦 {data.season}</h2>
+          <p style={{ color: "#5a6070", fontSize: ".82rem" }}>
+            Archived {new Date(data.archivedAt).toLocaleDateString("nl-BE")} · {allLeagues.length} leagues · read only
+          </p>
+        </div>
+        <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
+      </div>
+      <div className="card-grid" style={{ marginTop: "1rem" }}>
+        {feds.flatMap(fed =>
+          Object.values(data.federations[fed] || {}).map(lg => (
+            <div key={`${fed}-${lg.serieId}`} className="card" onClick={() => setLeague(lg)}>
+              <div className="card-badge badge-std" style={{ color: "#22d3ee", borderColor: "#22d3ee44", background: "#22d3ee18" }}>{fed}</div>
+              <div className="card-name">{lg.name}</div>
+              <div className="card-meta">
+                {(lg.teams || []).length} teams · {(lg.fixtures || []).filter(f => f.played).length} played
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
@@ -2917,10 +3203,11 @@ function ArchiveLeagueView({ league, scorers, season, onBack }) {
 const LEAGUESIM_DATA_URL = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/leaguesim-data.json";
 
 function App() {
-  const [store, setStore] = useState({ leagues: [] });
-  const [activeId, setActiveId] = useState(null);
+  const [store, setStore]         = useState({ leagues: [] });
+  const [activeId, setActiveId]   = useState(null);
   const [showArchive, setShowArchive] = useState(false);
   const [showBelgian, setShowBelgian] = useState(false);
+  const [archiveMsg, setArchiveMsg]   = useState(null); // { text, color }
 
   // ── Share mode: auto-load from repo ──────────────────────────────────────
   const [loadStatus, setLoadStatus] = useState(IS_SHARE ? "loading" : "ok");
@@ -2949,10 +3236,36 @@ function App() {
     }).catch(e => alert("Could not load: " + e));
   }
 
-  function createLeague(name, type, poSize, pdSize, phaseFormat, archivable) { const lg = makeLeague(name, type, poSize, pdSize, phaseFormat, archivable); setStore(s => ({ ...s, leagues: [...s.leagues, lg] })); setActiveId(lg.id); }
-  function deleteLeague(id) { if (!confirm("Delete this league?")) return; setStore(s => ({ ...s, leagues: s.leagues.filter(lg => lg.id !== id) })); if (activeId === id) setActiveId(null); }
-  function updateLeague(id, u) { setStore(s => ({ ...s, leagues: s.leagues.map(lg => lg.id === id ? (typeof u === "function" ? u(lg) : u) : lg) })); }
+  function createLeague(name, type, poSize, pdSize, phaseFormat, archivable) {
+    const lg = makeLeague(name, type, poSize, pdSize, phaseFormat, archivable);
+    setStore(s => ({ ...s, leagues: [...s.leagues, lg] }));
+    setActiveId(lg.id);
+  }
+  function deleteLeague(id) {
+    if (!confirm("Delete this league?")) return;
+    setStore(s => ({ ...s, leagues: s.leagues.filter(lg => lg.id !== id) }));
+    if (activeId === id) setActiveId(null);
+  }
+  function updateLeague(id, u) {
+    setStore(s => ({ ...s, leagues: s.leagues.map(lg => lg.id === id ? (typeof u === "function" ? u(lg) : u) : lg) }));
+  }
   function toggleArchivable(id) { updateLeague(id, lg => ({ ...lg, archivable: !lg.archivable })); }
+
+  async function archiveLeague(lg) {
+    if (!confirm(`Are you sure you want to archive "${lg.name}"?\n\nThis will remove it from the home screen and add it to the Archive.`)) return;
+    setArchiveMsg({ text: "⏳ Archiving…", color: "#5a6070" });
+    try {
+      await githubDispatch("archive-league", { leagueId: lg.id });
+      // Remove from local state immediately — the Action will also update the JSON on the repo
+      setStore(s => ({ ...s, leagues: s.leagues.filter(l => l.id !== lg.id) }));
+      if (activeId === lg.id) setActiveId(null);
+      setArchiveMsg({ text: "✓ Archived — Action running, changes will appear shortly", color: "#4ade80" });
+      setTimeout(() => setArchiveMsg(null), 6000);
+    } catch (e) {
+      setArchiveMsg({ text: "✗ " + e.message, color: "#f87171" });
+      setTimeout(() => setArchiveMsg(null), 8000);
+    }
+  }
 
   const active = store.leagues.find(lg => lg.id === activeId) || null;
 
@@ -2975,7 +3288,8 @@ function App() {
             </>
           ) : (
             <>
-              {msg && <span className="muted">{msg}</span>}
+              {archiveMsg && <span style={{ fontSize: ".78rem", color: archiveMsg.color }}>{archiveMsg.text}</span>}
+              {!archiveMsg && msg && <span className="muted">{msg}</span>}
               <button className="btn btn-cyan" onClick={handleSave}>💾 Save</button>
               <button className="btn btn-ghost" onClick={handleLoad}>📂 Load</button>
               {active && <button className="btn btn-ghost" onClick={() => setActiveId(null)}>← All Leagues</button>}
@@ -2983,7 +3297,18 @@ function App() {
           )}
         </div>
       </div>
-      {!active && <HomeScreen leagues={store.leagues} onOpen={setActiveId} onCreate={createLeague} onDelete={deleteLeague} onToggleArchivable={toggleArchivable} onOpenArchive={() => setShowArchive(true)} onOpenBelgian={() => setShowBelgian(true)} />}
+      {!active && (
+        <HomeScreen
+          leagues={store.leagues}
+          onOpen={setActiveId}
+          onCreate={createLeague}
+          onDelete={deleteLeague}
+          onToggleArchivable={toggleArchivable}
+          onOpenArchive={() => setShowArchive(true)}
+          onOpenBelgian={() => setShowBelgian(true)}
+          onArchiveLeague={archiveLeague}
+        />
+      )}
       {active && <LeagueEditor key={active.id} league={active} onChange={u => updateLeague(active.id, u)} />}
     </div>
   );

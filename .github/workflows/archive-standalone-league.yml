@@ -1,0 +1,30 @@
+name: Archive Standalone League
+
+on:
+  repository_dispatch:
+    types: [archive-league]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Archive league
+        env:
+          ARCHIVE_PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: node .github/scripts/archive-standalone-league.js
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add archive/ leaguesim-data.json
+          git diff --cached --quiet && echo "Nothing to commit" || (git commit -m "archive: standalone league" && git push)
