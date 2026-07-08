@@ -21,6 +21,7 @@ const vhvDataPath = path.join(root, "vhv-data.json");
 
 // ── LEAGUE CONFIG ─────────────────────────────────────────────────────────────
 // serie_ids confirmed from competition URLs.
+// seasonId is NOT hardcoded — it is auto-detected from the page each run.
 // name will be auto-detected from serie_name in the API response.
 // organizationId: 1=URBH-KBHB, 2=VHV, 3=LFH
 //
@@ -29,44 +30,44 @@ const vhvDataPath = path.join(root, "vhv-data.json");
 // leagueId="vhv:<serieId>". Leave empty/omit if not available.
 const VHV_LEAGUES = [
   // ── VHV ────────────────────────────────────────────────────────────────
-  { serieId: 650, seasonId: 5, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=650" },
-  { serieId: 651, seasonId: 5, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=651" },
-  { serieId: 652, seasonId: 5, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=652" },
-  { serieId: 653, seasonId: 5, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=653" },
-  { serieId: 654, seasonId: 5, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=654" },
-  { serieId: 655, seasonId: 5, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=655" },
-  { serieId: 656, seasonId: 5, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/?season_id=5&organization_id=2&serie_id=656" },
+  { serieId: 650, organizationId: 2, federation: "VHV", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
+  { serieId: 651, organizationId: 2, federation: "VHV", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
+  { serieId: 652, organizationId: 2, federation: "VHV", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
+  { serieId: 653, organizationId: 2, federation: "VHV", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
+  { serieId: 654, organizationId: 2, federation: "VHV", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
+  { serieId: 655, organizationId: 2, federation: "VHV", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
+  { serieId: 656, organizationId: 2, federation: "VHV", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
 
   // ── URBH-KBHB ──────────────────────────────────────────────────────────
-  { serieId: 645, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=645" },
-  { serieId: 646, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=646" },
-  { serieId: 647, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=647" },
-  { serieId: 649, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=649" },
-  { serieId: 868, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=868" },
-  { serieId: 869, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=869" },
-  { serieId: 870, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=870" },
-  { serieId: 872, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=872" },
-  { serieId: 873, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=873" },
-  { serieId: 874, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=874" },
-  { serieId: 878, seasonId: 5, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/?season_id=5&organization_id=1&serie_id=878" },
+  { serieId: 645, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 646, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 647, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 649, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 868, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 869, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 870, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 872, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 873, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 874, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+  { serieId: 878, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
+    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
 ];
 
 // Export so fetch-scorers.js can read this config without duplicating it
@@ -90,7 +91,31 @@ async function extractNonce(page) {
   });
 }
 
-// Load a page and extract nonce — uses domcontentloaded (fast) + short wait
+// Detect current season_id from the page — reads the selected option in the
+// season dropdown, or falls back to extracting it from the current page URL.
+async function detectSeasonId(page) {
+  return page.evaluate(() => {
+    // Option 1: season select dropdown (most reliable)
+    const sel = document.querySelector('select[name="season_id"], select#season_id, select[name*="season"]');
+    if (sel?.value) return Number(sel.value) || null;
+
+    // Option 2: read from bpleagues window object
+    if (window.bpleagues?.season_id) return Number(window.bpleagues.season_id);
+
+    // Option 3: extract from current URL
+    const m = window.location.search.match(/season_id=(\d+)/);
+    if (m) return Number(m[1]);
+
+    // Option 4: scan inline scripts for season_id
+    for (const s of document.querySelectorAll("script:not([src])")) {
+      const m2 = s.textContent.match(/"season_id"\s*:\s*(\d+)/);
+      if (m2) return Number(m2[1]);
+      const m3 = s.textContent.match(/season_id['":\s]+(\d+)/);
+      if (m3) return Number(m3[1]);
+    }
+    return null;
+  });
+}
 async function loadPageAndGetNonce(page, url) {
   log(`  Loading page…`);
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
@@ -259,10 +284,28 @@ async function main() {
 
     log(`\nLoading ${firstCfg.federation} page (${leagues.length} leagues)…`);
     let nonce;
+    let seasonId;
     try {
       nonce = await loadPageAndGetNonce(page, firstCfg.pageUrl);
       if (!nonce) throw new Error("Could not extract nonce from page");
       log(`  Nonce: ${nonce}`);
+
+      // Detect current season_id from the page
+      seasonId = await detectSeasonId(page);
+      if (seasonId) {
+        log(`  Season ID: ${seasonId} (auto-detected)`);
+      } else {
+        // Fallback: try loading with serie_id to trigger season detection
+        const probeUrl = `${firstCfg.pageUrl}?serie_id=${firstCfg.serieId}`;
+        await page.goto(probeUrl, { waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => {});
+        seasonId = await detectSeasonId(page);
+        if (seasonId) {
+          log(`  Season ID: ${seasonId} (detected from serie URL)`);
+        } else {
+          // Last resort: extract from the games API response below per league
+          log(`  Season ID: could not auto-detect — will read from API response`);
+        }
+      }
     } catch (err) {
       console.error(`  ✗ Failed to load ${firstCfg.federation} page: ${err.message}`);
       for (const cfg of leagues) results.push({ serieId: cfg.serieId, ok: false, error: err.message });
@@ -282,8 +325,11 @@ async function main() {
     for (const cfg of leagues) {
       log(`\n  Serie ${cfg.serieId}`);
       try {
+        // Build URLs — use detected seasonId, or omit it and let the API use its default
         const rankingUrl = `${BASE_URL}?serie_id=${cfg.serieId}&_path=ranking/byMyLeague`;
-        const gamesUrl   = `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${cfg.seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
+        const gamesUrl   = seasonId
+          ? `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`
+          : `${BASE_URL}?with_referees=true&no_forfeit=true&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
 
         const [rankingData, gamesData] = await Promise.all([
           fetchJson(rankingUrl),
@@ -293,8 +339,14 @@ async function main() {
         const rankingElements = getElements(rankingData);
         const gameElements    = getElements(gamesData);
 
+        // If we didn't detect seasonId yet, try reading it from a game entry
+        if (!seasonId && gameElements.length > 0 && gameElements[0].season_id) {
+          seasonId = gameElements[0].season_id;
+          log(`    Season ID: ${seasonId} (read from game entry)`);
+        }
+
         if (rankingElements.length === 0 && gameElements.length === 0) {
-          throw new Error("Empty response — serie may not exist or have no data yet");
+          throw new Error("Empty response — serie may not exist or have no data for this season");
         }
 
         const serieName = gameElements[0]?.serie_name
