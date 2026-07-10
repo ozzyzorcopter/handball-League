@@ -255,14 +255,11 @@ async function main() {
   log(`Starting at ${new Date().toUTCString()}`);
   log(`${VHV_LEAGUES.length} league(s) configured`);
 
-  // Load existing vhv-data to preserve leagues not being re-fetched
-  let existing = { updatedAt: null, federations: {} };
-  if (fs.existsSync(vhvDataPath)) {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(vhvDataPath, "utf8"));
-      existing = { updatedAt: parsed.updatedAt || null, federations: parsed.federations || {} };
-    } catch { warn("Could not parse existing vhv-data.json — starting fresh"); }
-  }
+  // Start with a fresh federations object each run.
+  // Old serie_ids that no longer exist on the API will simply not appear —
+  // no stale previous-season data will be kept.
+  // If a serie succeeds, it gets written. If it fails, nothing is written for it.
+  const fresh = { updatedAt: null, federations: {} };
 
   const browser = await chromium.launch({ headless: true });
   const results  = [];
@@ -365,8 +362,8 @@ async function main() {
         log(`    Fixtures: ${fixtures.length} (${played} played, ${pending} pending)`);
         log(`    Teams: ${teams.map(t => t.name).join(", ")}`);
 
-        if (!existing.federations[cfg.federation]) existing.federations[cfg.federation] = {};
-        existing.federations[cfg.federation][String(cfg.serieId)] = {
+        if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
+        fresh.federations[cfg.federation][String(cfg.serieId)] = {
           serieId:    cfg.serieId,
           name:       serieName,
           federation: cfg.federation,
@@ -390,8 +387,8 @@ async function main() {
 
   await browser.close();
 
-  existing.updatedAt = new Date().toISOString();
-  fs.writeFileSync(vhvDataPath, JSON.stringify(existing, null, 2));
+  fresh.updatedAt = new Date().toISOString();
+  fs.writeFileSync(vhvDataPath, JSON.stringify(fresh, null, 2));
 
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;
