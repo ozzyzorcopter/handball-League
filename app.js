@@ -2580,11 +2580,11 @@ function useVhvData() {
   return { data, error };
 }
 
-// The top-level Belgian screen — federation picker
+// The top-level Belgian screen — federation picker with division sub-groups
 function BelgianScreen({ onBack }) {
   const { data, error } = useVhvData();
-  const [fed, setFed]   = useState(null);   // selected federation
-  const [league, setLeague] = useState(null); // selected league object
+  const [fed, setFed]       = useState(null);
+  const [league, setLeague] = useState(null);
 
   if (league) return <BelgianLeagueView league={league} onBack={() => setLeague(null)} />;
 
@@ -2605,12 +2605,8 @@ function BelgianScreen({ onBack }) {
         <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
       </div>
 
-      {!data && !error && (
-        <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading data…</div>
-      )}
-      {error && (
-        <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load data.</div>
-      )}
+      {!data && !error && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading data…</div>}
+      {error && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load data.</div>}
 
       {data && (
         <>
@@ -2633,34 +2629,48 @@ function BelgianScreen({ onBack }) {
             })}
           </div>
 
-          {/* League cards for selected federation */}
+          {/* Leagues for selected federation, grouped by division */}
           {fed && (() => {
-            const leagues = Object.values(data.federations[fed] || {});
+            const allLeagues = Object.values(data.federations[fed] || {});
             const meta = FED_META[fed];
-            if (leagues.length === 0) return (
+            if (allLeagues.length === 0) return (
               <div className="muted" style={{ padding: "1.5rem", textAlign: "center" }}>No leagues available yet for {meta.label}.</div>
             );
+            // Group by division, preserving insertion order
+            const divisionMap = new Map();
+            for (const lg of allLeagues) {
+              const div = lg.division || "General";
+              if (!divisionMap.has(div)) divisionMap.set(div, []);
+              divisionMap.get(div).push(lg);
+            }
             return (
-              <div className="card-grid">
-                {leagues.map(lg => {
-                  const played  = (lg.fixtures || []).filter(f => f.played).length;
-                  const pending = (lg.fixtures || []).filter(f => !f.played).length;
-                  return (
-                    <div key={lg.serieId} className="card" onClick={() => setLeague(lg)}>
-                      <div className="card-badge badge-std" style={{ borderColor: meta.color + "44", color: meta.color, background: meta.color + "18" }}>
-                        {meta.label}
-                      </div>
-                      <div className="card-name">{lg.name}</div>
-                      <div className="card-meta">
-                        {(lg.teams || []).length} teams · {played} played · {pending} pending
-                        {lg.live && (
-                          <span style={{ display: "inline-block", marginLeft: ".4rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
-                        )}
-                      </div>
+              <>
+                {[...divisionMap.entries()].map(([division, leagues]) => (
+                  <div key={division} style={{ marginBottom: "1.5rem" }}>
+                    <div className="sub-ttl" style={{ marginBottom: ".75rem", color: meta.color }}>{division}</div>
+                    <div className="card-grid">
+                      {leagues.map(lg => {
+                        const played  = (lg.fixtures || []).filter(f => f.played).length;
+                        const pending = (lg.fixtures || []).filter(f => !f.played).length;
+                        return (
+                          <div key={lg.serieId || lg.id} className="card" onClick={() => setLeague(lg)}>
+                            <div className="card-badge badge-std" style={{ borderColor: meta.color + "44", color: meta.color, background: meta.color + "18" }}>
+                              {meta.label}
+                            </div>
+                            <div className="card-name">{lg.name}</div>
+                            <div className="card-meta">
+                              {(lg.teams || []).length} teams · {played} played · {pending} pending
+                              {lg.live && (
+                                <span style={{ display: "inline-block", marginLeft: ".4rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                ))}
+              </>
             );
           })()}
 
