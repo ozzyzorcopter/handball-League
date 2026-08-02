@@ -1,18 +1,15 @@
 // .github/scripts/fetch-vhv.js
-// Fetches live VHV/KBHB handball data via Playwright.
-// Writes vhv-data.json grouped by federation. Does NOT touch leaguesim-data.json.
+// Fetches Belgian handball data from Clubee (clubee.com/handballbelgium)
+// by scraping SSR HTML pages — no Playwright, no auth needed.
+// Writes vhv-data.json grouped by federation.
 //
-// API response shape (confirmed from diagnose-output.json):
-//   ranking: { elements: [...], total: N }
-//     entry fields: team_name, team_short_name, position, played, wins, losses,
-//                   draws, score_for, score_against, points, team_id
-//   games: { elements: [...], total: N }
-//     entry fields: home_team_name, home_team_short_name, away_team_name,
-//                   away_team_short_name, home_score, away_score,
-//                   round (match round 1-N), week (calendar week),
-//                   date, time, game_status_id (2=validated), serie_name
+// HOW TO FIND LEAGUE URLS:
+// 1. Go to clubee.com/handballbelgium
+// 2. Navigate to a competition (e.g. Liga Heren 3)
+// 3. The URL is the fixturesUrl below (e.g. .../liga-heren-3-982067v4)
+// 4. The standings URL follows pattern: .../standings-371073v4/leagues/LEAGUE_ID/seasons/SEASON_ID
+//    where LEAGUE_ID and SEASON_ID appear in the nav links on the fixtures page
 
-const { chromium } = require("playwright-core");
 const fs   = require("fs");
 const path = require("path");
 
@@ -20,372 +17,242 @@ const root        = process.cwd();
 const vhvDataPath = path.join(root, "vhv-data.json");
 
 // ── LEAGUE CONFIG ─────────────────────────────────────────────────────────────
-// serie_ids confirmed from competition URLs.
-// seasonId is NOT hardcoded — it is auto-detected from the page each run.
-// name will be auto-detected from serie_name in the API response.
-// organizationId: 1=URBH-KBHB, 2=VHV, 3=LFH
+// For each league, provide:
+//   fixturesUrl:  the main competition page (shows all gamedays + team names)
+//   standingsUrl: the standings page (shows table with W/D/L/GF/GA/Pts)
+//   name:         display name (auto-detected from page if left empty "")
+//   federation:   "VHV" | "URBH-KBHB" | "LFH"
 //
-// scorerUrl (optional): URL to the nuLiga/nuscore "topscorers" HTML page for
-// this serie. Used by fetch-scorers.js to populate scorer-data.json under
-// leagueId="vhv:<serieId>". Leave empty/omit if not available.
-const VHV_LEAGUES = [
-  // ── VHV ────────────────────────────────────────────────────────────────
-  { serieId: 650, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
-  { serieId: 651, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
-  { serieId: 652, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
-  { serieId: 653, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
-  { serieId: 654, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
-  { serieId: 655, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
-  { serieId: 656, organizationId: 2, federation: "VHV", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/vhv-competitions/" },
-
-  // ── URBH-KBHB ──────────────────────────────────────────────────────────
-  { serieId: 645, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 646, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 647, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 649, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 868, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 869, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 870, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 872, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 873, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 874, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
-  { serieId: 878, organizationId: 1, federation: "URBH-KBHB", scorerUrl: "",
-    pageUrl: "https://www.handballbelgium.be/index.php/competition/urbh-kbhb-competitions/" },
+// Liga Heren 3 confirmed. Add other leagues as you find their URLs on Clubee.
+const LEAGUES = [
+  {
+    id: "18709",                // Clubee league ID (from URL)
+    name: "Liga Heren 3",
+    federation: "VHV",
+    fixturesUrl:  "https://www.clubee.com/handballbelgium/liga-heren-3-982067v4",
+    standingsUrl: "https://www.clubee.com/handballbelgium/standings-371073v4/leagues/18709/seasons/220",
+  },
+  // Add more leagues here once you find their Clubee URLs:
+  // {
+  //   id: "XXXXX",
+  //   name: "Liga Heren 2",
+  //   federation: "VHV",
+  //   fixturesUrl:  "https://www.clubee.com/handballbelgium/liga-heren-2-XXXXXXV4",
+  //   standingsUrl: "https://www.clubee.com/handballbelgium/standings-371073v4/leagues/XXXXX/seasons/220",
+  // },
 ];
 
-// Export so fetch-scorers.js can read this config without duplicating it
-module.exports = { VHV_LEAGUES };
-
-const BASE_URL = "https://www.handballbelgium.be/index.php/wp-json/bpleagues/v1/proxy";
-
+// ── UTILS ─────────────────────────────────────────────────────────────────────
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-// ── NONCE EXTRACTION ──────────────────────────────────────────────────────────
-async function extractNonce(page) {
-  return page.evaluate(() => {
-    if (window.bpleagues?.nonce) return window.bpleagues.nonce;
-    if (window.wpApiSettings?.nonce) return window.wpApiSettings.nonce;
-    for (const s of document.querySelectorAll("script:not([src])")) {
-      const m  = s.textContent.match(/"nonce"\s*:\s*"([a-f0-9]{10,})"/);  if (m)  return m[1];
-      const m2 = s.textContent.match(/nonce['":\s]+['"]([a-f0-9]{10,})['"]/); if (m2) return m2[1];
-    }
-    return null;
+async function fetchHtml(url) {
+  const r = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml",
+    },
   });
+  if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
+  return r.text();
 }
 
-// Detect current season_id from the page — reads the selected option in the
-// season dropdown, or falls back to extracting it from the current page URL.
-async function detectSeasonId(page) {
-  return page.evaluate(() => {
-    // Option 1: season select dropdown (most reliable)
-    const sel = document.querySelector('select[name="season_id"], select#season_id, select[name*="season"]');
-    if (sel?.value) return Number(sel.value) || null;
-
-    // Option 2: read from bpleagues window object
-    if (window.bpleagues?.season_id) return Number(window.bpleagues.season_id);
-
-    // Option 3: extract from current URL
-    const m = window.location.search.match(/season_id=(\d+)/);
-    if (m) return Number(m[1]);
-
-    // Option 4: scan inline scripts for season_id
-    for (const s of document.querySelectorAll("script:not([src])")) {
-      const m2 = s.textContent.match(/"season_id"\s*:\s*(\d+)/);
-      if (m2) return Number(m2[1]);
-      const m3 = s.textContent.match(/season_id['":\s]+(\d+)/);
-      if (m3) return Number(m3[1]);
+// ── PARSE STANDINGS ───────────────────────────────────────────────────────────
+// Parse the HTML table from the standings page.
+// Returns [{ pos, name, played, won, drawn, lost, gf, ga, points }]
+function parseStandings(html) {
+  const rows = [];
+  // Match <tr> rows inside the table
+  const trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+  let tr;
+  while ((tr = trRe.exec(html)) !== null) {
+    const cells = [];
+    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+    let td;
+    while ((td = tdRe.exec(tr[1])) !== null) {
+      // Strip all HTML tags and decode common entities
+      const text = td[1]
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
+        .replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+        .replace(/\s+/g, " ").trim();
+      cells.push(text);
     }
-    return null;
-  });
-}
-async function loadPageAndGetNonce(page, url) {
-  log(`  Loading page…`);
-  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
-  // Wait up to 5s for nonce to appear in DOM (injected by inline script)
-  let nonce = null;
-  for (let i = 0; i < 10; i++) {
-    nonce = await extractNonce(page);
-    if (nonce) break;
-    await page.waitForTimeout(500);
+    // Valid row: first cell is a position number, has at least 9 cells
+    if (cells.length >= 9 && /^\d+\.?$/.test(cells[0])) {
+      const pos    = parseInt(cells[0]);
+      // Cell 1 is the team name (may include image alt text — take last word group)
+      const rawName = cells[1].replace(/\(Senior [MFW]\)/g, "").trim();
+      const name   = rawName || `Team ${pos}`;
+      const played = parseInt(cells[2]) || 0;
+      const won    = parseInt(cells[3]) || 0;
+      const drawn  = parseInt(cells[4]) || 0;
+      const lost   = parseInt(cells[5]) || 0;
+      const gf     = parseInt(cells[6]) || 0;
+      const ga     = parseInt(cells[7]) || 0;
+      const points = parseInt(cells[9]) || 0; // cell 8 is GD
+      rows.push({ pos, name, played, won, drawn, lost, gf, ga, points });
+    }
   }
-  // Fallback: intercept network requests for nonce header
-  if (!nonce) {
-    warn("  Nonce not in DOM — intercepting network requests");
-    let intercepted = null;
-    const handler = req => { const h = req.headers(); if (h["x-wp-nonce"]) intercepted = h["x-wp-nonce"]; };
-    page.on("request", handler);
-    // Trigger a fetch from within the page to any bpleagues endpoint
-    await page.evaluate(async () => {
-      try {
-        await fetch("/index.php/wp-json/bpleagues/v1/proxy?_path=ping", { credentials: "include" });
-      } catch {}
-    });
-    await page.waitForTimeout(2000);
-    page.off("request", handler);
-    nonce = intercepted;
-  }
-  return nonce;
+  return rows.sort((a, b) => a.pos - b.pos);
 }
 
-// ── DATA PARSING ──────────────────────────────────────────────────────────────
-// Both ranking and games are wrapped: { elements: [...], total: N }
-function getElements(resp) {
-  if (Array.isArray(resp)) return resp;
-  if (Array.isArray(resp?.elements)) return resp.elements;
-  // Fallback: find any array value
-  if (resp && typeof resp === "object") {
-    const found = Object.values(resp).find(v => Array.isArray(v));
-    if (found) return found;
-  }
-  return [];
-}
+// ── PARSE FIXTURES ────────────────────────────────────────────────────────────
+// Parse gameday fixtures from the fixtures page HTML.
+// Returns { leagueName, teams, fixtures }
+function parseFixtures(html, existingStandings) {
+  // Extract league/season title from <h1> or <title>
+  const h1Match = html.match(/<h1[^>]*>\s*(.*?)\s*<\/h1>/i);
+  const leagueName = h1Match
+    ? h1Match[1].replace(/<[^>]+>/g, "").replace(/\(Senior [MFW]\)/g, "").trim()
+    : "";
 
-function buildTeams(rankingElements) {
-  // Sort by position ascending
-  const sorted = [...rankingElements].sort((a, b) => (a.position || 0) - (b.position || 0));
-  return sorted.map(r => ({
-    id:        `t${r.team_id}`,
-    name:      r.team_short_name || r.team_name,
+  // Build team set from standings (most reliable source for clean names)
+  const teamNames = existingStandings.length > 0
+    ? existingStandings.map(r => r.name)
+    : [];
+
+  // Extract all game links: each game is a <a href=".../games/GAMEID">
+  // The page shows: [Home Team][Date/Time][Away Team]
+  // Pattern from the fetched page:
+  // [**Home Team**](.../games/ID)[**Away Team**]
+  const fixtures = [];
+  let round = 0;
+  let fixtureCounter = 0;
+
+  // Find gameday markers and game entries
+  // Gameday headers: "### Gameday N" or "### Dag N"
+  const gamedayRe = /###\s+(?:Gameday|Dag|Round|Ronde|Speeldag)\s+(\d+)/gi;
+  const gameRe = /\[(?:\*\*)?([^\]]+?)(?:\*\*)?\]\(https:\/\/www\.clubee\.com\/handballbelgium\/games\/(\d+)\)\[(?:\*\*)?([^\]]+?)(?:\*\*)?\]/g;
+
+  // Split by gameday
+  const gamedaySections = html.split(/###\s+(?:Gameday|Dag|Round|Ronde|Speeldag)\s+\d+/i);
+  let gamedayNum = 0;
+
+  // Process each section
+  const fullText = html;
+  let lastIdx = 0;
+
+  // Reset and use a line-by-line approach on the markdown-like content
+  const lines = html.split("\n");
+  let currentRound = 0;
+
+  for (const line of lines) {
+    // Check for gameday header
+    const gdMatch = line.match(/###\s+(?:Gameday|Dag|Round|Ronde|Speeldag)\s+(\d+)/i);
+    if (gdMatch) { currentRound = parseInt(gdMatch[1]); continue; }
+
+    // Check for game link pairs on the same line
+    // Format: [**Home**](url/games/ID)[**Away**]
+    // Or: [Home](url)[Score][Away]
+    // The markdown rendered version shows: [**Team**](link)[**Team**]
+    const lineGameRe = /\[(?:\*\*)?([^\]]+?)(?:\*\*)?\]\(https:\/\/www\.clubee\.com\/handballbelgium\/games\/(\d+)\)\[(?:\*\*)?([^\]]+?)(?:\*\*)?\]/g;
+    let m;
+    while ((m = lineGameRe.exec(line)) !== null) {
+      const homeName = m[1].replace(/\(Senior [MFW]\)/g, "").replace(/\s+/g, " ").trim();
+      const gameId   = m[2];
+      const awayName = m[3].replace(/\(Senior [MFW]\)/g, "").replace(/\s+/g, " ").trim();
+
+      if (!homeName || !awayName || homeName === awayName) continue;
+
+      // Extract date from line (format: DD.MM.YYYY or similar)
+      const dateMatch = line.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+      const date = dateMatch ? `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}` : null;
+
+      // Add teams if not seen
+      if (!teamNames.includes(homeName) && homeName !== "TBA") teamNames.push(homeName);
+      if (!teamNames.includes(awayName) && awayName !== "TBA") teamNames.push(awayName);
+
+      const homeIdx = teamNames.indexOf(homeName);
+      const awayIdx = teamNames.indexOf(awayName);
+
+      if (homeIdx < 0 || awayIdx < 0) continue;
+
+      fixtures.push({
+        id:        `f${fixtureCounter++}`,
+        gameId,
+        homeIdx,
+        awayIdx,
+        homeWin:   50, draw: 6, awayWin: 44,
+        overrideOn: false, ovHW: "", ovD: "", ovAW: "",
+        played:    false,
+        homeScore: null,
+        awayScore: null,
+        week:      currentRound,
+        date,
+      });
+    }
+  }
+
+  // Build team objects
+  const teams = teamNames.map((name, i) => ({
+    id:        `t_${name.replace(/\s+/g, "_").toLowerCase()}`,
+    name,
     points:    0,
     homeBonus: "",
   }));
-}
 
-function buildRanking(rankingElements) {
-  const sorted = [...rankingElements].sort((a, b) => (a.position || 0) - (b.position || 0));
-  return sorted.map(r => ({
-    pos:    r.position,
-    name:   r.team_short_name || r.team_name,
-    played: r.played       || 0,
-    won:    r.wins         || 0,
-    drawn:  r.draws        || 0,
-    lost:   r.losses       || 0,
-    gf:     r.score_for    || 0,
-    ga:     r.score_against || 0,
-    points: r.points       || 0,
-  }));
-}
-
-function buildFixtures(gameElements, teams) {
-  // Build lookup: short_name → index, full_name → index
-  const nameToIdx = new Map();
-  teams.forEach((t, i) => {
-    nameToIdx.set(t.name.toLowerCase(), i);
-  });
-
-  // Also index by team_id via ranking — but we only have short_name in games
-  // Use short_name first, fall back to full name
-  function resolve(shortName, fullName) {
-    const s = shortName?.toLowerCase();
-    const f = fullName?.toLowerCase();
-    if (s && nameToIdx.has(s)) return nameToIdx.get(s);
-    if (f && nameToIdx.has(f)) return nameToIdx.get(f);
-    // Partial match fallback
-    if (s) {
-      for (const [k, v] of nameToIdx) {
-        if (k.includes(s) || s.includes(k)) return v;
-      }
-    }
-    return -1;
-  }
-
-  let counter = 0;
-  const fixtures = [];
-  const unmatched = new Set();
-
-  for (const g of gameElements) {
-    const homeIdx = resolve(g.home_team_short_name, g.home_team_name);
-    const awayIdx = resolve(g.away_team_short_name, g.away_team_name);
-
-    if (homeIdx < 0) { unmatched.add(g.home_team_short_name || g.home_team_name); continue; }
-    if (awayIdx < 0) { unmatched.add(g.away_team_short_name || g.away_team_name); continue; }
-
-    // game_status_id=2 means validated/played. score_status_id=2 means score confirmed.
-    // A game is "played" if it has a game_status_id of 2 AND scores are present.
-    const played = g.game_status_id === 2
-      && g.home_score != null && g.away_score != null;
-
-    fixtures.push({
-      id:        `f${counter++}`,
-      homeIdx,
-      awayIdx,
-      homeWin:   50,
-      draw:      6,
-      awayWin:   44,
-      overrideOn: false,
-      ovHW: "", ovD: "", ovAW: "",
-      played,
-      homeScore: played ? Number(g.home_score) : null,
-      awayScore: played ? Number(g.away_score) : null,
-      week:      Number(g.round),   // round = match round (1-N), not calendar week
-      date:      g.date || null,
-    });
-  }
-
-  if (unmatched.size > 0) {
-    warn(`  Unmatched team names: ${[...unmatched].join(", ")}`);
-    warn(`  Known team names: ${teams.map(t => t.name).join(", ")}`);
-  }
-
-  // Sort by round then date
-  fixtures.sort((a, b) => (a.week || 0) - (b.week || 0) || (a.date || "").localeCompare(b.date || ""));
-  return fixtures;
+  return { leagueName, teams, fixtures };
 }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
   log(`Starting at ${new Date().toUTCString()}`);
-  log(`${VHV_LEAGUES.length} league(s) configured`);
+  log(`${LEAGUES.length} league(s) configured`);
 
-  // Start with a fresh federations object each run.
-  // Old serie_ids that no longer exist on the API will simply not appear —
-  // no stale previous-season data will be kept.
-  // If a serie succeeds, it gets written. If it fails, nothing is written for it.
+  // Start fresh each run — no stale data kept
   const fresh = { updatedAt: null, federations: {} };
+  const results = [];
 
-  const browser = await chromium.launch({ headless: true });
-  const results  = [];
-
-  // Group leagues by federation base URL — one page load per federation
-  const pageGroups = new Map();
-  for (const cfg of VHV_LEAGUES) {
-    const baseUrl = cfg.pageUrl.split("?")[0];
-    if (!pageGroups.has(baseUrl)) pageGroups.set(baseUrl, []);
-    pageGroups.get(baseUrl).push(cfg);
-  }
-
-  for (const [, leagues] of pageGroups) {
-    const firstCfg = leagues[0];
-    const context = await browser.newContext({
-      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0",
-    });
-    const page = await context.newPage();
-
-    log(`\nLoading ${firstCfg.federation} page (${leagues.length} leagues)…`);
-    let nonce;
-    let seasonId;
+  for (const cfg of LEAGUES) {
+    log(`\n${cfg.federation} · ${cfg.name} (league ${cfg.id})`);
     try {
-      nonce = await loadPageAndGetNonce(page, firstCfg.pageUrl);
-      if (!nonce) throw new Error("Could not extract nonce from page");
-      log(`  Nonce: ${nonce}`);
+      // Fetch both pages in parallel
+      log(`  Fetching fixtures + standings…`);
+      const [fixturesHtml, standingsHtml] = await Promise.all([
+        fetchHtml(cfg.fixturesUrl),
+        fetchHtml(cfg.standingsUrl),
+      ]);
 
-      // Detect current season_id from the page
-      seasonId = await detectSeasonId(page);
-      if (seasonId) {
-        log(`  Season ID: ${seasonId} (auto-detected)`);
-      } else {
-        // Fallback: try loading with serie_id to trigger season detection
-        const probeUrl = `${firstCfg.pageUrl}?serie_id=${firstCfg.serieId}`;
-        await page.goto(probeUrl, { waitUntil: "domcontentloaded", timeout: 15000 }).catch(() => {});
-        seasonId = await detectSeasonId(page);
-        if (seasonId) {
-          log(`  Season ID: ${seasonId} (detected from serie URL)`);
-        } else {
-          // Last resort: extract from the games API response below per league
-          log(`  Season ID: could not auto-detect — will read from API response`);
-        }
+      // Parse standings first (gives us clean team names)
+      const ranking = parseStandings(standingsHtml);
+      log(`  Standings: ${ranking.length} teams`);
+      if (ranking.length > 0) {
+        log(`  Teams: ${ranking.map(r => r.name).join(", ")}`);
       }
+
+      // Parse fixtures (uses standings team names for matching)
+      const { leagueName, teams, fixtures } = parseFixtures(fixturesHtml, ranking);
+      const serieName = cfg.name || leagueName || `League ${cfg.id}`;
+
+      const played  = fixtures.filter(f => f.played).length;
+      const pending = fixtures.filter(f => !f.played).length;
+      log(`  Fixtures: ${fixtures.length} (${played} played, ${pending} pending)`);
+      log(`  Name: "${serieName}"`);
+
+      if (teams.length === 0 && fixtures.length === 0) {
+        throw new Error("No teams or fixtures parsed — check URL or page structure");
+      }
+
+      if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
+      fresh.federations[cfg.federation][cfg.id] = {
+        serieId:    cfg.id,
+        name:       serieName,
+        federation: cfg.federation,
+        updatedAt:  new Date().toISOString(),
+        live:       pending > 0,
+        teams,
+        fixtures,
+        ranking,
+      };
+
+      results.push({ id: cfg.id, name: serieName, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending });
+
     } catch (err) {
-      console.error(`  ✗ Failed to load ${firstCfg.federation} page: ${err.message}`);
-      for (const cfg of leagues) results.push({ serieId: cfg.serieId, ok: false, error: err.message });
-      await context.close();
-      continue;
+      console.error(`  ✗ FAILED: ${err.message}`);
+      results.push({ id: cfg.id, name: cfg.name, ok: false, error: err.message });
     }
-
-    const fetchJson = (url) => page.evaluate(async ({ url, nonce }) => {
-      const r = await fetch(url, {
-        headers: { Accept: "application/json", "X-WP-Nonce": nonce },
-        credentials: "include",
-      });
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      return r.json();
-    }, { url, nonce });
-
-    for (const cfg of leagues) {
-      log(`\n  Serie ${cfg.serieId}`);
-      try {
-        // Build URLs — use detected seasonId, or omit it and let the API use its default
-        const rankingUrl = `${BASE_URL}?serie_id=${cfg.serieId}&_path=ranking/byMyLeague`;
-        const gamesUrl   = seasonId
-          ? `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`
-          : `${BASE_URL}?with_referees=true&no_forfeit=true&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${cfg.serieId}&_path=game/byMyLeague`;
-
-        const [rankingData, gamesData] = await Promise.all([
-          fetchJson(rankingUrl),
-          fetchJson(gamesUrl),
-        ]);
-
-        const rankingElements = getElements(rankingData);
-        const gameElements    = getElements(gamesData);
-
-        // If we didn't detect seasonId yet, try reading it from a game entry
-        if (!seasonId && gameElements.length > 0 && gameElements[0].season_id) {
-          seasonId = gameElements[0].season_id;
-          log(`    Season ID: ${seasonId} (read from game entry)`);
-        }
-
-        if (rankingElements.length === 0 && gameElements.length === 0) {
-          throw new Error("Empty response — serie may not exist or have no data for this season");
-        }
-
-        const serieName = gameElements[0]?.serie_name
-          || gameElements[0]?.serie_short_name
-          || rankingElements[0]?.serie_name
-          || `Serie ${cfg.serieId}`;
-
-        log(`    "${serieName}" · ${rankingElements.length} teams · ${gameElements.length} games`);
-
-        const teams    = buildTeams(rankingElements);
-        const ranking  = buildRanking(rankingElements);
-        const fixtures = buildFixtures(gameElements, teams);
-
-        const played  = fixtures.filter(f => f.played).length;
-        const pending = fixtures.filter(f => !f.played).length;
-        log(`    Fixtures: ${fixtures.length} (${played} played, ${pending} pending)`);
-        log(`    Teams: ${teams.map(t => t.name).join(", ")}`);
-
-        if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
-        fresh.federations[cfg.federation][String(cfg.serieId)] = {
-          serieId:    cfg.serieId,
-          name:       serieName,
-          federation: cfg.federation,
-          updatedAt:  new Date().toISOString(),
-          live:       pending > 0,
-          teams,
-          fixtures,
-          ranking,
-        };
-
-        results.push({ serieId: cfg.serieId, name: serieName, ok: true, played, pending });
-
-      } catch (err) {
-        console.error(`    ✗ FAILED: ${err.message}`);
-        results.push({ serieId: cfg.serieId, ok: false, error: err.message });
-      }
-    }
-
-    await context.close();
   }
-
-  await browser.close();
 
   fresh.updatedAt = new Date().toISOString();
   fs.writeFileSync(vhvDataPath, JSON.stringify(fresh, null, 2));
@@ -393,10 +260,17 @@ async function main() {
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;
   log(`\nDone — ${ok}/${results.length} succeeded`);
-  results.filter(r => r.ok).forEach(r => log(`  ✓ ${r.name} (${r.played} played, ${r.pending} pending)`));
-  results.filter(r => !r.ok).forEach(r => log(`  ✗ serie ${r.serieId}: ${r.error}`));
+  results.filter(r => r.ok).forEach(r =>
+    log(`  ✓ ${r.name}: ${r.teams} teams, ${r.fixtures} fixtures (${r.played} played, ${r.pending} pending)`)
+  );
+  results.filter(r => !r.ok).forEach(r =>
+    log(`  ✗ ${r.name}: ${r.error}`)
+  );
   if (bad > 0 && bad === results.length) process.exit(1);
 }
+
+// Export config so fetch-scorers.js can read scorerUrls
+module.exports = { LEAGUES };
 
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });

@@ -1,127 +1,106 @@
 // .github/scripts/diagnose-vhv.js
-// Detects current season_id, probes all serie IDs 640-900 for active data,
-// then dumps full ranking+games for the first active serie found.
+// Tests the Clubee HTML scraping approach against known URLs.
 // Run via: Actions → Diagnose VHV API → Run workflow
+// Output artifact: diagnose-output.json
 
-const { chromium } = require("playwright-core");
 const fs   = require("fs");
 const path = require("path");
+const OUT  = path.join(process.cwd(), "diagnose-output.json");
 
-const BASE_URL = "https://www.handballbelgium.be/index.php/wp-json/bpleagues/v1/proxy";
-const PAGE_URL = "https://www.handballbelgium.be/index.php/competition/vhv-competitions/";
-const OUT      = path.join(process.cwd(), "diagnose-output.json");
+const FIXTURES_URL  = "https://www.clubee.com/handballbelgium/liga-heren-3-982067v4";
+const STANDINGS_URL = "https://www.clubee.com/handballbelgium/standings-371073v4/leagues/18709/seasons/220";
 
-async function extractNonce(page) {
-  return page.evaluate(() => {
-    if (window.bpleagues?.nonce) return window.bpleagues.nonce;
-    if (window.wpApiSettings?.nonce) return window.wpApiSettings.nonce;
-    for (const s of document.querySelectorAll("script:not([src])")) {
-      const m  = s.textContent.match(/"nonce"\s*:\s*"([a-f0-9]{10,})"/);  if (m)  return m[1];
-      const m2 = s.textContent.match(/nonce['":\s]+['"]([a-f0-9]{10,})['"]/); if (m2) return m2[1];
-    }
-    return null;
+async function fetchHtml(url) {
+  const r = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36",
+      "Accept": "text/html",
+    },
   });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.text();
+}
+
+function parseStandings(html) {
+  const rows = [];
+  const trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+  let tr;
+  while ((tr = trRe.exec(html)) !== null) {
+    const cells = [];
+    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+    let td;
+    while ((td = tdRe.exec(tr[1])) !== null) {
+      const text = td[1].replace(/<[^>]+>/g, " ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ").replace(/&#39;/g,"'").replace(/\s+/g," ").trim();
+      cells.push(text);
+    }
+    if (cells.length >= 9 && /^\d+\.?$/.test(cells[0])) {
+      rows.push({
+        pos:    parseInt(cells[0]),
+        name:   cells[1].replace(/\(Senior [MFW]\)/g,"").trim(),
+        played: parseInt(cells[2])||0,
+        won:    parseInt(cells[3])||0,
+        drawn:  parseInt(cells[4])||0,
+        lost:   parseInt(cells[5])||0,
+        gf:     parseInt(cells[6])||0,
+        ga:     parseInt(cells[7])||0,
+        points: parseInt(cells[9])||0,
+      });
+    }
+  }
+  return rows.sort((a,b) => a.pos - b.pos);
 }
 
 async function main() {
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:151.0) Gecko/20100101 Firefox/151.0",
-  });
-  const page = await context.newPage();
+  console.log("=== DIAGNOSE VHV (Clubee) ===\n");
 
-  console.log("Loading page...");
-  await page.goto(PAGE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await page.waitForTimeout(3000);
+  console.log("Fetching standings:", STANDINGS_URL);
+  const standingsHtml = await fetchHtml(STANDINGS_URL);
+  const ranking = parseStandings(standingsHtml);
+  console.log(`Parsed ${ranking.length} teams from standings:`);
+  ranking.forEach(r => console.log(`  ${r.pos}. ${r.name} — ${r.played}P ${r.won}W ${r.drawn}D ${r.lost}L | ${r.gf}:${r.ga} | ${r.points}pts`));
 
-  let nonce = await extractNonce(page);
-  if (!nonce) {
-    console.log("Nonce not in DOM — intercepting network...");
-    let intercepted = null;
-    page.on("request", req => { const h = req.headers(); if (h["x-wp-nonce"]) intercepted = h["x-wp-nonce"]; });
-    await page.reload({ waitUntil: "domcontentloaded", timeout: 30000 });
-    await page.waitForTimeout(3000);
-    nonce = intercepted;
-  }
-  console.log("Nonce:", nonce);
+  console.log("\nFetching fixtures:", FIXTURES_URL);
+  const fixturesHtml = await fetchHtml(FIXTURES_URL);
 
-  // Detect season_id
-  const seasonId = await page.evaluate(() => {
-    const sel = document.querySelector('select[name="season_id"], select#season_id');
-    if (sel?.value) return Number(sel.value);
-    if (window.bpleagues?.season_id) return Number(window.bpleagues.season_id);
-    const m = window.location.search.match(/season_id=(\d+)/);
-    if (m) return Number(m[1]);
-    for (const s of document.querySelectorAll("script:not([src])")) {
-      const m2 = s.textContent.match(/"season_id"\s*:\s*(\d+)/);
-      if (m2) return Number(m2[1]);
-    }
-    return null;
-  });
-  console.log("Detected season_id:", seasonId ?? "(not detected)");
+  // Parse fixtures using same logic as fetch-vhv.js
+  const teamNames = ranking.map(r => r.name);
+  const fixtures = [];
+  let fixtureCounter = 0;
+  const lines = fixturesHtml.split("\n");
+  let currentRound = 0;
 
-  const fetchSafe = async (url) => page.evaluate(async ({ url, nonce }) => {
-    try {
-      const r = await fetch(url, { headers: { Accept: "application/json", "X-WP-Nonce": nonce }, credentials: "include" });
-      const body = await r.json().catch(() => null);
-      return { status: r.status, body };
-    } catch (e) { return { status: 0, body: null, error: e.message }; }
-  }, { url, nonce });
+  for (const line of lines) {
+    const gdMatch = line.match(/###\s+(?:Gameday|Dag|Round|Ronde|Speeldag)\s+(\d+)/i);
+    if (gdMatch) { currentRound = parseInt(gdMatch[1]); continue; }
 
-  // ── PROBE SERIES 640-900 ──────────────────────────────────────────────────
-  console.log("\n=== PROBING ACTIVE SERIES (IDs 640-900) ===");
-  const activeSeries = [];
-  const allProbeIds = Array.from({ length: 261 }, (_, i) => i + 640);
-
-  for (let i = 0; i < allProbeIds.length; i += 15) {
-    const batch = allProbeIds.slice(i, i + 15);
-    const batchResults = await Promise.all(batch.map(async id => {
-      const url = `${BASE_URL}?serie_id=${id}&_path=ranking/byMyLeague`;
-      const r = await fetchSafe(url);
-      const count = r.body?.elements?.length ?? r.body?.total ?? 0;
-      return { id, status: r.status, count };
-    }));
-    for (const r of batchResults) {
-      if (r.status === 200 && r.count > 0) {
-        console.log(`  ✓ serie_id=${r.id} → ${r.count} teams`);
-        activeSeries.push(r.id);
-      }
+    const lineGameRe = /\[(?:\*\*)?([^\]]+?)(?:\*\*)?\]\(https:\/\/www\.clubee\.com\/handballbelgium\/games\/(\d+)\)\[(?:\*\*)?([^\]]+?)(?:\*\*)?\]/g;
+    let m;
+    while ((m = lineGameRe.exec(line)) !== null) {
+      const homeName = m[1].replace(/\(Senior [MFW]\)/g,"").replace(/\s+/g," ").trim();
+      const gameId   = m[2];
+      const awayName = m[3].replace(/\(Senior [MFW]\)/g,"").replace(/\s+/g," ").trim();
+      if (!homeName || !awayName || homeName === awayName) continue;
+      if (!teamNames.includes(homeName) && homeName !== "TBA") teamNames.push(homeName);
+      if (!teamNames.includes(awayName) && awayName !== "TBA") teamNames.push(awayName);
+      const homeIdx = teamNames.indexOf(homeName);
+      const awayIdx = teamNames.indexOf(awayName);
+      if (homeIdx < 0 || awayIdx < 0) continue;
+      const dateMatch = line.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+      const date = dateMatch ? `${dateMatch[3]}-${dateMatch[2]}-${dateMatch[1]}` : null;
+      fixtures.push({ id: `f${fixtureCounter++}`, gameId, homeIdx, awayIdx, week: currentRound, date, played: false, homeScore: null, awayScore: null });
     }
   }
 
-  console.log("\nAll active series:", activeSeries.length > 0 ? activeSeries.join(", ") : "NONE FOUND");
-
-  if (activeSeries.length === 0) {
-    console.log("\nNo active series found — new season data may not be available yet.");
-    fs.writeFileSync(OUT, JSON.stringify({ seasonId, activeSeries: [], note: "No data found for any serie 640-900" }, null, 2));
-    await browser.close();
-    return;
+  console.log(`\nParsed ${fixtures.length} fixtures across ${Math.max(...fixtures.map(f=>f.week),0)} gamedays`);
+  if (fixtures.length > 0) {
+    console.log("First 3 fixtures:");
+    fixtures.slice(0,3).forEach(f => console.log(`  GD${f.week}: ${teamNames[f.homeIdx]} vs ${teamNames[f.awayIdx]} (${f.date})`));
   }
 
-  // ── FULL DUMP OF FIRST ACTIVE SERIE ──────────────────────────────────────
-  const targetSerie = activeSeries[0];
-  console.log(`\n=== FULL DATA FOR SERIE ${targetSerie} ===`);
+  const teams = teamNames.map(name => ({ id: `t_${name.replace(/\s+/g,"_").toLowerCase()}`, name, points: 0, homeBonus: "" }));
+  console.log(`\nAll teams (${teams.length}):`, teams.map(t=>t.name).join(", "));
 
-  const rankingUrl = `${BASE_URL}?serie_id=${targetSerie}&_path=ranking/byMyLeague`;
-  const gamesUrl   = seasonId
-    ? `${BASE_URL}?with_referees=true&no_forfeit=true&season_id=${seasonId}&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${targetSerie}&_path=game/byMyLeague`
-    : `${BASE_URL}?with_referees=true&no_forfeit=true&without_in_preparation=true&sort[0]=date&sort[1]=time&serie_id=${targetSerie}&_path=game/byMyLeague`;
-
-  const rankingRaw = (await fetchSafe(rankingUrl)).body;
-  const gamesRaw   = (await fetchSafe(gamesUrl)).body;
-
-  const rankArr  = rankingRaw?.elements || [];
-  const gamesArr = gamesRaw?.elements  || [];
-
-  console.log(`Teams: ${rankArr.length}, Games: ${gamesArr.length}`);
-  if (rankArr[0]) {
-    console.log("Serie name:", gamesArr[0]?.serie_name ?? rankArr[0]?.serie_name ?? "?");
-    console.log("First team:", rankArr[0].team_short_name ?? rankArr[0].team_name);
-    console.log("Season ID in data:", gamesArr[0]?.season_id ?? "?");
-  }
-
-  fs.writeFileSync(OUT, JSON.stringify({ seasonId, activeSeries, targetSerie, rankingRaw, gamesRaw }, null, 2));
-  await browser.close();
+  fs.writeFileSync(OUT, JSON.stringify({ ranking, teams, fixtures, fixturesHtmlLength: fixturesHtml.length, standingsHtmlLength: standingsHtml.length }, null, 2));
   console.log(`\n✓ Written to diagnose-output.json`);
 }
 
