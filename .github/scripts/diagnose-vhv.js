@@ -442,9 +442,16 @@ const LEAGUES = [
 
 
 async function fetchHtml(url) {
+  // Try 1: plain HTML request
   const r = await fetch(url, {
-    headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36", Accept: "text/html" },
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
+      "Cache-Control": "no-cache",
+    },
   });
+  console.log(`  [fetch] ${url.slice(0,60)}... → status=${r.status} content-type=${r.headers.get("content-type")}`);
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return r.text();
 }
@@ -482,6 +489,13 @@ async function main() {
       const effectiveStandingsHtml = standingsHtml ?? fixturesHtml;
       const ranking = parseStandings(effectiveStandingsHtml);
       console.log(`  Teams: ${ranking.length} — ${ranking.map(r=>r.name).join(", ")}`);
+
+      // Log raw HTML length and first 500 chars to diagnose response type
+      console.log(`  Standings HTML length: ${effectiveStandingsHtml.length}`);
+      console.log(`  Standings HTML first 300: ${effectiveStandingsHtml.slice(0, 300).replace(/\n/g, " ")}`);
+      console.log(`  Has <table>: ${"<table" in effectiveStandingsHtml || effectiveStandingsHtml.includes("<table")}`);
+      console.log(`  Has <tr>: ${effectiveStandingsHtml.includes("<tr")}`);
+      console.log(`  Has <td>: ${effectiveStandingsHtml.includes("<td")}`);
 
       // Find first game link and show raw context
       const gameIdx = fixturesHtml.indexOf('/games/');
