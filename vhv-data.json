@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-06T08:44:53.050Z",
+  "updatedAt": "2026-08-06T11:27:49.535Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:22.506Z",
+        "updatedAt": "2026-08-06T11:27:11.953Z",
         "live": true,
         "teams": [
           {
@@ -92,6 +92,60 @@
           },
           {
             "id": "f1",
+            "gameId": "2853517",
+            "homeIdx": 4,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-09-05"
+          },
+          {
+            "id": "f2",
+            "gameId": "2853516",
+            "homeIdx": 2,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-09-05"
+          },
+          {
+            "id": "f3",
+            "gameId": "2853522",
+            "homeIdx": 3,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-09-22"
+          },
+          {
+            "id": "f4",
             "gameId": "2853523",
             "homeIdx": 1,
             "awayIdx": 5,
@@ -107,60 +161,6 @@
             "awayScore": null,
             "week": 0,
             "date": "2026-09-23"
-          },
-          {
-            "id": "f2",
-            "gameId": "2853517",
-            "homeIdx": 4,
-            "awayIdx": 6,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-09-05"
-          },
-          {
-            "id": "f3",
-            "gameId": "2853516",
-            "homeIdx": 2,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-09-05"
-          },
-          {
-            "id": "f4",
-            "gameId": "2853522",
-            "homeIdx": 3,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-09-22"
           }
         ],
         "ranking": [
@@ -281,7 +281,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:23.091Z",
+        "updatedAt": "2026-08-06T11:27:12.818Z",
         "live": true,
         "teams": [
           {
@@ -503,7 +503,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:23.680Z",
+        "updatedAt": "2026-08-06T11:27:13.655Z",
         "live": true,
         "teams": [
           {
@@ -2307,7 +2307,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:24.264Z",
+        "updatedAt": "2026-08-06T11:27:14.508Z",
         "live": true,
         "teams": [
           {
@@ -2323,8 +2323,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_heren_2e_nationale",
-            "name": "Heren 2e nationale",
+            "id": "t_hbc_evergem_heren_2e_nationale",
+            "name": "HBC Evergem Heren 2e nationale",
             "points": 0,
             "homeBonus": ""
           },
@@ -4018,7 +4018,7 @@
           },
           {
             "pos": 3,
-            "name": "Heren 2e nationale",
+            "name": "HBC Evergem Heren 2e nationale",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -4111,7 +4111,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:24.982Z",
+        "updatedAt": "2026-08-06T11:27:15.339Z",
         "live": true,
         "teams": [
           {
@@ -5915,7 +5915,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:25.572Z",
+        "updatedAt": "2026-08-06T11:27:15.783Z",
         "live": true,
         "teams": [
           {
@@ -7378,7 +7378,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:26.155Z",
+        "updatedAt": "2026-08-06T11:27:16.225Z",
         "live": true,
         "teams": [
           {
@@ -9182,7 +9182,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-06T08:44:26.831Z",
+        "updatedAt": "2026-08-06T11:27:17.045Z",
         "live": true,
         "teams": [
           {
@@ -9789,7 +9789,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-06T08:44:27.219Z",
+        "updatedAt": "2026-08-06T11:27:17.899Z",
         "live": true,
         "teams": [
           {
@@ -11593,7 +11593,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-06T08:44:27.516Z",
+        "updatedAt": "2026-08-06T11:27:18.720Z",
         "live": true,
         "teams": [
           {
@@ -12784,7 +12784,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:28.876Z",
+        "updatedAt": "2026-08-06T11:27:19.814Z",
         "live": true,
         "teams": [
           {
@@ -13778,7 +13778,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:29.475Z",
+        "updatedAt": "2026-08-06T11:27:20.642Z",
         "live": true,
         "teams": [
           {
@@ -14292,7 +14292,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:30.797Z",
+        "updatedAt": "2026-08-06T11:27:21.680Z",
         "live": true,
         "teams": [
           {
@@ -15111,7 +15111,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:32.456Z",
+        "updatedAt": "2026-08-06T11:27:23.444Z",
         "live": true,
         "teams": [
           {
@@ -15625,7 +15625,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-06T08:44:28.186Z",
+        "updatedAt": "2026-08-06T11:27:19.239Z",
         "live": true,
         "teams": [
           {
@@ -18615,7 +18615,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:30.150Z",
+        "updatedAt": "2026-08-06T11:27:21.161Z",
         "live": true,
         "teams": [
           {
@@ -21676,7 +21676,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:32.079Z",
+        "updatedAt": "2026-08-06T11:27:23.092Z",
         "live": true,
         "teams": [
           {
@@ -23978,7 +23978,7 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:34.985Z",
+        "updatedAt": "2026-08-06T11:27:25.434Z",
         "live": true,
         "teams": [
           {
@@ -27274,7 +27274,7 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:35.476Z",
+        "updatedAt": "2026-08-06T11:27:26.053Z",
         "live": true,
         "teams": [
           {
@@ -30251,7 +30251,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:31.488Z",
+        "updatedAt": "2026-08-06T11:27:22.275Z",
         "live": true,
         "teams": [
           {
@@ -30710,7 +30710,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:33.180Z",
+        "updatedAt": "2026-08-06T11:27:23.941Z",
         "live": true,
         "teams": [
           {
@@ -31868,7 +31868,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-06T08:44:34.391Z",
+        "updatedAt": "2026-08-06T11:27:24.835Z",
         "live": true,
         "teams": [
           {
@@ -32526,7 +32526,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:36.058Z",
+        "updatedAt": "2026-08-06T11:27:26.884Z",
         "live": true,
         "teams": [
           {
@@ -35120,7 +35120,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:36.646Z",
+        "updatedAt": "2026-08-06T11:27:27.323Z",
         "live": true,
         "teams": [
           {
@@ -37714,7 +37714,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:37.235Z",
+        "updatedAt": "2026-08-06T11:27:28.299Z",
         "live": true,
         "teams": [
           {
@@ -37736,8 +37736,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_heren_liga_3",
-            "name": "Heren liga 3",
+            "id": "t_hbc_evergem_heren_liga_3",
+            "name": "HBC Evergem Heren liga 3",
             "points": 0,
             "homeBonus": ""
           },
@@ -39442,7 +39442,7 @@
           },
           {
             "pos": 4,
-            "name": "Heren liga 3",
+            "name": "HBC Evergem Heren liga 3",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -39535,7 +39535,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:37.928Z",
+        "updatedAt": "2026-08-06T11:27:29.260Z",
         "live": true,
         "teams": [
           {
@@ -39575,8 +39575,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_dames_liga",
-            "name": "Dames liga",
+            "id": "t_hbc_evergem_dames_liga",
+            "name": "HBC Evergem Dames liga",
             "points": 0,
             "homeBonus": ""
           },
@@ -41290,7 +41290,7 @@
           },
           {
             "pos": 7,
-            "name": "Dames liga",
+            "name": "HBC Evergem Dames liga",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -41339,7 +41339,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:38.558Z",
+        "updatedAt": "2026-08-06T11:27:29.674Z",
         "live": true,
         "teams": [
           {
@@ -41978,7 +41978,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:38.961Z",
+        "updatedAt": "2026-08-06T11:27:30.511Z",
         "live": true,
         "teams": [
           {
@@ -43835,7 +43835,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:39.577Z",
+        "updatedAt": "2026-08-06T11:27:31.348Z",
         "live": true,
         "teams": [
           {
@@ -43869,8 +43869,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_heren_regio",
-            "name": "Heren regio",
+            "id": "t_hbc_evergem_heren_regio",
+            "name": "HBC Evergem Heren regio",
             "points": 0,
             "homeBonus": ""
           },
@@ -45945,7 +45945,7 @@
           },
           {
             "pos": 6,
-            "name": "Heren regio",
+            "name": "HBC Evergem Heren regio",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -46016,7 +46016,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:40.160Z",
+        "updatedAt": "2026-08-06T11:27:32.184Z",
         "live": true,
         "teams": [
           {
@@ -46260,7 +46260,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:40.509Z",
+        "updatedAt": "2026-08-06T11:27:32.993Z",
         "live": true,
         "teams": [
           {
@@ -47633,7 +47633,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-06T08:44:41.235Z",
+        "updatedAt": "2026-08-06T11:27:33.813Z",
         "live": true,
         "teams": [
           {
@@ -47655,8 +47655,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_dames_regio",
-            "name": "Dames regio",
+            "id": "t_hbc_evergem_dames_regio",
+            "name": "HBC Evergem Dames regio",
             "points": 0,
             "homeBonus": ""
           },
@@ -49403,7 +49403,7 @@
           },
           {
             "pos": 2,
-            "name": "Dames regio",
+            "name": "HBC Evergem Dames regio",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -49573,7 +49573,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:42.722Z",
+        "updatedAt": "2026-08-06T11:27:36.364Z",
         "live": true,
         "teams": [
           {
@@ -49637,8 +49637,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_j18_vhv_u18_m_",
-            "name": "J18 VHV (U18 M)",
+            "id": "t_hbc_evergem_j18_vhv_u18_m_",
+            "name": "HBC Evergem J18 VHV (U18 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -50080,7 +50080,7 @@
             "id": "f22",
             "gameId": "2853544",
             "homeIdx": 0,
-            "awayIdx": 10,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50206,7 +50206,7 @@
             "id": "f29",
             "gameId": "2853546",
             "homeIdx": 3,
-            "awayIdx": 10,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50514,7 +50514,7 @@
           },
           {
             "pos": 4,
-            "name": "J18 VHV (U18 M)",
+            "name": "HBC Evergem J18 VHV (U18 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -50596,7 +50596,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:41.811Z",
+        "updatedAt": "2026-08-06T11:27:34.638Z",
         "live": true,
         "teams": [
           {
@@ -50660,8 +50660,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_j18_u18_m_",
-            "name": "J18 (U18 M)",
+            "id": "t_hbc_evergem_j18_u18_m_",
+            "name": "HBC Evergem J18 (U18 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -51031,7 +51031,7 @@
             "id": "f15",
             "gameId": "2850805",
             "homeIdx": 22,
-            "awayIdx": 10,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51067,7 +51067,7 @@
             "id": "f17",
             "gameId": "2850186",
             "homeIdx": 8,
-            "awayIdx": 10,
+            "awayIdx": 23,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51373,7 +51373,7 @@
             "id": "f34",
             "gameId": "2850821",
             "homeIdx": 2,
-            "awayIdx": 10,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51679,7 +51679,7 @@
             "id": "f51",
             "gameId": "2850798",
             "homeIdx": 7,
-            "awayIdx": 10,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51697,7 +51697,7 @@
             "id": "f52",
             "gameId": "2850179",
             "homeIdx": 13,
-            "awayIdx": 10,
+            "awayIdx": 23,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -52129,7 +52129,7 @@
             "id": "f76",
             "gameId": "2850184",
             "homeIdx": 3,
-            "awayIdx": 10,
+            "awayIdx": 23,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -52219,7 +52219,7 @@
             "id": "f81",
             "gameId": "2850803",
             "homeIdx": 25,
-            "awayIdx": 10,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -52417,7 +52417,7 @@
             "id": "f92",
             "gameId": "2850814",
             "homeIdx": 17,
-            "awayIdx": 10,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -52707,7 +52707,7 @@
           },
           {
             "pos": 3,
-            "name": "J18 (U18 M)",
+            "name": "HBC Evergem J18 (U18 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -52888,7 +52888,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:44.665Z",
+        "updatedAt": "2026-08-06T11:27:38.985Z",
         "live": true,
         "teams": [
           {
@@ -52976,8 +52976,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_jm16_vhv_u16_m_",
-            "name": "JM16 VHV (U16 M)",
+            "id": "t_hbc_evergem_jm16_vhv_u16_m_",
+            "name": "HBC Evergem JM16 VHV (U16 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -54275,7 +54275,7 @@
           },
           {
             "pos": 4,
-            "name": "JM16 VHV (U16 M)",
+            "name": "HBC Evergem JM16 VHV (U16 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -54390,7 +54390,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:43.508Z",
+        "updatedAt": "2026-08-06T11:27:37.343Z",
         "live": true,
         "teams": [
           {
@@ -54436,8 +54436,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_jm16_u16_m_",
-            "name": "JM16 (U16 M)",
+            "id": "t_hbc_evergem_jm16_u16_m_",
+            "name": "HBC Evergem JM16 (U16 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -57956,7 +57956,7 @@
           },
           {
             "pos": 2,
-            "name": "JM16 (U16 M)",
+            "name": "HBC Evergem JM16 (U16 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -58324,7 +58324,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:45.262Z",
+        "updatedAt": "2026-08-06T11:27:39.879Z",
         "live": true,
         "teams": [
           {
@@ -58584,7 +58584,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:44.988Z",
+        "updatedAt": "2026-08-06T11:27:39.423Z",
         "live": true,
         "teams": [
           {
@@ -59128,7 +59128,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:44.100Z",
+        "updatedAt": "2026-08-06T11:27:38.163Z",
         "live": true,
         "teams": [
           {
@@ -60818,7 +60818,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:45.904Z",
+        "updatedAt": "2026-08-06T11:27:40.771Z",
         "live": true,
         "teams": [
           {
@@ -61061,7 +61061,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:48.121Z",
+        "updatedAt": "2026-08-06T11:27:43.445Z",
         "live": true,
         "teams": [
           {
@@ -61137,8 +61137,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_jm14vhv_u14_m_",
-            "name": "JM14VHV (U14 M)",
+            "id": "t_hbc_evergem_jm14vhv_u14_m_",
+            "name": "HBC Evergem JM14VHV (U14 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -62252,7 +62252,7 @@
           },
           {
             "pos": 3,
-            "name": "JM14VHV (U14 M)",
+            "name": "HBC Evergem JM14VHV (U14 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -62400,7 +62400,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:46.434Z",
+        "updatedAt": "2026-08-06T11:27:41.824Z",
         "live": true,
         "teams": [
           {
@@ -62506,8 +62506,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_jm14_u14_m_",
-            "name": "JM14 (U14 M)",
+            "id": "t_hbc_evergem_jm14_u14_m_",
+            "name": "HBC Evergem JM14 (U14 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -66832,7 +66832,7 @@
           },
           {
             "pos": 3,
-            "name": "JM14 (U14 M)",
+            "name": "HBC Evergem JM14 (U14 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -67156,7 +67156,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:50.007Z",
+        "updatedAt": "2026-08-06T11:27:44.854Z",
         "live": true,
         "teams": [
           {
@@ -67488,7 +67488,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:48.702Z",
+        "updatedAt": "2026-08-06T11:27:44.257Z",
         "live": true,
         "teams": [
           {
@@ -68354,7 +68354,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:47.538Z",
+        "updatedAt": "2026-08-06T11:27:42.636Z",
         "live": true,
         "teams": [
           {
@@ -70686,7 +70686,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:50.595Z",
+        "updatedAt": "2026-08-06T11:27:46.016Z",
         "live": true,
         "teams": [
           {
@@ -71018,7 +71018,7 @@
         "name": "U12 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:51.290Z",
+        "updatedAt": "2026-08-06T11:27:46.962Z",
         "live": true,
         "teams": [
           {
@@ -71148,8 +71148,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_jm12_u12_m_",
-            "name": "JM12 (U12 M)",
+            "id": "t_hbc_evergem_jm12_u12_m_",
+            "name": "HBC Evergem JM12 (U12 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -76274,7 +76274,7 @@
           },
           {
             "pos": 3,
-            "name": "JM12 (U12 M)",
+            "name": "HBC Evergem JM12 (U12 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -76664,7 +76664,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:52.467Z",
+        "updatedAt": "2026-08-06T11:27:48.701Z",
         "live": true,
         "teams": [
           {
@@ -76977,7 +76977,7 @@
         "name": "U12 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:51.888Z",
+        "updatedAt": "2026-08-06T11:27:47.891Z",
         "live": true,
         "teams": [
           {
@@ -76999,8 +76999,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_m12_u12_m_f_",
-            "name": "M12 (U12 M/F)",
+            "id": "t_hbc_evergem_m12_u12_m_f_",
+            "name": "HBC Evergem M12 (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -77142,7 +77142,7 @@
             "id": "f4",
             "gameId": "2850728",
             "homeIdx": 11,
-            "awayIdx": 3,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -77340,7 +77340,7 @@
             "id": "f15",
             "gameId": "2850724",
             "homeIdx": 2,
-            "awayIdx": 3,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -77358,7 +77358,7 @@
             "id": "f16",
             "gameId": "2850719",
             "homeIdx": 5,
-            "awayIdx": 3,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -77502,7 +77502,7 @@
             "id": "f24",
             "gameId": "2850714",
             "homeIdx": 8,
-            "awayIdx": 3,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -77682,7 +77682,7 @@
             "id": "f34",
             "gameId": "2850710",
             "homeIdx": 13,
-            "awayIdx": 3,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -77790,7 +77790,7 @@
             "id": "f40",
             "gameId": "2850721",
             "homeIdx": 5,
-            "awayIdx": 3,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -77934,7 +77934,7 @@
             "id": "f48",
             "gameId": "2850717",
             "homeIdx": 8,
-            "awayIdx": 3,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -77988,7 +77988,7 @@
             "id": "f51",
             "gameId": "2850727",
             "homeIdx": 2,
-            "awayIdx": 3,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -78147,7 +78147,7 @@
           },
           {
             "pos": 2,
-            "name": "M12 (U12 M/F)",
+            "name": "HBC Evergem M12 (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -78273,7 +78273,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:53.050Z",
+        "updatedAt": "2026-08-06T11:27:49.535Z",
         "live": true,
         "teams": [
           {
@@ -78516,7 +78516,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-06T08:44:42.138Z",
+        "updatedAt": "2026-08-06T11:27:35.465Z",
         "live": true,
         "teams": [
           {
