@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-13T13:22:18.776Z",
+  "updatedAt": "2026-08-13T15:02:23.636Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:38.555Z",
+        "updatedAt": "2026-08-13T15:01:35.962Z",
         "live": true,
         "teams": [
           {
@@ -333,7 +333,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:39.503Z",
+        "updatedAt": "2026-08-13T15:01:36.961Z",
         "live": true,
         "teams": [
           {
@@ -607,7 +607,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:40.320Z",
+        "updatedAt": "2026-08-13T15:01:37.918Z",
         "live": true,
         "teams": [
           {
@@ -2411,7 +2411,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:41.114Z",
+        "updatedAt": "2026-08-13T15:01:39.132Z",
         "live": true,
         "teams": [
           {
@@ -4215,7 +4215,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:41.973Z",
+        "updatedAt": "2026-08-13T15:01:40.079Z",
         "live": true,
         "teams": [
           {
@@ -6019,7 +6019,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:43.040Z",
+        "updatedAt": "2026-08-13T15:01:41.026Z",
         "live": true,
         "teams": [
           {
@@ -7482,7 +7482,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:43.896Z",
+        "updatedAt": "2026-08-13T15:01:42.003Z",
         "live": true,
         "teams": [
           {
@@ -9286,7 +9286,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-13T13:21:44.369Z",
+        "updatedAt": "2026-08-13T15:01:43.181Z",
         "live": true,
         "teams": [
           {
@@ -10762,7 +10762,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-13T13:21:44.851Z",
+        "updatedAt": "2026-08-13T15:01:43.903Z",
         "live": true,
         "teams": [
           {
@@ -12566,7 +12566,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-13T13:21:45.228Z",
+        "updatedAt": "2026-08-13T15:01:44.455Z",
         "live": true,
         "teams": [
           {
@@ -13757,7 +13757,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:47.189Z",
+        "updatedAt": "2026-08-13T15:01:46.388Z",
         "live": true,
         "teams": [
           {
@@ -14751,7 +14751,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:49.497Z",
+        "updatedAt": "2026-08-13T15:01:47.345Z",
         "live": true,
         "teams": [
           {
@@ -15265,7 +15265,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:50.858Z",
+        "updatedAt": "2026-08-13T15:01:49.329Z",
         "live": true,
         "teams": [
           {
@@ -16084,7 +16084,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:53.000Z",
+        "updatedAt": "2026-08-13T15:01:52.424Z",
         "live": true,
         "teams": [
           {
@@ -16598,18 +16598,12 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-13T13:21:46.378Z",
+        "updatedAt": "2026-08-13T15:01:45.440Z",
         "live": true,
         "teams": [
           {
             "id": "t_hc_wanzois_passion",
             "name": "HC Wanzois Passion",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_ktsv_eupen",
-            "name": "KTSV Eupen",
             "points": 0,
             "homeBonus": ""
           },
@@ -16677,27 +16671,9 @@
         "fixtures": [
           {
             "id": "f0",
-            "gameId": "2851730",
-            "homeIdx": 1,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 1,
-            "date": null
-          },
-          {
-            "id": "f1",
             "gameId": "2851717",
-            "homeIdx": 7,
-            "awayIdx": 5,
+            "homeIdx": 6,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16712,10 +16688,28 @@
             "date": "2026-09-05"
           },
           {
-            "id": "f2",
+            "id": "f1",
             "gameId": "2851769",
-            "homeIdx": 9,
-            "awayIdx": 2,
+            "homeIdx": 8,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 1,
+            "date": "2026-09-06"
+          },
+          {
+            "id": "f2",
+            "gameId": "2851704",
+            "homeIdx": 5,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16731,9 +16725,9 @@
           },
           {
             "id": "f3",
-            "gameId": "2851704",
-            "homeIdx": 6,
-            "awayIdx": 11,
+            "gameId": "2851691",
+            "homeIdx": 3,
+            "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16749,9 +16743,9 @@
           },
           {
             "id": "f4",
-            "gameId": "2851691",
-            "homeIdx": 4,
-            "awayIdx": 0,
+            "gameId": "2851756",
+            "homeIdx": 1,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16767,9 +16761,9 @@
           },
           {
             "id": "f5",
-            "gameId": "2851756",
-            "homeIdx": 2,
-            "awayIdx": 8,
+            "gameId": "2851834",
+            "homeIdx": 4,
+            "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16780,14 +16774,14 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 1,
-            "date": "2026-09-06"
+            "week": 2,
+            "date": "2026-09-12"
           },
           {
             "id": "f6",
-            "gameId": "2851834",
-            "homeIdx": 5,
-            "awayIdx": 0,
+            "gameId": "2851782",
+            "homeIdx": 1,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16803,9 +16797,9 @@
           },
           {
             "id": "f7",
-            "gameId": "2851782",
-            "homeIdx": 2,
-            "awayIdx": 10,
+            "gameId": "2851847",
+            "homeIdx": 10,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16817,13 +16811,13 @@
             "homeScore": null,
             "awayScore": null,
             "week": 2,
-            "date": "2026-09-12"
+            "date": "2026-09-13"
           },
           {
             "id": "f8",
-            "gameId": "2851847",
-            "homeIdx": 11,
-            "awayIdx": 4,
+            "gameId": "2851808",
+            "homeIdx": 7,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16839,45 +16833,9 @@
           },
           {
             "id": "f9",
-            "gameId": "2851795",
-            "homeIdx": 8,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 2,
-            "date": null
-          },
-          {
-            "id": "f10",
-            "gameId": "2851808",
-            "homeIdx": 8,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 2,
-            "date": "2026-09-13"
-          },
-          {
-            "id": "f11",
             "gameId": "2851821",
-            "homeIdx": 3,
-            "awayIdx": 6,
+            "homeIdx": 2,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16892,28 +16850,10 @@
             "date": "2027-01-24"
           },
           {
-            "id": "f12",
-            "gameId": "2851731",
-            "homeIdx": 1,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 3,
-            "date": null
-          },
-          {
-            "id": "f13",
+            "id": "f10",
             "gameId": "2851718",
-            "homeIdx": 7,
-            "awayIdx": 2,
+            "homeIdx": 6,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16928,10 +16868,10 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f14",
+            "id": "f11",
             "gameId": "2851848",
-            "homeIdx": 11,
-            "awayIdx": 3,
+            "homeIdx": 10,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16946,10 +16886,10 @@
             "date": "2026-09-20"
           },
           {
-            "id": "f15",
+            "id": "f12",
             "gameId": "2851705",
-            "homeIdx": 6,
-            "awayIdx": 8,
+            "homeIdx": 5,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16964,10 +16904,10 @@
             "date": "2026-09-20"
           },
           {
-            "id": "f16",
+            "id": "f13",
             "gameId": "2851692",
-            "homeIdx": 4,
-            "awayIdx": 5,
+            "homeIdx": 3,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -16982,9 +16922,9 @@
             "date": "2026-09-20"
           },
           {
-            "id": "f17",
+            "id": "f14",
             "gameId": "2851783",
-            "homeIdx": 2,
+            "homeIdx": 1,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -17000,10 +16940,10 @@
             "date": "2026-09-26"
           },
           {
-            "id": "f18",
-            "gameId": "2851745",
-            "homeIdx": 10,
-            "awayIdx": 1,
+            "id": "f15",
+            "gameId": "2851771",
+            "homeIdx": 8,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17015,13 +16955,67 @@
             "homeScore": null,
             "awayScore": null,
             "week": 4,
-            "date": null
+            "date": "2026-09-27"
+          },
+          {
+            "id": "f16",
+            "gameId": "2851796",
+            "homeIdx": 7,
+            "awayIdx": 10,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 4,
+            "date": "2026-09-27"
+          },
+          {
+            "id": "f17",
+            "gameId": "2851822",
+            "homeIdx": 2,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 4,
+            "date": "2026-09-27"
+          },
+          {
+            "id": "f18",
+            "gameId": "2851757",
+            "homeIdx": 1,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 4,
+            "date": "2026-09-27"
           },
           {
             "id": "f19",
-            "gameId": "2851771",
-            "homeIdx": 9,
-            "awayIdx": 6,
+            "gameId": "2851809",
+            "homeIdx": 7,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17037,81 +17031,9 @@
           },
           {
             "id": "f20",
-            "gameId": "2851822",
-            "homeIdx": 3,
-            "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 4,
-            "date": "2026-09-27"
-          },
-          {
-            "id": "f21",
-            "gameId": "2851796",
-            "homeIdx": 8,
-            "awayIdx": 11,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 4,
-            "date": "2026-09-27"
-          },
-          {
-            "id": "f22",
-            "gameId": "2851757",
-            "homeIdx": 2,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 4,
-            "date": "2026-09-27"
-          },
-          {
-            "id": "f23",
-            "gameId": "2851809",
-            "homeIdx": 8,
-            "awayIdx": 5,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 4,
-            "date": "2026-09-27"
-          },
-          {
-            "id": "f24",
             "gameId": "2851835",
-            "homeIdx": 5,
-            "awayIdx": 2,
+            "homeIdx": 4,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17126,45 +17048,9 @@
             "date": "2026-10-03"
           },
           {
-            "id": "f25",
-            "gameId": "2851719",
-            "homeIdx": 7,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 5,
-            "date": null
-          },
-          {
-            "id": "f26",
+            "id": "f21",
             "gameId": "2851849",
-            "homeIdx": 11,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 5,
-            "date": "2026-10-04"
-          },
-          {
-            "id": "f27",
-            "gameId": "2851823",
-            "homeIdx": 3,
+            "homeIdx": 10,
             "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
@@ -17180,10 +17066,10 @@
             "date": "2026-10-04"
           },
           {
-            "id": "f28",
-            "gameId": "2851706",
-            "homeIdx": 6,
-            "awayIdx": 10,
+            "id": "f22",
+            "gameId": "2851823",
+            "homeIdx": 2,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17198,10 +17084,10 @@
             "date": "2026-10-04"
           },
           {
-            "id": "f29",
-            "gameId": "2851732",
-            "homeIdx": 1,
-            "awayIdx": 0,
+            "id": "f23",
+            "gameId": "2851706",
+            "homeIdx": 5,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17212,13 +17098,13 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 6,
-            "date": null
+            "week": 5,
+            "date": "2026-10-04"
           },
           {
-            "id": "f30",
-            "gameId": "2851772",
-            "homeIdx": 9,
+            "id": "f24",
+            "gameId": "2851797",
+            "homeIdx": 7,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -17234,9 +17120,45 @@
             "date": "2026-10-11"
           },
           {
-            "id": "f31",
-            "gameId": "2851797",
+            "id": "f25",
+            "gameId": "2851772",
             "homeIdx": 8,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 6,
+            "date": "2026-10-11"
+          },
+          {
+            "id": "f26",
+            "gameId": "2851746",
+            "homeIdx": 9,
+            "awayIdx": 10,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 6,
+            "date": "2026-10-11"
+          },
+          {
+            "id": "f27",
+            "gameId": "2851758",
+            "homeIdx": 1,
             "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
@@ -17252,46 +17174,10 @@
             "date": "2026-10-11"
           },
           {
-            "id": "f32",
-            "gameId": "2851746",
-            "homeIdx": 10,
-            "awayIdx": 11,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 6,
-            "date": "2026-10-11"
-          },
-          {
-            "id": "f33",
-            "gameId": "2851758",
-            "homeIdx": 2,
-            "awayIdx": 5,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 6,
-            "date": "2026-10-11"
-          },
-          {
-            "id": "f34",
+            "id": "f28",
             "gameId": "2851720",
-            "homeIdx": 7,
-            "awayIdx": 6,
+            "homeIdx": 6,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17306,81 +17192,9 @@
             "date": "2026-10-17"
           },
           {
-            "id": "f35",
-            "gameId": "2851836",
-            "homeIdx": 5,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 7,
-            "date": null
-          },
-          {
-            "id": "f36",
+            "id": "f29",
             "gameId": "2851850",
-            "homeIdx": 11,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 7,
-            "date": "2026-11-01"
-          },
-          {
-            "id": "f37",
-            "gameId": "2851824",
-            "homeIdx": 3,
-            "awayIdx": 10,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 7,
-            "date": "2026-11-01"
-          },
-          {
-            "id": "f38",
-            "gameId": "2851798",
-            "homeIdx": 8,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 7,
-            "date": "2026-11-01"
-          },
-          {
-            "id": "f39",
-            "gameId": "2851862",
-            "homeIdx": 0,
+            "homeIdx": 10,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -17396,10 +17210,10 @@
             "date": "2026-11-01"
           },
           {
-            "id": "f40",
-            "gameId": "2851694",
-            "homeIdx": 4,
-            "awayIdx": 2,
+            "id": "f30",
+            "gameId": "2851824",
+            "homeIdx": 2,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17414,10 +17228,64 @@
             "date": "2026-11-01"
           },
           {
-            "id": "f41",
-            "gameId": "2851721",
+            "id": "f31",
+            "gameId": "2851798",
             "homeIdx": 7,
-            "awayIdx": 3,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 7,
+            "date": "2026-11-01"
+          },
+          {
+            "id": "f32",
+            "gameId": "2851862",
+            "homeIdx": 0,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 7,
+            "date": "2026-11-01"
+          },
+          {
+            "id": "f33",
+            "gameId": "2851694",
+            "homeIdx": 3,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 7,
+            "date": "2026-11-01"
+          },
+          {
+            "id": "f34",
+            "gameId": "2851721",
+            "homeIdx": 6,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17432,63 +17300,27 @@
             "date": "2026-11-14"
           },
           {
-            "id": "f42",
+            "id": "f35",
             "gameId": "2851747",
-            "homeIdx": 10,
-            "awayIdx": 8,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 8,
-            "date": "2026-11-15"
-          },
-          {
-            "id": "f43",
-            "gameId": "2851707",
-            "homeIdx": 6,
-            "awayIdx": 5,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 8,
-            "date": "2026-11-15"
-          },
-          {
-            "id": "f44",
-            "gameId": "2851863",
-            "homeIdx": 0,
-            "awayIdx": 11,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 8,
-            "date": "2026-11-15"
-          },
-          {
-            "id": "f45",
-            "gameId": "2851773",
             "homeIdx": 9,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 8,
+            "date": "2026-11-15"
+          },
+          {
+            "id": "f36",
+            "gameId": "2851707",
+            "homeIdx": 5,
             "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
@@ -17504,10 +17336,46 @@
             "date": "2026-11-15"
           },
           {
-            "id": "f46",
+            "id": "f37",
+            "gameId": "2851773",
+            "homeIdx": 8,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 8,
+            "date": "2026-11-15"
+          },
+          {
+            "id": "f38",
+            "gameId": "2851863",
+            "homeIdx": 0,
+            "awayIdx": 10,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 8,
+            "date": "2026-11-15"
+          },
+          {
+            "id": "f39",
             "gameId": "2851837",
-            "homeIdx": 5,
-            "awayIdx": 11,
+            "homeIdx": 4,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17522,10 +17390,10 @@
             "date": "2026-11-21"
           },
           {
-            "id": "f47",
-            "gameId": "2851785",
-            "homeIdx": 2,
-            "awayIdx": 1,
+            "id": "f40",
+            "gameId": "2851799",
+            "homeIdx": 7,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17537,12 +17405,12 @@
             "homeScore": null,
             "awayScore": null,
             "week": 9,
-            "date": null
+            "date": "2026-11-22"
           },
           {
-            "id": "f48",
+            "id": "f41",
             "gameId": "2851825",
-            "homeIdx": 3,
+            "homeIdx": 2,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -17558,64 +17426,46 @@
             "date": "2026-11-22"
           },
           {
-            "id": "f49",
+            "id": "f42",
             "gameId": "2851774",
-            "homeIdx": 9,
-            "awayIdx": 10,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 9,
-            "date": "2026-11-22"
-          },
-          {
-            "id": "f50",
-            "gameId": "2851799",
             "homeIdx": 8,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 9,
-            "date": "2026-11-22"
-          },
-          {
-            "id": "f51",
-            "gameId": "2851811",
-            "homeIdx": 8,
-            "awayIdx": 6,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 9,
-            "date": "2026-11-22"
-          },
-          {
-            "id": "f52",
-            "gameId": "2851722",
-            "homeIdx": 7,
             "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 9,
+            "date": "2026-11-22"
+          },
+          {
+            "id": "f43",
+            "gameId": "2851811",
+            "homeIdx": 7,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 9,
+            "date": "2026-11-22"
+          },
+          {
+            "id": "f44",
+            "gameId": "2851722",
+            "homeIdx": 6,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17630,27 +17480,9 @@
             "date": "2026-11-28"
           },
           {
-            "id": "f53",
+            "id": "f45",
             "gameId": "2851748",
-            "homeIdx": 10,
-            "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 10,
-            "date": "2026-11-29"
-          },
-          {
-            "id": "f54",
-            "gameId": "2851838",
-            "homeIdx": 5,
+            "homeIdx": 9,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -17666,27 +17498,9 @@
             "date": "2026-11-29"
           },
           {
-            "id": "f55",
-            "gameId": "2851864",
-            "homeIdx": 0,
-            "awayIdx": 8,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 10,
-            "date": "2026-11-29"
-          },
-          {
-            "id": "f56",
-            "gameId": "2851708",
-            "homeIdx": 6,
+            "id": "f46",
+            "gameId": "2851838",
+            "homeIdx": 4,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -17702,9 +17516,45 @@
             "date": "2026-11-29"
           },
           {
-            "id": "f57",
+            "id": "f47",
+            "gameId": "2851864",
+            "homeIdx": 0,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 10,
+            "date": "2026-11-29"
+          },
+          {
+            "id": "f48",
+            "gameId": "2851708",
+            "homeIdx": 5,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 10,
+            "date": "2026-11-29"
+          },
+          {
+            "id": "f49",
             "gameId": "2851775",
-            "homeIdx": 9,
+            "homeIdx": 8,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -17720,10 +17570,10 @@
             "date": "2026-12-05"
           },
           {
-            "id": "f58",
+            "id": "f50",
             "gameId": "2851749",
-            "homeIdx": 10,
-            "awayIdx": 7,
+            "homeIdx": 9,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17738,10 +17588,10 @@
             "date": "2026-12-06"
           },
           {
-            "id": "f59",
+            "id": "f51",
             "gameId": "2851786",
-            "homeIdx": 2,
-            "awayIdx": 11,
+            "homeIdx": 1,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17756,9 +17606,27 @@
             "date": "2026-12-06"
           },
           {
-            "id": "f60",
+            "id": "f52",
             "gameId": "2851800",
-            "homeIdx": 8,
+            "homeIdx": 7,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 11,
+            "date": "2026-12-06"
+          },
+          {
+            "id": "f53",
+            "gameId": "2851760",
+            "homeIdx": 1,
             "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
@@ -17774,28 +17642,10 @@
             "date": "2026-12-06"
           },
           {
-            "id": "f61",
-            "gameId": "2851696",
-            "homeIdx": 4,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 11,
-            "date": null
-          },
-          {
-            "id": "f62",
-            "gameId": "2851760",
-            "homeIdx": 2,
-            "awayIdx": 6,
+            "id": "f54",
+            "gameId": "2851812",
+            "homeIdx": 7,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17810,9 +17660,27 @@
             "date": "2026-12-06"
           },
           {
-            "id": "f63",
-            "gameId": "2851812",
-            "homeIdx": 8,
+            "id": "f55",
+            "gameId": "2851839",
+            "homeIdx": 4,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 12,
+            "date": "2026-12-12"
+          },
+          {
+            "id": "f56",
+            "gameId": "2851723",
+            "homeIdx": 6,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -17824,13 +17692,13 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 11,
-            "date": "2026-12-06"
+            "week": 12,
+            "date": "2026-12-12"
           },
           {
-            "id": "f64",
-            "gameId": "2851839",
-            "homeIdx": 5,
+            "id": "f57",
+            "gameId": "2851865",
+            "homeIdx": 0,
             "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
@@ -17843,30 +17711,12 @@
             "homeScore": null,
             "awayScore": null,
             "week": 12,
-            "date": "2026-12-12"
+            "date": "2026-12-13"
           },
           {
-            "id": "f65",
-            "gameId": "2851723",
-            "homeIdx": 7,
-            "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 12,
-            "date": "2026-12-12"
-          },
-          {
-            "id": "f66",
-            "gameId": "2851709",
-            "homeIdx": 6,
+            "id": "f58",
+            "gameId": "2851826",
+            "homeIdx": 2,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -17879,67 +17729,13 @@
             "homeScore": null,
             "awayScore": null,
             "week": 12,
-            "date": null
-          },
-          {
-            "id": "f67",
-            "gameId": "2851826",
-            "homeIdx": 3,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 12,
             "date": "2026-12-13"
           },
           {
-            "id": "f68",
-            "gameId": "2851865",
-            "homeIdx": 0,
-            "awayIdx": 10,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 12,
-            "date": "2026-12-13"
-          },
-          {
-            "id": "f69",
-            "gameId": "2851735",
-            "homeIdx": 1,
-            "awayIdx": 11,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 13,
-            "date": null
-          },
-          {
-            "id": "f70",
+            "id": "f59",
             "gameId": "2851697",
-            "homeIdx": 4,
-            "awayIdx": 6,
+            "homeIdx": 3,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17954,9 +17750,9 @@
             "date": "2026-12-19"
           },
           {
-            "id": "f71",
+            "id": "f60",
             "gameId": "2851724",
-            "homeIdx": 7,
+            "homeIdx": 6,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -17972,10 +17768,10 @@
             "date": "2026-12-19"
           },
           {
-            "id": "f72",
+            "id": "f61",
             "gameId": "2851750",
-            "homeIdx": 10,
-            "awayIdx": 5,
+            "homeIdx": 9,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17990,46 +17786,46 @@
             "date": "2026-12-20"
           },
           {
-            "id": "f73",
+            "id": "f62",
             "gameId": "2851787",
-            "homeIdx": 2,
-            "awayIdx": 8,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 13,
-            "date": "2026-12-20"
-          },
-          {
-            "id": "f74",
-            "gameId": "2851761",
-            "homeIdx": 2,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 13,
-            "date": "2026-12-20"
-          },
-          {
-            "id": "f75",
-            "gameId": "2851840",
-            "homeIdx": 5,
+            "homeIdx": 1,
             "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 13,
+            "date": "2026-12-20"
+          },
+          {
+            "id": "f63",
+            "gameId": "2851761",
+            "homeIdx": 1,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 13,
+            "date": "2026-12-20"
+          },
+          {
+            "id": "f64",
+            "gameId": "2851840",
+            "homeIdx": 4,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18044,10 +17840,10 @@
             "date": "2027-01-16"
           },
           {
-            "id": "f76",
+            "id": "f65",
             "gameId": "2851853",
-            "homeIdx": 11,
-            "awayIdx": 6,
+            "homeIdx": 10,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18062,10 +17858,28 @@
             "date": "2027-01-17"
           },
           {
-            "id": "f77",
+            "id": "f66",
+            "gameId": "2851788",
+            "homeIdx": 1,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 14,
+            "date": "2027-01-17"
+          },
+          {
+            "id": "f67",
             "gameId": "2851866",
             "homeIdx": 0,
-            "awayIdx": 4,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18080,9 +17894,9 @@
             "date": "2027-01-17"
           },
           {
-            "id": "f78",
-            "gameId": "2851788",
-            "homeIdx": 2,
+            "id": "f68",
+            "gameId": "2851814",
+            "homeIdx": 7,
             "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
@@ -18098,46 +17912,10 @@
             "date": "2027-01-17"
           },
           {
-            "id": "f79",
-            "gameId": "2851827",
-            "homeIdx": 3,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 14,
-            "date": null
-          },
-          {
-            "id": "f80",
-            "gameId": "2851814",
-            "homeIdx": 8,
-            "awayIdx": 10,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 14,
-            "date": "2027-01-17"
-          },
-          {
-            "id": "f81",
+            "id": "f69",
             "gameId": "2851710",
-            "homeIdx": 6,
-            "awayIdx": 3,
+            "homeIdx": 5,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18152,8 +17930,44 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f82",
-            "gameId": "2851736",
+            "id": "f70",
+            "gameId": "2851751",
+            "homeIdx": 9,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 15,
+            "date": "2027-01-24"
+          },
+          {
+            "id": "f71",
+            "gameId": "2851698",
+            "homeIdx": 3,
+            "awayIdx": 10,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 15,
+            "date": "2027-01-24"
+          },
+          {
+            "id": "f72",
+            "gameId": "2851762",
             "homeIdx": 1,
             "awayIdx": 8,
             "homeWin": 50,
@@ -18167,67 +17981,13 @@
             "homeScore": null,
             "awayScore": null,
             "week": 15,
-            "date": null
-          },
-          {
-            "id": "f83",
-            "gameId": "2851751",
-            "homeIdx": 10,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 15,
             "date": "2027-01-24"
           },
           {
-            "id": "f84",
-            "gameId": "2851698",
-            "homeIdx": 4,
-            "awayIdx": 11,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 15,
-            "date": "2027-01-24"
-          },
-          {
-            "id": "f85",
-            "gameId": "2851762",
-            "homeIdx": 2,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 15,
-            "date": "2027-01-24"
-          },
-          {
-            "id": "f86",
+            "id": "f73",
             "gameId": "2851867",
             "homeIdx": 0,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18242,10 +18002,10 @@
             "date": "2027-01-24"
           },
           {
-            "id": "f87",
+            "id": "f74",
             "gameId": "2851841",
-            "homeIdx": 5,
-            "awayIdx": 4,
+            "homeIdx": 4,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18260,27 +18020,9 @@
             "date": "2027-01-30"
           },
           {
-            "id": "f88",
+            "id": "f75",
             "gameId": "2851789",
-            "homeIdx": 2,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 16,
-            "date": "2027-01-31"
-          },
-          {
-            "id": "f89",
-            "gameId": "2851802",
-            "homeIdx": 8,
+            "homeIdx": 1,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -18296,28 +18038,10 @@
             "date": "2027-01-31"
           },
           {
-            "id": "f90",
-            "gameId": "2851777",
-            "homeIdx": 9,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 16,
-            "date": null
-          },
-          {
-            "id": "f91",
-            "gameId": "2851828",
-            "homeIdx": 3,
-            "awayIdx": 11,
+            "id": "f76",
+            "gameId": "2851802",
+            "homeIdx": 7,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18332,8 +18056,8 @@
             "date": "2027-01-31"
           },
           {
-            "id": "f92",
-            "gameId": "2851763",
+            "id": "f77",
+            "gameId": "2851828",
             "homeIdx": 2,
             "awayIdx": 10,
             "homeWin": 50,
@@ -18350,9 +18074,27 @@
             "date": "2027-01-31"
           },
           {
-            "id": "f93",
+            "id": "f78",
+            "gameId": "2851763",
+            "homeIdx": 1,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 16,
+            "date": "2027-01-31"
+          },
+          {
+            "id": "f79",
             "gameId": "2851815",
-            "homeIdx": 8,
+            "homeIdx": 7,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -18368,27 +18110,9 @@
             "date": "2027-01-31"
           },
           {
-            "id": "f94",
-            "gameId": "2851737",
-            "homeIdx": 1,
-            "awayIdx": 10,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 17,
-            "date": null
-          },
-          {
-            "id": "f95",
-            "gameId": "2851868",
-            "homeIdx": 0,
+            "id": "f80",
+            "gameId": "2851699",
+            "homeIdx": 3,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -18404,10 +18128,10 @@
             "date": "2027-02-06"
           },
           {
-            "id": "f96",
-            "gameId": "2851699",
-            "homeIdx": 4,
-            "awayIdx": 3,
+            "id": "f81",
+            "gameId": "2851868",
+            "homeIdx": 0,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18422,9 +18146,27 @@
             "date": "2027-02-06"
           },
           {
-            "id": "f97",
+            "id": "f82",
             "gameId": "2851854",
-            "homeIdx": 11,
+            "homeIdx": 10,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 17,
+            "date": "2027-02-07"
+          },
+          {
+            "id": "f83",
+            "gameId": "2851711",
+            "homeIdx": 5,
             "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
@@ -18440,46 +18182,10 @@
             "date": "2027-02-07"
           },
           {
-            "id": "f98",
-            "gameId": "2851711",
-            "homeIdx": 6,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 17,
-            "date": "2027-02-07"
-          },
-          {
-            "id": "f99",
-            "gameId": "2851738",
-            "homeIdx": 1,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 18,
-            "date": null
-          },
-          {
-            "id": "f100",
+            "id": "f84",
             "gameId": "2851790",
-            "homeIdx": 2,
-            "awayIdx": 5,
+            "homeIdx": 1,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18494,28 +18200,10 @@
             "date": "2027-02-13"
           },
           {
-            "id": "f101",
+            "id": "f85",
             "gameId": "2851752",
-            "homeIdx": 10,
-            "awayIdx": 6,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 18,
-            "date": "2027-02-14"
-          },
-          {
-            "id": "f102",
-            "gameId": "2851778",
             "homeIdx": 9,
-            "awayIdx": 11,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18530,10 +18218,10 @@
             "date": "2027-02-14"
           },
           {
-            "id": "f103",
-            "gameId": "2851803",
+            "id": "f86",
+            "gameId": "2851778",
             "homeIdx": 8,
-            "awayIdx": 3,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18548,9 +18236,27 @@
             "date": "2027-02-14"
           },
           {
-            "id": "f104",
+            "id": "f87",
+            "gameId": "2851803",
+            "homeIdx": 7,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 18,
+            "date": "2027-02-14"
+          },
+          {
+            "id": "f88",
             "gameId": "2851764",
-            "homeIdx": 2,
+            "homeIdx": 1,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -18566,10 +18272,10 @@
             "date": "2027-02-14"
           },
           {
-            "id": "f105",
+            "id": "f89",
             "gameId": "2851816",
-            "homeIdx": 8,
-            "awayIdx": 4,
+            "homeIdx": 7,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18584,10 +18290,10 @@
             "date": "2027-02-14"
           },
           {
-            "id": "f106",
+            "id": "f90",
             "gameId": "2851700",
-            "homeIdx": 4,
-            "awayIdx": 8,
+            "homeIdx": 3,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18602,45 +18308,9 @@
             "date": "2027-02-20"
           },
           {
-            "id": "f107",
+            "id": "f91",
             "gameId": "2851855",
-            "homeIdx": 11,
-            "awayIdx": 10,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 19,
-            "date": "2027-02-21"
-          },
-          {
-            "id": "f108",
-            "gameId": "2851712",
-            "homeIdx": 6,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 19,
-            "date": "2027-02-21"
-          },
-          {
-            "id": "f109",
-            "gameId": "2851829",
-            "homeIdx": 3,
+            "homeIdx": 10,
             "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
@@ -18656,152 +18326,8 @@
             "date": "2027-02-21"
           },
           {
-            "id": "f110",
-            "gameId": "2851869",
-            "homeIdx": 0,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 19,
-            "date": null
-          },
-          {
-            "id": "f111",
-            "gameId": "2851817",
-            "homeIdx": 8,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 19,
-            "date": "2027-02-21"
-          },
-          {
-            "id": "f112",
-            "gameId": "2851739",
-            "homeIdx": 1,
-            "awayIdx": 5,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 20,
-            "date": null
-          },
-          {
-            "id": "f113",
-            "gameId": "2851791",
-            "homeIdx": 2,
-            "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 20,
-            "date": "2027-02-27"
-          },
-          {
-            "id": "f114",
-            "gameId": "2851727",
-            "homeIdx": 7,
-            "awayIdx": 11,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 20,
-            "date": "2027-02-27"
-          },
-          {
-            "id": "f115",
-            "gameId": "2851753",
-            "homeIdx": 10,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 20,
-            "date": "2027-02-28"
-          },
-          {
-            "id": "f116",
-            "gameId": "2851713",
-            "homeIdx": 6,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 20,
-            "date": "2027-02-28"
-          },
-          {
-            "id": "f117",
-            "gameId": "2851779",
-            "homeIdx": 9,
-            "awayIdx": 8,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 20,
-            "date": "2027-02-28"
-          },
-          {
-            "id": "f118",
-            "gameId": "2851844",
+            "id": "f92",
+            "gameId": "2851712",
             "homeIdx": 5,
             "awayIdx": 6,
             "homeWin": 50,
@@ -18814,14 +18340,140 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 21,
-            "date": "2027-03-20"
+            "week": 19,
+            "date": "2027-02-21"
           },
           {
-            "id": "f119",
-            "gameId": "2851701",
+            "id": "f93",
+            "gameId": "2851829",
+            "homeIdx": 2,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 19,
+            "date": "2027-02-21"
+          },
+          {
+            "id": "f94",
+            "gameId": "2851817",
+            "homeIdx": 7,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 19,
+            "date": "2027-02-21"
+          },
+          {
+            "id": "f95",
+            "gameId": "2851791",
+            "homeIdx": 1,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 20,
+            "date": "2027-02-27"
+          },
+          {
+            "id": "f96",
+            "gameId": "2851727",
+            "homeIdx": 6,
+            "awayIdx": 10,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 20,
+            "date": "2027-02-27"
+          },
+          {
+            "id": "f97",
+            "gameId": "2851753",
+            "homeIdx": 9,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 20,
+            "date": "2027-02-28"
+          },
+          {
+            "id": "f98",
+            "gameId": "2851713",
+            "homeIdx": 5,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 20,
+            "date": "2027-02-28"
+          },
+          {
+            "id": "f99",
+            "gameId": "2851779",
+            "homeIdx": 8,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 20,
+            "date": "2027-02-28"
+          },
+          {
+            "id": "f100",
+            "gameId": "2851844",
             "homeIdx": 4,
-            "awayIdx": 9,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18836,9 +18488,27 @@
             "date": "2027-03-20"
           },
           {
-            "id": "f120",
+            "id": "f101",
+            "gameId": "2851701",
+            "homeIdx": 3,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 21,
+            "date": "2027-03-20"
+          },
+          {
+            "id": "f102",
             "gameId": "2851856",
-            "homeIdx": 11,
+            "homeIdx": 10,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -18854,28 +18524,10 @@
             "date": "2027-03-21"
           },
           {
-            "id": "f121",
-            "gameId": "2851830",
-            "homeIdx": 3,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 21,
-            "date": "2027-03-21"
-          },
-          {
-            "id": "f122",
+            "id": "f103",
             "gameId": "2851804",
-            "homeIdx": 8,
-            "awayIdx": 10,
+            "homeIdx": 7,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18890,10 +18542,10 @@
             "date": "2027-03-21"
           },
           {
-            "id": "f123",
-            "gameId": "2851818",
-            "homeIdx": 8,
-            "awayIdx": 1,
+            "id": "f104",
+            "gameId": "2851830",
+            "homeIdx": 2,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18905,12 +18557,12 @@
             "homeScore": null,
             "awayScore": null,
             "week": 21,
-            "date": null
+            "date": "2027-03-21"
           },
           {
-            "id": "f124",
-            "gameId": "2851740",
-            "homeIdx": 1,
+            "id": "f105",
+            "gameId": "2851870",
+            "homeIdx": 0,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -18923,13 +18575,13 @@
             "homeScore": null,
             "awayScore": null,
             "week": 22,
-            "date": null
+            "date": "2027-04-03"
           },
           {
-            "id": "f125",
-            "gameId": "2851870",
-            "homeIdx": 0,
-            "awayIdx": 3,
+            "id": "f106",
+            "gameId": "2851728",
+            "homeIdx": 6,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18944,9 +18596,9 @@
             "date": "2027-04-03"
           },
           {
-            "id": "f126",
-            "gameId": "2851728",
-            "homeIdx": 7,
+            "id": "f107",
+            "gameId": "2851754",
+            "homeIdx": 9,
             "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
@@ -18959,48 +18611,12 @@
             "homeScore": null,
             "awayScore": null,
             "week": 22,
-            "date": "2027-04-03"
-          },
-          {
-            "id": "f127",
-            "gameId": "2851754",
-            "homeIdx": 10,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 22,
             "date": "2027-04-04"
           },
           {
-            "id": "f128",
+            "id": "f108",
             "gameId": "2851857",
-            "homeIdx": 11,
-            "awayIdx": 5,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 22,
-            "date": "2027-04-04"
-          },
-          {
-            "id": "f129",
-            "gameId": "2851766",
-            "homeIdx": 2,
+            "homeIdx": 10,
             "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
@@ -19016,10 +18632,28 @@
             "date": "2027-04-04"
           },
           {
-            "id": "f130",
+            "id": "f109",
+            "gameId": "2851766",
+            "homeIdx": 1,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 22,
+            "date": "2027-04-04"
+          },
+          {
+            "id": "f110",
             "gameId": "2851702",
-            "homeIdx": 4,
-            "awayIdx": 10,
+            "homeIdx": 3,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19034,27 +18668,9 @@
             "date": "2027-04-17"
           },
           {
-            "id": "f131",
+            "id": "f111",
             "gameId": "2851793",
-            "homeIdx": 2,
-            "awayIdx": 6,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 23,
-            "date": "2027-04-18"
-          },
-          {
-            "id": "f132",
-            "gameId": "2851831",
-            "homeIdx": 3,
+            "homeIdx": 1,
             "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
@@ -19070,27 +18686,9 @@
             "date": "2027-04-18"
           },
           {
-            "id": "f133",
-            "gameId": "2851780",
-            "homeIdx": 9,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 23,
-            "date": "2027-04-18"
-          },
-          {
-            "id": "f134",
+            "id": "f112",
             "gameId": "2851805",
-            "homeIdx": 8,
+            "homeIdx": 7,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -19106,28 +18704,10 @@
             "date": "2027-04-18"
           },
           {
-            "id": "f135",
-            "gameId": "2851767",
+            "id": "f113",
+            "gameId": "2851831",
             "homeIdx": 2,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 23,
-            "date": null
-          },
-          {
-            "id": "f136",
-            "gameId": "2851819",
-            "homeIdx": 8,
-            "awayIdx": 11,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19142,10 +18722,10 @@
             "date": "2027-04-18"
           },
           {
-            "id": "f137",
-            "gameId": "2851741",
-            "homeIdx": 1,
-            "awayIdx": 4,
+            "id": "f114",
+            "gameId": "2851780",
+            "homeIdx": 8,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19156,30 +18736,12 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 24,
-            "date": null
+            "week": 23,
+            "date": "2027-04-18"
           },
           {
-            "id": "f138",
-            "gameId": "2851845",
-            "homeIdx": 5,
-            "awayIdx": 8,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 24,
-            "date": "2027-04-24"
-          },
-          {
-            "id": "f139",
-            "gameId": "2851729",
+            "id": "f115",
+            "gameId": "2851819",
             "homeIdx": 7,
             "awayIdx": 10,
             "homeWin": 50,
@@ -19192,66 +18754,12 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 24,
-            "date": "2027-04-24"
+            "week": 23,
+            "date": "2027-04-18"
           },
           {
-            "id": "f140",
-            "gameId": "2851858",
-            "homeIdx": 11,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 24,
-            "date": "2027-04-25"
-          },
-          {
-            "id": "f141",
-            "gameId": "2851871",
-            "homeIdx": 0,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 24,
-            "date": "2027-04-25"
-          },
-          {
-            "id": "f142",
-            "gameId": "2851742",
-            "homeIdx": 1,
-            "awayIdx": 6,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 25,
-            "date": null
-          },
-          {
-            "id": "f143",
-            "gameId": "2851703",
+            "id": "f116",
+            "gameId": "2851845",
             "homeIdx": 4,
             "awayIdx": 7,
             "homeWin": 50,
@@ -19264,14 +18772,68 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 25,
-            "date": "2027-05-01"
+            "week": 24,
+            "date": "2027-04-24"
           },
           {
-            "id": "f144",
-            "gameId": "2851794",
-            "homeIdx": 2,
-            "awayIdx": 3,
+            "id": "f117",
+            "gameId": "2851729",
+            "homeIdx": 6,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 24,
+            "date": "2027-04-24"
+          },
+          {
+            "id": "f118",
+            "gameId": "2851858",
+            "homeIdx": 10,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 24,
+            "date": "2027-04-25"
+          },
+          {
+            "id": "f119",
+            "gameId": "2851871",
+            "homeIdx": 0,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 24,
+            "date": "2027-04-25"
+          },
+          {
+            "id": "f120",
+            "gameId": "2851703",
+            "homeIdx": 3,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19286,9 +18848,27 @@
             "date": "2027-05-01"
           },
           {
-            "id": "f145",
+            "id": "f121",
+            "gameId": "2851794",
+            "homeIdx": 1,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 25,
+            "date": "2027-05-01"
+          },
+          {
+            "id": "f122",
             "gameId": "2851755",
-            "homeIdx": 10,
+            "homeIdx": 9,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -19304,10 +18884,10 @@
             "date": "2027-05-02"
           },
           {
-            "id": "f146",
+            "id": "f123",
             "gameId": "2851781",
-            "homeIdx": 9,
-            "awayIdx": 5,
+            "homeIdx": 8,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19322,10 +18902,10 @@
             "date": "2027-05-02"
           },
           {
-            "id": "f147",
+            "id": "f124",
             "gameId": "2851768",
-            "homeIdx": 2,
-            "awayIdx": 11,
+            "homeIdx": 1,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19340,10 +18920,10 @@
             "date": "2027-05-02"
           },
           {
-            "id": "f148",
+            "id": "f125",
             "gameId": "2851846",
-            "homeIdx": 5,
-            "awayIdx": 10,
+            "homeIdx": 4,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19358,9 +18938,45 @@
             "date": "2027-05-08"
           },
           {
-            "id": "f149",
-            "gameId": "2851859",
-            "homeIdx": 11,
+            "id": "f126",
+            "gameId": "2851716",
+            "homeIdx": 5,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 26,
+            "date": "2027-05-09"
+          },
+          {
+            "id": "f127",
+            "gameId": "2851872",
+            "homeIdx": 0,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 26,
+            "date": "2027-05-09"
+          },
+          {
+            "id": "f128",
+            "gameId": "2851807",
+            "homeIdx": 7,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -19373,67 +18989,13 @@
             "homeScore": null,
             "awayScore": null,
             "week": 26,
-            "date": null
-          },
-          {
-            "id": "f150",
-            "gameId": "2851716",
-            "homeIdx": 6,
-            "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 26,
             "date": "2027-05-09"
           },
           {
-            "id": "f151",
-            "gameId": "2851872",
-            "homeIdx": 0,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 26,
-            "date": "2027-05-09"
-          },
-          {
-            "id": "f152",
-            "gameId": "2851807",
-            "homeIdx": 8,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 26,
-            "date": "2027-05-09"
-          },
-          {
-            "id": "f153",
+            "id": "f129",
             "gameId": "2851820",
-            "homeIdx": 8,
-            "awayIdx": 9,
+            "homeIdx": 7,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19462,17 +19024,6 @@
           },
           {
             "pos": 2,
-            "name": "KTSV Eupen",
-            "played": 0,
-            "won": 0,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 0,
-            "ga": 0,
-            "points": 0
-          },
-          {
-            "pos": 3,
             "name": "Handball Villers-Amay 59",
             "played": 0,
             "won": 0,
@@ -19483,7 +19034,7 @@
             "points": 0
           },
           {
-            "pos": 4,
+            "pos": 3,
             "name": "HC Malmedy",
             "played": 0,
             "won": 0,
@@ -19494,7 +19045,7 @@
             "points": 0
           },
           {
-            "pos": 5,
+            "pos": 4,
             "name": "HC Sprimont Promotion Hommes",
             "played": 0,
             "won": 0,
@@ -19505,7 +19056,7 @@
             "points": 0
           },
           {
-            "pos": 6,
+            "pos": 5,
             "name": "HC Eynatten-Raeren PROMOTION 1",
             "played": 0,
             "won": 0,
@@ -19516,7 +19067,7 @@
             "points": 0
           },
           {
-            "pos": 7,
+            "pos": 6,
             "name": "HC Eynatten-Raeren 2 2",
             "played": 0,
             "won": 0,
@@ -19527,7 +19078,7 @@
             "points": 0
           },
           {
-            "pos": 8,
+            "pos": 7,
             "name": "JS/EP Herstal",
             "played": 0,
             "won": 0,
@@ -19538,7 +19089,7 @@
             "points": 0
           },
           {
-            "pos": 9,
+            "pos": 8,
             "name": "ROC Flémalle",
             "played": 0,
             "won": 0,
@@ -19549,7 +19100,7 @@
             "points": 0
           },
           {
-            "pos": 10,
+            "pos": 9,
             "name": "Union Beynoise Handball",
             "played": 0,
             "won": 0,
@@ -19560,7 +19111,7 @@
             "points": 0
           },
           {
-            "pos": 11,
+            "pos": 10,
             "name": "HC Visé BM",
             "played": 0,
             "won": 0,
@@ -19571,7 +19122,7 @@
             "points": 0
           },
           {
-            "pos": 12,
+            "pos": 11,
             "name": "HC Verviers",
             "played": 0,
             "won": 0,
@@ -19588,7 +19139,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:50.381Z",
+        "updatedAt": "2026-08-13T15:01:48.297Z",
         "live": true,
         "teams": [
           {
@@ -19662,12 +19213,6 @@
             "name": "HC Herstal (U16 M/F)",
             "points": 0,
             "homeBonus": ""
-          },
-          {
-            "id": "t_hc_verviers_u16_m_f_",
-            "name": "HC Verviers (U16 M/F)",
-            "points": 0,
-            "homeBonus": ""
           }
         ],
         "fixtures": [
@@ -19727,9 +19272,9 @@
           },
           {
             "id": "f3",
-            "gameId": "2851886",
-            "homeIdx": 5,
-            "awayIdx": 12,
+            "gameId": "2851912",
+            "homeIdx": 4,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -19741,7 +19286,7 @@
             "homeScore": null,
             "awayScore": null,
             "week": 1,
-            "date": null
+            "date": "2026-09-06"
           },
           {
             "id": "f4",
@@ -19763,24 +19308,6 @@
           },
           {
             "id": "f5",
-            "gameId": "2851912",
-            "homeIdx": 4,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 1,
-            "date": "2026-09-06"
-          },
-          {
-            "id": "f6",
             "gameId": "2851952",
             "homeIdx": 9,
             "awayIdx": 11,
@@ -19798,7 +19325,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f7",
+            "id": "f6",
             "gameId": "2851964",
             "homeIdx": 10,
             "awayIdx": 2,
@@ -19816,25 +19343,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f8",
-            "gameId": "2852029",
-            "homeIdx": 12,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 2,
-            "date": null
-          },
-          {
-            "id": "f9",
+            "id": "f7",
             "gameId": "2852003",
             "homeIdx": 1,
             "awayIdx": 5,
@@ -19852,7 +19361,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f10",
+            "id": "f8",
             "gameId": "2851990",
             "homeIdx": 8,
             "awayIdx": 6,
@@ -19870,7 +19379,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f11",
+            "id": "f9",
             "gameId": "2851977",
             "homeIdx": 3,
             "awayIdx": 4,
@@ -19888,7 +19397,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f12",
+            "id": "f10",
             "gameId": "2852016",
             "homeIdx": 7,
             "awayIdx": 0,
@@ -19906,7 +19415,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f13",
+            "id": "f11",
             "gameId": "2851926",
             "homeIdx": 2,
             "awayIdx": 11,
@@ -19924,25 +19433,7 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f14",
-            "gameId": "2852030",
-            "homeIdx": 12,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 3,
-            "date": null
-          },
-          {
-            "id": "f15",
+            "id": "f12",
             "gameId": "2851913",
             "homeIdx": 4,
             "awayIdx": 9,
@@ -19960,7 +19451,7 @@
             "date": "2026-09-20"
           },
           {
-            "id": "f16",
+            "id": "f13",
             "gameId": "2851887",
             "homeIdx": 5,
             "awayIdx": 3,
@@ -19978,7 +19469,7 @@
             "date": "2026-09-20"
           },
           {
-            "id": "f17",
+            "id": "f14",
             "gameId": "2851874",
             "homeIdx": 0,
             "awayIdx": 7,
@@ -19996,7 +19487,7 @@
             "date": "2026-09-20"
           },
           {
-            "id": "f18",
+            "id": "f15",
             "gameId": "2851900",
             "homeIdx": 6,
             "awayIdx": 10,
@@ -20014,7 +19505,7 @@
             "date": "2027-01-30"
           },
           {
-            "id": "f19",
+            "id": "f16",
             "gameId": "2851991",
             "homeIdx": 8,
             "awayIdx": 7,
@@ -20032,7 +19523,7 @@
             "date": "2026-09-26"
           },
           {
-            "id": "f20",
+            "id": "f17",
             "gameId": "2851953",
             "homeIdx": 9,
             "awayIdx": 5,
@@ -20050,7 +19541,7 @@
             "date": "2026-09-26"
           },
           {
-            "id": "f21",
+            "id": "f18",
             "gameId": "2851927",
             "homeIdx": 2,
             "awayIdx": 4,
@@ -20068,7 +19559,7 @@
             "date": "2026-09-26"
           },
           {
-            "id": "f22",
+            "id": "f19",
             "gameId": "2852004",
             "homeIdx": 1,
             "awayIdx": 0,
@@ -20086,25 +19577,7 @@
             "date": "2026-09-26"
           },
           {
-            "id": "f23",
-            "gameId": "2851978",
-            "homeIdx": 3,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 4,
-            "date": null
-          },
-          {
-            "id": "f24",
+            "id": "f20",
             "gameId": "2851939",
             "homeIdx": 11,
             "awayIdx": 6,
@@ -20122,7 +19595,7 @@
             "date": "2026-09-27"
           },
           {
-            "id": "f25",
+            "id": "f21",
             "gameId": "2852005",
             "homeIdx": 1,
             "awayIdx": 3,
@@ -20140,7 +19613,7 @@
             "date": "2026-10-03"
           },
           {
-            "id": "f26",
+            "id": "f22",
             "gameId": "2851901",
             "homeIdx": 6,
             "awayIdx": 4,
@@ -20158,25 +19631,7 @@
             "date": "2026-10-03"
           },
           {
-            "id": "f27",
-            "gameId": "2852031",
-            "homeIdx": 12,
-            "awayIdx": 9,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 5,
-            "date": null
-          },
-          {
-            "id": "f28",
+            "id": "f23",
             "gameId": "2852017",
             "homeIdx": 7,
             "awayIdx": 10,
@@ -20194,7 +19649,7 @@
             "date": "2026-10-04"
           },
           {
-            "id": "f29",
+            "id": "f24",
             "gameId": "2851875",
             "homeIdx": 0,
             "awayIdx": 8,
@@ -20212,7 +19667,7 @@
             "date": "2026-10-04"
           },
           {
-            "id": "f30",
+            "id": "f25",
             "gameId": "2851888",
             "homeIdx": 5,
             "awayIdx": 2,
@@ -20230,25 +19685,7 @@
             "date": "2026-10-04"
           },
           {
-            "id": "f31",
-            "gameId": "2851928",
-            "homeIdx": 2,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 6,
-            "date": null
-          },
-          {
-            "id": "f32",
+            "id": "f26",
             "gameId": "2851979",
             "homeIdx": 3,
             "awayIdx": 0,
@@ -20266,7 +19703,7 @@
             "date": "2026-10-11"
           },
           {
-            "id": "f33",
+            "id": "f27",
             "gameId": "2851966",
             "homeIdx": 10,
             "awayIdx": 8,
@@ -20284,7 +19721,7 @@
             "date": "2026-10-11"
           },
           {
-            "id": "f34",
+            "id": "f28",
             "gameId": "2851940",
             "homeIdx": 11,
             "awayIdx": 7,
@@ -20302,7 +19739,7 @@
             "date": "2026-10-11"
           },
           {
-            "id": "f35",
+            "id": "f29",
             "gameId": "2851954",
             "homeIdx": 9,
             "awayIdx": 1,
@@ -20320,7 +19757,7 @@
             "date": "2026-10-11"
           },
           {
-            "id": "f36",
+            "id": "f30",
             "gameId": "2851902",
             "homeIdx": 6,
             "awayIdx": 5,
@@ -20338,7 +19775,7 @@
             "date": "2026-10-17"
           },
           {
-            "id": "f37",
+            "id": "f31",
             "gameId": "2851992",
             "homeIdx": 8,
             "awayIdx": 11,
@@ -20356,7 +19793,7 @@
             "date": "2026-10-24"
           },
           {
-            "id": "f38",
+            "id": "f32",
             "gameId": "2852006",
             "homeIdx": 1,
             "awayIdx": 2,
@@ -20374,25 +19811,7 @@
             "date": "2026-10-24"
           },
           {
-            "id": "f39",
-            "gameId": "2852032",
-            "homeIdx": 12,
-            "awayIdx": 6,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 7,
-            "date": null
-          },
-          {
-            "id": "f40",
+            "id": "f33",
             "gameId": "2851876",
             "homeIdx": 0,
             "awayIdx": 10,
@@ -20410,7 +19829,7 @@
             "date": "2026-10-25"
           },
           {
-            "id": "f41",
+            "id": "f34",
             "gameId": "2852018",
             "homeIdx": 7,
             "awayIdx": 4,
@@ -20428,7 +19847,7 @@
             "date": "2026-10-25"
           },
           {
-            "id": "f42",
+            "id": "f35",
             "gameId": "2851980",
             "homeIdx": 3,
             "awayIdx": 9,
@@ -20446,7 +19865,7 @@
             "date": "2026-10-25"
           },
           {
-            "id": "f43",
+            "id": "f36",
             "gameId": "2851903",
             "homeIdx": 6,
             "awayIdx": 1,
@@ -20464,7 +19883,7 @@
             "date": "2026-10-31"
           },
           {
-            "id": "f44",
+            "id": "f37",
             "gameId": "2851929",
             "homeIdx": 2,
             "awayIdx": 3,
@@ -20482,7 +19901,7 @@
             "date": "2026-10-31"
           },
           {
-            "id": "f45",
+            "id": "f38",
             "gameId": "2851955",
             "homeIdx": 9,
             "awayIdx": 0,
@@ -20500,7 +19919,7 @@
             "date": "2026-10-31"
           },
           {
-            "id": "f46",
+            "id": "f39",
             "gameId": "2851889",
             "homeIdx": 5,
             "awayIdx": 7,
@@ -20518,7 +19937,7 @@
             "date": "2026-11-01"
           },
           {
-            "id": "f47",
+            "id": "f40",
             "gameId": "2851915",
             "homeIdx": 4,
             "awayIdx": 8,
@@ -20536,7 +19955,7 @@
             "date": "2026-11-01"
           },
           {
-            "id": "f48",
+            "id": "f41",
             "gameId": "2851941",
             "homeIdx": 11,
             "awayIdx": 10,
@@ -20554,7 +19973,7 @@
             "date": "2026-11-01"
           },
           {
-            "id": "f49",
+            "id": "f42",
             "gameId": "2851993",
             "homeIdx": 8,
             "awayIdx": 5,
@@ -20572,7 +19991,7 @@
             "date": "2026-11-14"
           },
           {
-            "id": "f50",
+            "id": "f43",
             "gameId": "2851967",
             "homeIdx": 10,
             "awayIdx": 4,
@@ -20590,25 +20009,7 @@
             "date": "2026-11-14"
           },
           {
-            "id": "f51",
-            "gameId": "2852019",
-            "homeIdx": 7,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 9,
-            "date": null
-          },
-          {
-            "id": "f52",
+            "id": "f44",
             "gameId": "2851981",
             "homeIdx": 3,
             "awayIdx": 6,
@@ -20626,7 +20027,7 @@
             "date": "2026-11-15"
           },
           {
-            "id": "f53",
+            "id": "f45",
             "gameId": "2851877",
             "homeIdx": 0,
             "awayIdx": 11,
@@ -20644,7 +20045,7 @@
             "date": "2026-11-15"
           },
           {
-            "id": "f54",
+            "id": "f46",
             "gameId": "2851956",
             "homeIdx": 9,
             "awayIdx": 2,
@@ -20662,7 +20063,7 @@
             "date": "2026-12-19"
           },
           {
-            "id": "f55",
+            "id": "f47",
             "gameId": "2851916",
             "homeIdx": 4,
             "awayIdx": 11,
@@ -20680,7 +20081,7 @@
             "date": "2026-11-21"
           },
           {
-            "id": "f56",
+            "id": "f48",
             "gameId": "2851904",
             "homeIdx": 6,
             "awayIdx": 9,
@@ -20698,25 +20099,7 @@
             "date": "2026-11-21"
           },
           {
-            "id": "f57",
-            "gameId": "2852033",
-            "homeIdx": 12,
-            "awayIdx": 8,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 10,
-            "date": null
-          },
-          {
-            "id": "f58",
+            "id": "f49",
             "gameId": "2852020",
             "homeIdx": 7,
             "awayIdx": 1,
@@ -20734,7 +20117,7 @@
             "date": "2026-11-22"
           },
           {
-            "id": "f59",
+            "id": "f50",
             "gameId": "2851890",
             "homeIdx": 5,
             "awayIdx": 10,
@@ -20752,7 +20135,7 @@
             "date": "2026-11-22"
           },
           {
-            "id": "f60",
+            "id": "f51",
             "gameId": "2851930",
             "homeIdx": 2,
             "awayIdx": 0,
@@ -20770,7 +20153,7 @@
             "date": "2026-11-22"
           },
           {
-            "id": "f61",
+            "id": "f52",
             "gameId": "2851994",
             "homeIdx": 8,
             "awayIdx": 1,
@@ -20788,7 +20171,7 @@
             "date": "2026-11-28"
           },
           {
-            "id": "f62",
+            "id": "f53",
             "gameId": "2851931",
             "homeIdx": 2,
             "awayIdx": 6,
@@ -20806,25 +20189,7 @@
             "date": "2026-11-28"
           },
           {
-            "id": "f63",
-            "gameId": "2851968",
-            "homeIdx": 10,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 11,
-            "date": null
-          },
-          {
-            "id": "f64",
+            "id": "f54",
             "gameId": "2851982",
             "homeIdx": 3,
             "awayIdx": 7,
@@ -20842,7 +20207,7 @@
             "date": "2026-11-29"
           },
           {
-            "id": "f65",
+            "id": "f55",
             "gameId": "2851878",
             "homeIdx": 0,
             "awayIdx": 4,
@@ -20860,7 +20225,7 @@
             "date": "2026-11-29"
           },
           {
-            "id": "f66",
+            "id": "f56",
             "gameId": "2851942",
             "homeIdx": 11,
             "awayIdx": 5,
@@ -20878,7 +20243,7 @@
             "date": "2026-11-29"
           },
           {
-            "id": "f67",
+            "id": "f57",
             "gameId": "2851995",
             "homeIdx": 8,
             "awayIdx": 3,
@@ -20896,7 +20261,7 @@
             "date": "2026-12-05"
           },
           {
-            "id": "f68",
+            "id": "f58",
             "gameId": "2851905",
             "homeIdx": 6,
             "awayIdx": 0,
@@ -20914,7 +20279,7 @@
             "date": "2026-12-05"
           },
           {
-            "id": "f69",
+            "id": "f59",
             "gameId": "2852008",
             "homeIdx": 1,
             "awayIdx": 10,
@@ -20932,25 +20297,7 @@
             "date": "2026-12-05"
           },
           {
-            "id": "f70",
-            "gameId": "2852034",
-            "homeIdx": 12,
-            "awayIdx": 11,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 12,
-            "date": null
-          },
-          {
-            "id": "f71",
+            "id": "f60",
             "gameId": "2852021",
             "homeIdx": 7,
             "awayIdx": 9,
@@ -20968,7 +20315,7 @@
             "date": "2026-12-06"
           },
           {
-            "id": "f72",
+            "id": "f61",
             "gameId": "2851891",
             "homeIdx": 5,
             "awayIdx": 4,
@@ -20986,7 +20333,7 @@
             "date": "2026-12-06"
           },
           {
-            "id": "f73",
+            "id": "f62",
             "gameId": "2851932",
             "homeIdx": 2,
             "awayIdx": 7,
@@ -21004,7 +20351,7 @@
             "date": "2026-12-12"
           },
           {
-            "id": "f74",
+            "id": "f63",
             "gameId": "2851958",
             "homeIdx": 9,
             "awayIdx": 8,
@@ -21022,7 +20369,7 @@
             "date": "2026-12-12"
           },
           {
-            "id": "f75",
+            "id": "f64",
             "gameId": "2851969",
             "homeIdx": 10,
             "awayIdx": 3,
@@ -21040,7 +20387,7 @@
             "date": "2026-12-12"
           },
           {
-            "id": "f76",
+            "id": "f65",
             "gameId": "2851879",
             "homeIdx": 0,
             "awayIdx": 5,
@@ -21058,7 +20405,7 @@
             "date": "2026-12-13"
           },
           {
-            "id": "f77",
+            "id": "f66",
             "gameId": "2851943",
             "homeIdx": 11,
             "awayIdx": 1,
@@ -21076,25 +20423,7 @@
             "date": "2026-12-13"
           },
           {
-            "id": "f78",
-            "gameId": "2851917",
-            "homeIdx": 4,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 13,
-            "date": null
-          },
-          {
-            "id": "f79",
+            "id": "f67",
             "gameId": "2851996",
             "homeIdx": 8,
             "awayIdx": 2,
@@ -21112,7 +20441,7 @@
             "date": "2027-01-16"
           },
           {
-            "id": "f80",
+            "id": "f68",
             "gameId": "2852009",
             "homeIdx": 1,
             "awayIdx": 4,
@@ -21130,7 +20459,7 @@
             "date": "2027-01-16"
           },
           {
-            "id": "f81",
+            "id": "f69",
             "gameId": "2851970",
             "homeIdx": 10,
             "awayIdx": 9,
@@ -21148,25 +20477,7 @@
             "date": "2027-01-16"
           },
           {
-            "id": "f82",
-            "gameId": "2852035",
-            "homeIdx": 12,
-            "awayIdx": 5,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 14,
-            "date": null
-          },
-          {
-            "id": "f83",
+            "id": "f70",
             "gameId": "2852022",
             "homeIdx": 7,
             "awayIdx": 6,
@@ -21184,7 +20495,7 @@
             "date": "2027-01-17"
           },
           {
-            "id": "f84",
+            "id": "f71",
             "gameId": "2851983",
             "homeIdx": 3,
             "awayIdx": 11,
@@ -21202,7 +20513,7 @@
             "date": "2027-01-17"
           },
           {
-            "id": "f85",
+            "id": "f72",
             "gameId": "2851907",
             "homeIdx": 6,
             "awayIdx": 8,
@@ -21220,7 +20531,7 @@
             "date": "2027-01-23"
           },
           {
-            "id": "f86",
+            "id": "f73",
             "gameId": "2851918",
             "homeIdx": 4,
             "awayIdx": 3,
@@ -21238,25 +20549,7 @@
             "date": "2027-01-23"
           },
           {
-            "id": "f87",
-            "gameId": "2851880",
-            "homeIdx": 0,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 15,
-            "date": null
-          },
-          {
-            "id": "f88",
+            "id": "f74",
             "gameId": "2851892",
             "homeIdx": 5,
             "awayIdx": 1,
@@ -21274,7 +20567,7 @@
             "date": "2027-01-24"
           },
           {
-            "id": "f89",
+            "id": "f75",
             "gameId": "2851944",
             "homeIdx": 11,
             "awayIdx": 9,
@@ -21292,7 +20585,7 @@
             "date": "2027-01-24"
           },
           {
-            "id": "f90",
+            "id": "f76",
             "gameId": "2851933",
             "homeIdx": 2,
             "awayIdx": 10,
@@ -21310,7 +20603,7 @@
             "date": "2027-01-24"
           },
           {
-            "id": "f91",
+            "id": "f77",
             "gameId": "2851971",
             "homeIdx": 10,
             "awayIdx": 6,
@@ -21328,25 +20621,7 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f92",
-            "gameId": "2852010",
-            "homeIdx": 1,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 16,
-            "date": null
-          },
-          {
-            "id": "f93",
+            "id": "f78",
             "gameId": "2851959",
             "homeIdx": 9,
             "awayIdx": 4,
@@ -21364,7 +20639,7 @@
             "date": "2027-01-30"
           },
           {
-            "id": "f94",
+            "id": "f79",
             "gameId": "2852023",
             "homeIdx": 7,
             "awayIdx": 0,
@@ -21382,7 +20657,7 @@
             "date": "2027-01-31"
           },
           {
-            "id": "f95",
+            "id": "f80",
             "gameId": "2851984",
             "homeIdx": 3,
             "awayIdx": 5,
@@ -21400,7 +20675,7 @@
             "date": "2027-01-31"
           },
           {
-            "id": "f96",
+            "id": "f81",
             "gameId": "2851945",
             "homeIdx": 11,
             "awayIdx": 2,
@@ -21418,7 +20693,7 @@
             "date": "2027-01-31"
           },
           {
-            "id": "f97",
+            "id": "f82",
             "gameId": "2851908",
             "homeIdx": 6,
             "awayIdx": 11,
@@ -21436,7 +20711,7 @@
             "date": "2027-02-06"
           },
           {
-            "id": "f98",
+            "id": "f83",
             "gameId": "2851919",
             "homeIdx": 4,
             "awayIdx": 2,
@@ -21454,25 +20729,7 @@
             "date": "2027-02-06"
           },
           {
-            "id": "f99",
-            "gameId": "2852036",
-            "homeIdx": 12,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 17,
-            "date": null
-          },
-          {
-            "id": "f100",
+            "id": "f84",
             "gameId": "2852024",
             "homeIdx": 7,
             "awayIdx": 8,
@@ -21490,7 +20747,7 @@
             "date": "2027-02-07"
           },
           {
-            "id": "f101",
+            "id": "f85",
             "gameId": "2851881",
             "homeIdx": 0,
             "awayIdx": 1,
@@ -21508,7 +20765,7 @@
             "date": "2027-02-07"
           },
           {
-            "id": "f102",
+            "id": "f86",
             "gameId": "2851893",
             "homeIdx": 5,
             "awayIdx": 9,
@@ -21526,7 +20783,7 @@
             "date": "2027-02-07"
           },
           {
-            "id": "f103",
+            "id": "f87",
             "gameId": "2851998",
             "homeIdx": 8,
             "awayIdx": 0,
@@ -21544,7 +20801,7 @@
             "date": "2027-02-13"
           },
           {
-            "id": "f104",
+            "id": "f88",
             "gameId": "2851934",
             "homeIdx": 2,
             "awayIdx": 5,
@@ -21562,25 +20819,7 @@
             "date": "2027-02-13"
           },
           {
-            "id": "f105",
-            "gameId": "2851960",
-            "homeIdx": 9,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 18,
-            "date": null
-          },
-          {
-            "id": "f106",
+            "id": "f89",
             "gameId": "2851920",
             "homeIdx": 4,
             "awayIdx": 6,
@@ -21598,7 +20837,7 @@
             "date": "2027-02-14"
           },
           {
-            "id": "f107",
+            "id": "f90",
             "gameId": "2851972",
             "homeIdx": 10,
             "awayIdx": 7,
@@ -21616,7 +20855,7 @@
             "date": "2027-02-14"
           },
           {
-            "id": "f108",
+            "id": "f91",
             "gameId": "2851985",
             "homeIdx": 3,
             "awayIdx": 1,
@@ -21634,7 +20873,7 @@
             "date": "2027-02-14"
           },
           {
-            "id": "f109",
+            "id": "f92",
             "gameId": "2851999",
             "homeIdx": 8,
             "awayIdx": 10,
@@ -21652,7 +20891,7 @@
             "date": "2027-02-27"
           },
           {
-            "id": "f110",
+            "id": "f93",
             "gameId": "2852011",
             "homeIdx": 1,
             "awayIdx": 9,
@@ -21670,25 +20909,7 @@
             "date": "2027-02-27"
           },
           {
-            "id": "f111",
-            "gameId": "2852037",
-            "homeIdx": 12,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 19,
-            "date": null
-          },
-          {
-            "id": "f112",
+            "id": "f94",
             "gameId": "2852025",
             "homeIdx": 7,
             "awayIdx": 11,
@@ -21706,7 +20927,7 @@
             "date": "2027-02-28"
           },
           {
-            "id": "f113",
+            "id": "f95",
             "gameId": "2851882",
             "homeIdx": 0,
             "awayIdx": 3,
@@ -21724,7 +20945,7 @@
             "date": "2027-02-28"
           },
           {
-            "id": "f114",
+            "id": "f96",
             "gameId": "2851894",
             "homeIdx": 5,
             "awayIdx": 6,
@@ -21742,25 +20963,7 @@
             "date": "2027-02-28"
           },
           {
-            "id": "f115",
-            "gameId": "2851909",
-            "homeIdx": 6,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 20,
-            "date": null
-          },
-          {
-            "id": "f116",
+            "id": "f97",
             "gameId": "2851935",
             "homeIdx": 2,
             "awayIdx": 1,
@@ -21778,7 +20981,7 @@
             "date": "2027-03-06"
           },
           {
-            "id": "f117",
+            "id": "f98",
             "gameId": "2851921",
             "homeIdx": 4,
             "awayIdx": 7,
@@ -21796,7 +20999,7 @@
             "date": "2027-03-06"
           },
           {
-            "id": "f118",
+            "id": "f99",
             "gameId": "2851961",
             "homeIdx": 9,
             "awayIdx": 3,
@@ -21814,7 +21017,7 @@
             "date": "2027-03-06"
           },
           {
-            "id": "f119",
+            "id": "f100",
             "gameId": "2851973",
             "homeIdx": 10,
             "awayIdx": 0,
@@ -21832,7 +21035,7 @@
             "date": "2027-03-06"
           },
           {
-            "id": "f120",
+            "id": "f101",
             "gameId": "2851947",
             "homeIdx": 11,
             "awayIdx": 8,
@@ -21850,7 +21053,7 @@
             "date": "2027-03-07"
           },
           {
-            "id": "f121",
+            "id": "f102",
             "gameId": "2852000",
             "homeIdx": 8,
             "awayIdx": 4,
@@ -21868,7 +21071,7 @@
             "date": "2027-03-13"
           },
           {
-            "id": "f122",
+            "id": "f103",
             "gameId": "2852012",
             "homeIdx": 1,
             "awayIdx": 6,
@@ -21886,7 +21089,7 @@
             "date": "2027-03-13"
           },
           {
-            "id": "f123",
+            "id": "f104",
             "gameId": "2851974",
             "homeIdx": 10,
             "awayIdx": 11,
@@ -21904,7 +21107,7 @@
             "date": "2027-03-13"
           },
           {
-            "id": "f124",
+            "id": "f105",
             "gameId": "2852026",
             "homeIdx": 7,
             "awayIdx": 5,
@@ -21922,25 +21125,7 @@
             "date": "2027-03-14"
           },
           {
-            "id": "f125",
-            "gameId": "2851986",
-            "homeIdx": 3,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 21,
-            "date": "2027-03-14"
-          },
-          {
-            "id": "f126",
+            "id": "f106",
             "gameId": "2851883",
             "homeIdx": 0,
             "awayIdx": 9,
@@ -21958,7 +21143,25 @@
             "date": "2027-03-14"
           },
           {
-            "id": "f127",
+            "id": "f107",
+            "gameId": "2851986",
+            "homeIdx": 3,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 21,
+            "date": "2027-03-14"
+          },
+          {
+            "id": "f108",
             "gameId": "2851910",
             "homeIdx": 6,
             "awayIdx": 3,
@@ -21976,7 +21179,7 @@
             "date": "2027-03-20"
           },
           {
-            "id": "f128",
+            "id": "f109",
             "gameId": "2851936",
             "homeIdx": 2,
             "awayIdx": 9,
@@ -21994,25 +21197,7 @@
             "date": "2027-03-20"
           },
           {
-            "id": "f129",
-            "gameId": "2852039",
-            "homeIdx": 12,
-            "awayIdx": 7,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 22,
-            "date": null
-          },
-          {
-            "id": "f130",
+            "id": "f110",
             "gameId": "2851896",
             "homeIdx": 5,
             "awayIdx": 8,
@@ -22030,7 +21215,7 @@
             "date": "2027-03-21"
           },
           {
-            "id": "f131",
+            "id": "f111",
             "gameId": "2851922",
             "homeIdx": 4,
             "awayIdx": 10,
@@ -22048,7 +21233,7 @@
             "date": "2027-03-21"
           },
           {
-            "id": "f132",
+            "id": "f112",
             "gameId": "2851948",
             "homeIdx": 11,
             "awayIdx": 0,
@@ -22066,25 +21251,7 @@
             "date": "2027-03-21"
           },
           {
-            "id": "f133",
-            "gameId": "2852001",
-            "homeIdx": 8,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 23,
-            "date": null
-          },
-          {
-            "id": "f134",
+            "id": "f113",
             "gameId": "2852013",
             "homeIdx": 1,
             "awayIdx": 7,
@@ -22102,7 +21269,7 @@
             "date": "2027-04-03"
           },
           {
-            "id": "f135",
+            "id": "f114",
             "gameId": "2851962",
             "homeIdx": 9,
             "awayIdx": 6,
@@ -22120,7 +21287,7 @@
             "date": "2027-04-03"
           },
           {
-            "id": "f136",
+            "id": "f115",
             "gameId": "2851975",
             "homeIdx": 10,
             "awayIdx": 5,
@@ -22138,7 +21305,7 @@
             "date": "2027-04-03"
           },
           {
-            "id": "f137",
+            "id": "f116",
             "gameId": "2851884",
             "homeIdx": 0,
             "awayIdx": 2,
@@ -22156,7 +21323,7 @@
             "date": "2027-04-04"
           },
           {
-            "id": "f138",
+            "id": "f117",
             "gameId": "2851949",
             "homeIdx": 11,
             "awayIdx": 4,
@@ -22174,7 +21341,7 @@
             "date": "2027-04-04"
           },
           {
-            "id": "f139",
+            "id": "f118",
             "gameId": "2851911",
             "homeIdx": 6,
             "awayIdx": 2,
@@ -22192,7 +21359,7 @@
             "date": "2027-04-10"
           },
           {
-            "id": "f140",
+            "id": "f119",
             "gameId": "2852014",
             "homeIdx": 1,
             "awayIdx": 8,
@@ -22210,25 +21377,7 @@
             "date": "2027-04-10"
           },
           {
-            "id": "f141",
-            "gameId": "2852040",
-            "homeIdx": 12,
-            "awayIdx": 10,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 24,
-            "date": null
-          },
-          {
-            "id": "f142",
+            "id": "f120",
             "gameId": "2852027",
             "homeIdx": 7,
             "awayIdx": 3,
@@ -22246,7 +21395,7 @@
             "date": "2027-04-11"
           },
           {
-            "id": "f143",
+            "id": "f121",
             "gameId": "2851897",
             "homeIdx": 5,
             "awayIdx": 11,
@@ -22264,7 +21413,7 @@
             "date": "2027-04-11"
           },
           {
-            "id": "f144",
+            "id": "f122",
             "gameId": "2851923",
             "homeIdx": 4,
             "awayIdx": 0,
@@ -22282,7 +21431,7 @@
             "date": "2027-04-11"
           },
           {
-            "id": "f145",
+            "id": "f123",
             "gameId": "2851963",
             "homeIdx": 9,
             "awayIdx": 7,
@@ -22300,7 +21449,7 @@
             "date": "2027-04-17"
           },
           {
-            "id": "f146",
+            "id": "f124",
             "gameId": "2851976",
             "homeIdx": 10,
             "awayIdx": 1,
@@ -22318,7 +21467,7 @@
             "date": "2027-04-17"
           },
           {
-            "id": "f147",
+            "id": "f125",
             "gameId": "2851924",
             "homeIdx": 4,
             "awayIdx": 5,
@@ -22336,7 +21485,7 @@
             "date": "2027-04-17"
           },
           {
-            "id": "f148",
+            "id": "f126",
             "gameId": "2851988",
             "homeIdx": 3,
             "awayIdx": 8,
@@ -22354,7 +21503,7 @@
             "date": "2027-04-18"
           },
           {
-            "id": "f149",
+            "id": "f127",
             "gameId": "2851885",
             "homeIdx": 0,
             "awayIdx": 6,
@@ -22372,25 +21521,7 @@
             "date": "2027-04-18"
           },
           {
-            "id": "f150",
-            "gameId": "2851950",
-            "homeIdx": 11,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 25,
-            "date": null
-          },
-          {
-            "id": "f151",
+            "id": "f128",
             "gameId": "2852002",
             "homeIdx": 8,
             "awayIdx": 9,
@@ -22408,7 +21539,7 @@
             "date": "2027-05-08"
           },
           {
-            "id": "f152",
+            "id": "f129",
             "gameId": "2852015",
             "homeIdx": 1,
             "awayIdx": 11,
@@ -22426,25 +21557,7 @@
             "date": "2027-05-08"
           },
           {
-            "id": "f153",
-            "gameId": "2852041",
-            "homeIdx": 12,
-            "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 26,
-            "date": null
-          },
-          {
-            "id": "f154",
+            "id": "f130",
             "gameId": "2852028",
             "homeIdx": 7,
             "awayIdx": 2,
@@ -22462,7 +21575,7 @@
             "date": "2027-05-09"
           },
           {
-            "id": "f155",
+            "id": "f131",
             "gameId": "2851989",
             "homeIdx": 3,
             "awayIdx": 10,
@@ -22480,7 +21593,7 @@
             "date": "2027-05-09"
           },
           {
-            "id": "f156",
+            "id": "f132",
             "gameId": "2851898",
             "homeIdx": 5,
             "awayIdx": 0,
@@ -22630,17 +21743,6 @@
             "gf": 0,
             "ga": 0,
             "points": 0
-          },
-          {
-            "pos": 13,
-            "name": "HC Verviers (U16 M/F)",
-            "played": 0,
-            "won": 0,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 0,
-            "ga": 0,
-            "points": 0
           }
         ]
       },
@@ -22649,7 +21751,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:52.207Z",
+        "updatedAt": "2026-08-13T15:01:51.424Z",
         "live": true,
         "teams": [
           {
@@ -23184,6 +22286,42 @@
           },
           {
             "id": "f24",
+            "gameId": "2852134",
+            "homeIdx": 7,
+            "awayIdx": 13,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 4,
+            "date": "2026-09-26"
+          },
+          {
+            "id": "f25",
+            "gameId": "2852078",
+            "homeIdx": 6,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 4,
+            "date": "2026-09-26"
+          },
+          {
+            "id": "f26",
             "gameId": "2852126",
             "homeIdx": 3,
             "awayIdx": 11,
@@ -23201,7 +22339,7 @@
             "date": "2026-09-26"
           },
           {
-            "id": "f25",
+            "id": "f27",
             "gameId": "2852070",
             "homeIdx": 4,
             "awayIdx": 14,
@@ -23219,7 +22357,7 @@
             "date": "2026-09-26"
           },
           {
-            "id": "f26",
+            "id": "f28",
             "gameId": "2852140",
             "homeIdx": 15,
             "awayIdx": 9,
@@ -23237,7 +22375,7 @@
             "date": "2026-09-27"
           },
           {
-            "id": "f27",
+            "id": "f29",
             "gameId": "2852084",
             "homeIdx": 10,
             "awayIdx": 8,
@@ -23255,25 +22393,7 @@
             "date": "2026-09-27"
           },
           {
-            "id": "f28",
-            "gameId": "2852064",
-            "homeIdx": 12,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 4,
-            "date": "2026-09-27"
-          },
-          {
-            "id": "f29",
+            "id": "f30",
             "gameId": "2852120",
             "homeIdx": 5,
             "awayIdx": 1,
@@ -23291,28 +22411,10 @@
             "date": "2026-09-27"
           },
           {
-            "id": "f30",
-            "gameId": "2852134",
-            "homeIdx": 7,
-            "awayIdx": 13,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 4,
-            "date": "2026-09-27"
-          },
-          {
             "id": "f31",
-            "gameId": "2852078",
-            "homeIdx": 6,
-            "awayIdx": 0,
+            "gameId": "2852064",
+            "homeIdx": 12,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -23418,9 +22520,9 @@
           },
           {
             "id": "f37",
-            "gameId": "2852147",
-            "homeIdx": 13,
-            "awayIdx": 5,
+            "gameId": "2852091",
+            "homeIdx": 0,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -23436,9 +22538,9 @@
           },
           {
             "id": "f38",
-            "gameId": "2852091",
-            "homeIdx": 0,
-            "awayIdx": 12,
+            "gameId": "2852147",
+            "homeIdx": 13,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -24951,7 +24053,7 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:55.211Z",
+        "updatedAt": "2026-08-13T15:01:54.128Z",
         "live": true,
         "teams": [
           {
@@ -28247,7 +27349,7 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:56.044Z",
+        "updatedAt": "2026-08-13T15:01:54.724Z",
         "live": true,
         "teams": [
           {
@@ -31224,7 +30326,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:51.663Z",
+        "updatedAt": "2026-08-13T15:01:50.311Z",
         "live": true,
         "teams": [
           {
@@ -31683,7 +30785,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:53.816Z",
+        "updatedAt": "2026-08-13T15:01:52.815Z",
         "live": true,
         "teams": [
           {
@@ -32841,7 +31943,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-13T13:21:54.682Z",
+        "updatedAt": "2026-08-13T15:01:53.177Z",
         "live": true,
         "teams": [
           {
@@ -33499,7 +32601,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:21:56.893Z",
+        "updatedAt": "2026-08-13T15:01:55.235Z",
         "live": true,
         "teams": [
           {
@@ -36093,7 +35195,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:21:57.790Z",
+        "updatedAt": "2026-08-13T15:01:56.199Z",
         "live": true,
         "teams": [
           {
@@ -38687,7 +37789,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:21:58.672Z",
+        "updatedAt": "2026-08-13T15:01:57.139Z",
         "live": true,
         "teams": [
           {
@@ -40508,7 +39610,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:21:59.096Z",
+        "updatedAt": "2026-08-13T15:01:57.950Z",
         "live": true,
         "teams": [
           {
@@ -42312,7 +41414,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:21:59.457Z",
+        "updatedAt": "2026-08-13T15:01:58.749Z",
         "live": true,
         "teams": [
           {
@@ -42951,7 +42053,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:22:00.194Z",
+        "updatedAt": "2026-08-13T15:01:59.645Z",
         "live": true,
         "teams": [
           {
@@ -44808,7 +43910,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:22:01.127Z",
+        "updatedAt": "2026-08-13T15:02:00.090Z",
         "live": true,
         "teams": [
           {
@@ -46989,7 +46091,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:22:01.985Z",
+        "updatedAt": "2026-08-13T15:02:01.075Z",
         "live": true,
         "teams": [
           {
@@ -47233,7 +46335,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:22:02.923Z",
+        "updatedAt": "2026-08-13T15:02:01.688Z",
         "live": true,
         "teams": [
           {
@@ -48606,7 +47708,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-13T13:22:03.713Z",
+        "updatedAt": "2026-08-13T15:02:02.728Z",
         "live": true,
         "teams": [
           {
@@ -50546,7 +49648,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:05.327Z",
+        "updatedAt": "2026-08-13T15:02:07.438Z",
         "live": true,
         "teams": [
           {
@@ -51569,7 +50671,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:04.161Z",
+        "updatedAt": "2026-08-13T15:02:03.633Z",
         "live": true,
         "teams": [
           {
@@ -53861,7 +52963,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:07.594Z",
+        "updatedAt": "2026-08-13T15:02:11.854Z",
         "live": true,
         "teams": [
           {
@@ -55363,7 +54465,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:06.213Z",
+        "updatedAt": "2026-08-13T15:02:08.396Z",
         "live": true,
         "teams": [
           {
@@ -59297,7 +58399,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:09.375Z",
+        "updatedAt": "2026-08-13T15:02:13.032Z",
         "live": true,
         "teams": [
           {
@@ -59557,7 +58659,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:08.532Z",
+        "updatedAt": "2026-08-13T15:02:12.654Z",
         "live": true,
         "teams": [
           {
@@ -60101,7 +59203,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:07.137Z",
+        "updatedAt": "2026-08-13T15:02:10.613Z",
         "live": true,
         "teams": [
           {
@@ -61910,7 +61012,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:09.796Z",
+        "updatedAt": "2026-08-13T15:02:13.637Z",
         "live": true,
         "teams": [
           {
@@ -62153,7 +61255,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:12.636Z",
+        "updatedAt": "2026-08-13T15:02:16.887Z",
         "live": true,
         "teams": [
           {
@@ -63492,7 +62594,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:11.056Z",
+        "updatedAt": "2026-08-13T15:02:14.749Z",
         "live": true,
         "teams": [
           {
@@ -68265,7 +67367,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:15.191Z",
+        "updatedAt": "2026-08-13T15:02:18.219Z",
         "live": true,
         "teams": [
           {
@@ -68597,7 +67699,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:14.394Z",
+        "updatedAt": "2026-08-13T15:02:17.697Z",
         "live": true,
         "teams": [
           {
@@ -69463,7 +68565,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:11.496Z",
+        "updatedAt": "2026-08-13T15:02:16.500Z",
         "live": true,
         "teams": [
           {
@@ -71795,7 +70897,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:15.981Z",
+        "updatedAt": "2026-08-13T15:02:19.037Z",
         "live": true,
         "teams": [
           {
@@ -72127,7 +71229,7 @@
         "name": "U12 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:16.685Z",
+        "updatedAt": "2026-08-13T15:02:19.995Z",
         "live": true,
         "teams": [
           {
@@ -76883,7 +75985,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:17.951Z",
+        "updatedAt": "2026-08-13T15:02:22.577Z",
         "live": true,
         "teams": [
           {
@@ -77196,7 +76298,7 @@
         "name": "U12 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:17.146Z",
+        "updatedAt": "2026-08-13T15:02:20.946Z",
         "live": true,
         "teams": [
           {
@@ -78492,7 +77594,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:18.776Z",
+        "updatedAt": "2026-08-13T15:02:23.636Z",
         "live": true,
         "teams": [
           {
@@ -78735,7 +77837,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-13T13:22:04.938Z",
+        "updatedAt": "2026-08-13T15:02:06.615Z",
         "live": true,
         "teams": [
           {
