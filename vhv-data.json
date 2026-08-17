@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-17T14:32:32.462Z",
+  "updatedAt": "2026-08-17T15:29:05.913Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:31:57.799Z",
+        "updatedAt": "2026-08-17T15:28:35.971Z",
         "live": true,
         "teams": [
           {
@@ -437,7 +437,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:31:58.498Z",
+        "updatedAt": "2026-08-17T15:28:36.544Z",
         "live": true,
         "teams": [
           {
@@ -711,7 +711,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:31:59.168Z",
+        "updatedAt": "2026-08-17T15:28:37.138Z",
         "live": true,
         "teams": [
           {
@@ -2515,7 +2515,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:31:59.825Z",
+        "updatedAt": "2026-08-17T15:28:37.721Z",
         "live": true,
         "teams": [
           {
@@ -4319,7 +4319,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:32:00.452Z",
+        "updatedAt": "2026-08-17T15:28:38.263Z",
         "live": true,
         "teams": [
           {
@@ -6123,7 +6123,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:32:01.039Z",
+        "updatedAt": "2026-08-17T15:28:38.670Z",
         "live": true,
         "teams": [
           {
@@ -7586,12 +7586,12 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:32:01.643Z",
+        "updatedAt": "2026-08-17T15:28:39.196Z",
         "live": true,
         "teams": [
           {
-            "id": "t_hc_pentagoon_kortessem",
-            "name": "HC Pentagoon Kortessem",
+            "id": "t_hc_pentagoon_kortessem_dames_1",
+            "name": "HC Pentagoon Kortessem Dames 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -9275,7 +9275,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "HC Pentagoon Kortessem",
+            "name": "HC Pentagoon Kortessem Dames 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -9390,7 +9390,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-17T14:32:02.277Z",
+        "updatedAt": "2026-08-17T15:28:39.749Z",
         "live": true,
         "teams": [
           {
@@ -9526,8 +9526,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem",
-            "name": "HC Pentagoon Kortessem",
+            "id": "t_hc_pentagoon_kortessem_heren_1",
+            "name": "HC Pentagoon Kortessem Heren 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -10379,7 +10379,7 @@
           },
           {
             "pos": 12,
-            "name": "HC Pentagoon Kortessem",
+            "name": "HC Pentagoon Kortessem Heren 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10705,7 +10705,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-17T14:32:02.864Z",
+        "updatedAt": "2026-08-17T15:28:40.453Z",
         "live": true,
         "teams": [
           {
@@ -12509,7 +12509,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-17T14:32:03.388Z",
+        "updatedAt": "2026-08-17T15:28:41.959Z",
         "live": true,
         "teams": [
           {
@@ -13700,7 +13700,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:04.372Z",
+        "updatedAt": "2026-08-17T15:28:43.022Z",
         "live": true,
         "teams": [
           {
@@ -14694,7 +14694,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:05.079Z",
+        "updatedAt": "2026-08-17T15:28:43.664Z",
         "live": true,
         "teams": [
           {
@@ -15208,7 +15208,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:06.460Z",
+        "updatedAt": "2026-08-17T15:28:44.575Z",
         "live": true,
         "teams": [
           {
@@ -16027,7 +16027,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:08.283Z",
+        "updatedAt": "2026-08-17T15:28:46.083Z",
         "live": true,
         "teams": [
           {
@@ -16541,7 +16541,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-17T14:32:04.072Z",
+        "updatedAt": "2026-08-17T15:28:42.497Z",
         "live": true,
         "teams": [
           {
@@ -18669,7 +18669,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:05.868Z",
+        "updatedAt": "2026-08-17T15:28:44.179Z",
         "live": true,
         "teams": [
           {
@@ -21281,7 +21281,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:07.714Z",
+        "updatedAt": "2026-08-17T15:28:45.551Z",
         "live": true,
         "teams": [
           {
@@ -23583,7 +23583,7 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:10.444Z",
+        "updatedAt": "2026-08-17T15:28:47.960Z",
         "live": true,
         "teams": [
           {
@@ -24490,24 +24490,6 @@
           },
           {
             "id": "f40",
-            "gameId": "2852437",
-            "homeIdx": 13,
-            "awayIdx": 12,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 3,
-            "date": "2027-02-07"
-          },
-          {
-            "id": "f41",
             "gameId": "2852461",
             "homeIdx": 1,
             "awayIdx": 21,
@@ -24523,6 +24505,24 @@
             "awayScore": null,
             "week": 3,
             "date": "2027-02-07"
+          },
+          {
+            "id": "f41",
+            "gameId": "2852437",
+            "homeIdx": 13,
+            "awayIdx": 12,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 3,
+            "date": "2027-02-21"
           },
           {
             "id": "f42",
@@ -24670,9 +24670,9 @@
           },
           {
             "id": "f50",
-            "gameId": "2852417",
-            "homeIdx": 15,
-            "awayIdx": 7,
+            "gameId": "2852425",
+            "homeIdx": 21,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -24688,9 +24688,9 @@
           },
           {
             "id": "f51",
-            "gameId": "2852425",
-            "homeIdx": 21,
-            "awayIdx": 19,
+            "gameId": "2852417",
+            "homeIdx": 15,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -26879,7 +26879,7 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:10.844Z",
+        "updatedAt": "2026-08-17T15:28:48.502Z",
         "live": true,
         "teams": [
           {
@@ -27378,6 +27378,24 @@
           },
           {
             "id": "f19",
+            "gameId": "2852862",
+            "homeIdx": 11,
+            "awayIdx": 14,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 2,
+            "date": "2026-10-03"
+          },
+          {
+            "id": "f20",
             "gameId": "2852832",
             "homeIdx": 7,
             "awayIdx": 16,
@@ -27395,7 +27413,7 @@
             "date": "2026-10-03"
           },
           {
-            "id": "f20",
+            "id": "f21",
             "gameId": "2852853",
             "homeIdx": 8,
             "awayIdx": 2,
@@ -27413,7 +27431,7 @@
             "date": "2026-10-04"
           },
           {
-            "id": "f21",
+            "id": "f22",
             "gameId": "2852823",
             "homeIdx": 13,
             "awayIdx": 0,
@@ -27431,28 +27449,10 @@
             "date": "2026-10-04"
           },
           {
-            "id": "f22",
+            "id": "f23",
             "gameId": "2852827",
             "homeIdx": 10,
             "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 2,
-            "date": "2026-10-04"
-          },
-          {
-            "id": "f23",
-            "gameId": "2852862",
-            "homeIdx": 11,
-            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -29856,7 +29856,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:07.057Z",
+        "updatedAt": "2026-08-17T15:28:45.141Z",
         "live": true,
         "teams": [
           {
@@ -30315,7 +30315,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:08.664Z",
+        "updatedAt": "2026-08-17T15:28:46.683Z",
         "live": true,
         "teams": [
           {
@@ -31473,7 +31473,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-17T14:32:09.666Z",
+        "updatedAt": "2026-08-17T15:28:47.298Z",
         "live": true,
         "teams": [
           {
@@ -32131,7 +32131,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:11.304Z",
+        "updatedAt": "2026-08-17T15:28:49.271Z",
         "live": true,
         "teams": [
           {
@@ -32141,8 +32141,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem",
-            "name": "HC Pentagoon Kortessem",
+            "id": "t_hc_pentagoon_kortessem_heren_1",
+            "name": "HC Pentagoon Kortessem Heren 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -34599,7 +34599,7 @@
           },
           {
             "pos": 2,
-            "name": "HC Pentagoon Kortessem",
+            "name": "HC Pentagoon Kortessem Heren 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -34725,7 +34725,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:11.751Z",
+        "updatedAt": "2026-08-17T15:28:50.461Z",
         "live": true,
         "teams": [
           {
@@ -37319,7 +37319,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:12.338Z",
+        "updatedAt": "2026-08-17T15:28:50.874Z",
         "live": true,
         "teams": [
           {
@@ -39140,7 +39140,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:12.957Z",
+        "updatedAt": "2026-08-17T15:28:51.681Z",
         "live": true,
         "teams": [
           {
@@ -40944,7 +40944,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:13.558Z",
+        "updatedAt": "2026-08-17T15:28:51.995Z",
         "live": true,
         "teams": [
           {
@@ -41583,7 +41583,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:14.158Z",
+        "updatedAt": "2026-08-17T15:28:52.415Z",
         "live": true,
         "teams": [
           {
@@ -41593,8 +41593,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem",
-            "name": "HC Pentagoon Kortessem",
+            "id": "t_hc_pentagoon_kortessem_heren_2",
+            "name": "HC Pentagoon Kortessem Heren 2",
             "points": 0,
             "homeBonus": ""
           },
@@ -43325,7 +43325,7 @@
           },
           {
             "pos": 2,
-            "name": "HC Pentagoon Kortessem",
+            "name": "HC Pentagoon Kortessem Heren 2",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -43440,7 +43440,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:14.791Z",
+        "updatedAt": "2026-08-17T15:28:52.950Z",
         "live": true,
         "teams": [
           {
@@ -45621,7 +45621,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:15.492Z",
+        "updatedAt": "2026-08-17T15:28:53.471Z",
         "live": true,
         "teams": [
           {
@@ -45865,7 +45865,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:15.799Z",
+        "updatedAt": "2026-08-17T15:28:53.897Z",
         "live": true,
         "teams": [
           {
@@ -45875,8 +45875,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem",
-            "name": "HC Pentagoon Kortessem",
+            "id": "t_hc_pentagoon_kortessem_dames_2",
+            "name": "HC Pentagoon Kortessem Dames 2",
             "points": 0,
             "homeBonus": ""
           },
@@ -47001,7 +47001,7 @@
           },
           {
             "pos": 2,
-            "name": "HC Pentagoon Kortessem",
+            "name": "HC Pentagoon Kortessem Dames 2",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -47094,7 +47094,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-17T14:32:16.408Z",
+        "updatedAt": "2026-08-17T15:28:54.480Z",
         "live": true,
         "teams": [
           {
@@ -49034,7 +49034,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:18.469Z",
+        "updatedAt": "2026-08-17T15:28:57.416Z",
         "live": true,
         "teams": [
           {
@@ -49062,8 +49062,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_u18_m_",
-            "name": "HC Pentagoon Kortessem (U18 M)",
+            "id": "t_hc_pentagoon_kortessem_m18_u18_m_",
+            "name": "HC Pentagoon Kortessem M18 (U18 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -49909,7 +49909,7 @@
           },
           {
             "pos": 2,
-            "name": "HC Pentagoon Kortessem (U18 M)",
+            "name": "HC Pentagoon Kortessem M18 (U18 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -50057,7 +50057,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:17.000Z",
+        "updatedAt": "2026-08-17T15:28:55.098Z",
         "live": true,
         "teams": [
           {
@@ -50079,8 +50079,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_u18_m_",
-            "name": "HC Pentagoon Kortessem (U18 M)",
+            "id": "t_hc_pentagoon_kortessem_j18_u18_m_",
+            "name": "HC Pentagoon Kortessem J18 (U18 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -52055,7 +52055,7 @@
           },
           {
             "pos": 1,
-            "name": "HC Pentagoon Kortessem (U18 M)",
+            "name": "HC Pentagoon Kortessem J18 (U18 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -52313,7 +52313,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:21.480Z",
+        "updatedAt": "2026-08-17T15:28:59.312Z",
         "live": true,
         "teams": [
           {
@@ -52365,8 +52365,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_u16_m_",
-            "name": "HC Pentagoon Kortessem (U16 M)",
+            "id": "t_hc_pentagoon_kortessem_m16_u16_m_",
+            "name": "HC Pentagoon Kortessem M16 (U16 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -53634,7 +53634,7 @@
           },
           {
             "pos": 3,
-            "name": "HC Pentagoon Kortessem (U16 M)",
+            "name": "HC Pentagoon Kortessem M16 (U16 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -53815,7 +53815,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:20.138Z",
+        "updatedAt": "2026-08-17T15:28:58.014Z",
         "live": true,
         "teams": [
           {
@@ -53849,8 +53849,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_u16_m_",
-            "name": "HC Pentagoon Kortessem (U16 M)",
+            "id": "t_hc_pentagoon_kortessem_j16_u16_m_",
+            "name": "HC Pentagoon Kortessem J16 (U16 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -57359,7 +57359,7 @@
           },
           {
             "pos": 1,
-            "name": "HC Pentagoon Kortessem (U16 M)",
+            "name": "HC Pentagoon Kortessem J16 (U16 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -57749,7 +57749,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:22.797Z",
+        "updatedAt": "2026-08-17T15:28:59.960Z",
         "live": true,
         "teams": [
           {
@@ -58009,7 +58009,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:22.088Z",
+        "updatedAt": "2026-08-17T15:28:59.700Z",
         "live": true,
         "teams": [
           {
@@ -58553,7 +58553,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:20.896Z",
+        "updatedAt": "2026-08-17T15:28:58.708Z",
         "live": true,
         "teams": [
           {
@@ -60218,7 +60218,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:24.269Z",
+        "updatedAt": "2026-08-17T15:29:00.522Z",
         "live": true,
         "teams": [
           {
@@ -60461,7 +60461,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:26.635Z",
+        "updatedAt": "2026-08-17T15:29:02.240Z",
         "live": true,
         "teams": [
           {
@@ -61800,7 +61800,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:25.241Z",
+        "updatedAt": "2026-08-17T15:29:01.083Z",
         "live": true,
         "teams": [
           {
@@ -61846,8 +61846,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_u14_m_",
-            "name": "HC Pentagoon Kortessem (U14 M)",
+            "id": "t_hc_pentagoon_kortessem_j14_u14_m_",
+            "name": "HC Pentagoon Kortessem J14 (U14 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -66122,7 +66122,7 @@
           },
           {
             "pos": 1,
-            "name": "HC Pentagoon Kortessem (U14 M)",
+            "name": "HC Pentagoon Kortessem J14 (U14 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -66556,7 +66556,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:27.857Z",
+        "updatedAt": "2026-08-17T15:29:03.089Z",
         "live": true,
         "teams": [
           {
@@ -66888,7 +66888,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:27.244Z",
+        "updatedAt": "2026-08-17T15:29:02.839Z",
         "live": true,
         "teams": [
           {
@@ -66952,8 +66952,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_u14_f_",
-            "name": "HC Pentagoon Kortessem (U14 F)",
+            "id": "t_hc_pentagoon_kortessem_m14_u14_f_",
+            "name": "HC Pentagoon Kortessem M14 (U14 F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -67727,7 +67727,7 @@
           },
           {
             "pos": 4,
-            "name": "HC Pentagoon Kortessem (U14 F)",
+            "name": "HC Pentagoon Kortessem M14 (U14 F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -67754,7 +67754,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:26.046Z",
+        "updatedAt": "2026-08-17T15:29:01.697Z",
         "live": true,
         "teams": [
           {
@@ -67770,8 +67770,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_u14_f_",
-            "name": "HC Pentagoon Kortessem (U14 F)",
+            "id": "t_hc_pentagoon_kortessem_m14_u14_f_",
+            "name": "HC Pentagoon Kortessem M14 (U14 F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -69861,7 +69861,7 @@
           },
           {
             "pos": 1,
-            "name": "HC Pentagoon Kortessem (U14 F)",
+            "name": "HC Pentagoon Kortessem M14 (U14 F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -70086,7 +70086,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:28.465Z",
+        "updatedAt": "2026-08-17T15:29:03.609Z",
         "live": true,
         "teams": [
           {
@@ -70418,7 +70418,7 @@
         "name": "U12 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:29.212Z",
+        "updatedAt": "2026-08-17T15:29:04.282Z",
         "live": true,
         "teams": [
           {
@@ -75174,7 +75174,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:31.802Z",
+        "updatedAt": "2026-08-17T15:29:05.388Z",
         "live": true,
         "teams": [
           {
@@ -75487,7 +75487,7 @@
         "name": "U12 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:29.994Z",
+        "updatedAt": "2026-08-17T15:29:04.845Z",
         "live": true,
         "teams": [
           {
@@ -75497,14 +75497,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_1_1_u12_m_f_",
-            "name": "HC Pentagoon Kortessem 1 1 (U12 M/F)",
+            "id": "t_hc_pentagoon_kortessem_1_jm12_1_u12_m_f_",
+            "name": "HC Pentagoon Kortessem 1 JM12 1 (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_pentagoon_kortessem_2_2_u12_m_f_",
-            "name": "HC Pentagoon Kortessem 2 2 (U12 M/F)",
+            "id": "t_hc_pentagoon_kortessem_jm12_2_2_u12_m_f_",
+            "name": "HC Pentagoon Kortessem JM12 2 2 (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -76635,7 +76635,7 @@
           },
           {
             "pos": 1,
-            "name": "HC Pentagoon Kortessem 1 1 (U12 M/F)",
+            "name": "HC Pentagoon Kortessem 1 JM12 1 (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -76646,7 +76646,7 @@
           },
           {
             "pos": 1,
-            "name": "HC Pentagoon Kortessem 2 2 (U12 M/F)",
+            "name": "HC Pentagoon Kortessem JM12 2 2 (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -76783,7 +76783,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:32.462Z",
+        "updatedAt": "2026-08-17T15:29:05.913Z",
         "live": true,
         "teams": [
           {
@@ -77026,7 +77026,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-17T14:32:17.686Z",
+        "updatedAt": "2026-08-17T15:28:56.852Z",
         "live": true,
         "teams": [
           {
