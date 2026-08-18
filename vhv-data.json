@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-18T13:47:20.462Z",
+  "updatedAt": "2026-08-18T14:38:01.356Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:43.630Z",
+        "updatedAt": "2026-08-18T14:37:17.942Z",
         "live": true,
         "teams": [
           {
@@ -437,7 +437,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:44.349Z",
+        "updatedAt": "2026-08-18T14:37:20.264Z",
         "live": true,
         "teams": [
           {
@@ -711,7 +711,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:45.081Z",
+        "updatedAt": "2026-08-18T14:37:21.186Z",
         "live": true,
         "teams": [
           {
@@ -2515,7 +2515,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:45.785Z",
+        "updatedAt": "2026-08-18T14:37:22.215Z",
         "live": true,
         "teams": [
           {
@@ -4319,7 +4319,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:46.177Z",
+        "updatedAt": "2026-08-18T14:37:23.170Z",
         "live": true,
         "teams": [
           {
@@ -6123,7 +6123,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:46.905Z",
+        "updatedAt": "2026-08-18T14:37:24.065Z",
         "live": true,
         "teams": [
           {
@@ -7586,7 +7586,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:47.616Z",
+        "updatedAt": "2026-08-18T14:37:24.578Z",
         "live": true,
         "teams": [
           {
@@ -9390,7 +9390,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-18T13:46:48.108Z",
+        "updatedAt": "2026-08-18T14:37:25.481Z",
         "live": true,
         "teams": [
           {
@@ -9616,8 +9616,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_eynatten_raeren_promotion_1",
-            "name": "HC Eynatten-Raeren PROMOTION 1",
+            "id": "t_hc_eynatten_raeren_1",
+            "name": "HC Eynatten-Raeren 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -9694,8 +9694,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_promotion_hommes",
-            "name": "HC Sprimont Promotion Hommes",
+            "id": "t_hc_sprimont",
+            "name": "HC Sprimont",
             "points": 0,
             "homeBonus": ""
           }
@@ -10526,7 +10526,7 @@
           },
           {
             "pos": 20,
-            "name": "HC Eynatten-Raeren PROMOTION 1",
+            "name": "HC Eynatten-Raeren 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10669,7 +10669,7 @@
           },
           {
             "pos": 33,
-            "name": "HC Sprimont Promotion Hommes",
+            "name": "HC Sprimont",
             "played": 2,
             "won": 0,
             "drawn": 0,
@@ -10687,7 +10687,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-18T13:46:49.229Z",
+        "updatedAt": "2026-08-18T14:37:26.217Z",
         "live": true,
         "teams": [
           {
@@ -12491,7 +12491,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-18T13:46:50.126Z",
+        "updatedAt": "2026-08-18T14:37:27.103Z",
         "live": true,
         "teams": [
           {
@@ -13682,7 +13682,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:51.270Z",
+        "updatedAt": "2026-08-18T14:37:28.032Z",
         "live": true,
         "teams": [
           {
@@ -14676,7 +14676,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:52.179Z",
+        "updatedAt": "2026-08-18T14:37:28.903Z",
         "live": true,
         "teams": [
           {
@@ -15190,7 +15190,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:53.711Z",
+        "updatedAt": "2026-08-18T14:37:30.255Z",
         "live": true,
         "teams": [
           {
@@ -16009,7 +16009,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:56.163Z",
+        "updatedAt": "2026-08-18T14:37:33.034Z",
         "live": true,
         "teams": [
           {
@@ -16523,7 +16523,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-18T13:46:50.840Z",
+        "updatedAt": "2026-08-18T14:37:27.627Z",
         "live": true,
         "teams": [
           {
@@ -16545,20 +16545,20 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_promotion_hommes",
-            "name": "HC Sprimont Promotion Hommes",
+            "id": "t_hc_sprimont",
+            "name": "HC Sprimont",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_eynatten_raeren_promotion_1",
-            "name": "HC Eynatten-Raeren PROMOTION 1",
+            "id": "t_hc_eynatten_raeren_1",
+            "name": "HC Eynatten-Raeren 1",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_eynatten_raeren_2_2",
-            "name": "HC Eynatten-Raeren 2 2",
+            "id": "t_hc_eynatten_raeren_2",
+            "name": "HC Eynatten-Raeren 2",
             "points": 0,
             "homeBonus": ""
           },
@@ -18569,7 +18569,7 @@
           },
           {
             "pos": 4,
-            "name": "HC Sprimont Promotion Hommes",
+            "name": "HC Sprimont",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -18580,7 +18580,7 @@
           },
           {
             "pos": 5,
-            "name": "HC Eynatten-Raeren PROMOTION 1",
+            "name": "HC Eynatten-Raeren 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -18591,7 +18591,7 @@
           },
           {
             "pos": 6,
-            "name": "HC Eynatten-Raeren 2 2",
+            "name": "HC Eynatten-Raeren 2",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -18651,12 +18651,12 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:53.003Z",
+        "updatedAt": "2026-08-18T14:37:29.822Z",
         "live": true,
         "teams": [
           {
-            "id": "t_ktsv_eupen_minimes_u16_m_f_",
-            "name": "KTSV Eupen Minimes (U16 M/F)",
+            "id": "t_ktsv_eupen_u16_m_f_",
+            "name": "KTSV Eupen (U16 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -18679,8 +18679,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u16_gar_ons_u16_m_f_",
-            "name": "HC Sprimont U16 Garçons (U16 M/F)",
+            "id": "t_hc_sprimont_u16_m_f_",
+            "name": "HC Sprimont (U16 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -21126,7 +21126,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "KTSV Eupen Minimes (U16 M/F)",
+            "name": "KTSV Eupen (U16 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -21170,7 +21170,7 @@
           },
           {
             "pos": 5,
-            "name": "HC Sprimont U16 Garçons (U16 M/F)",
+            "name": "HC Sprimont (U16 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -21263,12 +21263,12 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:55.452Z",
+        "updatedAt": "2026-08-18T14:37:32.041Z",
         "live": true,
         "teams": [
           {
-            "id": "t_ktsv_eupen_preminimes_1_u14_m_f_",
-            "name": "KTSV Eupen Preminimes 1 (U14 M/F)",
+            "id": "t_ktsv_eupen_1_u14_m_f_",
+            "name": "KTSV Eupen 1 (U14 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -21279,8 +21279,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_ktsv_eupen_preminimes_2_u14_m_f_",
-            "name": "KTSV Eupen Preminimes 2 (U14 M/F)",
+            "id": "t_ktsv_eupen_2_u14_m_f_",
+            "name": "KTSV Eupen 2 (U14 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -21303,26 +21303,26 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u14_u14_m_f_",
-            "name": "HC Sprimont U14 (U14 M/F)",
+            "id": "t_hc_sprimont_u14_m_f_",
+            "name": "HC Sprimont (U14 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u14_r_u14_m_f_",
-            "name": "HC Sprimont U14 R (U14 M/F)",
+            "id": "t_hc_sprimont_r_u14_m_f_",
+            "name": "HC Sprimont R (U14 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_eynatten_raeren_1_1_u14_m_f_",
-            "name": "HC Eynatten-Raeren 1 1 (U14 M/F)",
+            "id": "t_hc_eynatten_raeren_1_u14_m_f_",
+            "name": "HC Eynatten-Raeren 1 (U14 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_eynatten_raeren_2_2_u14_m_f_",
-            "name": "HC Eynatten-Raeren 2 2 (U14 M/F)",
+            "id": "t_hc_eynatten_raeren_2_u14_m_f_",
+            "name": "HC Eynatten-Raeren 2 (U14 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -23384,7 +23384,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "KTSV Eupen Preminimes 1 (U14 M/F)",
+            "name": "KTSV Eupen 1 (U14 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -23406,7 +23406,7 @@
           },
           {
             "pos": 2,
-            "name": "KTSV Eupen Preminimes 2 (U14 M/F)",
+            "name": "KTSV Eupen 2 (U14 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -23450,7 +23450,7 @@
           },
           {
             "pos": 4,
-            "name": "HC Sprimont U14 (U14 M/F)",
+            "name": "HC Sprimont (U14 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -23461,7 +23461,7 @@
           },
           {
             "pos": 4,
-            "name": "HC Sprimont U14 R (U14 M/F)",
+            "name": "HC Sprimont R (U14 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -23472,7 +23472,7 @@
           },
           {
             "pos": 5,
-            "name": "HC Eynatten-Raeren 1 1 (U14 M/F)",
+            "name": "HC Eynatten-Raeren 1 (U14 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -23483,7 +23483,7 @@
           },
           {
             "pos": 5,
-            "name": "HC Eynatten-Raeren 2 2 (U14 M/F)",
+            "name": "HC Eynatten-Raeren 2 (U14 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -23565,12 +23565,12 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:58.390Z",
+        "updatedAt": "2026-08-18T14:37:35.412Z",
         "live": true,
         "teams": [
           {
-            "id": "t_ktsv_eupen_poussins_u12_m_f_",
-            "name": "KTSV Eupen Poussins (U12 M/F)",
+            "id": "t_ktsv_eupen_u12_m_f_",
+            "name": "KTSV Eupen (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -23587,8 +23587,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_ktsv_eupen_poussins_r_u12_m_f_",
-            "name": "KTSV Eupen Poussins R (U12 M/F)",
+            "id": "t_ktsv_eupen_r_u12_m_f_",
+            "name": "KTSV Eupen R (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -23599,8 +23599,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_ktsv_eupen_poussins_u12_m_f_",
-            "name": "KTSV Eupen Poussins (U12 M/F)",
+            "id": "t_ktsv_eupen_u12_m_f_",
+            "name": "KTSV Eupen (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -23617,14 +23617,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_ktsv_eupen_poussins_r_u12_m_f_",
-            "name": "KTSV Eupen Poussins R (U12 M/F)",
+            "id": "t_ktsv_eupen_r_u12_m_f_",
+            "name": "KTSV Eupen R (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u12_u12_m_f_",
-            "name": "HC Sprimont U12 (U12 M/F)",
+            "id": "t_hc_sprimont_u12_m_f_",
+            "name": "HC Sprimont (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -23665,8 +23665,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u12_r_u12_m_f_",
-            "name": "HC Sprimont U12 R (U12 M/F)",
+            "id": "t_hc_sprimont_r_u12_m_f_",
+            "name": "HC Sprimont R (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -23707,14 +23707,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u12_u12_m_f_",
-            "name": "HC Sprimont U12 (U12 M/F)",
+            "id": "t_hc_sprimont_u12_m_f_",
+            "name": "HC Sprimont (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u12_r_u12_m_f_",
-            "name": "HC Sprimont U12 R (U12 M/F)",
+            "id": "t_hc_sprimont_r_u12_m_f_",
+            "name": "HC Sprimont R (U12 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -26526,7 +26526,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "KTSV Eupen Poussins (U12 M/F)",
+            "name": "KTSV Eupen (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26559,7 +26559,7 @@
           },
           {
             "pos": 2,
-            "name": "KTSV Eupen Poussins R (U12 M/F)",
+            "name": "KTSV Eupen R (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26581,7 +26581,7 @@
           },
           {
             "pos": 2,
-            "name": "KTSV Eupen Poussins (U12 M/F)",
+            "name": "KTSV Eupen (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26614,7 +26614,7 @@
           },
           {
             "pos": 3,
-            "name": "KTSV Eupen Poussins R (U12 M/F)",
+            "name": "KTSV Eupen R (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26625,7 +26625,7 @@
           },
           {
             "pos": 4,
-            "name": "HC Sprimont U12 (U12 M/F)",
+            "name": "HC Sprimont (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26702,7 +26702,7 @@
           },
           {
             "pos": 6,
-            "name": "HC Sprimont U12 R (U12 M/F)",
+            "name": "HC Sprimont R (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26779,7 +26779,7 @@
           },
           {
             "pos": 9,
-            "name": "HC Sprimont U12 (U12 M/F)",
+            "name": "HC Sprimont (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26790,7 +26790,7 @@
           },
           {
             "pos": 10,
-            "name": "HC Sprimont U12 R (U12 M/F)",
+            "name": "HC Sprimont R (U12 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -26861,30 +26861,30 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:59.109Z",
+        "updatedAt": "2026-08-18T14:37:36.732Z",
         "live": true,
         "teams": [
           {
-            "id": "t_ktsv_eupen_maxis_u10_m_f_",
-            "name": "KTSV Eupen Maxis (U10 M/F)",
+            "id": "t_ktsv_eupen_u10_m_f_",
+            "name": "KTSV Eupen (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_ktsv_eupen_maxis_u10_m_f_",
-            "name": "KTSV Eupen Maxis (U10 M/F)",
+            "id": "t_ktsv_eupen_u10_m_f_",
+            "name": "KTSV Eupen (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_ktsv_eupen_maxis_r_u10_m_f_",
-            "name": "KTSV Eupen Maxis R (U10 M/F)",
+            "id": "t_ktsv_eupen_r_u10_m_f_",
+            "name": "KTSV Eupen R (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_ktsv_eupen_maxis_r_u10_m_f_",
-            "name": "KTSV Eupen Maxis R (U10 M/F)",
+            "id": "t_ktsv_eupen_r_u10_m_f_",
+            "name": "KTSV Eupen R (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -26895,8 +26895,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u10_r_u10_m_f_",
-            "name": "HC Sprimont U10 R (U10 M/F)",
+            "id": "t_hc_sprimont_r_u10_m_f_",
+            "name": "HC Sprimont R (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -26913,8 +26913,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_eynatten_raeren_r_r_u10_m_f_",
-            "name": "HC Eynatten-Raeren R R (U10 M/F)",
+            "id": "t_hc_eynatten_raeren_r_u10_m_f_",
+            "name": "HC Eynatten-Raeren R (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -26925,8 +26925,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u10_u10_m_f_",
-            "name": "HC Sprimont U10 (U10 M/F)",
+            "id": "t_hc_sprimont_u10_m_f_",
+            "name": "HC Sprimont (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -26967,14 +26967,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u10_u10_m_f_",
-            "name": "HC Sprimont U10 (U10 M/F)",
+            "id": "t_hc_sprimont_u10_m_f_",
+            "name": "HC Sprimont (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_u10_r_u10_m_f_",
-            "name": "HC Sprimont U10 R (U10 M/F)",
+            "id": "t_hc_sprimont_r_u10_m_f_",
+            "name": "HC Sprimont R (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -26985,8 +26985,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hc_eynatten_raeren_r_r_u10_m_f_",
-            "name": "HC Eynatten-Raeren R R (U10 M/F)",
+            "id": "t_hc_eynatten_raeren_r_u10_m_f_",
+            "name": "HC Eynatten-Raeren R (U10 M/F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -29558,7 +29558,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "KTSV Eupen Maxis (U10 M/F)",
+            "name": "KTSV Eupen (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29569,7 +29569,7 @@
           },
           {
             "pos": 1,
-            "name": "KTSV Eupen Maxis (U10 M/F)",
+            "name": "KTSV Eupen (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29580,7 +29580,7 @@
           },
           {
             "pos": 1,
-            "name": "KTSV Eupen Maxis R (U10 M/F)",
+            "name": "KTSV Eupen R (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29591,7 +29591,7 @@
           },
           {
             "pos": 2,
-            "name": "KTSV Eupen Maxis R (U10 M/F)",
+            "name": "KTSV Eupen R (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29613,7 +29613,7 @@
           },
           {
             "pos": 2,
-            "name": "HC Sprimont U10 R (U10 M/F)",
+            "name": "HC Sprimont R (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29646,7 +29646,7 @@
           },
           {
             "pos": 3,
-            "name": "HC Eynatten-Raeren R R (U10 M/F)",
+            "name": "HC Eynatten-Raeren R (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29668,7 +29668,7 @@
           },
           {
             "pos": 4,
-            "name": "HC Sprimont U10 (U10 M/F)",
+            "name": "HC Sprimont (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29745,7 +29745,7 @@
           },
           {
             "pos": 7,
-            "name": "HC Sprimont U10 (U10 M/F)",
+            "name": "HC Sprimont (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29756,7 +29756,7 @@
           },
           {
             "pos": 8,
-            "name": "HC Sprimont U10 R (U10 M/F)",
+            "name": "HC Sprimont R (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29778,7 +29778,7 @@
           },
           {
             "pos": 10,
-            "name": "HC Eynatten-Raeren R R (U10 M/F)",
+            "name": "HC Eynatten-Raeren R (U10 M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -29838,7 +29838,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:54.602Z",
+        "updatedAt": "2026-08-18T14:37:31.127Z",
         "live": true,
         "teams": [
           {
@@ -30136,7 +30136,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:57.398Z",
+        "updatedAt": "2026-08-18T14:37:33.942Z",
         "live": true,
         "teams": [
           {
@@ -30792,7 +30792,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-18T13:46:57.790Z",
+        "updatedAt": "2026-08-18T14:37:34.799Z",
         "live": true,
         "teams": [
           {
@@ -31450,7 +31450,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:46:59.813Z",
+        "updatedAt": "2026-08-18T14:37:37.600Z",
         "live": true,
         "teams": [
           {
@@ -34044,7 +34044,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:00.646Z",
+        "updatedAt": "2026-08-18T14:37:38.481Z",
         "live": true,
         "teams": [
           {
@@ -36638,7 +36638,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:01.328Z",
+        "updatedAt": "2026-08-18T14:37:39.411Z",
         "live": true,
         "teams": [
           {
@@ -38459,7 +38459,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:02.232Z",
+        "updatedAt": "2026-08-18T14:37:40.331Z",
         "live": true,
         "teams": [
           {
@@ -40263,7 +40263,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:02.989Z",
+        "updatedAt": "2026-08-18T14:37:41.612Z",
         "live": true,
         "teams": [
           {
@@ -40902,7 +40902,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:03.421Z",
+        "updatedAt": "2026-08-18T14:37:42.557Z",
         "live": true,
         "teams": [
           {
@@ -42759,7 +42759,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:03.791Z",
+        "updatedAt": "2026-08-18T14:37:43.096Z",
         "live": true,
         "teams": [
           {
@@ -44760,7 +44760,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:04.264Z",
+        "updatedAt": "2026-08-18T14:37:44.025Z",
         "live": true,
         "teams": [
           {
@@ -45004,7 +45004,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:05.421Z",
+        "updatedAt": "2026-08-18T14:37:44.919Z",
         "live": true,
         "teams": [
           {
@@ -46234,7 +46234,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-18T13:47:06.938Z",
+        "updatedAt": "2026-08-18T14:37:45.856Z",
         "live": true,
         "teams": [
           {
@@ -48174,7 +48174,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:09.374Z",
+        "updatedAt": "2026-08-18T14:37:48.041Z",
         "live": true,
         "teams": [
           {
@@ -49197,7 +49197,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:07.794Z",
+        "updatedAt": "2026-08-18T14:37:46.730Z",
         "live": true,
         "teams": [
           {
@@ -51436,7 +51436,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:11.322Z",
+        "updatedAt": "2026-08-18T14:37:51.158Z",
         "live": true,
         "teams": [
           {
@@ -52938,7 +52938,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:10.160Z",
+        "updatedAt": "2026-08-18T14:37:48.913Z",
         "live": true,
         "teams": [
           {
@@ -56872,7 +56872,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:12.425Z",
+        "updatedAt": "2026-08-18T14:37:52.481Z",
         "live": true,
         "teams": [
           {
@@ -57132,7 +57132,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:12.086Z",
+        "updatedAt": "2026-08-18T14:37:51.588Z",
         "live": true,
         "teams": [
           {
@@ -57676,7 +57676,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:10.973Z",
+        "updatedAt": "2026-08-18T14:37:49.903Z",
         "live": true,
         "teams": [
           {
@@ -59341,7 +59341,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:13.138Z",
+        "updatedAt": "2026-08-18T14:37:53.678Z",
         "live": true,
         "teams": [
           {
@@ -59584,7 +59584,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:15.654Z",
+        "updatedAt": "2026-08-18T14:37:55.939Z",
         "live": true,
         "teams": [
           {
@@ -60923,7 +60923,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:14.067Z",
+        "updatedAt": "2026-08-18T14:37:55.141Z",
         "live": true,
         "teams": [
           {
@@ -65679,7 +65679,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:16.464Z",
+        "updatedAt": "2026-08-18T14:37:57.364Z",
         "live": true,
         "teams": [
           {
@@ -66011,7 +66011,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:15.963Z",
+        "updatedAt": "2026-08-18T14:37:56.884Z",
         "live": true,
         "teams": [
           {
@@ -66877,7 +66877,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:14.799Z",
+        "updatedAt": "2026-08-18T14:37:55.588Z",
         "live": true,
         "teams": [
           {
@@ -69209,7 +69209,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:17.208Z",
+        "updatedAt": "2026-08-18T14:37:58.235Z",
         "live": true,
         "teams": [
           {
@@ -69541,7 +69541,7 @@
         "name": "U12 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:18.428Z",
+        "updatedAt": "2026-08-18T14:37:59.074Z",
         "live": true,
         "teams": [
           {
@@ -74297,7 +74297,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:19.914Z",
+        "updatedAt": "2026-08-18T14:38:00.427Z",
         "live": true,
         "teams": [
           {
@@ -74610,7 +74610,7 @@
         "name": "U12 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:19.182Z",
+        "updatedAt": "2026-08-18T14:38:00.035Z",
         "live": true,
         "teams": [
           {
@@ -75906,7 +75906,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:20.462Z",
+        "updatedAt": "2026-08-18T14:38:01.356Z",
         "live": true,
         "teams": [
           {
@@ -76149,7 +76149,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-18T13:47:09.005Z",
+        "updatedAt": "2026-08-18T14:37:47.162Z",
         "live": true,
         "teams": [
           {
