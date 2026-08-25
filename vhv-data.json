@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T10:37:56.473Z",
+  "updatedAt": "2026-08-25T11:33:03.755Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:12.952Z",
+        "updatedAt": "2026-08-25T11:32:24.211Z",
         "live": true,
         "teams": [
           {
@@ -503,7 +503,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:13.915Z",
+        "updatedAt": "2026-08-25T11:32:25.216Z",
         "live": true,
         "teams": [
           {
@@ -844,12 +844,12 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:14.746Z",
+        "updatedAt": "2026-08-25T11:32:26.042Z",
         "live": true,
         "teams": [
           {
-            "id": "t_a_spurs_d1_m",
-            "name": "A. Spurs D1 M",
+            "id": "t_hbc_apolloon_spurs_d1_m",
+            "name": "HBC Apolloon Spurs D1 M",
             "points": 0,
             "homeBonus": ""
           },
@@ -2533,7 +2533,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "A. Spurs D1 M",
+            "name": "HBC Apolloon Spurs D1 M",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -2648,7 +2648,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:15.592Z",
+        "updatedAt": "2026-08-25T11:32:26.430Z",
         "live": true,
         "teams": [
           {
@@ -4452,7 +4452,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:16.504Z",
+        "updatedAt": "2026-08-25T11:32:27.456Z",
         "live": true,
         "teams": [
           {
@@ -6256,7 +6256,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:17.312Z",
+        "updatedAt": "2026-08-25T11:32:27.892Z",
         "live": true,
         "teams": [
           {
@@ -7719,7 +7719,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:17.944Z",
+        "updatedAt": "2026-08-25T11:32:29.038Z",
         "live": true,
         "teams": [
           {
@@ -9523,7 +9523,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T10:37:18.761Z",
+        "updatedAt": "2026-08-25T11:32:30.028Z",
         "live": true,
         "teams": [
           {
@@ -9563,8 +9563,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_a_spurs_d1_m",
-            "name": "A. Spurs D1 M",
+            "id": "t_hbc_apolloon_spurs_d1_m",
+            "name": "HBC Apolloon Spurs D1 M",
             "points": 0,
             "homeBonus": ""
           },
@@ -9890,6 +9890,24 @@
         "fixtures": [
           {
             "id": "f0",
+            "gameId": "2965046",
+            "homeIdx": 0,
+            "awayIdx": 22,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-08-25"
+          },
+          {
+            "id": "f1",
             "gameId": "2951492",
             "homeIdx": 30,
             "awayIdx": 38,
@@ -9907,7 +9925,7 @@
             "date": "2026-08-25"
           },
           {
-            "id": "f1",
+            "id": "f2",
             "gameId": "2942100",
             "homeIdx": 38,
             "awayIdx": 28,
@@ -9925,7 +9943,7 @@
             "date": "2026-08-25"
           },
           {
-            "id": "f2",
+            "id": "f3",
             "gameId": "2946379",
             "homeIdx": 38,
             "awayIdx": 33,
@@ -9943,7 +9961,7 @@
             "date": "2026-08-27"
           },
           {
-            "id": "f3",
+            "id": "f4",
             "gameId": "2852646",
             "homeIdx": 29,
             "awayIdx": 38,
@@ -9961,7 +9979,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f4",
+            "id": "f5",
             "gameId": "2852648",
             "homeIdx": 38,
             "awayIdx": 28,
@@ -9979,7 +9997,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f5",
+            "id": "f6",
             "gameId": "2852649",
             "homeIdx": 29,
             "awayIdx": 38,
@@ -9997,7 +10015,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f6",
+            "id": "f7",
             "gameId": "2852650",
             "homeIdx": 38,
             "awayIdx": 28,
@@ -10015,7 +10033,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f7",
+            "id": "f8",
             "gameId": "2964921",
             "homeIdx": 2,
             "awayIdx": 10,
@@ -10033,7 +10051,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f8",
+            "id": "f9",
             "gameId": "2852652",
             "homeIdx": 29,
             "awayIdx": 38,
@@ -10051,28 +10069,10 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f9",
+            "id": "f10",
             "gameId": "2852653",
             "homeIdx": 38,
             "awayIdx": 28,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-08-29"
-          },
-          {
-            "id": "f10",
-            "gameId": "2957002",
-            "homeIdx": 38,
-            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -10106,6 +10106,24 @@
           },
           {
             "id": "f12",
+            "gameId": "2957002",
+            "homeIdx": 38,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-08-29"
+          },
+          {
+            "id": "f13",
             "gameId": "2852655",
             "homeIdx": 29,
             "awayIdx": 28,
@@ -10123,7 +10141,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f13",
+            "id": "f14",
             "gameId": "2949664",
             "homeIdx": 31,
             "awayIdx": 18,
@@ -10141,7 +10159,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f14",
+            "id": "f15",
             "gameId": "2957003",
             "homeIdx": 8,
             "awayIdx": 6,
@@ -10159,7 +10177,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f15",
+            "id": "f16",
             "gameId": "2949642",
             "homeIdx": 38,
             "awayIdx": 20,
@@ -10177,7 +10195,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f16",
+            "id": "f17",
             "gameId": "2949663",
             "homeIdx": 38,
             "awayIdx": 18,
@@ -10195,7 +10213,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f17",
+            "id": "f18",
             "gameId": "2964917",
             "homeIdx": 2,
             "awayIdx": 0,
@@ -10213,7 +10231,7 @@
             "date": "2026-08-30"
           },
           {
-            "id": "f18",
+            "id": "f19",
             "gameId": "2946376",
             "homeIdx": 38,
             "awayIdx": 21,
@@ -10231,7 +10249,7 @@
             "date": "2026-08-30"
           },
           {
-            "id": "f19",
+            "id": "f20",
             "gameId": "2964918",
             "homeIdx": 0,
             "awayIdx": 12,
@@ -10249,7 +10267,7 @@
             "date": "2026-08-30"
           },
           {
-            "id": "f20",
+            "id": "f21",
             "gameId": "2964919",
             "homeIdx": 2,
             "awayIdx": 12,
@@ -10336,7 +10354,7 @@
           },
           {
             "pos": 4,
-            "name": "A. Spurs D1 M",
+            "name": "HBC Apolloon Spurs D1 M",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10937,7 +10955,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-25T10:37:19.546Z",
+        "updatedAt": "2026-08-25T11:32:30.983Z",
         "live": true,
         "teams": [
           {
@@ -12741,7 +12759,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-25T10:37:20.381Z",
+        "updatedAt": "2026-08-25T11:32:31.839Z",
         "live": true,
         "teams": [
           {
@@ -13932,7 +13950,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:22.202Z",
+        "updatedAt": "2026-08-25T11:32:33.634Z",
         "live": true,
         "teams": [
           {
@@ -14926,7 +14944,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:23.008Z",
+        "updatedAt": "2026-08-25T11:32:34.469Z",
         "live": true,
         "teams": [
           {
@@ -15207,7 +15225,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:23.897Z",
+        "updatedAt": "2026-08-25T11:32:35.874Z",
         "live": true,
         "teams": [
           {
@@ -16026,7 +16044,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:26.392Z",
+        "updatedAt": "2026-08-25T11:32:37.716Z",
         "live": true,
         "teams": [
           {
@@ -16540,7 +16558,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-25T10:37:21.401Z",
+        "updatedAt": "2026-08-25T11:32:32.672Z",
         "live": true,
         "teams": [
           {
@@ -18344,7 +18362,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:23.430Z",
+        "updatedAt": "2026-08-25T11:32:35.441Z",
         "live": true,
         "teams": [
           {
@@ -20938,7 +20956,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:25.543Z",
+        "updatedAt": "2026-08-25T11:32:36.872Z",
         "live": true,
         "teams": [
           {
@@ -23240,7 +23258,7 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:28.426Z",
+        "updatedAt": "2026-08-25T11:32:40.363Z",
         "live": true,
         "teams": [
           {
@@ -26536,7 +26554,7 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:30.002Z",
+        "updatedAt": "2026-08-25T11:32:40.965Z",
         "live": true,
         "teams": [
           {
@@ -29513,7 +29531,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:24.719Z",
+        "updatedAt": "2026-08-25T11:32:36.442Z",
         "live": true,
         "teams": [
           {
@@ -29811,7 +29829,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:27.194Z",
+        "updatedAt": "2026-08-25T11:32:38.613Z",
         "live": true,
         "teams": [
           {
@@ -30467,7 +30485,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T10:37:27.804Z",
+        "updatedAt": "2026-08-25T11:32:39.694Z",
         "live": true,
         "teams": [
           {
@@ -31125,12 +31143,12 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:30.992Z",
+        "updatedAt": "2026-08-25T11:32:42.570Z",
         "live": true,
         "teams": [
           {
-            "id": "t_a_spurs_d1_m_vhv",
-            "name": "A. Spurs D1 M VHV",
+            "id": "t_hbc_apolloon_spurs_d1_m_vhv",
+            "name": "HBC Apolloon Spurs D1 M VHV",
             "points": 0,
             "homeBonus": ""
           },
@@ -33564,7 +33582,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "A. Spurs D1 M VHV",
+            "name": "HBC Apolloon Spurs D1 M VHV",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -33701,7 +33719,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:33.455Z",
+        "updatedAt": "2026-08-25T11:32:43.411Z",
         "live": true,
         "teams": [
           {
@@ -36295,7 +36313,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:34.418Z",
+        "updatedAt": "2026-08-25T11:32:43.968Z",
         "live": true,
         "teams": [
           {
@@ -38116,12 +38134,12 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:35.882Z",
+        "updatedAt": "2026-08-25T11:32:44.803Z",
         "live": true,
         "teams": [
           {
-            "id": "t_a_spurs_d1_w_vhv",
-            "name": "A. Spurs D1 W VHV",
+            "id": "t_hbc_apolloon_spurs_d1_w_vhv",
+            "name": "HBC Apolloon Spurs D1 W VHV",
             "points": 0,
             "homeBonus": ""
           },
@@ -39805,7 +39823,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "A. Spurs D1 W VHV",
+            "name": "HBC Apolloon Spurs D1 W VHV",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -39920,7 +39938,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:36.745Z",
+        "updatedAt": "2026-08-25T11:32:45.252Z",
         "live": true,
         "teams": [
           {
@@ -40559,7 +40577,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:37.781Z",
+        "updatedAt": "2026-08-25T11:32:46.259Z",
         "live": true,
         "teams": [
           {
@@ -42794,12 +42812,12 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:38.617Z",
+        "updatedAt": "2026-08-25T11:32:47.248Z",
         "live": true,
         "teams": [
           {
-            "id": "t_a_spurs_d_m_vhv_owv",
-            "name": "A. Spurs D M VHV OWV",
+            "id": "t_hbc_apolloon_spurs_d_m_vhv_owv",
+            "name": "HBC Apolloon Spurs D M VHV OWV",
             "points": 0,
             "homeBonus": ""
           },
@@ -44669,7 +44687,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "A. Spurs D M VHV OWV",
+            "name": "HBC Apolloon Spurs D M VHV OWV",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -44795,7 +44813,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:39.437Z",
+        "updatedAt": "2026-08-25T11:32:48.335Z",
         "live": true,
         "teams": [
           {
@@ -45039,7 +45057,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:40.516Z",
+        "updatedAt": "2026-08-25T11:32:49.022Z",
         "live": true,
         "teams": [
           {
@@ -46251,7 +46269,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T10:37:41.332Z",
+        "updatedAt": "2026-08-25T11:32:49.852Z",
         "live": true,
         "teams": [
           {
@@ -46267,8 +46285,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_a_spurs_d_w_vhv_owv",
-            "name": "A. Spurs D W VHV OWV",
+            "id": "t_hbc_apolloon_spurs_d_w_vhv_owv",
+            "name": "HBC Apolloon Spurs D W VHV OWV",
             "points": 0,
             "homeBonus": ""
           },
@@ -48010,7 +48028,7 @@
           },
           {
             "pos": 1,
-            "name": "A. Spurs D W VHV OWV",
+            "name": "HBC Apolloon Spurs D W VHV OWV",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -48191,12 +48209,12 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:43.752Z",
+        "updatedAt": "2026-08-25T11:32:52.118Z",
         "live": true,
         "teams": [
           {
-            "id": "t_a_spurs_b18_vhv_q_u18_m_",
-            "name": "A. Spurs B18 VHV Q (U18 M)",
+            "id": "t_hbc_apolloon_spurs_b18_vhv_q_u18_m_",
+            "name": "HBC Apolloon Spurs B18 VHV Q (U18 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -49022,7 +49040,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "A. Spurs B18 VHV Q (U18 M)",
+            "name": "HBC Apolloon Spurs B18 VHV Q (U18 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -49214,12 +49232,12 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:41.840Z",
+        "updatedAt": "2026-08-25T11:32:50.842Z",
         "live": true,
         "teams": [
           {
-            "id": "t_a_spurs_b18_vhv_r_u18_m_",
-            "name": "A. Spurs B18 VHV R (U18 M)",
+            "id": "t_hbc_apolloon_spurs_b18_vhv_r_u18_m_",
+            "name": "HBC Apolloon Spurs B18 VHV R (U18 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -51317,7 +51335,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "A. Spurs B18 VHV R (U18 M)",
+            "name": "HBC Apolloon Spurs B18 VHV R (U18 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -51597,7 +51615,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:46.359Z",
+        "updatedAt": "2026-08-25T11:32:54.438Z",
         "live": true,
         "teams": [
           {
@@ -51613,8 +51631,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_a_spurs_u16_vhv_q_u16_m_",
-            "name": "A. Spurs U16 VHV Q (U16 M)",
+            "id": "t_hbc_apolloon_spurs_u16_vhv_q_u16_m_",
+            "name": "HBC Apolloon Spurs U16 VHV Q (U16 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -52852,7 +52870,7 @@
           },
           {
             "pos": 1,
-            "name": "A. Spurs U16 VHV Q (U16 M)",
+            "name": "HBC Apolloon Spurs U16 VHV Q (U16 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -53099,7 +53117,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:44.923Z",
+        "updatedAt": "2026-08-25T11:32:53.094Z",
         "live": true,
         "teams": [
           {
@@ -53109,8 +53127,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_a_spurs_u16_vhv_r_u16_m_",
-            "name": "A. Spurs U16 VHV R (U16 M)",
+            "id": "t_hbc_apolloon_spurs_u16_vhv_r_u16_m_",
+            "name": "HBC Apolloon Spurs U16 VHV R (U16 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -56779,7 +56797,7 @@
           },
           {
             "pos": 1,
-            "name": "A. Spurs U16 VHV R (U16 M)",
+            "name": "HBC Apolloon Spurs U16 VHV R (U16 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -57213,7 +57231,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:48.041Z",
+        "updatedAt": "2026-08-25T11:32:55.894Z",
         "live": true,
         "teams": [
           {
@@ -57473,7 +57491,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:47.218Z",
+        "updatedAt": "2026-08-25T11:32:55.419Z",
         "live": true,
         "teams": [
           {
@@ -58017,7 +58035,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:45.935Z",
+        "updatedAt": "2026-08-25T11:32:53.927Z",
         "live": true,
         "teams": [
           {
@@ -59419,7 +59437,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:48.951Z",
+        "updatedAt": "2026-08-25T11:32:56.277Z",
         "live": true,
         "teams": [
           {
@@ -59662,7 +59680,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:51.170Z",
+        "updatedAt": "2026-08-25T11:32:58.831Z",
         "live": true,
         "teams": [
           {
@@ -59678,8 +59696,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_a_spurs_u14_vhv_q_u14_m_",
-            "name": "A. Spurs U14 VHV Q (U14 M)",
+            "id": "t_hbc_apolloon_spurs_u14_vhv_q_u14_m_",
+            "name": "HBC Apolloon Spurs U14 VHV Q (U14 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -60743,7 +60761,7 @@
           },
           {
             "pos": 1,
-            "name": "A. Spurs U14 VHV Q (U14 M)",
+            "name": "HBC Apolloon Spurs U14 VHV Q (U14 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -61001,7 +61019,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:49.777Z",
+        "updatedAt": "2026-08-25T11:32:57.465Z",
         "live": true,
         "teams": [
           {
@@ -61017,8 +61035,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_a_spurs_u14_vhv_r_u14_m_",
-            "name": "A. Spurs U14 VHV R (U14 M)",
+            "id": "t_hbc_apolloon_spurs_u14_vhv_r_u14_m_",
+            "name": "HBC Apolloon Spurs U14 VHV R (U14 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -65268,7 +65286,7 @@
           },
           {
             "pos": 1,
-            "name": "A. Spurs U14 VHV R (U14 M)",
+            "name": "HBC Apolloon Spurs U14 VHV R (U14 M)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -65757,7 +65775,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:51.967Z",
+        "updatedAt": "2026-08-25T11:33:00.073Z",
         "live": true,
         "teams": [
           {
@@ -66089,7 +66107,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:51.553Z",
+        "updatedAt": "2026-08-25T11:32:59.680Z",
         "live": true,
         "teams": [
           {
@@ -66099,8 +66117,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_a_spurs_g14_vhv_q_u14_f_",
-            "name": "A. Spurs G14 VHV Q (U14 F)",
+            "id": "t_hbc_apolloon_spurs_g14_vhv_q_u14_f_",
+            "name": "HBC Apolloon Spurs G14 VHV Q (U14 F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -66829,7 +66847,7 @@
           },
           {
             "pos": 1,
-            "name": "A. Spurs G14 VHV Q (U14 F)",
+            "name": "HBC Apolloon Spurs G14 VHV Q (U14 F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -66955,12 +66973,12 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:50.737Z",
+        "updatedAt": "2026-08-25T11:32:57.974Z",
         "live": true,
         "teams": [
           {
-            "id": "t_a_spurs_g14_vhv_r_u14_f_",
-            "name": "A. Spurs G14 VHV R (U14 F)",
+            "id": "t_hbc_apolloon_spurs_g14_vhv_r_u14_f_",
+            "name": "HBC Apolloon Spurs G14 VHV R (U14 F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -69040,7 +69058,7 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "A. Spurs G14 VHV R (U14 F)",
+            "name": "HBC Apolloon Spurs G14 VHV R (U14 F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -69287,7 +69305,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:52.836Z",
+        "updatedAt": "2026-08-25T11:33:00.400Z",
         "live": true,
         "teams": [
           {
@@ -69619,7 +69637,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:55.633Z",
+        "updatedAt": "2026-08-25T11:33:02.930Z",
         "live": true,
         "teams": [
           {
@@ -69932,7 +69950,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:56.473Z",
+        "updatedAt": "2026-08-25T11:33:03.755Z",
         "live": true,
         "teams": [
           {
@@ -70175,7 +70193,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T10:37:42.690Z",
+        "updatedAt": "2026-08-25T11:32:51.730Z",
         "live": true,
         "teams": [
           {
