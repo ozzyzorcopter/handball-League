@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T18:45:31.361Z",
+  "updatedAt": "2026-08-25T19:35:44.922Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:53.044Z",
+        "updatedAt": "2026-08-25T19:35:10.042Z",
         "live": true,
         "teams": [
           {
@@ -503,7 +503,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:53.815Z",
+        "updatedAt": "2026-08-25T19:35:10.677Z",
         "live": true,
         "teams": [
           {
@@ -844,7 +844,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:54.943Z",
+        "updatedAt": "2026-08-25T19:35:11.305Z",
         "live": true,
         "teams": [
           {
@@ -2648,7 +2648,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:56.398Z",
+        "updatedAt": "2026-08-25T19:35:12.106Z",
         "live": true,
         "teams": [
           {
@@ -4452,7 +4452,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:57.079Z",
+        "updatedAt": "2026-08-25T19:35:12.674Z",
         "live": true,
         "teams": [
           {
@@ -6256,7 +6256,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:57.715Z",
+        "updatedAt": "2026-08-25T19:35:13.219Z",
         "live": true,
         "teams": [
           {
@@ -7719,7 +7719,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:58.835Z",
+        "updatedAt": "2026-08-25T19:35:14.084Z",
         "live": true,
         "teams": [
           {
@@ -9523,7 +9523,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-25T18:44:59.700Z",
+        "updatedAt": "2026-08-25T19:35:14.649Z",
         "live": true,
         "teams": [
           {
@@ -9890,24 +9890,6 @@
         "fixtures": [
           {
             "id": "f0",
-            "gameId": "2942100",
-            "homeIdx": 38,
-            "awayIdx": 28,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-08-25"
-          },
-          {
-            "id": "f1",
             "gameId": "2946379",
             "homeIdx": 38,
             "awayIdx": 33,
@@ -9925,7 +9907,7 @@
             "date": "2026-08-27"
           },
           {
-            "id": "f2",
+            "id": "f1",
             "gameId": "2852646",
             "homeIdx": 29,
             "awayIdx": 38,
@@ -9943,7 +9925,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f3",
+            "id": "f2",
             "gameId": "2852648",
             "homeIdx": 38,
             "awayIdx": 28,
@@ -9961,7 +9943,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f4",
+            "id": "f3",
             "gameId": "2852649",
             "homeIdx": 29,
             "awayIdx": 38,
@@ -9979,7 +9961,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f5",
+            "id": "f4",
             "gameId": "2852650",
             "homeIdx": 38,
             "awayIdx": 28,
@@ -9997,7 +9979,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f6",
+            "id": "f5",
             "gameId": "2964921",
             "homeIdx": 2,
             "awayIdx": 10,
@@ -10015,7 +9997,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f7",
+            "id": "f6",
             "gameId": "2852652",
             "homeIdx": 29,
             "awayIdx": 38,
@@ -10033,7 +10015,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f8",
+            "id": "f7",
             "gameId": "2852653",
             "homeIdx": 38,
             "awayIdx": 28,
@@ -10051,7 +10033,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f9",
+            "id": "f8",
             "gameId": "2949665",
             "homeIdx": 38,
             "awayIdx": 31,
@@ -10069,7 +10051,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f10",
+            "id": "f9",
             "gameId": "2957002",
             "homeIdx": 38,
             "awayIdx": 1,
@@ -10087,7 +10069,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f11",
+            "id": "f10",
             "gameId": "2852655",
             "homeIdx": 29,
             "awayIdx": 28,
@@ -10105,7 +10087,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f12",
+            "id": "f11",
             "gameId": "2949664",
             "homeIdx": 31,
             "awayIdx": 18,
@@ -10123,7 +10105,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f13",
+            "id": "f12",
             "gameId": "2957003",
             "homeIdx": 8,
             "awayIdx": 6,
@@ -10141,7 +10123,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f14",
+            "id": "f13",
             "gameId": "2949642",
             "homeIdx": 38,
             "awayIdx": 20,
@@ -10159,7 +10141,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f15",
+            "id": "f14",
             "gameId": "2949663",
             "homeIdx": 38,
             "awayIdx": 18,
@@ -10177,7 +10159,7 @@
             "date": "2026-08-29"
           },
           {
-            "id": "f16",
+            "id": "f15",
             "gameId": "2964917",
             "homeIdx": 2,
             "awayIdx": 0,
@@ -10195,7 +10177,7 @@
             "date": "2026-08-30"
           },
           {
-            "id": "f17",
+            "id": "f16",
             "gameId": "2946376",
             "homeIdx": 38,
             "awayIdx": 21,
@@ -10213,7 +10195,7 @@
             "date": "2026-08-30"
           },
           {
-            "id": "f18",
+            "id": "f17",
             "gameId": "2964918",
             "homeIdx": 0,
             "awayIdx": 12,
@@ -10231,7 +10213,7 @@
             "date": "2026-08-30"
           },
           {
-            "id": "f19",
+            "id": "f18",
             "gameId": "2964919",
             "homeIdx": 2,
             "awayIdx": 12,
@@ -10919,7 +10901,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-25T18:45:00.559Z",
+        "updatedAt": "2026-08-25T19:35:15.239Z",
         "live": true,
         "teams": [
           {
@@ -12723,7 +12705,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-25T18:45:00.988Z",
+        "updatedAt": "2026-08-25T19:35:16.344Z",
         "live": true,
         "teams": [
           {
@@ -13914,7 +13896,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:02.628Z",
+        "updatedAt": "2026-08-25T19:35:17.888Z",
         "live": true,
         "teams": [
           {
@@ -14908,7 +14890,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:03.166Z",
+        "updatedAt": "2026-08-25T19:35:18.145Z",
         "live": true,
         "teams": [
           {
@@ -15189,7 +15171,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:04.240Z",
+        "updatedAt": "2026-08-25T19:35:19.652Z",
         "live": true,
         "teams": [
           {
@@ -16008,7 +15990,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:06.048Z",
+        "updatedAt": "2026-08-25T19:35:21.508Z",
         "live": true,
         "teams": [
           {
@@ -16522,7 +16504,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-25T18:45:01.618Z",
+        "updatedAt": "2026-08-25T19:35:17.098Z",
         "live": true,
         "teams": [
           {
@@ -18326,7 +18308,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:03.593Z",
+        "updatedAt": "2026-08-25T19:35:19.075Z",
         "live": true,
         "teams": [
           {
@@ -20920,7 +20902,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:05.406Z",
+        "updatedAt": "2026-08-25T19:35:21.028Z",
         "live": true,
         "teams": [
           {
@@ -23222,7 +23204,7 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:08.784Z",
+        "updatedAt": "2026-08-25T19:35:24.425Z",
         "live": true,
         "teams": [
           {
@@ -26518,7 +26500,7 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:09.268Z",
+        "updatedAt": "2026-08-25T19:35:24.963Z",
         "live": true,
         "teams": [
           {
@@ -29495,7 +29477,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:04.875Z",
+        "updatedAt": "2026-08-25T19:35:20.274Z",
         "live": true,
         "teams": [
           {
@@ -29793,7 +29775,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:06.700Z",
+        "updatedAt": "2026-08-25T19:35:22.148Z",
         "live": true,
         "teams": [
           {
@@ -30449,7 +30431,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-25T18:45:07.247Z",
+        "updatedAt": "2026-08-25T19:35:23.167Z",
         "live": true,
         "teams": [
           {
@@ -31107,7 +31089,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:09.963Z",
+        "updatedAt": "2026-08-25T19:35:25.372Z",
         "live": true,
         "teams": [
           {
@@ -33683,7 +33665,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:10.651Z",
+        "updatedAt": "2026-08-25T19:35:26.672Z",
         "live": true,
         "teams": [
           {
@@ -35864,7 +35846,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:11.351Z",
+        "updatedAt": "2026-08-25T19:35:27.447Z",
         "live": true,
         "teams": [
           {
@@ -37685,7 +37667,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:11.824Z",
+        "updatedAt": "2026-08-25T19:35:27.820Z",
         "live": true,
         "teams": [
           {
@@ -39489,7 +39471,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:12.169Z",
+        "updatedAt": "2026-08-25T19:35:29.003Z",
         "live": true,
         "teams": [
           {
@@ -40128,7 +40110,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:12.963Z",
+        "updatedAt": "2026-08-25T19:35:29.824Z",
         "live": true,
         "teams": [
           {
@@ -42363,7 +42345,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:13.741Z",
+        "updatedAt": "2026-08-25T19:35:30.199Z",
         "live": true,
         "teams": [
           {
@@ -44364,7 +44346,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:14.300Z",
+        "updatedAt": "2026-08-25T19:35:30.601Z",
         "live": true,
         "teams": [
           {
@@ -44608,7 +44590,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:14.803Z",
+        "updatedAt": "2026-08-25T19:35:31.641Z",
         "live": true,
         "teams": [
           {
@@ -45820,7 +45802,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-25T18:45:15.792Z",
+        "updatedAt": "2026-08-25T19:35:32.285Z",
         "live": true,
         "teams": [
           {
@@ -47760,7 +47742,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:17.703Z",
+        "updatedAt": "2026-08-25T19:35:34.783Z",
         "live": true,
         "teams": [
           {
@@ -48783,7 +48765,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:16.514Z",
+        "updatedAt": "2026-08-25T19:35:33.410Z",
         "live": true,
         "teams": [
           {
@@ -51166,7 +51148,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:20.604Z",
+        "updatedAt": "2026-08-25T19:35:36.827Z",
         "live": true,
         "teams": [
           {
@@ -52668,7 +52650,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:18.861Z",
+        "updatedAt": "2026-08-25T19:35:35.679Z",
         "live": true,
         "teams": [
           {
@@ -56782,7 +56764,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:21.692Z",
+        "updatedAt": "2026-08-25T19:35:38.091Z",
         "live": true,
         "teams": [
           {
@@ -57042,7 +57024,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:21.352Z",
+        "updatedAt": "2026-08-25T19:35:37.436Z",
         "live": true,
         "teams": [
           {
@@ -57586,7 +57568,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:19.593Z",
+        "updatedAt": "2026-08-25T19:35:36.210Z",
         "live": true,
         "teams": [
           {
@@ -58988,7 +58970,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:23.087Z",
+        "updatedAt": "2026-08-25T19:35:38.722Z",
         "live": true,
         "teams": [
           {
@@ -59231,7 +59213,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:25.802Z",
+        "updatedAt": "2026-08-25T19:35:40.779Z",
         "live": true,
         "teams": [
           {
@@ -60570,7 +60552,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:24.567Z",
+        "updatedAt": "2026-08-25T19:35:39.680Z",
         "live": true,
         "teams": [
           {
@@ -65326,7 +65308,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:26.796Z",
+        "updatedAt": "2026-08-25T19:35:42.043Z",
         "live": true,
         "teams": [
           {
@@ -65658,7 +65640,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:26.448Z",
+        "updatedAt": "2026-08-25T19:35:41.308Z",
         "live": true,
         "teams": [
           {
@@ -66524,7 +66506,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:25.261Z",
+        "updatedAt": "2026-08-25T19:35:40.225Z",
         "live": true,
         "teams": [
           {
@@ -68856,7 +68838,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:27.450Z",
+        "updatedAt": "2026-08-25T19:35:42.583Z",
         "live": true,
         "teams": [
           {
@@ -69188,7 +69170,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:30.257Z",
+        "updatedAt": "2026-08-25T19:35:44.639Z",
         "live": true,
         "teams": [
           {
@@ -69501,7 +69483,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:31.361Z",
+        "updatedAt": "2026-08-25T19:35:44.922Z",
         "live": true,
         "teams": [
           {
@@ -69744,7 +69726,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-25T18:45:17.227Z",
+        "updatedAt": "2026-08-25T19:35:34.108Z",
         "live": true,
         "teams": [
           {
