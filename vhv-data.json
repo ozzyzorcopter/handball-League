@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T16:55:49.573Z",
+  "updatedAt": "2026-08-31T21:50:45.612Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:14.649Z",
+        "updatedAt": "2026-08-31T21:50:07.485Z",
         "live": true,
         "teams": [
           {
@@ -607,7 +607,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:15.392Z",
+        "updatedAt": "2026-08-31T21:50:08.108Z",
         "live": true,
         "teams": [
           {
@@ -1031,7 +1031,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:16.367Z",
+        "updatedAt": "2026-08-31T21:50:08.547Z",
         "live": true,
         "teams": [
           {
@@ -2835,7 +2835,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:17.563Z",
+        "updatedAt": "2026-08-31T21:50:09.174Z",
         "live": true,
         "teams": [
           {
@@ -4639,7 +4639,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:18.041Z",
+        "updatedAt": "2026-08-31T21:50:09.912Z",
         "live": true,
         "teams": [
           {
@@ -6443,7 +6443,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:18.573Z",
+        "updatedAt": "2026-08-31T21:50:10.636Z",
         "live": true,
         "teams": [
           {
@@ -6517,7 +6517,7 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 1,
+            "week": 0,
             "date": "2026-09-05"
           },
           {
@@ -6535,7 +6535,7 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 1,
+            "week": 0,
             "date": "2026-09-05"
           },
           {
@@ -6553,7 +6553,7 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 1,
+            "week": 0,
             "date": "2026-09-05"
           },
           {
@@ -6571,7 +6571,7 @@
             "played": false,
             "homeScore": null,
             "awayScore": null,
-            "week": 1,
+            "week": 0,
             "date": "2026-09-06"
           },
           {
@@ -7906,7 +7906,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:19.395Z",
+        "updatedAt": "2026-08-31T21:50:11.688Z",
         "live": true,
         "teams": [
           {
@@ -9710,36 +9710,12 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-08-31T16:55:20.043Z",
+        "updatedAt": "2026-08-31T21:50:12.559Z",
         "live": false,
         "teams": [
           {
             "id": "t_olse_merksem_d1_m_vhv",
             "name": "Olse Merksem D1 M VHV",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_compi_gne_fr_1",
-            "name": "Compiègne (FR) 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_sprimont_d1_w",
-            "name": "Sprimont D1 W",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_tournai_promo_bh",
-            "name": "Tournai Promo BH",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_union_beynoise_d1_w",
-            "name": "Union Beynoise D1 W",
             "points": 0,
             "homeBonus": ""
           },
@@ -9750,20 +9726,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_",
-            "name": "",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_hc_vis_bm_2",
-            "name": "HC Visé BM 2",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_witte_ster_1",
-            "name": "Witte Ster 1",
+            "id": "t_sprimont_d1_w",
+            "name": "Sprimont D1 W",
             "points": 0,
             "homeBonus": ""
           },
@@ -9774,8 +9738,20 @@
             "homeBonus": ""
           },
           {
-            "id": "t_compi_gne_fr_1",
-            "name": "Compiègne (FR) 1",
+            "id": "t_union_beynoise_d1_w",
+            "name": "Union Beynoise D1 W",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hc_vis_bm_2",
+            "name": "HC Visé BM 2",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_",
+            "name": "",
             "points": 0,
             "homeBonus": ""
           },
@@ -9786,44 +9762,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_btb_aachen_1",
-            "name": "BTB Aachen 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_btb_aachen_1",
-            "name": "BTB Aachen 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_diekirch_chev_1",
-            "name": "Diekirch CHEV 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_sprimont_d1_wr_reserves_f_",
-            "name": "Sprimont D1 WR (Reserves F)",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_dudelange_lux_1",
-            "name": "Dudelange (LUX) 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_sprimont_d1_w",
-            "name": "Sprimont D1 W",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_hazebrouck_fr_1",
-            "name": "Hazebrouck (FR) 1",
+            "id": "t_witte_ster_1",
+            "name": "Witte Ster 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -9834,86 +9774,20 @@
             "homeBonus": ""
           },
           {
-            "id": "t_riemke_1_senior_m_f_",
-            "name": "Riemke 1 (Senior M/F)",
+            "id": "t_compi_gne_fr_1",
+            "name": "Compiègne (FR) 1",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_gelpe_strombach_1_senior_m_f_",
-            "name": "Gelpe-Strombach 1 (Senior M/F)",
+            "id": "t_btb_aachen_1",
+            "name": "BTB Aachen 1",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_tubize_d1_m_lfh",
-            "name": "Tubize D1 M LFH",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_riemke_1_senior_m_f_",
-            "name": "Riemke 1 (Senior M/F)",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_f_mina_vis_d2_w",
-            "name": "Fémina Visé D2 W",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_merkstein_1_senior_m_f_",
-            "name": "Merkstein 1 (Senior M/F)",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_vis_bm_b18_lfh_u18_m_",
-            "name": "Visé BM B18 LFH (U18 M)",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_entente_du_centre_d1_m_lfh",
-            "name": "Entente du Centre D1 M LFH",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_vis_bm_d2_m",
-            "name": "Visé BM D2 M",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_kraainem_d1_m_lfh",
-            "name": "Kraainem D1 M LFH",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_hc_vis_bm_1",
-            "name": "HC Visé BM 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_hc_weiden_1",
-            "name": "HC Weiden 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_hbc_apolloon_spurs_d1_m",
-            "name": "HBC Apolloon Spurs D1 M",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_vis_bm_d2_m",
-            "name": "Visé BM D2 M",
+            "id": "t_btb_aachen_1",
+            "name": "BTB Aachen 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -9924,14 +9798,104 @@
             "homeBonus": ""
           },
           {
+            "id": "t_diekirch_chev_1",
+            "name": "Diekirch CHEV 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hc_sprimont_shl_hommes",
+            "name": "HC Sprimont SHL Hommes",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_dudelange_lux_1",
+            "name": "Dudelange (LUX) 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_riemke_1_senior_m_f_",
+            "name": "Riemke 1 (Senior M/F)",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hazebrouck_fr_1",
+            "name": "Hazebrouck (FR) 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_merkstein_1_senior_m_f_",
+            "name": "Merkstein 1 (Senior M/F)",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_riemke_1_senior_m_f_",
+            "name": "Riemke 1 (Senior M/F)",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_entente_du_centre_d1_m_lfh",
+            "name": "Entente du Centre D1 M LFH",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_tubize_d1_m_lfh",
+            "name": "Tubize D1 M LFH",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_gelpe_strombach_1_senior_m_f_",
+            "name": "Gelpe-Strombach 1 (Senior M/F)",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_f_mina_vis_d2_w",
+            "name": "Fémina Visé D2 W",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_kraainem_d1_m_lfh",
+            "name": "Kraainem D1 M LFH",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_vis_bm_b18_lfh_u18_m_",
+            "name": "Visé BM B18 LFH (U18 M)",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_vis_bm_d2_m",
+            "name": "Visé BM D2 M",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_vis_bm_d2_m",
+            "name": "Visé BM D2 M",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
             "id": "t_hc_vis_bm_1",
             "name": "HC Visé BM 1",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_eeklo_d2_m",
-            "name": "Eeklo D2 M",
+            "id": "t_hc_vis_bm_1",
+            "name": "HC Visé BM 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -9942,8 +9906,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_h_bilzen_b18_vhv_r_u18_m_",
-            "name": "H. Bilzen B18 VHV R (U18 M)",
+            "id": "t_hbc_apolloon_spurs_d1_m",
+            "name": "HBC Apolloon Spurs D1 M",
             "points": 0,
             "homeBonus": ""
           },
@@ -9954,8 +9918,20 @@
             "homeBonus": ""
           },
           {
-            "id": "t_tournai_d1_m",
-            "name": "Tournai D1 M",
+            "id": "t_sprimont_d1_wr_reserves_f_",
+            "name": "Sprimont D1 WR (Reserves F)",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_compi_gne_fr_1",
+            "name": "Compiègne (FR) 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_eeklo_d2_m",
+            "name": "Eeklo D2 M",
             "points": 0,
             "homeBonus": ""
           },
@@ -9966,8 +9942,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_tournai_d2_m",
-            "name": "Tournai D2 M",
+            "id": "t_h_bilzen_b18_vhv_r_u18_m_",
+            "name": "H. Bilzen B18 VHV R (U18 M)",
             "points": 0,
             "homeBonus": ""
           },
@@ -9978,8 +9954,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_eupen_d1_m_lfh",
-            "name": "Eupen D1 M LFH",
+            "id": "t_tournai_d1_m",
+            "name": "Tournai D1 M",
             "points": 0,
             "homeBonus": ""
           },
@@ -9990,8 +9966,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_eupen_d1_wr_reserves_f_",
-            "name": "Eupen D1 WR (Reserves F)",
+            "id": "t_tournai_d2_m",
+            "name": "Tournai D2 M",
             "points": 0,
             "homeBonus": ""
           },
@@ -10002,8 +9978,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_p_kortessem_d1_m_vhv_1",
-            "name": "P. Kortessem D1 M VHV 1",
+            "id": "t_eupen_d1_m_lfh",
+            "name": "Eupen D1 M LFH",
             "points": 0,
             "homeBonus": ""
           },
@@ -10014,8 +9990,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_rhino_cup_m",
-            "name": "Rhino Cup M",
+            "id": "t_eupen_d1_wr_reserves_f_",
+            "name": "Eupen D1 WR (Reserves F)",
             "points": 0,
             "homeBonus": ""
           },
@@ -10026,8 +10002,26 @@
             "homeBonus": ""
           },
           {
+            "id": "t_p_kortessem_d1_m_vhv_1",
+            "name": "P. Kortessem D1 M VHV 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
             "id": "t_renaissance_montegn_e_d1_m",
             "name": "Renaissance Montegnée D1 M",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_rhino_cup_m",
+            "name": "Rhino Cup M",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_tournai_promo_bh",
+            "name": "Tournai Promo BH",
             "points": 0,
             "homeBonus": ""
           },
@@ -10062,14 +10056,20 @@
             "homeBonus": ""
           },
           {
+            "id": "t_hc_weiden_1",
+            "name": "HC Weiden 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
             "id": "t_eynatten_raeren_d1_m",
             "name": "Eynatten-Raeren D1 M",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_hc_sprimont_shl_hommes",
-            "name": "HC Sprimont SHL Hommes",
+            "id": "t_sprimont_d1_w",
+            "name": "Sprimont D1 W",
             "points": 0,
             "homeBonus": ""
           },
@@ -10095,14 +10095,14 @@
           },
           {
             "pos": 1,
-            "name": "Compiègne (FR) 1",
-            "played": 0,
-            "won": 0,
+            "name": "Renaissance Montegnée D1 M LFH",
+            "played": 1,
+            "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 0,
-            "ga": 0,
-            "points": 0
+            "gf": 28,
+            "ga": 17,
+            "points": 2
           },
           {
             "pos": 2,
@@ -10117,14 +10117,14 @@
           },
           {
             "pos": 2,
-            "name": "Tournai Promo BH",
-            "played": 0,
-            "won": 0,
+            "name": "Hubo Scup M",
+            "played": 1,
+            "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 0,
-            "ga": 0,
-            "points": 0
+            "gf": 25,
+            "ga": 20,
+            "points": 2
           },
           {
             "pos": 3,
@@ -10139,13 +10139,13 @@
           },
           {
             "pos": 3,
-            "name": "Renaissance Montegnée D1 M LFH",
+            "name": "HC Visé BM 2",
             "played": 1,
             "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 28,
-            "ga": 17,
+            "gf": 29,
+            "ga": 24,
             "points": 2
           },
           {
@@ -10161,12 +10161,12 @@
           },
           {
             "pos": 4,
-            "name": "HC Visé BM 2",
+            "name": "KTSV Eupen Herren 1 SHL",
             "played": 1,
             "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 29,
+            "gf": 26,
             "ga": 24,
             "points": 2
           },
@@ -10183,13 +10183,13 @@
           },
           {
             "pos": 5,
-            "name": "Hubo Scup M",
+            "name": "Union Beynoise D1 W",
             "played": 1,
             "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 25,
-            "ga": 20,
+            "gf": 2,
+            "ga": 0,
             "points": 2
           },
           {
@@ -10205,12 +10205,12 @@
           },
           {
             "pos": 6,
-            "name": "KTSV Eupen Herren 1 SHL",
+            "name": "BTB Aachen 1",
             "played": 1,
             "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 26,
+            "gf": 25,
             "ga": 24,
             "points": 2
           },
@@ -10227,13 +10227,13 @@
           },
           {
             "pos": 7,
-            "name": "BTB Aachen 1",
+            "name": "Sprimont D1 WR (Reserves F)",
             "played": 1,
             "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 25,
-            "ga": 24,
+            "gf": 1,
+            "ga": 0,
             "points": 2
           },
           {
@@ -10249,13 +10249,13 @@
           },
           {
             "pos": 8,
-            "name": "Sprimont D1 WR (Reserves F)",
-            "played": 1,
+            "name": "HC Sprimont SHL Hommes",
+            "played": 3,
             "won": 1,
             "drawn": 0,
-            "lost": 0,
-            "gf": 1,
-            "ga": 0,
+            "lost": 2,
+            "gf": 45,
+            "ga": 50,
             "points": 2
           },
           {
@@ -10271,14 +10271,14 @@
           },
           {
             "pos": 9,
-            "name": "Sprimont D1 W",
-            "played": 1,
+            "name": "Riemke 1 (Senior M/F)",
+            "played": 0,
             "won": 0,
-            "drawn": 1,
+            "drawn": 0,
             "lost": 0,
             "gf": 0,
             "ga": 0,
-            "points": 1
+            "points": 0
           },
           {
             "pos": 10,
@@ -10293,14 +10293,14 @@
           },
           {
             "pos": 10,
-            "name": "Union Beynoise D1 W",
-            "played": 1,
+            "name": "Merkstein 1 (Senior M/F)",
+            "played": 0,
             "won": 0,
-            "drawn": 1,
+            "drawn": 0,
             "lost": 0,
             "gf": 0,
             "ga": 0,
-            "points": 1
+            "points": 0
           },
           {
             "pos": 11,
@@ -10315,11 +10315,11 @@
           },
           {
             "pos": 11,
-            "name": "Gelpe-Strombach 1 (Senior M/F)",
-            "played": 0,
+            "name": "Entente du Centre D1 M LFH",
+            "played": 1,
             "won": 0,
             "drawn": 0,
-            "lost": 0,
+            "lost": 1,
             "gf": 0,
             "ga": 0,
             "points": 0
@@ -10337,7 +10337,7 @@
           },
           {
             "pos": 12,
-            "name": "Riemke 1 (Senior M/F)",
+            "name": "Gelpe-Strombach 1 (Senior M/F)",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10359,7 +10359,7 @@
           },
           {
             "pos": 13,
-            "name": "Merkstein 1 (Senior M/F)",
+            "name": "Kraainem D1 M LFH",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10381,7 +10381,7 @@
           },
           {
             "pos": 14,
-            "name": "Entente du Centre D1 M LFH",
+            "name": "Visé BM D2 M",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10403,7 +10403,7 @@
           },
           {
             "pos": 15,
-            "name": "Kraainem D1 M LFH",
+            "name": "HC Visé BM 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10425,7 +10425,7 @@
           },
           {
             "pos": 16,
-            "name": "HC Weiden 1",
+            "name": "Union Beynoise D1 M LFH",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10447,7 +10447,7 @@
           },
           {
             "pos": 17,
-            "name": "Visé BM D2 M",
+            "name": "Union Beynoise D2 M",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10469,7 +10469,7 @@
           },
           {
             "pos": 18,
-            "name": "HC Visé BM 1",
+            "name": "Compiègne (FR) 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10491,7 +10491,7 @@
           },
           {
             "pos": 19,
-            "name": "Union Beynoise D1 M LFH",
+            "name": "Flémalle D2 W",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10513,7 +10513,7 @@
           },
           {
             "pos": 20,
-            "name": "Union Beynoise D2 M",
+            "name": "Eynatten-Raeren Promo Lg 1",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10535,7 +10535,7 @@
           },
           {
             "pos": 21,
-            "name": "Flémalle D2 W",
+            "name": "Eynatten-Raeren D2 W",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10557,7 +10557,7 @@
           },
           {
             "pos": 22,
-            "name": "Eynatten-Raeren Promo Lg 1",
+            "name": "Sprimont D2 M",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10579,7 +10579,7 @@
           },
           {
             "pos": 23,
-            "name": "Eynatten-Raeren D2 W",
+            "name": "Hubo D1 M VHV",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10601,7 +10601,7 @@
           },
           {
             "pos": 24,
-            "name": "Sprimont D2 M",
+            "name": "Hubo D1 M",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10623,7 +10623,7 @@
           },
           {
             "pos": 25,
-            "name": "Hubo D1 M VHV",
+            "name": "Renaissance Montegnée D1 M",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10645,7 +10645,7 @@
           },
           {
             "pos": 26,
-            "name": "Hubo D1 M",
+            "name": "Tournai Promo BH",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -10656,28 +10656,17 @@
           },
           {
             "pos": 27,
-            "name": "Renaissance Montegnée D1 M",
-            "played": 0,
+            "name": "Tournai D2 M",
+            "played": 1,
             "won": 0,
             "drawn": 0,
-            "lost": 0,
+            "lost": 1,
             "gf": 0,
             "ga": 0,
             "points": 0
           },
           {
             "pos": 28,
-            "name": "Tournai D2 M",
-            "played": 0,
-            "won": 0,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 0,
-            "ga": 0,
-            "points": 0
-          },
-          {
-            "pos": 29,
             "name": "Eupen D1 M LFH",
             "played": 0,
             "won": 0,
@@ -10688,7 +10677,7 @@
             "points": 0
           },
           {
-            "pos": 30,
+            "pos": 29,
             "name": "KTSV Eupen Herren 1 Pokal",
             "played": 0,
             "won": 0,
@@ -10699,7 +10688,7 @@
             "points": 0
           },
           {
-            "pos": 31,
+            "pos": 30,
             "name": "Eupen D1 W",
             "played": 0,
             "won": 0,
@@ -10710,8 +10699,19 @@
             "points": 0
           },
           {
-            "pos": 32,
+            "pos": 31,
             "name": "Villers-Amay Cup W",
+            "played": 1,
+            "won": 0,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 0,
+            "ga": 1,
+            "points": 0
+          },
+          {
+            "pos": 32,
+            "name": "HC Weiden 1",
             "played": 1,
             "won": 0,
             "drawn": 0,
@@ -10733,13 +10733,13 @@
           },
           {
             "pos": 34,
-            "name": "HC Sprimont SHL Hommes",
-            "played": 2,
+            "name": "Sprimont D1 W",
+            "played": 1,
             "won": 0,
             "drawn": 0,
-            "lost": 2,
-            "gf": 44,
-            "ga": 50,
+            "lost": 1,
+            "gf": 0,
+            "ga": 2,
             "points": 0
           },
           {
@@ -10762,7 +10762,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-31T16:55:20.514Z",
+        "updatedAt": "2026-08-31T21:50:14.169Z",
         "live": true,
         "teams": [
           {
@@ -12566,7 +12566,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-31T16:55:20.902Z",
+        "updatedAt": "2026-08-31T21:50:14.808Z",
         "live": true,
         "teams": [
           {
@@ -13757,7 +13757,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:22.072Z",
+        "updatedAt": "2026-08-31T21:50:15.700Z",
         "live": true,
         "teams": [
           {
@@ -14751,7 +14751,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:22.622Z",
+        "updatedAt": "2026-08-31T21:50:16.145Z",
         "live": true,
         "teams": [
           {
@@ -15032,7 +15032,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:23.739Z",
+        "updatedAt": "2026-08-31T21:50:17.276Z",
         "live": true,
         "teams": [
           {
@@ -15851,7 +15851,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:25.637Z",
+        "updatedAt": "2026-08-31T21:50:19.066Z",
         "live": true,
         "teams": [
           {
@@ -16365,7 +16365,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-08-31T16:55:21.550Z",
+        "updatedAt": "2026-08-31T21:50:15.317Z",
         "live": true,
         "teams": [
           {
@@ -18493,7 +18493,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:23.062Z",
+        "updatedAt": "2026-08-31T21:50:16.686Z",
         "live": true,
         "teams": [
           {
@@ -21087,7 +21087,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:25.088Z",
+        "updatedAt": "2026-08-31T21:50:18.488Z",
         "live": true,
         "teams": [
           {
@@ -23389,7 +23389,7 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:29.343Z",
+        "updatedAt": "2026-08-31T21:50:21.355Z",
         "live": true,
         "teams": [
           {
@@ -26685,7 +26685,7 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:30.004Z",
+        "updatedAt": "2026-08-31T21:50:21.849Z",
         "live": true,
         "teams": [
           {
@@ -29662,7 +29662,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:24.368Z",
+        "updatedAt": "2026-08-31T21:50:17.889Z",
         "live": true,
         "teams": [
           {
@@ -29960,7 +29960,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:26.400Z",
+        "updatedAt": "2026-08-31T21:50:19.699Z",
         "live": true,
         "teams": [
           {
@@ -30616,7 +30616,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-08-31T16:55:28.311Z",
+        "updatedAt": "2026-08-31T21:50:20.413Z",
         "live": true,
         "teams": [
           {
@@ -31274,7 +31274,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:31.632Z",
+        "updatedAt": "2026-08-31T21:50:23.147Z",
         "live": true,
         "teams": [
           {
@@ -33850,7 +33850,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:32.440Z",
+        "updatedAt": "2026-08-31T21:50:29.373Z",
         "live": true,
         "teams": [
           {
@@ -36031,7 +36031,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:33.441Z",
+        "updatedAt": "2026-08-31T21:50:30.091Z",
         "live": true,
         "teams": [
           {
@@ -37852,7 +37852,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:34.217Z",
+        "updatedAt": "2026-08-31T21:50:30.791Z",
         "live": true,
         "teams": [
           {
@@ -39656,7 +39656,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:34.530Z",
+        "updatedAt": "2026-08-31T21:50:31.397Z",
         "live": true,
         "teams": [
           {
@@ -39891,24 +39891,6 @@
           },
           {
             "id": "f11",
-            "gameId": "2852480",
-            "homeIdx": 0,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 2,
-            "date": "2026-11-14"
-          },
-          {
-            "id": "f12",
             "gameId": "2852479",
             "homeIdx": 1,
             "awayIdx": 4,
@@ -39924,6 +39906,24 @@
             "awayScore": null,
             "week": 2,
             "date": "2026-11-14"
+          },
+          {
+            "id": "f12",
+            "gameId": "2852480",
+            "homeIdx": 0,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 2,
+            "date": "2026-11-15"
           },
           {
             "id": "f13",
@@ -40295,7 +40295,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:35.312Z",
+        "updatedAt": "2026-08-31T21:50:32.120Z",
         "live": true,
         "teams": [
           {
@@ -42548,7 +42548,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:35.880Z",
+        "updatedAt": "2026-08-31T21:50:32.736Z",
         "live": true,
         "teams": [
           {
@@ -44549,7 +44549,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:36.740Z",
+        "updatedAt": "2026-08-31T21:50:33.331Z",
         "live": true,
         "teams": [
           {
@@ -44793,7 +44793,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:37.546Z",
+        "updatedAt": "2026-08-31T21:50:33.731Z",
         "live": true,
         "teams": [
           {
@@ -46005,7 +46005,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-08-31T16:55:38.013Z",
+        "updatedAt": "2026-08-31T21:50:34.152Z",
         "live": true,
         "teams": [
           {
@@ -46258,9 +46258,9 @@
           },
           {
             "id": "f8",
-            "gameId": "2851454",
-            "homeIdx": 10,
-            "awayIdx": 13,
+            "gameId": "2851364",
+            "homeIdx": 6,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -46276,9 +46276,9 @@
           },
           {
             "id": "f9",
-            "gameId": "2851364",
-            "homeIdx": 6,
-            "awayIdx": 9,
+            "gameId": "2851454",
+            "homeIdx": 10,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -46636,9 +46636,9 @@
           },
           {
             "id": "f29",
-            "gameId": "2851371",
-            "homeIdx": 15,
-            "awayIdx": 12,
+            "gameId": "2851390",
+            "homeIdx": 8,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -46654,9 +46654,9 @@
           },
           {
             "id": "f30",
-            "gameId": "2851390",
-            "homeIdx": 8,
-            "awayIdx": 11,
+            "gameId": "2851371",
+            "homeIdx": 15,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -47154,13 +47154,13 @@
             "homeScore": null,
             "awayScore": null,
             "week": 8,
-            "date": "2026-11-21"
+            "date": "2026-11-07"
           },
           {
             "id": "f58",
-            "gameId": "2851382",
-            "homeIdx": 0,
-            "awayIdx": 15,
+            "gameId": "2851457",
+            "homeIdx": 10,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -47176,9 +47176,9 @@
           },
           {
             "id": "f59",
-            "gameId": "2851457",
-            "homeIdx": 10,
-            "awayIdx": 4,
+            "gameId": "2851382",
+            "homeIdx": 0,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -47302,9 +47302,9 @@
           },
           {
             "id": "f66",
-            "gameId": "2851398",
-            "homeIdx": 10,
-            "awayIdx": 8,
+            "gameId": "2851468",
+            "homeIdx": 13,
+            "awayIdx": 16,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -47320,9 +47320,9 @@
           },
           {
             "id": "f67",
-            "gameId": "2851468",
-            "homeIdx": 13,
-            "awayIdx": 16,
+            "gameId": "2851398",
+            "homeIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -47748,7 +47748,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:39.824Z",
+        "updatedAt": "2026-08-31T21:50:35.869Z",
         "live": true,
         "teams": [
           {
@@ -48771,7 +48771,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:38.544Z",
+        "updatedAt": "2026-08-31T21:50:34.718Z",
         "live": true,
         "teams": [
           {
@@ -49126,24 +49126,6 @@
           },
           {
             "id": "f11",
-            "gameId": "2850795",
-            "homeIdx": 7,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 2,
-            "date": "2026-09-12"
-          },
-          {
-            "id": "f12",
             "gameId": "2850775",
             "homeIdx": 16,
             "awayIdx": 6,
@@ -49161,7 +49143,7 @@
             "date": "2026-09-12"
           },
           {
-            "id": "f13",
+            "id": "f12",
             "gameId": "2850770",
             "homeIdx": 11,
             "awayIdx": 1,
@@ -49179,7 +49161,7 @@
             "date": "2026-09-12"
           },
           {
-            "id": "f14",
+            "id": "f13",
             "gameId": "2850745",
             "homeIdx": 0,
             "awayIdx": 15,
@@ -49197,7 +49179,7 @@
             "date": "2026-09-12"
           },
           {
-            "id": "f15",
+            "id": "f14",
             "gameId": "2850805",
             "homeIdx": 22,
             "awayIdx": 12,
@@ -49215,10 +49197,28 @@
             "date": "2026-09-12"
           },
           {
-            "id": "f16",
+            "id": "f15",
             "gameId": "2850406",
             "homeIdx": 19,
             "awayIdx": 14,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 2,
+            "date": "2026-09-12"
+          },
+          {
+            "id": "f16",
+            "gameId": "2850795",
+            "homeIdx": 7,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49342,6 +49342,24 @@
           },
           {
             "id": "f23",
+            "gameId": "2850771",
+            "homeIdx": 11,
+            "awayIdx": 21,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 3,
+            "date": "2026-09-19"
+          },
+          {
+            "id": "f24",
             "gameId": "2850761",
             "homeIdx": 20,
             "awayIdx": 5,
@@ -49359,7 +49377,7 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f24",
+            "id": "f25",
             "gameId": "2850197",
             "homeIdx": 23,
             "awayIdx": 3,
@@ -49377,28 +49395,10 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f25",
+            "id": "f26",
             "gameId": "2850756",
             "homeIdx": 10,
             "awayIdx": 15,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 3,
-            "date": "2026-09-19"
-          },
-          {
-            "id": "f26",
-            "gameId": "2850771",
-            "homeIdx": 11,
-            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51154,7 +51154,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:41.859Z",
+        "updatedAt": "2026-08-31T21:50:37.792Z",
         "live": true,
         "teams": [
           {
@@ -52656,7 +52656,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:40.780Z",
+        "updatedAt": "2026-08-31T21:50:36.925Z",
         "live": true,
         "teams": [
           {
@@ -52939,24 +52939,6 @@
           },
           {
             "id": "f2",
-            "gameId": "2850371",
-            "homeIdx": 19,
-            "awayIdx": 5,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 1,
-            "date": "2026-09-05"
-          },
-          {
-            "id": "f3",
             "gameId": "2850850",
             "homeIdx": 21,
             "awayIdx": 28,
@@ -52974,7 +52956,7 @@
             "date": "2026-09-05"
           },
           {
-            "id": "f4",
+            "id": "f3",
             "gameId": "2851681",
             "homeIdx": 11,
             "awayIdx": 4,
@@ -52992,25 +52974,7 @@
             "date": "2026-09-05"
           },
           {
-            "id": "f5",
-            "gameId": "2850900",
-            "homeIdx": 30,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 1,
-            "date": "2026-09-05"
-          },
-          {
-            "id": "f6",
+            "id": "f4",
             "gameId": "2850895",
             "homeIdx": 23,
             "awayIdx": 16,
@@ -53028,10 +52992,46 @@
             "date": "2026-09-05"
           },
           {
-            "id": "f7",
+            "id": "f5",
             "gameId": "2850925",
             "homeIdx": 31,
             "awayIdx": 10,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 1,
+            "date": "2026-09-05"
+          },
+          {
+            "id": "f6",
+            "gameId": "2850900",
+            "homeIdx": 30,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 1,
+            "date": "2026-09-05"
+          },
+          {
+            "id": "f7",
+            "gameId": "2850371",
+            "homeIdx": 19,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -53065,24 +53065,6 @@
           },
           {
             "id": "f9",
-            "gameId": "2851686",
-            "homeIdx": 18,
-            "awayIdx": 37,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 1,
-            "date": "2026-09-05"
-          },
-          {
-            "id": "f10",
             "gameId": "2850930",
             "homeIdx": 3,
             "awayIdx": 17,
@@ -53100,10 +53082,28 @@
             "date": "2026-09-05"
           },
           {
+            "id": "f10",
+            "gameId": "2851686",
+            "homeIdx": 18,
+            "awayIdx": 37,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 1,
+            "date": "2026-09-05"
+          },
+          {
             "id": "f11",
-            "gameId": "2850865",
-            "homeIdx": 1,
-            "awayIdx": 22,
+            "gameId": "2850401",
+            "homeIdx": 20,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -53119,9 +53119,9 @@
           },
           {
             "id": "f12",
-            "gameId": "2850401",
-            "homeIdx": 20,
-            "awayIdx": 6,
+            "gameId": "2850865",
+            "homeIdx": 1,
+            "awayIdx": 22,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -53659,24 +53659,6 @@
           },
           {
             "id": "f42",
-            "gameId": "2850826",
-            "homeIdx": 14,
-            "awayIdx": 35,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 3,
-            "date": "2026-09-19"
-          },
-          {
-            "id": "f43",
             "gameId": "2850397",
             "homeIdx": 39,
             "awayIdx": 6,
@@ -53694,7 +53676,7 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f44",
+            "id": "f43",
             "gameId": "2850871",
             "homeIdx": 29,
             "awayIdx": 15,
@@ -53712,10 +53694,28 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f45",
+            "id": "f44",
             "gameId": "2850926",
             "homeIdx": 31,
             "awayIdx": 17,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 3,
+            "date": "2026-09-19"
+          },
+          {
+            "id": "f45",
+            "gameId": "2850841",
+            "homeIdx": 7,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -53749,24 +53749,6 @@
           },
           {
             "id": "f47",
-            "gameId": "2850841",
-            "homeIdx": 7,
-            "awayIdx": 21,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 3,
-            "date": "2026-09-19"
-          },
-          {
-            "id": "f48",
             "gameId": "2850392",
             "homeIdx": 34,
             "awayIdx": 20,
@@ -53784,10 +53766,28 @@
             "date": "2026-09-19"
           },
           {
-            "id": "f49",
+            "id": "f48",
             "gameId": "2851682",
             "homeIdx": 11,
             "awayIdx": 37,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 3,
+            "date": "2026-09-19"
+          },
+          {
+            "id": "f49",
+            "gameId": "2850826",
+            "homeIdx": 14,
+            "awayIdx": 35,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -56770,7 +56770,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:42.932Z",
+        "updatedAt": "2026-08-31T21:50:38.766Z",
         "live": true,
         "teams": [
           {
@@ -57030,7 +57030,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:42.399Z",
+        "updatedAt": "2026-08-31T21:50:38.408Z",
         "live": true,
         "teams": [
           {
@@ -57574,7 +57574,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:41.165Z",
+        "updatedAt": "2026-08-31T21:50:37.349Z",
         "live": true,
         "teams": [
           {
@@ -58976,7 +58976,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:43.298Z",
+        "updatedAt": "2026-08-31T21:50:39.338Z",
         "live": true,
         "teams": [
           {
@@ -59219,7 +59219,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:46.138Z",
+        "updatedAt": "2026-08-31T21:50:41.389Z",
         "live": true,
         "teams": [
           {
@@ -60558,7 +60558,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:44.205Z",
+        "updatedAt": "2026-08-31T21:50:40.234Z",
         "live": true,
         "teams": [
           {
@@ -61345,9 +61345,9 @@
           },
           {
             "id": "f28",
-            "gameId": "2850963",
-            "homeIdx": 33,
-            "awayIdx": 25,
+            "gameId": "2851038",
+            "homeIdx": 4,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -61399,6 +61399,24 @@
           },
           {
             "id": "f31",
+            "gameId": "2850963",
+            "homeIdx": 33,
+            "awayIdx": 25,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 2,
+            "date": "2026-09-12"
+          },
+          {
+            "id": "f32",
             "gameId": "2850988",
             "homeIdx": 2,
             "awayIdx": 18,
@@ -61416,7 +61434,7 @@
             "date": "2026-09-12"
           },
           {
-            "id": "f32",
+            "id": "f33",
             "gameId": "2850321",
             "homeIdx": 7,
             "awayIdx": 45,
@@ -61434,7 +61452,7 @@
             "date": "2026-09-12"
           },
           {
-            "id": "f33",
+            "id": "f34",
             "gameId": "2851043",
             "homeIdx": 28,
             "awayIdx": 20,
@@ -61452,7 +61470,7 @@
             "date": "2026-09-12"
           },
           {
-            "id": "f34",
+            "id": "f35",
             "gameId": "2851078",
             "homeIdx": 21,
             "awayIdx": 13,
@@ -61470,7 +61488,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f35",
+            "id": "f36",
             "gameId": "2851068",
             "homeIdx": 5,
             "awayIdx": 43,
@@ -61488,7 +61506,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f36",
+            "id": "f37",
             "gameId": "2850286",
             "homeIdx": 38,
             "awayIdx": 22,
@@ -61506,7 +61524,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f37",
+            "id": "f38",
             "gameId": "2851073",
             "homeIdx": 37,
             "awayIdx": 29,
@@ -61524,7 +61542,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f38",
+            "id": "f39",
             "gameId": "2850958",
             "homeIdx": 1,
             "awayIdx": 17,
@@ -61542,7 +61560,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f39",
+            "id": "f40",
             "gameId": "2850296",
             "homeIdx": 14,
             "awayIdx": 44,
@@ -61560,7 +61578,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f40",
+            "id": "f41",
             "gameId": "2851008",
             "homeIdx": 11,
             "awayIdx": 35,
@@ -61578,7 +61596,7 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f41",
+            "id": "f42",
             "gameId": "2850326",
             "homeIdx": 23,
             "awayIdx": 15,
@@ -61596,28 +61614,10 @@
             "date": "2026-09-13"
           },
           {
-            "id": "f42",
+            "id": "f43",
             "gameId": "2851018",
             "homeIdx": 19,
             "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 2,
-            "date": "2026-09-13"
-          },
-          {
-            "id": "f43",
-            "gameId": "2851038",
-            "homeIdx": 4,
-            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65314,7 +65314,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:46.799Z",
+        "updatedAt": "2026-08-31T21:50:42.470Z",
         "live": true,
         "teams": [
           {
@@ -65646,7 +65646,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:46.520Z",
+        "updatedAt": "2026-08-31T21:50:41.972Z",
         "live": true,
         "teams": [
           {
@@ -66512,7 +66512,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:45.610Z",
+        "updatedAt": "2026-08-31T21:50:41.034Z",
         "live": true,
         "teams": [
           {
@@ -68844,7 +68844,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:47.438Z",
+        "updatedAt": "2026-08-31T21:50:43.209Z",
         "live": true,
         "teams": [
           {
@@ -69176,7 +69176,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:49.246Z",
+        "updatedAt": "2026-08-31T21:50:45.043Z",
         "live": true,
         "teams": [
           {
@@ -69489,7 +69489,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:49.573Z",
+        "updatedAt": "2026-08-31T21:50:45.612Z",
         "live": true,
         "teams": [
           {
@@ -69732,7 +69732,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-08-31T16:55:39.155Z",
+        "updatedAt": "2026-08-31T21:50:35.218Z",
         "live": true,
         "teams": [
           {
