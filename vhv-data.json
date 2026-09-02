@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T03:51:29.160Z",
+  "updatedAt": "2026-09-02T08:38:45.237Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:44.150Z",
+        "updatedAt": "2026-09-02T08:38:07.219Z",
         "live": true,
         "teams": [
           {
@@ -607,7 +607,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:45.338Z",
+        "updatedAt": "2026-09-02T08:38:07.970Z",
         "live": true,
         "teams": [
           {
@@ -1031,7 +1031,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:46.332Z",
+        "updatedAt": "2026-09-02T08:38:09.013Z",
         "live": true,
         "teams": [
           {
@@ -2835,7 +2835,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:47.159Z",
+        "updatedAt": "2026-09-02T08:38:09.913Z",
         "live": true,
         "teams": [
           {
@@ -4639,7 +4639,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:48.364Z",
+        "updatedAt": "2026-09-02T08:38:10.701Z",
         "live": true,
         "teams": [
           {
@@ -6443,7 +6443,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:48.808Z",
+        "updatedAt": "2026-09-02T08:38:11.613Z",
         "live": true,
         "teams": [
           {
@@ -7906,7 +7906,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:49.894Z",
+        "updatedAt": "2026-09-02T08:38:12.088Z",
         "live": true,
         "teams": [
           {
@@ -9710,7 +9710,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-02T03:50:50.420Z",
+        "updatedAt": "2026-09-02T08:38:13.008Z",
         "live": false,
         "teams": [
           {
@@ -10762,7 +10762,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-09-02T03:50:51.579Z",
+        "updatedAt": "2026-09-02T08:38:13.863Z",
         "live": true,
         "teams": [
           {
@@ -12566,7 +12566,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-09-02T03:50:52.560Z",
+        "updatedAt": "2026-09-02T08:38:14.688Z",
         "live": true,
         "teams": [
           {
@@ -13757,7 +13757,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:54.428Z",
+        "updatedAt": "2026-09-02T08:38:15.466Z",
         "live": true,
         "teams": [
           {
@@ -14751,7 +14751,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:55.251Z",
+        "updatedAt": "2026-09-02T08:38:17.391Z",
         "live": true,
         "teams": [
           {
@@ -15032,7 +15032,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:56.975Z",
+        "updatedAt": "2026-09-02T08:38:18.818Z",
         "live": true,
         "teams": [
           {
@@ -15851,7 +15851,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:59.180Z",
+        "updatedAt": "2026-09-02T08:38:21.112Z",
         "live": true,
         "teams": [
           {
@@ -16365,7 +16365,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-09-02T03:50:53.385Z",
+        "updatedAt": "2026-09-02T08:38:15.147Z",
         "live": true,
         "teams": [
           {
@@ -16432,24 +16432,6 @@
         "fixtures": [
           {
             "id": "f0",
-            "gameId": "2851717",
-            "homeIdx": 6,
-            "awayIdx": 4,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 1,
-            "date": null
-          },
-          {
-            "id": "f1",
             "gameId": "2851704",
             "homeIdx": 5,
             "awayIdx": 9,
@@ -16467,7 +16449,7 @@
             "date": "2026-09-06"
           },
           {
-            "id": "f2",
+            "id": "f1",
             "gameId": "2851691",
             "homeIdx": 3,
             "awayIdx": 0,
@@ -16485,7 +16467,7 @@
             "date": "2026-09-06"
           },
           {
-            "id": "f3",
+            "id": "f2",
             "gameId": "2851756",
             "homeIdx": 1,
             "awayIdx": 7,
@@ -16501,6 +16483,24 @@
             "awayScore": null,
             "week": 1,
             "date": "2026-09-06"
+          },
+          {
+            "id": "f3",
+            "gameId": "2851717",
+            "homeIdx": 6,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 1,
+            "date": "2027-01-02"
           },
           {
             "id": "f4",
@@ -17188,9 +17188,9 @@
           },
           {
             "id": "f42",
-            "gameId": "2851786",
-            "homeIdx": 1,
-            "awayIdx": 9,
+            "gameId": "2851800",
+            "homeIdx": 7,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -17206,9 +17206,9 @@
           },
           {
             "id": "f43",
-            "gameId": "2851800",
-            "homeIdx": 7,
-            "awayIdx": 4,
+            "gameId": "2851786",
+            "homeIdx": 1,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -18493,7 +18493,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:56.158Z",
+        "updatedAt": "2026-09-02T08:38:18.142Z",
         "live": true,
         "teams": [
           {
@@ -21087,7 +21087,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:58.790Z",
+        "updatedAt": "2026-09-02T08:38:20.291Z",
         "live": true,
         "teams": [
           {
@@ -23389,7 +23389,7 @@
         "name": "U12 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:51:01.025Z",
+        "updatedAt": "2026-09-02T08:38:22.813Z",
         "live": true,
         "teams": [
           {
@@ -26685,7 +26685,7 @@
         "name": "U10 Liège",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:51:01.995Z",
+        "updatedAt": "2026-09-02T08:38:23.392Z",
         "live": true,
         "teams": [
           {
@@ -29662,7 +29662,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:57.875Z",
+        "updatedAt": "2026-09-02T08:38:19.569Z",
         "live": true,
         "teams": [
           {
@@ -29960,7 +29960,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:50:59.574Z",
+        "updatedAt": "2026-09-02T08:38:21.840Z",
         "live": true,
         "teams": [
           {
@@ -30616,7 +30616,7 @@
         "name": "U12 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-02T03:51:00.469Z",
+        "updatedAt": "2026-09-02T08:38:22.183Z",
         "live": true,
         "teams": [
           {
@@ -31274,7 +31274,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:03.054Z",
+        "updatedAt": "2026-09-02T08:38:24.122Z",
         "live": true,
         "teams": [
           {
@@ -33850,7 +33850,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:04.162Z",
+        "updatedAt": "2026-09-02T08:38:24.757Z",
         "live": true,
         "teams": [
           {
@@ -36031,7 +36031,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:04.693Z",
+        "updatedAt": "2026-09-02T08:38:27.938Z",
         "live": true,
         "teams": [
           {
@@ -37852,7 +37852,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:05.692Z",
+        "updatedAt": "2026-09-02T08:38:28.664Z",
         "live": true,
         "teams": [
           {
@@ -39656,7 +39656,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:06.535Z",
+        "updatedAt": "2026-09-02T08:38:29.480Z",
         "live": true,
         "teams": [
           {
@@ -40295,7 +40295,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:07.445Z",
+        "updatedAt": "2026-09-02T08:38:30.231Z",
         "live": true,
         "teams": [
           {
@@ -42548,7 +42548,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:08.339Z",
+        "updatedAt": "2026-09-02T08:38:30.850Z",
         "live": true,
         "teams": [
           {
@@ -44549,7 +44549,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:10.236Z",
+        "updatedAt": "2026-09-02T08:38:31.492Z",
         "live": true,
         "teams": [
           {
@@ -44793,7 +44793,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:12.869Z",
+        "updatedAt": "2026-09-02T08:38:31.870Z",
         "live": true,
         "teams": [
           {
@@ -46005,7 +46005,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-02T03:51:13.723Z",
+        "updatedAt": "2026-09-02T08:38:32.613Z",
         "live": true,
         "teams": [
           {
@@ -47748,7 +47748,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:16.468Z",
+        "updatedAt": "2026-09-02T08:38:34.317Z",
         "live": true,
         "teams": [
           {
@@ -48771,7 +48771,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:14.785Z",
+        "updatedAt": "2026-09-02T08:38:33.339Z",
         "live": true,
         "teams": [
           {
@@ -51154,7 +51154,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:18.278Z",
+        "updatedAt": "2026-09-02T08:38:36.129Z",
         "live": true,
         "teams": [
           {
@@ -52656,7 +52656,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:17.381Z",
+        "updatedAt": "2026-09-02T08:38:35.175Z",
         "live": true,
         "teams": [
           {
@@ -56770,7 +56770,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:19.760Z",
+        "updatedAt": "2026-09-02T08:38:37.347Z",
         "live": true,
         "teams": [
           {
@@ -57030,7 +57030,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:18.769Z",
+        "updatedAt": "2026-09-02T08:38:36.451Z",
         "live": true,
         "teams": [
           {
@@ -57574,7 +57574,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:17.881Z",
+        "updatedAt": "2026-09-02T08:38:35.797Z",
         "live": true,
         "teams": [
           {
@@ -58976,7 +58976,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:20.631Z",
+        "updatedAt": "2026-09-02T08:38:37.638Z",
         "live": true,
         "teams": [
           {
@@ -59219,7 +59219,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:23.338Z",
+        "updatedAt": "2026-09-02T08:38:39.321Z",
         "live": true,
         "teams": [
           {
@@ -60558,7 +60558,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:21.589Z",
+        "updatedAt": "2026-09-02T08:38:38.235Z",
         "live": true,
         "teams": [
           {
@@ -65314,7 +65314,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:24.533Z",
+        "updatedAt": "2026-09-02T08:38:40.811Z",
         "live": true,
         "teams": [
           {
@@ -65646,7 +65646,7 @@
         "name": "VHV Q-Tornooien M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:24.151Z",
+        "updatedAt": "2026-09-02T08:38:40.470Z",
         "live": true,
         "teams": [
           {
@@ -66512,7 +66512,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:22.475Z",
+        "updatedAt": "2026-09-02T08:38:38.672Z",
         "live": true,
         "teams": [
           {
@@ -68844,7 +68844,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:24.968Z",
+        "updatedAt": "2026-09-02T08:38:41.460Z",
         "live": true,
         "teams": [
           {
@@ -69176,7 +69176,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:26.557Z",
+        "updatedAt": "2026-09-02T08:38:43.417Z",
         "live": true,
         "teams": [
           {
@@ -69489,7 +69489,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:29.159Z",
+        "updatedAt": "2026-09-02T08:38:45.237Z",
         "live": true,
         "teams": [
           {
@@ -69732,7 +69732,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-02T03:51:15.635Z",
+        "updatedAt": "2026-09-02T08:38:33.701Z",
         "live": true,
         "teams": [
           {
