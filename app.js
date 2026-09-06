@@ -2688,7 +2688,7 @@ function BelgianScreen({ onBack }) {
 
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
-  const { teams: initTeams = [], fixtures = [] } = league;
+  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null } = league;
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
@@ -2759,8 +2759,9 @@ function BelgianLeagueView({ league, onBack }) {
             highlightBottom={hlBot}
             confirmedTop={confirmedTop}
             confirmedBottom={confirmedBottom}
-            leagueId={`vhv:${league.serieId}`}
+            leagueId={leagueScorers ? null : null}
             aliases={leagueState.scorerAliases || {}}
+            archiveScorers={leagueScorers}
             phaseTeams={null}
             phase="regular"
             toughFullWidth={true}
@@ -2812,8 +2813,9 @@ function BelgianLeagueView({ league, onBack }) {
           teams={teams}
           fixtures={fixtures}
           onClose={() => setDetail(null)}
-          leagueId={`vhv:${league.serieId}`}
+          leagueId={null}
           aliases={leagueState.scorerAliases || {}}
+          archiveScorers={leagueScorers}
           phase="regular"
         />
       )}
