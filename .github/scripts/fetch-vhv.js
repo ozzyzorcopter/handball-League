@@ -316,6 +316,42 @@ function parseStats(html) {
   return scorers;
 }
 
+// ── GAMESHEET PARSER ─────────────────────────────────────────────────────────
+// Fetches /games/GAMEID/gamesheet and extracts half-time + full-time scores
+// Returns { homeScore, awayScore } or null if not available
+async function fetchGameScore(gameId) {
+  try {
+    const html = await fetchHtml(`https://www.clubee.com/handballbelgium/games/${gameId}/gamesheet`);
+    // Look for score table: periods rows show "X - Y" or numeric cells
+    // Pattern: two numbers in the "total" row (last row of score table)
+    const chunks = html.split(/<tr[\s>]/i);
+    let homeScore = null, awayScore = null;
+    for (const chunk of chunks) {
+      const cells = [];
+      const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+      let td;
+      while ((td = tdRe.exec(chunk)) !== null) {
+        const text = td[1].replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+        cells.push(text);
+      }
+      // Score row: 3 cells — "Team/Period label", home value, away value
+      // The final row has the totals
+      if (cells.length === 3 && /^\d+$/.test(cells[1]) && /^\d+$/.test(cells[2])) {
+        homeScore = parseInt(cells[1]);
+        awayScore = parseInt(cells[2]);
+        // Keep updating — last valid row = final score
+      }
+      // Also check for "X - Y" pattern in a single cell
+      if (cells.length >= 1) {
+        const m = cells[0].match(/^(\d+)\s*[-–]\s*(\d+)$/);
+        if (m) { homeScore = parseInt(m[1]); awayScore = parseInt(m[2]); }
+      }
+    }
+    if (homeScore !== null && awayScore !== null) return { homeScore, awayScore };
+    return null;
+  } catch { return null; }
+}
+
 // ── GAMES PARSER ──────────────────────────────────────────────────────────────
 // Game link format (inside one <a> tag):
 //   [**Home (Senior M)**HH:MMDD.MM.YYYY**Away (Senior M)**](url/games/ID)
@@ -426,6 +462,26 @@ async function main() {
       const ranking          = parseStandings(standingsHtml);
       const { fixtures }     = parseGames(gamesHtml, ranking);
       const scorers          = parseStats(statsHtml);
+
+      // Fetch scores for past games (date <= today) in batches of 10
+      const today    = new Date().toISOString().slice(0,10);
+      const needScore = fixtures.filter(f => !f.played && f.date && f.date <= today);
+      if (needScore.length > 0) {
+        log(`  Fetching scores for ${needScore.length} past game(s)…`);
+        for (let i = 0; i < needScore.length; i += 10) {
+          const batch = needScore.slice(i, i + 10);
+          await Promise.all(batch.map(async f => {
+            const score = await fetchGameScore(f.gameId);
+            if (score) {
+              f.played    = true;
+              f.homeScore = score.homeScore;
+              f.awayScore = score.awayScore;
+            }
+          }));
+        }
+        const nowPlayed = fixtures.filter(f => f.played).length;
+        log(`  Scores fetched: ${nowPlayed} played`);
+      }
 
       // Build teams from rankings (source of truth for names/order)
       const teams = ranking.map(r => ({
