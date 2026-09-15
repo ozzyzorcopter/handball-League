@@ -385,16 +385,37 @@ async function fetchGameScore(gameId) {
   } catch { return null; }
 }
 
-// ── GAMES PARSER ──────────────────────────────────────────────────────────────
-// Game link format (inside one <a> tag):
-//   [**Home (Senior M)**HH:MMDD.MM.YYYY**Away (Senior M)**](url/games/ID)
-// With score (if entered):
-//   [**Home (Senior M)**HS-ASDD.MM.YYYY**Away (Senior M)**](url)
-// Or in raw HTML: <a href="...games/ID"><strong>Home</strong>time<strong>Away</strong></a>
+// Strip common prefixes to get core club name for fuzzy matching
+function coreClubName(name) {
+  return name
+    .replace(/\(Senior [A-Z]\)/gi, "")
+    .replace(/\b(handbalclub|handbal|hbc|hv|hc|khc|hvh|hbv|elita|besox|db gent|db|olse|uilenspiegel|hestia)\b/gi, "")
+    .replace(/\b(d[123]\s+[mf]\s+vhv\s*\d*|liga\s+\d+|regio\s+\w+|vhv\s*\d*)\b/gi, "")
+    .replace(/\s+/g, " ").trim().toLowerCase();
+}
+
 function parseGames(html, ranking) {
-  // Build team lookup from standings (source of truth for names/indices)
+  // Build lookup: standings name → index, with both exact and fuzzy keys
   const teamNames = ranking.map(r => r.name);
-  const nameIdx   = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
+  const exactIdx  = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
+  // Fuzzy index: core name → index
+  const fuzzyIdx  = new Map(teamNames.map((n, i) => [coreClubName(n), i]));
+
+  function resolveTeam(raw) {
+    const lower = raw.toLowerCase();
+    // 1. Exact match
+    if (exactIdx.has(lower)) return exactIdx.get(lower);
+    // 2. Fuzzy: strip prefixes from raw game name, match against standings core names
+    const core = coreClubName(raw);
+    if (core && fuzzyIdx.has(core)) return fuzzyIdx.get(core);
+    // 3. Partial: game core is contained in any standings core, or vice versa
+    for (const [standingsCore, idx] of fuzzyIdx) {
+      if (core && standingsCore && (standingsCore.startsWith(core) || core.startsWith(standingsCore))) {
+        return idx;
+      }
+    }
+    return -1;
+  }
 
   const fixtures = [];
   let counter    = 0;
@@ -406,57 +427,57 @@ function parseGames(html, ranking) {
     const gdMatch = section.match(/Gameday\s+(\d+)/i);
     const round   = gdMatch ? parseInt(gdMatch[1]) : 0;
 
-    // Find all <a href=".../games/ID">...</a> blocks
     const linkRe  = /<a[^>]+href="[^"]*\/games\/(\d+)"[^>]*>([\s\S]*?)<\/a>/gi;
     let m;
     while ((m = linkRe.exec(section)) !== null) {
       const gameId  = m[1];
-      // Strip all HTML tags from link content
       const content = m[2].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 
-      // Extract date (DD.MM.YYYY)
-      const dateM   = content.match(/(\d{2})\.(\d{2})\.(\d{4})/);
-      const date    = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
-
-      // Extract score: two numbers separated by - or – between non-digit chars
-      // Only treat as score if both numbers <= 99 and NOT a time (HH:MM)
-      const scoreM  = content.match(/(?<!\d:)\b(\d{1,2})\s*[-–]\s*(\d{1,2})\b(?!:\d)/);
+      const dateM     = content.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+      const date      = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
+      const scoreM    = content.match(/(?<!\d:)\b(\d{1,2})\s*[-–]\s*(\d{1,2})\b(?!:\d)/);
       const homeScore = scoreM ? parseInt(scoreM[1]) : null;
       const awayScore = scoreM ? parseInt(scoreM[2]) : null;
       const played    = homeScore !== null && awayScore !== null;
 
-      // Remove date, time (HH:MM), score from content to get team name string
+      // Remove date, time, score, category to isolate "Home Away"
       let stripped = content
-        .replace(/\d{2}\.\d{2}\.\d{4}/, " ")     // date
-        .replace(/\b\d{1,2}:\d{2}\b/, " ")        // time HH:MM
-        .replace(/(?<!\d:)\b\d{1,2}\s*[-–]\s*\d{1,2}\b(?!:\d)/, " ")  // score
-        .replace(/\(Senior [A-Z]\)/gi, " ")        // category suffix
+        .replace(/\d{2}\.\d{2}\.\d{4}/, " ")
+        .replace(/\b\d{1,2}:\d{2}\b/, " ")
+        .replace(/(?<!\d:)\b\d{1,2}\s*[-–]\s*\d{1,2}\b(?!:\d)/, " ")
+        .replace(/\(Senior [A-Z]\)/gi, " ")
         .replace(/\s+/g, " ").trim();
 
-      // The string is now "HomeTeamName AwayTeamName" (two teams side by side)
-      // Find split point: try matching known team names greedily from left
+      if (PLACEHOLDER.test(stripped) || stripped.toLowerCase().includes("tba")) continue;
+
+      // Split into home/away: try each known team name as a prefix
       let homeIdx = -1, awayIdx = -1;
 
-      // Try each team name as a prefix match
-      for (const [nameLower, idx] of nameIdx) {
+      // Try standings names as prefix
+      for (const [nameLower, idx] of exactIdx) {
         if (stripped.toLowerCase().startsWith(nameLower)) {
           const rest = stripped.slice(nameLower.length).trim();
-          const awayI = nameIdx.get(rest.toLowerCase());
-          if (awayI !== undefined) {
-            homeIdx = idx; awayIdx = awayI; break;
-          }
-          // Partial match: rest starts with another team name
-          for (const [n2, i2] of nameIdx) {
-            if (rest.toLowerCase().startsWith(n2)) {
-              homeIdx = idx; awayIdx = i2; break;
-            }
-          }
-          if (homeIdx >= 0) break;
+          const ai = resolveTeam(rest);
+          if (ai >= 0 && ai !== idx) { homeIdx = idx; awayIdx = ai; break; }
         }
       }
 
-      // Skip TBA/placeholder games
-      if (PLACEHOLDER.test(stripped.split(" ")[0]) || stripped.toLowerCase().includes("tba")) continue;
+      // If exact didn't work, try splitting on double-space or at position where
+      // resolveTeam finds a match for the first part
+      if (homeIdx < 0) {
+        // Try splitting the stripped string at every word boundary
+        const words = stripped.split(" ");
+        for (let split = 1; split < words.length; split++) {
+          const homePart = words.slice(0, split).join(" ");
+          const awayPart = words.slice(split).join(" ");
+          const hi = resolveTeam(homePart);
+          const ai = resolveTeam(awayPart);
+          if (hi >= 0 && ai >= 0 && hi !== ai) {
+            homeIdx = hi; awayIdx = ai; break;
+          }
+        }
+      }
+
       if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) continue;
 
       fixtures.push({
