@@ -435,8 +435,9 @@ function parseGames(html, ranking) {
 
       const dateM     = content.match(/(\d{2})\.(\d{2})\.(\d{4})/);
       const date      = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
-      // Score format confirmed: "30 - 28" with spaces around dash
-      const scoreM    = content.match(/\b(\d{1,3})\s+-\s+(\d{1,3})\b/);
+      // Score format in raw HTML: "30 - 28" directly followed by date "12.09.2026" (no space)
+      // So score regex must use lookahead for date digits
+      const scoreM    = content.match(/(\d{1,3})\s+-\s+(\d{1,3})(?=\d{2}\.\d{2}\.\d{4})/);
       const homeScore = scoreM ? parseInt(scoreM[1]) : null;
       const awayScore = scoreM ? parseInt(scoreM[2]) : null;
       const played    = homeScore !== null && awayScore !== null;
@@ -446,7 +447,7 @@ function parseGames(html, ranking) {
         .replace(/\(Senior [A-Z]\)/gi, " ")
         .replace(/\d{2}\.\d{2}\.\d{4}/, " ")
         .replace(/\b\d{1,2}:\d{2}\b/, " ")
-        .replace(/\b\d{1,3}\s+-\s+\d{1,3}\b/, " ")
+        .replace(/(\d{1,3})\s+-\s+(\d{1,3})(?=\s|\d)/, " ")
         .replace(/\s+/g, " ").trim();
 
       if (PLACEHOLDER.test(stripped) || stripped.toLowerCase().startsWith("tba")) continue;
