@@ -2688,21 +2688,30 @@ function BelgianScreen({ onBack }) {
 
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
-  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null } = league;
+  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [] } = league;
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
   const [confirmedTop, setConfirmedTop]       = useState(null);
   const [confirmedBottom, setConfirmedBottom] = useState(null);
-  // Local league state for SettingsPanel (highlight zones, aliases) — not persisted
   const [leagueState, setLeagueState] = useState({
     type: "standard", promoTop: 2, demotBot: 2,
     scorerUrl: "", playoffScorerUrl: "", playdownScorerUrl: "",
     scorerAliases: {}, teams: initTeams,
   });
 
-  // Derive live points from played fixtures — same as SimStep
+  // Build points lookup from API ranking (source of truth)
+  // Falls back to computing from played fixtures if ranking is empty
   const teams = useMemo(() => {
+    if (ranking.length > 0) {
+      // Map ranking positions/points onto teams by name match
+      const rankMap = new Map(ranking.map(r => [r.name.toLowerCase(), r]));
+      return initTeams.map(t => {
+        const r = rankMap.get(t.name.toLowerCase());
+        return r ? { ...t, points: r.points || 0 } : t;
+      });
+    }
+    // Fallback: derive from played fixtures
     const earned = initTeams.map(() => 0);
     fixtures.filter(f => f.played && f.homeScore != null).forEach(f => {
       const hg = +f.homeScore, ag = +f.awayScore;
@@ -2712,7 +2721,7 @@ function BelgianLeagueView({ league, onBack }) {
       else { earned[f.homeIdx]++; earned[f.awayIdx]++; }
     });
     return initTeams.map((t, i) => ({ ...t, points: t.points + earned[i] }));
-  }, [initTeams, fixtures]);
+  }, [initTeams, fixtures, ranking]);
 
   const pending = fixtures.filter(f => !f.played);
   const played  = fixtures.filter(f => f.played);

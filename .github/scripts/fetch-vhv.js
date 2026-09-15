@@ -259,6 +259,7 @@ function parseStandings(html) {
         .replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
         .replace(/&#39;/g,"'").replace(/&#x27;/g,"'")
         .replace(/&lt;/g,"<").replace(/&gt;/g,">")
+        .replace(/&[a-z0-9#]+;/gi, " ")
         .replace(/\s+/g," ").trim();
       cells.push(text);
     }
@@ -294,7 +295,7 @@ async function parseStatsAllPages(page, leagueId) {
   let maxPage = 1;
 
   while (pageNum <= maxPage) {
-    const url = `${BASE}/stats-371072v4/leagues/${leagueId}?page=${pageNum}`;
+    const url = `${BASE}/stats-371072v4/leagues/${leagueId}/seasons/0?page=${pageNum}`;
     let html;
     try { html = await fetchFromPage(page, url); }
     catch { break; }
@@ -320,7 +321,7 @@ async function parseStatsAllPages(page, leagueId) {
       const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
       let td;
       while ((td = tdRe.exec(rowContent)) !== null) {
-        const text = td[1].replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ").replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/\s+/g," ").trim();
+        const text = td[1].replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ").replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/&[a-z0-9#]+;/gi," ").replace(/\s+/g," ").trim();
         cells.push(text);
       }
 
@@ -393,19 +394,20 @@ function parseGames(html, ranking) {
 
       const dateM     = content.match(/(\d{2})\.(\d{2})\.(\d{4})/);
       const date      = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
-      // Score format in raw HTML: "30 - 28" directly followed by date "12.09.2026" (no space)
-      // So score regex must use lookahead for date digits
-      const scoreM    = content.match(/(\d{1,3})\s+-\s+(\d{1,3})(?=\d{2}\.\d{2}\.\d{4})/);
+      // Score: "30 - 28" with spaces. Simple regex — time "20:00" won't match because
+      // it uses colon not space-dash-space.
+      const scoreM    = content.match(/\b(\d{1,3})\s+-\s+(\d{1,3})\b/);
       const homeScore = scoreM ? parseInt(scoreM[1]) : null;
       const awayScore = scoreM ? parseInt(scoreM[2]) : null;
       const played    = homeScore !== null && awayScore !== null;
 
       // Remove category, date, time, score — then split into "Home Away"
       let stripped = content
+        .replace(/&[a-z0-9#]+;/gi, " ")          // decode HTML entities to space
         .replace(/\(Senior [A-Z]\)/gi, " ")
         .replace(/\d{2}\.\d{2}\.\d{4}/, " ")
         .replace(/\b\d{1,2}:\d{2}\b/, " ")
-        .replace(/(\d{1,3})\s+-\s+(\d{1,3})(?=\s|\d)/, " ")
+        .replace(/\b\d{1,3}\s+-\s+\d{1,3}\b/, " ")
         .replace(/\s+/g, " ").trim();
 
       if (PLACEHOLDER.test(stripped) || stripped.toLowerCase().startsWith("tba")) continue;
