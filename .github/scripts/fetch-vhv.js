@@ -382,6 +382,10 @@ async function fetchGameScore(gameId) {
 }
 
 // Strip common prefixes to get core club name for fuzzy matching
+function cleanTeam(name) {
+  return name.replace(/\(Senior [A-Z]\)/gi, "").replace(/\s+/g, " ").trim();
+}
+
 function coreClubName(name) {
   return name
     .replace(/\(Senior [A-Z]\)/gi, "")
