@@ -235,18 +235,12 @@ function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
 const PLACEHOLDER = /^(TBA|heren liga \d+|dames liga \d+|ploeg \d+)$/i;
 
-// Fetch HTML from within a Playwright browser page context
-// This bypasses Cloudflare bot detection
+// Fetch HTML by navigating directly with Playwright — gets actual SSR HTML
 async function fetchFromPage(page, url) {
-  const result = await page.evaluate(async (url) => {
-    const r = await fetch(url, {
-      headers: { "Accept": "text/html,application/xhtml+xml" },
-      credentials: "include",
-    });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return r.text();
-  }, url);
-  return result;
+  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 });
+  if (!response || !response.ok()) throw new Error(`HTTP ${response?.status()} for ${url}`);
+  const html = await page.content();
+  return html;
 }
 
 // ── STANDINGS PARSER ──────────────────────────────────────────────────────────
@@ -343,42 +337,6 @@ async function parseStatsAllPages(page, leagueId) {
   }
 
   return scorers.sort((a, b) => b.goals - a.goals);
-}
-
-// ── GAMESHEET PARSER ─────────────────────────────────────────────────────────
-// Fetches /games/GAMEID/gamesheet and extracts half-time + full-time scores
-// Returns { homeScore, awayScore } or null if not available
-async function fetchGameScore(gameId) {
-  try {
-    const html = await fetchHtml(`https://www.clubee.com/handballbelgium/games/${gameId}/gamesheet`);
-    // Look for score table: periods rows show "X - Y" or numeric cells
-    // Pattern: two numbers in the "total" row (last row of score table)
-    const chunks = html.split(/<tr[\s>]/i);
-    let homeScore = null, awayScore = null;
-    for (const chunk of chunks) {
-      const cells = [];
-      const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-      let td;
-      while ((td = tdRe.exec(chunk)) !== null) {
-        const text = td[1].replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
-        cells.push(text);
-      }
-      // Score row: 3 cells — "Team/Period label", home value, away value
-      // The final row has the totals
-      if (cells.length === 3 && /^\d+$/.test(cells[1]) && /^\d+$/.test(cells[2])) {
-        homeScore = parseInt(cells[1]);
-        awayScore = parseInt(cells[2]);
-        // Keep updating — last valid row = final score
-      }
-      // Also check for "X - Y" pattern in a single cell
-      if (cells.length >= 1) {
-        const m = cells[0].match(/^(\d+)\s*[-–]\s*(\d+)$/);
-        if (m) { homeScore = parseInt(m[1]); awayScore = parseInt(m[2]); }
-      }
-    }
-    if (homeScore !== null && awayScore !== null) return { homeScore, awayScore };
-    return null;
-  } catch { return null; }
 }
 
 // Strip common prefixes to get core club name for fuzzy matching
@@ -523,26 +481,11 @@ async function main() {
     });
     const page = await context.newPage();
 
-    // Load one page to establish Cloudflare session
-    const firstCfg = leagues[0];
-    try {
-      log(`  Loading ${federation} page…`);
-      await page.goto(firstCfg.standingsUrl, { waitUntil: "domcontentloaded", timeout: 30000 });
-      await page.waitForTimeout(1500);
-    } catch (e) {
-      warn(`  Failed to load initial page: ${e.message}`);
-      for (const cfg of leagues) results.push({ id: cfg.id, name: cfg.name, ok: false, error: e.message });
-      await context.close();
-      continue;
-    }
-
     for (const cfg of leagues) {
       log(`\n  ${cfg.name} (${cfg.id})`);
       try {
-        const [standingsHtml, gamesHtml] = await Promise.all([
-          fetchFromPage(page, cfg.standingsUrl),
-          fetchFromPage(page, cfg.gamesUrl),
-        ]);
+        const standingsHtml = await fetchFromPage(page, cfg.standingsUrl);
+        const gamesHtml     = await fetchFromPage(page, cfg.gamesUrl);
 
         const ranking          = parseStandings(standingsHtml);
         const { fixtures }     = parseGames(gamesHtml, ranking);
