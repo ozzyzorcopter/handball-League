@@ -229,28 +229,24 @@ const LEAGUES = [
 
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
+const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
 const PLACEHOLDER = /^(TBA|heren liga \d+|dames liga \d+|ploeg \d+)$/i;
 
-async function fetchHtml(url) {
-  const r = await fetch(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36",
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "Accept-Language": "en-US,en;q=0.9",
-    },
-  });
-  if (!r.ok) throw new Error(`HTTP ${r.status} for ${url}`);
-  return r.text();
-}
-
-// Clean a team name: strip (Senior M/F/X), strip D3/D2 suffixes, normalise whitespace
-function cleanTeam(raw) {
-  return raw
-    .replace(/\(Senior [A-Z]\)/gi, "")
-    .replace(/\s+/g, " ").trim();
+// Fetch HTML from within a Playwright browser page context
+// This bypasses Cloudflare bot detection
+async function fetchFromPage(page, url) {
+  const result = await page.evaluate(async (url) => {
+    const r = await fetch(url, {
+      headers: { "Accept": "text/html,application/xhtml+xml" },
+      credentials: "include",
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.text();
+  }, url);
+  return result;
 }
 
 // ── STANDINGS PARSER ──────────────────────────────────────────────────────────
@@ -297,22 +293,22 @@ function parseStandings(html) {
 // Club comes from team logo alt text, not a text cell
 // Paginated: ?page=N on the base URL (without /seasons/)
 // Returns [{ player, club, goals, matchesPlayed }]
-async function parseStatsAllPages(leagueId) {
+async function parseStatsAllPages(page, leagueId) {
   const BASE = "https://www.clubee.com/handballbelgium";
   const scorers = [];
-  let page = 1;
+  let pageNum = 1;
   let maxPage = 1;
 
-  while (page <= maxPage) {
-    const url = `${BASE}/stats-371072v4/leagues/${leagueId}?page=${page}`;
+  while (pageNum <= maxPage) {
+    const url = `${BASE}/stats-371072v4/leagues/${leagueId}?page=${pageNum}`;
     let html;
-    try { html = await fetchHtml(url); }
+    try { html = await fetchFromPage(page, url); }
     catch { break; }
 
     if (html.includes("No information added yet")) break;
 
     // Detect max page from pagination links
-    if (page === 1) {
+    if (pageNum === 1) {
       const pageNums = [...html.matchAll(/page=(\d+)/g)].map(m => parseInt(m[1]));
       if (pageNums.length > 0) maxPage = Math.max(...pageNums);
     }
@@ -343,7 +339,7 @@ async function parseStatsAllPages(leagueId) {
         }
       }
     }
-    page++;
+    pageNum++;
   }
 
   return scorers.sort((a, b) => b.goals - a.goals);
@@ -505,62 +501,84 @@ async function main() {
   const fresh = { updatedAt: null, federations: {} };
   const results = [];
 
+  const browser = await chromium.launch({ headless: true });
+
+  // Group by federation base URL — one page load per federation
+  const groups = new Map();
   for (const cfg of LEAGUES) {
-    log(`\n${cfg.federation} · ${cfg.name} (${cfg.id})`);
-    try {
-      log(`  Fetching standings + games…`);
-      const [standingsHtml, gamesHtml] = await Promise.all([
-        fetchHtml(cfg.standingsUrl),
-        fetchHtml(cfg.gamesUrl),
-      ]);
-
-      const ranking          = parseStandings(standingsHtml);
-      const { fixtures }     = parseGames(gamesHtml, ranking);
-
-      // Fetch stats (all pages)
-      log(`  Fetching stats…`);
-      const scorers = await parseStatsAllPages(cfg.id);
-
-
-      // Build teams from rankings (source of truth for names/order)
-      const teams = ranking.map(r => ({
-        id:        `t_${r.name.replace(/\W+/g,"_").toLowerCase()}`,
-        name:      r.name,
-        points:    0,
-        homeBonus: "",
-      }));
-
-      const played  = fixtures.filter(f => f.played).length;
-      const pending = fixtures.filter(f => !f.played).length;
-
-      log(`  Teams: ${teams.length} | Fixtures: ${fixtures.length} (${played} played, ${pending} pending) | Scorers: ${scorers.length}`);
-      if (teams.length > 0) log(`  ${teams.slice(0,4).map(t=>t.name).join(", ")}…`);
-
-      if (teams.length === 0 && fixtures.length === 0) {
-        throw new Error("No data parsed — page may be empty or structure changed");
-      }
-
-      if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
-      fresh.federations[cfg.federation][cfg.id] = {
-        serieId:    cfg.id,
-        name:       cfg.name,
-        federation: cfg.federation,
-        division:   cfg.division,
-        updatedAt:  new Date().toISOString(),
-        live:       pending > 0,
-        teams,
-        fixtures,
-        ranking,
-        scorers,
-      };
-
-      results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
-
-    } catch (err) {
-      console.error(`  ✗ FAILED: ${err.message}`);
-      results.push({ id: cfg.id, name: cfg.name, ok: false, error: err.message });
-    }
+    const key = cfg.federation;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(cfg);
   }
+
+  for (const [federation, leagues] of groups) {
+    log(`\n── ${federation} (${leagues.length} leagues) ──`);
+    const context = await browser.newContext({
+      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+      locale: "nl-BE",
+    });
+    const page = await context.newPage();
+
+    // Load one page to establish Cloudflare session
+    const firstCfg = leagues[0];
+    try {
+      log(`  Loading ${federation} page…`);
+      await page.goto(firstCfg.standingsUrl, { waitUntil: "domcontentloaded", timeout: 30000 });
+      await page.waitForTimeout(1500);
+    } catch (e) {
+      warn(`  Failed to load initial page: ${e.message}`);
+      for (const cfg of leagues) results.push({ id: cfg.id, name: cfg.name, ok: false, error: e.message });
+      await context.close();
+      continue;
+    }
+
+    for (const cfg of leagues) {
+      log(`\n  ${cfg.name} (${cfg.id})`);
+      try {
+        const [standingsHtml, gamesHtml] = await Promise.all([
+          fetchFromPage(page, cfg.standingsUrl),
+          fetchFromPage(page, cfg.gamesUrl),
+        ]);
+
+        const ranking          = parseStandings(standingsHtml);
+        const { fixtures }     = parseGames(gamesHtml, ranking);
+
+        // Fetch stats (all pages) — soft fail
+        let scorers = [];
+        try { scorers = await parseStatsAllPages(page, cfg.id); } catch {}
+
+        const teams = ranking.map(r => ({
+          id: `t_${r.name.replace(/\W+/g,"_").toLowerCase()}`,
+          name: r.name, points: 0, homeBonus: "",
+        }));
+
+        const played  = fixtures.filter(f => f.played).length;
+        const pending = fixtures.filter(f => !f.played).length;
+        log(`    Teams: ${teams.length} | Fixtures: ${fixtures.length} (${played} played, ${pending} pending) | Scorers: ${scorers.length}`);
+        if (teams.length > 0) log(`    ${teams.slice(0,4).map(t=>t.name).join(", ")}…`);
+
+        if (teams.length === 0 && fixtures.length === 0) {
+          throw new Error("No data parsed — page may be empty or structure changed");
+        }
+
+        if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
+        fresh.federations[cfg.federation][cfg.id] = {
+          serieId: cfg.id, name: cfg.name, federation: cfg.federation,
+          division: cfg.division, updatedAt: new Date().toISOString(),
+          live: pending > 0, teams, fixtures, ranking, scorers,
+        };
+
+        results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
+
+      } catch (err) {
+        console.error(`    ✗ FAILED: ${err.message}`);
+        results.push({ id: cfg.id, name: cfg.name, ok: false, error: err.message });
+      }
+    }
+    await context.close();
+  }
+
+  await browser.close();
 
   fresh.updatedAt = new Date().toISOString();
   fs.writeFileSync(vhvDataPath, JSON.stringify(fresh, null, 2));

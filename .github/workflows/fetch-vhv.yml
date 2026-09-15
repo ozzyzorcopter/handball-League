@@ -2,10 +2,8 @@ name: Fetch VHV Data
 
 on:
   schedule:
-    # Half-hourly on Saturday (6) and Sunday (0), 12:00-23:30 UTC
-    - cron: "0,30 12-23 * * 6,0"
-    # Also once daily on weekdays to pick up any results entered after the weekend
-    - cron: "0 7 * * 1-5"
+    - cron: "0,30 12-23 * * 6,0"   # half-hourly Sat+Sun 12:00-23:30 UTC
+    - cron: "0 7 * * 1-5"           # once daily weekdays 07:00 UTC
   workflow_dispatch:
 
 env:
@@ -20,6 +18,11 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Install Playwright + Chromium
+        run: |
+          npm install playwright-core
+          npx playwright install chromium --with-deps
 
       - name: Fetch VHV data
         run: node .github/scripts/fetch-vhv.js
