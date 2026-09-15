@@ -293,27 +293,60 @@ function parseStandings(html) {
 }
 
 // ── STATS PARSER (top scorers) ─────────────────────────────────────────────────
-function parseStats(html) {
-  if (!html || html.includes("No information added yet")) return [];
+// Stats page columns: # | Player | MP | Goals | YC | RC | ... (9 cols total)
+// Club comes from team logo alt text, not a text cell
+// Paginated: ?page=N on the base URL (without /seasons/)
+// Returns [{ player, club, goals, matchesPlayed }]
+async function parseStatsAllPages(leagueId) {
+  const BASE = "https://www.clubee.com/handballbelgium";
   const scorers = [];
-  const chunks  = html.split(/<tr[\s>]/i);
-  for (const chunk of chunks) {
-    const rowContent = chunk.split(/<\/tr>/i)[0];
-    const cells = [];
-    const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-    let td;
-    while ((td = tdRe.exec(rowContent)) !== null) {
-      const text = td[1].replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ").replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/\s+/g," ").trim();
-      cells.push(text);
+  let page = 1;
+  let maxPage = 1;
+
+  while (page <= maxPage) {
+    const url = `${BASE}/stats-371072v4/leagues/${leagueId}?page=${page}`;
+    let html;
+    try { html = await fetchHtml(url); }
+    catch { break; }
+
+    if (html.includes("No information added yet")) break;
+
+    // Detect max page from pagination links
+    if (page === 1) {
+      const pageNums = [...html.matchAll(/page=(\d+)/g)].map(m => parseInt(m[1]));
+      if (pageNums.length > 0) maxPage = Math.max(...pageNums);
     }
-    if (cells.length >= 4 && /^\d+\.?$/.test(cells[0])) {
-      const goals = parseInt(cells[cells.length - 1]);
-      if (!isNaN(goals) && cells[1] && cells[2]) {
-        scorers.push({ player: cells[1], club: cleanTeam(cells[2]), goals });
+
+    // Parse rows
+    const chunks = html.split(/<tr[\s>]/i);
+    for (const chunk of chunks) {
+      const rowContent = chunk.split(/<\/tr>/i)[0];
+
+      // Extract club name from team logo alt text
+      const altM = rowContent.match(/alt="([^"]+)"/i);
+      const club = altM ? altM[1].trim() : "";
+
+      const cells = [];
+      const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+      let td;
+      while ((td = tdRe.exec(rowContent)) !== null) {
+        const text = td[1].replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ").replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/\s+/g," ").trim();
+        cells.push(text);
+      }
+
+      // Row: # (no dot) | Player name | MP | Goals | ...
+      if (cells.length >= 4 && /^\d+$/.test(cells[0]) && cells[1] && /^\d+$/.test(cells[3])) {
+        const goals = parseInt(cells[3]);
+        const mp    = parseInt(cells[2]) || 0;
+        if (goals > 0) {
+          scorers.push({ player: cells[1], club, goals, matchesPlayed: mp });
+        }
       }
     }
+    page++;
   }
-  return scorers;
+
+  return scorers.sort((a, b) => b.goals - a.goals);
 }
 
 // ── GAMESHEET PARSER ─────────────────────────────────────────────────────────
@@ -452,16 +485,18 @@ async function main() {
   for (const cfg of LEAGUES) {
     log(`\n${cfg.federation} · ${cfg.name} (${cfg.id})`);
     try {
-      log(`  Fetching standings, games, stats…`);
-      const [standingsHtml, gamesHtml, statsHtml] = await Promise.all([
+      log(`  Fetching standings + games…`);
+      const [standingsHtml, gamesHtml] = await Promise.all([
         fetchHtml(cfg.standingsUrl),
         fetchHtml(cfg.gamesUrl),
-        fetchHtml(cfg.statsUrl).catch(() => ""),
       ]);
 
       const ranking          = parseStandings(standingsHtml);
       const { fixtures }     = parseGames(gamesHtml, ranking);
-      const scorers          = parseStats(statsHtml);
+
+      // Fetch stats (all pages)
+      log(`  Fetching stats…`);
+      const scorers = await parseStatsAllPages(cfg.id);
 
       // Fetch scores for past games (date <= today) in batches of 10
       const today    = new Date().toISOString().slice(0,10);

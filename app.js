@@ -1084,7 +1084,7 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases
 
         </div>
 
-        {(leagueId || archiveScorers !== undefined) && <TeamScorers leagueId={leagueId} teamName={team?.name} aliases={aliases} archiveScorers={archiveScorers} phase={phase} />}
+        {(leagueId || (Array.isArray(archiveScorers) && archiveScorers.length > 0)) && <TeamScorers leagueId={leagueId} teamName={team?.name} aliases={aliases} archiveScorers={archiveScorers} phase={phase} />}
 
       </div>
     </>
@@ -1314,7 +1314,7 @@ function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBott
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
-      {(leagueId || archiveScorers !== undefined) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
+      {(leagueId || (Array.isArray(archiveScorers) && archiveScorers.length > 0)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
           {/* Row 1: Attackers + Defenders */}
