@@ -435,20 +435,21 @@ function parseGames(html, ranking) {
 
       const dateM     = content.match(/(\d{2})\.(\d{2})\.(\d{4})/);
       const date      = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
-      const scoreM    = content.match(/(?<!\d:)\b(\d{1,2})\s*[-–]\s*(\d{1,2})\b(?!:\d)/);
+      // Score format confirmed: "30 - 28" with spaces around dash
+      const scoreM    = content.match(/\b(\d{1,3})\s+-\s+(\d{1,3})\b/);
       const homeScore = scoreM ? parseInt(scoreM[1]) : null;
       const awayScore = scoreM ? parseInt(scoreM[2]) : null;
       const played    = homeScore !== null && awayScore !== null;
 
-      // Remove date, time, score, category to isolate "Home Away"
+      // Remove category, date, time, score — then split into "Home Away"
       let stripped = content
+        .replace(/\(Senior [A-Z]\)/gi, " ")
         .replace(/\d{2}\.\d{2}\.\d{4}/, " ")
         .replace(/\b\d{1,2}:\d{2}\b/, " ")
-        .replace(/(?<!\d:)\b\d{1,2}\s*[-–]\s*\d{1,2}\b(?!:\d)/, " ")
-        .replace(/\(Senior [A-Z]\)/gi, " ")
+        .replace(/\b\d{1,3}\s+-\s+\d{1,3}\b/, " ")
         .replace(/\s+/g, " ").trim();
 
-      if (PLACEHOLDER.test(stripped) || stripped.toLowerCase().includes("tba")) continue;
+      if (PLACEHOLDER.test(stripped) || stripped.toLowerCase().startsWith("tba")) continue;
 
       // Split into home/away: try each known team name as a prefix
       let homeIdx = -1, awayIdx = -1;
@@ -519,25 +520,6 @@ async function main() {
       log(`  Fetching stats…`);
       const scorers = await parseStatsAllPages(cfg.id);
 
-      // Fetch scores for past games (date <= today) in batches of 10
-      const today    = new Date().toISOString().slice(0,10);
-      const needScore = fixtures.filter(f => !f.played && f.date && f.date <= today);
-      if (needScore.length > 0) {
-        log(`  Fetching scores for ${needScore.length} past game(s)…`);
-        for (let i = 0; i < needScore.length; i += 10) {
-          const batch = needScore.slice(i, i + 10);
-          await Promise.all(batch.map(async f => {
-            const score = await fetchGameScore(f.gameId);
-            if (score) {
-              f.played    = true;
-              f.homeScore = score.homeScore;
-              f.awayScore = score.awayScore;
-            }
-          }));
-        }
-        const nowPlayed = fixtures.filter(f => f.played).length;
-        log(`  Scores fetched: ${nowPlayed} played`);
-      }
 
       // Build teams from rankings (source of truth for names/order)
       const teams = ranking.map(r => ({
