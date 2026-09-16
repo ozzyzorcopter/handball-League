@@ -280,7 +280,13 @@ function parseStandings(html) {
       });
     }
   }
-  return rows.sort((a,b) => a.pos - b.pos);
+  // Deduplicate by name — page renders table twice (home+away groups)
+  const seen = new Set();
+  const unique = rows.filter(r => {
+    if (seen.has(r.name)) return false;
+    seen.add(r.name); return true;
+  });
+  return unique.sort((a,b) => a.pos - b.pos);
 }
 
 // ── STATS PARSER (top scorers) ─────────────────────────────────────────────────
@@ -440,7 +446,14 @@ function parseGames(html, ranking) {
         }
       }
 
-      if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) continue;
+      if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) {
+        // Log first unmatched game for debugging
+        if (fixtures.length === 0 && counter === 0) {
+          warn(`    First unmatched game: "${stripped.slice(0,80)}"`);
+          warn(`    Known teams: ${teamNames.slice(0,3).join(", ")}…`);
+        }
+        continue;
+      }
 
       fixtures.push({
         id: `f${counter++}`, gameId, homeIdx, awayIdx,
@@ -452,6 +465,13 @@ function parseGames(html, ranking) {
         week: round, date,
       });
     }
+  }
+
+  // Log h3 count and game link count for debugging
+  const gameLinks = (html.match(/\/games\/\d+/g) || []).length;
+  const h3count   = (html.match(/<h3[^>]*>/gi) || []).length;
+  if (fixtures.length === 0 && gameLinks > 0) {
+    warn(`    0 fixtures from ${gameLinks} game links, ${h3count} h3 tags — name mismatch?`);
   }
 
   return { fixtures };
