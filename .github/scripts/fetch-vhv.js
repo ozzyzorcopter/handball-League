@@ -472,6 +472,16 @@ function parseGames(html, ranking) {
   const h3count   = (html.match(/<h3[^>]*>/gi) || []).length;
   if (fixtures.length === 0 && gameLinks > 0) {
     warn(`    0 fixtures from ${gameLinks} game links, ${h3count} h3 tags — name mismatch?`);
+    // Log first 3 raw game link contents to diagnose naming
+    let debugCount = 0;
+    const debugRe = /<a[^>]+href="[^"]*\/games\/\d+"[^>]*>([\s\S]*?)<\/a>/gi;
+    let dm;
+    while ((dm = debugRe.exec(html)) !== null && debugCount < 3) {
+      const raw = dm[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+      warn(`    Game ${debugCount+1} raw: "${raw.slice(0,120)}"`);
+      debugCount++;
+    }
+    warn(`    Known team names: ${teamNames.slice(0,4).join(" | ")}`);
   }
 
   return { fixtures };
@@ -535,6 +545,25 @@ async function main() {
           serieId: cfg.id, name: cfg.name, federation: cfg.federation,
           division: cfg.division, updatedAt: new Date().toISOString(),
           live: pending > 0, teams, fixtures, ranking, scorers,
+          _debug: fixtures.length === 0 ? (() => {
+            const linkRe = /<a[^>]+href="[^"]*\/games\/\d+"[^>]*>([\s\S]*?)<\/a>/gi;
+            const samples = [];
+            let dm;
+            while ((dm = linkRe.exec(gamesHtml)) !== null && samples.length < 3) {
+              samples.push(dm[1].replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().slice(0,120));
+            }
+            return { gameLinks: (gamesHtml.match(/\/games\/\d+/g)||[]).length, samples };
+          })() : (() => {
+            // Check why scores aren't detected - sample first played-date game
+            const linkRe = /<a[^>]+href="[^"]*\/games\/\d+"[^>]*>([\s\S]*?)<\/a>/gi;
+            let dm;
+            const scoreSamples = [];
+            while ((dm = linkRe.exec(gamesHtml)) !== null && scoreSamples.length < 3) {
+              const raw = dm[1].replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+              scoreSamples.push(raw.slice(0, 150));
+            }
+            return { scoreSamples };
+          })(),
         };
 
         results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
