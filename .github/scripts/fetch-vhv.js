@@ -446,77 +446,98 @@ async function main() {
   const fresh = { updatedAt: null, federations: {} };
   const results = [];
 
+  const CONCURRENCY = 4; // parallel browser pages
   const browser = await chromium.launch({ headless: true });
 
-  // Group by federation — one browser context per federation (shares cookies/session)
-  const groups = new Map();
-  for (const cfg of LEAGUES) {
-    const key = cfg.federation;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(cfg);
+  // Shared context — one context for all leagues (shared cookies after warm-up)
+  const context = await browser.newContext({
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+    locale: "nl-BE",
+  });
+
+  // Warm-up: one page visits the main site to seed cookies for the whole context
+  log(`Warming up session…`);
+  const warmPage = await context.newPage();
+  try {
+    await warmPage.goto("https://www.clubee.com/handballbelgium/", { waitUntil: "domcontentloaded", timeout: 30000 });
+    await warmPage.waitForTimeout(2000);
+  } catch (e) { warn(`Warm-up failed: ${e.message}`); }
+  await warmPage.close();
+
+  // Process one league — each call gets its own page from the shared context
+  async function processLeague(cfg) {
+    const page = await context.newPage();
+    try {
+      log(`\n  ${cfg.name} (${cfg.id})`);
+
+      log(`    Fetching standings…`);
+      const standingsHtml = await fetchHtml(page, cfg.standingsUrl);
+      log(`    Fetching games…`);
+      const gamesHtml     = await fetchHtml(page, cfg.gamesUrl);
+
+      const ranking      = parseStandingsHtml(standingsHtml);
+      const { fixtures } = parseGamesHtml(gamesHtml, ranking);
+
+      let scorers = [];
+      log(`    Fetching stats…`);
+      try { scorers = await parseStatsAllPages(page, cfg.id); } catch {}
+
+      const teams = ranking.map(r => ({
+        id: `t_${r.name.replace(/\W+/g,"_").toLowerCase()}`,
+        name: r.name, points: 0, homeBonus: "",
+      }));
+
+      const played  = fixtures.filter(f => f.played).length;
+      const pending = fixtures.filter(f => !f.played).length;
+      log(`    ✓ ${cfg.name}: ${teams.length}t ${fixtures.length}fx (${played}✓ ${pending}⏳) ${scorers.length}sc`);
+      if (teams.length > 0) log(`      ${teams.slice(0,4).map(t=>t.name).join(", ")}…`);
+
+      if (teams.length === 0 && fixtures.length === 0) {
+        throw new Error("No data parsed — league may not have started yet");
+      }
+
+      return { cfg, ok: true, ranking, fixtures, teams, scorers, played, pending };
+    } catch (err) {
+      console.error(`    ✗ ${cfg.name}: ${err.message}`);
+      return { cfg, ok: false, error: err.message };
+    } finally {
+      await page.close();
+    }
   }
 
-  for (const [federation, leagues] of groups) {
-    log(`\n── ${federation} (${leagues.length} leagues) ──`);
-    const context = await browser.newContext({
-      userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
-      locale: "nl-BE",
-    });
-    const page = await context.newPage();
-
-    // Warm-up: visit the main Clubee site to get session cookies before hitting API endpoints
-    log(`  Warming up session for ${federation}…`);
-    try {
-      await page.goto("https://www.clubee.com/handballbelgium/", { waitUntil: "domcontentloaded", timeout: 30000 });
-      await page.waitForTimeout(1500);
-    } catch (e) { warn(`Warm-up failed: ${e.message}`); }
-
-    for (const cfg of leagues) {
-      log(`\n  ${cfg.name} (${cfg.id})`);
-      try {
-        log(`    Fetching standings…`);
-        const standingsHtml    = await fetchHtml(page, cfg.standingsUrl);
-        log(`    Fetching games…`);
-        const gamesHtml        = await fetchHtml(page, cfg.gamesUrl);
-
-        const ranking          = parseStandingsHtml(standingsHtml);
-        const { fixtures }     = parseGamesHtml(gamesHtml, ranking);
-
-        // Fetch stats (HTML page, all pages) — soft fail
-        let scorers = [];
-        log(`    Fetching stats…`);
-        try { scorers = await parseStatsAllPages(page, cfg.id); } catch {}
-
-        const teams = ranking.map(r => ({
-          id: `t_${r.name.replace(/\W+/g,"_").toLowerCase()}`,
-          name: r.name, points: 0, homeBonus: "",
-        }));
-
-        const played  = fixtures.filter(f => f.played).length;
-        const pending = fixtures.filter(f => !f.played).length;
-        log(`    Teams: ${teams.length} | Fixtures: ${fixtures.length} (${played} played, ${pending} pending) | Scorers: ${scorers.length}`);
-        if (teams.length > 0) log(`    ${teams.slice(0,4).map(t=>t.name).join(", ")}…`);
-
-        if (teams.length === 0 && fixtures.length === 0) {
-          throw new Error("No data parsed — league may not have started yet");
-        }
-
-        if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
-        fresh.federations[cfg.federation][cfg.id] = {
-          serieId: cfg.id, name: cfg.name, federation: cfg.federation,
-          division: cfg.division, updatedAt: new Date().toISOString(),
-          live: pending > 0, teams, fixtures, ranking, scorers,
-        };
-
-        results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
-
-      } catch (err) {
-        console.error(`    ✗ FAILED: ${err.message}`);
-        results.push({ id: cfg.id, name: cfg.name, ok: false, error: err.message });
+  // Run with limited concurrency
+  async function runPool(items, concurrency, fn) {
+    const results = [];
+    let i = 0;
+    async function worker() {
+      while (i < items.length) {
+        const item = items[i++];
+        results.push(await fn(item));
       }
     }
-    await context.close();
+    await Promise.all(Array.from({ length: concurrency }, worker));
+    return results;
   }
+
+  const allResults = await runPool(LEAGUES, CONCURRENCY, processLeague);
+
+  // Write results to fresh data structure
+  for (const r of allResults) {
+    if (!r.ok) {
+      results.push({ id: r.cfg.id, name: r.cfg.name, ok: false, error: r.error });
+      continue;
+    }
+    const { cfg, ranking, fixtures, teams, scorers, played, pending } = r;
+    if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
+    fresh.federations[cfg.federation][cfg.id] = {
+      serieId: cfg.id, name: cfg.name, federation: cfg.federation,
+      division: cfg.division, updatedAt: new Date().toISOString(),
+      live: pending > 0, teams, fixtures, ranking, scorers,
+    };
+    results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
+  }
+
+  await context.close();
 
   await browser.close();
 
