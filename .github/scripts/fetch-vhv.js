@@ -1,10 +1,8 @@
 // .github/scripts/fetch-vhv.js
-// Fetches Belgian handball data from Clubee (clubee.com/handballbelgium).
-// Uses seasons/0 = current season (auto-updates each year).
-// Standings: /standings-371073v4/leagues/ID/seasons/0
-// Games:     /games-371075v4/leagues/ID/seasons/0  (full club names, no scores)
-// Stats:     /stats-371072v4/leagues/ID/seasons/0
-// Scores come from individual game pages: /games/GAMEID/gamesheet
+// Fetches Belgian handball data from Clubee JSON APIs.
+// Standings: /standings-371073v4/leagues/ID/seasons/0  → { elements, total }
+// Games:     /games-371075v4/leagues/ID/seasons/0      → { elements, total }
+// Stats:     /stats-371072v4/leagues/ID/seasons/0      → HTML page (scraped)
 // Writes vhv-data.json grouped by federation/division.
 
 const fs   = require("fs");
@@ -233,67 +231,132 @@ const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-const PLACEHOLDER = /^(TBA|heren liga \d+|dames liga \d+|ploeg \d+)$/i;
-
-// Fetch HTML by navigating directly with Playwright — gets actual SSR HTML
-async function fetchFromPage(page, url) {
-  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 });
+// Navigate to URL and extract JSON from the page.
+// Clubee API endpoints return JSON; Playwright wraps it in <pre> tags.
+// Falls back to parsing the body text directly.
+async function fetchJson(page, url) {
+  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
   if (!response || !response.ok()) throw new Error(`HTTP ${response?.status()} for ${url}`);
-  const html = await page.content();
-  return html;
-}
-
-// ── STANDINGS PARSER ──────────────────────────────────────────────────────────
-// Splits on <tr to handle Next.js multiline <tr class="...">\n tags
-function parseStandings(html) {
-  const rows = [];
-  const chunks = html.split(/<tr[\s>]/i);
-  for (const chunk of chunks) {
-    const rowContent = chunk.split(/<\/tr>/i)[0];
-    const cells = [];
-    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-    let td;
-    while ((td = tdRe.exec(rowContent)) !== null) {
-      const text = td[1]
-        .replace(/<[^>]+>/g, " ")
-        .replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
-        .replace(/&#39;/g,"'").replace(/&#x27;/g,"'")
-        .replace(/&lt;/g,"<").replace(/&gt;/g,">")
-        .replace(/&[a-z0-9#]+;/gi, " ")
-        .replace(/\s+/g," ").trim();
-      cells.push(text);
-    }
-    // Columns: # | Club | MP | W | D | L | GS | GA | GD | Pts | (action)
-    if (cells.length >= 9 && /^\d+\.?$/.test(cells[0])) {
-      const name = cleanTeam(cells[1]);
-      if (!name || PLACEHOLDER.test(name)) continue;
-      rows.push({
-        pos:    parseInt(cells[0]),
-        name,
-        played: parseInt(cells[2])||0,
-        won:    parseInt(cells[3])||0,
-        drawn:  parseInt(cells[4])||0,
-        lost:   parseInt(cells[5])||0,
-        gf:     parseInt(cells[6])||0,
-        ga:     parseInt(cells[7])||0,
-        points: parseInt(cells[9])||0,
-      });
-    }
-  }
-  // Deduplicate by name — page renders table twice (home+away groups)
-  const seen = new Set();
-  const unique = rows.filter(r => {
-    if (seen.has(r.name)) return false;
-    seen.add(r.name); return true;
+  // Try to get JSON from the response body via Playwright's evaluate
+  const text = await page.evaluate(() => {
+    // If browser rendered JSON, it's inside <pre> or just document.body.innerText
+    const pre = document.querySelector("pre");
+    return pre ? pre.textContent : document.body.innerText;
   });
-  return unique.sort((a,b) => a.pos - b.pos);
+  return JSON.parse(text);
 }
 
-// ── STATS PARSER (top scorers) ─────────────────────────────────────────────────
-// Stats page columns: # | Player | MP | Goals | YC | RC | ... (9 cols total)
-// Club comes from team logo alt text, not a text cell
-// Paginated: ?page=N on the base URL (without /seasons/)
-// Returns [{ player, club, goals, matchesPlayed }]
+// Navigate to URL and return raw HTML (for stats pages which are rendered HTML)
+async function fetchHtml(page, url) {
+  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
+  if (!response || !response.ok()) throw new Error(`HTTP ${response?.status()} for ${url}`);
+  try {
+    await page.waitForFunction(() => {
+      const hasTr  = document.querySelector("table tr td") !== null;
+      const noData = document.body.innerText.includes("No information added yet");
+      return hasTr || noData;
+    }, { timeout: 8000 });
+  } catch { /* timeout — return what we have */ }
+  return page.content();
+}
+
+// ── STANDINGS: parse JSON from standings API ───────────────────────────────────
+// API fields: position, team_name, played, wins, losses, draws,
+//             score_for, score_against, points
+function parseStandingsJson(data) {
+  const elements = (data && data.elements) ? data.elements : [];
+  const rows = elements.map(e => ({
+    pos:    e.position || 0,
+    name:   (e.team_name || "").trim(),
+    played: e.played  || 0,
+    won:    e.wins    || 0,
+    drawn:  e.draws   || 0,
+    lost:   e.losses  || 0,
+    gf:     e.score_for     || 0,
+    ga:     e.score_against || 0,
+    points: e.points  || 0,
+  })).filter(r => r.name);
+  return rows.sort((a, b) => a.pos - b.pos);
+}
+
+// ── GAMES: parse JSON from games API ──────────────────────────────────────────
+// API fields: id, week, date, time, home_team_name, away_team_name,
+//             home_score, away_score, game_status_id (2 = played)
+// We match team names against the standings ranking to get indices.
+function parseGamesJson(data, ranking) {
+  const elements = (data && data.elements) ? data.elements : [];
+  if (elements.length === 0) return { fixtures: [] };
+
+  // Build lookup by team name
+  const teamNames = ranking.map(r => r.name);
+  const nameIdx   = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
+
+  // Fuzzy: strip known suffixes/prefixes
+  function coreClubName(name) {
+    return name
+      .replace(/\(Senior [A-Z]\)/gi, "")
+      .replace(/\b(handbalclub|handbal|hbc|hv|hc|khc|hvh|hbv)\b/gi, "")
+      .replace(/\s+/g, " ").trim().toLowerCase();
+  }
+  const coreIdx = new Map(teamNames.map((n, i) => [coreClubName(n), i]));
+
+  function resolveTeam(raw) {
+    const lower = raw.toLowerCase().trim();
+    if (nameIdx.has(lower)) return nameIdx.get(lower);
+    const core = coreClubName(raw);
+    if (core && coreIdx.has(core)) return coreIdx.get(core);
+    // Partial prefix match
+    for (const [standingsCore, idx] of coreIdx) {
+      if (core && standingsCore && (standingsCore.startsWith(core) || core.startsWith(standingsCore))) {
+        return idx;
+      }
+    }
+    return -1;
+  }
+
+  const fixtures = [];
+  let counter    = 0;
+
+  for (const g of elements) {
+    const homeName = (g.home_team_name || "").trim();
+    const awayName = (g.away_team_name || "").trim();
+    if (!homeName || !awayName) continue;
+
+    const homeIdx = resolveTeam(homeName);
+    const awayIdx = resolveTeam(awayName);
+
+    // game_status_id: 1 = scheduled, 2 = played/validated
+    const played    = g.game_status_id === 2 && g.home_score !== null && g.away_score !== null;
+    const homeScore = played ? g.home_score : null;
+    const awayScore = played ? g.away_score : null;
+
+    // Date from API: "YYYY-MM-DD"
+    const date = g.date || null;
+    const week = g.week || g.round || 0;
+
+    if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) {
+      // Teams not in standings (e.g. cup, friendly with external teams) — skip silently
+      continue;
+    }
+
+    fixtures.push({
+      id: `f${counter++}`, gameId: String(g.id || ""),
+      homeIdx, awayIdx,
+      homeWin: 50, draw: 6, awayWin: 44,
+      overrideOn: false, ovHW: "", ovD: "", ovAW: "",
+      played,
+      homeScore, awayScore,
+      week, date,
+    });
+  }
+
+  return { fixtures };
+}
+
+// ── STATS PARSER (HTML page, top scorers) ─────────────────────────────────────
+// Stats page columns: # | Player | MP | Goals | YC | RC | ...
+// Club comes from team logo alt text.
+// Paginated: ?page=N
 async function parseStatsAllPages(page, leagueId) {
   const BASE = "https://www.clubee.com/handballbelgium";
   const scorers = [];
@@ -303,7 +366,7 @@ async function parseStatsAllPages(page, leagueId) {
   while (pageNum <= maxPage) {
     const url = `${BASE}/stats-371072v4/leagues/${leagueId}/seasons/0?page=${pageNum}`;
     let html;
-    try { html = await fetchFromPage(page, url); }
+    try { html = await fetchHtml(page, url); }
     catch { break; }
 
     if (html.includes("No information added yet")) break;
@@ -327,7 +390,9 @@ async function parseStatsAllPages(page, leagueId) {
       const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
       let td;
       while ((td = tdRe.exec(rowContent)) !== null) {
-        const text = td[1].replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ").replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/&[a-z0-9#]+;/gi," ").replace(/\s+/g," ").trim();
+        const text = td[1].replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
+          .replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/&[a-z0-9#]+;/gi," ")
+          .replace(/\s+/g," ").trim();
         cells.push(text);
       }
 
@@ -346,147 +411,6 @@ async function parseStatsAllPages(page, leagueId) {
   return scorers.sort((a, b) => b.goals - a.goals);
 }
 
-// Strip common prefixes to get core club name for fuzzy matching
-function cleanTeam(name) {
-  return name.replace(/\(Senior [A-Z]\)/gi, "").replace(/\s+/g, " ").trim();
-}
-
-function coreClubName(name) {
-  return name
-    .replace(/\(Senior [A-Z]\)/gi, "")
-    .replace(/\b(handbalclub|handbal|hbc|hv|hc|khc|hvh|hbv|elita|besox|db gent|db|olse|uilenspiegel|hestia)\b/gi, "")
-    .replace(/\b(d[123]\s+[mf]\s+vhv\s*\d*|liga\s+\d+|regio\s+\w+|vhv\s*\d*)\b/gi, "")
-    .replace(/\s+/g, " ").trim().toLowerCase();
-}
-
-function parseGames(html, ranking) {
-  // Build lookup: standings name → index, with both exact and fuzzy keys
-  const teamNames = ranking.map(r => r.name);
-  const exactIdx  = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
-  // Fuzzy index: core name → index
-  const fuzzyIdx  = new Map(teamNames.map((n, i) => [coreClubName(n), i]));
-
-  function resolveTeam(raw) {
-    const lower = raw.toLowerCase();
-    // 1. Exact match
-    if (exactIdx.has(lower)) return exactIdx.get(lower);
-    // 2. Fuzzy: strip prefixes from raw game name, match against standings core names
-    const core = coreClubName(raw);
-    if (core && fuzzyIdx.has(core)) return fuzzyIdx.get(core);
-    // 3. Partial: game core is contained in any standings core, or vice versa
-    for (const [standingsCore, idx] of fuzzyIdx) {
-      if (core && standingsCore && (standingsCore.startsWith(core) || core.startsWith(standingsCore))) {
-        return idx;
-      }
-    }
-    return -1;
-  }
-
-  const fixtures = [];
-  let counter    = 0;
-
-  // Split on <h3> for gameday sections
-  const sections = html.split(/<h3[^>]*>/i);
-
-  for (const section of sections) {
-    const gdMatch = section.match(/Gameday\s+(\d+)/i);
-    const round   = gdMatch ? parseInt(gdMatch[1]) : 0;
-
-    const linkRe  = /<a[^>]+href="[^"]*\/games\/(\d+)"[^>]*>([\s\S]*?)<\/a>/gi;
-    let m;
-    while ((m = linkRe.exec(section)) !== null) {
-      const gameId  = m[1];
-      const content = m[2].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-
-      const dateM     = content.match(/(\d{2})\.(\d{2})\.(\d{4})/);
-      const date      = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
-      // Score: "30 - 28" with spaces. Simple regex — time "20:00" won't match because
-      // it uses colon not space-dash-space.
-      const scoreM    = content.match(/\b(\d{1,3})\s+-\s+(\d{1,3})\b/);
-      const homeScore = scoreM ? parseInt(scoreM[1]) : null;
-      const awayScore = scoreM ? parseInt(scoreM[2]) : null;
-      const played    = homeScore !== null && awayScore !== null;
-
-      // Remove category, date, time, score — then split into "Home Away"
-      let stripped = content
-        .replace(/&[a-z0-9#]+;/gi, " ")          // decode HTML entities to space
-        .replace(/\(Senior [A-Z]\)/gi, " ")
-        .replace(/\d{2}\.\d{2}\.\d{4}/, " ")
-        .replace(/\b\d{1,2}:\d{2}\b/, " ")
-        .replace(/\b\d{1,3}\s+-\s+\d{1,3}\b/, " ")
-        .replace(/\s+/g, " ").trim();
-
-      if (PLACEHOLDER.test(stripped) || stripped.toLowerCase().startsWith("tba")) continue;
-
-      // Split into home/away: try each known team name as a prefix
-      let homeIdx = -1, awayIdx = -1;
-
-      // Try standings names as prefix
-      for (const [nameLower, idx] of exactIdx) {
-        if (stripped.toLowerCase().startsWith(nameLower)) {
-          const rest = stripped.slice(nameLower.length).trim();
-          const ai = resolveTeam(rest);
-          if (ai >= 0 && ai !== idx) { homeIdx = idx; awayIdx = ai; break; }
-        }
-      }
-
-      // If exact didn't work, try splitting on double-space or at position where
-      // resolveTeam finds a match for the first part
-      if (homeIdx < 0) {
-        // Try splitting the stripped string at every word boundary
-        const words = stripped.split(" ");
-        for (let split = 1; split < words.length; split++) {
-          const homePart = words.slice(0, split).join(" ");
-          const awayPart = words.slice(split).join(" ");
-          const hi = resolveTeam(homePart);
-          const ai = resolveTeam(awayPart);
-          if (hi >= 0 && ai >= 0 && hi !== ai) {
-            homeIdx = hi; awayIdx = ai; break;
-          }
-        }
-      }
-
-      if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) {
-        // Log first unmatched game for debugging
-        if (fixtures.length === 0 && counter === 0) {
-          warn(`    First unmatched game: "${stripped.slice(0,80)}"`);
-          warn(`    Known teams: ${teamNames.slice(0,3).join(", ")}…`);
-        }
-        continue;
-      }
-
-      fixtures.push({
-        id: `f${counter++}`, gameId, homeIdx, awayIdx,
-        homeWin: 50, draw: 6, awayWin: 44,
-        overrideOn: false, ovHW: "", ovD: "", ovAW: "",
-        played,
-        homeScore: played ? homeScore : null,
-        awayScore: played ? awayScore : null,
-        week: round, date,
-      });
-    }
-  }
-
-  // Log h3 count and game link count for debugging
-  const gameLinks = (html.match(/\/games\/\d+/g) || []).length;
-  const h3count   = (html.match(/<h3[^>]*>/gi) || []).length;
-  if (fixtures.length === 0 && gameLinks > 0) {
-    warn(`    0 fixtures from ${gameLinks} game links, ${h3count} h3 tags — name mismatch?`);
-    // Log first 3 raw game link contents to diagnose naming
-    let debugCount = 0;
-    const debugRe = /<a[^>]+href="[^"]*\/games\/\d+"[^>]*>([\s\S]*?)<\/a>/gi;
-    let dm;
-    while ((dm = debugRe.exec(html)) !== null && debugCount < 3) {
-      const raw = dm[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-      warn(`    Game ${debugCount+1} raw: "${raw.slice(0,120)}"`);
-      debugCount++;
-    }
-    warn(`    Known team names: ${teamNames.slice(0,4).join(" | ")}`);
-  }
-
-  return { fixtures };
-}
-
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
   log(`Starting at ${new Date().toUTCString()}`);
@@ -497,7 +421,7 @@ async function main() {
 
   const browser = await chromium.launch({ headless: true });
 
-  // Group by federation base URL — one page load per federation
+  // Group by federation — one browser context per federation (shares cookies/session)
   const groups = new Map();
   for (const cfg of LEAGUES) {
     const key = cfg.federation;
@@ -516,14 +440,17 @@ async function main() {
     for (const cfg of leagues) {
       log(`\n  ${cfg.name} (${cfg.id})`);
       try {
-        const standingsHtml = await fetchFromPage(page, cfg.standingsUrl);
-        const gamesHtml     = await fetchFromPage(page, cfg.gamesUrl);
+        log(`    Fetching standings…`);
+        const standingsData = await fetchJson(page, cfg.standingsUrl);
+        log(`    Fetching games…`);
+        const gamesData     = await fetchJson(page, cfg.gamesUrl);
 
-        const ranking          = parseStandings(standingsHtml);
-        const { fixtures }     = parseGames(gamesHtml, ranking);
+        const ranking          = parseStandingsJson(standingsData);
+        const { fixtures }     = parseGamesJson(gamesData, ranking);
 
-        // Fetch stats (all pages) — soft fail
+        // Fetch stats (HTML page, all pages) — soft fail
         let scorers = [];
+        log(`    Fetching stats…`);
         try { scorers = await parseStatsAllPages(page, cfg.id); } catch {}
 
         const teams = ranking.map(r => ({
@@ -537,7 +464,7 @@ async function main() {
         if (teams.length > 0) log(`    ${teams.slice(0,4).map(t=>t.name).join(", ")}…`);
 
         if (teams.length === 0 && fixtures.length === 0) {
-          throw new Error("No data parsed — page may be empty or structure changed");
+          throw new Error("No data parsed — league may not have started yet");
         }
 
         if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
@@ -545,25 +472,6 @@ async function main() {
           serieId: cfg.id, name: cfg.name, federation: cfg.federation,
           division: cfg.division, updatedAt: new Date().toISOString(),
           live: pending > 0, teams, fixtures, ranking, scorers,
-          _debug: fixtures.length === 0 ? (() => {
-            const linkRe = /<a[^>]+href="[^"]*\/games\/\d+"[^>]*>([\s\S]*?)<\/a>/gi;
-            const samples = [];
-            let dm;
-            while ((dm = linkRe.exec(gamesHtml)) !== null && samples.length < 3) {
-              samples.push(dm[1].replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().slice(0,120));
-            }
-            return { gameLinks: (gamesHtml.match(/\/games\/\d+/g)||[]).length, samples };
-          })() : (() => {
-            // Check why scores aren't detected - sample first played-date game
-            const linkRe = /<a[^>]+href="[^"]*\/games\/\d+"[^>]*>([\s\S]*?)<\/a>/gi;
-            let dm;
-            const scoreSamples = [];
-            while ((dm = linkRe.exec(gamesHtml)) !== null && scoreSamples.length < 3) {
-              const raw = dm[1].replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
-              scoreSamples.push(raw.slice(0, 150));
-            }
-            return { scoreSamples };
-          })(),
         };
 
         results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
