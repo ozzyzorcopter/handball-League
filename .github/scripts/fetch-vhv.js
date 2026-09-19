@@ -248,15 +248,37 @@ async function fetchHtml(page, url) {
   // DEBUG: for the very first page load, dump structure so we can see what we're parsing
   if (!_debugDone) {
     _debugDone = true;
-    const trIdx = html.indexOf("<tr");
-    const tdIdx = html.indexOf("<td");
     log(`[DEBUG] HTML length: ${html.length}`);
-    log(`[DEBUG] First <tr> at index: ${trIdx}`);
-    log(`[DEBUG] First <td> at index: ${tdIdx}`);
-    if (trIdx >= 0) {
-      log(`[DEBUG] Around first <tr>:\n${html.slice(Math.max(0, trIdx - 50), trIdx + 400)}`);
-    } else {
-      log(`[DEBUG] No <tr> found. First 500 chars:\n${html.slice(0, 500)}`);
+    // Show first 5 data rows and their parsed cells
+    const chunks = html.split(/<tr[\s>]/i);
+    log(`[DEBUG] Total <tr> chunks: ${chunks.length}`);
+    let shown = 0;
+    for (let ci = 0; ci < chunks.length && shown < 5; ci++) {
+      const chunk = chunks[ci];
+      const rowContent = chunk.split(/<\/tr>/i)[0];
+      const cells = [];
+      const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+      let td;
+      while ((td = tdRe.exec(rowContent)) !== null) {
+        const text = td[1]
+          .replace(/<[^>]+>/g, " ")
+          .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
+          .replace(/&#39;/g, "'").replace(/&#x27;/g, "'")
+          .replace(/&[a-z0-9#]+;/gi, " ")
+          .replace(/\s+/g, " ").trim();
+        cells.push(text);
+      }
+      if (cells.length > 0) {
+        log(`[DEBUG] Row ${ci} cells[${cells.length}]: ${JSON.stringify(cells.slice(0, 12))}`);
+        shown++;
+      }
+    }
+    // Also dump raw HTML of first data row (first chunk with tds)
+    for (let ci = 0; ci < chunks.length; ci++) {
+      if (chunks[ci].includes("<td")) {
+        log(`[DEBUG] First chunk with <td> (raw, 600 chars):\n${chunks[ci].slice(0, 600)}`);
+        break;
+      }
     }
   }
 
