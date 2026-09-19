@@ -231,19 +231,48 @@ const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-// Navigate to URL and extract JSON from the page.
-// Clubee API endpoints return JSON; Playwright wraps it in <pre> tags.
-// Falls back to parsing the body text directly.
+// Fetch JSON from a Clubee API endpoint using Playwright's response interception.
+// We intercept the network response directly rather than reading the rendered DOM,
+// so we get the raw JSON even if Cloudflare/Clubee returns an HTML shell page.
 async function fetchJson(page, url) {
-  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
-  if (!response || !response.ok()) throw new Error(`HTTP ${response?.status()} for ${url}`);
-  // Try to get JSON from the response body via Playwright's evaluate
+  let capturedBody = null;
+
+  // Intercept the response for this exact URL
+  const handler = async (response) => {
+    if (response.url() === url || response.url().startsWith(url.split("?")[0])) {
+      const ct = response.headers()["content-type"] || "";
+      if (ct.includes("json") || ct.includes("javascript") || ct.includes("text")) {
+        try { capturedBody = await response.text(); } catch {}
+      }
+    }
+  };
+  page.on("response", handler);
+
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
+  } finally {
+    page.off("response", handler);
+  }
+
+  // If we captured the raw network body, use it
+  if (capturedBody) {
+    // Strip any HTML wrapper if we got redirected to a shell page
+    const trimmed = capturedBody.trim();
+    if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+      return JSON.parse(trimmed);
+    }
+  }
+
+  // Fallback: try reading <pre> content from the rendered DOM
   const text = await page.evaluate(() => {
-    // If browser rendered JSON, it's inside <pre> or just document.body.innerText
     const pre = document.querySelector("pre");
     return pre ? pre.textContent : document.body.innerText;
   });
-  return JSON.parse(text);
+  const trimmed = text.trim();
+  if (!trimmed.startsWith("{") && !trimmed.startsWith("[")) {
+    throw new Error(`Expected JSON but got HTML (starts with: "${trimmed.slice(0, 30)}")`);
+  }
+  return JSON.parse(trimmed);
 }
 
 // Navigate to URL and return raw HTML (for stats pages which are rendered HTML)
@@ -436,6 +465,13 @@ async function main() {
       locale: "nl-BE",
     });
     const page = await context.newPage();
+
+    // Warm-up: visit the main Clubee site to get session cookies before hitting API endpoints
+    log(`  Warming up session for ${federation}…`);
+    try {
+      await page.goto("https://www.clubee.com/handballbelgium/", { waitUntil: "domcontentloaded", timeout: 30000 });
+      await page.waitForTimeout(1500);
+    } catch (e) { warn(`Warm-up failed: ${e.message}`); }
 
     for (const cfg of leagues) {
       log(`\n  ${cfg.name} (${cfg.id})`);
