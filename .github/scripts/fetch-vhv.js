@@ -231,54 +231,9 @@ const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-// Fetch JSON from a Clubee API endpoint using Playwright's response interception.
-// We intercept the network response directly rather than reading the rendered DOM,
-// so we get the raw JSON even if Cloudflare/Clubee returns an HTML shell page.
-async function fetchJson(page, url) {
-  let capturedBody = null;
-
-  // Intercept the response for this exact URL
-  const handler = async (response) => {
-    if (response.url() === url || response.url().startsWith(url.split("?")[0])) {
-      const ct = response.headers()["content-type"] || "";
-      if (ct.includes("json") || ct.includes("javascript") || ct.includes("text")) {
-        try { capturedBody = await response.text(); } catch {}
-      }
-    }
-  };
-  page.on("response", handler);
-
-  try {
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
-  } finally {
-    page.off("response", handler);
-  }
-
-  // If we captured the raw network body, use it
-  if (capturedBody) {
-    // Strip any HTML wrapper if we got redirected to a shell page
-    const trimmed = capturedBody.trim();
-    if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
-      return JSON.parse(trimmed);
-    }
-  }
-
-  // Fallback: try reading <pre> content from the rendered DOM
-  const text = await page.evaluate(() => {
-    const pre = document.querySelector("pre");
-    return pre ? pre.textContent : document.body.innerText;
-  });
-  const trimmed = text.trim();
-  if (!trimmed.startsWith("{") && !trimmed.startsWith("[")) {
-    throw new Error(`Expected JSON but got HTML (starts with: "${trimmed.slice(0, 30)}")`);
-  }
-  return JSON.parse(trimmed);
-}
-
-// Navigate to URL and return raw HTML (for stats pages which are rendered HTML)
+// Navigate to URL and return raw HTML, waiting for table content
 async function fetchHtml(page, url) {
-  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
-  if (!response || !response.ok()) throw new Error(`HTTP ${response?.status()} for ${url}`);
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
   try {
     await page.waitForFunction(() => {
       const hasTr  = document.querySelector("table tr td") !== null;
@@ -289,41 +244,53 @@ async function fetchHtml(page, url) {
   return page.content();
 }
 
-// ── STANDINGS: parse JSON from standings API ───────────────────────────────────
-// API fields: position, team_name, played, wins, losses, draws,
-//             score_for, score_against, points
-function parseStandingsJson(data) {
-  const elements = (data && data.elements) ? data.elements : [];
-  const rows = elements.map(e => ({
-    pos:    e.position || 0,
-    name:   (e.team_name || "").trim(),
-    played: e.played  || 0,
-    won:    e.wins    || 0,
-    drawn:  e.draws   || 0,
-    lost:   e.losses  || 0,
-    gf:     e.score_for     || 0,
-    ga:     e.score_against || 0,
-    points: e.points  || 0,
-  })).filter(r => r.name);
+// ── STANDINGS: parse from rendered HTML table ──────────────────────────────────
+// Columns: # | Club (with img) | MP | W | D | L | GS | GA | GD | Pts | (empty)
+function parseStandingsHtml(html) {
+  const rows = [];
+  const chunks = html.split(/<tr[\s>]/i);
+  for (const chunk of chunks) {
+    const rowContent = chunk.split(/<\/tr>/i)[0];
+    const cells = [];
+    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+    let td;
+    while ((td = tdRe.exec(rowContent)) !== null) {
+      const text = td[1]
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
+        .replace(/&#39;/g, "'").replace(/&#x27;/g, "'")
+        .replace(/&[a-z0-9#]+;/gi, " ")
+        .replace(/\s+/g, " ").trim();
+      cells.push(text);
+    }
+    // Expect at least 10 cells; first cell is position number
+    if (cells.length >= 10 && /^\d+$/.test(cells[0]) && cells[1]) {
+      rows.push({
+        pos:    parseInt(cells[0]),
+        name:   cells[1].trim(),
+        played: parseInt(cells[2])  || 0,
+        won:    parseInt(cells[3])  || 0,
+        drawn:  parseInt(cells[4])  || 0,
+        lost:   parseInt(cells[5])  || 0,
+        gf:     parseInt(cells[6])  || 0,
+        ga:     parseInt(cells[7])  || 0,
+        points: parseInt(cells[9])  || 0,
+      });
+    }
+  }
   return rows.sort((a, b) => a.pos - b.pos);
 }
 
-// ── GAMES: parse JSON from games API ──────────────────────────────────────────
-// API fields: id, week, date, time, home_team_name, away_team_name,
-//             home_score, away_score, game_status_id (2 = played)
-// We match team names against the standings ranking to get indices.
-function parseGamesJson(data, ranking) {
-  const elements = (data && data.elements) ? data.elements : [];
-  if (elements.length === 0) return { fixtures: [] };
-
-  // Build lookup by team name
+// ── GAMES: parse from rendered HTML page ──────────────────────────────────────
+// Games page shows: home team | score (e.g. "26 - 25") | date | away team
+// Played games have a score; scheduled ones show a date/time only.
+function parseGamesHtml(html, ranking) {
   const teamNames = ranking.map(r => r.name);
   const nameIdx   = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
 
-  // Fuzzy: strip known suffixes/prefixes
   function coreClubName(name) {
     return name
-      .replace(/\(Senior [A-Z]\)/gi, "")
+      .replace(/\([^)]*\)/g, "")  // strip parentheticals like (Senior M)
       .replace(/\b(handbalclub|handbal|hbc|hv|hc|khc|hvh|hbv)\b/gi, "")
       .replace(/\s+/g, " ").trim().toLowerCase();
   }
@@ -334,48 +301,79 @@ function parseGamesJson(data, ranking) {
     if (nameIdx.has(lower)) return nameIdx.get(lower);
     const core = coreClubName(raw);
     if (core && coreIdx.has(core)) return coreIdx.get(core);
-    // Partial prefix match
-    for (const [standingsCore, idx] of coreIdx) {
-      if (core && standingsCore && (standingsCore.startsWith(core) || core.startsWith(standingsCore))) {
-        return idx;
-      }
+    for (const [sc, idx] of coreIdx) {
+      if (core && sc && (sc.startsWith(core) || core.startsWith(sc))) return idx;
     }
     return -1;
   }
 
   const fixtures = [];
-  let counter    = 0;
+  let counter = 0;
 
-  for (const g of elements) {
-    const homeName = (g.home_team_name || "").trim();
-    const awayName = (g.away_team_name || "").trim();
-    if (!homeName || !awayName) continue;
-
-    const homeIdx = resolveTeam(homeName);
-    const awayIdx = resolveTeam(awayName);
-
-    // game_status_id: 1 = scheduled, 2 = played/validated
-    const played    = g.game_status_id === 2 && g.home_score !== null && g.away_score !== null;
-    const homeScore = played ? g.home_score : null;
-    const awayScore = played ? g.away_score : null;
-
-    // Date from API: "YYYY-MM-DD"
-    const date = g.date || null;
-    const week = g.week || g.round || 0;
-
-    if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) {
-      // Teams not in standings (e.g. cup, friendly with external teams) — skip silently
-      continue;
+  // Each game row in the HTML table: cells contain home team, score/date, away team
+  const chunks = html.split(/<tr[\s>]/i);
+  for (const chunk of chunks) {
+    const rowContent = chunk.split(/<\/tr>/i)[0];
+    const cells = [];
+    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+    let td;
+    while ((td = tdRe.exec(rowContent)) !== null) {
+      const text = td[1]
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
+        .replace(/&#39;/g, "'").replace(/&[a-z0-9#]+;/gi, " ")
+        .replace(/\s+/g, " ").trim();
+      cells.push(text);
     }
 
+    // Need at least 3 cells: home, score-or-date, away
+    if (cells.length < 3) continue;
+
+    // Find the score cell — matches "N - N" pattern
+    let scoreCell = -1;
+    let scoreMatch = null;
+    for (let i = 0; i < cells.length; i++) {
+      const m = cells[i].match(/^(\d{1,3})\s*-\s*(\d{1,3})$/);
+      if (m) { scoreCell = i; scoreMatch = m; break; }
+    }
+
+    let homeName, awayName, played, homeScore, awayScore, date;
+
+    if (scoreCell >= 1) {
+      // Played game: cells before score = home team info, after = away team info
+      homeName  = cells.slice(0, scoreCell).join(" ").trim();
+      awayName  = cells.slice(scoreCell + 1).join(" ").trim();
+      played    = true;
+      homeScore = parseInt(scoreMatch[1]);
+      awayScore = parseInt(scoreMatch[2]);
+      date      = null;
+    } else {
+      // Scheduled game: try to find date pattern DD.MM.YYYY
+      const dateCell = cells.findIndex(c => /\d{2}\.\d{2}\.\d{4}/.test(c));
+      if (dateCell < 1) continue;
+      const dateStr = cells[dateCell].match(/(\d{2})\.(\d{2})\.(\d{4})/);
+      date     = dateStr ? `${dateStr[3]}-${dateStr[2]}-${dateStr[1]}` : null;
+      homeName = cells.slice(0, dateCell).join(" ").trim();
+      awayName = cells.slice(dateCell + 1).join(" ").trim();
+      played   = false; homeScore = null; awayScore = null;
+    }
+
+    // Strip division suffixes like "(Senior M)" from team names
+    homeName = homeName.replace(/\([^)]*\)/g, "").trim();
+    awayName = awayName.replace(/\([^)]*\)/g, "").trim();
+
+    if (!homeName || !awayName) continue;
+    const homeIdx = resolveTeam(homeName);
+    const awayIdx = resolveTeam(awayName);
+    if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) continue;
+
     fixtures.push({
-      id: `f${counter++}`, gameId: String(g.id || ""),
+      id: `f${counter++}`, gameId: "",
       homeIdx, awayIdx,
       homeWin: 50, draw: 6, awayWin: 44,
       overrideOn: false, ovHW: "", ovD: "", ovAW: "",
-      played,
-      homeScore, awayScore,
-      week, date,
+      played, homeScore, awayScore,
+      week: 0, date,
     });
   }
 
@@ -477,12 +475,12 @@ async function main() {
       log(`\n  ${cfg.name} (${cfg.id})`);
       try {
         log(`    Fetching standings…`);
-        const standingsData = await fetchJson(page, cfg.standingsUrl);
+        const standingsHtml    = await fetchHtml(page, cfg.standingsUrl);
         log(`    Fetching games…`);
-        const gamesData     = await fetchJson(page, cfg.gamesUrl);
+        const gamesHtml        = await fetchHtml(page, cfg.gamesUrl);
 
-        const ranking          = parseStandingsJson(standingsData);
-        const { fixtures }     = parseGamesJson(gamesData, ranking);
+        const ranking          = parseStandingsHtml(standingsHtml);
+        const { fixtures }     = parseGamesHtml(gamesHtml, ranking);
 
         // Fetch stats (HTML page, all pages) — soft fail
         let scorers = [];
