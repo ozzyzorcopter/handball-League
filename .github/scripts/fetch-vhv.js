@@ -231,6 +231,8 @@ const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
+let _debugDone = false;
+
 // Navigate to URL and return raw HTML, waiting for table content
 async function fetchHtml(page, url) {
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
@@ -241,7 +243,24 @@ async function fetchHtml(page, url) {
       return hasTr || noData;
     }, { timeout: 8000 });
   } catch { /* timeout — return what we have */ }
-  return page.content();
+  const html = await page.content();
+
+  // DEBUG: for the very first page load, dump structure so we can see what we're parsing
+  if (!_debugDone) {
+    _debugDone = true;
+    const trIdx = html.indexOf("<tr");
+    const tdIdx = html.indexOf("<td");
+    log(`[DEBUG] HTML length: ${html.length}`);
+    log(`[DEBUG] First <tr> at index: ${trIdx}`);
+    log(`[DEBUG] First <td> at index: ${tdIdx}`);
+    if (trIdx >= 0) {
+      log(`[DEBUG] Around first <tr>:\n${html.slice(Math.max(0, trIdx - 50), trIdx + 400)}`);
+    } else {
+      log(`[DEBUG] No <tr> found. First 500 chars:\n${html.slice(0, 500)}`);
+    }
+  }
+
+  return html;
 }
 
 // ── STANDINGS: parse from rendered HTML table ──────────────────────────────────
