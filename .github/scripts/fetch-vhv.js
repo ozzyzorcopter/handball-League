@@ -315,6 +315,7 @@ function parseGamesHtml(html, ranking) {
 
   // Each game row in the HTML table: cells contain home team, score/date, away team
   const chunks = html.split(/<tr[\s>]/i);
+  let debugCount = 0;
   for (const chunk of chunks) {
     const rowContent = chunk.split(/<\/tr>/i)[0];
     const cells = [];
@@ -332,6 +333,12 @@ function parseGamesHtml(html, ranking) {
 
     // Need at least 3 cells: home, score-or-date, away
     if (cells.length < 3) continue;
+
+    // DEBUG: print first 8 rows with >=3 cells
+    if (debugCount < 8) {
+      console.log(`[DEBUG-GAMES] cells[${cells.length}]: ${JSON.stringify(cells)}`);
+      debugCount++;
+    }
 
     // Find the score cell — matches "N - N" pattern
     let scoreCell = -1;
