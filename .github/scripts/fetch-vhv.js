@@ -265,8 +265,9 @@ function parseStandingsHtml(html) {
       cells.push(text);
     }
     // Expect at least 10 cells; first cell is position number (may have trailing dot: "1.")
-    const posStr = cells[0].replace(/\.$/, "");
-    if (cells.length >= 10 && /^\d+$/.test(posStr) && cells[1]) {
+    if (cells.length < 10) continue;
+    const posStr = (cells[0] ?? "").replace(/\.$/, "");
+    if (/^\d+$/.test(posStr) && cells[1]) {
       rows.push({
         pos:    parseInt(posStr),
         name:   cells[1].replace(/\s*\([^)]*\)\s*$/, "").trim(),
