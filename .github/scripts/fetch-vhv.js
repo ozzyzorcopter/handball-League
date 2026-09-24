@@ -231,8 +231,6 @@ const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-let _debugDone = false;
-
 // Navigate to URL and return raw HTML, waiting for table content
 async function fetchHtml(page, url) {
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
@@ -243,46 +241,7 @@ async function fetchHtml(page, url) {
       return hasTr || noData;
     }, { timeout: 8000 });
   } catch { /* timeout — return what we have */ }
-  const html = await page.content();
-
-  // DEBUG: for the very first page load, dump structure so we can see what we're parsing
-  if (!_debugDone) {
-    _debugDone = true;
-    log(`[DEBUG] HTML length: ${html.length}`);
-    // Show first 5 data rows and their parsed cells
-    const chunks = html.split(/<tr[\s>]/i);
-    log(`[DEBUG] Total <tr> chunks: ${chunks.length}`);
-    let shown = 0;
-    for (let ci = 0; ci < chunks.length && shown < 5; ci++) {
-      const chunk = chunks[ci];
-      const rowContent = chunk.split(/<\/tr>/i)[0];
-      const cells = [];
-      const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-      let td;
-      while ((td = tdRe.exec(rowContent)) !== null) {
-        const text = td[1]
-          .replace(/<[^>]+>/g, " ")
-          .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
-          .replace(/&#39;/g, "'").replace(/&#x27;/g, "'")
-          .replace(/&[a-z0-9#]+;/gi, " ")
-          .replace(/\s+/g, " ").trim();
-        cells.push(text);
-      }
-      if (cells.length > 0) {
-        log(`[DEBUG] Row ${ci} cells[${cells.length}]: ${JSON.stringify(cells.slice(0, 12))}`);
-        shown++;
-      }
-    }
-    // Also dump raw HTML of first data row (first chunk with tds)
-    for (let ci = 0; ci < chunks.length; ci++) {
-      if (chunks[ci].includes("<td")) {
-        log(`[DEBUG] First chunk with <td> (raw, 600 chars):\n${chunks[ci].slice(0, 600)}`);
-        break;
-      }
-    }
-  }
-
-  return html;
+  return page.content();
 }
 
 // ── STANDINGS: parse from rendered HTML table ──────────────────────────────────
@@ -304,11 +263,12 @@ function parseStandingsHtml(html) {
         .replace(/\s+/g, " ").trim();
       cells.push(text);
     }
-    // Expect at least 10 cells; first cell is position number
-    if (cells.length >= 10 && /^\d+$/.test(cells[0]) && cells[1]) {
+    // Expect at least 10 cells; first cell is position number (may have trailing dot: "1.")
+    const posStr = cells[0].replace(/\.$/, "");
+    if (cells.length >= 10 && /^\d+$/.test(posStr) && cells[1]) {
       rows.push({
-        pos:    parseInt(cells[0]),
-        name:   cells[1].trim(),
+        pos:    parseInt(posStr),
+        name:   cells[1].replace(/\s*\([^)]*\)\s*$/, "").trim(),
         played: parseInt(cells[2])  || 0,
         won:    parseInt(cells[3])  || 0,
         drawn:  parseInt(cells[4])  || 0,
