@@ -487,6 +487,21 @@ async function main() {
       const gamesHtml     = await fetchHtml(page, cfg.gamesUrl);
 
       const ranking      = parseStandingsHtml(standingsHtml);
+
+      // DEBUG: inspect games HTML for first league only
+      if (cfg.id === "18700" || cfg.id === "18701") {
+        const trCount = (gamesHtml.match(/<tr[\s>]/gi) || []).length;
+        const tdCount = (gamesHtml.match(/<td[\s>]/gi) || []).length;
+        console.log(`[DEBUG-GAMES-HTML] ${cfg.name}: len=${gamesHtml.length} <tr>=${trCount} <td>=${tdCount}`);
+        // Print first 2000 chars of body content
+        const bodyM = gamesHtml.match(/<body[\s\S]*?>([\s\S]{0,2000})/i);
+        if (bodyM) console.log(`[DEBUG-GAMES-BODY] ${bodyM[1].replace(/\s+/g," ").substring(0,800)}`);
+        // Print first table block found
+        const tableM = gamesHtml.match(/<table[\s\S]{0,3000}/i);
+        if (tableM) console.log(`[DEBUG-GAMES-TABLE] ${tableM[0].substring(0,1000).replace(/\s+/g," ")}`);
+        else console.log(`[DEBUG-GAMES-TABLE] no <table> found`);
+      }
+
       const { fixtures } = parseGamesHtml(gamesHtml, ranking);
 
       let scorers = [];
