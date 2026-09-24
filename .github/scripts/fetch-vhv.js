@@ -255,7 +255,8 @@ function parseStandingsHtml(html) {
     const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
     let td;
     while ((td = tdRe.exec(rowContent)) !== null) {
-      const text = td[1]
+      const inner = td[1] ?? "";
+      const text = inner
         .replace(/<[^>]+>/g, " ")
         .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
         .replace(/&#39;/g, "'").replace(/&#x27;/g, "'")
@@ -319,7 +320,8 @@ function parseGamesHtml(html, ranking) {
     const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
     let td;
     while ((td = tdRe.exec(rowContent)) !== null) {
-      const text = td[1]
+      const inner = td[1] ?? "";
+      const text = inner
         .replace(/<[^>]+>/g, " ")
         .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
         .replace(/&#39;/g, "'").replace(/&[a-z0-9#]+;/gi, " ")
@@ -360,8 +362,8 @@ function parseGamesHtml(html, ranking) {
     }
 
     // Strip division suffixes like "(Senior M)" from team names
-    homeName = homeName.replace(/\([^)]*\)/g, "").trim();
-    awayName = awayName.replace(/\([^)]*\)/g, "").trim();
+    homeName = (homeName || "").replace(/\([^)]*\)/g, "").trim();
+    awayName = (awayName || "").replace(/\([^)]*\)/g, "").trim();
 
     if (!homeName || !awayName) continue;
     const homeIdx = resolveTeam(homeName);
@@ -418,7 +420,7 @@ async function parseStatsAllPages(page, leagueId) {
       const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
       let td;
       while ((td = tdRe.exec(rowContent)) !== null) {
-        const text = td[1].replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
+        const text = (td[1] ?? "").replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
           .replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/&[a-z0-9#]+;/gi," ")
           .replace(/\s+/g," ").trim();
         cells.push(text);
