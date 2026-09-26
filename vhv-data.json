@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-26T15:28:48.160Z",
+  "updatedAt": "2026-09-26T18:48:08.173Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -956,7 +956,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -1446,7 +1446,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -1630,7 +1630,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -1814,12 +1814,18 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
             "id": "t_hubo_d1_w",
             "name": "Hubo D1 W",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_sezoens_achilles_bocholt_d1_w",
+            "name": "Sezoens Achilles Bocholt D1 W",
             "points": 0,
             "homeBonus": ""
           },
@@ -1836,12 +1842,6 @@
             "homeBonus": ""
           },
           {
-            "id": "t_sezoens_achilles_bocholt_d1_w",
-            "name": "Sezoens Achilles Bocholt D1 W",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
             "id": "t_sprimont_d1_w",
             "name": "Sprimont D1 W",
             "points": 0,
@@ -1854,14 +1854,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_dhc_overpelt_d1_w",
-            "name": "DHC Overpelt D1 W",
+            "id": "t_dhc_waasmunster_d1_w",
+            "name": "DHC Waasmunster D1 W",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_dhc_waasmunster_d1_w",
-            "name": "DHC Waasmunster D1 W",
+            "id": "t_dhc_overpelt_d1_w",
+            "name": "DHC Overpelt D1 W",
             "points": 0,
             "homeBonus": ""
           },
@@ -1883,16 +1883,27 @@
           {
             "pos": 1,
             "name": "Hubo D1 W",
-            "played": 3,
-            "won": 3,
+            "played": 4,
+            "won": 4,
             "drawn": 0,
             "lost": 0,
-            "gf": 97,
-            "ga": 52,
-            "points": 6
+            "gf": 124,
+            "ga": 72,
+            "points": 8
           },
           {
             "pos": 2,
+            "name": "Sezoens Achilles Bocholt D1 W",
+            "played": 4,
+            "won": 3,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 122,
+            "ga": 102,
+            "points": 6
+          },
+          {
+            "pos": 3,
             "name": "Eupen D1 W",
             "played": 3,
             "won": 3,
@@ -1903,7 +1914,7 @@
             "points": 6
           },
           {
-            "pos": 3,
+            "pos": 4,
             "name": "Sint-Truiden D1 W",
             "played": 3,
             "won": 2,
@@ -1914,40 +1925,40 @@
             "points": 4
           },
           {
-            "pos": 4,
-            "name": "Sezoens Achilles Bocholt D1 W",
-            "played": 3,
-            "won": 2,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 95,
-            "ga": 77,
-            "points": 4
-          },
-          {
             "pos": 5,
             "name": "Sprimont D1 W",
-            "played": 3,
+            "played": 4,
             "won": 2,
             "drawn": 0,
-            "lost": 1,
-            "gf": 78,
-            "ga": 69,
+            "lost": 2,
+            "gf": 103,
+            "ga": 96,
             "points": 4
           },
           {
             "pos": 6,
             "name": "AtomiX D1 W",
-            "played": 3,
+            "played": 4,
             "won": 2,
             "drawn": 0,
-            "lost": 1,
-            "gf": 90,
-            "ga": 81,
+            "lost": 2,
+            "gf": 110,
+            "ga": 108,
             "points": 4
           },
           {
             "pos": 7,
+            "name": "DHC Waasmunster D1 W",
+            "played": 4,
+            "won": 1,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 94,
+            "ga": 108,
+            "points": 2
+          },
+          {
+            "pos": 8,
             "name": "DHC Overpelt D1 W",
             "played": 3,
             "won": 1,
@@ -1958,25 +1969,14 @@
             "points": 2
           },
           {
-            "pos": 8,
-            "name": "DHC Waasmunster D1 W",
-            "played": 3,
-            "won": 0,
-            "drawn": 0,
-            "lost": 3,
-            "gf": 70,
-            "ga": 85,
-            "points": 0
-          },
-          {
             "pos": 9,
             "name": "Union Beynoise D1 W",
-            "played": 3,
+            "played": 4,
             "won": 0,
             "drawn": 0,
-            "lost": 3,
-            "gf": 57,
-            "ga": 94,
+            "lost": 4,
+            "gf": 80,
+            "ga": 118,
             "points": 0
           },
           {
@@ -1998,7 +1998,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -2008,14 +2008,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hubo_d1_wr",
-            "name": "Hubo D1 WR",
+            "id": "t_sezoens_achilles_bocholt_d1_wr",
+            "name": "Sezoens Achilles Bocholt D1 WR",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_sezoens_achilles_bocholt_d1_wr",
-            "name": "Sezoens Achilles Bocholt D1 WR",
+            "id": "t_hubo_d1_wr",
+            "name": "Hubo D1 WR",
             "points": 0,
             "homeBonus": ""
           },
@@ -2071,6 +2071,17 @@
           },
           {
             "pos": 2,
+            "name": "Sezoens Achilles Bocholt D1 WR",
+            "played": 4,
+            "won": 3,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 126,
+            "ga": 94,
+            "points": 6
+          },
+          {
+            "pos": 3,
             "name": "Hubo D1 WR",
             "played": 3,
             "won": 3,
@@ -2081,25 +2092,14 @@
             "points": 6
           },
           {
-            "pos": 3,
-            "name": "Sezoens Achilles Bocholt D1 WR",
-            "played": 3,
-            "won": 2,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 100,
-            "ga": 72,
-            "points": 4
-          },
-          {
             "pos": 4,
             "name": "Sprimont D1 WR",
-            "played": 3,
+            "played": 4,
             "won": 1,
             "drawn": 1,
-            "lost": 1,
-            "gf": 75,
-            "ga": 70,
+            "lost": 2,
+            "gf": 97,
+            "ga": 96,
             "points": 3
           },
           {
@@ -2165,15 +2165,9 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
-          {
-            "id": "t_eynatten_raeren_d2_w",
-            "name": "Eynatten-Raeren D2 W",
-            "points": 0,
-            "homeBonus": ""
-          },
           {
             "id": "t_schoten_d2_w",
             "name": "Schoten D2 W",
@@ -2181,14 +2175,20 @@
             "homeBonus": ""
           },
           {
-            "id": "t_besox_izegem_d2_w",
-            "name": "Besox Izegem D2 W",
+            "id": "t_eynatten_raeren_d2_w",
+            "name": "Eynatten-Raeren D2 W",
             "points": 0,
             "homeBonus": ""
           },
           {
             "id": "t_derdaele_sp_pelt_d2_w",
             "name": "Derdaele Sp. Pelt D2 W",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_besox_izegem_d2_w",
+            "name": "Besox Izegem D2 W",
             "points": 0,
             "homeBonus": ""
           },
@@ -2233,6 +2233,17 @@
         "ranking": [
           {
             "pos": 1,
+            "name": "Schoten D2 W",
+            "played": 4,
+            "won": 4,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 110,
+            "ga": 63,
+            "points": 8
+          },
+          {
+            "pos": 2,
             "name": "Eynatten-Raeren D2 W",
             "played": 3,
             "won": 3,
@@ -2243,18 +2254,18 @@
             "points": 6
           },
           {
-            "pos": 2,
-            "name": "Schoten D2 W",
-            "played": 3,
+            "pos": 3,
+            "name": "Derdaele Sp. Pelt D2 W",
+            "played": 4,
             "won": 3,
             "drawn": 0,
-            "lost": 0,
-            "gf": 74,
-            "ga": 53,
+            "lost": 1,
+            "gf": 87,
+            "ga": 89,
             "points": 6
           },
           {
-            "pos": 3,
+            "pos": 4,
             "name": "Besox Izegem D2 W",
             "played": 3,
             "won": 2,
@@ -2265,25 +2276,14 @@
             "points": 4
           },
           {
-            "pos": 4,
-            "name": "Derdaele Sp. Pelt D2 W",
-            "played": 3,
-            "won": 2,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 69,
-            "ga": 73,
-            "points": 4
-          },
-          {
             "pos": 5,
             "name": "P. Kortessem D2 W 1",
-            "played": 3,
+            "played": 4,
             "won": 1,
             "drawn": 0,
-            "lost": 2,
-            "gf": 87,
-            "ga": 64,
+            "lost": 3,
+            "gf": 103,
+            "ga": 82,
             "points": 2
           },
           {
@@ -2333,12 +2333,12 @@
           {
             "pos": 10,
             "name": "Fémina Visé D2 W",
-            "played": 2,
+            "played": 3,
             "won": 0,
             "drawn": 0,
-            "lost": 2,
-            "gf": 19,
-            "ga": 79,
+            "lost": 3,
+            "gf": 29,
+            "ga": 115,
             "points": 0
           }
         ],
@@ -2349,7 +2349,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -3453,7 +3453,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -3499,14 +3499,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_entente_du_centre_d1_m_lfh",
-            "name": "Entente du Centre D1 M LFH",
+            "id": "t_union_beynoise_d1_m_lfh",
+            "name": "Union Beynoise D1 M LFH",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_union_beynoise_d1_m_lfh",
-            "name": "Union Beynoise D1 M LFH",
+            "id": "t_entente_du_centre_d1_m_lfh",
+            "name": "Entente du Centre D1 M LFH",
             "points": 0,
             "homeBonus": ""
           },
@@ -3522,23 +3522,23 @@
           {
             "pos": 1,
             "name": "Mont-Sur-Marchienne D1 M LFH",
-            "played": 3,
-            "won": 3,
+            "played": 4,
+            "won": 4,
             "drawn": 0,
             "lost": 0,
-            "gf": 98,
-            "ga": 79,
-            "points": 6
+            "gf": 127,
+            "ga": 105,
+            "points": 8
           },
           {
             "pos": 2,
             "name": "Jeunesse Jemeppe D1 M LFH 1",
-            "played": 3,
+            "played": 4,
             "won": 2,
             "drawn": 1,
-            "lost": 0,
-            "gf": 78,
-            "ga": 66,
+            "lost": 1,
+            "gf": 102,
+            "ga": 93,
             "points": 5
           },
           {
@@ -3566,12 +3566,12 @@
           {
             "pos": 5,
             "name": "Kraainem D1 M LFH",
-            "played": 3,
+            "played": 4,
             "won": 2,
             "drawn": 0,
-            "lost": 1,
-            "gf": 88,
-            "ga": 90,
+            "lost": 2,
+            "gf": 114,
+            "ga": 119,
             "points": 4
           },
           {
@@ -3598,6 +3598,17 @@
           },
           {
             "pos": 8,
+            "name": "Union Beynoise D1 M LFH",
+            "played": 3,
+            "won": 1,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 83,
+            "ga": 89,
+            "points": 2
+          },
+          {
+            "pos": 9,
             "name": "Entente du Centre D1 M LFH",
             "played": 2,
             "won": 0,
@@ -3606,17 +3617,6 @@
             "gf": 46,
             "ga": 50,
             "points": 1
-          },
-          {
-            "pos": 9,
-            "name": "Union Beynoise D1 M LFH",
-            "played": 2,
-            "won": 0,
-            "drawn": 0,
-            "lost": 2,
-            "gf": 56,
-            "ga": 65,
-            "points": 0
           },
           {
             "pos": 10,
@@ -3637,7 +3637,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -3821,7 +3821,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4005,7 +4005,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4070,7 +4070,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4169,7 +4169,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4251,7 +4251,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4435,7 +4435,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4457,6 +4457,12 @@
             "homeBonus": ""
           },
           {
+            "id": "t_villers_amay_u16_lg",
+            "name": "Villers-Amay U16 Lg",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
             "id": "t_sprimont_u16_lg",
             "name": "Sprimont U16 Lg",
             "points": 0,
@@ -4465,12 +4471,6 @@
           {
             "id": "t_union_beynoise_u16_lg",
             "name": "Union Beynoise U16 Lg",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_villers_amay_u16_lg",
-            "name": "Villers-Amay U16 Lg",
             "points": 0,
             "homeBonus": ""
           },
@@ -4536,17 +4536,28 @@
           },
           {
             "pos": 4,
-            "name": "Sprimont U16 Lg",
+            "name": "Villers-Amay U16 Lg",
             "played": 3,
             "won": 2,
             "drawn": 0,
             "lost": 1,
-            "gf": 81,
-            "ga": 70,
+            "gf": 89,
+            "ga": 79,
             "points": 4
           },
           {
             "pos": 5,
+            "name": "Sprimont U16 Lg",
+            "played": 4,
+            "won": 2,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 101,
+            "ga": 101,
+            "points": 4
+          },
+          {
+            "pos": 6,
             "name": "Union Beynoise U16 Lg",
             "played": 2,
             "won": 1,
@@ -4554,17 +4565,6 @@
             "lost": 1,
             "gf": 55,
             "ga": 37,
-            "points": 2
-          },
-          {
-            "pos": 6,
-            "name": "Villers-Amay U16 Lg",
-            "played": 2,
-            "won": 1,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 58,
-            "ga": 59,
             "points": 2
           },
           {
@@ -4619,7 +4619,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4837,7 +4837,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -4919,7 +4919,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -5037,9 +5037,15 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
+          {
+            "id": "t_db_gent_d1_m_vhv",
+            "name": "DB Gent D1 M VHV",
+            "points": 0,
+            "homeBonus": ""
+          },
           {
             "id": "t_olse_merksem_d1_m_vhv",
             "name": "Olse Merksem D1 M VHV",
@@ -5049,12 +5055,6 @@
           {
             "id": "t_uilenspiegel_d1_m_vhv_1",
             "name": "Uilenspiegel D1 M VHV 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_db_gent_d1_m_vhv",
-            "name": "DB Gent D1 M VHV",
             "points": 0,
             "homeBonus": ""
           },
@@ -5117,6 +5117,17 @@
         "ranking": [
           {
             "pos": 1,
+            "name": "DB Gent D1 M VHV",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 85,
+            "ga": 74,
+            "points": 6
+          },
+          {
+            "pos": 2,
             "name": "Olse Merksem D1 M VHV",
             "played": 2,
             "won": 2,
@@ -5127,7 +5138,7 @@
             "points": 4
           },
           {
-            "pos": 2,
+            "pos": 3,
             "name": "Uilenspiegel D1 M VHV 1",
             "played": 2,
             "won": 2,
@@ -5135,17 +5146,6 @@
             "lost": 0,
             "gf": 53,
             "ga": 41,
-            "points": 4
-          },
-          {
-            "pos": 3,
-            "name": "DB Gent D1 M VHV",
-            "played": 2,
-            "won": 2,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 56,
-            "ga": 46,
             "points": 4
           },
           {
@@ -5184,12 +5184,12 @@
           {
             "pos": 7,
             "name": "Biobest Sasja D1 M VHV",
-            "played": 2,
+            "played": 3,
             "won": 1,
             "drawn": 0,
-            "lost": 1,
-            "gf": 50,
-            "ga": 52,
+            "lost": 2,
+            "gf": 78,
+            "ga": 81,
             "points": 2
           },
           {
@@ -5255,7 +5255,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -5456,9 +5456,15 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
+          {
+            "id": "t_schoten_d3_m_vhv",
+            "name": "Schoten D3 M VHV",
+            "points": 0,
+            "homeBonus": ""
+          },
           {
             "id": "t_roeselare_d3_m_vhv_1",
             "name": "Roeselare D3 M VHV 1",
@@ -5502,12 +5508,6 @@
             "homeBonus": ""
           },
           {
-            "id": "t_schoten_d3_m_vhv",
-            "name": "Schoten D3 M VHV",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
             "id": "t_h_bilzen_d3_m_vhv",
             "name": "H. Bilzen D3 M VHV",
             "points": 0,
@@ -5530,6 +5530,17 @@
         "ranking": [
           {
             "pos": 1,
+            "name": "Schoten D3 M VHV",
+            "played": 3,
+            "won": 2,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 77,
+            "ga": 66,
+            "points": 4
+          },
+          {
+            "pos": 2,
             "name": "Roeselare D3 M VHV 1",
             "played": 2,
             "won": 2,
@@ -5540,7 +5551,7 @@
             "points": 4
           },
           {
-            "pos": 2,
+            "pos": 3,
             "name": "Uilenspiegel D3 M VHV 2",
             "played": 2,
             "won": 1,
@@ -5551,7 +5562,7 @@
             "points": 2
           },
           {
-            "pos": 3,
+            "pos": 4,
             "name": "HvH 't Noorden",
             "played": 2,
             "won": 1,
@@ -5562,7 +5573,7 @@
             "points": 2
           },
           {
-            "pos": 4,
+            "pos": 5,
             "name": "Attila Temse D3 M VHV",
             "played": 1,
             "won": 1,
@@ -5573,7 +5584,7 @@
             "points": 2
           },
           {
-            "pos": 5,
+            "pos": 6,
             "name": "Evergem D3 M VHV",
             "played": 2,
             "won": 1,
@@ -5584,7 +5595,7 @@
             "points": 2
           },
           {
-            "pos": 6,
+            "pos": 7,
             "name": "Aalst D3 M VHV",
             "played": 2,
             "won": 1,
@@ -5595,7 +5606,7 @@
             "points": 2
           },
           {
-            "pos": 7,
+            "pos": 8,
             "name": "Thor D3 M VHV",
             "played": 1,
             "won": 1,
@@ -5603,17 +5614,6 @@
             "lost": 0,
             "gf": 27,
             "ga": 25,
-            "points": 2
-          },
-          {
-            "pos": 8,
-            "name": "Schoten D3 M VHV",
-            "played": 2,
-            "won": 1,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 49,
-            "ga": 48,
             "points": 2
           },
           {
@@ -5641,12 +5641,12 @@
           {
             "pos": 11,
             "name": "Lebbeke D3 M VHV",
-            "played": 1,
+            "played": 2,
             "won": 0,
             "drawn": 0,
-            "lost": 1,
-            "gf": 17,
-            "ga": 30,
+            "lost": 2,
+            "gf": 35,
+            "ga": 58,
             "points": 0
           }
         ],
@@ -5657,7 +5657,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -5841,7 +5841,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -5957,9 +5957,15 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
+          {
+            "id": "t_sezoens_achilles_bocholt_d_m_vhv_lim",
+            "name": "Sezoens Achilles Bocholt D M VHV LIM",
+            "points": 0,
+            "homeBonus": ""
+          },
           {
             "id": "t_h_tessenderlo_d_m_vhv_lim",
             "name": "H. Tessenderlo D M VHV LIM",
@@ -5979,8 +5985,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_sezoens_achilles_bocholt_d_m_vhv_lim",
-            "name": "Sezoens Achilles Bocholt D M VHV LIM",
+            "id": "t_derdaele_sp_pelt_d_m_vhv_lim_b",
+            "name": "Derdaele Sp. Pelt D M VHV LIM-B",
             "points": 0,
             "homeBonus": ""
           },
@@ -5997,14 +6003,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_maasmechelen_65_d_m_vhv_lim",
-            "name": "Maasmechelen 65 D M VHV LIM",
+            "id": "t_h_bilzen_d_m_vhv_lim_b",
+            "name": "H. Bilzen D M VHV LIM-B",
             "points": 0,
             "homeBonus": ""
           },
           {
-            "id": "t_h_bilzen_d_m_vhv_lim_b",
-            "name": "H. Bilzen D M VHV LIM-B",
+            "id": "t_maasmechelen_65_d_m_vhv_lim",
+            "name": "Maasmechelen 65 D M VHV LIM",
             "points": 0,
             "homeBonus": ""
           },
@@ -6019,18 +6025,23 @@
             "name": "P. Kortessem D M VHV LIM-B 2",
             "points": 0,
             "homeBonus": ""
-          },
-          {
-            "id": "t_derdaele_sp_pelt_d_m_vhv_lim_b",
-            "name": "Derdaele Sp. Pelt D M VHV LIM-B",
-            "points": 0,
-            "homeBonus": ""
           }
         ],
         "fixtures": [],
         "ranking": [
           {
             "pos": 1,
+            "name": "Sezoens Achilles Bocholt D M VHV LIM",
+            "played": 3,
+            "won": 2,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 108,
+            "ga": 78,
+            "points": 4
+          },
+          {
+            "pos": 2,
             "name": "H. Tessenderlo D M VHV LIM",
             "played": 2,
             "won": 2,
@@ -6041,7 +6052,7 @@
             "points": 4
           },
           {
-            "pos": 2,
+            "pos": 3,
             "name": "Hubo D M VHV LIM",
             "played": 2,
             "won": 2,
@@ -6052,7 +6063,7 @@
             "points": 4
           },
           {
-            "pos": 3,
+            "pos": 4,
             "name": "Sint-Truiden D M VHV LIM 2",
             "played": 2,
             "won": 2,
@@ -6063,29 +6074,29 @@
             "points": 4
           },
           {
-            "pos": 4,
-            "name": "Sezoens Achilles Bocholt D M VHV LIM",
-            "played": 2,
+            "pos": 5,
+            "name": "Derdaele Sp. Pelt D M VHV LIM-B",
+            "played": 1,
             "won": 1,
             "drawn": 0,
-            "lost": 1,
-            "gf": 59,
-            "ga": 48,
+            "lost": 0,
+            "gf": 28,
+            "ga": 27,
             "points": 2
           },
           {
-            "pos": 5,
+            "pos": 6,
             "name": "HHV Meeuwen D M VHV LIM 2",
-            "played": 2,
+            "played": 3,
             "won": 0,
             "drawn": 1,
-            "lost": 1,
-            "gf": 21,
-            "ga": 27,
+            "lost": 2,
+            "gf": 48,
+            "ga": 55,
             "points": 1
           },
           {
-            "pos": 6,
+            "pos": 7,
             "name": "HC Overpelt D M VHV LIM",
             "played": 2,
             "won": 0,
@@ -6096,7 +6107,18 @@
             "points": 1
           },
           {
-            "pos": 7,
+            "pos": 8,
+            "name": "H. Bilzen D M VHV LIM-B",
+            "played": 2,
+            "won": 0,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 50,
+            "ga": 83,
+            "points": 0
+          },
+          {
+            "pos": 9,
             "name": "Maasmechelen 65 D M VHV LIM",
             "played": 2,
             "won": 0,
@@ -6107,18 +6129,7 @@
             "points": 0
           },
           {
-            "pos": 8,
-            "name": "H. Bilzen D M VHV LIM-B",
-            "played": 1,
-            "won": 0,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 20,
-            "ga": 34,
-            "points": 0
-          },
-          {
-            "pos": 9,
+            "pos": 10,
             "name": "Kwanten Arena D M VHV LIM-B 2",
             "played": 1,
             "won": 0,
@@ -6129,19 +6140,8 @@
             "points": 0
           },
           {
-            "pos": 10,
-            "name": "P. Kortessem D M VHV LIM-B 2",
-            "played": 0,
-            "won": 0,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 0,
-            "ga": 0,
-            "points": 0
-          },
-          {
             "pos": 11,
-            "name": "Derdaele Sp. Pelt D M VHV LIM-B",
+            "name": "P. Kortessem D M VHV LIM-B 2",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -6158,7 +6158,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.145Z",
         "live": false,
         "teams": [
           {
@@ -6182,6 +6182,12 @@
           {
             "id": "t_dendermonde_d_m_vhv_owv_b_1",
             "name": "Dendermonde D M VHV OWV-B 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hbc_apolloon_spurs_d_m_vhv_owv",
+            "name": "HBC Apolloon Spurs D M VHV OWV",
             "points": 0,
             "homeBonus": ""
           },
@@ -6210,20 +6216,14 @@
             "homeBonus": ""
           },
           {
-            "id": "t_hbc_apolloon_spurs_d_m_vhv_owv",
-            "name": "HBC Apolloon Spurs D M VHV OWV",
+            "id": "t_desselgemse_d_m_vhv_owv_b",
+            "name": "Desselgemse D M VHV OWV-B",
             "points": 0,
             "homeBonus": ""
           },
           {
             "id": "t_lokeren_d_m_vhv_owv_b_2",
             "name": "Lokeren D M VHV OWV-B 2",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_desselgemse_d_m_vhv_owv_b",
-            "name": "Desselgemse D M VHV OWV-B",
             "points": 0,
             "homeBonus": ""
           }
@@ -6276,6 +6276,17 @@
           },
           {
             "pos": 5,
+            "name": "HBC Apolloon Spurs D M VHV OWV",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 68,
+            "ga": 61,
+            "points": 2
+          },
+          {
+            "pos": 6,
             "name": "Evergem D M VHV OWV-B",
             "played": 1,
             "won": 1,
@@ -6286,7 +6297,7 @@
             "points": 2
           },
           {
-            "pos": 6,
+            "pos": 7,
             "name": "Lebbeke D M VHV OWV-B",
             "played": 1,
             "won": 0,
@@ -6297,7 +6308,7 @@
             "points": 1
           },
           {
-            "pos": 7,
+            "pos": 8,
             "name": "Dendermonde D M VHV OWV-B 2",
             "played": 1,
             "won": 0,
@@ -6308,7 +6319,7 @@
             "points": 1
           },
           {
-            "pos": 8,
+            "pos": 9,
             "name": "Brugge D M VHV OWV",
             "played": 1,
             "won": 0,
@@ -6319,29 +6330,7 @@
             "points": 0
           },
           {
-            "pos": 9,
-            "name": "HBC Apolloon Spurs D M VHV OWV",
-            "played": 1,
-            "won": 0,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 20,
-            "ga": 35,
-            "points": 0
-          },
-          {
             "pos": 10,
-            "name": "Lokeren D M VHV OWV-B 2",
-            "played": 2,
-            "won": 0,
-            "drawn": 0,
-            "lost": 2,
-            "gf": 36,
-            "ga": 55,
-            "points": 0
-          },
-          {
-            "pos": 11,
             "name": "Desselgemse D M VHV OWV-B",
             "played": 2,
             "won": 0,
@@ -6349,6 +6338,17 @@
             "lost": 2,
             "gf": 41,
             "ga": 62,
+            "points": 0
+          },
+          {
+            "pos": 11,
+            "name": "Lokeren D M VHV OWV-B 2",
+            "played": 3,
+            "won": 0,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 62,
+            "ga": 103,
             "points": 0
           }
         ],
@@ -6359,7 +6359,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.106Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -6475,7 +6475,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -6625,12 +6625,12 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
-            "id": "t_dhc_waasmunster_d_w_vhv_owv_b",
-            "name": "DHC Waasmunster D W VHV OWV-B",
+            "id": "t_thor_d_w_vhv_owv_2",
+            "name": "Thor D W VHV OWV 2",
             "points": 0,
             "homeBonus": ""
           },
@@ -6647,8 +6647,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_thor_d_w_vhv_owv_2",
-            "name": "Thor D W VHV OWV 2",
+            "id": "t_dhc_waasmunster_d_w_vhv_owv_b",
+            "name": "DHC Waasmunster D W VHV OWV-B",
             "points": 0,
             "homeBonus": ""
           },
@@ -6735,13 +6735,13 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "DHC Waasmunster D W VHV OWV-B",
+            "name": "Thor D W VHV OWV 2",
             "played": 2,
             "won": 2,
             "drawn": 0,
             "lost": 0,
-            "gf": 42,
-            "ga": 33,
+            "gf": 45,
+            "ga": 27,
             "points": 4
           },
           {
@@ -6768,14 +6768,14 @@
           },
           {
             "pos": 2,
-            "name": "Thor D W VHV OWV 2",
-            "played": 1,
-            "won": 1,
+            "name": "DHC Waasmunster D W VHV OWV-B",
+            "played": 2,
+            "won": 2,
             "drawn": 0,
             "lost": 0,
-            "gf": 24,
-            "ga": 12,
-            "points": 2
+            "gf": 42,
+            "ga": 33,
+            "points": 4
           },
           {
             "pos": 2,
@@ -6901,12 +6901,12 @@
           {
             "pos": 6,
             "name": "Evergem D W VHV OWV",
-            "played": 2,
+            "played": 3,
             "won": 0,
             "drawn": 0,
-            "lost": 2,
-            "gf": 32,
-            "ga": 46,
+            "lost": 3,
+            "gf": 47,
+            "ga": 67,
             "points": 0
           },
           {
@@ -6928,7 +6928,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -7231,7 +7231,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -7423,24 +7423,24 @@
           {
             "pos": 1,
             "name": "P. Kortessem B18 VHV R",
-            "played": 2,
-            "won": 2,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 62,
-            "ga": 44,
-            "points": 4
-          },
-          {
-            "pos": 1,
-            "name": "Sezoens Achilles Bocholt B18 VHV-B R 2",
             "played": 3,
             "won": 3,
             "drawn": 0,
             "lost": 0,
-            "gf": 72,
-            "ga": 59,
+            "gf": 84,
+            "ga": 61,
             "points": 6
+          },
+          {
+            "pos": 1,
+            "name": "Sezoens Achilles Bocholt B18 VHV-B R 2",
+            "played": 4,
+            "won": 4,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 112,
+            "ga": 88,
+            "points": 8
           },
           {
             "pos": 2,
@@ -7533,23 +7533,23 @@
           {
             "pos": 3,
             "name": "Sezoens Achilles Bocholt B18 VHV R 1",
-            "played": 3,
+            "played": 4,
             "won": 1,
             "drawn": 1,
-            "lost": 1,
-            "gf": 90,
-            "ga": 86,
+            "lost": 2,
+            "gf": 107,
+            "ga": 108,
             "points": 3
           },
           {
             "pos": 3,
             "name": "Kwanten Arena B18 VHV-B R",
-            "played": 2,
+            "played": 3,
             "won": 1,
             "drawn": 0,
-            "lost": 1,
-            "gf": 56,
-            "ga": 50,
+            "lost": 2,
+            "gf": 85,
+            "ga": 90,
             "points": 2
           },
           {
@@ -7577,13 +7577,13 @@
           {
             "pos": 4,
             "name": "Heist o/d Berg B18 VHV R",
-            "played": 3,
-            "won": 1,
+            "played": 4,
+            "won": 2,
             "drawn": 0,
             "lost": 2,
-            "gf": 89,
-            "ga": 116,
-            "points": 2
+            "gf": 131,
+            "ga": 155,
+            "points": 4
           },
           {
             "pos": 4,
@@ -7632,12 +7632,12 @@
           {
             "pos": 5,
             "name": "Schoten B18 VHV R",
-            "played": 3,
+            "played": 4,
             "won": 0,
             "drawn": 0,
-            "lost": 3,
-            "gf": 77,
-            "ga": 118,
+            "lost": 4,
+            "gf": 116,
+            "ga": 160,
             "points": 0
           },
           {
@@ -7670,7 +7670,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -8092,7 +8092,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -8134,6 +8134,90 @@
           {
             "id": "t_sezoens_achilles_bocholt_u16_vhv_r",
             "name": "Sezoens Achilles Bocholt U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_lokeren_u16_vhv_r",
+            "name": "Lokeren U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hbc_apolloon_spurs_u16_vhv_r",
+            "name": "HBC Apolloon Spurs U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_besox_izegem_u16_vhv_r_1",
+            "name": "Besox Izegem U16 VHV R 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_biobest_sasja_u16_vhv_r",
+            "name": "Biobest Sasja U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_rhino_u16_vhv_b_r",
+            "name": "Rhino U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hubo_u16_vhv_r_1",
+            "name": "Hubo U16 VHV R 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_sezoens_achilles_bocholt_u16_vhv_r",
+            "name": "Sezoens Achilles Bocholt U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_db_gent_u16_vhv_r",
+            "name": "DB Gent U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_db_gent_u16_vhv_r_2",
+            "name": "DB Gent U16 VHV R 2",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_brugge_u16_vhv_b_r",
+            "name": "Brugge U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_olse_merksem_u16_vhv_r",
+            "name": "Olse Merksem U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_leuven_u16_vhv_r",
+            "name": "Leuven U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_p_kortessem_u16_vhv_r",
+            "name": "P. Kortessem U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hubo_u16_vhv_r_2",
+            "name": "Hubo U16 VHV R 2",
             "points": 0,
             "homeBonus": ""
           },
@@ -8222,6 +8306,48 @@
             "homeBonus": ""
           },
           {
+            "id": "t_evergem_u16_vhv_b_r",
+            "name": "Evergem U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_thor_u16_vhv_b_r",
+            "name": "Thor U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hk_waasmunster_u16_vhv_r",
+            "name": "HK Waasmunster U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_uilenspiegel_u16_vhv_r",
+            "name": "Uilenspiegel U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_e_aarschot_u16_vhv_r",
+            "name": "E. Aarschot U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_united_west_t_b",
+            "name": "United West T-B",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hc_overpelt_u16_vhv_r",
+            "name": "HC Overpelt U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
             "id": "t_dendermonde_u16_vhv_r",
             "name": "Dendermonde U16 VHV R",
             "points": 0,
@@ -8246,8 +8372,50 @@
             "homeBonus": ""
           },
           {
-            "id": "t_heist_o_d_berg_u16_vhv_r",
-            "name": "Heist o/d Berg U16 VHV R",
+            "id": "t_atomix_u16_vhv_r",
+            "name": "AtomiX U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_h_bilzen_u16_vhv_r",
+            "name": "H. Bilzen U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_derdaele_sp_pelt_u16_vhv_r",
+            "name": "Derdaele Sp. Pelt U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_dendermonde_u16_vhv_r",
+            "name": "Dendermonde U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_besox_izegem_u16_vhv_r_2",
+            "name": "Besox Izegem U16 VHV R 2",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_lebbeke_u16_vhv_r",
+            "name": "Lebbeke U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_merksplas_u16_vhv_r",
+            "name": "Merksplas U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_atomix_u16_vhv_r",
+            "name": "AtomiX U16 VHV R",
             "points": 0,
             "homeBonus": ""
           },
@@ -8288,8 +8456,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_atomix_u16_vhv_r",
-            "name": "AtomiX U16 VHV R",
+            "id": "t_heist_o_d_berg_u16_vhv_r",
+            "name": "Heist o/d Berg U16 VHV R",
             "points": 0,
             "homeBonus": ""
           },
@@ -8302,6 +8470,72 @@
           {
             "id": "t_hhv_meeuwen_u16_vhv_b_r",
             "name": "HHV Meeuwen U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_mouscron_u16_vhv_r",
+            "name": "Mouscron U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_desselgemse_u16_vhv_r",
+            "name": "Desselgemse U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_roeselare_u16_vhv_r",
+            "name": "Roeselare U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_welta_u16_vhv_b_r",
+            "name": "Welta U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_heist_o_d_berg_u16_vhv_r",
+            "name": "Heist o/d Berg U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_maasmechelen_65_u16_vhv_b_r",
+            "name": "Maasmechelen 65 U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hhv_meeuwen_u16_vhv_b_r",
+            "name": "HHV Meeuwen U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_schoten_u16_vhv_r",
+            "name": "Schoten U16 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hvh_t_noorden_b",
+            "name": "HvH 't Noorden B",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_kreasa_houthalen_u16_vhv_b_r",
+            "name": "Kreasa Houthalen U16 VHV-B R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_kwanten_arena_u16_vhv_r",
+            "name": "Kwanten Arena U16 VHV R",
             "points": 0,
             "homeBonus": ""
           },
@@ -8408,6 +8642,160 @@
             "gf": 65,
             "ga": 35,
             "points": 6
+          },
+          {
+            "pos": 1,
+            "name": "Lokeren U16 VHV R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 121,
+            "ga": 47,
+            "points": 6
+          },
+          {
+            "pos": 1,
+            "name": "HBC Apolloon Spurs U16 VHV R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 98,
+            "ga": 77,
+            "points": 6
+          },
+          {
+            "pos": 1,
+            "name": "Besox Izegem U16 VHV R 1",
+            "played": 2,
+            "won": 2,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 63,
+            "ga": 46,
+            "points": 4
+          },
+          {
+            "pos": 1,
+            "name": "Biobest Sasja U16 VHV R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 106,
+            "ga": 37,
+            "points": 6
+          },
+          {
+            "pos": 1,
+            "name": "Rhino U16 VHV-B R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 110,
+            "ga": 62,
+            "points": 6
+          },
+          {
+            "pos": 1,
+            "name": "Hubo U16 VHV R 1",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 132,
+            "ga": 51,
+            "points": 6
+          },
+          {
+            "pos": 1,
+            "name": "Sezoens Achilles Bocholt U16 VHV R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 65,
+            "ga": 35,
+            "points": 6
+          },
+          {
+            "pos": 2,
+            "name": "DB Gent U16 VHV R",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 50,
+            "ga": 60,
+            "points": 2
+          },
+          {
+            "pos": 2,
+            "name": "DB Gent U16 VHV R 2",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 53,
+            "ga": 53,
+            "points": 2
+          },
+          {
+            "pos": 2,
+            "name": "Brugge U16 VHV-B R",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 61,
+            "ga": 52,
+            "points": 2
+          },
+          {
+            "pos": 2,
+            "name": "Olse Merksem U16 VHV R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 95,
+            "ga": 60,
+            "points": 6
+          },
+          {
+            "pos": 2,
+            "name": "Leuven U16 VHV R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 81,
+            "ga": 49,
+            "points": 6
+          },
+          {
+            "pos": 2,
+            "name": "P. Kortessem U16 VHV R",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 108,
+            "ga": 78,
+            "points": 6
+          },
+          {
+            "pos": 2,
+            "name": "Hubo U16 VHV R 2",
+            "played": 3,
+            "won": 2,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 111,
+            "ga": 51,
+            "points": 4
           },
           {
             "pos": 2,
@@ -8564,6 +8952,83 @@
             "points": 4
           },
           {
+            "pos": 3,
+            "name": "Evergem U16 VHV-B R",
+            "played": 2,
+            "won": 0,
+            "drawn": 1,
+            "lost": 1,
+            "gf": 72,
+            "ga": 74,
+            "points": 1
+          },
+          {
+            "pos": 3,
+            "name": "Thor U16 VHV-B R",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 51,
+            "ga": 53,
+            "points": 2
+          },
+          {
+            "pos": 3,
+            "name": "HK Waasmunster U16 VHV R",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 61,
+            "ga": 58,
+            "points": 2
+          },
+          {
+            "pos": 3,
+            "name": "Uilenspiegel U16 VHV R",
+            "played": 3,
+            "won": 1,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 77,
+            "ga": 79,
+            "points": 2
+          },
+          {
+            "pos": 3,
+            "name": "E. Aarschot U16 VHV R",
+            "played": 4,
+            "won": 2,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 89,
+            "ga": 78,
+            "points": 4
+          },
+          {
+            "pos": 3,
+            "name": "United West T-B",
+            "played": 3,
+            "won": 2,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 70,
+            "ga": 78,
+            "points": 4
+          },
+          {
+            "pos": 3,
+            "name": "HC Overpelt U16 VHV R",
+            "played": 3,
+            "won": 2,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 52,
+            "ga": 51,
+            "points": 4
+          },
+          {
             "pos": 4,
             "name": "Dendermonde U16 VHV R",
             "played": 2,
@@ -8609,14 +9074,91 @@
           },
           {
             "pos": 4,
-            "name": "Heist o/d Berg U16 VHV R",
+            "name": "AtomiX U16 VHV R",
             "played": 4,
+            "won": 2,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 103,
+            "ga": 115,
+            "points": 4
+          },
+          {
+            "pos": 4,
+            "name": "H. Bilzen U16 VHV R",
+            "played": 3,
             "won": 1,
             "drawn": 0,
-            "lost": 3,
-            "gf": 99,
-            "ga": 106,
+            "lost": 2,
+            "gf": 86,
+            "ga": 104,
             "points": 2
+          },
+          {
+            "pos": 4,
+            "name": "Derdaele Sp. Pelt U16 VHV R",
+            "played": 3,
+            "won": 1,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 51,
+            "ga": 76,
+            "points": 2
+          },
+          {
+            "pos": 4,
+            "name": "Dendermonde U16 VHV R",
+            "played": 2,
+            "won": 0,
+            "drawn": 1,
+            "lost": 1,
+            "gf": 65,
+            "ga": 83,
+            "points": 1
+          },
+          {
+            "pos": 4,
+            "name": "Besox Izegem U16 VHV R 2",
+            "played": 3,
+            "won": 1,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 82,
+            "ga": 87,
+            "points": 2
+          },
+          {
+            "pos": 4,
+            "name": "Lebbeke U16 VHV R",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 47,
+            "ga": 50,
+            "points": 2
+          },
+          {
+            "pos": 4,
+            "name": "Merksplas U16 VHV R",
+            "played": 2,
+            "won": 1,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 50,
+            "ga": 53,
+            "points": 2
+          },
+          {
+            "pos": 4,
+            "name": "AtomiX U16 VHV R",
+            "played": 4,
+            "won": 2,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 103,
+            "ga": 115,
+            "points": 4
           },
           {
             "pos": 4,
@@ -8686,13 +9228,90 @@
           },
           {
             "pos": 5,
-            "name": "AtomiX U16 VHV R",
+            "name": "Heist o/d Berg U16 VHV R",
+            "played": 4,
+            "won": 1,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 99,
+            "ga": 106,
+            "points": 2
+          },
+          {
+            "pos": 5,
+            "name": "Maasmechelen 65 U16 VHV-B R",
+            "played": 3,
+            "won": 0,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 64,
+            "ga": 85,
+            "points": 0
+          },
+          {
+            "pos": 5,
+            "name": "HHV Meeuwen U16 VHV-B R",
             "played": 3,
             "won": 1,
             "drawn": 0,
             "lost": 2,
-            "gf": 64,
-            "ga": 98,
+            "gf": 48,
+            "ga": 88,
+            "points": 2
+          },
+          {
+            "pos": 5,
+            "name": "Mouscron U16 VHV R",
+            "played": 1,
+            "won": 0,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 6,
+            "ga": 50,
+            "points": 0
+          },
+          {
+            "pos": 5,
+            "name": "Desselgemse U16 VHV R",
+            "played": 2,
+            "won": 0,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 42,
+            "ga": 56,
+            "points": 0
+          },
+          {
+            "pos": 5,
+            "name": "Roeselare U16 VHV R",
+            "played": 2,
+            "won": 0,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 38,
+            "ga": 64,
+            "points": 0
+          },
+          {
+            "pos": 5,
+            "name": "Welta U16 VHV-B R",
+            "played": 2,
+            "won": 0,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 23,
+            "ga": 65,
+            "points": 0
+          },
+          {
+            "pos": 5,
+            "name": "Heist o/d Berg U16 VHV R",
+            "played": 4,
+            "won": 1,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 99,
+            "ga": 106,
             "points": 2
           },
           {
@@ -8731,12 +9350,56 @@
           {
             "pos": 6,
             "name": "HvH 't Noorden B",
+            "played": 4,
+            "won": 0,
+            "drawn": 0,
+            "lost": 4,
+            "gf": 61,
+            "ga": 133,
+            "points": 0
+          },
+          {
+            "pos": 6,
+            "name": "Kreasa Houthalen U16 VHV-B R",
             "played": 3,
             "won": 0,
             "drawn": 0,
             "lost": 3,
-            "gf": 44,
-            "ga": 94,
+            "gf": 55,
+            "ga": 119,
+            "points": 0
+          },
+          {
+            "pos": 6,
+            "name": "Kwanten Arena U16 VHV R",
+            "played": 3,
+            "won": 0,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 67,
+            "ga": 93,
+            "points": 0
+          },
+          {
+            "pos": 6,
+            "name": "Schoten U16 VHV R",
+            "played": 3,
+            "won": 0,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 56,
+            "ga": 113,
+            "points": 0
+          },
+          {
+            "pos": 6,
+            "name": "HvH 't Noorden B",
+            "played": 4,
+            "won": 0,
+            "drawn": 0,
+            "lost": 4,
+            "gf": 61,
+            "ga": 133,
             "points": 0
           },
           {
@@ -8769,7 +9432,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -8987,7 +9650,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -9171,12 +9834,12 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
-            "id": "t_lokeren_u16_vhv_r",
-            "name": "Lokeren U16 VHV R",
+            "id": "t_besox_izegem_g16_vhv_r_2",
+            "name": "Besox Izegem G16 VHV R 2",
             "points": 0,
             "homeBonus": ""
           },
@@ -9193,8 +9856,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_besox_izegem_g16_vhv_r_2",
-            "name": "Besox Izegem G16 VHV R 2",
+            "id": "t_dhc_waasmunster_g16_vhv_r",
+            "name": "DHC Waasmunster G16 VHV R",
             "points": 0,
             "homeBonus": ""
           },
@@ -9211,8 +9874,8 @@
             "homeBonus": ""
           },
           {
-            "id": "t_dhc_waasmunster_g16_vhv_r",
-            "name": "DHC Waasmunster G16 VHV R",
+            "id": "t_lokeren_u16_vhv_r",
+            "name": "Lokeren U16 VHV R",
             "points": 0,
             "homeBonus": ""
           },
@@ -9275,14 +9938,14 @@
         "ranking": [
           {
             "pos": 1,
-            "name": "Lokeren U16 VHV R",
-            "played": 0,
-            "won": 0,
+            "name": "Besox Izegem G16 VHV R 2",
+            "played": 2,
+            "won": 2,
             "drawn": 0,
             "lost": 0,
-            "gf": 0,
-            "ga": 0,
-            "points": 0
+            "gf": 56,
+            "ga": 27,
+            "points": 4
           },
           {
             "pos": 1,
@@ -9308,14 +9971,14 @@
           },
           {
             "pos": 2,
-            "name": "Besox Izegem G16 VHV R 2",
-            "played": 2,
-            "won": 2,
+            "name": "DHC Waasmunster G16 VHV R",
+            "played": 1,
+            "won": 1,
             "drawn": 0,
             "lost": 0,
-            "gf": 56,
+            "gf": 28,
             "ga": 27,
-            "points": 4
+            "points": 2
           },
           {
             "pos": 2,
@@ -9341,14 +10004,14 @@
           },
           {
             "pos": 3,
-            "name": "DHC Waasmunster G16 VHV R",
-            "played": 1,
-            "won": 1,
+            "name": "Lokeren U16 VHV R",
+            "played": 0,
+            "won": 0,
             "drawn": 0,
             "lost": 0,
-            "gf": 28,
-            "ga": 27,
-            "points": 2
+            "gf": 0,
+            "ga": 0,
+            "points": 0
           },
           {
             "pos": 3,
@@ -9457,7 +10120,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -9590,7 +10253,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -10029,7 +10692,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -10842,7 +11505,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -10854,6 +11517,30 @@
           {
             "id": "t_hbc_apolloon_spurs_u14_vhv_r",
             "name": "HBC Apolloon Spurs U14 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_sezoens_achilles_bocholt_u14_vhv_c",
+            "name": "Sezoens Achilles Bocholt U14 VHV C",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hbc_apolloon_spurs_u14_vhv_r",
+            "name": "HBC Apolloon Spurs U14 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_h_bilzen_u14_vhv_c",
+            "name": "H. Bilzen U14 VHV C",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_roeselare_u14_vhv_b_r",
+            "name": "Roeselare U14 VHV-B R",
             "points": 0,
             "homeBonus": ""
           },
@@ -10882,6 +11569,30 @@
             "homeBonus": ""
           },
           {
+            "id": "t_hhv_meeuwen_u14_vhv_c",
+            "name": "HHV Meeuwen U14 VHV C",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_evergem_u14_vhv_r",
+            "name": "Evergem U14 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_hubo_u14_vhv_c_1",
+            "name": "Hubo U14 VHV C 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_handbalclub_aalst",
+            "name": "Handbalclub Aalst",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
             "id": "t_hubo_u14_vhv_c_1",
             "name": "Hubo U14 VHV C 1",
             "points": 0,
@@ -10906,6 +11617,18 @@
             "homeBonus": ""
           },
           {
+            "id": "t_hubo_u14_vhv_c_2",
+            "name": "Hubo U14 VHV C 2",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_dendermonde_u14_vhv_r",
+            "name": "Dendermonde U14 VHV R",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
             "id": "t_derdaele_sp_pelt_u14_vhv_c",
             "name": "Derdaele Sp. Pelt U14 VHV C",
             "points": 0,
@@ -10914,6 +11637,24 @@
           {
             "id": "t_db_gent_u14_cup_2",
             "name": "DB Gent U14 Cup 2",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_derdaele_sp_pelt_u14_vhv_c",
+            "name": "Derdaele Sp. Pelt U14 VHV C",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_db_gent_u14_cup_2",
+            "name": "DB Gent U14 Cup 2",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_db_gent_u14_cup_1",
+            "name": "DB Gent U14 Cup 1",
             "points": 0,
             "homeBonus": ""
           },
@@ -10949,6 +11690,28 @@
             "points": 0
           },
           {
+            "pos": 1,
+            "name": "Sezoens Achilles Bocholt U14 VHV C",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 1,
+            "name": "HBC Apolloon Spurs U14 VHV R",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
             "pos": 2,
             "name": "H. Bilzen U14 VHV C",
             "played": 0,
@@ -10962,6 +11725,50 @@
           {
             "pos": 2,
             "name": "Roeselare U14 VHV-B R",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 2,
+            "name": "H. Bilzen U14 VHV C",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 2,
+            "name": "Roeselare U14 VHV-B R",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 3,
+            "name": "HHV Meeuwen U14 VHV C",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 3,
+            "name": "Evergem U14 VHV R",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -11015,6 +11822,28 @@
             "points": 0
           },
           {
+            "pos": 4,
+            "name": "Hubo U14 VHV C 1",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 4,
+            "name": "Handbalclub Aalst",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
             "pos": 5,
             "name": "Hubo U14 VHV C 2",
             "played": 0,
@@ -11028,6 +11857,50 @@
           {
             "pos": 5,
             "name": "Dendermonde U14 VHV R",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 5,
+            "name": "Hubo U14 VHV C 2",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 5,
+            "name": "Dendermonde U14 VHV R",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 6,
+            "name": "Derdaele Sp. Pelt U14 VHV C",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
+          },
+          {
+            "pos": 6,
+            "name": "DB Gent U14 Cup 2",
             "played": 0,
             "won": 0,
             "drawn": 0,
@@ -11068,6 +11941,17 @@
             "gf": 0,
             "ga": 0,
             "points": 0
+          },
+          {
+            "pos": 7,
+            "name": "DB Gent U14 Cup 1",
+            "played": 0,
+            "won": 0,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 0,
+            "ga": 0,
+            "points": 0
           }
         ],
         "scorers": []
@@ -11077,7 +11961,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -11465,7 +12349,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -11649,7 +12533,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -11986,7 +12870,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -12119,7 +13003,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-09-26T15:28:48.107Z",
+        "updatedAt": "2026-09-26T18:48:08.146Z",
         "live": false,
         "teams": [
           {
@@ -12186,23 +13070,23 @@
           {
             "pos": 3,
             "name": "Derdaele Sp. Pelt G 18 VHV",
-            "played": 3,
-            "won": 1,
+            "played": 4,
+            "won": 2,
             "drawn": 0,
             "lost": 2,
-            "gf": 75,
-            "ga": 65,
-            "points": 2
+            "gf": 105,
+            "ga": 94,
+            "points": 4
           },
           {
             "pos": 4,
             "name": "DHC Overpelt G 18 VHV",
-            "played": 3,
+            "played": 4,
             "won": 1,
             "drawn": 0,
-            "lost": 2,
-            "gf": 98,
-            "ga": 90,
+            "lost": 3,
+            "gf": 127,
+            "ga": 120,
             "points": 2
           },
           {
