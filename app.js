@@ -446,7 +446,7 @@ function calcStats(teams, fixtures, ranking) {
       if (hg > ag) { h.W++; a.L++; } else if (hg < ag) { a.W++; h.L++; } else { h.D++; a.D++; }
     });
   }
-  const rows = Object.values(s).map(r => ({ ...r, GD: r.GF - r.GA, totalPts: r.basePts + (scoredFixtures.length > 0 ? r.W * 2 + r.D : 0) }));
+  const rows = Object.values(s).map(r => ({ ...r, GD: r.GF - r.GA, totalPts: scoredFixtures.length > 0 ? r.W * 2 + r.D : r.basePts }));
 
   function h2h(ids) {
     const h = {};
