@@ -490,28 +490,23 @@ async function main() {
 
       const ranking      = parseStandingsHtml(standingsHtml);
 
-      // DEBUG: hunt for JSON data islands containing fixtures
+      // DEBUG: dump full GameCard HTML to see score structure
       if (cfg.id === "18700") {
         console.log(`[DEBUG-GAMES] len=${gamesHtml.length}`);
-        // Look for score patterns like "home_score" or "score" or "goals" in JSON
-        const scoreKeys = ["home_score","away_score","home_goals","away_goals","score_home","score_away","result","score\":"];
-        for (const key of scoreKeys) {
-          const idx = gamesHtml.indexOf(key);
-          if (idx >= 0) {
-            console.log(`[DEBUG-JSON-KEY:${key}] at ${idx}: ${gamesHtml.substring(Math.max(0,idx-100), idx+400).replace(/\s+/g," ")}`);
-          }
+        // Find first GameCard anchor and dump 2000 chars of it
+        const gcIdx = gamesHtml.indexOf("GameCard-module");
+        if (gcIdx >= 0) {
+          // Walk back to find the opening <a
+          const aStart = gamesHtml.lastIndexOf("<a ", gcIdx);
+          const chunk = gamesHtml.substring(aStart, aStart + 2500).replace(/\s+/g, " ");
+          console.log(`[DEBUG-GAMECARD] ${chunk}`);
         }
-        // Also look for team name patterns
-        const teamIdx = gamesHtml.indexOf("Schoten");
-        if (teamIdx >= 0) console.log(`[DEBUG-TEAM] "Schoten" at ${teamIdx}: ${gamesHtml.substring(Math.max(0,teamIdx-200), teamIdx+400).replace(/\s+/g," ")}`);
-        // Find all <script> tags that contain JSON (look for __NEXT_DATA__ or similar)
-        const scriptMatches = [...gamesHtml.matchAll(/<script[^>]*>([\s\S]{200,}?)<\/script>/gi)];
-        console.log(`[DEBUG-SCRIPTS] found ${scriptMatches.length} non-trivial <script> blocks`);
-        for (let i = 0; i < Math.min(scriptMatches.length, 5); i++) {
-          const content = scriptMatches[i][1];
-          if (content.includes("score") || content.includes("goals") || content.includes("result")) {
-            console.log(`[DEBUG-SCRIPT-${i}] len=${content.length} preview: ${content.substring(0,300).replace(/\s+/g," ")}`);
-          }
+        // Also find a second game card (skip first occurrence)
+        const gc2 = gamesHtml.indexOf("GameCard-module", gcIdx + 100);
+        if (gc2 >= 0) {
+          const a2 = gamesHtml.lastIndexOf("<a ", gc2);
+          const chunk2 = gamesHtml.substring(a2, a2 + 2500).replace(/\s+/g, " ");
+          console.log(`[DEBUG-GAMECARD2] ${chunk2}`);
         }
       }
 
