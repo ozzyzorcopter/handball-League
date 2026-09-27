@@ -401,7 +401,52 @@ async function parseStatsAllPages(page, leagueId) {
     catch { break; }
 
     if (pageNum === 1) {
-      console.log(`[DBG stats ${leagueId}] url=${url} html_len=${html.length} snippet="${html.slice(0,200).replace(/\s+/g,' ')}"`);
+      // DEBUG: the old version logged html.slice(0,200), which is always just
+      // the <!DOCTYPE>/<head> boilerplate and tells us nothing about the table
+      // markup. Log structural facts instead, plus a snippet anchored on the
+      // "Player" column header (or the first player-like row) so we can see
+      // the ACTUAL markup (table/tr/td vs. div-grid vs. something else).
+      let structInfo;
+      try {
+        structInfo = await page.evaluate(() => {
+          const tableCount = document.querySelectorAll("table").length;
+          const trCount    = document.querySelectorAll("tr").length;
+          const tdCount    = document.querySelectorAll("td").length;
+          const memberLinkCount = document.querySelectorAll(
+            "a[href*='/member'], a[href*='/player'], a[href*='/profile']"
+          ).length;
+          const roleRowCount = document.querySelectorAll("[role='row']").length;
+
+          // Find the smallest element whose own text is exactly "Player"
+          // (the column header), then walk up to something table/grid-like
+          // and grab its outerHTML so we can see real markup around the data.
+          let headerAnchorHtml = "";
+          const all = document.querySelectorAll("body *");
+          for (const el of all) {
+            if (el.children.length === 0 && el.textContent.trim() === "Player") {
+              const container =
+                el.closest("table") ||
+                el.closest("[role='table']") ||
+                el.closest("div[class]") ||
+                el.parentElement;
+              headerAnchorHtml = (container ? container.outerHTML : el.outerHTML).slice(0, 2000);
+              break;
+            }
+          }
+
+          return { tableCount, trCount, tdCount, memberLinkCount, roleRowCount, headerAnchorHtml };
+        });
+      } catch (e) {
+        structInfo = { error: String(e) };
+      }
+      console.log(
+        `[DBG stats ${leagueId}] url=${url} html_len=${html.length} ` +
+        `tables=${structInfo.tableCount} trs=${structInfo.trCount} tds=${structInfo.tdCount} ` +
+        `memberLinks=${structInfo.memberLinkCount} roleRows=${structInfo.roleRowCount}`
+      );
+      console.log(
+        `[DBG stats ${leagueId}] headerAnchorHtml="${(structInfo.headerAnchorHtml || "").replace(/\s+/g, " ")}"`
+      );
     }
     if (html.includes("No information added yet")) break;
 
@@ -411,34 +456,74 @@ async function parseStatsAllPages(page, leagueId) {
       if (pageNums.length > 0) maxPage = Math.max(...pageNums);
     }
 
-    // Parse rows
-    const chunks = html.split(/<tr[\s>]/i);
-    for (const chunk of chunks) {
-      const rowContent = chunk.split(/<\/tr>/i)[0];
+    // Primary strategy: parse via the live DOM (page.evaluate) rather than
+    // regex over serialized HTML. This is robust to attribute quoting,
+    // nested tags, and whitespace that broke the old regex-based split, and
+    // it works whether rows are real <tr>/<td> or ARIA "row"/"cell" divs.
+    let domRows = [];
+    try {
+      domRows = await page.evaluate(() => {
+        function cellsOf(rowEl, cellSelector) {
+          return Array.from(rowEl.querySelectorAll(cellSelector)).map(td => {
+            const img = td.querySelector("img[alt]");
+            return {
+              text: (td.textContent || "").replace(/\s+/g, " ").trim(),
+              alt: img ? img.getAttribute("alt") || "" : "",
+            };
+          });
+        }
 
-      // Extract club name from team logo alt text
-      const altM = rowContent.match(/alt="([^"]+)"/i);
-      const club = altM ? altM[1].trim() : "";
+        let rowEls = Array.from(document.querySelectorAll("table tr"));
+        let cellSel = "td";
+        if (rowEls.length === 0) {
+          rowEls = Array.from(document.querySelectorAll("[role='row']"));
+          cellSel = "[role='cell'], [role='gridcell']";
+        }
 
-      const cells = [];
-      const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-      let td;
-      while ((td = tdRe.exec(rowContent)) !== null) {
-        const text = (td[1] ?? "").replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
-          .replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/&[a-z0-9#]+;/gi," ")
-          .replace(/\s+/g," ").trim();
-        cells.push(text);
-      }
+        return rowEls.map(row => cellsOf(row, cellSel)).filter(cells => cells.length > 0);
+      });
+    } catch { domRows = []; }
 
-      // Row: # (no dot) | Player name | MP | Goals | ...
-      if (cells.length >= 4 && /^\d+$/.test(cells[0]) && cells[1] && /^\d+$/.test(cells[3])) {
-        const goals = parseInt(cells[3]);
-        const mp    = parseInt(cells[2]) || 0;
+    for (const cells of domRows) {
+      const texts = cells.map(c => c.text);
+      const club = cells.find(c => c.alt)?.alt.trim() || "";
+      if (texts.length >= 4 && /^\d+$/.test(texts[0]) && texts[1] && /^\d+$/.test(texts[3])) {
+        const goals = parseInt(texts[3]);
+        const mp    = parseInt(texts[2]) || 0;
         if (goals > 0) {
-          scorers.push({ player: cells[1], club, goals, matchesPlayed: mp });
+          scorers.push({ player: texts[1], club, goals, matchesPlayed: mp });
         }
       }
     }
+
+    // Fallback: old regex-based parser, in case the DOM pass above found
+    // nothing (e.g. page.evaluate failed) but the raw HTML still has a
+    // parseable <table>. Kept only as a safety net.
+    if (domRows.length === 0) {
+      const chunks = html.split(/<tr[\s>]/i);
+      for (const chunk of chunks) {
+        const rowContent = chunk.split(/<\/tr>/i)[0];
+        const altM = rowContent.match(/alt="([^"]+)"/i);
+        const club = altM ? altM[1].trim() : "";
+        const cells = [];
+        const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+        let td;
+        while ((td = tdRe.exec(rowContent)) !== null) {
+          const text = (td[1] ?? "").replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
+            .replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/&[a-z0-9#]+;/gi," ")
+            .replace(/\s+/g," ").trim();
+          cells.push(text);
+        }
+        if (cells.length >= 4 && /^\d+$/.test(cells[0]) && cells[1] && /^\d+$/.test(cells[3])) {
+          const goals = parseInt(cells[3]);
+          const mp    = parseInt(cells[2]) || 0;
+          if (goals > 0) {
+            scorers.push({ player: cells[1], club, goals, matchesPlayed: mp });
+          }
+        }
+      }
+    }
+
     pageNum++;
   }
 
