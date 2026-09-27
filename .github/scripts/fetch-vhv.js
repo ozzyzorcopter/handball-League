@@ -236,11 +236,12 @@ async function fetchHtml(page, url) {
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
   try {
     await page.waitForFunction(() => {
-      const hasTr   = document.querySelector("table tr td") !== null;
-      // Games page uses divs — wait for enough text content to appear (>5000 chars)
-      const hasDiv  = document.body.innerText.length > 5000;
-      const noData  = document.body.innerText.includes("No information added yet");
-      return hasTr || hasDiv || noData;
+      const hasTr    = document.querySelector("table tr td") !== null;
+      // Games/stats pages render into divs — GameCard or stats table rows
+      const hasCards = document.querySelector("a[href*='/games/']") !== null;
+      const hasStats = document.querySelector("a[href*='/members/']") !== null;
+      const noData   = document.body.innerText.includes("No information added yet");
+      return hasTr || hasCards || hasStats || noData;
     }, { timeout: 15000 });
   } catch { /* timeout — return what we have */ }
   return page.content();
@@ -286,25 +287,35 @@ function parseStandingsHtml(html) {
   return rows.sort((a, b) => a.pos - b.pos);
 }
 
-// ── GAMES: parse from rendered HTML page ──────────────────────────────────────
-// Games page shows: home team | score (e.g. "26 - 25") | date | away team
-// Played games have a score; scheduled ones show a date/time only.
+// ── GAMES: parse from rendered div-based GameCard components ──────────────────
+// Each game is an <a href="/handballbelgium/games/ID"> containing:
+//   teamInnerParapraph  div → <strong>Home Team (Division)</strong>
+//   <h3>               → " - : - " (scheduled) or "26 : 25" (played)
+//   <p>                → "22.08.2026" (date)
+//   teamInnerParapraphSecond div → <strong>Away Team (Division)</strong>
 function parseGamesHtml(html, ranking) {
   const teamNames = ranking.map(r => r.name);
   const nameIdx   = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
 
+  function stripText(s) {
+    return s.replace(/<[^>]+>/g, " ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
+            .replace(/&#39;/g,"'").replace(/&[a-z0-9#]+;/gi," ")
+            .replace(/\s+/g," ").trim();
+  }
   function coreClubName(name) {
     return name
-      .replace(/\([^)]*\)/g, "")  // strip parentheticals like (Senior M)
+      .replace(/\([^)]*\)/g, "")
       .replace(/\b(handbalclub|handbal|hbc|hv|hc|khc|hvh|hbv)\b/gi, "")
       .replace(/\s+/g, " ").trim().toLowerCase();
   }
   const coreIdx = new Map(teamNames.map((n, i) => [coreClubName(n), i]));
 
   function resolveTeam(raw) {
-    const lower = raw.toLowerCase().trim();
+    // Strip division suffix like "(Senior M)" first
+    const clean = raw.replace(/\s*\([^)]*\)\s*$/, "").trim();
+    const lower = clean.toLowerCase();
     if (nameIdx.has(lower)) return nameIdx.get(lower);
-    const core = coreClubName(raw);
+    const core = coreClubName(clean);
     if (core && coreIdx.has(core)) return coreIdx.get(core);
     for (const [sc, idx] of coreIdx) {
       if (core && sc && (sc.startsWith(core) || core.startsWith(sc))) return idx;
@@ -315,73 +326,44 @@ function parseGamesHtml(html, ranking) {
   const fixtures = [];
   let counter = 0;
 
-  // Each game row in the HTML table: cells contain home team, score/date, away team
-  const chunks = html.split(/<tr[\s>]/i);
-  let debugCount = 0;
-  for (const chunk of chunks) {
-    const rowContent = chunk.split(/<\/tr>/i)[0];
-    const cells = [];
-    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-    let td;
-    while ((td = tdRe.exec(rowContent)) !== null) {
-      const inner = td[1] ?? "";
-      const text = inner
-        .replace(/<[^>]+>/g, " ")
-        .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
-        .replace(/&#39;/g, "'").replace(/&[a-z0-9#]+;/gi, " ")
-        .replace(/\s+/g, " ").trim();
-      cells.push(text);
-    }
+  // Split on game card anchors — each <a href="/handballbelgium/games/..."> is one game
+  const gameRe = /<a[^>]+href="[^"]*\/games\/(\d+)"[\s\S]*?<\/a>/gi;
+  let m;
+  while ((m = gameRe.exec(html)) !== null) {
+    const gameId  = m[1];
+    const cardHtml = m[0];
 
-    // Need at least 3 cells: home, score-or-date, away
-    if (cells.length < 3) continue;
+    // Extract home team: inside teamInnerParapraph (not Second) → first <strong>
+    const homeM = cardHtml.match(/teamInnerParapraph"[\s\S]*?<strong>([\s\S]*?)<\/strong>/i);
+    // Extract away team: inside teamInnerParapraphSecond → first <strong>
+    const awayM = cardHtml.match(/teamInnerParapraphSecond[\s\S]*?<strong>([\s\S]*?)<\/strong>/i);
+    if (!homeM || !awayM) continue;
 
-    // DEBUG: print first 8 rows with >=3 cells
-    if (debugCount < 8) {
-      console.log(`[DEBUG-GAMES] cells[${cells.length}]: ${JSON.stringify(cells)}`);
-      debugCount++;
-    }
-
-    // Find the score cell — matches "N - N" pattern
-    let scoreCell = -1;
-    let scoreMatch = null;
-    for (let i = 0; i < cells.length; i++) {
-      const m = cells[i].match(/^(\d{1,3})\s*-\s*(\d{1,3})$/);
-      if (m) { scoreCell = i; scoreMatch = m; break; }
-    }
-
-    let homeName, awayName, played, homeScore, awayScore, date;
-
-    if (scoreCell >= 1) {
-      // Played game: cells before score = home team info, after = away team info
-      homeName  = cells.slice(0, scoreCell).join(" ").trim();
-      awayName  = cells.slice(scoreCell + 1).join(" ").trim();
-      played    = true;
-      homeScore = parseInt(scoreMatch[1]);
-      awayScore = parseInt(scoreMatch[2]);
-      date      = null;
-    } else {
-      // Scheduled game: try to find date pattern DD.MM.YYYY
-      const dateCell = cells.findIndex(c => /\d{2}\.\d{2}\.\d{4}/.test(c));
-      if (dateCell < 1) continue;
-      const dateStr = cells[dateCell].match(/(\d{2})\.(\d{2})\.(\d{4})/);
-      date     = dateStr ? `${dateStr[3]}-${dateStr[2]}-${dateStr[1]}` : null;
-      homeName = cells.slice(0, dateCell).join(" ").trim();
-      awayName = cells.slice(dateCell + 1).join(" ").trim();
-      played   = false; homeScore = null; awayScore = null;
-    }
-
-    // Strip division suffixes like "(Senior M)" from team names
-    homeName = (homeName || "").replace(/\([^)]*\)/g, "").trim();
-    awayName = (awayName || "").replace(/\([^)]*\)/g, "").trim();
-
+    const homeName = stripText(homeM[1]);
+    const awayName = stripText(awayM[1]);
     if (!homeName || !awayName) continue;
+
+    // Skip "Bye" placeholder teams
+    if (/^bye\b/i.test(homeName) || /^bye\b/i.test(awayName)) continue;
+
+    // Extract score from <h3>: "26 : 25" (played) or " - : - " (scheduled)
+    const h3M = cardHtml.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
+    const h3  = h3M ? stripText(h3M[1]) : "";
+    const scoreM = h3.match(/(\d+)\s*:\s*(\d+)/);
+    const played = !!scoreM;
+    const homeScore = played ? parseInt(scoreM[1]) : null;
+    const awayScore = played ? parseInt(scoreM[2]) : null;
+
+    // Extract date from <p> inside the centre column: "22.08.2026"
+    const dateM = cardHtml.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
+    const date  = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
+
     const homeIdx = resolveTeam(homeName);
     const awayIdx = resolveTeam(awayName);
     if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) continue;
 
     fixtures.push({
-      id: `f${counter++}`, gameId: "",
+      id: `f${counter++}`, gameId,
       homeIdx, awayIdx,
       homeWin: 50, draw: 6, awayWin: 44,
       overrideOn: false, ovHW: "", ovD: "", ovAW: "",
@@ -490,25 +472,7 @@ async function main() {
 
       const ranking      = parseStandingsHtml(standingsHtml);
 
-      // DEBUG: dump full GameCard HTML to see score structure
-      if (cfg.id === "18700") {
-        console.log(`[DEBUG-GAMES] len=${gamesHtml.length}`);
-        // Find first GameCard anchor and dump 2000 chars of it
-        const gcIdx = gamesHtml.indexOf("GameCard-module");
-        if (gcIdx >= 0) {
-          // Walk back to find the opening <a
-          const aStart = gamesHtml.lastIndexOf("<a ", gcIdx);
-          const chunk = gamesHtml.substring(aStart, aStart + 2500).replace(/\s+/g, " ");
-          console.log(`[DEBUG-GAMECARD] ${chunk}`);
-        }
-        // Also find a second game card (skip first occurrence)
-        const gc2 = gamesHtml.indexOf("GameCard-module", gcIdx + 100);
-        if (gc2 >= 0) {
-          const a2 = gamesHtml.lastIndexOf("<a ", gc2);
-          const chunk2 = gamesHtml.substring(a2, a2 + 2500).replace(/\s+/g, " ");
-          console.log(`[DEBUG-GAMECARD2] ${chunk2}`);
-        }
-      }
+      // (debug removed)
 
       const { fixtures } = parseGamesHtml(gamesHtml, ranking);
 
