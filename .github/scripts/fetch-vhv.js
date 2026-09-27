@@ -400,6 +400,9 @@ async function parseStatsAllPages(page, leagueId) {
     try { html = await fetchHtml(page, url); }
     catch { break; }
 
+    if (pageNum === 1) {
+      console.log(`[DBG stats ${leagueId}] url=${url} html_len=${html.length} snippet="${html.slice(0,200).replace(/\s+/g,' ')}"`);
+    }
     if (html.includes("No information added yet")) break;
 
     // Detect max page from pagination links
