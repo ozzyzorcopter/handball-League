@@ -472,7 +472,16 @@ async function parseStatsAllPages(page, leagueId) {
         `[DBG stats ${leagueId}] firstBodyRowHtml="${(structInfo.firstBodyRowHtml || "").replace(/\s+/g, " ")}"`
       );
     }
-    if (html.includes("No information added yet")) break;
+    // NOTE: we intentionally do NOT break here based on a page-wide text
+    // search for "No information added yet". That phrase can appear
+    // anywhere on the page (an unrelated empty-state widget, a hidden
+    // placeholder present in the initial markup, etc.) even when the stats
+    // table itself has real rows — this was confirmed to be exactly what
+    // was causing every league to report 0 scorers: the debug block above
+    // (structInfo, read from the live DOM) showed real row data, but this
+    // check fired first and broke out of the loop before the row-gathering
+    // code below ever ran. Instead we only decide "no data" from the
+    // actual DOM rows we gather further down.
 
     // Detect max page from pagination links
     if (pageNum === 1) {
