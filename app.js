@@ -1341,7 +1341,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
-      {(leagueId || (Array.isArray(archiveScorers) && archiveScorers.length > 0)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
+      {(leagueId || Array.isArray(archiveScorers)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
           {/* Row 1: Attackers + Defenders */}
@@ -1820,7 +1820,7 @@ function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, on
           <span style={{ color: "#5a6070" }}>?</span>
         </div>
         <span className="res-lbl" style={{ color: "#5a6070" }}>Played</span>
-        <button className="btn-undo" onClick={() => onUndo(f.id)}>↩ Undo</button>
+        {onUndo && <button className="btn-undo" onClick={() => onUndo(f.id)}>↩ Undo</button>}
       </div>
     );
   }

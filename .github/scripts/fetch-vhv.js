@@ -354,18 +354,7 @@ function parseGamesHtml(html, ranking) {
     // Score from <h3>: "26 : 25" = played, " - : - " = scheduled
     const h3M    = card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
     const h3     = h3M ? stripText(h3M[1]) : "";
-    const scoreM = h3.match(/(\d+)\s*:\s*(\d+)/);
-    // Debug: log first 5 past-game cards to inspect structure
-    if (counter < 5) {
-      const today2 = new Date().toISOString().slice(0, 10);
-      const dateM2 = card.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
-      const d2 = dateM2 ? `${dateM2[3]}-${dateM2[2]}-${dateM2[1]}` : null;
-      if (d2 && d2 < today2) {
-        console.log(`[DBG card ${counter}] h3="${h3}" scoreM=${scoreM ? scoreM[0] : "none"}`);
-        const cardText = card.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,400);
-        console.log(`[DBG card ${counter}] text: ${cardText}`);
-      }
-    }
+    const scoreM = h3.match(/(\d+)\s*[-:]\s*(\d+)/);
 
     // Date from <p>: "22.08.2026"
     const dateM = card.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
