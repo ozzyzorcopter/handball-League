@@ -247,6 +247,24 @@ async function fetchHtml(page, url) {
   return page.content();
 }
 
+// Club logo <img> URLs for the same team can differ between pages (Next.js
+// image optimizer query params like width/quality vary by where the logo is
+// rendered), even though they point at the same underlying image. This pulls
+// out a stable key — the real image path/filename — so a logo captured on
+// the standings page can still be matched against one captured on the stats
+// page.
+function normalizeLogoSrc(src) {
+  if (!src) return "";
+  try {
+    // Next.js image optimizer: /_next/image?url=<encoded-real-path>&w=64&q=75
+    const m = src.match(/[?&]url=([^&]+)/i);
+    if (m) return decodeURIComponent(m[1]).split("?")[0];
+    return src.split("?")[0];
+  } catch {
+    return src.split("?")[0];
+  }
+}
+
 // ── STANDINGS: parse from rendered HTML table ──────────────────────────────────
 // Columns: # | Club (with img) | MP | W | D | L | GS | GA | GD | Pts | (empty)
 function parseStandingsHtml(html) {
@@ -271,6 +289,11 @@ function parseStandingsHtml(html) {
     if (cells.length < 10) continue;
     const posStr = (cells[0] ?? "").replace(/\.$/, "");
     if (/^\d+$/.test(posStr) && cells[1]) {
+      // Grab the club logo <img> (src or data-src, whichever is set — some
+      // lazy-loading setups only populate data-src until the image scrolls
+      // into view) so we can later match it against the stats page's logos,
+      // which have no usable alt text.
+      const imgM = rowContent.match(/<img[^>]*\s(?:data-)?src="([^"]+)"/i);
       rows.push({
         pos:    parseInt(posStr),
         name:   cells[1].replace(/\s*\([^)]*\)\s*$/, "").trim(),
@@ -281,6 +304,7 @@ function parseStandingsHtml(html) {
         gf:     parseInt(cells[6])  || 0,
         ga:     parseInt(cells[7])  || 0,
         points: parseInt(cells[9])  || 0,
+        logoKey: imgM ? normalizeLogoSrc(imgM[1]) : "",
       });
     }
   }
@@ -388,13 +412,36 @@ function parseGamesHtml(html, ranking) {
 // Stats page columns: # | Player | MP | Goals | YC | RC | ...
 // Club comes from team logo alt text.
 // Paginated: ?page=N
-async function parseStatsAllPages(page, leagueId) {
+async function parseStatsAllPages(page, leagueId, ranking = []) {
   const BASE = "https://www.clubee.com/handballbelgium";
+  // The scorer table's club logo <img> has no alt text at all (confirmed on
+  // real captured markup), so club always came out as "" and the app's
+  // per-team "Team Scorers" panel could never match anyone. Build a
+  // logo-URL → team-name map from the standings page (which we already
+  // parsed) so we can identify a scorer's club from their row's logo image
+  // instead, even with no alt text to read.
+  const logoMap = new Map();
+  for (const r of ranking) {
+    if (r.logoKey) logoMap.set(r.logoKey, r.name);
+  }
   const scorers = [];
   let pageNum = 1;
-  let maxPage = 1;
+  // We no longer trust a regex over the static HTML to find "page=N" links to
+  // determine how many pages exist — that only works if pagination is
+  // rendered as real <a href> links in the initial markup. If it's
+  // client-side buttons instead (no such links ever appear), that regex
+  // finds nothing and we'd silently stop after page 1, capping every league
+  // at whatever the page size is (seen live: 10 scorers, even when more
+  // exist). Instead we just keep fetching subsequent pages until one comes
+  // back with zero real player rows, bounded by a safety cap.
+  const MAX_PAGES_SAFETY_CAP = 30;
+  // Guards against a site that clamps an out-of-range page request back to
+  // the last valid page (returning the SAME rows again) instead of an empty
+  // page — without this we'd re-add the same scorers on every iteration up
+  // to the safety cap instead of stopping.
+  let prevPageSignature = null;
 
-  while (pageNum <= maxPage) {
+  while (pageNum <= MAX_PAGES_SAFETY_CAP) {
     const url = `${BASE}/stats-371072v4/leagues/${leagueId}/seasons/0?page=${pageNum}`;
     let html;
     try { html = await fetchHtml(page, url); }
@@ -483,12 +530,6 @@ async function parseStatsAllPages(page, leagueId) {
     // code below ever ran. Instead we only decide "no data" from the
     // actual DOM rows we gather further down.
 
-    // Detect max page from pagination links
-    if (pageNum === 1) {
-      const pageNums = [...html.matchAll(/page=(\d+)/g)].map(m => parseInt(m[1]));
-      if (pageNums.length > 0) maxPage = Math.max(...pageNums);
-    }
-
     // Primary strategy: parse via the live DOM (page.evaluate) rather than
     // regex over serialized HTML. This is robust to attribute quoting,
     // nested tags, and whitespace that broke the old regex-based split, and
@@ -498,10 +539,14 @@ async function parseStatsAllPages(page, leagueId) {
       domRows = await page.evaluate(() => {
         function cellsOf(rowEl, cellSelector) {
           return Array.from(rowEl.querySelectorAll(cellSelector)).map(td => {
-            const img = td.querySelector("img[alt]");
+            // Don't require an alt attribute to exist — the scorer table's
+            // club logo <img> has none, so we also grab its src/data-src to
+            // match against the standings page's logos instead.
+            const img = td.querySelector("img");
             return {
               text: (td.textContent || "").replace(/\s+/g, " ").trim(),
               alt: img ? img.getAttribute("alt") || "" : "",
+              src: img ? (img.getAttribute("src") || img.getAttribute("data-src") || "") : "",
             };
           });
         }
@@ -524,14 +569,32 @@ async function parseStatsAllPages(page, leagueId) {
 
     console.log(`[DBG stats ${leagueId}] page=${pageNum} domRows=${domRows.length} sampleRow0=${JSON.stringify((domRows[0] || []).map(c => c.text))} sampleRow1=${JSON.stringify((domRows[1] || []).map(c => c.text))}`);
 
+    const pageSignature = domRows.map(cells => cells.map(c => c.text).join("\u0001")).join("\u0002");
+    if (pageNum > 1 && pageSignature === prevPageSignature) {
+      // Site clamped back to the last valid page instead of returning an
+      // empty one — same content as the previous page, so stop here.
+      break;
+    }
+    prevPageSignature = pageSignature;
+
+    // Track how many real player rows this page actually had (regardless of
+    // the goals>0 filter below) so we know whether to bother fetching the
+    // next page — this replaces the old, unreliable "page=N link" detection.
+    let realRowsThisPage = 0;
+
     const seenRowKey = new Set();
     for (const cells of domRows) {
       const texts = cells.map(c => c.text);
       const rowKey = texts.join("\u0001");
       if (seenRowKey.has(rowKey)) continue; // duplicate row (mirrored table) — skip
-      const club = cells.find(c => c.alt)?.alt.trim() || "";
+      let club = cells.find(c => c.alt)?.alt.trim() || "";
+      if (!club) {
+        const withSrc = cells.find(c => c.src);
+        if (withSrc) club = logoMap.get(normalizeLogoSrc(withSrc.src)) || "";
+      }
       if (texts.length >= 4 && /^\d+$/.test(texts[0]) && texts[1] && /^\d+$/.test(texts[3])) {
         seenRowKey.add(rowKey);
+        realRowsThisPage++;
         const goals = parseInt(texts[3]);
         const mp    = parseInt(texts[2]) || 0;
         if (goals > 0) {
@@ -548,7 +611,11 @@ async function parseStatsAllPages(page, leagueId) {
       for (const chunk of chunks) {
         const rowContent = chunk.split(/<\/tr>/i)[0];
         const altM = rowContent.match(/alt="([^"]+)"/i);
-        const club = altM ? altM[1].trim() : "";
+        let club = altM ? altM[1].trim() : "";
+        if (!club) {
+          const srcM = rowContent.match(/<img[^>]*\s(?:data-)?src="([^"]+)"/i);
+          if (srcM) club = logoMap.get(normalizeLogoSrc(srcM[1])) || "";
+        }
         const cells = [];
         const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
         let td;
@@ -559,6 +626,7 @@ async function parseStatsAllPages(page, leagueId) {
           cells.push(text);
         }
         if (cells.length >= 4 && /^\d+$/.test(cells[0]) && cells[1] && /^\d+$/.test(cells[3])) {
+          realRowsThisPage++;
           const goals = parseInt(cells[3]);
           const mp    = parseInt(cells[2]) || 0;
           if (goals > 0) {
@@ -568,8 +636,15 @@ async function parseStatsAllPages(page, leagueId) {
       }
     }
 
+    console.log(`[DBG stats ${leagueId}] page=${pageNum} realRowsThisPage=${realRowsThisPage}`);
+
+    if (realRowsThisPage === 0) break; // no more real player rows — stop paginating
+
     pageNum++;
   }
+
+  const withClub = scorers.filter(s => s.club).length;
+  console.log(`[DBG stats ${leagueId}] clubMatch=${withClub}/${scorers.length} logoMapSize=${logoMap.size}`);
 
   return scorers.sort((a, b) => b.goals - a.goals);
 }
@@ -619,7 +694,7 @@ async function main() {
 
       let scorers = [];
       log(`    Fetching stats…`);
-      try { scorers = await parseStatsAllPages(page, cfg.id); } catch {}
+      try { scorers = await parseStatsAllPages(page, cfg.id, ranking); } catch {}
 
       const teams = ranking.map(r => ({
         id: `t_${r.name.replace(/\W+/g,"_").toLowerCase()}`,
