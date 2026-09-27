@@ -9,6 +9,7 @@ const fs   = require("fs");
 const path = require("path");
 const root        = process.cwd();
 const vhvDataPath = path.join(root, "vhv-data.json");
+const boxscoreCachePath = path.join(root, "boxscore-cache.json");
 
 const LEAGUES = [
   { id: "19333", name: "Supercup Men", federation: "URBH-KBHB", division: "National",
@@ -535,8 +536,9 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
     // nested tags, and whitespace that broke the old regex-based split, and
     // it works whether rows are real <tr>/<td> or ARIA "row"/"cell" divs.
     let domRows = [];
+    let headerLabels = [];
     try {
-      domRows = await page.evaluate(() => {
+      const evalResult = await page.evaluate(() => {
         function cellsOf(rowEl, cellSelector) {
           return Array.from(rowEl.querySelectorAll(cellSelector)).map(td => {
             // Don't require an alt attribute to exist — the scorer table's
@@ -551,6 +553,18 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
           });
         }
 
+        // Read the real header labels instead of assuming a fixed column
+        // order — some leagues may not track every stat (e.g. no 7m shots
+        // at lower levels), which would shift column positions.
+        const headerRow =
+          document.querySelector("table thead tr") ||
+          document.querySelector("tr[data-is-header='true']");
+        const headerLabels = headerRow
+          ? Array.from(headerRow.querySelectorAll("th, td")).map(c =>
+              (c.textContent || "").replace(/\s+/g, " ").trim().toLowerCase()
+            )
+          : [];
+
         // Some leagues render TWO copies of the stats table in the DOM (seen
         // live: tables=2). We don't know in general which one (if either)
         // is a partial/sticky-columns mirror missing the data columns, so
@@ -563,10 +577,33 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
           cellSel = "[role='cell'], [role='gridcell']";
         }
 
-        return rowEls.map(row => cellsOf(row, cellSel)).filter(cells => cells.length > 0);
+        const rows = rowEls.map(row => cellsOf(row, cellSel)).filter(cells => cells.length > 0);
+        return { headerLabels, rows };
       });
-    } catch { domRows = []; }
+      domRows = evalResult.rows;
+      headerLabels = evalResult.headerLabels;
+    } catch { domRows = []; headerLabels = []; }
 
+    // Map header labels to column indices, falling back to the fixed
+    // positions confirmed from real captured markup
+    // (# | Player | MP | G | 7MS | 7MM | YC | 2MIN | BC | RC) if the header
+    // row couldn't be read or doesn't contain a label we recognize.
+    function colIdx(labels, fallback) {
+      const idx = headerLabels.indexOf(labels);
+      return idx !== -1 ? idx : fallback;
+    }
+    const cMP    = colIdx("mp", 2);
+    const cGoals = colIdx("g", 3);
+    const c7MS   = colIdx("7ms", 4);
+    const c7MM   = colIdx("7mm", 5);
+    const cYC    = colIdx("yc", 6);
+    const c2MIN  = colIdx("2min", 7);
+    const cBC    = colIdx("bc", 8);
+    const cRC    = colIdx("rc", 9);
+
+    if (pageNum === 1) {
+      console.log(`[DBG stats ${leagueId}] headerLabels=${JSON.stringify(headerLabels)}`);
+    }
     console.log(`[DBG stats ${leagueId}] page=${pageNum} domRows=${domRows.length} sampleRow0=${JSON.stringify((domRows[0] || []).map(c => c.text))} sampleRow1=${JSON.stringify((domRows[1] || []).map(c => c.text))}`);
 
     const pageSignature = domRows.map(cells => cells.map(c => c.text).join("\u0001")).join("\u0002");
@@ -592,13 +629,23 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
         const withSrc = cells.find(c => c.src);
         if (withSrc) club = logoMap.get(normalizeLogoSrc(withSrc.src)) || "";
       }
-      if (texts.length >= 4 && /^\d+$/.test(texts[0]) && texts[1] && /^\d+$/.test(texts[3])) {
+      if (texts.length >= 4 && /^\d+$/.test(texts[0]) && texts[1] && /^\d+$/.test(texts[cGoals])) {
         seenRowKey.add(rowKey);
         realRowsThisPage++;
-        const goals = parseInt(texts[3]);
-        const mp    = parseInt(texts[2]) || 0;
+        const goals = parseInt(texts[cGoals]) || 0;
         if (goals > 0) {
-          scorers.push({ player: texts[1], club, goals, matchesPlayed: mp });
+          scorers.push({
+            player: texts[1],
+            club,
+            goals,
+            matchesPlayed:     parseInt(texts[cMP])   || 0,
+            sevenMShots:       parseInt(texts[c7MS])  || 0,
+            sevenMMade:        parseInt(texts[c7MM])  || 0,
+            yellowCards:       parseInt(texts[cYC])   || 0,
+            twoMinSuspensions: parseInt(texts[c2MIN]) || 0,
+            blueCards:         parseInt(texts[cBC])   || 0,
+            redCards:          parseInt(texts[cRC])   || 0,
+          });
         }
       }
     }
@@ -625,12 +672,22 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
             .replace(/\s+/g," ").trim();
           cells.push(text);
         }
-        if (cells.length >= 4 && /^\d+$/.test(cells[0]) && cells[1] && /^\d+$/.test(cells[3])) {
+        if (cells.length >= 4 && /^\d+$/.test(cells[0]) && cells[1] && /^\d+$/.test(cells[cGoals])) {
           realRowsThisPage++;
-          const goals = parseInt(cells[3]);
-          const mp    = parseInt(cells[2]) || 0;
+          const goals = parseInt(cells[cGoals]) || 0;
           if (goals > 0) {
-            scorers.push({ player: cells[1], club, goals, matchesPlayed: mp });
+            scorers.push({
+              player: cells[1],
+              club,
+              goals,
+              matchesPlayed:     parseInt(cells[cMP])   || 0,
+              sevenMShots:       parseInt(cells[c7MS])  || 0,
+              sevenMMade:        parseInt(cells[c7MM])  || 0,
+              yellowCards:       parseInt(cells[cYC])   || 0,
+              twoMinSuspensions: parseInt(cells[c2MIN]) || 0,
+              blueCards:         parseInt(cells[cBC])   || 0,
+              redCards:          parseInt(cells[cRC])   || 0,
+            });
           }
         }
       }
@@ -649,6 +706,115 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
   return scorers.sort((a, b) => b.goals - a.goals);
 }
 
+// ── PER-GAME BOXSCORE (lineup page, per-player goals for ONE match) ───────────
+// Confirmed live structure (games/{id}/lineup): two separate <table>s, one per
+// team, each preceded by a plain-text team-name heading (no logo-matching
+// needed here, unlike the season stats page) — same columns as the season
+// stats table: # | Player | MP | G | 7MS | 7MM | YC | 2MIN | BC | RC.
+// Powers "goals in last game" and the "most goals in a single game" ranking.
+async function fetchGameLineup(page, gameId) {
+  const url = `https://www.clubee.com/handballbelgium/games/${gameId}/lineup`;
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    try {
+      await page.waitForFunction(
+        () => document.querySelector("table tr td") !== null,
+        { timeout: 15000 }
+      );
+    } catch { /* timeout — parse whatever's there */ }
+  } catch {
+    return null; // navigation failed — caller marks this game as failed, retried next run
+  }
+
+  let tables;
+  try {
+    tables = await page.evaluate(() => {
+      const out = [];
+      for (const table of Array.from(document.querySelectorAll("table"))) {
+        // Walk backwards through siblings/ancestors for the nearest bit of
+        // real text — that's the team-name heading above this table.
+        let teamName = "";
+        let el = table.previousElementSibling;
+        let hops = 0;
+        while (el && hops < 8 && !teamName) {
+          const t = (el.textContent || "").replace(/\s+/g, " ").trim();
+          if (t && t.length < 80) teamName = t;
+          el = el.previousElementSibling;
+          hops++;
+        }
+        if (!teamName) {
+          let p = table.parentElement, hops2 = 0;
+          while (p && hops2 < 4 && !teamName) {
+            const sib = p.previousElementSibling;
+            if (sib) {
+              const t = (sib.textContent || "").replace(/\s+/g, " ").trim();
+              if (t && t.length < 80) teamName = t;
+            }
+            p = p.parentElement;
+            hops2++;
+          }
+        }
+        teamName = teamName.replace(/\s*\([^)]*\)\s*$/, "").trim();
+
+        const headerRow = table.querySelector("thead tr") || table.querySelector("tr[data-is-header='true']");
+        const headerLabels = headerRow
+          ? Array.from(headerRow.querySelectorAll("th, td")).map(c =>
+              (c.textContent || "").replace(/\s+/g, " ").trim().toLowerCase()
+            )
+          : [];
+        // Skip tables that clearly aren't the player-stats table (e.g. a
+        // staff/coach list rendered as a <table> too).
+        if (!headerLabels.includes("player") && !headerLabels.includes("g")) continue;
+
+        const bodyRows = Array.from(table.querySelectorAll("tbody tr")).map(row =>
+          Array.from(row.querySelectorAll("td")).map(td =>
+            (td.textContent || "").replace(/\s+/g, " ").trim()
+          )
+        );
+        out.push({ teamName, headerLabels, rows: bodyRows });
+      }
+      return out;
+    });
+  } catch {
+    return null;
+  }
+
+  const players = [];
+  for (const t of tables) {
+    function colIdx(label, fallback) {
+      const idx = t.headerLabels.indexOf(label);
+      return idx !== -1 ? idx : fallback;
+    }
+    const cPlayer = colIdx("player", 1);
+    const cMP     = colIdx("mp", 2);
+    const cGoals  = colIdx("g", 3);
+    const c7MS    = colIdx("7ms", 4);
+    const c7MM    = colIdx("7mm", 5);
+    const cYC     = colIdx("yc", 6);
+    const c2MIN   = colIdx("2min", 7);
+    const cBC     = colIdx("bc", 8);
+    const cRC     = colIdx("rc", 9);
+
+    for (const cells of t.rows) {
+      if (cells.length < 4 || !cells[cPlayer] || !/^\d+$/.test(cells[cGoals] ?? "")) continue;
+      const goals = parseInt(cells[cGoals]) || 0;
+      players.push({
+        player: cells[cPlayer],
+        club: t.teamName,
+        goals,
+        matchesPlayed:     parseInt(cells[cMP])   || 0,
+        sevenMShots:       parseInt(cells[c7MS])  || 0,
+        sevenMMade:        parseInt(cells[c7MM])  || 0,
+        yellowCards:       parseInt(cells[cYC])   || 0,
+        twoMinSuspensions: parseInt(cells[c2MIN]) || 0,
+        blueCards:         parseInt(cells[cBC])   || 0,
+        redCards:          parseInt(cells[cRC])   || 0,
+      });
+    }
+  }
+  return players;
+}
+
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
   log(`Starting at ${new Date().toUTCString()}`);
@@ -656,6 +822,17 @@ async function main() {
 
   const fresh = { updatedAt: null, federations: {} };
   const results = [];
+
+  // Boxscore cache: keyed by gameId, persisted to disk and committed
+  // alongside vhv-data.json so repeat runs only fetch NEWLY played games
+  // instead of re-fetching a whole season's worth of boxscores every time.
+  let boxCache = { games: {} };
+  try {
+    boxCache = JSON.parse(fs.readFileSync(boxscoreCachePath, "utf8"));
+    if (!boxCache.games) boxCache.games = {};
+  } catch { boxCache = { games: {} }; }
+  const cachedGameCount = Object.keys(boxCache.games).length;
+  log(`Loaded boxscore cache: ${cachedGameCount} game(s) already fetched`);
 
   const CONCURRENCY = 4; // parallel browser pages
   const browser = await chromium.launch({ headless: true });
@@ -701,6 +878,60 @@ async function main() {
         name: r.name, points: 0, homeBonus: "",
       }));
 
+      // Per-game boxscores — only fetch games not already in the cache from
+      // a previous run. Powers "goals in last game" on the scorer panel and
+      // the "most goals in a single game" player ranking.
+      const playedWithGameId = fixtures.filter(f => f.played && f.gameId);
+      let newBoxscores = 0, failedBoxscores = 0;
+      for (const f of playedWithGameId) {
+        if (boxCache.games[f.gameId]) continue;
+        const players = await fetchGameLineup(page, f.gameId);
+        if (players && players.length > 0) {
+          boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players };
+          newBoxscores++;
+        } else {
+          // Remember the attempt so we don't refetch a broken/empty page
+          // every single run — a future run can still retry by manually
+          // clearing this entry (or the whole cache file).
+          boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players: [], failed: true };
+          failedBoxscores++;
+        }
+      }
+      if (newBoxscores > 0 || failedBoxscores > 0) {
+        log(`    Boxscores: +${newBoxscores} new, ${failedBoxscores} failed/empty`);
+      }
+
+      // Build a per-player game log from every cached boxscore belonging to
+      // this league's played fixtures, then use it to backfill each
+      // scorer's "goals in their last game" and to rank players by their
+      // best single-game output.
+      const playerGameLog = new Map(); // "player|||club" -> [{date, goals}]
+      for (const f of playedWithGameId) {
+        const g = boxCache.games[f.gameId];
+        if (!g || !g.players) continue;
+        for (const p of g.players) {
+          const key = `${p.player}|||${p.club}`;
+          if (!playerGameLog.has(key)) playerGameLog.set(key, []);
+          playerGameLog.get(key).push({ date: g.date, goals: p.goals });
+        }
+      }
+      for (const s of scorers) {
+        const log_ = playerGameLog.get(`${s.player}|||${s.club}`);
+        if (log_ && log_.length) {
+          const mostRecent = [...log_].sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0];
+          s.lastGameGoals = mostRecent.goals;
+        }
+      }
+      const topSingleGamePlayers = Array.from(playerGameLog.entries())
+        .map(([key, entries]) => {
+          const [player, club] = key.split("|||");
+          const best = entries.reduce((a, b) => (b.goals > a.goals ? b : a), entries[0]);
+          return { player, club, goals: best.goals, date: best.date };
+        })
+        .filter(r => r.goals > 0)
+        .sort((a, b) => b.goals - a.goals)
+        .slice(0, 15);
+
       const played  = fixtures.filter(f => f.played).length;
       const pending = fixtures.filter(f => !f.played).length;
       log(`    ✓ ${cfg.name}: ${teams.length}t ${fixtures.length}fx (${played}✓ ${pending}⏳) ${scorers.length}sc`);
@@ -710,7 +941,7 @@ async function main() {
         throw new Error("No data parsed — league may not have started yet");
       }
 
-      return { cfg, ok: true, ranking, fixtures, teams, scorers, played, pending };
+      return { cfg, ok: true, ranking, fixtures, teams, scorers, topSingleGamePlayers, played, pending };
     } catch (err) {
       console.error(`    ✗ ${cfg.name}: ${err.message}`);
       return { cfg, ok: false, error: err.message };
@@ -741,12 +972,13 @@ async function main() {
       results.push({ id: r.cfg.id, name: r.cfg.name, ok: false, error: r.error });
       continue;
     }
-    const { cfg, ranking, fixtures, teams, scorers, played, pending } = r;
+    const { cfg, ranking, fixtures, teams, scorers, topSingleGamePlayers, played, pending } = r;
     if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
     fresh.federations[cfg.federation][cfg.id] = {
       serieId: cfg.id, name: cfg.name, federation: cfg.federation,
       division: cfg.division, updatedAt: new Date().toISOString(),
       live: pending > 0, teams, fixtures, ranking, scorers,
+      topSingleGamePlayers: topSingleGamePlayers || [],
     };
     results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
   }
@@ -757,6 +989,10 @@ async function main() {
 
   fresh.updatedAt = new Date().toISOString();
   fs.writeFileSync(vhvDataPath, JSON.stringify(fresh, null, 2));
+
+  fs.writeFileSync(boxscoreCachePath, JSON.stringify(boxCache, null, 2));
+  const totalCached = Object.keys(boxCache.games).length;
+  log(`Boxscore cache: ${totalCached} game(s) total (was ${cachedGameCount} before this run)`);
 
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;

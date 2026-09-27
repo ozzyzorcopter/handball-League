@@ -199,7 +199,14 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
           <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fbbf24" : "#3a3f50" }}>{i < 3 ? ["🥇","🥈","🥉"][i] : (i+1)+"."}</span>
           <span className="mini-name" style={{ flex: 1 }}>{s.player}</span>
           {!filterClub && <span className="muted" style={{ fontSize: ".68rem", marginRight: ".4rem" }}>{s.club}</span>}
-          <span className="mini-val" style={{ color: "#fbbf24" }}>{s.goals}</span>
+          <span className="mini-val" style={{ color: "#fbbf24" }}>
+            {s.goals}
+            {/* Goals scored in the player's most recent game — populated once
+                per-match boxscore data is wired in; renders nothing until then. */}
+            {s.lastGameGoals != null && (
+              <span style={{ fontSize: ".68rem", marginLeft: ".2rem", color: "#9ca3af" }}>({s.lastGameGoals})</span>
+            )}
+          </span>
           {s.delta != null && (
             <span style={{ fontSize: ".68rem", marginLeft: ".3rem", color: s.delta > 0 ? "#4ade80" : "#5a6070" }}>
               ({s.delta > 0 ? "+" : ""}{s.delta})
@@ -209,6 +216,23 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
             <span className="muted" style={{ fontSize: ".66rem", marginLeft: ".4rem", whiteSpace: "nowrap" }}>
               {s.matchesPlayed}g · {s.avg != null ? s.avg + "/g" : "—"}
             </span>
+          )}
+          {(s.sevenMShots > 0 || s.sevenMMade > 0) && (
+            <span className="muted" style={{ fontSize: ".66rem", marginLeft: ".4rem", whiteSpace: "nowrap" }} title="7m scored/taken">
+              7m {s.sevenMMade || 0}/{s.sevenMShots || 0}
+            </span>
+          )}
+          {s.yellowCards > 0 && (
+            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="Yellow cards">🟨{s.yellowCards}</span>
+          )}
+          {s.twoMinSuspensions > 0 && (
+            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="2-minute suspensions">⏱{s.twoMinSuspensions}</span>
+          )}
+          {s.blueCards > 0 && (
+            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="Blue cards">🟦{s.blueCards}</span>
+          )}
+          {s.redCards > 0 && (
+            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="Red cards">🟥{s.redCards}</span>
           )}
         </div>
       ))}
@@ -1196,7 +1220,7 @@ function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, p
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth }) {
+function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
@@ -1263,6 +1287,34 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
     return teams.map((t, i) => ({ id: t.id, name: t.name, gd: gd[i], P: games[i] })).sort((a, b) => b.gd - a.gd || a.name.localeCompare(b.name));
   }, [fixtures, teams]);
   const topAway = awayGDRanking.slice(0, 3);
+
+  // Highest single-game score ranking: the best score any team put up in
+  // one match (home or away), with who they beat/played and the date.
+  const highGameRanking = useMemo(() => {
+    const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
+    const N = teams.length;
+    const best = new Array(N).fill(null);
+    played.forEach(f => {
+      const hi = f.homeIdx, ai = f.awayIdx;
+      const hg = +f.homeScore, ag = +f.awayScore;
+      if (hi < N && (!best[hi] || hg > best[hi].score)) {
+        best[hi] = { score: hg, vs: teams[ai]?.name || "?", date: f.date };
+      }
+      if (ai < N && (!best[ai] || ag > best[ai].score)) {
+        best[ai] = { score: ag, vs: teams[hi]?.name || "?", date: f.date };
+      }
+    });
+    return teams
+      .map((t, i) => ({ id: t.id, name: t.name, score: best[i]?.score ?? 0, vs: best[i]?.vs || "", date: best[i]?.date }))
+      .filter(r => r.score > 0)
+      .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+  }, [fixtures, teams]);
+  const topHighGame = highGameRanking.slice(0, 3);
+
+  // Player-level highest single-game goal count, from the pre-computed
+  // per-league boxscore ranking (topSingleGamePlayers) — empty until the
+  // data pipeline has boxscores cached for this league's played games.
+  const topHighGamePlayers = (topSingleGamePlayers || []).slice(0, 3);
 
   // Clutch ranking: games won by exactly 1 or 2 GD
   const clutchRanking = useMemo(() => {
@@ -1484,6 +1536,70 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Row 2b: Most Goals in a Single Game — team + player */}
+          <div className="mini-rankings" style={{ marginTop: ".75rem" }}>
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "highgame" ? null : "highgame")}>
+                <div className="mini-ttl" style={{ color: "#22d3ee", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>🔥 Most Goals (Game)</span><span>{rankingPanel === "highgame" ? "▲" : "▼"}</span>
+                </div>
+                {topHighGame.length === 0 && (
+                  <div className="muted" style={{ fontSize: ".78rem" }}>No played games yet.</div>
+                )}
+                {topHighGame.map((r, i) => (
+                  <div key={r.id} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                    <span className="mini-name">{cleanTeamName(r.name)}</span>
+                    <span className="mini-val" style={{ color: "#22d3ee" }}>{r.score}</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "highgame" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Highest score by a team in a single match.</div>
+                  {highGameRanking.map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#22d3ee" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
+                      <span className="mini-val" style={{ color: "#22d3ee" }}>{r.score}</span>
+                      <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>vs {cleanTeamName(r.vs)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div>
+              <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "highgameplayer" ? null : "highgameplayer")}>
+                <div className="mini-ttl" style={{ color: "#f472b6", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                  <span>🎯 Most Goals (Player)</span><span>{rankingPanel === "highgameplayer" ? "▲" : "▼"}</span>
+                </div>
+                {topHighGamePlayers.length === 0 && (
+                  <div className="muted" style={{ fontSize: ".78rem" }}>No data yet.</div>
+                )}
+                {topHighGamePlayers.map((r, i) => (
+                  <div key={i} className="mini-row">
+                    <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                    <span className="mini-name">{r.player}</span>
+                    <span className="mini-val" style={{ color: "#f472b6" }}>{r.goals}</span>
+                  </div>
+                ))}
+              </div>
+              {rankingPanel === "highgameplayer" && (
+                <div className="ranking-expand">
+                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Most goals scored by a player in a single match.</div>
+                  {(topSingleGamePlayers || []).map((r, i) => (
+                    <div key={i} className="mini-row">
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f472b6" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-name">{r.player}</span>
+                      <span className="mini-val" style={{ color: "#f472b6" }}>{r.goals}</span>
+                      <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{r.club}</span>
                     </div>
                   ))}
                 </div>
@@ -2781,7 +2897,7 @@ function BelgianScreen({ onBack }) {
 
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
-  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [] } = league;
+  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [] } = league;
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
@@ -2867,7 +2983,8 @@ function BelgianLeagueView({ league, onBack }) {
             archiveScorers={leagueScorers}
             phaseTeams={null}
             phase="regular"
-            toughFullWidth={true}
+            toughFullWidth={false}
+            topSingleGamePlayers={topSingleGamePlayers}
           />
         )}
 
