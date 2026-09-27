@@ -1075,7 +1075,9 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases
                   <span className="detail-opp" style={{ color: f.played ? "#d4d8e0" : "#5a6070" }}>{opp}</span>
                   {f.played && f.homeScore != null
                     ? <span className="detail-score" style={{ color: resColor(f) }}>{f.homeScore}&mdash;{f.awayScore}</span>
-                    : <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50" }}>pending</span>
+                    : f.played
+                      ? <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#5a6070" }}>?—?</span>
+                      : <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50" }}>pending</span>
                   }
                 </div>
               );
@@ -1776,6 +1778,27 @@ function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, on
   const ls = settings?.lossScore || 25;
   const ds = settings?.drawScore || 25;
   const probs = (f.overrideOn && f.ovHW !== "") ? { homeWin: parseFloat(f.ovHW) || 0, draw: parseFloat(f.ovD) || 0, awayWin: parseFloat(f.ovAW) || 0 } : (liveP || f);
+
+  if (f.played && f.homeScore == null) {
+    // Game has been played but score not entered in Clubee — show as completed with unknown score
+    return (
+      <div className="outcome done">
+        {f.week != null && <span className="week-badge" style={{ fontSize: ".6rem" }}>W{f.week}</span>}
+        <div className="oteams">
+          <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.homeIdx)}>{hn}</button>
+          <span className="vs">vs</span>
+          <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.awayIdx)}>{an}</button>
+        </div>
+        <div className="score-done">
+          <span style={{ color: "#5a6070" }}>?</span>
+          <span className="score-sep">&mdash;</span>
+          <span style={{ color: "#5a6070" }}>?</span>
+        </div>
+        <span className="res-lbl" style={{ color: "#5a6070" }}>Played</span>
+        <button className="btn-undo" onClick={() => onUndo(f.id)}>↩ Undo</button>
+      </div>
+    );
+  }
 
   if (f.played && f.homeScore != null) {
     const hs = +f.homeScore, as_ = +f.awayScore;
