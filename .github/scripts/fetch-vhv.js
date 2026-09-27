@@ -326,36 +326,41 @@ function parseGamesHtml(html, ranking) {
   const fixtures = [];
   let counter = 0;
 
-  // Split on game card anchors — each <a href="/handballbelgium/games/..."> is one game
-  const gameRe = /<a[^>]+href="[^"]*\/games\/(\d+)"[\s\S]*?<\/a>/gi;
-  let m;
-  while ((m = gameRe.exec(html)) !== null) {
-    const gameId  = m[1];
-    const cardHtml = m[0];
+  // Split HTML on game-card anchor starts: <a href="...games/ID"
+  // Each chunk runs from one anchor to the next, so regexes stay within one card.
+  const anchorRe = /<a[^>]+href="[^"]*\/games\/(\d+)"[^>]*>/gi;
+  const anchors = [];
+  let am;
+  while ((am = anchorRe.exec(html)) !== null) {
+    anchors.push({ gameId: am[1], start: am.index });
+  }
 
-    // Extract home team: inside teamInnerParapraph (not Second) → first <strong>
-    const homeM = cardHtml.match(/teamInnerParapraph"[\s\S]*?<strong>([\s\S]*?)<\/strong>/i);
-    // Extract away team: inside teamInnerParapraphSecond → first <strong>
-    const awayM = cardHtml.match(/teamInnerParapraphSecond[\s\S]*?<strong>([\s\S]*?)<\/strong>/i);
+  for (let ai = 0; ai < anchors.length; ai++) {
+    const { gameId, start } = anchors[ai];
+    const end = ai + 1 < anchors.length ? anchors[ai + 1].start : start + 4000;
+    const card = html.slice(start, end);
+
+    // Home team: first <strong> inside teamInnerParapraph (not Second)
+    const homeM = card.match(/teamInnerParapraph"[\s\S]*?<strong>([\s\S]*?)<\/strong>/i);
+    // Away team: first <strong> inside teamInnerParapraphSecond
+    const awayM = card.match(/teamInnerParapraphSecond[\s\S]*?<strong>([\s\S]*?)<\/strong>/i);
     if (!homeM || !awayM) continue;
 
     const homeName = stripText(homeM[1]);
     const awayName = stripText(awayM[1]);
     if (!homeName || !awayName) continue;
-
-    // Skip "Bye" placeholder teams
     if (/^bye\b/i.test(homeName) || /^bye\b/i.test(awayName)) continue;
 
-    // Extract score from <h3>: "26 : 25" (played) or " - : - " (scheduled)
-    const h3M = cardHtml.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
-    const h3  = h3M ? stripText(h3M[1]) : "";
+    // Score from <h3>: "26 : 25" = played, " - : - " = scheduled
+    const h3M   = card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
+    const h3    = h3M ? stripText(h3M[1]) : "";
     const scoreM = h3.match(/(\d+)\s*:\s*(\d+)/);
-    const played = !!scoreM;
+    const played    = !!scoreM;
     const homeScore = played ? parseInt(scoreM[1]) : null;
     const awayScore = played ? parseInt(scoreM[2]) : null;
 
-    // Extract date from <p> inside the centre column: "22.08.2026"
-    const dateM = cardHtml.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
+    // Date from <p>: "22.08.2026"
+    const dateM = card.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
     const date  = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
 
     const homeIdx = resolveTeam(homeName);
