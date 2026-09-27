@@ -450,7 +450,7 @@ function calcStats(teams, fixtures, ranking) {
   function h2h(ids) {
     const h = {};
     ids.forEach(id => { h[id] = { pts: 0, GF: 0, GA: 0, awayGF: 0 }; });
-    played.forEach(f => {
+    scoredFixtures.forEach(f => {
       const hid = teams[f.homeIdx]?.id, aid = teams[f.awayIdx]?.id;
       if (!ids.includes(hid) || !ids.includes(aid)) return;
       const hg = +f.homeScore, ag = +f.awayScore;
