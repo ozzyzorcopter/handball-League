@@ -490,22 +490,29 @@ async function main() {
 
       const ranking      = parseStandingsHtml(standingsHtml);
 
-      // DEBUG: inspect games HTML structure for first league
+      // DEBUG: hunt for JSON data islands containing fixtures
       if (cfg.id === "18700") {
         console.log(`[DEBUG-GAMES] len=${gamesHtml.length}`);
-        // Find the games widget container — look for score-like patterns or team name patterns
-        // Dump 3000 chars starting from a likely game content area
-        const markers = ["game", "match", "fixture", "score", "result", "speeldag", "journée", "ronde", "wedstrijd"];
-        for (const m of markers) {
-          const idx = gamesHtml.toLowerCase().indexOf(m);
-          if (idx > 0) {
-            console.log(`[DEBUG-GAMES-MARKER:${m}] at ${idx}: ...${gamesHtml.substring(Math.max(0,idx-50), idx+300).replace(/\s+/g," ")}...`);
-            break;
+        // Look for score patterns like "home_score" or "score" or "goals" in JSON
+        const scoreKeys = ["home_score","away_score","home_goals","away_goals","score_home","score_away","result","score\":"];
+        for (const key of scoreKeys) {
+          const idx = gamesHtml.indexOf(key);
+          if (idx >= 0) {
+            console.log(`[DEBUG-JSON-KEY:${key}] at ${idx}: ${gamesHtml.substring(Math.max(0,idx-100), idx+400).replace(/\s+/g," ")}`);
           }
         }
-        // Dump a 2000-char window from 40% into the document (past nav/header)
-        const mid = Math.floor(gamesHtml.length * 0.4);
-        console.log(`[DEBUG-GAMES-MID] @${mid}: ${gamesHtml.substring(mid, mid+2000).replace(/\s+/g," ")}`);
+        // Also look for team name patterns
+        const teamIdx = gamesHtml.indexOf("Schoten");
+        if (teamIdx >= 0) console.log(`[DEBUG-TEAM] "Schoten" at ${teamIdx}: ${gamesHtml.substring(Math.max(0,teamIdx-200), teamIdx+400).replace(/\s+/g," ")}`);
+        // Find all <script> tags that contain JSON (look for __NEXT_DATA__ or similar)
+        const scriptMatches = [...gamesHtml.matchAll(/<script[^>]*>([\s\S]{200,}?)<\/script>/gi)];
+        console.log(`[DEBUG-SCRIPTS] found ${scriptMatches.length} non-trivial <script> blocks`);
+        for (let i = 0; i < Math.min(scriptMatches.length, 5); i++) {
+          const content = scriptMatches[i][1];
+          if (content.includes("score") || content.includes("goals") || content.includes("result")) {
+            console.log(`[DEBUG-SCRIPT-${i}] len=${content.length} preview: ${content.substring(0,300).replace(/\s+/g," ")}`);
+          }
+        }
       }
 
       const { fixtures } = parseGamesHtml(gamesHtml, ranking);
