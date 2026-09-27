@@ -1946,10 +1946,24 @@ function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, on
 }
 
 // ── MONTE CARLO TAB ───────────────────────────────────────────────────────────
-function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onConfirmed }) {
+function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onConfirmed, ranking }) {
   const [results, setResults] = useState(null);
   const [running, setRunning] = useState(false);
   const pending = fixtures.filter(f => !f.played);
+
+  // The League Table tab shows points recomputed from actual played-game
+  // results (via calcStats) rather than each team's raw `.points` field —
+  // those two can genuinely disagree (e.g. if points were seeded from a
+  // ranking scrape that doesn't match the games actually recorded). The
+  // League Table's number is the one that matches real standings, so use
+  // the SAME recomputed points here — both for display and, more
+  // importantly, as the baseline the simulation itself starts from
+  // (runMC below adds simulated results on top of teams[].points).
+  const teams_ = useMemo(() => {
+    const rows = calcStats(teams, fixtures, ranking);
+    const ptsById = Object.fromEntries(rows.map(r => [r.id, r.totalPts]));
+    return teams.map(t => (t.id in ptsById ? { ...t, points: ptsById[t.id] } : t));
+  }, [teams, fixtures, ranking]);
 
   // Use a ref so the effect closure always reads the latest value
   // without needing it as a dependency (which would cause infinite re-runs).
@@ -1957,8 +1971,8 @@ function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onCon
   const pendingRef = useRef([]);
   const teamsRef = useRef([]);
   const playedRef = useRef([]);
-  pendingRef.current = pending.map(f => ({ ...f, ...fixProbs(f, teams, fixtures, settings) }));
-  teamsRef.current = teams;
+  pendingRef.current = pending.map(f => ({ ...f, ...fixProbs(f, teams_, fixtures, settings) }));
+  teamsRef.current = teams_;
   playedRef.current = playedFixtures;
 
   useEffect(() => {
@@ -1981,11 +1995,11 @@ function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onCon
     return () => clearTimeout(tid);
   }, []); // runs once on mount — parent re-mounts this via key= when fixtures change
 
-  const n = teams.length;
+  const n = teams_.length;
   const sorted = useMemo(() => {
     if (!results) return [];
-    return teams.map((t, i) => ({ ...t, idx: i, avg: results[i].reduce((s, p, pos) => s + (p / 100) * (pos + 1), 0) })).sort((a, b) => a.avg - b.avg);
-  }, [results, teams]);
+    return teams_.map((t, i) => ({ ...t, idx: i, avg: results[i].reduce((s, p, pos) => s + (p / 100) * (pos + 1), 0) })).sort((a, b) => a.avg - b.avg);
+  }, [results, teams_]);
 
   return (
     <div>
@@ -2569,7 +2583,7 @@ function SimStep({ league, setLeague, onBack }) {
           )}
 
           {tab === "monte" && (
-            <MCTab key={played.length} teams={teams} fixtures={initFixtures} settings={settings}
+            <MCTab key={played.length} teams={teams} fixtures={initFixtures} settings={settings} ranking={league.ranking}
               highlightTop={hlTop} highlightBottom={hlBot}
               onConfirmed={(ct, cb) => { setConfirmedTop(ct); setConfirmedBottom(cb); }} />
           )}
@@ -2877,6 +2891,7 @@ function BelgianLeagueView({ league, onBack }) {
             teams={teams}
             fixtures={fixtures}
             settings={settings}
+            ranking={ranking}
             highlightTop={hlTop}
             highlightBottom={hlBot}
             onConfirmed={(ct, cb) => { setConfirmedTop(ct); setConfirmedBottom(cb); }}

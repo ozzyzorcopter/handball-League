@@ -497,7 +497,15 @@ async function parseStatsAllPages(page, leagueId) {
           });
         }
 
-        let rowEls = Array.from(document.querySelectorAll("table tr"));
+        // Some leagues render TWO copies of the same stats table in the DOM
+        // (seen live: tables=2, identical content — likely a sticky-column
+        // mirroring quirk). Scope to just the first table so we don't count
+        // every scorer twice; fall back to a document-wide row search only
+        // if there's no <table> at all.
+        const firstTable = document.querySelector("table");
+        let rowEls = firstTable
+          ? Array.from(firstTable.querySelectorAll("tr"))
+          : Array.from(document.querySelectorAll("table tr"));
         let cellSel = "td";
         if (rowEls.length === 0) {
           rowEls = Array.from(document.querySelectorAll("[role='row']"));
