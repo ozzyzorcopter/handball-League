@@ -434,7 +434,27 @@ async function parseStatsAllPages(page, leagueId) {
             }
           }
 
-          return { tableCount, trCount, tdCount, memberLinkCount, roleRowCount, headerAnchorHtml };
+          // Grab the first BODY row (not the header) specifically, since the
+          // header-anchored snippet above never reaches into <tbody> before
+          // its 2000-char cutoff. Report each of its cells' tag name, class,
+          // and text so we can see exactly how data rows differ from the
+          // header row we already inspected.
+          const bodyRows = Array.from(document.querySelectorAll("table tbody tr"));
+          const firstBodyRow = bodyRows[0] || null;
+          const firstBodyRowCells = firstBodyRow
+            ? Array.from(firstBodyRow.children).map(c => ({
+                tag: c.tagName,
+                cls: (c.className || "").toString().slice(0, 60),
+                text: (c.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60),
+              }))
+            : [];
+          const firstBodyRowHtml = firstBodyRow ? firstBodyRow.outerHTML.slice(0, 2500) : "";
+          const bodyRowCount = bodyRows.length;
+
+          return {
+            tableCount, trCount, tdCount, memberLinkCount, roleRowCount, headerAnchorHtml,
+            bodyRowCount, firstBodyRowCells, firstBodyRowHtml,
+          };
         });
       } catch (e) {
         structInfo = { error: String(e) };
@@ -442,10 +462,14 @@ async function parseStatsAllPages(page, leagueId) {
       console.log(
         `[DBG stats ${leagueId}] url=${url} html_len=${html.length} ` +
         `tables=${structInfo.tableCount} trs=${structInfo.trCount} tds=${structInfo.tdCount} ` +
-        `memberLinks=${structInfo.memberLinkCount} roleRows=${structInfo.roleRowCount}`
+        `memberLinks=${structInfo.memberLinkCount} roleRows=${structInfo.roleRowCount} ` +
+        `bodyRows=${structInfo.bodyRowCount}`
       );
       console.log(
-        `[DBG stats ${leagueId}] headerAnchorHtml="${(structInfo.headerAnchorHtml || "").replace(/\s+/g, " ")}"`
+        `[DBG stats ${leagueId}] firstBodyRowCells=${JSON.stringify(structInfo.firstBodyRowCells || [])}`
+      );
+      console.log(
+        `[DBG stats ${leagueId}] firstBodyRowHtml="${(structInfo.firstBodyRowHtml || "").replace(/\s+/g, " ")}"`
       );
     }
     if (html.includes("No information added yet")) break;

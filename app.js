@@ -79,6 +79,37 @@ function stripPrefix(name) {
   return name.replace(CLUB_PREFIXES, "").replace(CLUB_PREFIXES, "").trim().toLowerCase();
 }
 
+// ── DISPLAY-ONLY TEAM NAME CLEANUP ─────────────────────────────────────────────
+// VHV/LFH import data appends division/gender/federation/region/pool codes to
+// team names, e.g. "Sint-Truiden D1 M VHV LIM 2" or "Uilenspiegel D1 M VHV 1".
+// Strip those trailing code tokens for DISPLAY ONLY — never for the stored
+// `name` used for matching, keys, or editing, since scorer-alias matching and
+// the team editor need the exact original string.
+//
+// A trailing token is treated as a "code" (not part of the real club name) if
+// it's made up solely of uppercase letters/digits (optionally with a
+// "-X" suffix like "LIM-B"), e.g. "VHV", "D1", "M", "W", "U16", "1", "A" — or
+// the literal "Lg" (mixed-case federation abbreviation). Real club-name words
+// almost always contain a lowercase letter (Tournai, Overpelt, 't Noorden),
+// so they stop the strip as soon as one is reached. We always keep at least
+// one token, so a name can never be stripped down to nothing.
+const TEAM_CODE_TOKEN = /^[A-Z0-9]+(-[A-Z0-9]+)?$/;
+
+function cleanTeamName(name) {
+  if (!name) return name;
+  // Drop a trailing parenthetical annotation entirely, e.g. "(M14-Beker)".
+  const noParen = name.trim().replace(/\s*\([^)]*\)\s*$/, "");
+  const tokens = (noParen || name.trim()).split(/\s+/);
+  let end = tokens.length;
+  while (end > 1) {
+    const tok = tokens[end - 1];
+    if (TEAM_CODE_TOKEN.test(tok) || tok === "Lg") { end--; continue; }
+    break;
+  }
+  const cleaned = tokens.slice(0, end).join(" ").trim();
+  return cleaned || name;
+}
+
 // Build a lookup from scorer club names indexed by their stripped form
 // Called once per scorer list
 function buildClubIndex(scorers) {
@@ -992,7 +1023,7 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases
       <div className="detail-overlay" onClick={onClose} />
       <div className="detail-panel">
         <div className="detail-h">
-          <h3>{team?.name}</h3>
+          <h3>{cleanTeamName(team?.name)}</h3>
           <button className="detail-close" onClick={onClose}>✕</button>
         </div>
 
@@ -1028,11 +1059,11 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases
                             </span>
                             {!oppOpen && toughest && (
                               <span style={{ fontSize: ".78rem" }}>
-                                <span style={{ color: "#f87171", fontWeight: 600 }}>{toughest.name}</span>
+                                <span style={{ color: "#f87171", fontWeight: 600 }}>{cleanTeamName(toughest.name)}</span>
                                 <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".3rem" }}>{toughest.gd > 0 ? "+" : ""}{toughest.gd}</span>
                                 {weakest && weakest.name !== toughest.name && (
                                   <span style={{ marginLeft: ".5rem" }}>
-                                    <span style={{ color: "#4ade80", fontWeight: 600 }}>{weakest.name}</span>
+                                    <span style={{ color: "#4ade80", fontWeight: 600 }}>{cleanTeamName(weakest.name)}</span>
                                     <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", color: "#3a3f50", marginLeft: ".3rem" }}>{weakest.gd > 0 ? "+" : ""}{weakest.gd}</span>
                                   </span>
                                 )}
@@ -1044,7 +1075,7 @@ function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases
                               {sorted.map((o, i) => (
                                 <div key={o.name} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: ".2rem 0", borderBottom: i < sorted.length-1 ? "1px solid #1c1f27" : "none" }}>
                                   <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50", minWidth: "1.4rem" }}>{i+1}.</span>
-                                  <span style={{ flex: 1, fontSize: ".78rem", color: o.gd < 0 ? "#f87171" : o.gd > 0 ? "#4ade80" : "#d4d8e0", fontWeight: 600 }}>{o.name}</span>
+                                  <span style={{ flex: 1, fontSize: ".78rem", color: o.gd < 0 ? "#f87171" : o.gd > 0 ? "#4ade80" : "#d4d8e0", fontWeight: 600 }}>{cleanTeamName(o.name)}</span>
                                   <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".72rem", color: "#3a3f50" }}>{o.gd > 0 ? "+" : ""}{o.gd} GD</span>
                                   <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#3a3f50", marginLeft: ".35rem" }}>({o.games}g)</span>
                                 </div>
@@ -1122,7 +1153,7 @@ function TeamScorers({ leagueId, teamName, aliases, archiveScorers, phase }) {
   const live = useScorers(archiveScorers !== undefined ? null : leagueId, phase);
   const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
   const error = archiveScorers !== undefined ? false : live.error;
-  return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={teamName + " Scorers"} maxRows={5} aliases={aliases} />;
+  return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={cleanTeamName(teamName) + " Scorers"} maxRows={5} aliases={aliases} />;
 }
 
 function ToughPanel({ ranking }) {
@@ -1135,7 +1166,7 @@ function ToughPanel({ ranking }) {
       {shown.map((r, i) => (
         <div key={r.id} className="mini-row">
           <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-          <span className="mini-name">{r.name}</span>
+          <span className="mini-name">{cleanTeamName(r.name)}</span>
           <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
         </div>
       ))}
@@ -1324,7 +1355,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 <tr key={r.id} style={bg ? { background: bg } : {}}>
                   <td className="tpos" style={bg ? { color: "rgba(255,255,255,0.85)", fontWeight: 700 } : {}}>{i + 1}</td>
                   <td className="tl">
-                    <button className="otbtn" onClick={() => onTeamClick && onTeamClick(ti)}>{r.name}</button>
+                    <button className="otbtn" onClick={() => onTeamClick && onTeamClick(ti)}>{cleanTeamName(r.name)}</button>
                   </td>
                   <td>{r.P}</td>
                   <td style={{ color: "#4ade80" }}>{r.W}</td>
@@ -1354,7 +1385,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 {attackers.map((r, i) => (
                   <div key={r.id} className="mini-row">
                     <span className="mini-pos">{MEDALS[i]}</span>
-                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-name">{cleanTeamName(r.name)}</span>
                     <span className="mini-val" style={{ color: "#f87171" }}>{r.GF} GF</span>
                   </div>
                 ))}
@@ -1365,7 +1396,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {allAttackers.map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#f87171" }}>{r.GF} GF</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
                     </div>
@@ -1381,7 +1412,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 {defenders.map((r, i) => (
                   <div key={r.id} className="mini-row">
                     <span className="mini-pos">{MEDALS[i]}</span>
-                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-name">{cleanTeamName(r.name)}</span>
                     <span className="mini-val" style={{ color: "#4ade80" }}>{r.GA} GA</span>
                   </div>
                 ))}
@@ -1392,7 +1423,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {allDefenders.map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#4ade80" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#4ade80" }}>{r.GA} GA</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
                     </div>
@@ -1412,7 +1443,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 {topHome.map((r, i) => (
                   <div key={r.id} className="mini-row">
                     <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-name">{cleanTeamName(r.name)}</span>
                     <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                   </div>
                 ))}
@@ -1423,7 +1454,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {homeGDRanking.map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fb923c" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
                     </div>
@@ -1439,7 +1470,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 {topAway.map((r, i) => (
                   <div key={r.id} className="mini-row">
                     <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                    <span className="mini-name">{r.name}</span>
+                    <span className="mini-name">{cleanTeamName(r.name)}</span>
                     <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                   </div>
                 ))}
@@ -1450,7 +1481,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {awayGDRanking.map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#a78bfa" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
                     </div>
@@ -1471,7 +1502,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {toughRanking.slice(0, 3).map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos">{MEDALS[i]}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
                     </div>
                   ))}
@@ -1482,7 +1513,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     {toughRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                        <span className="mini-name">{r.name}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
                       </div>
                     ))}
@@ -1500,7 +1531,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {toughRanking.slice(0, 3).map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos">{MEDALS[i]}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
                     </div>
                   ))}
@@ -1511,7 +1542,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     {toughRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                        <span className="mini-name">{r.name}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
                       </div>
                     ))}
@@ -1526,7 +1557,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {topClutch.map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
                     </div>
                   ))}
@@ -1537,7 +1568,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     {clutchRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#3a3f50" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
-                        <span className="mini-name">{r.name}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
                       </div>
                     ))}
@@ -1559,7 +1590,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     {topUnlucky.map((r, i) => (
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                        <span className="mini-name">{r.name}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
                       </div>
                     ))}
@@ -1570,7 +1601,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                       {unluckyRanking.map((r, i) => (
                         <div key={r.id} className="mini-row">
                           <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                          <span className="mini-name">{r.name}</span>
+                          <span className="mini-name">{cleanTeamName(r.name)}</span>
                           <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
                           <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.pts} pts)</span>
                         </div>
@@ -1586,7 +1617,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     {topClutch.map((r, i) => (
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
-                        <span className="mini-name">{r.name}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
                       </div>
                     ))}
@@ -1597,7 +1628,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                       {clutchRanking.map((r, i) => (
                         <div key={r.id} className="mini-row">
                           <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#3a3f50" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
-                          <span className="mini-name">{r.name}</span>
+                          <span className="mini-name">{cleanTeamName(r.name)}</span>
                           <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
                         </div>
                       ))}
@@ -1614,7 +1645,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   {topUnlucky.map((r, i) => (
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                      <span className="mini-name">{r.name}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
                     </div>
                   ))}
@@ -1625,7 +1656,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     {unluckyRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
-                        <span className="mini-name">{r.name}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
                         <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.pts} pts)</span>
                       </div>
@@ -1731,20 +1762,20 @@ function FixturesStep({ teams, fixtures, setFixtures, settings, setSettings, onB
       <div style={{ marginBottom: "1.1rem" }}>
         <div className="row" style={{ marginBottom: ".6rem" }}>
           <select className="inp sel" value={hi} onChange={e => setHi(+e.target.value)}>
-            {teams.map((t, i) => <option key={i} value={i}>{t.name}</option>)}
+            {teams.map((t, i) => <option key={i} value={i}>{cleanTeamName(t.name)}</option>)}
           </select>
           <span className="vs">vs</span>
           <select className="inp sel" value={ai} onChange={e => setAi(+e.target.value)}>
-            {teams.map((t, i) => <option key={i} value={i}>{t.name}</option>)}
+            {teams.map((t, i) => <option key={i} value={i}>{cleanTeamName(t.name)}</option>)}
           </select>
         </div>
         <div className="prob-bar">
           <span className="muted">Auto:</span>
-          <span className="ph-col">{preview.homeWin}% {teams[hi]?.name}</span>
+          <span className="ph-col">{preview.homeWin}% {cleanTeamName(teams[hi]?.name)}</span>
           <span className="muted">·</span>
           <span className="pd-col">{preview.draw}% Draw</span>
           <span className="muted">·</span>
-          <span className="pa-col">{preview.awayWin}% {teams[ai]?.name}</span>
+          <span className="pa-col">{preview.awayWin}% {cleanTeamName(teams[ai]?.name)}</span>
         </div>
         <div style={{ display: "flex", gap: ".5rem", marginTop: ".65rem", flexWrap: "wrap", alignItems: "center" }}>
           <span className="lbl" style={{ marginBottom: 0, whiteSpace: "nowrap" }}>Week:</span>
@@ -1773,7 +1804,7 @@ function FixturesStep({ teams, fixtures, setFixtures, settings, setSettings, onB
                     style={{ width: "3rem", textAlign: "center", padding: ".22rem .3rem", fontFamily: "DM Mono,monospace", fontSize: ".8rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }}
                   />
                 </div>
-                <div className="fix-teams"><b>{teams[f.homeIdx]?.name}</b><span className="vs">vs</span><b>{teams[f.awayIdx]?.name}</b></div>
+                <div className="fix-teams"><b>{cleanTeamName(teams[f.homeIdx]?.name)}</b><span className="vs">vs</span><b>{cleanTeamName(teams[f.awayIdx]?.name)}</b></div>
                 <div className="fix-probs">
                   <span className="ph-col">{p.homeWin}%</span>
                   <span className="pd-col">{p.draw}%</span>
@@ -1797,8 +1828,8 @@ function FixturesStep({ teams, fixtures, setFixtures, settings, setSettings, onB
 function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange }) {
   const [hg, setHg] = useState("");
   const [ag, setAg] = useState("");
-  const hn = teams[f.homeIdx]?.name || "?";
-  const an = teams[f.awayIdx]?.name || "?";
+  const hn = cleanTeamName(teams[f.homeIdx]?.name) || "?";
+  const an = cleanTeamName(teams[f.awayIdx]?.name) || "?";
   const ws = settings?.winScore || 30;
   const ls = settings?.lossScore || 25;
   const ds = settings?.drawScore || 25;
@@ -1974,7 +2005,7 @@ function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onCon
               <tbody>
                 {sorted.map(t => (
                   <tr key={t.idx}>
-                    <td className="tl">{t.name}</td>
+                    <td className="tl">{cleanTeamName(t.name)}</td>
                     <td className="dm">{t.points}</td>
                     {results[t.idx].map((p, pos) => (
                       <td key={pos} style={{ background: heatColor(p) }}>{fmtPct(p)}</td>
@@ -2043,7 +2074,7 @@ function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, on
           <span className="lbl" style={{ marginBottom: 0, whiteSpace: "nowrap" }}>Team:</span>
           <select className="inp" style={{ maxWidth: "200px", flex: 1 }} value={selectedTeam} onChange={e => setSelectedTeam(e.target.value)}>
             <option value="all">All teams</option>
-            {teams.map((t, i) => <option key={i} value={i}>{t.name}</option>)}
+            {teams.map((t, i) => <option key={i} value={i}>{cleanTeamName(t.name)}</option>)}
           </select>
           {hasWeeks && (
             <>
@@ -2139,8 +2170,8 @@ function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm, onUndo
 
   const hIdx = resolveRef(match.homeRef, teams, rounds);
   const aIdx = resolveRef(match.awayRef, teams, rounds);
-  const hn = hIdx != null ? (teams[hIdx]?.name || "?") : "TBD";
-  const an = aIdx != null ? (teams[aIdx]?.name || "?") : "TBD";
+  const hn = hIdx != null ? (cleanTeamName(teams[hIdx]?.name) || "?") : "TBD";
+  const an = aIdx != null ? (cleanTeamName(teams[aIdx]?.name) || "?") : "TBD";
   const isTbd = hIdx == null || aIdx == null;
   const ws = settings?.winScore || 30;
   const ls = settings?.lossScore || 25;
