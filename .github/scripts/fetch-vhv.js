@@ -231,15 +231,17 @@ const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-// Navigate to URL and return raw HTML, waiting for table content
+// Navigate to URL and return raw HTML, waiting for content to render
 async function fetchHtml(page, url) {
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
   try {
     await page.waitForFunction(() => {
-      const hasTr  = document.querySelector("table tr td") !== null;
-      const noData = document.body.innerText.includes("No information added yet");
-      return hasTr || noData;
-    }, { timeout: 8000 });
+      const hasTr   = document.querySelector("table tr td") !== null;
+      // Games page uses divs — wait for enough text content to appear (>5000 chars)
+      const hasDiv  = document.body.innerText.length > 5000;
+      const noData  = document.body.innerText.includes("No information added yet");
+      return hasTr || hasDiv || noData;
+    }, { timeout: 15000 });
   } catch { /* timeout — return what we have */ }
   return page.content();
 }
@@ -488,18 +490,22 @@ async function main() {
 
       const ranking      = parseStandingsHtml(standingsHtml);
 
-      // DEBUG: inspect games HTML for first league only
-      if (cfg.id === "18700" || cfg.id === "18701") {
-        const trCount = (gamesHtml.match(/<tr[\s>]/gi) || []).length;
-        const tdCount = (gamesHtml.match(/<td[\s>]/gi) || []).length;
-        console.log(`[DEBUG-GAMES-HTML] ${cfg.name}: len=${gamesHtml.length} <tr>=${trCount} <td>=${tdCount}`);
-        // Print first 2000 chars of body content
-        const bodyM = gamesHtml.match(/<body[\s\S]*?>([\s\S]{0,2000})/i);
-        if (bodyM) console.log(`[DEBUG-GAMES-BODY] ${bodyM[1].replace(/\s+/g," ").substring(0,800)}`);
-        // Print first table block found
-        const tableM = gamesHtml.match(/<table[\s\S]{0,3000}/i);
-        if (tableM) console.log(`[DEBUG-GAMES-TABLE] ${tableM[0].substring(0,1000).replace(/\s+/g," ")}`);
-        else console.log(`[DEBUG-GAMES-TABLE] no <table> found`);
+      // DEBUG: inspect games HTML structure for first league
+      if (cfg.id === "18700") {
+        console.log(`[DEBUG-GAMES] len=${gamesHtml.length}`);
+        // Find the games widget container — look for score-like patterns or team name patterns
+        // Dump 3000 chars starting from a likely game content area
+        const markers = ["game", "match", "fixture", "score", "result", "speeldag", "journée", "ronde", "wedstrijd"];
+        for (const m of markers) {
+          const idx = gamesHtml.toLowerCase().indexOf(m);
+          if (idx > 0) {
+            console.log(`[DEBUG-GAMES-MARKER:${m}] at ${idx}: ...${gamesHtml.substring(Math.max(0,idx-50), idx+300).replace(/\s+/g," ")}...`);
+            break;
+          }
+        }
+        // Dump a 2000-char window from 40% into the document (past nav/header)
+        const mid = Math.floor(gamesHtml.length * 0.4);
+        console.log(`[DEBUG-GAMES-MID] @${mid}: ${gamesHtml.substring(mid, mid+2000).replace(/\s+/g," ")}`);
       }
 
       const { fixtures } = parseGamesHtml(gamesHtml, ranking);
