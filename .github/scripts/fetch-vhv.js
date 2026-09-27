@@ -352,30 +352,17 @@ function parseGamesHtml(html, ranking) {
     if (/^bye\b/i.test(homeName) || /^bye\b/i.test(awayName)) continue;
 
     // Score from <h3>: "26 : 25" = played, " - : - " = scheduled
-    // Also check <p> elements and other score containers Clubee might use
     const h3M    = card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
     const h3     = h3M ? stripText(h3M[1]) : "";
-    // Try h3 first, then any element containing a digit:digit pattern (score)
-    let scoreM = h3.match(/(\d+)\s*:\s*(\d+)/);
-    if (!scoreM) {
-      // Clubee results page may render score in a span/div instead of h3
-      const allScores = card.match(/(\d{1,3})\s*[:\-]\s*(\d{1,3})/g);
-      if (allScores) {
-        for (const s of allScores) {
-          const m = s.match(/(\d+)\s*[:\-]\s*(\d+)/);
-          if (m && parseInt(m[1]) <= 99 && parseInt(m[2]) <= 99) { scoreM = m; break; }
-        }
-      }
-    }
-    // Debug: log first 5 played-by-date cards to inspect structure
+    const scoreM = h3.match(/(\d+)\s*:\s*(\d+)/);
+    // Debug: log first 5 past-game cards to inspect structure
     if (counter < 5) {
       const today2 = new Date().toISOString().slice(0, 10);
       const dateM2 = card.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
       const d2 = dateM2 ? `${dateM2[3]}-${dateM2[2]}-${dateM2[1]}` : null;
       if (d2 && d2 < today2) {
         console.log(`[DBG card ${counter}] h3="${h3}" scoreM=${scoreM ? scoreM[0] : "none"}`);
-        // Print any text that looks like a score in the card
-        const cardText = card.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,300);
+        const cardText = card.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,400);
         console.log(`[DBG card ${counter}] text: ${cardText}`);
       }
     }
