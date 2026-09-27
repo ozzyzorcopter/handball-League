@@ -412,6 +412,7 @@ function makeFixtures(teams, settings) {
 // Always uses full tiebreaker chain.
 // ranking: optional array from API with { name, played, won, drawn, lost, gf, ga, points }
 function calcStats(teams, fixtures, ranking) {
+  if (!teams || !fixtures) return [];
   const scoredFixtures = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
   // Build a name→ranking lookup for seeding P/W/D/L/GF/GA when scores aren't entered
   const rankMap = ranking && ranking.length > 0
@@ -466,7 +467,8 @@ function calcStats(teams, fixtures, ranking) {
     if (b.totalPts !== a.totalPts) return b.totalPts - a.totalPts;
     const ids = rows.filter(r => r.totalPts === a.totalPts).map(r => r.id);
     const hh = h2h(ids);
-    const ha = hh[a.id], hb = hh[b.id];
+    const ha = hh[a.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
+    const hb = hh[b.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
     if (b.W !== a.W) return b.W - a.W;
     if (hb.pts !== ha.pts) return hb.pts - ha.pts;
     const gdA = ha.GF - ha.GA, gdB = hb.GF - hb.GA;
