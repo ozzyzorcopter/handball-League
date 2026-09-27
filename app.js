@@ -410,19 +410,42 @@ function makeFixtures(teams, settings) {
 
 // ── STATS ─────────────────────────────────────────────────────────────────────
 // Always uses full tiebreaker chain.
-function calcStats(teams, fixtures) {
-  const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
+// ranking: optional array from API with { name, played, won, drawn, lost, gf, ga, points }
+function calcStats(teams, fixtures, ranking) {
+  const scoredFixtures = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
+  // Build a name→ranking lookup for seeding P/W/D/L/GF/GA when scores aren't entered
+  const rankMap = ranking && ranking.length > 0
+    ? new Map(ranking.map(r => [r.name.toLowerCase(), r]))
+    : null;
   const s = {};
-  teams.forEach(t => { s[t.id] = { id: t.id, name: t.name, basePts: t.points, P: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0 }; });
-  played.forEach(f => {
-    const hg = +f.homeScore, ag = +f.awayScore;
-    if (isNaN(hg) || isNaN(ag)) return;
-    const h = s[teams[f.homeIdx]?.id], a = s[teams[f.awayIdx]?.id];
-    if (!h || !a) return;
-    h.P++; a.P++; h.GF += hg; h.GA += ag; a.GF += ag; a.GA += hg;
-    if (hg > ag) { h.W++; a.L++; } else if (hg < ag) { a.W++; h.L++; } else { h.D++; a.D++; }
+  teams.forEach(t => {
+    const rk = rankMap && rankMap.get(t.name.toLowerCase());
+    s[t.id] = {
+      id: t.id, name: t.name, basePts: t.points,
+      // Seed from API ranking when available; scored fixtures will add on top
+      P: rk ? (rk.played || 0) : 0,
+      W: rk ? (rk.won   || 0) : 0,
+      D: rk ? (rk.drawn || 0) : 0,
+      L: rk ? (rk.lost  || 0) : 0,
+      GF: rk ? (rk.gf   || 0) : 0,
+      GA: rk ? (rk.ga   || 0) : 0,
+    };
   });
-  const rows = Object.values(s).map(r => ({ ...r, GD: r.GF - r.GA, totalPts: r.basePts + r.W * 2 + r.D }));
+  // Layer scored fixtures on top (override ranking counts to avoid double-counting)
+  // Only add from fixtures if there are scored ones — otherwise trust ranking totals
+  if (scoredFixtures.length > 0) {
+    // Reset computed fields; re-derive everything from scored fixtures only
+    Object.values(s).forEach(r => { r.P = 0; r.W = 0; r.D = 0; r.L = 0; r.GF = 0; r.GA = 0; });
+    scoredFixtures.forEach(f => {
+      const hg = +f.homeScore, ag = +f.awayScore;
+      if (isNaN(hg) || isNaN(ag)) return;
+      const h = s[teams[f.homeIdx]?.id], a = s[teams[f.awayIdx]?.id];
+      if (!h || !a) return;
+      h.P++; a.P++; h.GF += hg; h.GA += ag; a.GF += ag; a.GA += hg;
+      if (hg > ag) { h.W++; a.L++; } else if (hg < ag) { a.W++; h.L++; } else { h.D++; a.D++; }
+    });
+  }
+  const rows = Object.values(s).map(r => ({ ...r, GD: r.GF - r.GA, totalPts: r.basePts + (scoredFixtures.length > 0 ? r.W * 2 + r.D : 0) }));
 
   function h2h(ids) {
     const h = {};
@@ -1140,8 +1163,8 @@ function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, p
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth }) {
-  const rows = useMemo(() => calcStats(teams, fixtures), [teams, fixtures]);
+function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth }) {
+  const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
   const attackers = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => b.GF - a.GF || a.name.localeCompare(b.name)).slice(0, 3), [rows]);
@@ -2433,7 +2456,7 @@ function SimStep({ league, setLeague, onBack }) {
     }));
   }
 
-  const regStats = useMemo(() => calcStats(teams, initFixtures), [teams, initFixtures]);
+  const regStats = useMemo(() => calcStats(teams, initFixtures, league.ranking), [teams, initFixtures, league.ranking]);
   const n = teams.length;
 
   // Playoff source: top 6 with starting pts 6,5,4,3,2,1
@@ -2500,7 +2523,7 @@ function SimStep({ league, setLeague, onBack }) {
           </div>
 
           {tab === "table" && (
-            <LeagueTable teams={initTeams} fixtures={initFixtures} onTeamClick={openDetail}
+            <LeagueTable teams={initTeams} fixtures={initFixtures} ranking={league.ranking} onTeamClick={openDetail}
               highlightTop={hlTop} highlightBottom={hlBot}
               confirmedTop={confirmedTop} confirmedBottom={confirmedBottom}
               leagueId={league.name} aliases={league.scorerAliases || {}} />
@@ -2786,6 +2809,7 @@ function BelgianLeagueView({ league, onBack }) {
           <LeagueTable
             teams={teams}
             fixtures={fixtures}
+            ranking={ranking}
             onTeamClick={idx => setDetail({ idx })}
             highlightTop={hlTop}
             highlightBottom={hlBot}
