@@ -352,16 +352,21 @@ function parseGamesHtml(html, ranking) {
     if (/^bye\b/i.test(homeName) || /^bye\b/i.test(awayName)) continue;
 
     // Score from <h3>: "26 : 25" = played, " - : - " = scheduled
-    const h3M   = card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
-    const h3    = h3M ? stripText(h3M[1]) : "";
+    // Clubee admins often don't enter scores — fall back to date-based detection
+    const h3M    = card.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i);
+    const h3     = h3M ? stripText(h3M[1]) : "";
     const scoreM = h3.match(/(\d+)\s*:\s*(\d+)/);
-    const played    = !!scoreM;
-    const homeScore = played ? parseInt(scoreM[1]) : null;
-    const awayScore = played ? parseInt(scoreM[2]) : null;
 
     // Date from <p>: "22.08.2026"
     const dateM = card.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
     const date  = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
+
+    // A game is played if: (a) score entered in h3, OR (b) game date is in the past
+    const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+    const pastDate = date && date < today;
+    const played    = !!(scoreM || pastDate);
+    const homeScore = scoreM ? parseInt(scoreM[1]) : null;
+    const awayScore = scoreM ? parseInt(scoreM[2]) : null;
 
     const homeIdx = resolveTeam(homeName);
     const awayIdx = resolveTeam(awayName);
