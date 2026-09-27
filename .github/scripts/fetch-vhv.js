@@ -497,15 +497,12 @@ async function parseStatsAllPages(page, leagueId) {
           });
         }
 
-        // Some leagues render TWO copies of the same stats table in the DOM
-        // (seen live: tables=2, identical content — likely a sticky-column
-        // mirroring quirk). Scope to just the first table so we don't count
-        // every scorer twice; fall back to a document-wide row search only
-        // if there's no <table> at all.
-        const firstTable = document.querySelector("table");
-        let rowEls = firstTable
-          ? Array.from(firstTable.querySelectorAll("tr"))
-          : Array.from(document.querySelectorAll("table tr"));
+        // Some leagues render TWO copies of the stats table in the DOM (seen
+        // live: tables=2). We don't know in general which one (if either)
+        // is a partial/sticky-columns mirror missing the data columns, so
+        // rather than guess by table position, gather rows from ALL tables
+        // and de-duplicate identical rows below by content instead.
+        let rowEls = Array.from(document.querySelectorAll("table tr"));
         let cellSel = "td";
         if (rowEls.length === 0) {
           rowEls = Array.from(document.querySelectorAll("[role='row']"));
@@ -516,10 +513,16 @@ async function parseStatsAllPages(page, leagueId) {
       });
     } catch { domRows = []; }
 
+    console.log(`[DBG stats ${leagueId}] page=${pageNum} domRows=${domRows.length} sampleRow0=${JSON.stringify((domRows[0] || []).map(c => c.text))} sampleRow1=${JSON.stringify((domRows[1] || []).map(c => c.text))}`);
+
+    const seenRowKey = new Set();
     for (const cells of domRows) {
       const texts = cells.map(c => c.text);
+      const rowKey = texts.join("\u0001");
+      if (seenRowKey.has(rowKey)) continue; // duplicate row (mirrored table) — skip
       const club = cells.find(c => c.alt)?.alt.trim() || "";
       if (texts.length >= 4 && /^\d+$/.test(texts[0]) && texts[1] && /^\d+$/.test(texts[3])) {
+        seenRowKey.add(rowKey);
         const goals = parseInt(texts[3]);
         const mp    = parseInt(texts[2]) || 0;
         if (goals > 0) {
