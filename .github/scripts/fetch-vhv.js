@@ -10,6 +10,7 @@ const path = require("path");
 const root        = process.cwd();
 const vhvDataPath = path.join(root, "vhv-data.json");
 const boxscoreCachePath = path.join(root, "boxscore-cache.json");
+const venueCachePath = path.join(root, "venue-cache.json");
 
 const LEAGUES = [
   { id: "19333", name: "Supercup Men", federation: "URBH-KBHB", division: "National",
@@ -639,8 +640,8 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
             club,
             goals,
             matchesPlayed:     parseInt(texts[cMP])   || 0,
-            sevenMShots:       parseInt(texts[c7MS])  || 0,
-            sevenMMade:        parseInt(texts[c7MM])  || 0,
+            sevenMScored:       parseInt(texts[c7MS])  || 0,
+            sevenMMissed:        parseInt(texts[c7MM])  || 0,
             yellowCards:       parseInt(texts[cYC])   || 0,
             twoMinSuspensions: parseInt(texts[c2MIN]) || 0,
             blueCards:         parseInt(texts[cBC])   || 0,
@@ -681,8 +682,8 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
               club,
               goals,
               matchesPlayed:     parseInt(cells[cMP])   || 0,
-              sevenMShots:       parseInt(cells[c7MS])  || 0,
-              sevenMMade:        parseInt(cells[c7MM])  || 0,
+              sevenMScored:       parseInt(cells[c7MS])  || 0,
+              sevenMMissed:        parseInt(cells[c7MM])  || 0,
               yellowCards:       parseInt(cells[cYC])   || 0,
               twoMinSuspensions: parseInt(cells[c2MIN]) || 0,
               blueCards:         parseInt(cells[cBC])   || 0,
@@ -803,8 +804,8 @@ async function fetchGameLineup(page, gameId) {
         club: t.teamName,
         goals,
         matchesPlayed:     parseInt(cells[cMP])   || 0,
-        sevenMShots:       parseInt(cells[c7MS])  || 0,
-        sevenMMade:        parseInt(cells[c7MM])  || 0,
+        sevenMScored:       parseInt(cells[c7MS])  || 0,
+        sevenMMissed:        parseInt(cells[c7MM])  || 0,
         yellowCards:       parseInt(cells[cYC])   || 0,
         twoMinSuspensions: parseInt(cells[c2MIN]) || 0,
         blueCards:         parseInt(cells[cBC])   || 0,
@@ -814,6 +815,82 @@ async function fetchGameLineup(page, gameId) {
   }
   return players;
 }
+
+// ── VENUE / TRAVEL DISTANCE ─────────────────────────────────────────────────────
+// A team's home venue ("sporthal") address is shown on its game pages
+// ("Venue" section with a "Show the directions" map link). Both Apple Maps
+// and Google Maps directions links use a `daddr=` query param holding the
+// plain-text address, regardless of which one the site renders for a given
+// browser/locale — matching on that is more robust than trying to pin down
+// the exact heading markup, which we can't verify without live access.
+async function fetchVenueAddress(page, gameId) {
+  const url = `https://www.clubee.com/handballbelgium/games/${gameId}`;
+  try {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+  } catch {
+    return null;
+  }
+  let html;
+  try { html = await page.content(); } catch { return null; }
+  const m = html.match(/daddr=([^"&]+)/i);
+  if (!m) return null;
+  try {
+    const addr = decodeURIComponent(m[1].replace(/\+/g, " ")).trim();
+    return addr || null;
+  } catch {
+    return null;
+  }
+}
+
+// Groups divisions of the same club under one venue-cache key (e.g. "Thor
+// D3 M" and "Thor D2 W" almost always share the same sporthal), so we don't
+// re-fetch/re-geocode the same address once per division. Deliberately
+// duplicated from parseGamesHtml's local coreClubName rather than sharing a
+// reference, to avoid touching that already-working function.
+function venueKey(teamName) {
+  return teamName
+    .replace(/\([^)]*\)/g, "")
+    .replace(/\b(handbalclub|handbal|hbc|hv|hc|khc|hvh|hbv)\b/gi, "")
+    .replace(/\s+/g, " ").trim().toLowerCase();
+}
+
+// Geocoding via OpenStreetMap's free Nominatim API. No API key needed, but
+// their usage policy requires a descriptive User-Agent and caps requests at
+// ~1/sec — we respect that by only calling this for addresses not already
+// in the cache, and by throttling new lookups in the caller.
+async function geocodeAddress(address) {
+  if (typeof fetch !== "function") return null; // very old Node — skip gracefully
+  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(address)}`;
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": "handball-League-fetcher/1.0 (https://github.com/ozzyzorcopter/handball-League)" },
+    });
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+    }
+  } catch { /* geocoding service unreachable/failed — caller treats as unresolved */ }
+  return null;
+}
+
+// Actual driving distance via OSRM's free public routing server (no API
+// key). Treated as symmetric (A→B ≈ B→A) to halve the number of route
+// lookups — real road distance can differ slightly by direction, but not
+// enough to matter for a season-long travel-km panel.
+async function drivingDistanceKm(a, b) {
+  if (typeof fetch !== "function") return null;
+  const url = `https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data && data.code === "Ok" && data.routes && data.routes[0]) {
+      return data.routes[0].distance / 1000; // meters → km
+    }
+  } catch { /* routing service unreachable/failed — caller treats as unresolved */ }
+  return null;
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
@@ -833,6 +910,19 @@ async function main() {
   } catch { boxCache = { games: {} }; }
   const cachedGameCount = Object.keys(boxCache.games).length;
   log(`Loaded boxscore cache: ${cachedGameCount} game(s) already fetched`);
+
+  // Venue cache: each club's home venue (address + geocoded lat/lon), keyed
+  // by venueKey(name), plus driving distances between venue pairs — both
+  // persisted so we only geocode/route NEW clubs and NEW pairings, never
+  // re-doing work for venues we've already resolved. Powers the "Distance
+  // Travelled" panel.
+  let venueCache = { venues: {}, distances: {} };
+  try {
+    venueCache = JSON.parse(fs.readFileSync(venueCachePath, "utf8"));
+    if (!venueCache.venues) venueCache.venues = {};
+    if (!venueCache.distances) venueCache.distances = {};
+  } catch { venueCache = { venues: {}, distances: {} }; }
+  log(`Loaded venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s)`);
 
   const CONCURRENCY = 4; // parallel browser pages
   const browser = await chromium.launch({ headless: true });
@@ -932,6 +1022,44 @@ async function main() {
         .sort((a, b) => b.goals - a.goals)
         .slice(0, 15);
 
+      // Distance Travelled panel: resolve each team's home venue (their
+      // "sporthal") from one of their home fixtures' game page, geocode it,
+      // then sum the driving distance from each team's own venue to every
+      // opponent's venue across their played away fixtures.
+      log(`    Resolving venues…`);
+      for (const t of teams) {
+        const vk = venueKey(t.name);
+        if (venueCache.venues[vk]) continue; // already resolved in a previous run
+        const homeFx = fixtures.find(f => teams[f.homeIdx]?.name === t.name && f.gameId);
+        if (!homeFx) continue; // no home fixture with a gameId yet (e.g. brand-new team)
+        const address = await fetchVenueAddress(page, homeFx.gameId);
+        if (!address) { venueCache.venues[vk] = { name: t.name, address: null, lat: null, lon: null }; continue; }
+        await sleep(1100); // respect Nominatim's ~1 req/sec usage policy
+        const coords = await geocodeAddress(address);
+        venueCache.venues[vk] = { name: t.name, address, lat: coords?.lat ?? null, lon: coords?.lon ?? null };
+      }
+
+      const travelKm = new Array(teams.length).fill(0);
+      const playedAway = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
+      for (const f of playedAway) {
+        const home = teams[f.homeIdx], away = teams[f.awayIdx];
+        if (!home || !away) continue;
+        const hv = venueCache.venues[venueKey(home.name)];
+        const av = venueCache.venues[venueKey(away.name)];
+        if (!hv?.lat || !av?.lat) continue; // venue unresolved for one side — skip this leg
+        const pairKey = [venueKey(home.name), venueKey(away.name)].sort().join("|");
+        if (venueCache.distances[pairKey] == null) {
+          const km = await drivingDistanceKm({ lat: hv.lat, lon: hv.lon }, { lat: av.lat, lon: av.lon });
+          if (km != null) venueCache.distances[pairKey] = km;
+          await sleep(300); // be a reasonable citizen of the free OSRM demo server
+        }
+        const dist = venueCache.distances[pairKey];
+        if (dist != null) travelKm[f.awayIdx] += dist;
+      }
+      const travelRanking = teams
+        .map((t, i) => ({ id: t.id, name: t.name, km: Math.round(travelKm[i]) }))
+        .sort((a, b) => b.km - a.km || a.name.localeCompare(b.name));
+
       const played  = fixtures.filter(f => f.played).length;
       const pending = fixtures.filter(f => !f.played).length;
       log(`    ✓ ${cfg.name}: ${teams.length}t ${fixtures.length}fx (${played}✓ ${pending}⏳) ${scorers.length}sc`);
@@ -941,7 +1069,7 @@ async function main() {
         throw new Error("No data parsed — league may not have started yet");
       }
 
-      return { cfg, ok: true, ranking, fixtures, teams, scorers, topSingleGamePlayers, played, pending };
+      return { cfg, ok: true, ranking, fixtures, teams, scorers, topSingleGamePlayers, travelRanking, played, pending };
     } catch (err) {
       console.error(`    ✗ ${cfg.name}: ${err.message}`);
       return { cfg, ok: false, error: err.message };
@@ -972,13 +1100,14 @@ async function main() {
       results.push({ id: r.cfg.id, name: r.cfg.name, ok: false, error: r.error });
       continue;
     }
-    const { cfg, ranking, fixtures, teams, scorers, topSingleGamePlayers, played, pending } = r;
+    const { cfg, ranking, fixtures, teams, scorers, topSingleGamePlayers, travelRanking, played, pending } = r;
     if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
     fresh.federations[cfg.federation][cfg.id] = {
       serieId: cfg.id, name: cfg.name, federation: cfg.federation,
       division: cfg.division, updatedAt: new Date().toISOString(),
       live: pending > 0, teams, fixtures, ranking, scorers,
       topSingleGamePlayers: topSingleGamePlayers || [],
+      travelRanking: travelRanking || [],
     };
     results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
   }
@@ -993,6 +1122,9 @@ async function main() {
   fs.writeFileSync(boxscoreCachePath, JSON.stringify(boxCache, null, 2));
   const totalCached = Object.keys(boxCache.games).length;
   log(`Boxscore cache: ${totalCached} game(s) total (was ${cachedGameCount} before this run)`);
+
+  fs.writeFileSync(venueCachePath, JSON.stringify(venueCache, null, 2));
+  log(`Venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s) total`);
 
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;

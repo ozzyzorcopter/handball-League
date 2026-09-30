@@ -217,9 +217,9 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
               {s.matchesPlayed}g · {s.avg != null ? s.avg + "/g" : "—"}
             </span>
           )}
-          {(s.sevenMShots > 0 || s.sevenMMade > 0) && (
-            <span className="muted" style={{ fontSize: ".66rem", marginLeft: ".4rem", whiteSpace: "nowrap" }} title="7m scored/taken">
-              7m {s.sevenMMade || 0}/{s.sevenMShots || 0}
+          {(s.sevenMScored > 0 || s.sevenMMissed > 0) && (
+            <span className="muted" style={{ fontSize: ".66rem", marginLeft: ".4rem", whiteSpace: "nowrap" }} title="7m scored / attempted">
+              7m {s.sevenMScored || 0}/{(s.sevenMScored || 0) + (s.sevenMMissed || 0)}
             </span>
           )}
           {s.yellowCards > 0 && (
@@ -1220,7 +1220,7 @@ function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, p
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers }) {
+function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
@@ -1782,6 +1782,38 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
               </div>
             )}
           </div>
+
+          {/* Row 5: Distance Travelled — how far each team has travelled to away games this season */}
+          {(travelRanking || []).length > 0 && (
+            <div className="mini-rankings" style={{ marginTop: ".75rem" }}>
+              <div style={{ gridColumn: "1 / -1" }}>
+                <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "travel" ? null : "travel")}>
+                  <div className="mini-ttl" style={{ color: "#38bdf8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                    <span>🚗 Distance Travelled</span><span>{rankingPanel === "travel" ? "▲" : "▼"}</span>
+                  </div>
+                  {travelRanking.slice(0, 3).map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos">{MEDALS[i]}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
+                      <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                    </div>
+                  ))}
+                </div>
+                {rankingPanel === "travel" && (
+                  <div className="ranking-expand">
+                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Driving distance from each team's home venue to every away game played this season.</div>
+                    {travelRanking.map((r, i) => (
+                      <div key={r.id} className="mini-row">
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
+                        <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>
@@ -2897,7 +2929,7 @@ function BelgianScreen({ onBack }) {
 
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
-  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [] } = league;
+  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [], travelRanking = [] } = league;
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
@@ -2985,6 +3017,7 @@ function BelgianLeagueView({ league, onBack }) {
             phase="regular"
             toughFullWidth={false}
             topSingleGamePlayers={topSingleGamePlayers}
+            travelRanking={travelRanking}
           />
         )}
 
