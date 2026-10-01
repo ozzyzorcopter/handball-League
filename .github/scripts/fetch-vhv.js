@@ -858,9 +858,8 @@ function venueKey(teamName) {
 // their usage policy requires a descriptive User-Agent and caps requests at
 // ~1/sec — we respect that by only calling this for addresses not already
 // in the cache, and by throttling new lookups in the caller.
-async function geocodeAddress(address) {
-  if (typeof fetch !== "function") return null; // very old Node — skip gracefully
-  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(address)}`;
+async function geocodeOnce(query) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=be&q=${encodeURIComponent(query)}`;
   try {
     const res = await fetch(url, {
       headers: { "User-Agent": "handball-League-fetcher/1.0 (https://github.com/ozzyzorcopter/handball-League)" },
@@ -869,28 +868,77 @@ async function geocodeAddress(address) {
     if (Array.isArray(data) && data.length > 0) {
       return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
     }
-  } catch { /* geocoding service unreachable/failed — caller treats as unresolved */ }
+  } catch { /* geocoding service unreachable/failed */ }
   return null;
+}
+
+async function geocodeAddress(address) {
+  if (typeof fetch !== "function") return null; // very old Node — skip gracefully
+
+  // Venue addresses come as "Venue Name, Street Number, City" (e.g.
+  // "Sportcentrum MT De Gryse, Schapenstraat 45a, Oostende"). Nominatim
+  // generally can't resolve the venue-name part (small sports halls are
+  // rarely indexed as named POIs in OpenStreetMap), so a query that
+  // includes it often returns zero results even though the actual street
+  // address is perfectly geocodable. Try the full string first, then fall
+  // back to just the part after the first comma (street + city) if that
+  // fails. Every call goes through throttledGeocodeCall so the ~1 req/sec
+  // limit is respected globally, not just within one league's loop.
+  let result = await throttledGeocodeCall(() => geocodeOnce(address));
+  console.log(`[DBG venue] geocode full="${address}" -> ${result ? `${result.lat},${result.lon}` : "FAILED"}`);
+  if (!result) {
+    const commaIdx = address.indexOf(",");
+    if (commaIdx !== -1) {
+      const withoutVenueName = address.slice(commaIdx + 1).trim();
+      result = await throttledGeocodeCall(() => geocodeOnce(withoutVenueName));
+      console.log(`[DBG venue] geocode fallback="${withoutVenueName}" -> ${result ? `${result.lat},${result.lon}` : "FAILED"}`);
+    }
+  }
+  return result;
 }
 
 // Actual driving distance via OSRM's free public routing server (no API
 // key). Treated as symmetric (A→B ≈ B→A) to halve the number of route
 // lookups — real road distance can differ slightly by direction, but not
-// enough to matter for a season-long travel-km panel.
+// enough to matter for a season-long travel-km panel. Routed through
+// throttledRouteCall so concurrent leagues don't hammer the free server at
+// once.
 async function drivingDistanceKm(a, b) {
   if (typeof fetch !== "function") return null;
-  const url = `https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false`;
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data && data.code === "Ok" && data.routes && data.routes[0]) {
-      return data.routes[0].distance / 1000; // meters → km
-    }
-  } catch { /* routing service unreachable/failed — caller treats as unresolved */ }
-  return null;
+  return throttledRouteCall(async () => {
+    const url = `https://router.project-osrm.org/route/v1/driving/${a.lon},${a.lat};${b.lon},${b.lat}?overview=false`;
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data && data.code === "Ok" && data.routes && data.routes[0]) {
+        return data.routes[0].distance / 1000; // meters → km
+      }
+    } catch { /* routing service unreachable/failed — caller treats as unresolved */ }
+    return null;
+  });
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Leagues are processed with CONCURRENCY parallel workers (see main()), but
+// Nominatim's usage policy (~1 req/sec) and OSRM's free demo server are
+// shared global resources — a per-league sleep() only throttles calls
+// *within* one league's sequential loop, not *across* the several leagues
+// running at the same time. With 4 leagues in flight, that let up to 4
+// geocode/route requests fire in the same second, well over Nominatim's
+// limit, which silently fails (returns no results) far more often than it
+// succeeds — the likely cause of widespread 0km results. These two queues
+// serialize ALL such calls globally, across every concurrent league.
+function makeThrottledQueue(minGapMs) {
+  let chain = Promise.resolve();
+  return function run(fn) {
+    const result = chain.then(fn);
+    chain = result.catch(() => {}).then(() => sleep(minGapMs));
+    return result;
+  };
+}
+const throttledGeocodeCall = makeThrottledQueue(1100); // Nominatim: ~1 req/sec
+const throttledRouteCall   = makeThrottledQueue(300);  // OSRM free demo server: be gentle
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
@@ -1029,12 +1077,17 @@ async function main() {
       log(`    Resolving venues…`);
       for (const t of teams) {
         const vk = venueKey(t.name);
-        if (venueCache.venues[vk]) continue; // already resolved in a previous run
+        // Skip only venues that actually resolved to coordinates before — a
+        // cached entry with lat/lon still null means a previous run failed
+        // to find/geocode this venue (very likely due to the rate-limiting
+        // bug just fixed above) and should be retried, not treated as a
+        // permanent "no venue" result.
+        if (venueCache.venues[vk] && venueCache.venues[vk].lat != null) continue;
         const homeFx = fixtures.find(f => teams[f.homeIdx]?.name === t.name && f.gameId);
         if (!homeFx) continue; // no home fixture with a gameId yet (e.g. brand-new team)
         const address = await fetchVenueAddress(page, homeFx.gameId);
+        console.log(`[DBG venue] team="${t.name}" gameId=${homeFx.gameId} address=${address ? `"${address}"` : "NOT FOUND"}`);
         if (!address) { venueCache.venues[vk] = { name: t.name, address: null, lat: null, lon: null }; continue; }
-        await sleep(1100); // respect Nominatim's ~1 req/sec usage policy
         const coords = await geocodeAddress(address);
         venueCache.venues[vk] = { name: t.name, address, lat: coords?.lat ?? null, lon: coords?.lon ?? null };
       }
@@ -1050,8 +1103,8 @@ async function main() {
         const pairKey = [venueKey(home.name), venueKey(away.name)].sort().join("|");
         if (venueCache.distances[pairKey] == null) {
           const km = await drivingDistanceKm({ lat: hv.lat, lon: hv.lon }, { lat: av.lat, lon: av.lon });
+          console.log(`[DBG travel] ${pairKey} -> ${km != null ? km.toFixed(1) + "km" : "FAILED"}`);
           if (km != null) venueCache.distances[pairKey] = km;
-          await sleep(300); // be a reasonable citizen of the free OSRM demo server
         }
         const dist = venueCache.distances[pairKey];
         if (dist != null) travelKm[f.awayIdx] += dist;
