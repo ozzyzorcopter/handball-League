@@ -875,26 +875,29 @@ async function geocodeOnce(query) {
 async function geocodeAddress(address) {
   if (typeof fetch !== "function") return null; // very old Node — skip gracefully
 
-  // Venue addresses come as "Venue Name, Street Number, City" (e.g.
-  // "Sportcentrum MT De Gryse, Schapenstraat 45a, Oostende"). Nominatim
-  // generally can't resolve the venue-name part (small sports halls are
-  // rarely indexed as named POIs in OpenStreetMap), so a query that
-  // includes it often returns zero results even though the actual street
-  // address is perfectly geocodable. Try the full string first, then fall
-  // back to just the part after the first comma (street + city) if that
-  // fails. Every call goes through throttledGeocodeCall so the ~1 req/sec
-  // limit is respected globally, not just within one league's loop.
-  let result = await throttledGeocodeCall(() => geocodeOnce(address));
-  console.log(`[DBG venue] geocode full="${address}" -> ${result ? `${result.lat},${result.lon}` : "FAILED"}`);
-  if (!result) {
-    const commaIdx = address.indexOf(",");
-    if (commaIdx !== -1) {
-      const withoutVenueName = address.slice(commaIdx + 1).trim();
-      result = await throttledGeocodeCall(() => geocodeOnce(withoutVenueName));
-      console.log(`[DBG venue] geocode fallback="${withoutVenueName}" -> ${result ? `${result.lat},${result.lon}` : "FAILED"}`);
-    }
+  // Venue addresses come as "Venue Name, Street Number, City[, Belgium]"
+  // (e.g. "Sportcentrum MT De Gryse, Schapenstraat 45a, Oostende"). Try
+  // progressively coarser queries until one resolves:
+  //   1. the full string (works when there's no venue-name prefix at all)
+  //   2. everything after the first comma (drops the venue name — Nominatim
+  //      generally can't resolve small sports halls as named POIs)
+  //   3. just the last two comma-separated segments (city [, country]) —
+  //      loses street-level precision but still gives a usable town-center
+  //      fix for the handful of streets Nominatim has no record of at all,
+  //      rather than leaving the team fully unresolved (0km).
+  // Every call goes through throttledGeocodeCall so the ~1 req/sec limit is
+  // respected globally, not just within one league's loop.
+  const parts = address.split(",").map(s => s.trim()).filter(Boolean);
+  const attempts = [address];
+  if (parts.length > 1) attempts.push(parts.slice(1).join(", "));
+  if (parts.length > 2) attempts.push(parts.slice(-2).join(", "));
+
+  for (const query of attempts) {
+    const result = await throttledGeocodeCall(() => geocodeOnce(query));
+    console.log(`[DBG venue] geocode query="${query}" -> ${result ? `${result.lat},${result.lon}` : "FAILED"}`);
+    if (result) return result;
   }
-  return result;
+  return null;
 }
 
 // Actual driving distance via OSRM's free public routing server (no API
@@ -939,6 +942,14 @@ function makeThrottledQueue(minGapMs) {
 }
 const throttledGeocodeCall = makeThrottledQueue(1100); // Nominatim: ~1 req/sec
 const throttledRouteCall   = makeThrottledQueue(300);  // OSRM free demo server: be gentle
+
+// The same club often appears in several leagues (cup editions, reserve
+// teams, etc.), which run concurrently — without this, two leagues could
+// both notice a venue is unresolved at the same moment and each kick off
+// their own fetch+geocode for it, wasting scarce rate-limited calls on an
+// exact duplicate. This lets the second (and third, ...) caller just await
+// the first one's in-flight resolution instead.
+const inFlightVenueResolutions = new Map(); // venueKey -> Promise
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
@@ -1083,13 +1094,26 @@ async function main() {
         // bug just fixed above) and should be retried, not treated as a
         // permanent "no venue" result.
         if (venueCache.venues[vk] && venueCache.venues[vk].lat != null) continue;
+
+        // Another league may already be resolving this exact club's venue
+        // right now — piggyback on that instead of duplicating the work.
+        if (inFlightVenueResolutions.has(vk)) {
+          await inFlightVenueResolutions.get(vk);
+          continue;
+        }
+
         const homeFx = fixtures.find(f => teams[f.homeIdx]?.name === t.name && f.gameId);
         if (!homeFx) continue; // no home fixture with a gameId yet (e.g. brand-new team)
-        const address = await fetchVenueAddress(page, homeFx.gameId);
-        console.log(`[DBG venue] team="${t.name}" gameId=${homeFx.gameId} address=${address ? `"${address}"` : "NOT FOUND"}`);
-        if (!address) { venueCache.venues[vk] = { name: t.name, address: null, lat: null, lon: null }; continue; }
-        const coords = await geocodeAddress(address);
-        venueCache.venues[vk] = { name: t.name, address, lat: coords?.lat ?? null, lon: coords?.lon ?? null };
+
+        const resolution = (async () => {
+          const address = await fetchVenueAddress(page, homeFx.gameId);
+          console.log(`[DBG venue] team="${t.name}" gameId=${homeFx.gameId} address=${address ? `"${address}"` : "NOT FOUND"}`);
+          if (!address) { venueCache.venues[vk] = { name: t.name, address: null, lat: null, lon: null }; return; }
+          const coords = await geocodeAddress(address);
+          venueCache.venues[vk] = { name: t.name, address, lat: coords?.lat ?? null, lon: coords?.lon ?? null };
+        })();
+        inFlightVenueResolutions.set(vk, resolution);
+        try { await resolution; } finally { inFlightVenueResolutions.delete(vk); }
       }
 
       const travelKm = new Array(teams.length).fill(0);
