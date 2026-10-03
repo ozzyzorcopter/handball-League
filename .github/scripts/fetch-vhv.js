@@ -994,7 +994,12 @@ async function main() {
   } catch { venueCache = { venues: {}, distances: {} }; }
   log(`Loaded venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s)`);
 
-  const CONCURRENCY = 4; // parallel browser pages
+  // Each "worker" is just a browser page doing sequential page.goto() calls —
+  // no shared rate-limited resource like Nominatim/OSRM is involved here, so
+  // this scales with runner CPU/network, not an external API limit. Bumped
+  // from 4 → 8 to cut wall-clock time; the geocoding/routing throttles further
+  // down stay global and unaffected by this number.
+  const CONCURRENCY = 8; // parallel browser pages
   const browser = await chromium.launch({ headless: true });
 
   // Shared context — one context for all leagues (shared cookies after warm-up)

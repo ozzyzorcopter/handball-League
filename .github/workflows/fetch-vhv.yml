@@ -26,10 +26,32 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install Playwright + Chromium
+      - name: Cache Playwright browser binary
+        uses: actions/cache@v4
+        id: pw-cache
+        with:
+          path: ~/.cache/ms-playwright
+          # Pinned playwright-core version keeps this key (and therefore the
+          # cached Chromium download) stable across runs — letting npm grab
+          # whatever is "latest" would silently bust the cache on every
+          # version bump upstream. Bump the version here too when you
+          # deliberately want to pick up a newer Chromium build.
+          key: playwright-chromium-1.63.0-${{ runner.os }}
+
+      - name: Install playwright-core
+        run: npm install playwright-core@1.63.0
+
+      # On a cache hit the browser binary is already on disk, so this just
+      # verifies/links it (fast, no download). On a cache miss it does the
+      # full download + OS-dependency install (slow, but only happens once
+      # until the pinned version above changes).
+      - name: Install Chromium (cached) or Chromium + OS deps (cold)
         run: |
-          npm install playwright-core
-          npx playwright install chromium --with-deps
+          if [ "${{ steps.pw-cache.outputs.cache-hit }}" = "true" ]; then
+            npx playwright install chromium
+          else
+            npx playwright install chromium --with-deps
+          fi
 
       - name: Fetch VHV data
         run: node .github/scripts/fetch-vhv.js

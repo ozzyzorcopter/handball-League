@@ -518,17 +518,42 @@ function calcStats(teams, fixtures, ranking) {
     return h;
   }
 
+  // Head-to-head criteria are only fair to apply once every team in the tied
+  // group has actually played every other team in it at least once. With an
+  // incomplete mini round-robin (e.g. only one of several pairs has met so
+  // far), a single result would unfairly separate teams that simply haven't
+  // had the chance to play each other yet — so in that case we skip straight
+  // to overall goal difference instead.
+  function h2hGroupComplete(ids) {
+    if (ids.length < 2) return true;
+    const played = new Set();
+    scoredFixtures.forEach(f => {
+      const hid = teams[f.homeIdx]?.id, aid = teams[f.awayIdx]?.id;
+      if (ids.includes(hid) && ids.includes(aid)) {
+        played.add([hid, aid].sort().join("|"));
+      }
+    });
+    for (let i = 0; i < ids.length; i++) {
+      for (let j = i + 1; j < ids.length; j++) {
+        if (!played.has([ids[i], ids[j]].sort().join("|"))) return false;
+      }
+    }
+    return true;
+  }
+
   return rows.sort((a, b) => {
     if (b.totalPts !== a.totalPts) return b.totalPts - a.totalPts;
-    const ids = rows.filter(r => r.totalPts === a.totalPts).map(r => r.id);
-    const hh = h2h(ids);
-    const ha = hh[a.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
-    const hb = hh[b.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
     if (b.W !== a.W) return b.W - a.W;
-    if (hb.pts !== ha.pts) return hb.pts - ha.pts;
-    const gdA = ha.GF - ha.GA, gdB = hb.GF - hb.GA;
-    if (gdB !== gdA) return gdB - gdA;
-    if (hb.awayGF !== ha.awayGF) return hb.awayGF - ha.awayGF;
+    const ids = rows.filter(r => r.totalPts === a.totalPts).map(r => r.id);
+    if (h2hGroupComplete(ids)) {
+      const hh = h2h(ids);
+      const ha = hh[a.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
+      const hb = hh[b.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
+      if (hb.pts !== ha.pts) return hb.pts - ha.pts;
+      const gdA = ha.GF - ha.GA, gdB = hb.GF - hb.GA;
+      if (gdB !== gdA) return gdB - gdA;
+      if (hb.awayGF !== ha.awayGF) return hb.awayGF - ha.awayGF;
+    }
     if (b.GD !== a.GD) return b.GD - a.GD;
     return a.name.localeCompare(b.name);
   });
