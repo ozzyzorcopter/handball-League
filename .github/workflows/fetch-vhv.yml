@@ -9,6 +9,13 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+# If a run is still going when the next half-hourly trigger fires (the
+# venue/boxscore work can make a run take a while), cancel the stale one
+# instead of letting two runs overlap and fight over the same git push.
+concurrency:
+  group: fetch-vhv
+  cancel-in-progress: true
+
 jobs:
   fetch:
     runs-on: ubuntu-latest

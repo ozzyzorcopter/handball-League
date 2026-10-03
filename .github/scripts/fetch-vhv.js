@@ -951,6 +951,17 @@ const throttledRouteCall   = makeThrottledQueue(300);  // OSRM free demo server:
 // the first one's in-flight resolution instead.
 const inFlightVenueResolutions = new Map(); // venueKey -> Promise
 
+// Every still-unresolved venue (address not found, or geocoding failed even
+// after the fallback stages) gets retried on EVERY run, since a cached
+// failure isn't treated as permanent. As the list of genuinely hard venues
+// built up, that retry cost grew every run — likely pushing total run time
+// well past 30 minutes and causing GitHub to silently drop some of the
+// half-hourly scheduled triggers (it does that under load, with no error or
+// notification). This caps how many NEW venue resolutions a single run will
+// attempt; the rest just wait for the next run, so the backlog drains
+// gradually instead of every run paying for the whole thing every time.
+let venueResolutionBudget = 20;
+
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
   log(`Starting at ${new Date().toUTCString()}`);
@@ -1105,6 +1116,12 @@ async function main() {
         const homeFx = fixtures.find(f => teams[f.homeIdx]?.name === t.name && f.gameId);
         if (!homeFx) continue; // no home fixture with a gameId yet (e.g. brand-new team)
 
+        // This run has spent its venue-resolution budget — leave the rest
+        // for next time rather than letting the retry backlog blow out this
+        // run's total time.
+        if (venueResolutionBudget <= 0) continue;
+        venueResolutionBudget--;
+
         const resolution = (async () => {
           const address = await fetchVenueAddress(page, homeFx.gameId);
           console.log(`[DBG venue] team="${t.name}" gameId=${homeFx.gameId} address=${address ? `"${address}"` : "NOT FOUND"}`);
@@ -1201,7 +1218,8 @@ async function main() {
   log(`Boxscore cache: ${totalCached} game(s) total (was ${cachedGameCount} before this run)`);
 
   fs.writeFileSync(venueCachePath, JSON.stringify(venueCache, null, 2));
-  log(`Venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s) total`);
+  const unresolvedVenues = Object.values(venueCache.venues).filter(v => v.lat == null).length;
+  log(`Venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s) total, ${unresolvedVenues} still unresolved (budget spent this run: ${20 - venueResolutionBudget}/20)`);
 
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;
