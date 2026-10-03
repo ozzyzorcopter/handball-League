@@ -1628,9 +1628,9 @@
     },
     "besox izegem b18 vhv r": {
       "name": "Besox Izegem B18 VHV R",
-      "address": "Sport- en Recreatiecentrum De Krekel, H. Hartstraat 15, Izegem",
-      "lat": null,
-      "lon": null
+      "address": "Sport- en Recreatiecentrum De Krekel, H. Hartstraat 15, Izegem, Belgium",
+      "lat": 50.9198305,
+      "lon": 3.215435
     },
     "h. tessenderlo b18 vhv q": {
       "name": "H. Tessenderlo B18 VHV Q",
@@ -1856,7 +1856,7 @@
     },
     "h. tessenderlo b18 vhv r": {
       "name": "H. Tessenderlo B18 VHV R",
-      "address": "Sporthal Curticella, Sportlaan 20, Koesel, Belgium",
+      "address": null,
       "lat": null,
       "lon": null
     },
@@ -2786,9 +2786,9 @@
     },
     "kwanten arena g14 vhv r": {
       "name": "Kwanten Arena G14 VHV R",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "Gemeentelijke Sporthal Hechtel- Eksel, Dennestraat 8, Hechtel-Eksel, Belgium",
+      "lat": 51.1340192,
+      "lon": 5.3780119
     },
     "heist o/d berg u14 vhv r": {
       "name": "Heist o/d Berg U14 VHV R",
@@ -3056,9 +3056,9 @@
     },
     "besox izegem u14 vhv r 2": {
       "name": "Besox Izegem U14 VHV R 2",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "Sport- en Recreatiecentrum De Krekel, H. Hartstraat 15, Izegem, Belgium",
+      "lat": 50.9198305,
+      "lon": 3.215435
     },
     "hubo u14 vhv c 2": {
       "name": "Hubo U14 VHV C 2",
@@ -3308,9 +3308,9 @@
     },
     "derdaele sp. pelt g12 vhv c": {
       "name": "Derdaele Sp. Pelt G12 VHV C",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "Sportcentrum Dommelhof, Toekomstlaan 5, Pelt, Belgium",
+      "lat": 51.2320986,
+      "lon": 5.4231522
     },
     "elita buggenhout": {
       "name": "Elita Buggenhout",
@@ -3971,6 +3971,36 @@
     "db gent u14 vhv r 1|groot berlare u14 vhv-b r": 29.847099999999998,
     "derdaele sp. pelt u14 vhv r 2|hubo u14 vhv r 2": 64.3598,
     "schoten u14 vhv r|welta u14 vhv-b r": 32.0737,
-    "leuven u14 vhv r|united west b u14 vhv r": 37.8913
+    "leuven u14 vhv r|united west b u14 vhv r": 37.8913,
+    "derdaele sp. pelt d1 m|renaissance montegnée d1 m": 86.30160000000001,
+    "dhc waasmunster d1 wr|eupen d1 wr": 181.6587,
+    "eynatten-raeren promo lg 1|villers-amay promo lg": 71.7021,
+    "mont-sur-marchienne b18 lfh|sprimont b18 lfh": 123.2212,
+    "eupen u14 lg 2|visé bm u14 lg": 48.306599999999996,
+    "apolloon spurs d1 m vhv|hubo d1 m vhv": 185.9783,
+    "dendermonde d1 m vhv 1|h. bilzen d1 m vhv": 131.9717,
+    "olse merksem d3 m vhv|thor d3 m vhv": 128.3376,
+    "lebbeke d3 m vhv|roeselare d3 m vhv 1": 85.9232,
+    "h. bilzen d m vhv lim-b|maasmechelen 65 d m vhv lim": 27.8086,
+    "apolloon spurs d m vhv owv|db gent d m vhv owv": 39.7352,
+    "besox izegem d w vhv owv|evergem d w vhv owv": 54.5184,
+    "besox izegem b18 vhv r|eeklo b18 vhv r": 45.806599999999996,
+    "besox izegem b18 vhv r|lokeren b18 vhv r": 78.6816,
+    "besox izegem b18 vhv r|mouscron b18 vhv-b r": 27.142799999999998,
+    "olse merksem b18 vhv r|uilenspiegel b18 vhv r": 13.021799999999999,
+    "'t noorden b|rhino u16 vhv-b r": 63.813199999999995,
+    "biobest sasja u16 vhv r|merksplas u16 vhv r": 51.941900000000004,
+    "besox izegem u14 vhv r 2|thor u14 vhv r": 54.8745,
+    "apolloon spurs u14 vhv r|besox izegem u14 vhv r 2": 16.6885,
+    "besox izegem u14 vhv r 2|desselgemse u14 vhv r": 12.35,
+    "besox izegem u14 vhv r 2|db gent u14 vhv r 3": 48.3738,
+    "kwanten arena g14 vhv r|united west b g14 vhv r": 36.435900000000004,
+    "dhc meeuwen g14 vhv-b r 2|kwanten arena g14 vhv r": 14.760299999999999,
+    "dhc overpelt g14 vhv r b|kwanten arena g14 vhv r": 15.4665,
+    "kwanten arena g14 vhv r|sezoens achilles bocholt g14 vhv r": 15.8237,
+    "p. kortessem g14 vhv r|sint-truiden g14 vhv-b r": 21.814400000000003,
+    "derdaele sp. pelt g14 vhv r 2|kwanten arena g14 vhv r": 16.195899999999998,
+    "besox izegem g14 vhv r|lebbeke g14 vhv r": 89.3745,
+    "apolloon spurs g14 vhv-b r|roeselare g14 vhv r": 15.388
   }
 }
