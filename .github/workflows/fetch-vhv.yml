@@ -1,9 +1,16 @@
 name: Fetch VHV Data
 
 on:
+  # GitHub explicitly documents that scheduled workflows are most likely to
+  # be delayed or dropped right at the top (":00") and half (":30") of every
+  # hour, since that's when the shared scheduler is busiest across every
+  # repo on the platform — not just this one. We were scheduling both crons
+  # exactly on those marks, which likely explains runs going missing
+  # entirely rather than just running late. Offsetting to :17 avoids that
+  # rush; the actual minute doesn't matter otherwise.
   schedule:
-    - cron: "0 12-23 * * 6,0"       # hourly Sat+Sun 12:00-23:00 UTC
-    - cron: "0 7 * * 1-5"           # once daily weekdays 07:00 UTC
+    - cron: "17 12-23 * * 6,0"      # hourly Sat+Sun, off-peak minute
+    - cron: "17 7 * * 1-5"          # once daily weekdays, off-peak minute
   workflow_dispatch:
 
 env:
