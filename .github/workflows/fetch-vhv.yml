@@ -2,7 +2,7 @@ name: Fetch VHV Data
 
 on:
   schedule:
-    - cron: "0,30 12-23 * * 6,0"   # half-hourly Sat+Sun 12:00-23:30 UTC
+    - cron: "0 12-23 * * 6,0"       # hourly Sat+Sun 12:00-23:00 UTC
     - cron: "0 7 * * 1-5"           # once daily weekdays 07:00 UTC
   workflow_dispatch:
 

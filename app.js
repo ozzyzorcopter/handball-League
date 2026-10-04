@@ -588,49 +588,83 @@ function runMC(teams, pending, played) {
   const n = teams.length, SIMS = 100000;
   const hits = teams.map(() => new Array(n).fill(0));
 
-  // Pre-compute wins and h2h points from already-played fixtures
+  // Pre-compute wins, h2h points and GF/GA from already-played fixtures
   const basePts   = teams.map(t => t.points);  // already includes earned pts
   const baseWins  = new Array(n).fill(0);
+  const baseGF    = new Array(n).fill(0);
+  const baseGA    = new Array(n).fill(0);
   const baseH2H   = Array.from({ length: n }, () => new Array(n).fill(0));
   (played || []).forEach(f => {
     const hi = f.homeIdx, ai = f.awayIdx;
     const hg = +f.homeScore, ag = +f.awayScore;
     if (isNaN(hg) || isNaN(ag)) return;
+    baseGF[hi] += hg; baseGA[hi] += ag; baseGF[ai] += ag; baseGA[ai] += hg;
     if (hg > ag) { baseWins[hi]++; baseH2H[hi][ai] += 2; }
     else if (hg < ag) { baseWins[ai]++; baseH2H[ai][hi] += 2; }
     else { baseH2H[hi][ai]++; baseH2H[ai][hi]++; }
   });
 
+  // Whether team i and team j ever face each other at all this season
+  // (already played OR still scheduled) — static for the whole run, since
+  // it only depends on the fixture list, not on simulated outcomes. Used so
+  // the head-to-head tiebreaker below is only applied to a tied group once
+  // every pair in it actually has (or will have) a fixture between them;
+  // otherwise one incidental result would unfairly separate teams that
+  // never got, or won't get, the chance to play each other at all.
+  const matchExists = Array.from({ length: n }, () => new Array(n).fill(false));
+  [...(played || []), ...(pending || [])].forEach(f => {
+    matchExists[f.homeIdx][f.awayIdx] = true;
+    matchExists[f.awayIdx][f.homeIdx] = true;
+  });
+  function h2hGroupComplete(idxs) {
+    for (let a = 0; a < idxs.length; a++) {
+      for (let b = a + 1; b < idxs.length; b++) {
+        if (!matchExists[idxs[a]][idxs[b]]) return false;
+      }
+    }
+    return true;
+  }
+
   for (let s = 0; s < SIMS; s++) {
     const pts   = basePts.slice();
     const wins  = baseWins.slice();
+    const gf    = baseGF.slice();
+    const ga    = baseGA.slice();
     const h2h   = baseH2H.map(row => row.slice()); // deep copy per sim
 
     for (const f of pending) {
       const r = Math.random() * 100;
       const hi = f.homeIdx, ai = f.awayIdx;
+      // Simulated scorelines aren't generated here, only win/draw/loss — use
+      // a nominal 1-goal margin so GF/GA (and thus GD) still move in the
+      // right direction for teams who need the GD tiebreaker.
       if (r < f.homeWin) {
-        pts[hi] += 2; wins[hi]++;
+        pts[hi] += 2; wins[hi]++; gf[hi]++; ga[ai]++;
         h2h[hi][ai] += 2;
       } else if (r < f.homeWin + f.draw) {
         pts[hi]++; pts[ai]++;
         h2h[hi][ai]++; h2h[ai][hi]++;
       } else {
-        pts[ai] += 2; wins[ai]++;
+        pts[ai] += 2; wins[ai]++; gf[ai]++; ga[hi]++;
         h2h[ai][hi] += 2;
       }
     }
 
-    // Sort with tiebreakers: pts → wins → h2h pts among full tied group → random
-    const entries = pts.map((p, i) => ({ p, i, w: wins[i], rnd: Math.random() }));
+    // Sort with tiebreakers: pts → wins → h2h pts among tied group (only
+    // when that group's head-to-head schedule is complete) → overall GD →
+    // random (final fallback, since a simulated season has no name to
+    // alphabetize meaningfully by).
+    const entries = pts.map((p, i) => ({ p, i, w: wins[i], gd: gf[i] - ga[i], rnd: Math.random() }));
     entries.sort((a, b) => {
       if (b.p !== a.p) return b.p - a.p;
       if (b.w !== a.w) return b.w - a.w;
-      // Sum h2h points earned against ALL teams tied on same points
       const tiedIdxs = entries.filter(e => e.p === a.p).map(e => e.i);
-      const sumA = tiedIdxs.reduce((s, j) => s + (j !== a.i ? h2h[a.i][j] : 0), 0);
-      const sumB = tiedIdxs.reduce((s, j) => s + (j !== b.i ? h2h[b.i][j] : 0), 0);
-      if (sumB !== sumA) return sumB - sumA;
+      if (h2hGroupComplete(tiedIdxs)) {
+        const sumA = tiedIdxs.reduce((s, j) => s + (j !== a.i ? h2h[a.i][j] : 0), 0);
+        const sumB = tiedIdxs.reduce((s, j) => s + (j !== b.i ? h2h[b.i][j] : 0), 0);
+        if (sumB !== sumA) return sumB - sumA;
+      }
+      if (b.gd !== a.gd) return b.gd - a.gd;
       return a.rnd - b.rnd;
     });
     entries.forEach(({ i }, rank) => { hits[i][rank]++; });
