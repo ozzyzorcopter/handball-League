@@ -238,7 +238,7 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
                   </td>
                   {cols.delta && <td style={{ color: s.delta > 0 ? "#4ade80" : "#5a6070" }}>{s.delta != null ? (s.delta > 0 ? "+" : "") + s.delta : ""}</td>}
                   {cols.mp && <td>{s.matchesPlayed > 0 ? s.matchesPlayed : ""}</td>}
-                  {cols.mp && <td>{s.matchesPlayed > 0 ? (s.avg != null ? s.avg : "—") : ""}</td>}
+                  {cols.mp && <td>{s.matchesPlayed > 0 ? (s.goals / s.matchesPlayed).toFixed(2) : ""}</td>}
                   {cols.sevenM && <td>{(s.sevenMScored > 0 || s.sevenMMissed > 0) ? `${s.sevenMScored || 0}/${(s.sevenMScored || 0) + (s.sevenMMissed || 0)}` : ""}</td>}
                   {cols.yc && <td>{s.yellowCards > 0 ? s.yellowCards : ""}</td>}
                   {cols.two && <td>{s.twoMinSuspensions > 0 ? s.twoMinSuspensions : ""}</td>}
