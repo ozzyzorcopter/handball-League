@@ -1958,7 +1958,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 </div>
               </>
             ) : (
-              <div style={{ gridColumn: "1 / -1" }}>
+              <div>
                 <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "unlucky" ? null : "unlucky")}>
                   <div className="mini-ttl" style={{ color: "#94a3b8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
                     <span>😤 Most Unlucky</span><span>{rankingPanel === "unlucky" ? "▲" : "▼"}</span>
@@ -1986,12 +1986,40 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 )}
               </div>
             )}
+            {!toughFullWidth && (travelRanking || []).length > 0 && (
+              <div>
+                <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "travel" ? null : "travel")}>
+                  <div className="mini-ttl" style={{ color: "#38bdf8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                    <span>🚗 Distance Travelled</span><span>{rankingPanel === "travel" ? "▲" : "▼"}</span>
+                  </div>
+                  {travelRanking.slice(0, 3).map((r, i) => (
+                    <div key={r.id} className="mini-row">
+                      <span className="mini-pos">{MEDALS[i]}</span>
+                      <span className="mini-name">{cleanTeamName(r.name)}</span>
+                      <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                    </div>
+                  ))}
+                </div>
+                {rankingPanel === "travel" && (
+                  <div className="ranking-expand">
+                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>Driving distance from each team's home venue to every away game played this season.</div>
+                    {travelRanking.map((r, i) => (
+                      <div key={r.id} className="mini-row">
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-name">{cleanTeamName(r.name)}</span>
+                        <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Row 5: Distance Travelled — how far each team has travelled to away games this season */}
-          {(travelRanking || []).length > 0 && (
+          {toughFullWidth && (travelRanking || []).length > 0 && (
             <div className="mini-rankings" style={{ marginTop: ".75rem" }}>
-              <div style={{ gridColumn: "1 / -1" }}>
+              <div>
                 <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "travel" ? null : "travel")}>
                   <div className="mini-ttl" style={{ color: "#38bdf8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
                     <span>🚗 Distance Travelled</span><span>{rankingPanel === "travel" ? "▲" : "▼"}</span>
