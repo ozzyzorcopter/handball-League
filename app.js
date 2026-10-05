@@ -1306,6 +1306,36 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
     Object.keys(m).forEach(k => { m[k] = m[k].slice(-5); });
     return m;
   }, [fixtures, teams]);
+
+  // Each team's most recent played match (same ordering rules as form above).
+  const lastMatches = useMemo(() => {
+    const played = fixtures
+      .map((f, idx) => ({ f, idx }))
+      .filter(({ f }) => f.played && f.homeScore != null && f.awayScore != null && !isNaN(+f.homeScore) && !isNaN(+f.awayScore))
+      .sort((a, b) => {
+        const da = a.f.date || "", db = b.f.date || "";
+        if (da !== db && da && db) return da < db ? -1 : 1;
+        return a.idx - b.idx;
+      });
+    const last = {};
+    played.forEach(({ f }) => {
+      const h = teams[f.homeIdx], a = teams[f.awayIdx];
+      if (!h || !a) return;
+      last[h.id] = f; last[a.id] = f;
+    });
+    return teams
+      .filter(t => last[t.id])
+      .map(t => ({ team: t, f: last[t.id] }))
+      .sort((x, y) => {
+        const dx = x.f.date || "", dy = y.f.date || "";
+        if (dx !== dy) return dx < dy ? 1 : -1; // newest first
+        return x.team.name.localeCompare(y.team.name);
+      });
+  }, [fixtures, teams]);
+  const fmtMatchDate = d => {
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || "");
+    return m ? `${m[3]}/${m[2]}/${m[1]}` : "—";
+  };
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
   const attackers = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => b.GF - a.GF || a.name.localeCompare(b.name)).slice(0, 3), [rows]);
@@ -1518,6 +1548,26 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
+      {lastMatches.length > 0 && (
+        <div className="mini-box" style={{ marginTop: "1rem" }}>
+          <div className="mini-ttl" style={{ color: "#22d3ee" }}>🗓 Last Played Match</div>
+          {lastMatches.map(({ team, f }) => {
+            const hn = cleanTeamName(teams[f.homeIdx].name), an = cleanTeamName(teams[f.awayIdx].name);
+            const isHome = teams[f.homeIdx].id === team.id;
+            return (
+              <div key={team.id} className="mini-row" style={{ gap: ".5rem" }}>
+                <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "5.2rem" }}>{fmtMatchDate(f.date)}</span>
+                <span className="mini-name" style={{ flex: "0 0 30%", minWidth: 0 }}>{cleanTeamName(team.name)}</span>
+                <span style={{ fontSize: ".78rem" }}>
+                  <span style={{ fontWeight: isHome ? 700 : 400 }}>{hn}</span>
+                  <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
+                  <span style={{ fontWeight: isHome ? 400 : 700 }}>{an}</span>
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
       {(leagueId || Array.isArray(archiveScorers)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
