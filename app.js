@@ -1281,6 +1281,31 @@ function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, p
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
 function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
+
+  // Last 5 results per team (oldest → newest). Played fixtures are ordered by
+  // date when present (ISO strings sort correctly); fixtures without a date
+  // (e.g. results entered manually in the sim) keep their list order.
+  const formById = useMemo(() => {
+    const played = fixtures
+      .map((f, idx) => ({ f, idx }))
+      .filter(({ f }) => f.played && f.homeScore != null && f.awayScore != null)
+      .sort((a, b) => {
+        const da = a.f.date || "", db = b.f.date || "";
+        if (da !== db && da && db) return da < db ? -1 : 1;
+        return a.idx - b.idx;
+      });
+    const m = {};
+    played.forEach(({ f }) => {
+      const hg = +f.homeScore, ag = +f.awayScore;
+      if (isNaN(hg) || isNaN(ag)) return;
+      const hid = teams[f.homeIdx]?.id, aid = teams[f.awayIdx]?.id;
+      if (hid == null || aid == null) return;
+      (m[hid] = m[hid] || []).push(hg > ag ? "W" : hg < ag ? "L" : "D");
+      (m[aid] = m[aid] || []).push(ag > hg ? "W" : ag < hg ? "L" : "D");
+    });
+    Object.keys(m).forEach(k => { m[k] = m[k].slice(-5); });
+    return m;
+  }, [fixtures, teams]);
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
   const attackers = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => b.GF - a.GF || a.name.localeCompare(b.name)).slice(0, 3), [rows]);
@@ -1455,6 +1480,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
               <th title="Goals Against">GA</th>
               <th className="tgd" title="Goal Difference">GD</th>
               <th className="tpts" title="Points">Pts</th>
+              <th title="Last 5 games (oldest → newest)">Form</th>
             </tr>
           </thead>
           <tbody>
@@ -1476,6 +1502,15 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                   <td>{r.GA}</td>
                   <td className={gdc}>{r.GD > 0 ? "+" + r.GD : r.GD}</td>
                   <td className="tpts">{r.totalPts}</td>
+                  <td style={{ whiteSpace: "nowrap" }}>
+                    {(formById[r.id] || []).map((res, k) => (
+                      <span key={k} title={res === "W" ? "Win" : res === "D" ? "Draw" : "Loss"}
+                        style={{ display: "inline-block", width: "1.1rem", textAlign: "center", fontWeight: 700, fontSize: ".78rem",
+                          color: res === "W" ? "#4ade80" : res === "D" ? "#9ca3af" : "#f87171" }}>
+                        {res === "W" ? "✓" : res === "D" ? "D" : "–"}
+                      </span>
+                    ))}
+                  </td>
                 </tr>
               );
             })}
