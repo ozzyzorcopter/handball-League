@@ -176,6 +176,17 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
 
   const shown = expanded ? filtered : filtered.slice(0, maxRows);
   const collapsible = !loading && filtered.length > maxRows;
+  // Only show stat columns that have data for at least one listed player
+  // (e.g. lower divisions have no 7m / card stats).
+  const cols = {
+    delta: filtered.some(s => s.delta != null),
+    mp: filtered.some(s => s.matchesPlayed > 0),
+    sevenM: filtered.some(s => s.sevenMScored > 0 || s.sevenMMissed > 0),
+    yc: filtered.some(s => s.yellowCards > 0),
+    two: filtered.some(s => s.twoMinSuspensions > 0),
+    bc: filtered.some(s => s.blueCards > 0),
+    rc: filtered.some(s => s.redCards > 0),
+  };
 
   return (
     <div className="mini-box" style={{ marginTop: "1rem" }}>
@@ -194,48 +205,51 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
       {!loading && !error && filtered.length === 0 && (
         <div className="muted" style={{ fontSize: ".78rem" }}>No scorer data found.</div>
       )}
-      {shown.map((s, i) => (
-        <div key={i} className="mini-row">
-          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fbbf24" : "#3a3f50" }}>{i < 3 ? ["🥇","🥈","🥉"][i] : (i+1)+"."}</span>
-          <span className="mini-name" style={{ flex: 1 }}>{s.player}</span>
-          {!filterClub && <span className="muted" style={{ fontSize: ".68rem", marginRight: ".4rem" }}>{s.club}</span>}
-          <span className="mini-val" style={{ color: "#fbbf24" }}>
-            {s.goals}
-            {/* Goals scored in the player's most recent game — populated once
-                per-match boxscore data is wired in; renders nothing until then. */}
-            {s.lastGameGoals != null && (
-              <span style={{ fontSize: ".68rem", marginLeft: ".2rem", color: "#9ca3af" }}>({s.lastGameGoals})</span>
-            )}
-          </span>
-          {s.delta != null && (
-            <span style={{ fontSize: ".68rem", marginLeft: ".3rem", color: s.delta > 0 ? "#4ade80" : "#5a6070" }}>
-              ({s.delta > 0 ? "+" : ""}{s.delta})
-            </span>
-          )}
-          {s.matchesPlayed > 0 && (
-            <span className="muted" style={{ fontSize: ".66rem", marginLeft: ".4rem", whiteSpace: "nowrap" }}>
-              {s.matchesPlayed}g · {s.avg != null ? s.avg + "/g" : "—"}
-            </span>
-          )}
-          {(s.sevenMScored > 0 || s.sevenMMissed > 0) && (
-            <span className="muted" style={{ fontSize: ".66rem", marginLeft: ".4rem", whiteSpace: "nowrap" }} title="7m scored / attempted">
-              7m {s.sevenMScored || 0}/{(s.sevenMScored || 0) + (s.sevenMMissed || 0)}
-            </span>
-          )}
-          {s.yellowCards > 0 && (
-            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="Yellow cards">🟨{s.yellowCards}</span>
-          )}
-          {s.twoMinSuspensions > 0 && (
-            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="2-minute suspensions">⏱{s.twoMinSuspensions}</span>
-          )}
-          {s.blueCards > 0 && (
-            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="Blue cards">🟦{s.blueCards}</span>
-          )}
-          {s.redCards > 0 && (
-            <span style={{ fontSize: ".66rem", marginLeft: ".3rem" }} title="Red cards">🟥{s.redCards}</span>
-          )}
+      {shown.length > 0 && (
+        <div className="tbl-wrap">
+          <table className="ltbl">
+            <thead>
+              <tr>
+                <th style={{ width: "2rem" }}>#</th>
+                <th className="tl">Player</th>
+                {!filterClub && <th className="tl" style={{ minWidth: 0 }}>Club</th>}
+                <th className="tpts" title="Goals (goals in last game)">G</th>
+                {cols.delta && <th title="Goals since previous update">+/-</th>}
+                {cols.mp && <th title="Matches played">MP</th>}
+                {cols.mp && <th title="Goals per game">Avg</th>}
+                {cols.sevenM && <th title="7m scored / attempted">7m</th>}
+                {cols.yc && <th title="Yellow cards">🟨</th>}
+                {cols.two && <th title="2-minute suspensions">2'</th>}
+                {cols.bc && <th title="Blue cards">🟦</th>}
+                {cols.rc && <th title="Red cards">🟥</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {shown.map((s, i) => (
+                <tr key={i}>
+                  <td className="tpos">{i < 3 ? ["🥇","🥈","🥉"][i] : (i + 1)}</td>
+                  <td className="tl">{s.player}</td>
+                  {!filterClub && <td className="tl" style={{ fontFamily: "DM Sans,sans-serif", fontWeight: 400, color: "#6b7280", fontSize: ".72rem" }}>{cleanTeamName(s.club || "")}</td>}
+                  <td className="tpts" style={{ color: "#fbbf24" }}>
+                    {s.goals}
+                    {s.lastGameGoals != null && (
+                      <span style={{ fontSize: ".68rem", marginLeft: ".2rem", color: "#9ca3af", fontWeight: 400 }}>({s.lastGameGoals})</span>
+                    )}
+                  </td>
+                  {cols.delta && <td style={{ color: s.delta > 0 ? "#4ade80" : "#5a6070" }}>{s.delta != null ? (s.delta > 0 ? "+" : "") + s.delta : ""}</td>}
+                  {cols.mp && <td>{s.matchesPlayed > 0 ? s.matchesPlayed : ""}</td>}
+                  {cols.mp && <td>{s.matchesPlayed > 0 ? (s.avg != null ? s.avg : "—") : ""}</td>}
+                  {cols.sevenM && <td>{(s.sevenMScored > 0 || s.sevenMMissed > 0) ? `${s.sevenMScored || 0}/${(s.sevenMScored || 0) + (s.sevenMMissed || 0)}` : ""}</td>}
+                  {cols.yc && <td>{s.yellowCards > 0 ? s.yellowCards : ""}</td>}
+                  {cols.two && <td>{s.twoMinSuspensions > 0 ? s.twoMinSuspensions : ""}</td>}
+                  {cols.bc && <td>{s.blueCards > 0 ? s.blueCards : ""}</td>}
+                  {cols.rc && <td>{s.redCards > 0 ? s.redCards : ""}</td>}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      ))}
+      )}
       {collapsible && (
         <div style={{ marginTop: ".4rem", textAlign: "center" }}>
           <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
@@ -1332,6 +1346,33 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
         return x.team.name.localeCompare(y.team.name);
       });
   }, [fixtures, teams]);
+  // Each team's next unplayed match: earliest date first; undated fixtures
+  // (e.g. sim-generated) come after dated ones, in list order.
+  const nextMatches = useMemo(() => {
+    const upcoming = fixtures
+      .map((f, idx) => ({ f, idx }))
+      .filter(({ f }) => !f.played)
+      .sort((a, b) => {
+        const da = a.f.date || "", db = b.f.date || "";
+        if (da !== db) { if (!da) return 1; if (!db) return -1; return da < db ? -1 : 1; }
+        return a.idx - b.idx;
+      });
+    const next = {};
+    upcoming.forEach(({ f }) => {
+      const h = teams[f.homeIdx], a = teams[f.awayIdx];
+      if (!h || !a) return;
+      if (!next[h.id]) next[h.id] = f;
+      if (!next[a.id]) next[a.id] = f;
+    });
+    return teams
+      .filter(t => next[t.id])
+      .map(t => ({ team: t, f: next[t.id] }))
+      .sort((x, y) => {
+        const dx = x.f.date || "", dy = y.f.date || "";
+        if (dx !== dy) { if (!dx) return 1; if (!dy) return -1; return dx < dy ? -1 : 1; } // soonest first
+        return x.team.name.localeCompare(y.team.name);
+      });
+  }, [fixtures, teams]);
   const fmtMatchDate = d => {
     const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || "");
     return m ? `${m[3]}/${m[2]}/${m[1]}` : "—";
@@ -1561,6 +1602,26 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 <span style={{ fontSize: ".78rem" }}>
                   <span style={{ fontWeight: isHome ? 700 : 400 }}>{hn}</span>
                   <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
+                  <span style={{ fontWeight: isHome ? 400 : 700 }}>{an}</span>
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {nextMatches.length > 0 && (
+        <div className="mini-box" style={{ marginTop: "1rem" }}>
+          <div className="mini-ttl" style={{ color: "#a78bfa" }}>⏭ Next Match</div>
+          {nextMatches.map(({ team, f }) => {
+            const hn = cleanTeamName(teams[f.homeIdx].name), an = cleanTeamName(teams[f.awayIdx].name);
+            const isHome = teams[f.homeIdx].id === team.id;
+            return (
+              <div key={team.id} className="mini-row" style={{ gap: ".5rem" }}>
+                <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "5.2rem" }}>{fmtMatchDate(f.date)}</span>
+                <span className="mini-name" style={{ flex: "0 0 30%", minWidth: 0 }}>{cleanTeamName(team.name)}</span>
+                <span style={{ fontSize: ".78rem" }}>
+                  <span style={{ fontWeight: isHome ? 700 : 400 }}>{hn}</span>
+                  <span className="muted" style={{ margin: "0 .4rem" }}>vs</span>
                   <span style={{ fontWeight: isHome ? 400 : 700 }}>{an}</span>
                 </span>
               </div>
