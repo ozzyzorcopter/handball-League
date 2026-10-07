@@ -110,6 +110,72 @@ function cleanTeamName(name) {
   return cleaned || name;
 }
 
+// ── FOLLOWED TEAMS ────────────────────────────────────────────────────────────
+// Stored in this browser only (no account). A team is identified by
+// "<leagueSerieId>:<teamId>"; following a whole club = following each of its teams.
+const FOLLOW_KEY = "leaguesim.follow.v1";
+const followListeners = new Set();
+function readFollow() {
+  try {
+    const v = JSON.parse(localStorage.getItem(FOLLOW_KEY));
+    return { main: v && v.main ? v.main : null, ids: v && Array.isArray(v.ids) ? v.ids : [] };
+  } catch { return { main: null, ids: [] }; }
+}
+function writeFollow(next) {
+  try { localStorage.setItem(FOLLOW_KEY, JSON.stringify(next)); } catch {}
+  followListeners.forEach(fn => fn(next));
+}
+function teamKey(leagueId, teamId) { return leagueId + ":" + teamId; }
+function useFollow() {
+  const [state, setState] = useState(readFollow);
+  useEffect(() => {
+    followListeners.add(setState);
+    const onStorage = e => { if (e.key === FOLLOW_KEY) setState(readFollow()); };
+    window.addEventListener("storage", onStorage);
+    return () => { followListeners.delete(setState); window.removeEventListener("storage", onStorage); };
+  }, []);
+  const toggle = key => {
+    const cur = readFollow();
+    const ids = cur.ids.includes(key) ? cur.ids.filter(k => k !== key) : [...cur.ids, key];
+    const main = ids.includes(cur.main) ? cur.main : (ids[0] || null);
+    writeFollow({ main, ids });
+  };
+  const setMain = key => {
+    const cur = readFollow();
+    writeFollow({ main: key, ids: cur.ids.includes(key) ? cur.ids : [...cur.ids, key] });
+  };
+  return { main: state.main, ids: state.ids, isFollowing: key => state.ids.includes(key), toggle, setMain };
+}
+
+// Position, points, last-5 form and next match for one team of a Belgian league.
+function teamSnapshot(league, teamId) {
+  const teams = league.teams || [], fixtures = league.fixtures || [];
+  const rows = calcStats(teams, fixtures, league.ranking || []);
+  const pos = rows.findIndex(r => r.id === teamId);
+  if (pos < 0) return null;
+  const idx = teams.findIndex(t => t.id === teamId);
+  const byDate = (a, b) => ((a.date || "") < (b.date || "") ? -1 : (a.date || "") > (b.date || "") ? 1 : 0);
+  const mine = fixtures.filter(f => f.homeIdx === idx || f.awayIdx === idx);
+  const form = mine
+    .filter(f => f.played && f.homeScore != null && f.awayScore != null)
+    .sort(byDate)
+    .map(f => {
+      const home = f.homeIdx === idx;
+      const gf = +(home ? f.homeScore : f.awayScore), ga = +(home ? f.awayScore : f.homeScore);
+      return gf > ga ? "W" : gf < ga ? "L" : "D";
+    })
+    .slice(-5);
+  const today = new Date().toISOString().slice(0, 10);
+  const nextFx = mine.filter(f => !f.played && (!f.date || f.date.slice(0, 10) >= today)).sort(byDate)[0];
+  let next = null;
+  if (nextFx) {
+    const home = nextFx.homeIdx === idx;
+    const opp = teams[home ? nextFx.awayIdx : nextFx.homeIdx];
+    next = { date: nextFx.date || null, home, opp: opp ? cleanTeamName(opp.name) : "?" };
+  }
+  return { name: cleanTeamName(rows[pos].name), pos: pos + 1, of: rows.length, pts: rows[pos].totalPts, form, next };
+}
+
 // Build a lookup from scorer club names indexed by their stripped form
 // Called once per scorer list
 function buildClubIndex(scorers) {
@@ -1293,8 +1359,11 @@ function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, p
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking }) {
+function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
+  const follow = useFollow();
+  const isMine = id => !!followKey && follow.isFollowing(teamKey(followKey, id));
+  const nm = idx => (teams[idx] && isMine(teams[idx].id) ? "★ " : "") + cleanTeamName(teams[idx].name);
 
   // Last 5 results per team (oldest → newest). Played fixtures are ordered by
   // date when present (ISO strings sort correctly); fixtures without a date
@@ -1532,9 +1601,15 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
               const bg = rowBg(i, r);
               const gdc = r.GD > 0 ? "gdp" : r.GD < 0 ? "gdn" : "gd0";
               return (
-                <tr key={r.id} style={bg ? { background: bg } : {}}>
+                <tr key={r.id} style={{ ...(bg ? { background: bg } : {}), ...(isMine(r.id) ? { boxShadow: "inset 3px 0 0 #fbbf24" } : {}) }}>
                   <td className="tpos" style={bg ? { color: "rgba(255,255,255,0.85)", fontWeight: 700 } : {}}>{i + 1}</td>
                   <td className="tl">
+                    {followKey && (
+                      <button className="otbtn" style={{ marginRight: ".3rem", color: isMine(r.id) ? "#fbbf24" : "#6b7280", minWidth: "1.6rem" }}
+                        aria-label={(isMine(r.id) ? "Unfollow " : "Follow ") + cleanTeamName(r.name)}
+                        title={isMine(r.id) ? "Unfollow" : "Follow this team"}
+                        onClick={() => follow.toggle(teamKey(followKey, r.id))}>{isMine(r.id) ? "★" : "☆"}</button>
+                    )}
                     <button className="otbtn" onClick={() => onTeamClick && onTeamClick(ti)}>{cleanTeamName(r.name)}</button>
                   </td>
                   <td>{r.P}</td>
@@ -1560,7 +1635,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
           </tbody>
         </table>
       </div>
-      <p className="note">Click a team name for match details</p>
+      <p className="note">Click a team name for match details{followKey ? " · ☆ follows a team (saved on this device)" : ""}</p>
       <div className="mini-box" style={{ marginTop: "1rem" }}>
         <div className="mini-ttl" style={{ color: "#22d3ee", display: "flex", justifyContent: "space-between" }}>
           <span>🗓 Games last week</span>
@@ -1571,9 +1646,9 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
           <div key={f.id || k} className="mini-row" style={{ gap: ".5rem" }}>
             <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{fmtMatchDate(f.date)}</span>
             <span style={{ fontSize: ".78rem" }}>
-              <span style={{ fontWeight: +f.homeScore > +f.awayScore ? 700 : 400 }}>{cleanTeamName(teams[f.homeIdx].name)}</span>
+              <span style={{ fontWeight: +f.homeScore > +f.awayScore ? 700 : 400 }}>{nm(f.homeIdx)}</span>
               <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
-              <span style={{ fontWeight: +f.awayScore > +f.homeScore ? 700 : 400 }}>{cleanTeamName(teams[f.awayIdx].name)}</span>
+              <span style={{ fontWeight: +f.awayScore > +f.homeScore ? 700 : 400 }}>{nm(f.awayIdx)}</span>
             </span>
           </div>
         ))}
@@ -1592,11 +1667,11 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                 const done = f.played && f.homeScore != null && f.awayScore != null;
                 return (
                   <>
-                    <span style={{ fontWeight: done && +f.homeScore > +f.awayScore ? 700 : 400 }}>{cleanTeamName(teams[f.homeIdx].name)}</span>
+                    <span style={{ fontWeight: done && +f.homeScore > +f.awayScore ? 700 : 400 }}>{nm(f.homeIdx)}</span>
                     {done
                       ? <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
                       : <span className="muted" style={{ margin: "0 .4rem" }}>vs</span>}
-                    <span style={{ fontWeight: done && +f.awayScore > +f.homeScore ? 700 : 400 }}>{cleanTeamName(teams[f.awayIdx].name)}</span>
+                    <span style={{ fontWeight: done && +f.awayScore > +f.homeScore ? 700 : 400 }}>{nm(f.awayIdx)}</span>
                   </>
                 );
               })()}
@@ -3038,6 +3113,22 @@ function BelgianScreen({ onBack }) {
   if (league) return <BelgianLeagueView league={league} onBack={() => setLeague(null)} />;
 
   const feds = data ? Object.keys(data.federations || {}) : [];
+  const follow = useFollow();
+  const myTeams = useMemo(() => {
+    if (!data) return [];
+    const byLeague = new Map();
+    for (const f of Object.values(data.federations || {})) {
+      for (const lg of Object.values(f || {})) byLeague.set(String(lg.serieId || lg.id), lg);
+    }
+    return follow.ids.map(key => {
+      const cut = key.indexOf(":");
+      const lg = byLeague.get(key.slice(0, cut));
+      if (!lg) return null;
+      const teamId = (lg.teams || []).find(t => String(t.id) === key.slice(cut + 1))?.id;
+      const snap = teamId != null ? teamSnapshot(lg, teamId) : null;
+      return snap ? { key, lg, snap } : null;
+    }).filter(Boolean).sort((a, b) => (b.key === follow.main) - (a.key === follow.main));
+  }, [data, follow.ids, follow.main]);
 
   return (
     <div className="panel">
@@ -3059,6 +3150,37 @@ function BelgianScreen({ onBack }) {
 
       {data && (
         <>
+          {/* My teams */}
+          <div className="mini-box" style={{ marginBottom: "1.25rem" }}>
+            <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".5rem" }}>★ My teams</div>
+            {myTeams.length === 0 && (
+              <div className="muted" style={{ fontSize: ".8rem" }}>Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.</div>
+            )}
+            {myTeams.map(({ key, lg, snap }) => (
+              <div key={key} className="mini-row" style={{ gap: ".6rem", flexWrap: "wrap", cursor: "pointer", padding: ".45rem 0" }} onClick={() => setLeague(lg)}>
+                <span style={{ minWidth: "9rem", fontWeight: 700 }}>
+                  {key === follow.main && <span title="Main team" style={{ color: "#fbbf24", marginRight: ".3rem" }}>★</span>}
+                  {snap.name}
+                  <span className="muted" style={{ display: "block", fontWeight: 400, fontSize: ".68rem" }}>{lg.name}</span>
+                </span>
+                <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".8rem" }}>{snap.pos}/{snap.of} · {snap.pts} pts</span>
+                <span style={{ whiteSpace: "nowrap" }}>
+                  {snap.form.map((res, k) => (
+                    <span key={k} style={{ display: "inline-block", width: "1.1rem", textAlign: "center", fontWeight: 700, fontSize: ".78rem",
+                      color: res === "W" ? "#4ade80" : res === "D" ? "#9ca3af" : "#f87171" }}>{res === "W" ? "✓" : res === "D" ? "D" : "–"}</span>
+                  ))}
+                </span>
+                <span className="muted" style={{ fontSize: ".76rem", flex: 1 }}>
+                  {snap.next ? "Next: " + (snap.next.date ? snap.next.date.slice(8, 10) + "/" + snap.next.date.slice(5, 7) + " " : "") + (snap.next.home ? "vs " : "at ") + snap.next.opp : "No upcoming game"}
+                </span>
+                {key !== follow.main && (
+                  <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }}
+                    onClick={e => { e.stopPropagation(); follow.setMain(key); }}>Make main</button>
+                )}
+              </div>
+            ))}
+          </div>
+
           {/* Federation tabs */}
           <div style={{ display: "flex", gap: ".5rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
             {Object.keys(FED_META).map(f => {
@@ -3135,6 +3257,75 @@ function BelgianScreen({ onBack }) {
   );
 }
 
+// Cards & suspensions: per-team totals and the most-penalised players, built
+// from the scorer stats (yellow cards, 2-minute suspensions, blue and red cards).
+function CardsTab({ scorers }) {
+  const list = Array.isArray(scorers) ? scorers : [];
+  const has = list.some(s => s.yellowCards > 0 || s.twoMinSuspensions > 0 || s.blueCards > 0 || s.redCards > 0);
+  const num = v => (v > 0 ? v : 0);
+  const teamRows = useMemo(() => {
+    const m = new Map();
+    list.forEach(s => {
+      const k = s.club || "?";
+      const r = m.get(k) || { club: k, yc: 0, two: 0, bc: 0, rc: 0 };
+      r.yc += num(s.yellowCards); r.two += num(s.twoMinSuspensions); r.bc += num(s.blueCards); r.rc += num(s.redCards);
+      m.set(k, r);
+    });
+    return [...m.values()].sort((a, b) => b.two - a.two || b.yc - a.yc || b.rc - a.rc || a.club.localeCompare(b.club));
+  }, [list]);
+  const players = useMemo(() => list
+    .filter(s => s.yellowCards > 0 || s.twoMinSuspensions > 0 || s.blueCards > 0 || s.redCards > 0)
+    .sort((a, b) => num(b.twoMinSuspensions) - num(a.twoMinSuspensions) || num(b.yellowCards) - num(a.yellowCards) || num(b.redCards) - num(a.redCards))
+    .slice(0, 15), [list]);
+  if (!has) return <div className="muted" style={{ padding: "1.5rem", textAlign: "center", fontSize: ".85rem" }}>No cards or suspensions published for this league (lower divisions usually don't have this data).</div>;
+  const head = (
+    <>
+      <th title="Yellow cards">🟨</th><th title="2-minute suspensions">2'</th><th title="Blue cards">🟦</th><th title="Red cards">🟥</th>
+    </>
+  );
+  return (
+    <div>
+      <div className="mini-box">
+        <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".6rem" }}>Teams</div>
+        <div className="tbl-wrap">
+          <table className="ltbl">
+            <thead><tr><th style={{ width: "2rem" }}>#</th><th className="tl">Team</th>{head}</tr></thead>
+            <tbody>
+              {teamRows.map((r, i) => (
+                <tr key={r.club}>
+                  <td className="tpos">{i + 1}</td>
+                  <td className="tl">{cleanTeamName(r.club)}</td>
+                  <td>{r.yc || ""}</td><td className="tpts">{r.two || ""}</td><td>{r.bc || ""}</td><td>{r.rc || ""}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div className="mini-box" style={{ marginTop: "1rem" }}>
+        <div className="mini-ttl" style={{ color: "#f87171", marginBottom: ".6rem" }}>Players with most suspensions</div>
+        <div className="tbl-wrap">
+          <table className="ltbl">
+            <thead><tr><th style={{ width: "2rem" }}>#</th><th className="tl">Player</th><th className="tl">Club</th>{head}</tr></thead>
+            <tbody>
+              {players.map((s, i) => (
+                <tr key={i}>
+                  <td className="tpos">{i + 1}</td>
+                  <td className="tl">{s.player}</td>
+                  <td className="tl" style={{ fontFamily: "DM Sans,sans-serif", fontWeight: 400, color: "#6b7280", fontSize: ".72rem" }}>{cleanTeamName(s.club || "")}</td>
+                  <td>{s.yellowCards > 0 ? s.yellowCards : ""}</td><td className="tpts">{s.twoMinSuspensions > 0 ? s.twoMinSuspensions : ""}</td>
+                  <td>{s.blueCards > 0 ? s.blueCards : ""}</td><td>{s.redCards > 0 ? s.redCards : ""}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p className="note">2' = two-minute suspension · a blue card is a red card with a written report</p>
+    </div>
+  );
+}
+
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
   const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [], travelRanking = [] } = league;
@@ -3201,9 +3392,9 @@ function BelgianLeagueView({ league, onBack }) {
 
       <div className="panel">
         <div className="tabs">
-          {["table", "scores", "monte", "settings"].map(t => (
+          {["table", "scores", "cards", "monte", "settings"].map(t => (
             <button key={t} className={"tab" + (tab === t ? " on" : "")} onClick={() => setTab(t)}>
-              {t === "table" ? "League Table" : t === "scores" ? "Scores" + (pending.length ? " (" + pending.length + ")" : "") : t === "monte" ? "Monte Carlo" : "Settings"}
+              {t === "table" ? "Table" : t === "scores" ? "Games" + (pending.length ? " (" + pending.length + ")" : "") : t === "cards" ? "Cards & suspensions" : t === "monte" ? "Simulator" : "Sim settings"}
             </button>
           ))}
         </div>
@@ -3226,6 +3417,7 @@ function BelgianLeagueView({ league, onBack }) {
             toughFullWidth={false}
             topSingleGamePlayers={topSingleGamePlayers}
             travelRanking={travelRanking}
+            followKey={String(league.serieId ?? league.id)}
           />
         )}
 
@@ -3242,6 +3434,8 @@ function BelgianLeagueView({ league, onBack }) {
             onWeekChange={null}
           />
         )}
+
+        {tab === "cards" && <CardsTab scorers={leagueScorers} />}
 
         {tab === "monte" && (
           <MCTab
