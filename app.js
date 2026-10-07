@@ -1321,62 +1321,34 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
     return m;
   }, [fixtures, teams]);
 
-  // Each team's most recent played match (same ordering rules as form above).
-  const lastMatches = useMemo(() => {
-    const played = fixtures
-      .map((f, idx) => ({ f, idx }))
-      .filter(({ f }) => f.played && f.homeScore != null && f.awayScore != null && !isNaN(+f.homeScore) && !isNaN(+f.awayScore))
-      .sort((a, b) => {
-        const da = a.f.date || "", db = b.f.date || "";
-        if (da !== db && da && db) return da < db ? -1 : 1;
-        return a.idx - b.idx;
-      });
-    const last = {};
-    played.forEach(({ f }) => {
-      const h = teams[f.homeIdx], a = teams[f.awayIdx];
-      if (!h || !a) return;
-      last[h.id] = f; last[a.id] = f;
-    });
-    return teams
-      .filter(t => last[t.id])
-      .map(t => ({ team: t, f: last[t.id] }))
-      .sort((x, y) => {
-        const dx = x.f.date || "", dy = y.f.date || "";
-        if (dx !== dy) return dx < dy ? 1 : -1; // newest first
-        return x.team.name.localeCompare(y.team.name);
-      });
-  }, [fixtures, teams]);
-  // Each team's next unplayed match: earliest date first; undated fixtures
-  // (e.g. sim-generated) come after dated ones, in list order.
-  const nextMatches = useMemo(() => {
-    const upcoming = fixtures
-      .map((f, idx) => ({ f, idx }))
-      .filter(({ f }) => !f.played)
-      .sort((a, b) => {
-        const da = a.f.date || "", db = b.f.date || "";
-        if (da !== db) { if (!da) return 1; if (!db) return -1; return da < db ? -1 : 1; }
-        return a.idx - b.idx;
-      });
-    const next = {};
-    upcoming.forEach(({ f }) => {
-      const h = teams[f.homeIdx], a = teams[f.awayIdx];
-      if (!h || !a) return;
-      if (!next[h.id]) next[h.id] = f;
-      if (!next[a.id]) next[a.id] = f;
-    });
-    return teams
-      .filter(t => next[t.id])
-      .map(t => ({ team: t, f: next[t.id] }))
-      .sort((x, y) => {
-        const dx = x.f.date || "", dy = y.f.date || "";
-        if (dx !== dy) { if (!dx) return 1; if (!dy) return -1; return dx < dy ? -1 : 1; } // soonest first
-        return x.team.name.localeCompare(y.team.name);
-      });
-  }, [fixtures, teams]);
-  const fmtMatchDate = d => {
-    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || "");
-    return m ? `${m[3]}/${m[2]}/${m[1]}` : "—";
-  };
+  // Weekly windows, rolling over every Monday: "last week" = the previous
+  // Monday up to (not including) this Monday (played games); "this week" =
+  // this Monday up to (not including) next Monday (played AND upcoming — a
+  // game stays here once played until the Monday rollover). Computed from the viewer's current date,
+  // so the panels roll over on their own each Monday.
+  const weekWindow = useMemo(() => {
+    const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    const now = new Date();
+    const thisMon = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
+    const prevMon = new Date(thisMon.getFullYear(), thisMon.getMonth(), thisMon.getDate() - 7);
+    const nextMon = new Date(thisMon.getFullYear(), thisMon.getMonth(), thisMon.getDate() + 7);
+    const lastSun = new Date(thisMon.getFullYear(), thisMon.getMonth(), thisMon.getDate() - 1);
+    const nextSun = new Date(nextMon.getFullYear(), nextMon.getMonth(), nextMon.getDate() - 1);
+    return { prev: iso(prevMon), cur: iso(thisMon), next: iso(nextMon), prevEnd: iso(lastSun), nextEnd: iso(nextSun) };
+  }, []);
+  const byDate = (a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+  const lastMatches = useMemo(() => fixtures
+    .filter(f => f.played && f.homeScore != null && f.awayScore != null && f.date
+      && f.date.slice(0, 10) >= weekWindow.prev && f.date.slice(0, 10) < weekWindow.cur
+      && teams[f.homeIdx] && teams[f.awayIdx])
+    .sort(byDate), [fixtures, teams, weekWindow]);
+  const nextMatches = useMemo(() => fixtures
+    .filter(f => f.date
+      && f.date.slice(0, 10) >= weekWindow.cur && f.date.slice(0, 10) < weekWindow.next
+      && teams[f.homeIdx] && teams[f.awayIdx])
+    .sort(byDate), [fixtures, teams, weekWindow]);
+  const fmtShort = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? `${m[3]}/${m[2]}` : "—"; };
+  const fmtMatchDate = fmtShort;
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
   const n = rows.length;
   const attackers = useMemo(() => rows.filter(r => r.P > 0).sort((a, b) => b.GF - a.GF || a.name.localeCompare(b.name)).slice(0, 3), [rows]);
@@ -1589,46 +1561,49 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
         </table>
       </div>
       <p className="note">Click a team name for match details</p>
-      {lastMatches.length > 0 && (
-        <div className="mini-box" style={{ marginTop: "1rem" }}>
-          <div className="mini-ttl" style={{ color: "#22d3ee" }}>🗓 Last Played Match</div>
-          {lastMatches.map(({ team, f }) => {
-            const hn = cleanTeamName(teams[f.homeIdx].name), an = cleanTeamName(teams[f.awayIdx].name);
-            const isHome = teams[f.homeIdx].id === team.id;
-            return (
-              <div key={team.id} className="mini-row" style={{ gap: ".5rem" }}>
-                <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "5.2rem" }}>{fmtMatchDate(f.date)}</span>
-                <span className="mini-name" style={{ flex: "0 0 30%", minWidth: 0 }}>{cleanTeamName(team.name)}</span>
-                <span style={{ fontSize: ".78rem" }}>
-                  <span style={{ fontWeight: isHome ? 700 : 400 }}>{hn}</span>
-                  <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
-                  <span style={{ fontWeight: isHome ? 400 : 700 }}>{an}</span>
-                </span>
-              </div>
-            );
-          })}
+      <div className="mini-box" style={{ marginTop: "1rem" }}>
+        <div className="mini-ttl" style={{ color: "#22d3ee", display: "flex", justifyContent: "space-between" }}>
+          <span>🗓 Games last week</span>
+          <span className="muted" style={{ fontWeight: 400, fontSize: ".7rem" }}>{fmtShort(weekWindow.prev)} – {fmtShort(weekWindow.prevEnd)}</span>
         </div>
-      )}
-      {nextMatches.length > 0 && (
-        <div className="mini-box" style={{ marginTop: "1rem" }}>
-          <div className="mini-ttl" style={{ color: "#a78bfa" }}>⏭ Next Match</div>
-          {nextMatches.map(({ team, f }) => {
-            const hn = cleanTeamName(teams[f.homeIdx].name), an = cleanTeamName(teams[f.awayIdx].name);
-            const isHome = teams[f.homeIdx].id === team.id;
-            return (
-              <div key={team.id} className="mini-row" style={{ gap: ".5rem" }}>
-                <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "5.2rem" }}>{fmtMatchDate(f.date)}</span>
-                <span className="mini-name" style={{ flex: "0 0 30%", minWidth: 0 }}>{cleanTeamName(team.name)}</span>
-                <span style={{ fontSize: ".78rem" }}>
-                  <span style={{ fontWeight: isHome ? 700 : 400 }}>{hn}</span>
-                  <span className="muted" style={{ margin: "0 .4rem" }}>vs</span>
-                  <span style={{ fontWeight: isHome ? 400 : 700 }}>{an}</span>
-                </span>
-              </div>
-            );
-          })}
+        {lastMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>No games last week.</div>}
+        {lastMatches.map((f, k) => (
+          <div key={f.id || k} className="mini-row" style={{ gap: ".5rem" }}>
+            <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{fmtMatchDate(f.date)}</span>
+            <span style={{ fontSize: ".78rem" }}>
+              <span style={{ fontWeight: +f.homeScore > +f.awayScore ? 700 : 400 }}>{cleanTeamName(teams[f.homeIdx].name)}</span>
+              <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
+              <span style={{ fontWeight: +f.awayScore > +f.homeScore ? 700 : 400 }}>{cleanTeamName(teams[f.awayIdx].name)}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="mini-box" style={{ marginTop: "1rem" }}>
+        <div className="mini-ttl" style={{ color: "#a78bfa", display: "flex", justifyContent: "space-between" }}>
+          <span>⏭ Games this week</span>
+          <span className="muted" style={{ fontWeight: 400, fontSize: ".7rem" }}>{fmtShort(weekWindow.cur)} – {fmtShort(weekWindow.nextEnd)}</span>
         </div>
-      )}
+        {nextMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>No games this week.</div>}
+        {nextMatches.map((f, k) => (
+          <div key={f.id || k} className="mini-row" style={{ gap: ".5rem" }}>
+            <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{fmtMatchDate(f.date)}</span>
+            <span style={{ fontSize: ".78rem" }}>
+              {(() => {
+                const done = f.played && f.homeScore != null && f.awayScore != null;
+                return (
+                  <>
+                    <span style={{ fontWeight: done && +f.homeScore > +f.awayScore ? 700 : 400 }}>{cleanTeamName(teams[f.homeIdx].name)}</span>
+                    {done
+                      ? <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
+                      : <span className="muted" style={{ margin: "0 .4rem" }}>vs</span>}
+                    <span style={{ fontWeight: done && +f.awayScore > +f.homeScore ? 700 : 400 }}>{cleanTeamName(teams[f.awayIdx].name)}</span>
+                  </>
+                );
+              })()}
+            </span>
+          </div>
+        ))}
+      </div>
       {(leagueId || Array.isArray(archiveScorers)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
