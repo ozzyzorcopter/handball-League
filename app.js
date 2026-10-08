@@ -3104,16 +3104,105 @@ function useVhvData() {
   return { data, error };
 }
 
+// Keeps a render error in one league from blanking the whole app.
+class ErrorBoundary extends React.Component {
+  constructor(props) { super(props); this.state = { err: null }; }
+  static getDerivedStateFromError(err) { return { err }; }
+  render() {
+    if (!this.state.err) return this.props.children;
+    return (
+      <div className="panel" style={{ padding: "1.5rem", textAlign: "center" }}>
+        <div style={{ color: "#f87171", marginBottom: ".5rem" }}>Something went wrong showing this page.</div>
+        <div className="muted" style={{ fontSize: ".75rem", marginBottom: "1rem" }}>{String(this.state.err && this.state.err.message || this.state.err)}</div>
+        <button className="btn btn-ghost" onClick={this.props.onBack}>← Back</button>
+      </div>
+    );
+  }
+}
+
+// First-visit / "add team" picker: search a club, tick which of its teams to follow.
+const PICKER_DISMISS_KEY = "leaguesim.pickerDismissed.v1";
+function ClubPicker({ data, follow, onClose }) {
+  const [q, setQ] = useState("");
+  const [club, setClub] = useState(null);
+  const [picked, setPicked] = useState({});
+  const clubs = useMemo(() => {
+    const m = new Map();
+    for (const f of Object.values(data.federations || {})) {
+      for (const lg of Object.values(f || {})) {
+        const lid = String(lg.serieId || lg.id);
+        for (const t of (lg.teams || [])) {
+          const name = cleanTeamName(t.name);
+          const k = name.toLowerCase();
+          const c = m.get(k) || { name, teams: [] };
+          c.teams.push({ key: teamKey(lid, t.id), league: lg.name, full: t.name });
+          m.set(k, c);
+        }
+      }
+    }
+    return [...m.values()].sort((a, b) => a.name.localeCompare(b.name));
+  }, [data]);
+  const shown = useMemo(() => {
+    const t = q.trim().toLowerCase();
+    return (t ? clubs.filter(c => c.name.toLowerCase().includes(t)) : clubs).slice(0, 12);
+  }, [clubs, q]);
+  const choose = c => { setClub(c); setPicked(Object.fromEntries(c.teams.map(t => [t.key, true]))); };
+  const save = () => {
+    const keys = club.teams.map(t => t.key).filter(k => picked[k]);
+    keys.forEach(k => { if (!follow.isFollowing(k)) follow.toggle(k); });
+    if (keys.length && !follow.main) follow.setMain(keys[0]);
+    onClose(true);
+  };
+  const dismiss = () => { try { localStorage.setItem(PICKER_DISMISS_KEY, "1"); } catch {} onClose(false); };
+  return (
+    <div className="mini-box" style={{ marginBottom: "1.25rem" }}>
+      <div className="mini-ttl" style={{ color: "#fbbf24", display: "flex", justifyContent: "space-between", marginBottom: ".5rem" }}>
+        <span>{club ? club.name : "Which club do you follow?"}</span>
+        <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={club ? () => setClub(null) : dismiss}>{club ? "← Back" : "Skip"}</button>
+      </div>
+      {!club && (
+        <>
+          <label htmlFor="club-q" style={{ position: "absolute", left: "-9999px" }}>Search clubs</label>
+          <input id="club-q" value={q} onChange={e => setQ(e.target.value)} placeholder={"Search " + clubs.length + " clubs…"}
+            style={{ width: "100%", boxSizing: "border-box", padding: ".55rem .7rem", borderRadius: "6px", border: "1px solid #2a2f3a", background: "#0f1218", color: "inherit", fontSize: ".9rem" }} />
+          <div style={{ marginTop: ".5rem" }}>
+            {shown.map(c => (
+              <div key={c.name} className="mini-row" style={{ cursor: "pointer", padding: ".5rem 0" }} onClick={() => choose(c)}>
+                <span style={{ fontWeight: 600 }}>{c.name}</span>
+                <span className="muted" style={{ marginLeft: "auto", fontSize: ".72rem" }}>{c.teams.length} team{c.teams.length === 1 ? "" : "s"}</span>
+              </div>
+            ))}
+            {shown.length === 0 && <div className="muted" style={{ fontSize: ".8rem", padding: ".5rem 0" }}>No club found.</div>}
+            {!q && <div className="muted" style={{ fontSize: ".72rem", marginTop: ".3rem" }}>Type to search all clubs.</div>}
+          </div>
+        </>
+      )}
+      {club && (
+        <>
+          <div className="muted" style={{ fontSize: ".78rem", marginBottom: ".4rem" }}>Choose the teams to follow. You can change this any time with ☆ in a table.</div>
+          {club.teams.map(t => (
+            <label key={t.key} className="mini-row" style={{ gap: ".6rem", padding: ".5rem 0", cursor: "pointer" }}>
+              <input type="checkbox" checked={!!picked[t.key]} onChange={() => setPicked(p => ({ ...p, [t.key]: !p[t.key] }))} />
+              <span>{cleanTeamName(t.full)}</span>
+              <span className="muted" style={{ marginLeft: "auto", fontSize: ".72rem" }}>{t.league}</span>
+            </label>
+          ))}
+          <button className="btn" style={{ marginTop: ".6rem" }} onClick={save} disabled={!club.teams.some(t => picked[t.key])}>Follow selected</button>
+        </>
+      )}
+    </div>
+  );
+}
+
 // The top-level Belgian screen — federation picker with division sub-groups
 function BelgianScreen({ onBack }) {
   const { data, error } = useVhvData();
   const [fed, setFed]       = useState(null);
   const [league, setLeague] = useState(null);
 
-  if (league) return <BelgianLeagueView league={league} onBack={() => setLeague(null)} />;
-
-  const feds = data ? Object.keys(data.federations || {}) : [];
   const follow = useFollow();
+  const [pickerForced, setPickerForced] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(() => { try { return !localStorage.getItem(PICKER_DISMISS_KEY); } catch { return true; } });
   const myTeams = useMemo(() => {
     if (!data) return [];
     const byLeague = new Map();
@@ -3125,11 +3214,15 @@ function BelgianScreen({ onBack }) {
       const lg = byLeague.get(key.slice(0, cut));
       if (!lg) return null;
       const teamId = (lg.teams || []).find(t => String(t.id) === key.slice(cut + 1))?.id;
-      const snap = teamId != null ? teamSnapshot(lg, teamId) : null;
+      let snap = null;
+      try { snap = teamId != null ? teamSnapshot(lg, teamId) : null; } catch { snap = null; }
       return snap ? { key, lg, snap } : null;
     }).filter(Boolean).sort((a, b) => (b.key === follow.main) - (a.key === follow.main));
   }, [data, follow.ids, follow.main]);
 
+  if (league) return <ErrorBoundary onBack={() => setLeague(null)}><BelgianLeagueView league={league} onBack={() => setLeague(null)} /></ErrorBoundary>;
+
+  const feds = data ? Object.keys(data.federations || {}) : [];
   return (
     <div className="panel">
       <div className="ph">
@@ -3150,9 +3243,16 @@ function BelgianScreen({ onBack }) {
 
       {data && (
         <>
+          {/* First visit / add team */}
+          {pickerOpen && (follow.ids.length === 0 || pickerForced) && (
+            <ClubPicker data={data} follow={follow} onClose={saved => { setPickerForced(false); if (!saved) setPickerOpen(false); }} />
+          )}
           {/* My teams */}
           <div className="mini-box" style={{ marginBottom: "1.25rem" }}>
-            <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".5rem" }}>★ My teams</div>
+            <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".5rem", display: "flex", justifyContent: "space-between" }}>
+              <span>★ My teams</span>
+              <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={() => { setPickerOpen(true); setPickerForced(true); }}>＋ Add club</button>
+            </div>
             {myTeams.length === 0 && (
               <div className="muted" style={{ fontSize: ".8rem" }}>Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.</div>
             )}
@@ -3791,7 +3891,7 @@ function ArchiveBelgianSeasonView({ filename, season, onBack }) {
   const { data, error } = useArchiveFile(filename);
   const [league, setLeague] = useState(null);
 
-  if (league) return <BelgianLeagueView league={league} onBack={() => setLeague(null)} />;
+  if (league) return <ErrorBoundary onBack={() => setLeague(null)}><BelgianLeagueView league={league} onBack={() => setLeague(null)} /></ErrorBoundary>;
 
   if (error) return (
     <div className="panel">
