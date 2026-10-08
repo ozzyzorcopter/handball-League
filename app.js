@@ -1347,7 +1347,7 @@ function ToughPanel({ ranking }) {
   );
 }
 
-function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, phase }) {
+function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, phase, title, maxRows }) {
   const live = useScorers(archiveScorers !== undefined ? null : leagueId, phase);
   const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
   const error = archiveScorers !== undefined ? false : live.error;
@@ -1355,11 +1355,11 @@ function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, p
   const clubIndex = useMemo(() => buildClubIndex(scorers), [scorers]);
   const clubNames = useMemo(() => new Set(relevantTeams.map(t => resolveClubName(t.name, aliases, clubIndex))), [relevantTeams, aliases, clubIndex]);
   const filtered = useMemo(() => scorers ? scorers.filter(s => clubNames.has(s.club)) : null, [scorers, clubNames]);
-  return <ScorerPanel scorers={filtered} error={error} title="Top Scorers" maxRows={10} aliases={aliases} />;
+  return <ScorerPanel scorers={filtered} error={error} title={title || "Top Scorers"} maxRows={maxRows || 10} aliases={aliases} />;
 }
 
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey }) {
+function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey, hideScorers }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
   const follow = useFollow();
   const isMine = id => !!followKey && follow.isFollowing(teamKey(followKey, id));
@@ -1679,7 +1679,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
           </div>
         ))}
       </div>
-      {(leagueId || Array.isArray(archiveScorers)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
+      {!hideScorers && (leagueId || Array.isArray(archiveScorers)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
           {/* Row 1: Attackers + Defenders */}
@@ -3257,6 +3257,40 @@ function BelgianScreen({ onBack }) {
   );
 }
 
+// Players tab: top scorers with a goal-type filter (all goals / open play only /
+// 7m only). Open-play goals = goals minus 7m goals scored.
+function PlayersTab({ scorers, teams, aliases }) {
+  const [mode, setMode] = useState("all");
+  const list = Array.isArray(scorers) ? scorers : [];
+  const hasSeven = list.some(s => s.sevenMScored > 0 || s.sevenMMissed > 0);
+  const view = useMemo(() => {
+    if (mode === "all") return list;
+    return list
+      .map(s => {
+        const seven = s.sevenMScored || 0;
+        const g = mode === "open" ? (s.goals || 0) - seven : seven;
+        return { ...s, goals: g, lastGameGoals: null, delta: null };
+      })
+      .filter(s => s.goals > 0)
+      .sort((a, b) => b.goals - a.goals || String(a.player).localeCompare(String(b.player)));
+  }, [list, mode]);
+  const chips = [["all", "All goals"], ["open", "Excl. 7m"], ["seven", "7m only"]];
+  return (
+    <div>
+      {hasSeven && (
+        <div style={{ display: "flex", gap: ".4rem", flexWrap: "wrap" }}>
+          {chips.map(([k, label]) => (
+            <button key={k} className={"btn" + (mode === k ? "" : " btn-ghost")} style={{ fontSize: ".78rem", padding: ".3rem .8rem" }} onClick={() => setMode(k)}>{label}</button>
+          ))}
+        </div>
+      )}
+      <LeagueScorers teams={teams} aliases={aliases} archiveScorers={view} phase="regular"
+        title={mode === "open" ? "Goals excluding 7m" : mode === "seven" ? "7m goals" : "Top Scorers"} maxRows={15} />
+      {!hasSeven && <p className="note">7m details aren't published for this league, so only total goals are shown.</p>}
+    </div>
+  );
+}
+
 // Cards & suspensions: per-team totals and the most-penalised players, built
 // from the scorer stats (yellow cards, 2-minute suspensions, blue and red cards).
 function CardsTab({ scorers }) {
@@ -3391,10 +3425,11 @@ function BelgianLeagueView({ league, onBack }) {
       </div>
 
       <div className="panel">
-        <div className="tabs">
-          {["table", "scores", "cards", "monte", "settings"].map(t => (
+        <div className="tabs" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
+          <button className="tab" onClick={onBack} title="Back to My teams and all leagues">⌂ Home</button>
+          {["table", "scores", "players", "cards", "monte", "settings"].map(t => (
             <button key={t} className={"tab" + (tab === t ? " on" : "")} onClick={() => setTab(t)}>
-              {t === "table" ? "Table" : t === "scores" ? "Games" + (pending.length ? " (" + pending.length + ")" : "") : t === "cards" ? "Cards & suspensions" : t === "monte" ? "Simulator" : "Sim settings"}
+              {t === "table" ? "Table" : t === "scores" ? "Games" + (pending.length ? " (" + pending.length + ")" : "") : t === "players" ? "Players" : t === "cards" ? "Cards & suspensions" : t === "monte" ? "Simulator" : "Sim settings"}
             </button>
           ))}
         </div>
@@ -3418,6 +3453,7 @@ function BelgianLeagueView({ league, onBack }) {
             topSingleGamePlayers={topSingleGamePlayers}
             travelRanking={travelRanking}
             followKey={String(league.serieId ?? league.id)}
+            hideScorers
           />
         )}
 
@@ -3434,6 +3470,8 @@ function BelgianLeagueView({ league, onBack }) {
             onWeekChange={null}
           />
         )}
+
+        {tab === "players" && <PlayersTab scorers={leagueScorers} teams={teams} aliases={leagueState.scorerAliases || {}} />}
 
         {tab === "cards" && <CardsTab scorers={leagueScorers} />}
 
