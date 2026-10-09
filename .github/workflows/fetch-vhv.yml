@@ -38,26 +38,27 @@ jobs:
         id: pw-cache
         with:
           path: ~/.cache/ms-playwright
-          # Pinned playwright-core version keeps this key (and therefore the
-          # cached Chromium download) stable across runs — letting npm grab
-          # whatever is "latest" would silently bust the cache on every
-          # version bump upstream. Bump the version here too when you
-          # deliberately want to pick up a newer Chromium build.
-          key: playwright-chromium-1.63.0-${{ runner.os }}
+          # Keyed on the lockfile, so the cached Chromium always matches the
+          # playwright-core version we actually run. (The old key was a fixed
+          # string, so a cache written by a mismatched install kept being
+          # restored and the browser was "missing".)
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: Install playwright-core
-        run: npm install playwright-core@1.63.0
+      # Installs exactly the versions in package-lock.json (production deps
+      # only: playwright-core).
+      - name: Install dependencies
+        run: npm ci --omit=dev
 
-      # On a cache hit the browser binary is already on disk, so this just
-      # verifies/links it (fast, no download). On a cache miss it does the
-      # full download + OS-dependency install (slow, but only happens once
-      # until the pinned version above changes).
+      # IMPORTANT: use the playwright-core CLI that was just installed. The old
+      # `npx playwright install` ran with only playwright-core present, so npx
+      # downloaded the latest *playwright* package, whose Chromium revision
+      # differs from the one playwright-core expects: "Executable doesn't exist".
       - name: Install Chromium (cached) or Chromium + OS deps (cold)
         run: |
           if [ "${{ steps.pw-cache.outputs.cache-hit }}" = "true" ]; then
-            npx playwright install chromium
+            node node_modules/playwright-core/cli.js install chromium
           else
-            npx playwright install chromium --with-deps
+            node node_modules/playwright-core/cli.js install chromium --with-deps
           fi
 
       - name: Fetch VHV data

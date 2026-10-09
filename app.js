@@ -1,6 +1,13 @@
+import { cleanTeamName, stripPrefix, buildClubIndex, resolveClubName } from "./src/names.js";
+import { LANG_LOCALE, useLang, LangSwitch } from "./src/i18n.js";
+import { teamKey, useFollow, teamSnapshot } from "./src/follow.js";
+import { calcProbs, calcProbsNeutral, fixProbs, predictMatch, weekBounds } from "./src/probabilities.js";
+import { calcStats } from "./src/standings.js";
+import { runMCAsync } from "./src/mcRunner.js";
+
 const { useState, useMemo, useRef, useEffect } = React;
 const MEDALS = ["🥇", "🥈", "🥉"];
-const IS_SHARE = false; // set to true in share version
+const IS_SHARE = __SHARE__; // injected at build time by build.mjs (esbuild --define); true only for the share page
 
 // ── GITHUB DISPATCH ──────────────────────────────────────────────────────────
 // To enable archive-from-app, set GITHUB_PAT and GITHUB_REPO in your repo's
@@ -70,274 +77,6 @@ function fetchScorerData() {
     .then(data => { scorerDataCache = data; return data; })
     .catch(e => { scorerDataPromise = null; throw e; });
   return scorerDataPromise;
-}
-
-// Strip common handball club prefixes to get the meaningful part (usually city name)
-const CLUB_PREFIXES = /^(handbalclub|handbal|hbc|hc|khc|ktsv|hv|shc|ehc|kh|hvv|sezoens|besox|derdaele|db|uilenspiegel|olse)\s+/i;
-
-function stripPrefix(name) {
-  return name.replace(CLUB_PREFIXES, "").replace(CLUB_PREFIXES, "").trim().toLowerCase();
-}
-
-// ── DISPLAY-ONLY TEAM NAME CLEANUP ─────────────────────────────────────────────
-// VHV/LFH import data appends division/gender/federation/region/pool codes to
-// team names, e.g. "Sint-Truiden D1 M VHV LIM 2" or "Uilenspiegel D1 M VHV 1".
-// Strip those trailing code tokens for DISPLAY ONLY — never for the stored
-// `name` used for matching, keys, or editing, since scorer-alias matching and
-// the team editor need the exact original string.
-//
-// A trailing token is treated as a "code" (not part of the real club name) if
-// it's made up solely of uppercase letters/digits (optionally with a
-// "-X" suffix like "LIM-B"), e.g. "VHV", "D1", "M", "W", "U16", "1", "A" — or
-// the literal "Lg" (mixed-case federation abbreviation). Real club-name words
-// almost always contain a lowercase letter (Tournai, Overpelt, 't Noorden),
-// so they stop the strip as soon as one is reached. We always keep at least
-// one token, so a name can never be stripped down to nothing.
-const TEAM_CODE_TOKEN = /^[A-Z0-9]+(-[A-Z0-9]+)?$/;
-
-function cleanTeamName(name) {
-  if (!name) return name;
-  // Drop a trailing parenthetical annotation entirely, e.g. "(M14-Beker)".
-  const noParen = name.trim().replace(/\s*\([^)]*\)\s*$/, "");
-  const tokens = (noParen || name.trim()).split(/\s+/);
-  let end = tokens.length;
-  while (end > 1) {
-    const tok = tokens[end - 1];
-    if (TEAM_CODE_TOKEN.test(tok) || tok === "Lg") { end--; continue; }
-    break;
-  }
-  const cleaned = tokens.slice(0, end).join(" ").trim();
-  return cleaned || name;
-}
-
-// ── LANGUAGE (NL / FR / EN) ───────────────────────────────────────────────────
-// English text is the key; missing translations fall back to English. Covers the
-// Belgian Handball screens (My teams, picker, league tabs, tables, players, cards).
-const LANG_KEY = "leaguesim.lang.v1";
-const LANGS = ["nl", "fr", "en"];
-const LANG_LOCALE = { nl: "nl-BE", fr: "fr-BE", en: "en-GB" };
-const I18N = {
-  nl: {
-    "Belgian Handball": "Belgisch handbal", "Live competition data": "Live competitiegegevens", "updated": "bijgewerkt",
-    "← Back": "← Terug", "← All Leagues": "← Alle reeksen", "⌂ Home": "⌂ Start", "Back to My teams and all leagues": "Terug naar mijn teams en alle reeksen",
-    "Loading data…": "Gegevens laden…", "Could not load data.": "Kon de gegevens niet laden.",
-    "★ My teams": "★ Mijn teams", "＋ Add club": "＋ Club toevoegen",
-    "Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.": "Open een reeks en tik op ☆ naast een team om het te volgen. Je teams verschijnen hier met positie, vorm en volgende wedstrijd.",
-    "Main team": "Hoofdteam", "Make main": "Maak hoofdteam", "Next": "Volgende", "No upcoming game": "Geen volgende wedstrijd", "vs": "tegen", "at": "bij",
-    "pts": "ptn", "This week · all my teams": "Deze week · al mijn teams",
-    "Select a federation above to browse leagues.": "Kies hierboven een federatie om reeksen te bekijken.",
-    "No competition data fetched yet — run the fetch-vhv workflow first.": "Nog geen competitiegegevens opgehaald — voer eerst de fetch-vhv workflow uit.",
-    "No leagues available yet for": "Nog geen reeksen beschikbaar voor", "teams": "teams", "team": "team", "played": "gespeeld", "pending": "te spelen",
-    "Which club do you follow?": "Welke club volg je?", "Skip": "Overslaan", "Search": "Zoek in", "clubs": "clubs", "No club found.": "Geen club gevonden.",
-    "Type to search all clubs.": "Typ om alle clubs te doorzoeken.", "Choose the teams to follow. You can change this any time with ☆ in a table.": "Kies de teams die je wilt volgen. Je kan dit altijd aanpassen met ☆ in een klassement.",
-    "Follow selected": "Volg geselecteerde",
-    "Table": "Klassement", "Games": "Wedstrijden", "Players": "Spelers", "Cards & suspensions": "Kaarten & schorsingen", "Simulator": "Simulator", "Sim settings": "Sim-instellingen",
-    "Team": "Team", "Form": "Vorm", "🗓 Games last week": "🗓 Wedstrijden vorige week", "⏭ Games this week": "⏭ Wedstrijden deze week",
-    "No games last week.": "Geen wedstrijden vorige week.", "No games this week.": "Geen wedstrijden deze week.",
-    "Click a team name for match details": "Klik op een teamnaam voor details", "☆ follows a team (saved on this device)": "☆ volgt een team (bewaard op dit toestel)",
-    "All goals": "Alle doelpunten", "Excl. 7m": "Zonder 7m", "7m only": "Enkel 7m", "Top Scorers": "Topschutters", "Goals excluding 7m": "Doelpunten zonder 7m", "7m goals": "7m-doelpunten",
-    "Player": "Speler", "Club": "Club", "loading…": "laden…", "unavailable": "niet beschikbaar", "No scorer data found.": "Geen schuttersgegevens gevonden.",
-    "7m details aren't published for this league, so only total goals are shown.": "Voor deze reeks zijn geen 7m-gegevens beschikbaar, dus enkel het totaal aantal doelpunten wordt getoond.",
-    "Teams": "Teams", "Players with most suspensions": "Spelers met de meeste schorsingen",
-    "No cards or suspensions published for this league (lower divisions usually don't have this data).": "Voor deze reeks zijn geen kaarten of schorsingen beschikbaar (lagere reeksen hebben deze gegevens meestal niet).",
-    "2' = two-minute suspension · a blue card is a red card with a written report": "2' = twee minuten schorsing · een blauwe kaart is een rode kaart met schriftelijk rapport",
-    "Goal model: home win / draw / away win chance, expected score": "Doelpuntenmodel: kans op thuiszege / gelijk / uitzege, verwachte score",
-  },
-  fr: {
-    "Belgian Handball": "Handball belge", "Live competition data": "Données de compétition en direct", "updated": "mis à jour",
-    "← Back": "← Retour", "← All Leagues": "← Toutes les séries", "⌂ Home": "⌂ Accueil", "Back to My teams and all leagues": "Retour à mes équipes et à toutes les séries",
-    "Loading data…": "Chargement des données…", "Could not load data.": "Impossible de charger les données.",
-    "★ My teams": "★ Mes équipes", "＋ Add club": "＋ Ajouter un club",
-    "Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.": "Ouvrez une série et touchez ☆ à côté d'une équipe pour la suivre. Vos équipes apparaissent ici avec position, forme et prochain match.",
-    "Main team": "Équipe principale", "Make main": "Définir comme principale", "Next": "Prochain", "No upcoming game": "Aucun match à venir", "vs": "contre", "at": "à",
-    "pts": "pts", "This week · all my teams": "Cette semaine · toutes mes équipes",
-    "Select a federation above to browse leagues.": "Choisissez une fédération ci-dessus pour parcourir les séries.",
-    "No competition data fetched yet — run the fetch-vhv workflow first.": "Aucune donnée récupérée — lancez d'abord le workflow fetch-vhv.",
-    "No leagues available yet for": "Aucune série disponible pour", "teams": "équipes", "team": "équipe", "played": "joués", "pending": "à jouer",
-    "Which club do you follow?": "Quel club suivez-vous ?", "Skip": "Passer", "Search": "Rechercher parmi", "clubs": "clubs", "No club found.": "Aucun club trouvé.",
-    "Type to search all clubs.": "Tapez pour chercher parmi tous les clubs.", "Choose the teams to follow. You can change this any time with ☆ in a table.": "Choisissez les équipes à suivre. Modifiable à tout moment avec ☆ dans un classement.",
-    "Follow selected": "Suivre la sélection",
-    "Table": "Classement", "Games": "Matchs", "Players": "Joueurs", "Cards & suspensions": "Cartons & suspensions", "Simulator": "Simulateur", "Sim settings": "Paramètres sim.",
-    "Team": "Équipe", "Form": "Forme", "🗓 Games last week": "🗓 Matchs de la semaine dernière", "⏭ Games this week": "⏭ Matchs de cette semaine",
-    "No games last week.": "Aucun match la semaine dernière.", "No games this week.": "Aucun match cette semaine.",
-    "Click a team name for match details": "Cliquez sur une équipe pour les détails", "☆ follows a team (saved on this device)": "☆ suit une équipe (enregistré sur cet appareil)",
-    "All goals": "Tous les buts", "Excl. 7m": "Hors 7m", "7m only": "7m seulement", "Top Scorers": "Meilleurs buteurs", "Goals excluding 7m": "Buts hors 7m", "7m goals": "Buts sur 7m",
-    "Player": "Joueur", "Club": "Club", "loading…": "chargement…", "unavailable": "indisponible", "No scorer data found.": "Aucune donnée de buteurs.",
-    "7m details aren't published for this league, so only total goals are shown.": "Les données de 7m ne sont pas publiées pour cette série ; seul le total de buts est affiché.",
-    "Teams": "Équipes", "Players with most suspensions": "Joueurs les plus suspendus",
-    "No cards or suspensions published for this league (lower divisions usually don't have this data).": "Aucun carton ni suspension publié pour cette série (les séries inférieures n'ont généralement pas ces données).",
-    "2' = two-minute suspension · a blue card is a red card with a written report": "2' = suspension de deux minutes · un carton bleu est un carton rouge avec rapport écrit",
-    "Goal model: home win / draw / away win chance, expected score": "Modèle de buts : chances de victoire domicile / nul / victoire extérieur, score attendu",
-  },
-};
-function detectLang() {
-  try {
-    const saved = localStorage.getItem(LANG_KEY);
-    if (LANGS.includes(saved)) return saved;
-  } catch {}
-  const nav = (typeof navigator !== "undefined" && (navigator.language || "") || "").slice(0, 2).toLowerCase();
-  return LANGS.includes(nav) ? nav : "en";
-}
-const langListeners = new Set();
-function useLang() {
-  const [lang, setLangState] = useState(detectLang);
-  useEffect(() => { langListeners.add(setLangState); return () => { langListeners.delete(setLangState); }; }, []);
-  const setLang = l => { try { localStorage.setItem(LANG_KEY, l); } catch {} langListeners.forEach(fn => fn(l)); };
-  const t = key => (I18N[lang] && I18N[lang][key]) || key;
-  return { lang, setLang, t };
-}
-function LangSwitch() {
-  const { lang, setLang } = useLang();
-  return (
-    <div role="group" aria-label="Language" style={{ display: "inline-flex", gap: ".15rem" }}>
-      {LANGS.map(l => (
-        <button key={l} aria-pressed={lang === l} className={"btn" + (lang === l ? "" : " btn-ghost")}
-          style={{ fontSize: ".7rem", padding: ".2rem .5rem", minWidth: "2.2rem" }} onClick={() => setLang(l)}>{l.toUpperCase()}</button>
-      ))}
-    </div>
-  );
-}
-
-// ── FOLLOWED TEAMS ────────────────────────────────────────────────────────────
-// Stored in this browser only (no account). A team is identified by
-// "<leagueSerieId>:<teamId>"; following a whole club = following each of its teams.
-const FOLLOW_KEY = "leaguesim.follow.v1";
-const followListeners = new Set();
-function readFollow() {
-  try {
-    const v = JSON.parse(localStorage.getItem(FOLLOW_KEY));
-    return { main: v && v.main ? v.main : null, ids: v && Array.isArray(v.ids) ? v.ids : [] };
-  } catch { return { main: null, ids: [] }; }
-}
-function writeFollow(next) {
-  try { localStorage.setItem(FOLLOW_KEY, JSON.stringify(next)); } catch {}
-  followListeners.forEach(fn => fn(next));
-}
-function teamKey(leagueId, teamId) { return leagueId + ":" + teamId; }
-function useFollow() {
-  const [state, setState] = useState(readFollow);
-  useEffect(() => {
-    followListeners.add(setState);
-    const onStorage = e => { if (e.key === FOLLOW_KEY) setState(readFollow()); };
-    window.addEventListener("storage", onStorage);
-    return () => { followListeners.delete(setState); window.removeEventListener("storage", onStorage); };
-  }, []);
-  const toggle = key => {
-    const cur = readFollow();
-    const ids = cur.ids.includes(key) ? cur.ids.filter(k => k !== key) : [...cur.ids, key];
-    const main = ids.includes(cur.main) ? cur.main : (ids[0] || null);
-    writeFollow({ main, ids });
-  };
-  const setMain = key => {
-    const cur = readFollow();
-    writeFollow({ main: key, ids: cur.ids.includes(key) ? cur.ids : [...cur.ids, key] });
-  };
-  return { main: state.main, ids: state.ids, isFollowing: key => state.ids.includes(key), toggle, setMain };
-}
-
-// ── GOAL MODEL (match predictions) ──────────────────────────────────────────────
-// Expected goals from each side's attack/defence relative to the league average
-// (shrunk towards average while a team has few games), then a normal model on
-// the goal difference gives win / draw / loss chances. Independent of the
-// Monte Carlo settings, which keep their own rank-based probabilities.
-function normCdf(x) {
-  const t = 1 / (1 + 0.2316419 * Math.abs(x));
-  const d = 0.3989423 * Math.exp(-x * x / 2);
-  const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
-  return x > 0 ? 1 - p : p;
-}
-function predictMatch(homeIdx, awayIdx, teams, fixtures) {
-  const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null && !isNaN(+f.homeScore) && !isNaN(+f.awayScore));
-  if (played.length < 6 || !teams[homeIdx] || !teams[awayIdx]) return null;
-  const lgH = played.reduce((a, f) => a + +f.homeScore, 0) / played.length;
-  const lgA = played.reduce((a, f) => a + +f.awayScore, 0) / played.length;
-  const lg = (lgH + lgA) / 2;
-  const gds = played.map(f => +f.homeScore - +f.awayScore);
-  const mean = gds.reduce((a, b) => a + b, 0) / gds.length;
-  const sd = Math.max(5, Math.sqrt(gds.reduce((a, b) => a + (b - mean) * (b - mean), 0) / gds.length));
-  const K = 4;
-  const rate = idx => {
-    let gf = 0, ga = 0, n = 0;
-    played.forEach(f => {
-      if (f.homeIdx === idx) { gf += +f.homeScore; ga += +f.awayScore; n++; }
-      else if (f.awayIdx === idx) { gf += +f.awayScore; ga += +f.homeScore; n++; }
-    });
-    const w = n / (n + K);
-    return { att: 1 + ((n ? gf / n / lg : 1) - 1) * w, def: 1 + ((n ? ga / n / lg : 1) - 1) * w };
-  };
-  const h = rate(homeIdx), a = rate(awayIdx);
-  const eh = lgH * h.att * a.def, ea = lgA * a.att * h.def;
-  const mu = eh - ea;
-  const draw = normCdf((0.5 - mu) / sd) - normCdf((-0.5 - mu) / sd);
-  const homeWin = 1 - normCdf((0.5 - mu) / sd);
-  const pct = v => Math.round(v * 100);
-  const hw = pct(homeWin), dr = pct(draw);
-  return { homeWin: hw, draw: dr, awayWin: Math.max(0, 100 - hw - dr), eh: Math.round(eh), ea: Math.round(ea) };
-}
-function weekBounds() {
-  const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-  const now = new Date();
-  const mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
-  const next = new Date(mon.getFullYear(), mon.getMonth(), mon.getDate() + 7);
-  return { cur: iso(mon), next: iso(next) };
-}
-
-// Position, points, last-5 form and next match for one team of a Belgian league.
-function teamSnapshot(league, teamId) {
-  const teams = league.teams || [], fixtures = league.fixtures || [];
-  const rows = calcStats(teams, fixtures, league.ranking || []);
-  const pos = rows.findIndex(r => r.id === teamId);
-  if (pos < 0) return null;
-  const idx = teams.findIndex(t => t.id === teamId);
-  const byDate = (a, b) => ((a.date || "") < (b.date || "") ? -1 : (a.date || "") > (b.date || "") ? 1 : 0);
-  const mine = fixtures.filter(f => f.homeIdx === idx || f.awayIdx === idx);
-  const form = mine
-    .filter(f => f.played && f.homeScore != null && f.awayScore != null)
-    .sort(byDate)
-    .map(f => {
-      const home = f.homeIdx === idx;
-      const gf = +(home ? f.homeScore : f.awayScore), ga = +(home ? f.awayScore : f.homeScore);
-      return gf > ga ? "W" : gf < ga ? "L" : "D";
-    })
-    .slice(-5);
-  const today = new Date().toISOString().slice(0, 10);
-  const nextFx = mine.filter(f => !f.played && (!f.date || f.date.slice(0, 10) >= today)).sort(byDate)[0];
-  let next = null;
-  if (nextFx) {
-    const home = nextFx.homeIdx === idx;
-    const opp = teams[home ? nextFx.awayIdx : nextFx.homeIdx];
-    next = { date: nextFx.date || null, home, opp: opp ? cleanTeamName(opp.name) : "?" };
-  }
-  return { name: cleanTeamName(rows[pos].name), pos: pos + 1, of: rows.length, pts: rows[pos].totalPts, form, next };
-}
-
-// Build a lookup from scorer club names indexed by their stripped form
-// Called once per scorer list
-function buildClubIndex(scorers) {
-  const index = {}; // stripped -> original club name
-  for (const s of (scorers || [])) {
-    const stripped = stripPrefix(s.club);
-    if (!index[stripped]) index[stripped] = s.club;
-  }
-  return index;
-}
-
-function resolveClubName(leagueSimName, aliases, clubIndex) {
-  // 1. Explicit alias takes priority
-  if (aliases && aliases[leagueSimName] && aliases[leagueSimName].trim()) return aliases[leagueSimName].trim();
-  // 2. Exact match
-  if (!clubIndex) return leagueSimName;
-  if (clubIndex[leagueSimName]) return leagueSimName; // already exact
-  // 3. Fuzzy: strip prefix from leaguesim name, find matching scorer club
-  const stripped = stripPrefix(leagueSimName);
-  if (clubIndex[stripped]) return clubIndex[stripped];
-  // 4. Partial: check if stripped leaguesim name is contained in any scorer club stripped name or vice versa
-  for (const [scorerStripped, scorerClub] of Object.entries(clubIndex)) {
-    if (scorerStripped.includes(stripped) || stripped.includes(scorerStripped)) {
-      return scorerClub;
-    }
-  }
-  return leagueSimName;
 }
 
 function useScorers(leagueId, phase) {
@@ -615,14 +354,6 @@ function generateTournament(sourceStats, settings, isPlaydown) {
   return { teams: phTeams, rounds };
 }
 
-// calcProbsNeutral: like calcProbs but homeBonus = 0 (neutral ground)
-function calcProbsNeutral(homeIdx, awayIdx, teams, settings) {
-  const neutralSettings = { ...settings, homeBonus: 0 };
-  // Also override per-team homeBonus
-  const neutralTeams = teams.map(t => ({ ...t, homeBonus: "" }));
-  return calcProbs(homeIdx, awayIdx, neutralTeams, [], neutralSettings);
-}
-
 // Resolve a ref to a team index given current match results
 // Returns teamIdx or null if not yet known
 function resolveRef(ref, teams, rounds) {
@@ -679,215 +410,6 @@ function makeFixtures(teams, settings) {
   return fixtures;
 }
 
-// ── STATS ─────────────────────────────────────────────────────────────────────
-// Always uses full tiebreaker chain.
-// ranking: optional array from API with { name, played, won, drawn, lost, gf, ga, points }
-function calcStats(teams, fixtures, ranking) {
-  if (!teams || !fixtures) return [];
-  const scoredFixtures = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
-  // Build a name→ranking lookup for seeding P/W/D/L/GF/GA when scores aren't entered
-  const rankMap = ranking && ranking.length > 0
-    ? new Map(ranking.map(r => [r.name.toLowerCase(), r]))
-    : null;
-  const s = {};
-  teams.forEach(t => {
-    const rk = rankMap && rankMap.get(t.name.toLowerCase());
-    s[t.id] = {
-      id: t.id, name: t.name, basePts: t.points,
-      // Seed from API ranking when available; scored fixtures will add on top
-      P: rk ? (rk.played || 0) : 0,
-      W: rk ? (rk.won   || 0) : 0,
-      D: rk ? (rk.drawn || 0) : 0,
-      L: rk ? (rk.lost  || 0) : 0,
-      GF: rk ? (rk.gf   || 0) : 0,
-      GA: rk ? (rk.ga   || 0) : 0,
-    };
-  });
-  // Layer scored fixtures on top (override ranking counts to avoid double-counting)
-  // Only add from fixtures if there are scored ones — otherwise trust ranking totals
-  if (scoredFixtures.length > 0) {
-    // Reset computed fields; re-derive everything from scored fixtures only
-    Object.values(s).forEach(r => { r.P = 0; r.W = 0; r.D = 0; r.L = 0; r.GF = 0; r.GA = 0; });
-    scoredFixtures.forEach(f => {
-      const hg = +f.homeScore, ag = +f.awayScore;
-      if (isNaN(hg) || isNaN(ag)) return;
-      const h = s[teams[f.homeIdx]?.id], a = s[teams[f.awayIdx]?.id];
-      if (!h || !a) return;
-      h.P++; a.P++; h.GF += hg; h.GA += ag; a.GF += ag; a.GA += hg;
-      if (hg > ag) { h.W++; a.L++; } else if (hg < ag) { a.W++; h.L++; } else { h.D++; a.D++; }
-    });
-  }
-  const rows = Object.values(s).map(r => ({ ...r, GD: r.GF - r.GA, totalPts: scoredFixtures.length > 0 ? r.W * 2 + r.D : r.basePts }));
-
-  function h2h(ids) {
-    const h = {};
-    ids.forEach(id => { h[id] = { pts: 0, GF: 0, GA: 0, awayGF: 0 }; });
-    scoredFixtures.forEach(f => {
-      const hid = teams[f.homeIdx]?.id, aid = teams[f.awayIdx]?.id;
-      if (!ids.includes(hid) || !ids.includes(aid)) return;
-      const hg = +f.homeScore, ag = +f.awayScore;
-      if (isNaN(hg) || isNaN(ag)) return;
-      if (hg > ag) { h[hid].pts += 2; } else if (hg < ag) { h[aid].pts += 2; } else { h[hid].pts++; h[aid].pts++; }
-      h[hid].GF += hg; h[hid].GA += ag; h[aid].GF += ag; h[aid].GA += hg;
-      h[aid].awayGF += ag;
-    });
-    return h;
-  }
-
-  // Head-to-head criteria are only fair to apply once every team in the tied
-  // group has actually played every other team in it at least once. With an
-  // incomplete mini round-robin (e.g. only one of several pairs has met so
-  // far), a single result would unfairly separate teams that simply haven't
-  // had the chance to play each other yet — so in that case we skip straight
-  // to overall goal difference instead.
-  function h2hGroupComplete(ids) {
-    if (ids.length < 2) return true;
-    const played = new Set();
-    scoredFixtures.forEach(f => {
-      const hid = teams[f.homeIdx]?.id, aid = teams[f.awayIdx]?.id;
-      if (ids.includes(hid) && ids.includes(aid)) {
-        played.add([hid, aid].sort().join("|"));
-      }
-    });
-    for (let i = 0; i < ids.length; i++) {
-      for (let j = i + 1; j < ids.length; j++) {
-        if (!played.has([ids[i], ids[j]].sort().join("|"))) return false;
-      }
-    }
-    return true;
-  }
-
-  return rows.sort((a, b) => {
-    if (b.totalPts !== a.totalPts) return b.totalPts - a.totalPts;
-    if (b.W !== a.W) return b.W - a.W;
-    const ids = rows.filter(r => r.totalPts === a.totalPts).map(r => r.id);
-    if (h2hGroupComplete(ids)) {
-      const hh = h2h(ids);
-      const ha = hh[a.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
-      const hb = hh[b.id] || { pts: 0, GF: 0, GA: 0, awayGF: 0 };
-      if (hb.pts !== ha.pts) return hb.pts - ha.pts;
-      const gdA = ha.GF - ha.GA, gdB = hb.GF - hb.GA;
-      if (gdB !== gdA) return gdB - gdA;
-      if (hb.awayGF !== ha.awayGF) return hb.awayGF - ha.awayGF;
-    }
-    if (b.GD !== a.GD) return b.GD - a.GD;
-    return a.name.localeCompare(b.name);
-  });
-}
-
-// ── PROB CALC ─────────────────────────────────────────────────────────────────
-function calcProbs(homeIdx, awayIdx, teams, fixtures, settings) {
-  const { baseWin, baseDraw, rankBonus } = settings;
-  const ht = teams[homeIdx], at = teams[awayIdx];
-  const hBonus = (ht && ht.homeBonus !== "" && ht.homeBonus != null) ? parseFloat(ht.homeBonus) || 0 : settings.homeBonus;
-  const table = calcStats(teams, fixtures);
-  const homeRow = table.find(r => r.id === ht?.id);
-  const awayRow = table.find(r => r.id === at?.id);
-  const hp = table.indexOf(homeRow);
-  const ap = table.indexOf(awayRow);
-  let gap = 0;
-  if (homeRow && awayRow && homeRow.totalPts !== awayRow.totalPts) {
-    const hGrp = table.map((r, i) => r.totalPts === homeRow.totalPts ? i : -1).filter(i => i >= 0);
-    const aGrp = table.map((r, i) => r.totalPts === awayRow.totalPts ? i : -1).filter(i => i >= 0);
-    gap = hp < ap ? Math.min(...aGrp) - Math.max(...hGrp) : Math.max(...aGrp) - Math.min(...hGrp);
-  }
-  const shift = gap * rankBonus;
-  let hw = Math.max(0, Math.min(100 - baseDraw, baseWin + hBonus + shift));
-  let aw = 100 - baseDraw - hw;
-  if (aw < 0) { hw += aw; aw = 0; }
-  return { homeWin: Math.round(hw), draw: Math.round(baseDraw), awayWin: Math.max(0, Math.round(aw)) };
-}
-
-// ── MONTE CARLO ───────────────────────────────────────────────────────────────
-function runMC(teams, pending, played) {
-  // played: array of already-confirmed fixtures with homeScore/awayScore
-  const n = teams.length, SIMS = 100000;
-  const hits = teams.map(() => new Array(n).fill(0));
-
-  // Pre-compute wins, h2h points and GF/GA from already-played fixtures
-  const basePts   = teams.map(t => t.points);  // already includes earned pts
-  const baseWins  = new Array(n).fill(0);
-  const baseGF    = new Array(n).fill(0);
-  const baseGA    = new Array(n).fill(0);
-  const baseH2H   = Array.from({ length: n }, () => new Array(n).fill(0));
-  (played || []).forEach(f => {
-    const hi = f.homeIdx, ai = f.awayIdx;
-    const hg = +f.homeScore, ag = +f.awayScore;
-    if (isNaN(hg) || isNaN(ag)) return;
-    baseGF[hi] += hg; baseGA[hi] += ag; baseGF[ai] += ag; baseGA[ai] += hg;
-    if (hg > ag) { baseWins[hi]++; baseH2H[hi][ai] += 2; }
-    else if (hg < ag) { baseWins[ai]++; baseH2H[ai][hi] += 2; }
-    else { baseH2H[hi][ai]++; baseH2H[ai][hi]++; }
-  });
-
-  // Whether team i and team j ever face each other at all this season
-  // (already played OR still scheduled) — static for the whole run, since
-  // it only depends on the fixture list, not on simulated outcomes. Used so
-  // the head-to-head tiebreaker below is only applied to a tied group once
-  // every pair in it actually has (or will have) a fixture between them;
-  // otherwise one incidental result would unfairly separate teams that
-  // never got, or won't get, the chance to play each other at all.
-  const matchExists = Array.from({ length: n }, () => new Array(n).fill(false));
-  [...(played || []), ...(pending || [])].forEach(f => {
-    matchExists[f.homeIdx][f.awayIdx] = true;
-    matchExists[f.awayIdx][f.homeIdx] = true;
-  });
-  function h2hGroupComplete(idxs) {
-    for (let a = 0; a < idxs.length; a++) {
-      for (let b = a + 1; b < idxs.length; b++) {
-        if (!matchExists[idxs[a]][idxs[b]]) return false;
-      }
-    }
-    return true;
-  }
-
-  for (let s = 0; s < SIMS; s++) {
-    const pts   = basePts.slice();
-    const wins  = baseWins.slice();
-    const gf    = baseGF.slice();
-    const ga    = baseGA.slice();
-    const h2h   = baseH2H.map(row => row.slice()); // deep copy per sim
-
-    for (const f of pending) {
-      const r = Math.random() * 100;
-      const hi = f.homeIdx, ai = f.awayIdx;
-      // Simulated scorelines aren't generated here, only win/draw/loss — use
-      // a nominal 1-goal margin so GF/GA (and thus GD) still move in the
-      // right direction for teams who need the GD tiebreaker.
-      if (r < f.homeWin) {
-        pts[hi] += 2; wins[hi]++; gf[hi]++; ga[ai]++;
-        h2h[hi][ai] += 2;
-      } else if (r < f.homeWin + f.draw) {
-        pts[hi]++; pts[ai]++;
-        h2h[hi][ai]++; h2h[ai][hi]++;
-      } else {
-        pts[ai] += 2; wins[ai]++; gf[ai]++; ga[hi]++;
-        h2h[ai][hi] += 2;
-      }
-    }
-
-    // Sort with tiebreakers: pts → wins → h2h pts among tied group (only
-    // when that group's head-to-head schedule is complete) → overall GD →
-    // random (final fallback, since a simulated season has no name to
-    // alphabetize meaningfully by).
-    const entries = pts.map((p, i) => ({ p, i, w: wins[i], gd: gf[i] - ga[i], rnd: Math.random() }));
-    entries.sort((a, b) => {
-      if (b.p !== a.p) return b.p - a.p;
-      if (b.w !== a.w) return b.w - a.w;
-      const tiedIdxs = entries.filter(e => e.p === a.p).map(e => e.i);
-      if (h2hGroupComplete(tiedIdxs)) {
-        const sumA = tiedIdxs.reduce((s, j) => s + (j !== a.i ? h2h[a.i][j] : 0), 0);
-        const sumB = tiedIdxs.reduce((s, j) => s + (j !== b.i ? h2h[b.i][j] : 0), 0);
-        if (sumB !== sumA) return sumB - sumA;
-      }
-      if (b.gd !== a.gd) return b.gd - a.gd;
-      return a.rnd - b.rnd;
-    });
-    entries.forEach(({ i }, rank) => { hits[i][rank]++; });
-  }
-  return hits.map(row => row.map(v => (v / SIMS) * 100));
-}
-
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 function heatColor(v) {
   if (v < 0.01) return "transparent";
@@ -899,11 +421,6 @@ function fmtPct(v) {
   if (v < 0.001) return "";
   if (v < 0.1) return "<0.1%";
   return v.toFixed(1) + "%";
-}
-
-function fixProbs(f, teams, fixtures, settings) {
-  if (f.overrideOn && f.ovHW !== "") return { homeWin: parseFloat(f.ovHW) || 0, draw: parseFloat(f.ovD) || 0, awayWin: parseFloat(f.ovAW) || 0 };
-  return calcProbs(f.homeIdx, f.awayIdx, teams, fixtures, settings);
 }
 
 // ── PAT SETTINGS ─────────────────────────────────────────────────────────────
@@ -2556,8 +2073,9 @@ function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onCon
   useEffect(() => {
     if (pendingRef.current.length === 0) { setResults(null); return; }
     setRunning(true);
-    const tid = setTimeout(() => {
-      const res = runMC(teamsRef.current, pendingRef.current, playedRef.current);
+    // Runs in a Web Worker so the page stays responsive while 100,000 seasons are simulated.
+    const run = runMCAsync(teamsRef.current, pendingRef.current, playedRef.current);
+    run.promise.then(res => {
       setResults(res);
       setRunning(false);
       if (onConfirmed) {
@@ -2569,8 +2087,8 @@ function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onCon
         });
         onConfirmed(ct, cb);
       }
-    }, 20);
-    return () => clearTimeout(tid);
+    }).catch(() => setRunning(false));
+    return () => run.cancel();
   }, []); // runs once on mount — parent re-mounts this via key= when fixtures change
 
   const n = teams_.length;
@@ -4317,6 +3835,11 @@ function App() {
       {active && <LeagueEditor key={active.id} league={active} onChange={u => updateLeague(active.id, u)} />}
     </div>
   );
+}
+
+// Test hook: lets test/ reach internals without exporting them in production.
+if (typeof window !== "undefined" && typeof window.__LEAGUESIM_TEST__ === "function") {
+  window.__LEAGUESIM_TEST__({ BelgianScreen, BelgianLeagueView, predictMatch });
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
