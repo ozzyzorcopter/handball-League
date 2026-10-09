@@ -110,6 +110,94 @@ function cleanTeamName(name) {
   return cleaned || name;
 }
 
+// ── LANGUAGE (NL / FR / EN) ───────────────────────────────────────────────────
+// English text is the key; missing translations fall back to English. Covers the
+// Belgian Handball screens (My teams, picker, league tabs, tables, players, cards).
+const LANG_KEY = "leaguesim.lang.v1";
+const LANGS = ["nl", "fr", "en"];
+const LANG_LOCALE = { nl: "nl-BE", fr: "fr-BE", en: "en-GB" };
+const I18N = {
+  nl: {
+    "Belgian Handball": "Belgisch handbal", "Live competition data": "Live competitiegegevens", "updated": "bijgewerkt",
+    "← Back": "← Terug", "← All Leagues": "← Alle reeksen", "⌂ Home": "⌂ Start", "Back to My teams and all leagues": "Terug naar mijn teams en alle reeksen",
+    "Loading data…": "Gegevens laden…", "Could not load data.": "Kon de gegevens niet laden.",
+    "★ My teams": "★ Mijn teams", "＋ Add club": "＋ Club toevoegen",
+    "Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.": "Open een reeks en tik op ☆ naast een team om het te volgen. Je teams verschijnen hier met positie, vorm en volgende wedstrijd.",
+    "Main team": "Hoofdteam", "Make main": "Maak hoofdteam", "Next": "Volgende", "No upcoming game": "Geen volgende wedstrijd", "vs": "tegen", "at": "bij",
+    "pts": "ptn", "This week · all my teams": "Deze week · al mijn teams",
+    "Select a federation above to browse leagues.": "Kies hierboven een federatie om reeksen te bekijken.",
+    "No competition data fetched yet — run the fetch-vhv workflow first.": "Nog geen competitiegegevens opgehaald — voer eerst de fetch-vhv workflow uit.",
+    "No leagues available yet for": "Nog geen reeksen beschikbaar voor", "teams": "teams", "team": "team", "played": "gespeeld", "pending": "te spelen",
+    "Which club do you follow?": "Welke club volg je?", "Skip": "Overslaan", "Search": "Zoek in", "clubs": "clubs", "No club found.": "Geen club gevonden.",
+    "Type to search all clubs.": "Typ om alle clubs te doorzoeken.", "Choose the teams to follow. You can change this any time with ☆ in a table.": "Kies de teams die je wilt volgen. Je kan dit altijd aanpassen met ☆ in een klassement.",
+    "Follow selected": "Volg geselecteerde",
+    "Table": "Klassement", "Games": "Wedstrijden", "Players": "Spelers", "Cards & suspensions": "Kaarten & schorsingen", "Simulator": "Simulator", "Sim settings": "Sim-instellingen",
+    "Team": "Team", "Form": "Vorm", "🗓 Games last week": "🗓 Wedstrijden vorige week", "⏭ Games this week": "⏭ Wedstrijden deze week",
+    "No games last week.": "Geen wedstrijden vorige week.", "No games this week.": "Geen wedstrijden deze week.",
+    "Click a team name for match details": "Klik op een teamnaam voor details", "☆ follows a team (saved on this device)": "☆ volgt een team (bewaard op dit toestel)",
+    "All goals": "Alle doelpunten", "Excl. 7m": "Zonder 7m", "7m only": "Enkel 7m", "Top Scorers": "Topschutters", "Goals excluding 7m": "Doelpunten zonder 7m", "7m goals": "7m-doelpunten",
+    "Player": "Speler", "Club": "Club", "loading…": "laden…", "unavailable": "niet beschikbaar", "No scorer data found.": "Geen schuttersgegevens gevonden.",
+    "7m details aren't published for this league, so only total goals are shown.": "Voor deze reeks zijn geen 7m-gegevens beschikbaar, dus enkel het totaal aantal doelpunten wordt getoond.",
+    "Teams": "Teams", "Players with most suspensions": "Spelers met de meeste schorsingen",
+    "No cards or suspensions published for this league (lower divisions usually don't have this data).": "Voor deze reeks zijn geen kaarten of schorsingen beschikbaar (lagere reeksen hebben deze gegevens meestal niet).",
+    "2' = two-minute suspension · a blue card is a red card with a written report": "2' = twee minuten schorsing · een blauwe kaart is een rode kaart met schriftelijk rapport",
+    "Goal model: home win / draw / away win chance, expected score": "Doelpuntenmodel: kans op thuiszege / gelijk / uitzege, verwachte score",
+  },
+  fr: {
+    "Belgian Handball": "Handball belge", "Live competition data": "Données de compétition en direct", "updated": "mis à jour",
+    "← Back": "← Retour", "← All Leagues": "← Toutes les séries", "⌂ Home": "⌂ Accueil", "Back to My teams and all leagues": "Retour à mes équipes et à toutes les séries",
+    "Loading data…": "Chargement des données…", "Could not load data.": "Impossible de charger les données.",
+    "★ My teams": "★ Mes équipes", "＋ Add club": "＋ Ajouter un club",
+    "Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.": "Ouvrez une série et touchez ☆ à côté d'une équipe pour la suivre. Vos équipes apparaissent ici avec position, forme et prochain match.",
+    "Main team": "Équipe principale", "Make main": "Définir comme principale", "Next": "Prochain", "No upcoming game": "Aucun match à venir", "vs": "contre", "at": "à",
+    "pts": "pts", "This week · all my teams": "Cette semaine · toutes mes équipes",
+    "Select a federation above to browse leagues.": "Choisissez une fédération ci-dessus pour parcourir les séries.",
+    "No competition data fetched yet — run the fetch-vhv workflow first.": "Aucune donnée récupérée — lancez d'abord le workflow fetch-vhv.",
+    "No leagues available yet for": "Aucune série disponible pour", "teams": "équipes", "team": "équipe", "played": "joués", "pending": "à jouer",
+    "Which club do you follow?": "Quel club suivez-vous ?", "Skip": "Passer", "Search": "Rechercher parmi", "clubs": "clubs", "No club found.": "Aucun club trouvé.",
+    "Type to search all clubs.": "Tapez pour chercher parmi tous les clubs.", "Choose the teams to follow. You can change this any time with ☆ in a table.": "Choisissez les équipes à suivre. Modifiable à tout moment avec ☆ dans un classement.",
+    "Follow selected": "Suivre la sélection",
+    "Table": "Classement", "Games": "Matchs", "Players": "Joueurs", "Cards & suspensions": "Cartons & suspensions", "Simulator": "Simulateur", "Sim settings": "Paramètres sim.",
+    "Team": "Équipe", "Form": "Forme", "🗓 Games last week": "🗓 Matchs de la semaine dernière", "⏭ Games this week": "⏭ Matchs de cette semaine",
+    "No games last week.": "Aucun match la semaine dernière.", "No games this week.": "Aucun match cette semaine.",
+    "Click a team name for match details": "Cliquez sur une équipe pour les détails", "☆ follows a team (saved on this device)": "☆ suit une équipe (enregistré sur cet appareil)",
+    "All goals": "Tous les buts", "Excl. 7m": "Hors 7m", "7m only": "7m seulement", "Top Scorers": "Meilleurs buteurs", "Goals excluding 7m": "Buts hors 7m", "7m goals": "Buts sur 7m",
+    "Player": "Joueur", "Club": "Club", "loading…": "chargement…", "unavailable": "indisponible", "No scorer data found.": "Aucune donnée de buteurs.",
+    "7m details aren't published for this league, so only total goals are shown.": "Les données de 7m ne sont pas publiées pour cette série ; seul le total de buts est affiché.",
+    "Teams": "Équipes", "Players with most suspensions": "Joueurs les plus suspendus",
+    "No cards or suspensions published for this league (lower divisions usually don't have this data).": "Aucun carton ni suspension publié pour cette série (les séries inférieures n'ont généralement pas ces données).",
+    "2' = two-minute suspension · a blue card is a red card with a written report": "2' = suspension de deux minutes · un carton bleu est un carton rouge avec rapport écrit",
+    "Goal model: home win / draw / away win chance, expected score": "Modèle de buts : chances de victoire domicile / nul / victoire extérieur, score attendu",
+  },
+};
+function detectLang() {
+  try {
+    const saved = localStorage.getItem(LANG_KEY);
+    if (LANGS.includes(saved)) return saved;
+  } catch {}
+  const nav = (typeof navigator !== "undefined" && (navigator.language || "") || "").slice(0, 2).toLowerCase();
+  return LANGS.includes(nav) ? nav : "en";
+}
+const langListeners = new Set();
+function useLang() {
+  const [lang, setLangState] = useState(detectLang);
+  useEffect(() => { langListeners.add(setLangState); return () => { langListeners.delete(setLangState); }; }, []);
+  const setLang = l => { try { localStorage.setItem(LANG_KEY, l); } catch {} langListeners.forEach(fn => fn(l)); };
+  const t = key => (I18N[lang] && I18N[lang][key]) || key;
+  return { lang, setLang, t };
+}
+function LangSwitch() {
+  const { lang, setLang } = useLang();
+  return (
+    <div role="group" aria-label="Language" style={{ display: "inline-flex", gap: ".15rem" }}>
+      {LANGS.map(l => (
+        <button key={l} aria-pressed={lang === l} className={"btn" + (lang === l ? "" : " btn-ghost")}
+          style={{ fontSize: ".7rem", padding: ".2rem .5rem", minWidth: "2.2rem" }} onClick={() => setLang(l)}>{l.toUpperCase()}</button>
+      ))}
+    </div>
+  );
+}
+
 // ── FOLLOWED TEAMS ────────────────────────────────────────────────────────────
 // Stored in this browser only (no account). A team is identified by
 // "<leagueSerieId>:<teamId>"; following a whole club = following each of its teams.
@@ -145,6 +233,53 @@ function useFollow() {
     writeFollow({ main: key, ids: cur.ids.includes(key) ? cur.ids : [...cur.ids, key] });
   };
   return { main: state.main, ids: state.ids, isFollowing: key => state.ids.includes(key), toggle, setMain };
+}
+
+// ── GOAL MODEL (match predictions) ──────────────────────────────────────────────
+// Expected goals from each side's attack/defence relative to the league average
+// (shrunk towards average while a team has few games), then a normal model on
+// the goal difference gives win / draw / loss chances. Independent of the
+// Monte Carlo settings, which keep their own rank-based probabilities.
+function normCdf(x) {
+  const t = 1 / (1 + 0.2316419 * Math.abs(x));
+  const d = 0.3989423 * Math.exp(-x * x / 2);
+  const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+  return x > 0 ? 1 - p : p;
+}
+function predictMatch(homeIdx, awayIdx, teams, fixtures) {
+  const played = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null && !isNaN(+f.homeScore) && !isNaN(+f.awayScore));
+  if (played.length < 6 || !teams[homeIdx] || !teams[awayIdx]) return null;
+  const lgH = played.reduce((a, f) => a + +f.homeScore, 0) / played.length;
+  const lgA = played.reduce((a, f) => a + +f.awayScore, 0) / played.length;
+  const lg = (lgH + lgA) / 2;
+  const gds = played.map(f => +f.homeScore - +f.awayScore);
+  const mean = gds.reduce((a, b) => a + b, 0) / gds.length;
+  const sd = Math.max(5, Math.sqrt(gds.reduce((a, b) => a + (b - mean) * (b - mean), 0) / gds.length));
+  const K = 4;
+  const rate = idx => {
+    let gf = 0, ga = 0, n = 0;
+    played.forEach(f => {
+      if (f.homeIdx === idx) { gf += +f.homeScore; ga += +f.awayScore; n++; }
+      else if (f.awayIdx === idx) { gf += +f.awayScore; ga += +f.homeScore; n++; }
+    });
+    const w = n / (n + K);
+    return { att: 1 + ((n ? gf / n / lg : 1) - 1) * w, def: 1 + ((n ? ga / n / lg : 1) - 1) * w };
+  };
+  const h = rate(homeIdx), a = rate(awayIdx);
+  const eh = lgH * h.att * a.def, ea = lgA * a.att * h.def;
+  const mu = eh - ea;
+  const draw = normCdf((0.5 - mu) / sd) - normCdf((-0.5 - mu) / sd);
+  const homeWin = 1 - normCdf((0.5 - mu) / sd);
+  const pct = v => Math.round(v * 100);
+  const hw = pct(homeWin), dr = pct(draw);
+  return { homeWin: hw, draw: dr, awayWin: Math.max(0, 100 - hw - dr), eh: Math.round(eh), ea: Math.round(ea) };
+}
+function weekBounds() {
+  const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const now = new Date();
+  const mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
+  const next = new Date(mon.getFullYear(), mon.getMonth(), mon.getDate() + 7);
+  return { cur: iso(mon), next: iso(next) };
 }
 
 // Position, points, last-5 form and next match for one team of a Belgian league.
@@ -228,6 +363,7 @@ function useScorers(leagueId, phase) {
 
 
 function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases }) {
+  const { t } = useLang();
   const [expanded, setExpanded] = useState(false);
   const loading = scorers === null;
 
@@ -257,10 +393,10 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
   return (
     <div className="mini-box" style={{ marginTop: "1rem" }}>
       <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".6rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span>⚽ {title || "Top Scorers"}</span>
+        <span>⚽ {t(title || "Top Scorers")}</span>
         <div style={{ display: "flex", gap: ".4rem", alignItems: "center" }}>
-          {loading && <span className="muted" style={{ fontSize: ".7rem", fontWeight: 400 }}>loading…</span>}
-          {error && <span style={{ color: "#f87171", fontSize: ".7rem", fontWeight: 400 }}>unavailable</span>}
+          {loading && <span className="muted" style={{ fontSize: ".7rem", fontWeight: 400 }}>{t("loading…")}</span>}
+          {error && <span style={{ color: "#f87171", fontSize: ".7rem", fontWeight: 400 }}>{t("unavailable")}</span>}
           {collapsible && (
             <button className="btn-ghost" style={{ fontSize: ".72rem", padding: ".2rem .6rem" }} onClick={() => setExpanded(e => !e)}>
               {expanded ? "▲" : "▼ " + filtered.length}
@@ -269,7 +405,7 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
         </div>
       </div>
       {!loading && !error && filtered.length === 0 && (
-        <div className="muted" style={{ fontSize: ".78rem" }}>No scorer data found.</div>
+        <div className="muted" style={{ fontSize: ".78rem" }}>{t("No scorer data found.")}</div>
       )}
       {shown.length > 0 && (
         <div className="tbl-wrap">
@@ -277,8 +413,8 @@ function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases 
             <thead>
               <tr>
                 <th style={{ width: "2rem" }}>#</th>
-                <th className="tl">Player</th>
-                {!filterClub && <th className="tl" style={{ minWidth: 0 }}>Club</th>}
+                <th className="tl">{t("Player")}</th>
+                {!filterClub && <th className="tl" style={{ minWidth: 0 }}>{t("Club")}</th>}
                 <th className="tpts" title="Goals (goals in last game)">G</th>
                 {cols.delta && <th title="Goals since previous update">+/-</th>}
                 {cols.mp && <th title="Matches played">MP</th>}
@@ -1362,6 +1498,7 @@ function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, p
 function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey, hideScorers }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
   const follow = useFollow();
+  const { t } = useLang();
   const isMine = id => !!followKey && follow.isFollowing(teamKey(followKey, id));
   const nm = idx => (teams[idx] && isMine(teams[idx].id) ? "★ " : "") + cleanTeamName(teams[idx].name);
 
@@ -1416,6 +1553,11 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
       && f.date.slice(0, 10) >= weekWindow.cur && f.date.slice(0, 10) < weekWindow.next
       && teams[f.homeIdx] && teams[f.awayIdx])
     .sort(byDate), [fixtures, teams, weekWindow]);
+  const preds = useMemo(() => {
+    const m = {};
+    nextMatches.forEach(f => { if (!(f.played && f.homeScore != null)) m[f.id] = predictMatch(f.homeIdx, f.awayIdx, teams, fixtures); });
+    return m;
+  }, [nextMatches, teams, fixtures]);
   const fmtShort = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? `${m[3]}/${m[2]}` : "—"; };
   const fmtMatchDate = fmtShort;
   const hasPlayed = fixtures.some(f => f.played && f.homeScore != null);
@@ -1583,7 +1725,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
           <thead>
             <tr>
               <th style={{ width: "2rem" }}>#</th>
-              <th className="tl">Team</th>
+              <th className="tl">{t("Team")}</th>
               <th title="Played">P</th>
               <th title="Won">W</th>
               <th title="Draw">D</th>
@@ -1592,7 +1734,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
               <th title="Goals Against">GA</th>
               <th className="tgd" title="Goal Difference">GD</th>
               <th className="tpts" title="Points">Pts</th>
-              <th title="Last 5 games (oldest → newest)">Form</th>
+              <th title="Last 5 games (oldest → newest)">{t("Form")}</th>
             </tr>
           </thead>
           <tbody>
@@ -1635,13 +1777,13 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
           </tbody>
         </table>
       </div>
-      <p className="note">Click a team name for match details{followKey ? " · ☆ follows a team (saved on this device)" : ""}</p>
+      <p className="note">{t("Click a team name for match details")}{followKey ? " · " + t("☆ follows a team (saved on this device)") : ""}</p>
       <div className="mini-box" style={{ marginTop: "1rem" }}>
         <div className="mini-ttl" style={{ color: "#22d3ee", display: "flex", justifyContent: "space-between" }}>
-          <span>🗓 Games last week</span>
+          <span>{t("🗓 Games last week")}</span>
           <span className="muted" style={{ fontWeight: 400, fontSize: ".7rem" }}>{fmtShort(weekWindow.prev)} – {fmtShort(weekWindow.prevEnd)}</span>
         </div>
-        {lastMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>No games last week.</div>}
+        {lastMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>{t("No games last week.")}</div>}
         {lastMatches.map((f, k) => (
           <div key={f.id || k} className="mini-row" style={{ gap: ".5rem" }}>
             <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{fmtMatchDate(f.date)}</span>
@@ -1655,10 +1797,10 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
       </div>
       <div className="mini-box" style={{ marginTop: "1rem" }}>
         <div className="mini-ttl" style={{ color: "#a78bfa", display: "flex", justifyContent: "space-between" }}>
-          <span>⏭ Games this week</span>
+          <span>{t("⏭ Games this week")}</span>
           <span className="muted" style={{ fontWeight: 400, fontSize: ".7rem" }}>{fmtShort(weekWindow.cur)} – {fmtShort(weekWindow.nextEnd)}</span>
         </div>
-        {nextMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>No games this week.</div>}
+        {nextMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>{t("No games this week.")}</div>}
         {nextMatches.map((f, k) => (
           <div key={f.id || k} className="mini-row" style={{ gap: ".5rem" }}>
             <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{fmtMatchDate(f.date)}</span>
@@ -1670,8 +1812,13 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     <span style={{ fontWeight: done && +f.homeScore > +f.awayScore ? 700 : 400 }}>{nm(f.homeIdx)}</span>
                     {done
                       ? <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
-                      : <span className="muted" style={{ margin: "0 .4rem" }}>vs</span>}
+                      : <span className="muted" style={{ margin: "0 .4rem" }}>{t("vs")}</span>}
                     <span style={{ fontWeight: done && +f.awayScore > +f.homeScore ? 700 : 400 }}>{nm(f.awayIdx)}</span>
+                    {!done && preds[f.id] && (
+                      <span className="muted" title={t("Goal model: home win / draw / away win chance, expected score")} style={{ marginLeft: ".6rem", fontFamily: "DM Mono,monospace", fontSize: ".66rem" }}>
+                        {preds[f.id].homeWin}% · {preds[f.id].draw}% · {preds[f.id].awayWin}% ({preds[f.id].eh}–{preds[f.id].ea})
+                      </span>
+                    )}
                   </>
                 );
               })()}
@@ -3123,6 +3270,7 @@ class ErrorBoundary extends React.Component {
 // First-visit / "add team" picker: search a club, tick which of its teams to follow.
 const PICKER_DISMISS_KEY = "leaguesim.pickerDismissed.v1";
 function ClubPicker({ data, follow, onClose }) {
+  const { t } = useLang();
   const [q, setQ] = useState("");
   const [club, setClub] = useState(null);
   const [picked, setPicked] = useState({});
@@ -3157,29 +3305,29 @@ function ClubPicker({ data, follow, onClose }) {
   return (
     <div className="mini-box" style={{ marginBottom: "1.25rem" }}>
       <div className="mini-ttl" style={{ color: "#fbbf24", display: "flex", justifyContent: "space-between", marginBottom: ".5rem" }}>
-        <span>{club ? club.name : "Which club do you follow?"}</span>
-        <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={club ? () => setClub(null) : dismiss}>{club ? "← Back" : "Skip"}</button>
+        <span>{club ? club.name : t("Which club do you follow?")}</span>
+        <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={club ? () => setClub(null) : dismiss}>{club ? t("← Back") : t("Skip")}</button>
       </div>
       {!club && (
         <>
           <label htmlFor="club-q" style={{ position: "absolute", left: "-9999px" }}>Search clubs</label>
-          <input id="club-q" value={q} onChange={e => setQ(e.target.value)} placeholder={"Search " + clubs.length + " clubs…"}
+          <input id="club-q" value={q} onChange={e => setQ(e.target.value)} placeholder={t("Search") + " " + clubs.length + " " + t("clubs") + "…"}
             style={{ width: "100%", boxSizing: "border-box", padding: ".55rem .7rem", borderRadius: "6px", border: "1px solid #2a2f3a", background: "#0f1218", color: "inherit", fontSize: ".9rem" }} />
           <div style={{ marginTop: ".5rem" }}>
             {shown.map(c => (
               <div key={c.name} className="mini-row" style={{ cursor: "pointer", padding: ".5rem 0" }} onClick={() => choose(c)}>
                 <span style={{ fontWeight: 600 }}>{c.name}</span>
-                <span className="muted" style={{ marginLeft: "auto", fontSize: ".72rem" }}>{c.teams.length} team{c.teams.length === 1 ? "" : "s"}</span>
+                <span className="muted" style={{ marginLeft: "auto", fontSize: ".72rem" }}>{c.teams.length} {c.teams.length === 1 ? t("team") : t("teams")}</span>
               </div>
             ))}
-            {shown.length === 0 && <div className="muted" style={{ fontSize: ".8rem", padding: ".5rem 0" }}>No club found.</div>}
-            {!q && <div className="muted" style={{ fontSize: ".72rem", marginTop: ".3rem" }}>Type to search all clubs.</div>}
+            {shown.length === 0 && <div className="muted" style={{ fontSize: ".8rem", padding: ".5rem 0" }}>{t("No club found.")}</div>}
+            {!q && <div className="muted" style={{ fontSize: ".72rem", marginTop: ".3rem" }}>{t("Type to search all clubs.")}</div>}
           </div>
         </>
       )}
       {club && (
         <>
-          <div className="muted" style={{ fontSize: ".78rem", marginBottom: ".4rem" }}>Choose the teams to follow. You can change this any time with ☆ in a table.</div>
+          <div className="muted" style={{ fontSize: ".78rem", marginBottom: ".4rem" }}>{t("Choose the teams to follow. You can change this any time with ☆ in a table.")}</div>
           {club.teams.map(t => (
             <label key={t.key} className="mini-row" style={{ gap: ".6rem", padding: ".5rem 0", cursor: "pointer" }}>
               <input type="checkbox" checked={!!picked[t.key]} onChange={() => setPicked(p => ({ ...p, [t.key]: !p[t.key] }))} />
@@ -3187,7 +3335,7 @@ function ClubPicker({ data, follow, onClose }) {
               <span className="muted" style={{ marginLeft: "auto", fontSize: ".72rem" }}>{t.league}</span>
             </label>
           ))}
-          <button className="btn" style={{ marginTop: ".6rem" }} onClick={save} disabled={!club.teams.some(t => picked[t.key])}>Follow selected</button>
+          <button className="btn" style={{ marginTop: ".6rem" }} onClick={save} disabled={!club.teams.some(t => picked[t.key])}>{t("Follow selected")}</button>
         </>
       )}
     </div>
@@ -3197,6 +3345,7 @@ function ClubPicker({ data, follow, onClose }) {
 // The top-level Belgian screen — federation picker with division sub-groups
 function BelgianScreen({ onBack }) {
   const { data, error } = useVhvData();
+  const { lang, t } = useLang();
   const [fed, setFed]       = useState(null);
   const [league, setLeague] = useState(null);
 
@@ -3219,6 +3368,37 @@ function BelgianScreen({ onBack }) {
       return snap ? { key, lg, snap } : null;
     }).filter(Boolean).sort((a, b) => (b.key === follow.main) - (a.key === follow.main));
   }, [data, follow.ids, follow.main]);
+  const weekGames = useMemo(() => {
+    if (!data) return [];
+    const { cur, next } = weekBounds();
+    const byLeague = new Map();
+    for (const f of Object.values(data.federations || {})) {
+      for (const lg of Object.values(f || {})) byLeague.set(String(lg.serieId || lg.id), lg);
+    }
+    const mine = {};
+    follow.ids.forEach(key => {
+      const cut = key.indexOf(":");
+      (mine[key.slice(0, cut)] = mine[key.slice(0, cut)] || new Set()).add(key.slice(cut + 1));
+    });
+    const out = [];
+    Object.entries(mine).forEach(([lid, ids]) => {
+      const lg = byLeague.get(lid);
+      if (!lg) return;
+      const teams = lg.teams || [], fixtures = lg.fixtures || [];
+      fixtures.forEach(f => {
+        const h = teams[f.homeIdx], a = teams[f.awayIdx];
+        if (!h || !a || !f.date) return;
+        const d = f.date.slice(0, 10);
+        const hm = ids.has(String(h.id)), am = ids.has(String(a.id));
+        if (d < cur || d >= next || !(hm || am)) return;
+        const done = f.played && f.homeScore != null && f.awayScore != null;
+        let pred = null;
+        try { pred = done ? null : predictMatch(f.homeIdx, f.awayIdx, teams, fixtures); } catch { pred = null; }
+        out.push({ id: lid + ":" + f.id, date: f.date, home: cleanTeamName(h.name), away: cleanTeamName(a.name), hm, am, done, hs: f.homeScore, as: f.awayScore, pred, lg });
+      });
+    });
+    return out.sort((x, y) => (x.date < y.date ? -1 : x.date > y.date ? 1 : 0));
+  }, [data, follow.ids]);
 
   if (league) return <ErrorBoundary onBack={() => setLeague(null)}><BelgianLeagueView league={league} onBack={() => setLeague(null)} /></ErrorBoundary>;
 
@@ -3227,19 +3407,19 @@ function BelgianScreen({ onBack }) {
     <div className="panel">
       <div className="ph">
         <div>
-          <h2>🇧🇪 Belgian Handball</h2>
+          <h2>🇧🇪 {t("Belgian Handball")}</h2>
           <p style={{ color: "#5a6070", fontSize: ".82rem" }}>
-            Live competition data
+            {t("Live competition data")}
             {data?.updatedAt && (
-              <span> · updated {new Date(data.updatedAt).toLocaleString("nl-BE", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>
+              <span> · {t("updated")} {new Date(data.updatedAt).toLocaleString(LANG_LOCALE[lang], { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span>
             )}
           </p>
         </div>
-        <button className="btn btn-ghost" style={{ marginLeft: "auto" }} onClick={onBack}>← Back</button>
+        <span style={{ marginLeft: "auto", display: "inline-flex", gap: ".6rem", alignItems: "center" }}><LangSwitch /><button className="btn btn-ghost" onClick={onBack}>{t("← Back")}</button></span>
       </div>
 
-      {!data && !error && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading data…</div>}
-      {error && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load data.</div>}
+      {!data && !error && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>{t("Loading data…")}</div>}
+      {error && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>{t("Could not load data.")}</div>}
 
       {data && (
         <>
@@ -3250,20 +3430,20 @@ function BelgianScreen({ onBack }) {
           {/* My teams */}
           <div className="mini-box" style={{ marginBottom: "1.25rem" }}>
             <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".5rem", display: "flex", justifyContent: "space-between" }}>
-              <span>★ My teams</span>
-              <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={() => { setPickerOpen(true); setPickerForced(true); }}>＋ Add club</button>
+              <span>{t("★ My teams")}</span>
+              <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={() => { setPickerOpen(true); setPickerForced(true); }}>{t("＋ Add club")}</button>
             </div>
             {myTeams.length === 0 && (
-              <div className="muted" style={{ fontSize: ".8rem" }}>Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.</div>
+              <div className="muted" style={{ fontSize: ".8rem" }}>{t("Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.")}</div>
             )}
             {myTeams.map(({ key, lg, snap }) => (
               <div key={key} className="mini-row" style={{ gap: ".6rem", flexWrap: "wrap", cursor: "pointer", padding: ".45rem 0" }} onClick={() => setLeague(lg)}>
                 <span style={{ minWidth: "9rem", fontWeight: 700 }}>
-                  {key === follow.main && <span title="Main team" style={{ color: "#fbbf24", marginRight: ".3rem" }}>★</span>}
+                  {key === follow.main && <span title={t("Main team")} style={{ color: "#fbbf24", marginRight: ".3rem" }}>★</span>}
                   {snap.name}
                   <span className="muted" style={{ display: "block", fontWeight: 400, fontSize: ".68rem" }}>{lg.name}</span>
                 </span>
-                <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".8rem" }}>{snap.pos}/{snap.of} · {snap.pts} pts</span>
+                <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".8rem" }}>{snap.pos}/{snap.of} · {snap.pts} {t("pts")}</span>
                 <span style={{ whiteSpace: "nowrap" }}>
                   {snap.form.map((res, k) => (
                     <span key={k} style={{ display: "inline-block", width: "1.1rem", textAlign: "center", fontWeight: 700, fontSize: ".78rem",
@@ -3271,14 +3451,30 @@ function BelgianScreen({ onBack }) {
                   ))}
                 </span>
                 <span className="muted" style={{ fontSize: ".76rem", flex: 1 }}>
-                  {snap.next ? "Next: " + (snap.next.date ? snap.next.date.slice(8, 10) + "/" + snap.next.date.slice(5, 7) + " " : "") + (snap.next.home ? "vs " : "at ") + snap.next.opp : "No upcoming game"}
+                  {snap.next ? t("Next") + ": " + (snap.next.date ? snap.next.date.slice(8, 10) + "/" + snap.next.date.slice(5, 7) + " " : "") + (snap.next.home ? t("vs") + " " : t("at") + " ") + snap.next.opp : t("No upcoming game")}
                 </span>
                 {key !== follow.main && (
                   <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }}
-                    onClick={e => { e.stopPropagation(); follow.setMain(key); }}>Make main</button>
+                    onClick={e => { e.stopPropagation(); follow.setMain(key); }}>{t("Make main")}</button>
                 )}
               </div>
             ))}
+            {weekGames.length > 0 && (
+              <div style={{ marginTop: ".7rem", borderTop: "1px solid #2a2f3a", paddingTop: ".5rem" }}>
+                <div className="muted" style={{ fontSize: ".7rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".06em", marginBottom: ".3rem" }}>{t("This week · all my teams")}</div>
+                {weekGames.map(g => (
+                  <div key={g.id} className="mini-row" style={{ gap: ".5rem", flexWrap: "wrap", cursor: "pointer" }} onClick={() => setLeague(g.lg)}>
+                    <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{g.date.slice(8, 10)}/{g.date.slice(5, 7)}</span>
+                    <span style={{ fontSize: ".8rem" }}>
+                      <span style={{ fontWeight: g.hm ? 700 : 400 }}>{g.hm ? "★ " : ""}{g.home}</span>
+                      {g.done ? <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{g.hs}–{g.as}</span> : <span className="muted" style={{ margin: "0 .4rem" }}>{t("vs")}</span>}
+                      <span style={{ fontWeight: g.am ? 700 : 400 }}>{g.am ? "★ " : ""}{g.away}</span>
+                    </span>
+                    {g.pred && <span className="muted" title={t("Goal model: home win / draw / away win chance, expected score")} style={{ fontFamily: "DM Mono,monospace", fontSize: ".66rem" }}>{g.pred.homeWin}% · {g.pred.draw}% · {g.pred.awayWin}% ({g.pred.eh}–{g.pred.ea})</span>}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Federation tabs */}
@@ -3305,7 +3501,7 @@ function BelgianScreen({ onBack }) {
             const allLeagues = Object.values(data.federations[fed] || {});
             const meta = FED_META[fed];
             if (allLeagues.length === 0) return (
-              <div className="muted" style={{ padding: "1.5rem", textAlign: "center" }}>No leagues available yet for {meta.label}.</div>
+              <div className="muted" style={{ padding: "1.5rem", textAlign: "center" }}>{t("No leagues available yet for")} {meta.label}.</div>
             );
             // Group by division, preserving insertion order
             const divisionMap = new Map();
@@ -3330,7 +3526,7 @@ function BelgianScreen({ onBack }) {
                             </div>
                             <div className="card-name">{lg.name}</div>
                             <div className="card-meta">
-                              {(lg.teams || []).length} teams · {played} played · {pending} pending
+                              {(lg.teams || []).length} {t("teams")} · {played} {t("played")} · {pending} {t("pending")}
                               {lg.live && (
                                 <span style={{ display: "inline-block", marginLeft: ".4rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
                               )}
@@ -3346,10 +3542,10 @@ function BelgianScreen({ onBack }) {
           })()}
 
           {!fed && feds.length === 0 && (
-            <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>No competition data fetched yet — run the fetch-vhv workflow first.</div>
+            <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>{t("No competition data fetched yet — run the fetch-vhv workflow first.")}</div>
           )}
           {!fed && feds.length > 0 && (
-            <div className="muted" style={{ padding: "1rem", textAlign: "center" }}>Select a federation above to browse leagues.</div>
+            <div className="muted" style={{ padding: "1rem", textAlign: "center" }}>{t("Select a federation above to browse leagues.")}</div>
           )}
         </>
       )}
@@ -3360,6 +3556,7 @@ function BelgianScreen({ onBack }) {
 // Players tab: top scorers with a goal-type filter (all goals / open play only /
 // 7m only). Open-play goals = goals minus 7m goals scored.
 function PlayersTab({ scorers, teams, aliases }) {
+  const { t } = useLang();
   const [mode, setMode] = useState("all");
   const list = Array.isArray(scorers) ? scorers : [];
   const hasSeven = list.some(s => s.sevenMScored > 0 || s.sevenMMissed > 0);
@@ -3380,13 +3577,13 @@ function PlayersTab({ scorers, teams, aliases }) {
       {hasSeven && (
         <div style={{ display: "flex", gap: ".4rem", flexWrap: "wrap" }}>
           {chips.map(([k, label]) => (
-            <button key={k} className={"btn" + (mode === k ? "" : " btn-ghost")} style={{ fontSize: ".78rem", padding: ".3rem .8rem" }} onClick={() => setMode(k)}>{label}</button>
+            <button key={k} className={"btn" + (mode === k ? "" : " btn-ghost")} style={{ fontSize: ".78rem", padding: ".3rem .8rem" }} onClick={() => setMode(k)}>{t(label)}</button>
           ))}
         </div>
       )}
       <LeagueScorers teams={teams} aliases={aliases} archiveScorers={view} phase="regular"
         title={mode === "open" ? "Goals excluding 7m" : mode === "seven" ? "7m goals" : "Top Scorers"} maxRows={15} />
-      {!hasSeven && <p className="note">7m details aren't published for this league, so only total goals are shown.</p>}
+      {!hasSeven && <p className="note">{t("7m details aren't published for this league, so only total goals are shown.")}</p>}
     </div>
   );
 }
@@ -3394,6 +3591,7 @@ function PlayersTab({ scorers, teams, aliases }) {
 // Cards & suspensions: per-team totals and the most-penalised players, built
 // from the scorer stats (yellow cards, 2-minute suspensions, blue and red cards).
 function CardsTab({ scorers }) {
+  const { t } = useLang();
   const list = Array.isArray(scorers) ? scorers : [];
   const has = list.some(s => s.yellowCards > 0 || s.twoMinSuspensions > 0 || s.blueCards > 0 || s.redCards > 0);
   const num = v => (v > 0 ? v : 0);
@@ -3411,7 +3609,7 @@ function CardsTab({ scorers }) {
     .filter(s => s.yellowCards > 0 || s.twoMinSuspensions > 0 || s.blueCards > 0 || s.redCards > 0)
     .sort((a, b) => num(b.twoMinSuspensions) - num(a.twoMinSuspensions) || num(b.yellowCards) - num(a.yellowCards) || num(b.redCards) - num(a.redCards))
     .slice(0, 15), [list]);
-  if (!has) return <div className="muted" style={{ padding: "1.5rem", textAlign: "center", fontSize: ".85rem" }}>No cards or suspensions published for this league (lower divisions usually don't have this data).</div>;
+  if (!has) return <div className="muted" style={{ padding: "1.5rem", textAlign: "center", fontSize: ".85rem" }}>{t("No cards or suspensions published for this league (lower divisions usually don't have this data).")}</div>;
   const head = (
     <>
       <th title="Yellow cards">🟨</th><th title="2-minute suspensions">2'</th><th title="Blue cards">🟦</th><th title="Red cards">🟥</th>
@@ -3420,10 +3618,10 @@ function CardsTab({ scorers }) {
   return (
     <div>
       <div className="mini-box">
-        <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".6rem" }}>Teams</div>
+        <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".6rem" }}>{t("Teams")}</div>
         <div className="tbl-wrap">
           <table className="ltbl">
-            <thead><tr><th style={{ width: "2rem" }}>#</th><th className="tl">Team</th>{head}</tr></thead>
+            <thead><tr><th style={{ width: "2rem" }}>#</th><th className="tl">{t("Team")}</th>{head}</tr></thead>
             <tbody>
               {teamRows.map((r, i) => (
                 <tr key={r.club}>
@@ -3437,10 +3635,10 @@ function CardsTab({ scorers }) {
         </div>
       </div>
       <div className="mini-box" style={{ marginTop: "1rem" }}>
-        <div className="mini-ttl" style={{ color: "#f87171", marginBottom: ".6rem" }}>Players with most suspensions</div>
+        <div className="mini-ttl" style={{ color: "#f87171", marginBottom: ".6rem" }}>{t("Players with most suspensions")}</div>
         <div className="tbl-wrap">
           <table className="ltbl">
-            <thead><tr><th style={{ width: "2rem" }}>#</th><th className="tl">Player</th><th className="tl">Club</th>{head}</tr></thead>
+            <thead><tr><th style={{ width: "2rem" }}>#</th><th className="tl">{t("Player")}</th><th className="tl">{t("Club")}</th>{head}</tr></thead>
             <tbody>
               {players.map((s, i) => (
                 <tr key={i}>
@@ -3455,7 +3653,7 @@ function CardsTab({ scorers }) {
           </table>
         </div>
       </div>
-      <p className="note">2' = two-minute suspension · a blue card is a red card with a written report</p>
+      <p className="note">{t("2' = two-minute suspension · a blue card is a red card with a written report")}</p>
     </div>
   );
 }
@@ -3463,6 +3661,7 @@ function CardsTab({ scorers }) {
 // Read-only league view for Belgian Handball data
 function BelgianLeagueView({ league, onBack }) {
   const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [], travelRanking = [] } = league;
+  const { t: tr } = useLang();
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
@@ -3521,15 +3720,15 @@ function BelgianLeagueView({ league, onBack }) {
             )}
           </div>
         </div>
-        <button className="btn btn-ghost" onClick={onBack}>← All Leagues</button>
+        <span style={{ display: "inline-flex", gap: ".6rem", alignItems: "center" }}><LangSwitch /><button className="btn btn-ghost" onClick={onBack}>{tr("← All Leagues")}</button></span>
       </div>
 
       <div className="panel">
         <div className="tabs" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
-          <button className="tab" onClick={onBack} title="Back to My teams and all leagues">⌂ Home</button>
-          {["table", "scores", "players", "cards", "monte", "settings"].map(t => (
-            <button key={t} className={"tab" + (tab === t ? " on" : "")} onClick={() => setTab(t)}>
-              {t === "table" ? "Table" : t === "scores" ? "Games" + (pending.length ? " (" + pending.length + ")" : "") : t === "players" ? "Players" : t === "cards" ? "Cards & suspensions" : t === "monte" ? "Simulator" : "Sim settings"}
+          <button className="tab" onClick={onBack} title={tr("Back to My teams and all leagues")}>{tr("⌂ Home")}</button>
+          {["table", "scores", "players", "cards", "monte", "settings"].map(tabId => (
+            <button key={tabId} className={"tab" + (tab === tabId ? " on" : "")} onClick={() => setTab(tabId)}>
+              {tr(tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : tabId === "cards" ? "Cards & suspensions" : tabId === "monte" ? "Simulator" : "Sim settings")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
             </button>
           ))}
         </div>
