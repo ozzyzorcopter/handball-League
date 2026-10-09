@@ -1,0 +1,28 @@
+name: Probe Clubee (manual)
+
+# One-off diagnostic: checks whether Clubee serves JSON (Next.js data / API)
+# that could replace HTML scraping, and saves real page samples as an artifact.
+on:
+  workflow_dispatch:
+    inputs:
+      league:
+        description: Clubee league id to probe
+        default: "19333"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Probe
+        env:
+          PROBE_LEAGUE: ${{ inputs.league }}
+        run: node .github/scripts/probe-clubee.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: clubee-probe
+          path: probe-output/

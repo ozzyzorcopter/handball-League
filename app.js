@@ -1710,7 +1710,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos">{MEDALS[i]}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
-                      <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                      <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
                     </div>
                   ))}
                 </div>
@@ -1721,7 +1721,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
-                        <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                        <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
                       </div>
                     ))}
                   </div>
@@ -1742,7 +1742,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                     <div key={r.id} className="mini-row">
                       <span className="mini-pos">{MEDALS[i]}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
-                      <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                      <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
                     </div>
                   ))}
                 </div>
@@ -1753,7 +1753,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
-                        <span className="mini-val" style={{ color: "#38bdf8" }}>{r.km} km</span>
+                        <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
                       </div>
                     ))}
                   </div>

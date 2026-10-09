@@ -921,6 +921,17 @@ async function drivingDistanceKm(a, b) {
   });
 }
 
+// Straight-line (great-circle) distance in km. Used as an estimate when the
+// routing service is unavailable; roads are typically ~25-30% longer than the
+// straight line, so callers scale it by ROAD_FACTOR.
+const ROAD_FACTOR = 1.3;
+function haversineKm(a, b) {
+  const R = 6371, rad = d => d * Math.PI / 180;
+  const dLat = rad(b.lat - a.lat), dLon = rad(b.lon - a.lon);
+  const x = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(x));
+}
+
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 // Leagues are processed with CONCURRENCY parallel workers (see main()), but
@@ -1139,24 +1150,33 @@ async function main() {
       }
 
       const travelKm = new Array(teams.length).fill(0);
+      const travelEstimated = new Array(teams.length).fill(0); // legs using a straight-line estimate
+      const travelMissing   = new Array(teams.length).fill(0); // legs skipped: a venue has no coordinates
       const playedAway = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
       for (const f of playedAway) {
         const home = teams[f.homeIdx], away = teams[f.awayIdx];
         if (!home || !away) continue;
         const hv = venueCache.venues[venueKey(home.name)];
         const av = venueCache.venues[venueKey(away.name)];
-        if (!hv?.lat || !av?.lat) continue; // venue unresolved for one side — skip this leg
+        if (!hv?.lat || !av?.lat) { travelMissing[f.awayIdx]++; continue; } // venue unresolved for one side
         const pairKey = [venueKey(home.name), venueKey(away.name)].sort().join("|");
         if (venueCache.distances[pairKey] == null) {
           const km = await drivingDistanceKm({ lat: hv.lat, lon: hv.lon }, { lat: av.lat, lon: av.lon });
-          console.log(`[DBG travel] ${pairKey} -> ${km != null ? km.toFixed(1) + "km" : "FAILED"}`);
+          console.log(`[DBG travel] ${pairKey} -> ${km != null ? km.toFixed(1) + "km" : "FAILED (using straight-line estimate)"}`);
           if (km != null) venueCache.distances[pairKey] = km;
         }
-        const dist = venueCache.distances[pairKey];
-        if (dist != null) travelKm[f.awayIdx] += dist;
+        let dist = venueCache.distances[pairKey];
+        if (dist == null) {
+          // Routing failed: estimate instead of counting 0 km. Not cached, so a later run retries real routing.
+          dist = haversineKm(hv, av) * ROAD_FACTOR;
+          travelEstimated[f.awayIdx]++;
+        }
+        travelKm[f.awayIdx] += dist;
       }
       const travelRanking = teams
-        .map((t, i) => ({ id: t.id, name: t.name, km: Math.round(travelKm[i]) }))
+        .map((t, i) => ({ id: t.id, name: t.name, km: Math.round(travelKm[i]),
+          ...(travelEstimated[i] ? { estimatedLegs: travelEstimated[i] } : {}),
+          ...(travelMissing[i] ? { missingLegs: travelMissing[i] } : {}) }))
         .sort((a, b) => b.km - a.km || a.name.localeCompare(b.name));
 
       const played  = fixtures.filter(f => f.played).length;
