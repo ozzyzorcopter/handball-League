@@ -1,0 +1,72 @@
+name: Fetch VHV Data
+
+on:
+  # GitHub explicitly documents that scheduled workflows are most likely to
+  # be delayed or dropped right at the top (":00") and half (":30") of every
+  # hour, since that's when the shared scheduler is busiest across every
+  # repo on the platform — not just this one. We were scheduling both crons
+  # exactly on those marks, which likely explains runs going missing
+  # entirely rather than just running late. Offsetting to :17 avoids that
+  # rush; the actual minute doesn't matter otherwise.
+  schedule:
+    - cron: "17 12-23 * * 6,0"      # hourly Sat+Sun, off-peak minute
+    - cron: "17 7 * * 1-5"          # once daily weekdays, off-peak minute
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+# If a run is still going when the next half-hourly trigger fires (the
+# venue/boxscore work can make a run take a while), cancel the stale one
+# instead of letting two runs overlap and fight over the same git push.
+concurrency:
+  group: fetch-vhv
+  cancel-in-progress: true
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Cache Playwright browser binary
+        uses: actions/cache@v4
+        id: pw-cache
+        with:
+          path: ~/.cache/ms-playwright
+          # Keyed on the lockfile, so the cached Chromium always matches the
+          # playwright-core version we actually run. (The old key was a fixed
+          # string, so a cache written by a mismatched install kept being
+          # restored and the browser was "missing".)
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      # Installs exactly the versions in package-lock.json (production deps
+      # only: playwright-core).
+      - name: Install dependencies
+        run: npm ci --omit=dev
+
+      # IMPORTANT: use the playwright-core CLI that was just installed. The old
+      # `npx playwright install` ran with only playwright-core present, so npx
+      # downloaded the latest *playwright* package, whose Chromium revision
+      # differs from the one playwright-core expects: "Executable doesn't exist".
+      - name: Install Chromium (cached) or Chromium + OS deps (cold)
+        run: |
+          if [ "${{ steps.pw-cache.outputs.cache-hit }}" = "true" ]; then
+            node node_modules/playwright-core/cli.js install chromium
+          else
+            node node_modules/playwright-core/cli.js install chromium --with-deps
+          fi
+
+      - name: Fetch VHV data
+        run: node .github/scripts/fetch-vhv.js
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add vhv-data.json boxscore-cache.json venue-cache.json
+          git diff --cached --quiet && echo "No changes" || (git commit -m "chore: update VHV data [$(date -u '+%Y-%m-%d %H:%M UTC')]" && git push)
