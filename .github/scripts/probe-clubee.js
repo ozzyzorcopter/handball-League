@@ -67,6 +67,25 @@ function describe(value, depth = 0, maxDepth = 3) {
     const states = [...r.text.matchAll(/window\.(__[A-Z_]+__|__\w+)\s*=/g)].map(m => m[1]);
     if (states.length) log(`window state globals: ${[...new Set(states)].join(", ")}`);
 
+
+    // 4. Next.js App Router ("flight") payload: data is streamed inside the HTML as
+    //    self.__next_f.push([1,"..."]) chunks. This is what has structured data + IDs.
+    const chunks = [...r.text.matchAll(/self\.__next_f\.push\(\[1,(".*?")\]\)<\/script>/gs)];
+    let flight = "";
+    for (const c of chunks) { try { flight += JSON.parse(c[1]); } catch { /* skip malformed chunk */ } }
+    log(`flight chunks: ${chunks.length} · decoded ${flight.length} chars`);
+    if (flight) {
+      fs.writeFileSync(path.join(OUT, `${name}.flight.txt`), flight);
+      log(`flight start: ${shorten(flight, 500)}`);
+      const keywords = name === "standings" ? ["\"points\"", "\"rank", "teamId", "\"wins\""]
+        : name === "games" ? ["homeTeam", "\"score", "gameId", "startTime", "\"date"]
+        : ["goals", "playerId", "\"player"];
+      for (const k of keywords) {
+        const i = flight.indexOf(k);
+        log(`  [${k}] ${i < 0 ? "not found" : "@" + i + ": " + shorten(flight.slice(Math.max(0, i - 250), i + 700).replace(/\s+/g, " "), 950)}`);
+      }
+    }
+
     // 3. API-looking URLs referenced anywhere in the HTML
     const api = [...new Set([...r.text.matchAll(/https?:\/\/[^"'\s<>\\)]*(?:api|graphql|json|\/data\/)[^"'\s<>\\)]*/gi)].map(m => m[0]))];
     log(`API-looking URLs in page (${api.length}):`);
