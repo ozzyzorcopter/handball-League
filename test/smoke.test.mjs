@@ -88,19 +88,31 @@ test("follow, language, league tabs and predictions", async () => {
   const tabs = () => [...w.document.querySelectorAll(".tab")].map((x) => x.textContent);
   assert.deepEqual(tabs().slice(0, 4), ["⌂ Start", "Klassement", "Wedstrijden (1)", "Spelers"]);
   await click(w, act, byText(w, "button", "EN"));
-  assert.deepEqual(tabs(), ["⌂ Home", "Table", "Games (1)", "Players", "Cards & suspensions", "Simulator", "Sim settings"]);
+  assert.deepEqual(tabs(), ["⌂ Home", "Table", "Games (1)", "Players", "Simulator", "Sim settings"]);
 
   // Star to follow another team.
   await click(w, act, w.document.querySelector("button[aria-label='Follow Schoten']"));
   assert.deepEqual(JSON.parse(w.localStorage.getItem("leaguesim.follow.v1")).ids, ["101:1", "101:2"]);
 
-  // Players tab filter, Cards tab, scorers moved out of the Table tab.
+  // One Players tab: a single table, narrowed by chips (7m, cards & suspensions) and sortable.
   await click(w, act, byText(w, ".tab", "Players"));
-  assert.match(text(w), /Top Scorers/);
+  assert.equal(w.document.querySelectorAll(".tab").length, 6, "no separate cards tab any more");
+  const rowsText = () => [...w.document.querySelectorAll(".ltbl tbody tr")].map((r) => r.textContent);
+  assert.equal(rowsText().length, 2);
+  assert.match(w.document.querySelector(".ltbl thead").textContent, /G.*7m.*🟨.*2'.*🟥/s, "one table has goals, 7m and card columns");
   await click(w, act, byText(w, "button", "Excl. 7m"));
   assert.match(text(w), /Goals excluding 7m/);
-  await click(w, act, byText(w, ".tab", "Cards & suspensions"));
-  assert.match(text(w), /Players with most suspensions/);
+  await click(w, act, byText(w, "button", "Cards & suspensions"));
+  assert.ok(rowsText().some((r) => r.startsWith("1A")), "most-suspended player first");
+  assert.match(text(w), /Teams/);
+  // search narrows the same table
+  const input = w.document.querySelector("input[aria-label]");
+  await act(async () => {
+    const setter = Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype, "value").set;
+    setter.call(input, "zzz");
+    input.dispatchEvent(new w.Event("input", { bubbles: true }));
+  });
+  assert.match(text(w), /Geen spelers|No players match/);
   await click(w, act, byText(w, ".tab", "Table"));
   assert.doesNotMatch(text(w), /Top Scorers/);
 

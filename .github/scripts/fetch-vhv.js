@@ -319,7 +319,21 @@ function parseStandingsHtml(html) {
 //   <h3>               → " - : - " (scheduled) or "26 : 25" (played)
 //   <p>                → "22.08.2026" (date)
 //   teamInnerParapraphSecond div → <strong>Away Team (Division)</strong>
-function parseGamesHtml(html, ranking) {
+// Kick-off times. The games page embeds structured game data (Next.js flight
+// payload) with "id" and "start_date" next to each other, e.g.
+//   "id":2942786,"start_date":"2026-08-29T20:15:00+00:00"
+// Clubee labels local kick-off times with +00:00, so the clock time is used
+// as is (no timezone conversion). In raw HTML the quotes are backslash-escaped.
+function extractGameTimes(html) {
+  const times = new Map();
+  if (!html) return times;
+  const re = /\\?"id\\?":(\d+),\\?"start_date\\?":\\?"(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})/g;
+  let m;
+  while ((m = re.exec(html)) !== null) times.set(m[1], { date: m[2], time: m[3] });
+  return times;
+}
+
+function parseGamesHtml(html, ranking, times) {
   const teamNames = ranking.map(r => r.name);
   const nameIdx   = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
 
@@ -404,6 +418,7 @@ function parseGamesHtml(html, ranking) {
       overrideOn: false, ovHW: "", ovD: "", ovAW: "",
       played, homeScore, awayScore,
       week: 0, date,
+      ...(times && times.get(gameId) && times.get(gameId).time !== "00:00" ? { time: times.get(gameId).time } : {}),
     });
   }
 
@@ -1085,7 +1100,15 @@ async function main() {
 
       // (debug removed)
 
-      const { fixtures } = parseGamesHtml(gamesHtml, ranking);
+      // Kick-off times: from the rendered page if present, else a plain fetch of the same URL.
+      let times = extractGameTimes(gamesHtml);
+      if (times.size === 0) {
+        try {
+          const res = await fetch(cfg.gamesUrl, { headers: { "User-Agent": "Mozilla/5.0 (compatible; LeagueSim/1.0)" } });
+          if (res.ok) times = extractGameTimes(await res.text());
+        } catch { /* times are optional */ }
+      }
+      const { fixtures } = parseGamesHtml(gamesHtml, ranking, times);
 
       // Scorer pages and boxscores only change when a game was played, so skip
       // them when the played count is the same as last time.
@@ -1319,7 +1342,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { LEAGUES, refreshReason };
+module.exports = { LEAGUES, refreshReason, extractGameTimes };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }

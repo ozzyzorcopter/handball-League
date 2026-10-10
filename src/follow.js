@@ -64,7 +64,7 @@ export function teamSnapshot(league, teamId) {
   if (nextFx) {
     const home = nextFx.homeIdx === idx;
     const opp = teams[home ? nextFx.awayIdx : nextFx.homeIdx];
-    next = { date: nextFx.date || null, home, opp: opp ? cleanTeamName(opp.name) : "?" };
+    next = { date: nextFx.date || null, time: nextFx.time || null, home, opp: opp ? cleanTeamName(opp.name) : "?" };
   }
   return { name: cleanTeamName(rows[pos].name), pos: pos + 1, of: rows.length, pts: rows[pos].totalPts, form, next };
 }

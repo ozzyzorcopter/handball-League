@@ -23,3 +23,13 @@ test("quiet league with fresh data -> skipped", () => {
 test("stale data -> daily refresh", () => {
   assert.equal(refreshReason(mk([{ date: "2026-10-17T20:00:00", played: false }], "2026-10-09T01:00:00Z"), NOW), "daily refresh");
 });
+
+const { extractGameTimes } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
+test("kick-off times are read from raw (escaped) and plain flight JSON", () => {
+  const raw = String.raw`\"completed\":true,\"id\":2942786,\"start_date\":\"2026-08-29T20:15:00+00:00\",\"information\":\"0\"`;
+  const plain = '"id":3009544,"start_date":"2026-10-10T18:30:00+00:00","x":1';
+  const t = extractGameTimes(raw + " " + plain);
+  assert.deepEqual(t.get("2942786"), { date: "2026-08-29", time: "20:15" });
+  assert.equal(t.get("3009544").time, "18:30");
+  assert.equal(extractGameTimes("").size, 0);
+});
