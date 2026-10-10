@@ -2987,6 +2987,7 @@ function BelgianScreen({ onBack }) {
                       <span style={{ fontWeight: g.hm ? 700 : 400 }}>{g.hm ? "★ " : ""}{g.home}</span>
                       {g.done ? <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{g.hs}–{g.as}</span> : <span className="muted" style={{ margin: "0 .4rem" }}>{t("vs")}</span>}
                       <span style={{ fontWeight: g.am ? 700 : 400 }}>{g.am ? "★ " : ""}{g.away}</span>
+                      <span className="muted" style={{ display: "block", fontSize: ".66rem" }}>{g.lg.name}</span>
                     </span>
                     {g.pred && <span className="muted" title={t("Goal model: home win / draw / away win chance, expected score")} style={{ fontFamily: "DM Mono,monospace", fontSize: ".66rem" }}>{g.pred.homeWin}% · {g.pred.draw}% · {g.pred.awayWin}% ({g.pred.eh}–{g.pred.ea})</span>}
                   </div>

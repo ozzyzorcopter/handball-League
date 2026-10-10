@@ -973,6 +973,35 @@ const inFlightVenueResolutions = new Map(); // venueKey -> Promise
 // gradually instead of every run paying for the whole thing every time.
 let venueResolutionBudget = 20;
 
+// ── INCREMENTAL UPDATES ─────────────────────────────────────────────────────────
+// Most hourly runs have nothing new for most leagues. A league is only
+// re-fetched when it could have changed:
+//   - no previous data, or FORCE_FULL=1
+//   - it has a game dated today or yesterday (live, or the result just landed)
+//   - it has an unplayed game dated in the past (result still missing)
+//   - its data is older than FULL_REFRESH_HOURS (daily safety net)
+// For a refreshed league, the slow parts (top-scorer pages and boxscores) are
+// skipped when the number of played games hasn't changed since last time.
+const FORCE_FULL = process.env.FORCE_FULL === "1" || process.env.FORCE_FULL === "true";
+const FULL_REFRESH_HOURS = 20;
+function brusselsDate(d = new Date()) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+}
+function refreshReason(prev, now = new Date()) {
+  if (FORCE_FULL) return "forced";
+  if (!prev || !Array.isArray(prev.fixtures) || !prev.fixtures.length) return "no previous data";
+  if (!prev.updatedAt || now - new Date(prev.updatedAt) > FULL_REFRESH_HOURS * 3600e3) return "daily refresh";
+  const today = brusselsDate(now);
+  const yesterday = brusselsDate(new Date(now.getTime() - 86400e3));
+  for (const f of prev.fixtures) {
+    const d = f.date && f.date.slice(0, 10);
+    if (!d) continue;
+    if (d === today || d === yesterday) return "game today/yesterday";
+    if (!f.played && d < today) return "result pending";
+  }
+  return null;
+}
+
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
   log(`Starting at ${new Date().toUTCString()}`);
@@ -980,6 +1009,13 @@ async function main() {
 
   const fresh = { updatedAt: null, federations: {} };
   const results = [];
+
+  // Previous run's output, used to skip leagues that can't have changed.
+  const prevLeagues = new Map();
+  try {
+    const prevData = JSON.parse(fs.readFileSync(vhvDataPath, "utf8"));
+    for (const fed of Object.values(prevData.federations || {})) for (const lg of Object.values(fed)) prevLeagues.set(String(lg.serieId), lg);
+  } catch { /* first run */ }
 
   // Boxscore cache: keyed by gameId, persisted to disk and committed
   // alongside vhv-data.json so repeat runs only fetch NEWLY played games
@@ -1030,9 +1066,15 @@ async function main() {
 
   // Process one league — each call gets its own page from the shared context
   async function processLeague(cfg) {
+    const prev = prevLeagues.get(String(cfg.id));
+    const reason = refreshReason(prev);
+    if (!reason) {
+      log(`\n  ${cfg.name} (${cfg.id}) — unchanged, reusing previous data`);
+      return { cfg, ok: true, reuse: prev };
+    }
     const page = await context.newPage();
     try {
-      log(`\n  ${cfg.name} (${cfg.id})`);
+      log(`\n  ${cfg.name} (${cfg.id}) — refreshing (${reason})`);
 
       log(`    Fetching standings…`);
       const standingsHtml = await fetchHtml(page, cfg.standingsUrl);
@@ -1045,9 +1087,20 @@ async function main() {
 
       const { fixtures } = parseGamesHtml(gamesHtml, ranking);
 
+      // Scorer pages and boxscores only change when a game was played, so skip
+      // them when the played count is the same as last time.
+      const playedNow = fixtures.filter(f => f.played).length;
+      const playedBefore = prev && prev.fixtures ? prev.fixtures.filter(f => f.played).length : -1;
+      const reuseStats = !FORCE_FULL && playedNow === playedBefore && Array.isArray(prev.scorers) && prev.scorers.length > 0;
+
       let scorers = [];
-      log(`    Fetching stats…`);
-      try { scorers = await parseStatsAllPages(page, cfg.id, ranking); } catch {}
+      if (reuseStats) {
+        scorers = prev.scorers.map(s => ({ ...s }));
+        log(`    Stats unchanged (${playedNow} games played) — reusing scorers`);
+      } else {
+        log(`    Fetching stats…`);
+        try { scorers = await parseStatsAllPages(page, cfg.id, ranking); } catch {}
+      }
 
       const teams = ranking.map(r => ({
         id: `t_${r.name.replace(/\W+/g,"_").toLowerCase()}`,
@@ -1060,7 +1113,7 @@ async function main() {
       const playedWithGameId = fixtures.filter(f => f.played && f.gameId);
       let newBoxscores = 0, failedBoxscores = 0;
       for (const f of playedWithGameId) {
-        if (boxCache.games[f.gameId]) continue;
+        if (reuseStats || boxCache.games[f.gameId]) continue;
         const players = await fetchGameLineup(page, f.gameId);
         if (players && players.length > 0) {
           boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players };
@@ -1219,6 +1272,14 @@ async function main() {
       results.push({ id: r.cfg.id, name: r.cfg.name, ok: false, error: r.error });
       continue;
     }
+    if (r.reuse) {
+      const lg = r.reuse;
+      if (!fresh.federations[r.cfg.federation]) fresh.federations[r.cfg.federation] = {};
+      fresh.federations[r.cfg.federation][r.cfg.id] = lg; // untouched: keeps its own updatedAt
+      const pl = (lg.fixtures || []).filter(f => f.played).length;
+      results.push({ id: r.cfg.id, name: r.cfg.name, ok: true, teams: (lg.teams || []).length, fixtures: (lg.fixtures || []).length, played: pl, pending: (lg.fixtures || []).length - pl, scorers: (lg.scorers || []).length, reused: true });
+      continue;
+    }
     const { cfg, ranking, fixtures, teams, scorers, topSingleGamePlayers, travelRanking, played, pending } = r;
     if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
     fresh.federations[cfg.federation][cfg.id] = {
@@ -1250,7 +1311,7 @@ async function main() {
   const bad = results.filter(r => !r.ok).length;
   log(`\nDone — ${ok}/${results.length} succeeded`);
   results.filter(r => r.ok).forEach(r =>
-    log(`  ✓ ${r.name}: ${r.teams}t ${r.fixtures}fx (${r.played}/${r.pending}) ${r.scorers}sc`)
+    log(`  ✓ ${r.name}: ${r.teams}t ${r.fixtures}fx (${r.played}/${r.pending}) ${r.scorers}sc${r.reused ? " [reused]" : ""}`)
   );
   results.filter(r => !r.ok).forEach(r =>
     log(`  ✗ ${r.name}: ${r.error}`)
@@ -1258,7 +1319,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { LEAGUES };
+module.exports = { LEAGUES, refreshReason };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }

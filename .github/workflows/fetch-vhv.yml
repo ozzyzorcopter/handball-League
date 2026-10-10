@@ -11,7 +11,13 @@ on:
   schedule:
     - cron: "17 12-23 * * 6,0"      # hourly Sat+Sun, off-peak minute
     - cron: "17 7 * * 1-5"          # once daily weekdays, off-peak minute
+    - cron: "17 17-21 * * 1-5"      # hourly weekday evenings (midweek games); cheap, quiet leagues are skipped
   workflow_dispatch:
+    inputs:
+      force_full:
+        description: "Re-fetch every league, ignoring the skip rules"
+        type: boolean
+        default: false
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -61,7 +67,11 @@ jobs:
             node node_modules/playwright-core/cli.js install chromium --with-deps
           fi
 
+      # Quiet leagues (no game today/yesterday, nothing pending) are skipped and
+      # their previous data reused; see refreshReason() in fetch-vhv.js.
       - name: Fetch VHV data
+        env:
+          FORCE_FULL: ${{ inputs.force_full && '1' || '' }}
         run: node .github/scripts/fetch-vhv.js
 
       - name: Commit if changed
