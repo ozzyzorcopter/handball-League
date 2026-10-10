@@ -33,3 +33,26 @@ test("kick-off times are read from raw (escaped) and plain flight JSON", () => {
   assert.equal(t.get("3009544").time, "18:30");
   assert.equal(extractGameTimes("").size, 0);
 });
+
+import fs from "node:fs";
+const { extractFlightGames } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
+test("embedded Clubee game data (real sample) gives ids, score, time and venue coordinates", () => {
+  const game = JSON.parse(fs.readFileSync(new URL("./fixtures/clubee-game-sample.json", import.meta.url), "utf8"));
+  // Wrap it the way the page does: a flight chunk inside a script tag, string-escaped.
+  const flight = '1:["$","div",null,{"leagues":[],"games":[' + JSON.stringify(game) + "," + JSON.stringify({ ...game, id: 5, cancelled: true, start_date: "2026-09-01T00:00:00+00:00" }) + "]}]\n";
+  const html = "<html><script>self.__next_f.push([1," + JSON.stringify(flight) + "])</script></html>";
+  const g = extractFlightGames(html);
+  assert.equal(g.size, 2);
+  const a = g.get("2942786");
+  assert.equal(a.homeId, 451279);
+  assert.equal(a.awayId, 451716);
+  assert.equal(a.time, "20:15");
+  assert.equal(a.date, "2026-08-29");
+  assert.equal(a.score1, 32);
+  assert.equal(a.completed, true);
+  assert.deepEqual([a.venue.lat, a.venue.lon], [50.9390602, 5.3211552]);
+  assert.match(a.venue.address, /Herkenrodesingel.*Hasselt/);
+  assert.equal(g.get("5").cancelled, true);
+  assert.equal(g.get("5").time, null, "00:00 means no time known");
+  assert.equal(extractFlightGames("<html></html>").size, 0);
+});

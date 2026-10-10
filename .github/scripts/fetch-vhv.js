@@ -319,6 +319,65 @@ function parseStandingsHtml(html) {
 //   <h3>               → " - : - " (scheduled) or "26 : 25" (played)
 //   <p>                → "22.08.2026" (date)
 //   teamInnerParapraphSecond div → <strong>Away Team (Division)</strong>
+// ── CLUBEE EMBEDDED GAME DATA ─────────────────────────────────────────────────
+// The games page embeds the full game list as JSON (Next.js "flight" payload:
+// self.__next_f.push([1,"..."]) script chunks). Each game has the Clubee game id,
+// both team ids, scores, start time, cancelled flag and the venue with
+// coordinates, which makes the browser visit + geocoding per venue unnecessary.
+function decodeFlight(html) {
+  let out = "";
+  if (!html) return out;
+  const re = /self\.__next_f\.push\(\[1,(".*?")\]\)<\/script>/gs;
+  let m;
+  while ((m = re.exec(html)) !== null) { try { out += JSON.parse(m[1]); } catch { /* skip chunk */ } }
+  return out;
+}
+
+// End index of the JSON value (object/array) starting at str[start], string-aware.
+function sliceBalanced(str, start) {
+  let depth = 0, inStr = false, esc = false;
+  for (let i = start; i < str.length; i++) {
+    const ch = str[i];
+    if (inStr) { if (esc) esc = false; else if (ch === "\\") esc = true; else if (ch === '"') inStr = false; continue; }
+    if (ch === '"') inStr = true;
+    else if (ch === "{" || ch === "[") depth++;
+    else if (ch === "}" || ch === "]") { depth--; if (depth === 0) return i; }
+  }
+  return -1;
+}
+
+// Map gameId -> { homeId, awayId, time, date, cancelled, completed, score1, score2, venue }
+function extractFlightGames(html) {
+  const games = new Map();
+  const flight = decodeFlight(html);
+  if (!flight) return games;
+  let from = 0, at;
+  while ((at = flight.indexOf('"games":[', from)) >= 0) {
+    const start = at + '"games":'.length;
+    const end = sliceBalanced(flight, start);
+    from = start + 1;
+    if (end < 0) continue;
+    let arr;
+    try { arr = JSON.parse(flight.slice(start, end + 1)); } catch { continue; }
+    if (!Array.isArray(arr)) continue;
+    for (const g of arr) {
+      if (!g || g.id == null || !g.team1 || !g.team2) continue;
+      const m = typeof g.start_date === "string" ? g.start_date.match(/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})/) : null;
+      const lat = parseFloat(g.venue_lat ?? g.facility?.lat), lon = parseFloat(g.venue_lng ?? g.facility?.lng);
+      games.set(String(g.id), {
+        homeId: g.team1.id, awayId: g.team2.id,
+        date: m ? m[1] : null, time: m && m[2] !== "00:00" ? m[2] : null,
+        cancelled: !!g.cancelled, completed: !!g.completed,
+        score1: g.score1 ?? null, score2: g.score2 ?? null,
+        venue: !isNaN(lat) && !isNaN(lon)
+          ? { name: g.venue_name || g.facility?.name || null, address: [g.venue_address, g.venue_zip, g.venue_city].filter(Boolean).join(", ") || null, lat, lon }
+          : null,
+      });
+    }
+  }
+  return games;
+}
+
 // Kick-off times. The games page embeds structured game data (Next.js flight
 // payload) with "id" and "start_date" next to each other, e.g.
 //   "id":2942786,"start_date":"2026-08-29T20:15:00+00:00"
@@ -1101,14 +1160,17 @@ async function main() {
       // (debug removed)
 
       // Kick-off times: from the rendered page if present, else a plain fetch of the same URL.
-      let times = extractGameTimes(gamesHtml);
-      if (times.size === 0) {
+      let rawGames = gamesHtml;
+      let flightGames = extractFlightGames(rawGames);
+      if (flightGames.size === 0) {
         try {
           const res = await fetch(cfg.gamesUrl, { headers: { "User-Agent": "Mozilla/5.0 (compatible; LeagueSim/1.0)" } });
-          if (res.ok) times = extractGameTimes(await res.text());
-        } catch { /* times are optional */ }
+          if (res.ok) { rawGames = await res.text(); flightGames = extractFlightGames(rawGames); }
+        } catch { /* embedded data is optional */ }
       }
+      let times = extractGameTimes(rawGames);
       const { fixtures } = parseGamesHtml(gamesHtml, ranking, times);
+      log(`    Embedded game data: ${flightGames.size} game(s) for ${fixtures.length} parsed fixture(s)`);
 
       // Scorer pages and boxscores only change when a game was played, so skip
       // them when the played count is the same as last time.
@@ -1129,6 +1191,33 @@ async function main() {
         id: `t_${r.name.replace(/\W+/g,"_").toLowerCase()}`,
         name: r.name, points: 0, homeBonus: "",
       }));
+
+      // Enrich from the embedded data: Clubee team ids (for ID-based matching later),
+      // cancelled games, and each team's home venue with coordinates.
+      const homeVenueVotes = teams.map(() => new Map());
+      for (const f of fixtures) {
+        const g = flightGames.get(String(f.gameId));
+        if (!g) continue;
+        if (g.cancelled) f.cancelled = true;
+        if (teams[f.homeIdx] && g.homeId != null && teams[f.homeIdx].clubeeId == null) teams[f.homeIdx].clubeeId = g.homeId;
+        if (teams[f.awayIdx] && g.awayId != null && teams[f.awayIdx].clubeeId == null) teams[f.awayIdx].clubeeId = g.awayId;
+        if (g.venue && teams[f.homeIdx]) {
+          const k = `${g.venue.lat},${g.venue.lon}`;
+          const e = homeVenueVotes[f.homeIdx].get(k) || { n: 0, venue: g.venue };
+          e.n++; homeVenueVotes[f.homeIdx].set(k, e);
+        }
+      }
+      // Use those coordinates for any venue not already resolved: no browser visit or geocoding needed.
+      let venuesFromClubee = 0;
+      teams.forEach((t, i) => {
+        const best = [...homeVenueVotes[i].values()].sort((a, b) => b.n - a.n)[0];
+        const vk = venueKey(t.name);
+        if (best && !(venueCache.venues[vk] && venueCache.venues[vk].lat != null)) {
+          venueCache.venues[vk] = { name: t.name, address: best.venue.address || best.venue.name, lat: best.venue.lat, lon: best.venue.lon, source: "clubee" };
+          venuesFromClubee++;
+        }
+      });
+      if (venuesFromClubee) log(`    Venues taken from game data: ${venuesFromClubee}`);
 
       // Per-game boxscores — only fetch games not already in the cache from
       // a previous run. Powers "goals in last game" on the scorer panel and
@@ -1342,7 +1431,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { LEAGUES, refreshReason, extractGameTimes };
+module.exports = { LEAGUES, refreshReason, extractGameTimes, extractFlightGames };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }
