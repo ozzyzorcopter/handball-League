@@ -3362,9 +3362,9 @@
     },
     "union beynoise handball cup": {
       "name": "Union Beynoise Handball Cup",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "Hall Omnisport Edmond Rigo, Rue du Heusay, 19, Beyne-Heusay",
+      "lat": 50.6236308,
+      "lon": 5.6542576
     },
     "lokeren g16 vhv-b r 1": {
       "name": "Lokeren G16 VHV-B R 1",
@@ -4111,6 +4111,22 @@
     "eynatten-raeren promo lg 2|visé bm promo lg": 43.9313,
     "apolloon spurs d1 w vhv|dhc waasmunster d1 w vhv": 72.1486,
     "hubo d m vhv lim|p. kortessem d m vhv lim-b 2": 14.7858,
-    "brugge d m vhv owv|desselgemse d m vhv owv-b": 54.5257
+    "brugge d m vhv owv|desselgemse d m vhv owv-b": 54.5257,
+    "dhc waasmunster d1 wr|hubo d1 wr": 107.2525,
+    "eupen d1 w|sprimont d1 w": 43.463300000000004,
+    "eupen b18 lfh|sprimont b18 lfh": 42.5994,
+    "brasschaat d m vhv avb 1|heist o/d berg d m vhv avb": 47.298300000000005,
+    "hk waasmunster u16 vhv r|roeselare u16 vhv r": 79.2297,
+    "overpelt u14 vhv r|sezoens achilles bocholt u14 vhv r 1": 11.5547,
+    "uilenspiegel g16 vhv q|united west l g16 vhv q": 0.023600000000000003,
+    "hubo g16 vhv q|sezoens achilles bocholt g16 vhv q": 0.0526,
+    "h. bilzen g16 vhv q|united west l g16 vhv q": 0.0526,
+    "hubo g16 vhv q|uilenspiegel g16 vhv q": 0.1569,
+    "h. bilzen g16 vhv q|sezoens achilles bocholt g16 vhv q": 0.0526,
+    "hubo g16 vhv q|united west l g16 vhv q": 0.1805,
+    "sezoens achilles bocholt g16 vhv q|uilenspiegel g16 vhv q": 0.023600000000000003,
+    "h. bilzen g16 vhv q|hubo g16 vhv q": 0,
+    "sezoens achilles bocholt g16 vhv q|united west l g16 vhv q": 0,
+    "h. bilzen g16 vhv q|uilenspiegel g16 vhv q": 0.1569
   }
 }
