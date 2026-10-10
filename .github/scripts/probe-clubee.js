@@ -77,12 +77,40 @@ function describe(value, depth = 0, maxDepth = 3) {
     if (flight) {
       fs.writeFileSync(path.join(OUT, `${name}.flight.txt`), flight);
       log(`flight start: ${shorten(flight, 500)}`);
-      const keywords = name === "standings" ? ["\"points\"", "\"rank", "teamId", "\"wins\""]
-        : name === "games" ? ["homeTeam", "\"score", "gameId", "startTime", "\"date"]
-        : ["goals", "playerId", "\"player"];
-      for (const k of keywords) {
-        const i = flight.indexOf(k);
-        log(`  [${k}] ${i < 0 ? "not found" : "@" + i + ": " + shorten(flight.slice(Math.max(0, i - 250), i + 700).replace(/\s+/g, " "), 950)}`);
+      // Which data-looking keys exist? Count them and show the first real context for each.
+      const wide = ["standing", "ranking", "position", "\"pts\"", "points", "played", "\"won\"", "\"win", "lost", "draw",
+        "goals_for", "goals_against", "scored", "diff", "score1", "team1", "team2", "scorer", "goals", "assist", "stat", "player", "boxscore", "lineup", "roster"];
+      const counts = wide.map(k => [k, flight.split(k).length - 1]).filter(([, c]) => c > 0);
+      log(`  key counts: ${counts.map(([k, c]) => k.replace(/"/g, "") + "=" + c).join(" ")}`);
+      const skipCtx = /system_page|navigation|customizable|has_menu/;
+      for (const [k] of counts) {
+        let i = -1;
+        while ((i = flight.indexOf(k, i + 1)) >= 0) {
+          const ctx = flight.slice(Math.max(0, i - 200), i + 500).replace(/\s+/g, " ");
+          if (skipCtx.test(ctx)) continue;
+          log(`  [${k}] @${i}: ${shorten(ctx, 700)}`);
+          break;
+        }
+      }
+      // One complete game object (the one holding score1), parsed and printed.
+      const gi = flight.indexOf('"score1"');
+      if (gi >= 0) {
+        let depth = 0, a = -1;
+        for (let i = gi; i >= 0; i--) { const ch = flight[i]; if (ch === "}") depth++; else if (ch === "{") { if (depth === 0) { a = i; break; } depth--; } }
+        let inStr = false, esc = false, dd = 0, b = -1;
+        for (let i = a; a >= 0 && i < flight.length; i++) {
+          const ch = flight[i];
+          if (inStr) { if (esc) esc = false; else if (ch === "\\") esc = true; else if (ch === '"') inStr = false; continue; }
+          if (ch === '"') inStr = true; else if (ch === "{") dd++; else if (ch === "}") { dd--; if (dd === 0) { b = i; break; } }
+        }
+        if (a >= 0 && b > a) {
+          try {
+            const obj = JSON.parse(flight.slice(a, b + 1));
+            fs.writeFileSync(path.join(OUT, `${name}.game-sample.json`), JSON.stringify(obj, null, 1));
+            log(`  GAME OBJECT KEYS: ${Object.keys(obj).join(", ")}`);
+            log(`  GAME OBJECT: ${shorten(JSON.stringify(obj), 3500)}`);
+          } catch (e) { log(`  game object found but not parseable: ${e.message}`); }
+        }
       }
     }
 
