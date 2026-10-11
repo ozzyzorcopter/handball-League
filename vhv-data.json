@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T17:44:58.327Z",
+  "updatedAt": "2026-10-11T21:58:18.971Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -16419,7 +16419,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -20066,7 +20066,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -23247,7 +23247,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -34662,7 +34662,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -34688,6 +34688,13 @@
             "clubeeId": 450975
           },
           {
+            "id": "t_js_herstal_d1_w_lfh",
+            "name": "JS Herstal D1 W LFH",
+            "points": 0,
+            "homeBonus": "",
+            "clubeeId": 451783
+          },
+          {
             "id": "t_wanzois_passion_d1_w_lfh",
             "name": "Wanzois Passion D1 W LFH",
             "points": 0,
@@ -34695,11 +34702,11 @@
             "clubeeId": 450978
           },
           {
-            "id": "t_js_herstal_d1_w_lfh",
-            "name": "JS Herstal D1 W LFH",
+            "id": "t_villers_amay_d1_w_lfh",
+            "name": "Villers-Amay D1 W LFH",
             "points": 0,
             "homeBonus": "",
-            "clubeeId": 451783
+            "clubeeId": 451734
           },
           {
             "id": "t_tubize_d1_w_lfh",
@@ -34728,13 +34735,6 @@
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451351
-          },
-          {
-            "id": "t_villers_amay_d1_w_lfh",
-            "name": "Villers-Amay D1 W LFH",
-            "points": 0,
-            "homeBonus": "",
-            "clubeeId": 451734
           }
         ],
         "fixtures": [
@@ -34742,7 +34742,7 @@
             "id": "f0",
             "gameId": "2849837",
             "homeIdx": 2,
-            "awayIdx": 9,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34760,7 +34760,7 @@
           {
             "id": "f1",
             "gameId": "2849821",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -34779,8 +34779,8 @@
           {
             "id": "f2",
             "gameId": "2849845",
-            "homeIdx": 3,
-            "awayIdx": 4,
+            "homeIdx": 4,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34788,9 +34788,9 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
+            "played": true,
+            "homeScore": 15,
+            "awayScore": 19,
             "week": 0,
             "date": "2026-10-11",
             "time": "19:00"
@@ -34799,7 +34799,7 @@
             "id": "f3",
             "gameId": "2849889",
             "homeIdx": 1,
-            "awayIdx": 6,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34817,8 +34817,8 @@
           {
             "id": "f4",
             "gameId": "2849875",
-            "homeIdx": 9,
-            "awayIdx": 8,
+            "homeIdx": 5,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34836,7 +34836,7 @@
           {
             "id": "f5",
             "gameId": "2849869",
-            "homeIdx": 4,
+            "homeIdx": 3,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -34856,7 +34856,7 @@
             "id": "f6",
             "gameId": "2849838",
             "homeIdx": 2,
-            "awayIdx": 3,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34874,8 +34874,8 @@
           {
             "id": "f7",
             "gameId": "2942096",
-            "homeIdx": 5,
-            "awayIdx": 7,
+            "homeIdx": 6,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34893,8 +34893,8 @@
           {
             "id": "f8",
             "gameId": "2849806",
-            "homeIdx": 6,
-            "awayIdx": 9,
+            "homeIdx": 7,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34932,7 +34932,7 @@
             "id": "f10",
             "gameId": "2849890",
             "homeIdx": 1,
-            "awayIdx": 5,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34950,8 +34950,8 @@
           {
             "id": "f11",
             "gameId": "2849846",
-            "homeIdx": 3,
-            "awayIdx": 8,
+            "homeIdx": 4,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -34969,7 +34969,7 @@
           {
             "id": "f12",
             "gameId": "2849823",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -34988,8 +34988,8 @@
           {
             "id": "f13",
             "gameId": "2849807",
-            "homeIdx": 6,
-            "awayIdx": 3,
+            "homeIdx": 7,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35007,8 +35007,8 @@
           {
             "id": "f14",
             "gameId": "2942097",
-            "homeIdx": 7,
-            "awayIdx": 4,
+            "homeIdx": 8,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35027,7 +35027,7 @@
             "id": "f15",
             "gameId": "2849891",
             "homeIdx": 1,
-            "awayIdx": 9,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35046,7 +35046,7 @@
             "id": "f16",
             "gameId": "2849831",
             "homeIdx": 0,
-            "awayIdx": 6,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35064,8 +35064,8 @@
           {
             "id": "f17",
             "gameId": "2849877",
-            "homeIdx": 9,
-            "awayIdx": 5,
+            "homeIdx": 5,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35073,9 +35073,9 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
+            "played": true,
+            "homeScore": 31,
+            "awayScore": 21,
             "week": 0,
             "date": "2026-10-11",
             "time": "19:00"
@@ -35083,8 +35083,8 @@
           {
             "id": "f18",
             "gameId": "2849800",
-            "homeIdx": 5,
-            "awayIdx": 4,
+            "homeIdx": 6,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35102,7 +35102,7 @@
           {
             "id": "f19",
             "gameId": "2942101",
-            "homeIdx": 7,
+            "homeIdx": 8,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -35121,7 +35121,7 @@
           {
             "id": "f20",
             "gameId": "2849847",
-            "homeIdx": 3,
+            "homeIdx": 4,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -35159,8 +35159,8 @@
           {
             "id": "f22",
             "gameId": "2942105",
-            "homeIdx": 8,
-            "awayIdx": 7,
+            "homeIdx": 9,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35178,8 +35178,8 @@
           {
             "id": "f23",
             "gameId": "2849848",
-            "homeIdx": 3,
-            "awayIdx": 9,
+            "homeIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35197,7 +35197,7 @@
           {
             "id": "f24",
             "gameId": "2849872",
-            "homeIdx": 4,
+            "homeIdx": 3,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -35216,7 +35216,7 @@
           {
             "id": "f25",
             "gameId": "2849879",
-            "homeIdx": 9,
+            "homeIdx": 5,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -35235,8 +35235,8 @@
           {
             "id": "f26",
             "gameId": "2942107",
-            "homeIdx": 7,
-            "awayIdx": 6,
+            "homeIdx": 8,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35254,8 +35254,8 @@
           {
             "id": "f27",
             "gameId": "2849849",
-            "homeIdx": 3,
-            "awayIdx": 5,
+            "homeIdx": 4,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35273,8 +35273,8 @@
           {
             "id": "f28",
             "gameId": "2849826",
-            "homeIdx": 8,
-            "awayIdx": 4,
+            "homeIdx": 9,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35292,8 +35292,8 @@
           {
             "id": "f29",
             "gameId": "2849873",
-            "homeIdx": 4,
-            "awayIdx": 6,
+            "homeIdx": 3,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35311,7 +35311,7 @@
           {
             "id": "f30",
             "gameId": "2849802",
-            "homeIdx": 5,
+            "homeIdx": 6,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -35330,7 +35330,7 @@
           {
             "id": "f31",
             "gameId": "2942106",
-            "homeIdx": 7,
+            "homeIdx": 8,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -35349,7 +35349,7 @@
           {
             "id": "f32",
             "gameId": "2849850",
-            "homeIdx": 3,
+            "homeIdx": 4,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -35369,7 +35369,7 @@
             "id": "f33",
             "gameId": "2849834",
             "homeIdx": 0,
-            "awayIdx": 5,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35387,7 +35387,7 @@
           {
             "id": "f34",
             "gameId": "2849827",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -35406,8 +35406,8 @@
           {
             "id": "f35",
             "gameId": "2942103",
-            "homeIdx": 7,
-            "awayIdx": 9,
+            "homeIdx": 8,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35425,7 +35425,7 @@
           {
             "id": "f36",
             "gameId": "2849874",
-            "homeIdx": 4,
+            "homeIdx": 3,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -35445,7 +35445,7 @@
             "id": "f37",
             "gameId": "2849843",
             "homeIdx": 2,
-            "awayIdx": 6,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35463,8 +35463,8 @@
           {
             "id": "f38",
             "gameId": "2849803",
-            "homeIdx": 5,
-            "awayIdx": 8,
+            "homeIdx": 6,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35482,8 +35482,8 @@
           {
             "id": "f39",
             "gameId": "2849882",
-            "homeIdx": 9,
-            "awayIdx": 4,
+            "homeIdx": 5,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35501,8 +35501,8 @@
           {
             "id": "f40",
             "gameId": "2849812",
-            "homeIdx": 6,
-            "awayIdx": 8,
+            "homeIdx": 7,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35520,8 +35520,8 @@
           {
             "id": "f41",
             "gameId": "2942104",
-            "homeIdx": 7,
-            "awayIdx": 3,
+            "homeIdx": 8,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35540,7 +35540,7 @@
             "id": "f42",
             "gameId": "2942108",
             "homeIdx": 0,
-            "awayIdx": 7,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35576,8 +35576,8 @@
           {
             "id": "f44",
             "gameId": "2849804",
-            "homeIdx": 5,
-            "awayIdx": 6,
+            "homeIdx": 6,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -35632,42 +35632,54 @@
           },
           {
             "pos": 4,
+            "name": "JS Herstal D1 W LFH",
+            "played": 2,
+            "won": 2,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 44,
+            "ga": 32,
+            "points": 4,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790353389.png"
+          },
+          {
+            "pos": 5,
             "name": "Wanzois Passion D1 W LFH",
-            "played": 3,
+            "played": 4,
             "won": 1,
             "drawn": 0,
-            "lost": 2,
-            "gf": 48,
-            "ga": 73,
+            "lost": 3,
+            "gf": 63,
+            "ga": 92,
             "points": 2,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17309/logo/_1786974445.png"
           },
           {
-            "pos": 5,
-            "name": "JS Herstal D1 W LFH",
-            "played": 1,
-            "won": 1,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 25,
-            "ga": 17,
-            "points": 2,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790353389.png"
-          },
-          {
             "pos": 6,
-            "name": "Tubize D1 W LFH",
+            "name": "Villers-Amay D1 W LFH",
             "played": 2,
             "won": 1,
             "drawn": 0,
             "lost": 1,
-            "gf": 38,
-            "ga": 26,
+            "gf": 46,
+            "ga": 44,
+            "points": 2,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790352808.png"
+          },
+          {
+            "pos": 7,
+            "name": "Tubize D1 W LFH",
+            "played": 3,
+            "won": 1,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 59,
+            "ga": 57,
             "points": 2,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17298/logo/96x96_hsc-tubize_1790346328.png"
           },
           {
-            "pos": 7,
+            "pos": 8,
             "name": "Entente du Centre D1 W LFH",
             "played": 3,
             "won": 1,
@@ -35679,7 +35691,7 @@
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17242/logo/_1786968133.png"
           },
           {
-            "pos": 8,
+            "pos": 9,
             "name": "Estudiantes Tournai D1 W LFH",
             "played": 2,
             "won": 0,
@@ -35691,7 +35703,7 @@
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/4969/logo/96x96_estudiantes-handball-club-tournai_1790953726.png"
           },
           {
-            "pos": 9,
+            "pos": 10,
             "name": "Mont-Sur-Marchienne D1 W LFH",
             "played": 3,
             "won": 0,
@@ -35701,18 +35713,6 @@
             "ga": 62,
             "points": 0,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17237/logo/96x96_shc-mont-sur-marchienne_1788707537.png"
-          },
-          {
-            "pos": 10,
-            "name": "Villers-Amay D1 W LFH",
-            "played": 1,
-            "won": 0,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 15,
-            "ga": 23,
-            "points": 0,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790352808.png"
           }
         ],
         "scorers": [
@@ -35745,15 +35745,28 @@
           {
             "player": "Justine Pirson",
             "club": "Wanzois Passion D1 W LFH",
-            "goals": 18,
-            "matchesPlayed": 3,
+            "goals": 22,
+            "matchesPlayed": 4,
             "sevenMScored": 2,
             "sevenMMissed": 1,
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 8
+            "lastGameGoals": 4
+          },
+          {
+            "player": "Mégane Claesen",
+            "club": "Wanzois Passion D1 W LFH",
+            "goals": 17,
+            "matchesPlayed": 4,
+            "sevenMScored": 3,
+            "sevenMMissed": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 3,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Marine Gailly",
@@ -35766,6 +35779,19 @@
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0
+          },
+          {
+            "player": "Clarice Lekefack",
+            "club": "Tubize D1 W LFH",
+            "goals": 14,
+            "matchesPlayed": 2,
+            "sevenMScored": 1,
+            "sevenMMissed": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 7
           },
           {
             "player": "Lison Soutif Cormerais",
@@ -35805,17 +35831,17 @@
             "redCards": 0
           },
           {
-            "player": "Mégane Claesen",
-            "club": "Wanzois Passion D1 W LFH",
+            "player": "Maroussia Mouta Rubira",
+            "club": "Villers-Amay D1 W LFH",
             "goals": 12,
-            "matchesPlayed": 3,
-            "sevenMScored": 3,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
-            "twoMinSuspensions": 3,
+            "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 4
+            "lastGameGoals": 10
           },
           {
             "player": "Elise DUPONT-STIEVET",
@@ -35829,6 +35855,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 4
+          },
+          {
+            "player": "Sandrine Lovinfosse",
+            "club": "JS Herstal D1 W LFH",
+            "goals": 10,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Pauline Ramay",
@@ -35869,6 +35908,19 @@
             "lastGameGoals": 3
           },
           {
+            "player": "Marjorie Claesen",
+            "club": "Tubize D1 W LFH",
+            "goals": 9,
+            "matchesPlayed": 2,
+            "sevenMScored": 1,
+            "sevenMMissed": 0,
+            "yellowCards": 1,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 7
+          },
+          {
             "player": "Marzia Sechi",
             "club": "",
             "goals": 9,
@@ -35879,6 +35931,19 @@
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0
+          },
+          {
+            "player": "Louise Horion",
+            "club": "JS Herstal D1 W LFH",
+            "goals": 9,
+            "matchesPlayed": 2,
+            "sevenMScored": 3,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Margaux Gueneugues",
@@ -35946,30 +36011,17 @@
             "lastGameGoals": 3
           },
           {
-            "player": "Sandrine Lovinfosse",
+            "player": "Mathilde Lehaen",
             "club": "JS Herstal D1 W LFH",
             "goals": 7,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
+            "matchesPlayed": 2,
+            "sevenMScored": 2,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 7
-          },
-          {
-            "player": "Clarice Lekefack",
-            "club": "Tubize D1 W LFH",
-            "goals": 7,
-            "matchesPlayed": 1,
-            "sevenMScored": 1,
-            "sevenMMissed": 1,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 7
+            "lastGameGoals": 2
           },
           {
             "player": "Pauline Mousis",
@@ -36013,14 +36065,14 @@
             "player": "Aurélia Pirson",
             "club": "Wanzois Passion D1 W LFH",
             "goals": 6,
-            "matchesPlayed": 3,
-            "sevenMScored": 1,
+            "matchesPlayed": 4,
+            "sevenMScored": 4,
             "sevenMMissed": 2,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 1,
-            "lastGameGoals": 3
+            "lastGameGoals": 0
           },
           {
             "player": "Elisabeth Kneip",
@@ -36075,6 +36127,19 @@
             "lastGameGoals": 4
           },
           {
+            "player": "Charline Noel",
+            "club": "Villers-Amay D1 W LFH",
+            "goals": 6,
+            "matchesPlayed": 2,
+            "sevenMScored": 2,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 4
+          },
+          {
             "player": "Manon CATALA",
             "club": "Kraainem D1 W LFH",
             "goals": 6,
@@ -36087,17 +36152,30 @@
             "redCards": 0
           },
           {
-            "player": "Mathilde Lehaen",
-            "club": "JS Herstal D1 W LFH",
+            "player": "Maurine Louwette",
+            "club": "Villers-Amay D1 W LFH",
             "goals": 5,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 5
+            "lastGameGoals": 2
+          },
+          {
+            "player": "Jodie Massy",
+            "club": "Wanzois Passion D1 W LFH",
+            "goals": 5,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Charlotte Vercaeren",
@@ -36151,6 +36229,19 @@
             "lastGameGoals": 1
           },
           {
+            "player": "Fiona Giuliano",
+            "club": "Villers-Amay D1 W LFH",
+            "goals": 5,
+            "matchesPlayed": 2,
+            "sevenMScored": 3,
+            "sevenMMissed": 3,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
             "player": "Amélie JEAN-ROBERT",
             "club": "Estudiantes Tournai D1 W LFH",
             "goals": 4,
@@ -36190,17 +36281,17 @@
             "lastGameGoals": 3
           },
           {
-            "player": "Louise Horion",
+            "player": "Soraia Gonçalves",
             "club": "JS Herstal D1 W LFH",
             "goals": 4,
-            "matchesPlayed": 1,
-            "sevenMScored": 1,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
             "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
+            "yellowCards": 1,
+            "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 4
+            "redCards": 1,
+            "lastGameGoals": 3
           },
           {
             "player": "Tatiana Dewildeman",
@@ -36231,6 +36322,32 @@
           {
             "player": "Elise Janvier",
             "club": "Kraainem D1 W LFH",
+            "goals": 4,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
+          },
+          {
+            "player": "Beverly Tsheke",
+            "club": "Tubize D1 W LFH",
+            "goals": 4,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
+            "player": "Claire Etienne",
+            "club": "Tubize D1 W LFH",
             "goals": 4,
             "matchesPlayed": 2,
             "sevenMScored": 0,
@@ -36306,19 +36423,6 @@
             "lastGameGoals": 0
           },
           {
-            "player": "Maurine Louwette",
-            "club": "Villers-Amay D1 W LFH",
-            "goals": 3,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
             "player": "Gladys Goffinet",
             "club": "United Brussels D1 W LFH 1",
             "goals": 3,
@@ -36335,14 +36439,14 @@
             "player": "Jessica Garate",
             "club": "JS Herstal D1 W LFH",
             "goals": 3,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 3
+            "lastGameGoals": 0
           },
           {
             "player": "Maud De Wit",
@@ -36358,21 +36462,34 @@
             "lastGameGoals": 1
           },
           {
-            "player": "Jodie Massy",
-            "club": "Wanzois Passion D1 W LFH",
+            "player": "Noa Coox",
+            "club": "Villers-Amay D1 W LFH",
             "goals": 3,
-            "matchesPlayed": 3,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 2
+            "lastGameGoals": 3
           },
           {
             "player": "Argitxu Pomadere",
             "club": "United Brussels D1 W LFH 1",
+            "goals": 3,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
+          },
+          {
+            "player": "Justine Torfs",
+            "club": "Villers-Amay D1 W LFH",
             "goals": 3,
             "matchesPlayed": 1,
             "sevenMScored": 0,
@@ -36423,6 +36540,19 @@
             "lastGameGoals": 0
           },
           {
+            "player": "Natalia Carolina Aguado Espinoza",
+            "club": "Villers-Amay D1 W LFH",
+            "goals": 3,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
             "player": "Célia GUIDICE",
             "club": "Estudiantes Tournai D1 W LFH",
             "goals": 3,
@@ -36431,19 +36561,6 @@
             "sevenMMissed": 1,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
-            "player": "Fiona Giuliano",
-            "club": "Villers-Amay D1 W LFH",
-            "goals": 3,
-            "matchesPlayed": 1,
-            "sevenMScored": 2,
-            "sevenMMissed": 2,
-            "yellowCards": 0,
-            "twoMinSuspensions": 2,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 3
@@ -36461,17 +36578,43 @@
             "redCards": 0
           },
           {
-            "player": "Marjorie Claesen",
-            "club": "Tubize D1 W LFH",
+            "player": "Anaëlle Fontaine",
+            "club": "JS Herstal D1 W LFH",
             "goals": 2,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
-            "yellowCards": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
+            "player": "Lara Albanese",
+            "club": "Wanzois Passion D1 W LFH",
+            "goals": 2,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
+            "player": "Marie Angenot",
+            "club": "JS Herstal D1 W LFH",
+            "goals": 2,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 2
+            "lastGameGoals": 1
           },
           {
             "player": "Lauren-Ange Djia Meyapyali",
@@ -36500,19 +36643,6 @@
             "lastGameGoals": 0
           },
           {
-            "player": "Maroussia Mouta Rubira",
-            "club": "Villers-Amay D1 W LFH",
-            "goals": 2,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
             "player": "Charlotte Barthélémy",
             "club": "United Brussels D1 W LFH 1",
             "goals": 2,
@@ -36539,32 +36669,6 @@
             "lastGameGoals": 0
           },
           {
-            "player": "Beverly Tsheke",
-            "club": "Tubize D1 W LFH",
-            "goals": 2,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 2,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
-            "player": "Natalia Carolina Aguado Espinoza",
-            "club": "Villers-Amay D1 W LFH",
-            "goals": 2,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
             "player": "Nina Cneude",
             "club": "",
             "goals": 2,
@@ -36588,19 +36692,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
-          },
-          {
-            "player": "Charline Noel",
-            "club": "Villers-Amay D1 W LFH",
-            "goals": 2,
-            "matchesPlayed": 1,
-            "sevenMScored": 1,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
           },
           {
             "player": "Mariana PEREIRA",
@@ -36635,45 +36726,6 @@
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Anaëlle Fontaine",
-            "club": "JS Herstal D1 W LFH",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Lara Albanese",
-            "club": "Wanzois Passion D1 W LFH",
-            "goals": 1,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Marie Angenot",
-            "club": "JS Herstal D1 W LFH",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
@@ -36734,27 +36786,27 @@
             "player": "Djapa Marlyse Lekefack",
             "club": "Tubize D1 W LFH",
             "goals": 1,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 1
+            "lastGameGoals": 0
           },
           {
             "player": "Joy Kerckhaert",
             "club": "JS Herstal D1 W LFH",
             "goals": 1,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 1
+            "lastGameGoals": 0
           },
           {
             "player": "Vicky Mary",
@@ -36783,17 +36835,30 @@
             "lastGameGoals": 1
           },
           {
+            "player": "Isabelle Marchal",
+            "club": "Villers-Amay D1 W LFH",
+            "goals": 1,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
             "player": "Léa Fontaine",
             "club": "JS Herstal D1 W LFH",
             "goals": 1,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 1
+            "lastGameGoals": 0
           },
           {
             "player": "Lisa Wagner",
@@ -36834,16 +36899,29 @@
             "lastGameGoals": 1
           },
           {
-            "player": "Soraia Gonçalves",
-            "club": "JS Herstal D1 W LFH",
+            "player": "Marie Warnier",
+            "club": "Villers-Amay D1 W LFH",
+            "goals": 1,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
+            "player": "Lena Laffineur",
+            "club": "Villers-Amay D1 W LFH",
             "goals": 1,
             "matchesPlayed": 1,
             "sevenMScored": 0,
             "sevenMMissed": 0,
-            "yellowCards": 1,
-            "twoMinSuspensions": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 1,
+            "redCards": 0,
             "lastGameGoals": 1
           },
           {
@@ -36937,23 +37015,10 @@
             "lastGameGoals": 0
           },
           {
-            "player": "Claire Etienne",
-            "club": "Tubize D1 W LFH",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
             "player": "Aline Grevesse",
             "club": "Wanzois Passion D1 W LFH",
             "goals": 1,
-            "matchesPlayed": 3,
+            "matchesPlayed": 4,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
@@ -36961,6 +37026,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
+          },
+          {
+            "player": "Bérénice LESVIER",
+            "club": "Tubize D1 W LFH",
+            "goals": 1,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Marine VERBEKE",
@@ -36974,6 +37052,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
+          },
+          {
+            "player": "Morgane Meurer",
+            "club": "Villers-Amay D1 W LFH",
+            "goals": 1,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Milaine Munezero",
@@ -37015,6 +37106,12 @@
             "date": "2026-10-04"
           },
           {
+            "player": "Maroussia Mouta Rubira",
+            "club": "Villers-Amay D1 W LFH",
+            "goals": 10,
+            "date": "2026-10-11"
+          },
+          {
             "player": "Justine Pirson",
             "club": "Wanzois Passion D1 W LFH",
             "goals": 8,
@@ -37031,6 +37128,12 @@
             "club": "United Brussels D1 W LFH 1",
             "goals": 7,
             "date": "2026-09-19"
+          },
+          {
+            "player": "Sandrine Lovinfosse",
+            "club": "JS Herstal D1 W LFH",
+            "goals": 7,
+            "date": "2026-10-04"
           },
           {
             "player": "Pauline Ramay",
@@ -37051,12 +37154,6 @@
             "date": "2026-09-27"
           },
           {
-            "player": "Sandrine Lovinfosse",
-            "club": "JS Herstal D1 W LFH",
-            "goals": 7,
-            "date": "2026-10-04"
-          },
-          {
             "player": "Pauline Werner",
             "club": "Entente du Centre D1 W LFH",
             "goals": 6,
@@ -37075,34 +37172,33 @@
             "date": "2026-10-04"
           },
           {
-            "player": "Nell Vanlaeke",
-            "club": "United Brussels D1 W LFH 1",
+            "player": "Mégane Claesen",
+            "club": "Wanzois Passion D1 W LFH",
             "goals": 5,
-            "date": "2026-09-19"
+            "date": "2026-10-11"
           },
           {
-            "player": "M... E...",
-            "club": "Kraainem D1 W LFH",
+            "player": "Louise Horion",
+            "club": "JS Herstal D1 W LFH",
             "goals": 5,
-            "date": "2026-09-27"
-          },
-          {
-            "player": "Ana Leonor Caldeira da Silva",
-            "club": "Kraainem D1 W LFH",
-            "goals": 5,
-            "date": "2026-10-10"
+            "date": "2026-10-11"
           }
         ],
         "travelRanking": [
           {
             "id": "t_js_herstal_d1_w_lfh",
             "name": "JS Herstal D1 W LFH",
-            "km": 183
+            "km": 225
           },
           {
             "id": "t_wanzois_passion_d1_w_lfh",
             "name": "Wanzois Passion D1 W LFH",
             "km": 131
+          },
+          {
+            "id": "t_tubize_d1_w_lfh",
+            "name": "Tubize D1 W LFH",
+            "km": 119
           },
           {
             "id": "t_kraainem_d1_w_lfh",
@@ -37135,11 +37231,6 @@
             "km": 54
           },
           {
-            "id": "t_tubize_d1_w_lfh",
-            "name": "Tubize D1 W LFH",
-            "km": 22
-          },
-          {
             "id": "t_united_brussels_d1_w_lfh_1",
             "name": "United Brussels D1 W LFH 1",
             "km": 0
@@ -37151,7 +37242,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -41673,7 +41764,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -42158,458 +42249,6 @@
             "week": 0,
             "date": "2027-05-09",
             "time": "10:00"
-          },
-          {
-            "id": "f24",
-            "gameId": "2849947",
-            "homeIdx": 1,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": true,
-            "homeScore": 8,
-            "awayScore": 0,
-            "week": 0,
-            "date": "2026-09-27",
-            "time": "10:00"
-          },
-          {
-            "id": "f25",
-            "gameId": "2849941",
-            "homeIdx": 0,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": true,
-            "homeScore": 0,
-            "awayScore": 0,
-            "week": 0,
-            "date": "2026-09-27",
-            "time": "12:30"
-          },
-          {
-            "id": "f26",
-            "gameId": "2849953",
-            "homeIdx": 3,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": true,
-            "homeScore": 0,
-            "awayScore": 8,
-            "week": 0,
-            "date": "2026-10-10",
-            "time": "15:30"
-          },
-          {
-            "id": "f27",
-            "gameId": "2849948",
-            "homeIdx": 1,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": null,
-            "time": "10:00",
-            "cancelled": true
-          },
-          {
-            "id": "f28",
-            "gameId": "2849954",
-            "homeIdx": 3,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-10-24",
-            "time": "16:00"
-          },
-          {
-            "id": "f29",
-            "gameId": "2849942",
-            "homeIdx": 0,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-10-25",
-            "time": "14:30"
-          },
-          {
-            "id": "f30",
-            "gameId": "2849959",
-            "homeIdx": 2,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-11-01",
-            "time": "14:00"
-          },
-          {
-            "id": "f31",
-            "gameId": "2849955",
-            "homeIdx": 3,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-11-07",
-            "time": "14:00"
-          },
-          {
-            "id": "f32",
-            "gameId": "2849960",
-            "homeIdx": 2,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-11-22"
-          },
-          {
-            "id": "f33",
-            "gameId": "2849943",
-            "homeIdx": 0,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-11-22",
-            "time": "12:00"
-          },
-          {
-            "id": "f34",
-            "gameId": "2849949",
-            "homeIdx": 1,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-12-12",
-            "time": "10:00"
-          },
-          {
-            "id": "f35",
-            "gameId": "2849961",
-            "homeIdx": 2,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2026-12-13"
-          },
-          {
-            "id": "f36",
-            "gameId": "2849944",
-            "homeIdx": 0,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-01-30",
-            "time": "11:00"
-          },
-          {
-            "id": "f37",
-            "gameId": "2849950",
-            "homeIdx": 1,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-01-31",
-            "time": "10:00"
-          },
-          {
-            "id": "f38",
-            "gameId": "2849956",
-            "homeIdx": 3,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-02-13",
-            "time": "16:30"
-          },
-          {
-            "id": "f39",
-            "gameId": "2849951",
-            "homeIdx": 1,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-02-14",
-            "time": "10:00"
-          },
-          {
-            "id": "f40",
-            "gameId": "2849957",
-            "homeIdx": 3,
-            "awayIdx": 2,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-02-27",
-            "time": "16:30"
-          },
-          {
-            "id": "f41",
-            "gameId": "2849945",
-            "homeIdx": 0,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-02-28",
-            "time": "12:00"
-          },
-          {
-            "id": "f42",
-            "gameId": "2849962",
-            "homeIdx": 2,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-03-21"
-          },
-          {
-            "id": "f43",
-            "gameId": "2849958",
-            "homeIdx": 3,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-03-21",
-            "time": "11:30"
-          },
-          {
-            "id": "f44",
-            "gameId": "2849963",
-            "homeIdx": 2,
-            "awayIdx": 1,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-04-25"
-          },
-          {
-            "id": "f45",
-            "gameId": "2849946",
-            "homeIdx": 0,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-04-25",
-            "time": "13:00"
-          },
-          {
-            "id": "f46",
-            "gameId": "2849964",
-            "homeIdx": 2,
-            "awayIdx": 3,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-05-09"
-          },
-          {
-            "id": "f47",
-            "gameId": "2849952",
-            "homeIdx": 1,
-            "awayIdx": 0,
-            "homeWin": 50,
-            "draw": 6,
-            "awayWin": 44,
-            "overrideOn": false,
-            "ovHW": "",
-            "ovD": "",
-            "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
-            "week": 0,
-            "date": "2027-05-09",
-            "time": "10:00"
           }
         ],
         "ranking": [
@@ -42820,17 +42459,17 @@
           {
             "id": "t_tubize_g14_lfh",
             "name": "Tubize G14 LFH",
-            "km": 324
+            "km": 162
           },
           {
             "id": "t_eynatten_raeren_g14_lfh",
             "name": "Eynatten-Raeren G14 LFH",
-            "km": 89
+            "km": 45
           },
           {
             "id": "t_f_mina_vis_g14_lfh",
             "name": "Fémina Visé G14 LFH",
-            "km": 35
+            "km": 18
           },
           {
             "id": "t_union_beynoise_g14_lfh_r",
@@ -42844,7 +42483,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -42877,18 +42516,18 @@
             "clubeeId": 451768
           },
           {
-            "id": "t_eynatten_raeren_promo_lg_2",
-            "name": "Eynatten-Raeren Promo Lg 2",
-            "points": 0,
-            "homeBonus": "",
-            "clubeeId": 451781
-          },
-          {
             "id": "t_vis_bm_promo_lg",
             "name": "Visé BM Promo Lg",
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451813
+          },
+          {
+            "id": "t_eynatten_raeren_promo_lg_2",
+            "name": "Eynatten-Raeren Promo Lg 2",
+            "points": 0,
+            "homeBonus": "",
+            "clubeeId": 451781
           },
           {
             "id": "t_malmedy_promo_lg",
@@ -42923,7 +42562,7 @@
           {
             "id": "f0",
             "gameId": "2851743",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -42942,7 +42581,7 @@
           {
             "id": "f1",
             "gameId": "2851704",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
@@ -43076,7 +42715,7 @@
             "id": "f8",
             "gameId": "2851782",
             "homeIdx": 1,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -43095,7 +42734,7 @@
             "id": "f9",
             "gameId": "2851821",
             "homeIdx": 6,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -43151,7 +42790,7 @@
           {
             "id": "f12",
             "gameId": "2851744",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -43189,7 +42828,7 @@
           {
             "id": "f14",
             "gameId": "2851705",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -43398,8 +43037,8 @@
           {
             "id": "f25",
             "gameId": "2851706",
-            "homeIdx": 4,
-            "awayIdx": 5,
+            "homeIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -43455,7 +43094,7 @@
           {
             "id": "f28",
             "gameId": "2851746",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
@@ -43464,9 +43103,9 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
+            "played": true,
+            "homeScore": 26,
+            "awayScore": 13,
             "week": 0,
             "date": "2026-10-11",
             "time": "19:00"
@@ -43483,9 +43122,9 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
+            "played": true,
+            "homeScore": 29,
+            "awayScore": 31,
             "week": 0,
             "date": "2026-10-11",
             "time": "19:30"
@@ -43494,7 +43133,7 @@
             "id": "f30",
             "gameId": "2851720",
             "homeIdx": 7,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -43532,7 +43171,7 @@
             "id": "f32",
             "gameId": "2851862",
             "homeIdx": 9,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -43589,7 +43228,7 @@
             "id": "f35",
             "gameId": "2851824",
             "homeIdx": 6,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -43607,7 +43246,7 @@
           {
             "id": "f36",
             "gameId": "2851747",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -43645,7 +43284,7 @@
           {
             "id": "f38",
             "gameId": "2851707",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -43741,7 +43380,7 @@
             "id": "f43",
             "gameId": "2851811",
             "homeIdx": 2,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -43835,7 +43474,7 @@
           {
             "id": "f48",
             "gameId": "2851748",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -43854,7 +43493,7 @@
           {
             "id": "f49",
             "gameId": "2851708",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -43873,7 +43512,7 @@
           {
             "id": "f50",
             "gameId": "2851749",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
@@ -43950,7 +43589,7 @@
             "id": "f54",
             "gameId": "2851760",
             "homeIdx": 1,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44007,7 +43646,7 @@
             "id": "f57",
             "gameId": "2851865",
             "homeIdx": 9,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44063,7 +43702,7 @@
           {
             "id": "f60",
             "gameId": "2851750",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -44083,7 +43722,7 @@
             "id": "f61",
             "gameId": "2851697",
             "homeIdx": 0,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44159,7 +43798,7 @@
             "id": "f65",
             "gameId": "2851853",
             "homeIdx": 8,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44216,7 +43855,7 @@
             "id": "f68",
             "gameId": "2851814",
             "homeIdx": 2,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44234,7 +43873,7 @@
           {
             "id": "f69",
             "gameId": "2851710",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -44272,7 +43911,7 @@
           {
             "id": "f71",
             "gameId": "2851751",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -44349,7 +43988,7 @@
             "id": "f75",
             "gameId": "2851802",
             "homeIdx": 2,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44425,7 +44064,7 @@
             "id": "f79",
             "gameId": "2851763",
             "homeIdx": 1,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44557,8 +44196,8 @@
           {
             "id": "f86",
             "gameId": "2851752",
-            "homeIdx": 5,
-            "awayIdx": 4,
+            "homeIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44672,7 +44311,7 @@
             "id": "f92",
             "gameId": "2851855",
             "homeIdx": 8,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44690,7 +44329,7 @@
           {
             "id": "f93",
             "gameId": "2851712",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
@@ -44728,7 +44367,7 @@
           {
             "id": "f95",
             "gameId": "2851753",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -44804,7 +44443,7 @@
           {
             "id": "f99",
             "gameId": "2851713",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
@@ -44824,7 +44463,7 @@
             "id": "f100",
             "gameId": "2851844",
             "homeIdx": 3,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44862,7 +44501,7 @@
             "id": "f102",
             "gameId": "2851804",
             "homeIdx": 2,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -44956,7 +44595,7 @@
           {
             "id": "f107",
             "gameId": "2851714",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -44995,7 +44634,7 @@
             "id": "f109",
             "gameId": "2851702",
             "homeIdx": 0,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -45033,7 +44672,7 @@
             "id": "f111",
             "gameId": "2851793",
             "homeIdx": 1,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -45109,7 +44748,7 @@
             "id": "f115",
             "gameId": "2851729",
             "homeIdx": 7,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -45146,7 +44785,7 @@
           {
             "id": "f117",
             "gameId": "2851715",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -45222,7 +44861,7 @@
           {
             "id": "f121",
             "gameId": "2851755",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
@@ -45261,7 +44900,7 @@
             "id": "f123",
             "gameId": "2851846",
             "homeIdx": 3,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -45298,7 +44937,7 @@
           {
             "id": "f125",
             "gameId": "2851716",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -45404,6 +45043,18 @@
           },
           {
             "pos": 5,
+            "name": "Visé BM Promo Lg",
+            "played": 2,
+            "won": 2,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 62,
+            "ga": 34,
+            "points": 4,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17239/logo/96x96_hc-vise-bm_1790346013.png"
+          },
+          {
+            "pos": 6,
             "name": "Eynatten-Raeren Promo Lg 2",
             "played": 4,
             "won": 2,
@@ -45413,18 +45064,6 @@
             "ga": 91,
             "points": 4,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17247/logo/_1786967216.jpg"
-          },
-          {
-            "pos": 6,
-            "name": "Visé BM Promo Lg",
-            "played": 1,
-            "won": 1,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 36,
-            "ga": 21,
-            "points": 2,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17239/logo/96x96_hc-vise-bm_1790346013.png"
           },
           {
             "pos": 7,
@@ -45453,12 +45092,12 @@
           {
             "pos": 9,
             "name": "Verviers Promo Lg",
-            "played": 4,
+            "played": 5,
             "won": 0,
             "drawn": 0,
-            "lost": 4,
-            "gf": 75,
-            "ga": 108,
+            "lost": 5,
+            "gf": 88,
+            "ga": 134,
             "points": 0,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790353154.png"
           },
@@ -45477,48 +45116,10 @@
         ],
         "scorers": [
           {
-            "player": "Hadrien Louis",
-            "club": "Verviers Promo Lg",
-            "goals": 31,
-            "matchesPlayed": 5,
-            "sevenMScored": 6,
-            "sevenMMissed": 2,
-            "yellowCards": 1,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 4
-          },
-          {
-            "player": "Dohryan Catoul",
-            "club": "",
-            "goals": 30,
-            "matchesPlayed": 4,
-            "sevenMScored": 1,
-            "sevenMMissed": 1,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Joshua Schmitz",
-            "club": "Eynatten-Raeren Promo Lg 1",
-            "goals": 29,
-            "matchesPlayed": 4,
-            "sevenMScored": 4,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 6
-          },
-          {
             "player": "Jérôme Delcomminette",
             "club": "",
-            "goals": 29,
-            "matchesPlayed": 5,
+            "goals": 40,
+            "matchesPlayed": 6,
             "sevenMScored": 0,
             "sevenMMissed": 1,
             "yellowCards": 0,
@@ -45527,12 +45128,50 @@
             "redCards": 0
           },
           {
+            "player": "Hadrien Louis",
+            "club": "Verviers Promo Lg",
+            "goals": 34,
+            "matchesPlayed": 6,
+            "sevenMScored": 6,
+            "sevenMMissed": 4,
+            "yellowCards": 1,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
+          },
+          {
+            "player": "Joshua Schmitz",
+            "club": "Eynatten-Raeren Promo Lg 1",
+            "goals": 32,
+            "matchesPlayed": 5,
+            "sevenMScored": 5,
+            "sevenMMissed": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
+          },
+          {
             "player": "Adrien Destexhe",
             "club": "",
-            "goals": 28,
-            "matchesPlayed": 5,
-            "sevenMScored": 8,
+            "goals": 30,
+            "matchesPlayed": 6,
+            "sevenMScored": 12,
             "sevenMMissed": 3,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0
+          },
+          {
+            "player": "Dohryan Catoul",
+            "club": "",
+            "goals": 30,
+            "matchesPlayed": 4,
+            "sevenMScored": 1,
+            "sevenMMissed": 1,
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
@@ -45563,6 +45202,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 5
+          },
+          {
+            "player": "Linus Fijalkowski",
+            "club": "Eynatten-Raeren Promo Lg 1",
+            "goals": 26,
+            "matchesPlayed": 5,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 6
           },
           {
             "player": "Thibault Tilman",
@@ -45617,6 +45269,19 @@
             "lastGameGoals": 7
           },
           {
+            "player": "Loris Schumacher",
+            "club": "Eynatten-Raeren Promo Lg 1",
+            "goals": 24,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 2,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 7
+          },
+          {
             "player": "Grégory Biet",
             "club": "Wanzois Passion Promo Lg",
             "goals": 22,
@@ -45656,6 +45321,18 @@
             "lastGameGoals": 2
           },
           {
+            "player": "Félix Puffet",
+            "club": "",
+            "goals": 21,
+            "matchesPlayed": 6,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0
+          },
+          {
             "player": "Yanis Awouters",
             "club": "Flémalle Promo Lg",
             "goals": 20,
@@ -45669,19 +45346,6 @@
             "lastGameGoals": 3
           },
           {
-            "player": "Linus Fijalkowski",
-            "club": "Eynatten-Raeren Promo Lg 1",
-            "goals": 20,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
             "player": "Dean Mathee-Gerrards",
             "club": "Eynatten-Raeren Promo Lg 2",
             "goals": 19,
@@ -45693,6 +45357,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
+          },
+          {
+            "player": "Sacha Roberfroid",
+            "club": "Visé BM Promo Lg",
+            "goals": 19,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 1,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Lionel Mulier",
@@ -45721,6 +45398,18 @@
             "lastGameGoals": 2
           },
           {
+            "player": "David Laghzouzi",
+            "club": "",
+            "goals": 18,
+            "matchesPlayed": 5,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0
+          },
+          {
             "player": "Yanis Awouters",
             "club": "",
             "goals": 18,
@@ -45744,6 +45433,18 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
+          },
+          {
+            "player": "Tim Delval",
+            "club": "Verviers Promo Lg",
+            "goals": 18,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0
           },
           {
             "player": "Quentin Savelkoul",
@@ -45772,14 +45473,14 @@
             "lastGameGoals": 2
           },
           {
-            "player": "Loris Schumacher",
+            "player": "Niklas Mühlmann",
             "club": "Eynatten-Raeren Promo Lg 1",
             "goals": 17,
-            "matchesPlayed": 3,
+            "matchesPlayed": 5,
             "sevenMScored": 0,
-            "sevenMMissed": 2,
+            "sevenMMissed": 0,
             "yellowCards": 0,
-            "twoMinSuspensions": 1,
+            "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 4
@@ -45788,7 +45489,7 @@
             "player": "Jiyan Schreurs",
             "club": "",
             "goals": 17,
-            "matchesPlayed": 5,
+            "matchesPlayed": 6,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
@@ -45809,41 +45510,17 @@
             "redCards": 0
           },
           {
-            "player": "David Laghzouzi",
-            "club": "",
+            "player": "Timothée Brüll",
+            "club": "Eynatten-Raeren Promo Lg 1",
             "goals": 16,
-            "matchesPlayed": 4,
+            "matchesPlayed": 5,
             "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Sacha Roberfroid",
-            "club": "Visé BM Promo Lg",
-            "goals": 16,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
+            "sevenMMissed": 1,
             "yellowCards": 1,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 4
-          },
-          {
-            "player": "Félix Puffet",
-            "club": "",
-            "goals": 16,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 2,
-            "blueCards": 0,
-            "redCards": 0
+            "lastGameGoals": 3
           },
           {
             "player": "Tanguy Gillet",
@@ -46009,19 +45686,6 @@
             "lastGameGoals": 3
           },
           {
-            "player": "Timothée Brüll",
-            "club": "Eynatten-Raeren Promo Lg 1",
-            "goals": 13,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 1,
-            "yellowCards": 1,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
             "player": "Romain Fagnart",
             "club": "Sprimont Promo Lg",
             "goals": 13,
@@ -46084,30 +45748,43 @@
             "redCards": 0
           },
           {
-            "player": "Niklas Mühlmann",
-            "club": "Eynatten-Raeren Promo Lg 1",
+            "player": "Nicolas Menendez Estevez",
+            "club": "Visé BM Promo Lg",
             "goals": 13,
-            "matchesPlayed": 4,
+            "matchesPlayed": 3,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 0
+            "lastGameGoals": 3
           },
           {
             "player": "Mohmed-Lamine Cissé",
             "club": "Verviers Promo Lg",
             "goals": 13,
-            "matchesPlayed": 4,
+            "matchesPlayed": 5,
             "sevenMScored": 0,
             "sevenMMissed": 2,
+            "yellowCards": 0,
+            "twoMinSuspensions": 3,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 0
+          },
+          {
+            "player": "Jeremy Faway",
+            "club": "Visé BM Promo Lg",
+            "goals": 13,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 3
+            "lastGameGoals": 2
           },
           {
             "player": "Fabien Emonts-Gast",
@@ -46121,18 +45798,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 5
-          },
-          {
-            "player": "Tim Delval",
-            "club": "Verviers Promo Lg",
-            "goals": 13,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0
           },
           {
             "player": "Xavier Davison",
@@ -46187,6 +45852,19 @@
             "lastGameGoals": 2
           },
           {
+            "player": "Rémy Delvaux",
+            "club": "Visé BM Promo Lg",
+            "goals": 11,
+            "matchesPlayed": 4,
+            "sevenMScored": 2,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
             "player": "Jules Dotrimont",
             "club": "Villers-Amay Promo Lg",
             "goals": 11,
@@ -46215,14 +45893,14 @@
             "player": "Mathis Lourtie",
             "club": "Visé BM Promo Lg",
             "goals": 11,
-            "matchesPlayed": 3,
+            "matchesPlayed": 4,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 4
+            "lastGameGoals": 0
           },
           {
             "player": "Jiyan Schreurs",
@@ -46238,10 +45916,10 @@
             "lastGameGoals": 9
           },
           {
-            "player": "Jeremy Faway",
-            "club": "Visé BM Promo Lg",
+            "player": "ETIENNE COUREAU",
+            "club": "Verviers Promo Lg",
             "goals": 11,
-            "matchesPlayed": 3,
+            "matchesPlayed": 5,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
@@ -46301,17 +45979,30 @@
             "redCards": 0
           },
           {
-            "player": "Nicolas Menendez Estevez",
+            "player": "Arthur Bruckwilder",
             "club": "Visé BM Promo Lg",
             "goals": 10,
-            "matchesPlayed": 2,
+            "matchesPlayed": 4,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 7
+            "lastGameGoals": 3
+          },
+          {
+            "player": "Wim Zimmermann",
+            "club": "Eynatten-Raeren Promo Lg 1",
+            "goals": 10,
+            "matchesPlayed": 5,
+            "sevenMScored": 2,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Jahvis Berges",
@@ -46352,6 +46043,18 @@
             "lastGameGoals": 5
           },
           {
+            "player": "Loris Steenwinckels",
+            "club": "",
+            "goals": 9,
+            "matchesPlayed": 6,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0
+          },
+          {
             "player": "Lenny Pousset",
             "club": "JS Herstal Promo Lg",
             "goals": 9,
@@ -46373,19 +46076,6 @@
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
-            "player": "Rémy Delvaux",
-            "club": "Visé BM Promo Lg",
-            "goals": 9,
-            "matchesPlayed": 3,
-            "sevenMScored": 2,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 2,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 2
@@ -46414,19 +46104,6 @@
             "twoMinSuspensions": 2,
             "blueCards": 0,
             "redCards": 0
-          },
-          {
-            "player": "ETIENNE COUREAU",
-            "club": "Verviers Promo Lg",
-            "goals": 9,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
           },
           {
             "player": "Sacha Patron",
@@ -46492,11 +46169,36 @@
             "lastGameGoals": 2
           },
           {
-            "player": "Wim Zimmermann",
-            "club": "Eynatten-Raeren Promo Lg 1",
+            "player": "Hussien Al-Shamsi",
+            "club": "Visé BM Promo Lg",
             "goals": 8,
-            "matchesPlayed": 4,
-            "sevenMScored": 2,
+            "matchesPlayed": 3,
+            "sevenMScored": 5,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 4
+          },
+          {
+            "player": "Lewis Labrot",
+            "club": "",
+            "goals": 8,
+            "matchesPlayed": 5,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0
+          },
+          {
+            "player": "Chem Sauveur",
+            "club": "Verviers Promo Lg",
+            "goals": 8,
+            "matchesPlayed": 5,
+            "sevenMScored": 3,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
@@ -46557,18 +46259,6 @@
             "lastGameGoals": 1
           },
           {
-            "player": "Loris Steenwinckels",
-            "club": "",
-            "goals": 7,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
             "player": "Arthur Dumont",
             "club": "Wanzois Passion Promo Lg",
             "goals": 7,
@@ -46580,19 +46270,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 3
-          },
-          {
-            "player": "Arthur Bruckwilder",
-            "club": "Visé BM Promo Lg",
-            "goals": 7,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
           },
           {
             "player": "Romain Meale",
@@ -46621,17 +46298,17 @@
             "lastGameGoals": 2
           },
           {
-            "player": "Chem Sauveur",
-            "club": "Verviers Promo Lg",
+            "player": "Matthis Adamski",
+            "club": "Eynatten-Raeren Promo Lg 1",
             "goals": 7,
             "matchesPlayed": 4,
-            "sevenMScored": 1,
+            "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 2
+            "lastGameGoals": 3
           },
           {
             "player": "François Remy",
@@ -46686,6 +46363,19 @@
             "lastGameGoals": 1
           },
           {
+            "player": "Maxime Buckel",
+            "club": "Visé BM Promo Lg",
+            "goals": 7,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 6
+          },
+          {
             "player": "Romain Vancosen",
             "club": "Flémalle Promo Lg",
             "goals": 6,
@@ -46731,18 +46421,6 @@
             "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 1,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Lewis Labrot",
-            "club": "",
-            "goals": 6,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
@@ -46828,7 +46506,7 @@
             "player": "Lucas Gillet",
             "club": "Verviers Promo Lg",
             "goals": 5,
-            "matchesPlayed": 5,
+            "matchesPlayed": 6,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
@@ -46913,19 +46591,6 @@
             "lastGameGoals": 2
           },
           {
-            "player": "Hussien Al-Shamsi",
-            "club": "Visé BM Promo Lg",
-            "goals": 4,
-            "matchesPlayed": 2,
-            "sevenMScored": 5,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
             "player": "Mathieu Coart",
             "club": "Visé BM Promo Lg",
             "goals": 4,
@@ -46939,8 +46604,8 @@
             "lastGameGoals": 4
           },
           {
-            "player": "Matthis Adamski",
-            "club": "Eynatten-Raeren Promo Lg 1",
+            "player": "Timéo Smettin",
+            "club": "",
             "goals": 4,
             "matchesPlayed": 3,
             "sevenMScored": 0,
@@ -46948,8 +46613,7 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
+            "redCards": 0
           },
           {
             "player": "Martin Grevesse",
@@ -47043,18 +46707,6 @@
             "lastGameGoals": 3
           },
           {
-            "player": "Timéo Smettin",
-            "club": "",
-            "goals": 3,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
             "player": "Elias Santamaria",
             "club": "Visé BM Promo Lg",
             "goals": 3,
@@ -47080,7 +46732,7 @@
             "redCards": 0
           },
           {
-            "player": "Andrés Casali",
+            "player": "Ayrton Nicolas",
             "club": "Visé BM Promo Lg",
             "goals": 3,
             "matchesPlayed": 2,
@@ -47090,7 +46742,20 @@
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 3
+            "lastGameGoals": 1
+          },
+          {
+            "player": "Andrés Casali",
+            "club": "Visé BM Promo Lg",
+            "goals": 3,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Théo Bernard",
@@ -47108,11 +46773,11 @@
             "player": "Ethan Gillet",
             "club": "Verviers Promo Lg",
             "goals": 3,
-            "matchesPlayed": 5,
+            "matchesPlayed": 6,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
-            "twoMinSuspensions": 2,
+            "twoMinSuspensions": 3,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
@@ -47195,19 +46860,6 @@
             "redCards": 0
           },
           {
-            "player": "Ayrton Nicolas",
-            "club": "Visé BM Promo Lg",
-            "goals": 2,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
             "player": "Lucas Charlier Angellotti",
             "club": "",
             "goals": 2,
@@ -47249,11 +46901,37 @@
             "player": "Gabriel Oger",
             "club": "Visé BM Promo Lg",
             "goals": 2,
-            "matchesPlayed": 2,
+            "matchesPlayed": 3,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 0
+          },
+          {
+            "player": "Tom Meyer",
+            "club": "Eynatten-Raeren Promo Lg 1",
+            "goals": 2,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
+            "player": "Milan Roland",
+            "club": "Visé BM Promo Lg",
+            "goals": 2,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
@@ -47462,6 +47140,18 @@
             "lastGameGoals": 1
           },
           {
+            "player": "Léni Martin Virseda",
+            "club": "Visé BM Promo Lg",
+            "goals": 1,
+            "matchesPlayed": 2,
+            "sevenMScored": 2,
+            "sevenMMissed": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0
+          },
+          {
             "player": "Lény Van Der Haeghe",
             "club": "",
             "goals": 1,
@@ -47575,19 +47265,6 @@
             "lastGameGoals": 0
           },
           {
-            "player": "Milan Roland",
-            "club": "Visé BM Promo Lg",
-            "goals": 1,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
             "player": "Nicolas Heptia",
             "club": "Wanzois Passion Promo Lg",
             "goals": 1,
@@ -47611,19 +47288,6 @@
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0
-          },
-          {
-            "player": "Maxime Buckel",
-            "club": "Visé BM Promo Lg",
-            "goals": 1,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
           },
           {
             "player": "Jérôme MARINO",
@@ -47696,6 +47360,12 @@
             "date": "2026-09-06"
           },
           {
+            "player": "Jérôme Delcomminette",
+            "club": "Villers-Amay Promo Lg R",
+            "goals": 11,
+            "date": "2026-10-11"
+          },
+          {
             "player": "Hugo Carrillo-Rojas",
             "club": "Flémalle Promo Lg",
             "goals": 11,
@@ -47730,12 +47400,6 @@
             "club": "Sprimont Promo Lg",
             "goals": 9,
             "date": "2026-10-11"
-          },
-          {
-            "player": "Jérôme Delcomminette",
-            "club": "Villers-Amay Promo Lg R",
-            "goals": 9,
-            "date": "2026-10-04"
           },
           {
             "player": "Yanis Awouters",
@@ -47785,6 +47449,11 @@
             "km": 139
           },
           {
+            "id": "t_eynatten_raeren_promo_lg_1",
+            "name": "Eynatten-Raeren Promo Lg 1",
+            "km": 120
+          },
+          {
             "id": "t_sprimont_promo_lg",
             "name": "Sprimont Promo Lg",
             "km": 94
@@ -47800,19 +47469,14 @@
             "km": 62
           },
           {
-            "id": "t_eynatten_raeren_promo_lg_1",
-            "name": "Eynatten-Raeren Promo Lg 1",
-            "km": 48
+            "id": "t_verviers_promo_lg",
+            "name": "Verviers Promo Lg",
+            "km": 60
           },
           {
             "id": "t_vis_bm_promo_lg",
             "name": "Visé BM Promo Lg",
             "km": 44
-          },
-          {
-            "id": "t_verviers_promo_lg",
-            "name": "Verviers Promo Lg",
-            "km": 30
           },
           {
             "id": "t_eynatten_raeren_promo_lg_2",
@@ -47826,7 +47490,7 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -52059,7 +51723,7 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -55882,7 +55546,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -57215,7 +56879,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -58706,7 +58370,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -63728,7 +63392,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.931Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -63789,6 +63453,13 @@
             "clubeeId": 451383
           },
           {
+            "id": "t_leuven_d2_m_vhv",
+            "name": "Leuven D2 M VHV",
+            "points": 0,
+            "homeBonus": "",
+            "clubeeId": 451077
+          },
+          {
             "id": "t_welta_d2_m_vhv",
             "name": "Welta D2 M VHV",
             "points": 0,
@@ -63801,13 +63472,6 @@
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451515
-          },
-          {
-            "id": "t_leuven_d2_m_vhv",
-            "name": "Leuven D2 M VHV",
-            "points": 0,
-            "homeBonus": "",
-            "clubeeId": 451077
           }
         ],
         "fixtures": [
@@ -63834,7 +63498,7 @@
             "id": "f1",
             "gameId": "2849575",
             "homeIdx": 0,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -63853,7 +63517,7 @@
             "id": "f2",
             "gameId": "2849630",
             "homeIdx": 4,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -63890,7 +63554,7 @@
           {
             "id": "f4",
             "gameId": "2849597",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -63909,7 +63573,7 @@
           {
             "id": "f5",
             "gameId": "2849696",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
@@ -63928,7 +63592,7 @@
           {
             "id": "f6",
             "gameId": "2849641",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
@@ -63948,7 +63612,7 @@
             "id": "f7",
             "gameId": "2849652",
             "homeIdx": 3,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64024,7 +63688,7 @@
             "id": "f11",
             "gameId": "2849576",
             "homeIdx": 0,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64062,7 +63726,7 @@
             "id": "f13",
             "gameId": "2849587",
             "homeIdx": 2,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64099,7 +63763,7 @@
           {
             "id": "f15",
             "gameId": "2849697",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
@@ -64175,8 +63839,8 @@
           {
             "id": "f19",
             "gameId": "2849642",
-            "homeIdx": 8,
-            "awayIdx": 10,
+            "homeIdx": 9,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64195,7 +63859,7 @@
             "id": "f20",
             "gameId": "2849588",
             "homeIdx": 2,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64214,7 +63878,7 @@
             "id": "f21",
             "gameId": "2849654",
             "homeIdx": 3,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64232,7 +63896,7 @@
           {
             "id": "f22",
             "gameId": "2849599",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -64241,9 +63905,9 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
+            "played": true,
+            "homeScore": 34,
+            "awayScore": 32,
             "week": 0,
             "date": "2026-10-11",
             "time": "18:30"
@@ -64289,8 +63953,8 @@
           {
             "id": "f25",
             "gameId": "2849698",
-            "homeIdx": 9,
-            "awayIdx": 10,
+            "homeIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64403,7 +64067,7 @@
           {
             "id": "f31",
             "gameId": "2849600",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
@@ -64423,7 +64087,7 @@
             "id": "f32",
             "gameId": "2849655",
             "homeIdx": 3,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64460,7 +64124,7 @@
           {
             "id": "f34",
             "gameId": "2849644",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -64480,7 +64144,7 @@
             "id": "f35",
             "gameId": "2849677",
             "homeIdx": 6,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64499,7 +64163,7 @@
             "id": "f36",
             "gameId": "2849611",
             "homeIdx": 7,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64574,7 +64238,7 @@
           {
             "id": "f40",
             "gameId": "2849601",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -64612,8 +64276,8 @@
           {
             "id": "f42",
             "gameId": "2849645",
-            "homeIdx": 8,
-            "awayIdx": 9,
+            "homeIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64669,7 +64333,7 @@
           {
             "id": "f45",
             "gameId": "2849700",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -64708,7 +64372,7 @@
             "id": "f47",
             "gameId": "2849634",
             "homeIdx": 4,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64727,7 +64391,7 @@
             "id": "f48",
             "gameId": "2849624",
             "homeIdx": 5,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64764,7 +64428,7 @@
           {
             "id": "f50",
             "gameId": "2849602",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -64803,7 +64467,7 @@
             "id": "f52",
             "gameId": "2849667",
             "homeIdx": 1,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64821,7 +64485,7 @@
           {
             "id": "f53",
             "gameId": "2849646",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
@@ -64859,7 +64523,7 @@
           {
             "id": "f55",
             "gameId": "2849701",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
@@ -64898,7 +64562,7 @@
             "id": "f57",
             "gameId": "2849668",
             "homeIdx": 1,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -64916,7 +64580,7 @@
           {
             "id": "f58",
             "gameId": "2849647",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -64973,7 +64637,7 @@
           {
             "id": "f61",
             "gameId": "2849603",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -65012,7 +64676,7 @@
             "id": "f63",
             "gameId": "2849613",
             "homeIdx": 7,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65031,7 +64695,7 @@
             "id": "f64",
             "gameId": "2849625",
             "homeIdx": 5,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65068,7 +64732,7 @@
           {
             "id": "f66",
             "gameId": "2849702",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -65125,7 +64789,7 @@
           {
             "id": "f69",
             "gameId": "2849648",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -65144,8 +64808,8 @@
           {
             "id": "f70",
             "gameId": "2849604",
-            "homeIdx": 10,
-            "awayIdx": 8,
+            "homeIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65202,7 +64866,7 @@
             "id": "f73",
             "gameId": "2849626",
             "homeIdx": 5,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65239,7 +64903,7 @@
           {
             "id": "f75",
             "gameId": "2849703",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -65259,7 +64923,7 @@
             "id": "f76",
             "gameId": "2849681",
             "homeIdx": 6,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65315,7 +64979,7 @@
           {
             "id": "f79",
             "gameId": "2849649",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -65334,8 +64998,8 @@
           {
             "id": "f80",
             "gameId": "2849605",
-            "homeIdx": 10,
-            "awayIdx": 9,
+            "homeIdx": 8,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65430,7 +65094,7 @@
             "id": "f85",
             "gameId": "2849671",
             "homeIdx": 1,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65448,7 +65112,7 @@
           {
             "id": "f86",
             "gameId": "2849704",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -65487,7 +65151,7 @@
             "id": "f88",
             "gameId": "2849638",
             "homeIdx": 4,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65543,7 +65207,7 @@
           {
             "id": "f91",
             "gameId": "2849606",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
@@ -65562,7 +65226,7 @@
           {
             "id": "f92",
             "gameId": "2849650",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -65619,8 +65283,8 @@
           {
             "id": "f95",
             "gameId": "2849705",
-            "homeIdx": 9,
-            "awayIdx": 8,
+            "homeIdx": 10,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65696,7 +65360,7 @@
             "id": "f99",
             "gameId": "2849584",
             "homeIdx": 0,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65714,7 +65378,7 @@
           {
             "id": "f100",
             "gameId": "2849607",
-            "homeIdx": 10,
+            "homeIdx": 8,
             "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
@@ -65734,7 +65398,7 @@
             "id": "f101",
             "gameId": "2849684",
             "homeIdx": 6,
-            "awayIdx": 9,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65771,7 +65435,7 @@
           {
             "id": "f103",
             "gameId": "2849651",
-            "homeIdx": 8,
+            "homeIdx": 9,
             "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
@@ -65828,7 +65492,7 @@
           {
             "id": "f106",
             "gameId": "2849706",
-            "homeIdx": 9,
+            "homeIdx": 10,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -65848,7 +65512,7 @@
             "id": "f107",
             "gameId": "2849618",
             "homeIdx": 7,
-            "awayIdx": 8,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65867,7 +65531,7 @@
             "id": "f108",
             "gameId": "2849596",
             "homeIdx": 2,
-            "awayIdx": 10,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -65978,12 +65642,12 @@
           {
             "pos": 7,
             "name": "HK Waasmunster D2 M VHV",
-            "played": 4,
+            "played": 5,
             "won": 2,
             "drawn": 0,
-            "lost": 2,
-            "gf": 117,
-            "ga": 134,
+            "lost": 3,
+            "gf": 149,
+            "ga": 168,
             "points": 4,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17267/logo/96x96_hk-waasmunster_1784924616.png"
           },
@@ -66001,6 +65665,18 @@
           },
           {
             "pos": 9,
+            "name": "Leuven D2 M VHV",
+            "played": 4,
+            "won": 1,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 105,
+            "ga": 127,
+            "points": 2,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790147161.png"
+          },
+          {
+            "pos": 10,
             "name": "Welta D2 M VHV",
             "played": 5,
             "won": 1,
@@ -66012,7 +65688,7 @@
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17227/logo/_1786898639.jpg"
           },
           {
-            "pos": 10,
+            "pos": 11,
             "name": "Lebbeke D2 M VHV",
             "played": 5,
             "won": 1,
@@ -66022,18 +65698,6 @@
             "ga": 148,
             "points": 2,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1787666603.png"
-          },
-          {
-            "pos": 11,
-            "name": "Leuven D2 M VHV",
-            "played": 3,
-            "won": 0,
-            "drawn": 0,
-            "lost": 3,
-            "gf": 71,
-            "ga": 95,
-            "points": 0,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790147161.png"
           }
         ],
         "scorers": [
@@ -66049,6 +65713,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 7
+          },
+          {
+            "player": "Arne Cleiren",
+            "club": "HK Waasmunster D2 M VHV",
+            "goals": 32,
+            "matchesPlayed": 5,
+            "sevenMScored": 1,
+            "sevenMMissed": 0,
+            "yellowCards": 1,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 9
           },
           {
             "player": "Tuur Cuyvers",
@@ -66090,6 +65767,19 @@
             "lastGameGoals": 7
           },
           {
+            "player": "Leon Van Damme",
+            "club": "HK Waasmunster D2 M VHV",
+            "goals": 24,
+            "matchesPlayed": 4,
+            "sevenMScored": 6,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 10
+          },
+          {
             "player": "Jonathan Vranken",
             "club": "Kwanten Arena D2 M VHV 1",
             "goals": 23,
@@ -66127,19 +65817,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 5
-          },
-          {
-            "player": "Arne Cleiren",
-            "club": "HK Waasmunster D2 M VHV",
-            "goals": 23,
-            "matchesPlayed": 4,
-            "sevenMScored": 1,
-            "sevenMMissed": 0,
-            "yellowCards": 1,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
           },
           {
             "player": "Jonas Bruggeman",
@@ -66192,6 +65869,32 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 4
+          },
+          {
+            "player": "Sander De Schepper",
+            "club": "HK Waasmunster D2 M VHV",
+            "goals": 19,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 6
+          },
+          {
+            "player": "Luca Pignatti",
+            "club": "Leuven D2 M VHV",
+            "goals": 19,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 1,
+            "yellowCards": 1,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 6
           },
           {
             "player": "Bert Haex",
@@ -66257,6 +65960,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 10
+          },
+          {
+            "player": "Benjamin Vanbiervliet",
+            "club": "Leuven D2 M VHV",
+            "goals": 17,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 2,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 7
           },
           {
             "player": "Nick Dromart",
@@ -66376,19 +66092,6 @@
             "lastGameGoals": 1
           },
           {
-            "player": "Leon Van Damme",
-            "club": "HK Waasmunster D2 M VHV",
-            "goals": 14,
-            "matchesPlayed": 3,
-            "sevenMScored": 5,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 5
-          },
-          {
             "player": "Jordy Van Moorleghem",
             "club": "Desselgemse D2 M VHV",
             "goals": 13,
@@ -66400,19 +66103,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 5
-          },
-          {
-            "player": "Sander De Schepper",
-            "club": "HK Waasmunster D2 M VHV",
-            "goals": 13,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
           },
           {
             "player": "Emiel Huyghe",
@@ -66428,6 +66118,19 @@
             "lastGameGoals": 4
           },
           {
+            "player": "Sooi Peeters",
+            "club": "Leuven D2 M VHV",
+            "goals": 13,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 7
+          },
+          {
             "player": "Pjotr Moens",
             "club": "Lebbeke D2 M VHV",
             "goals": 13,
@@ -66441,17 +66144,30 @@
             "lastGameGoals": 2
           },
           {
-            "player": "Luca Pignatti",
-            "club": "Leuven D2 M VHV",
+            "player": "Vince Vonck",
+            "club": "HK Waasmunster D2 M VHV",
             "goals": 13,
-            "matchesPlayed": 3,
+            "matchesPlayed": 5,
             "sevenMScored": 0,
             "sevenMMissed": 0,
-            "yellowCards": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 3,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
+            "player": "Viktor Claeys",
+            "club": "HK Waasmunster D2 M VHV",
+            "goals": 13,
+            "matchesPlayed": 5,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 6
+            "lastGameGoals": 1
           },
           {
             "player": "Mathijs Desloovere",
@@ -66478,19 +66194,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
-          },
-          {
-            "player": "Viktor Claeys",
-            "club": "HK Waasmunster D2 M VHV",
-            "goals": 12,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
           },
           {
             "player": "Arne Bruyneel",
@@ -66545,19 +66248,6 @@
             "lastGameGoals": 1
           },
           {
-            "player": "Vince Vonck",
-            "club": "HK Waasmunster D2 M VHV",
-            "goals": 11,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 2,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
             "player": "Faycal Ait Daoud",
             "club": "HC Overpelt D2 M VHV",
             "goals": 10,
@@ -66566,19 +66256,6 @@
             "sevenMMissed": 1,
             "yellowCards": 0,
             "twoMinSuspensions": 2,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
-            "player": "Benjamin Vanbiervliet",
-            "club": "Leuven D2 M VHV",
-            "goals": 10,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 1,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 3
@@ -66701,6 +66378,19 @@
             "lastGameGoals": 5
           },
           {
+            "player": "Jan Rohse",
+            "club": "Leuven D2 M VHV",
+            "goals": 8,
+            "matchesPlayed": 4,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
             "player": "simon Fraeyman",
             "club": "Eeklo D2 M VHV",
             "goals": 8,
@@ -66735,6 +66425,32 @@
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
+            "player": "Tuur De Beule",
+            "club": "HK Waasmunster D2 M VHV",
+            "goals": 8,
+            "matchesPlayed": 5,
+            "sevenMScored": 0,
+            "sevenMMissed": 1,
+            "yellowCards": 0,
+            "twoMinSuspensions": 2,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
+            "player": "Lucas De Keyser",
+            "club": "HK Waasmunster D2 M VHV",
+            "goals": 8,
+            "matchesPlayed": 5,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
@@ -66818,17 +66534,17 @@
             "lastGameGoals": 7
           },
           {
-            "player": "Lucas De Keyser",
-            "club": "HK Waasmunster D2 M VHV",
+            "player": "Vasilije Jovanovic",
+            "club": "Leuven D2 M VHV",
             "goals": 7,
-            "matchesPlayed": 4,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
-            "twoMinSuspensions": 1,
+            "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 0
+            "lastGameGoals": 5
           },
           {
             "player": "Lomme Plessers",
@@ -66868,19 +66584,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
-          },
-          {
-            "player": "Jan Rohse",
-            "club": "Leuven D2 M VHV",
-            "goals": 6,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
           },
           {
             "player": "Sander Vanwing",
@@ -66961,19 +66664,6 @@
             "lastGameGoals": 3
           },
           {
-            "player": "Sooi Peeters",
-            "club": "Leuven D2 M VHV",
-            "goals": 6,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 4
-          },
-          {
             "player": "Nuri De Backer",
             "club": "Lebbeke D2 M VHV",
             "goals": 6,
@@ -67000,19 +66690,6 @@
             "lastGameGoals": 3
           },
           {
-            "player": "Tuur De Beule",
-            "club": "HK Waasmunster D2 M VHV",
-            "goals": 6,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 1,
-            "yellowCards": 0,
-            "twoMinSuspensions": 2,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
             "player": "Rune Hellings",
             "club": "Desselgemse D2 M VHV",
             "goals": 6,
@@ -67031,6 +66708,19 @@
             "goals": 6,
             "matchesPlayed": 2,
             "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
+            "player": "Ruben Van Hout",
+            "club": "Leuven D2 M VHV",
+            "goals": 6,
+            "matchesPlayed": 4,
+            "sevenMScored": 1,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 1,
@@ -67377,19 +67067,6 @@
             "lastGameGoals": 2
           },
           {
-            "player": "Ruben Van Hout",
-            "club": "Leuven D2 M VHV",
-            "goals": 4,
-            "matchesPlayed": 3,
-            "sevenMScored": 1,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
             "player": "Freek Boes",
             "club": "HC Overpelt D2 M VHV",
             "goals": 4,
@@ -67445,14 +67122,14 @@
             "player": "Senne Ivens",
             "club": "HK Waasmunster D2 M VHV",
             "goals": 3,
-            "matchesPlayed": 4,
+            "matchesPlayed": 5,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 1
+            "lastGameGoals": 0
           },
           {
             "player": "Tibe Boriau",
@@ -67585,17 +67262,17 @@
             "lastGameGoals": 2
           },
           {
-            "player": "Vasilije Jovanovic",
+            "player": "Thomas Vergote",
             "club": "Leuven D2 M VHV",
             "goals": 2,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 2
+            "lastGameGoals": 1
           },
           {
             "player": "Gust Van Der Gucht",
@@ -67622,6 +67299,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 2
+          },
+          {
+            "player": "Aldo Callens",
+            "club": "Leuven D2 M VHV",
+            "goals": 2,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Nicolas Luyten",
@@ -67806,6 +67496,19 @@
             "lastGameGoals": 1
           },
           {
+            "player": "Thibault Vandenbroecke",
+            "club": "Leuven D2 M VHV",
+            "goals": 1,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 3,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
             "player": "Joren Vanthournout",
             "club": "Desselgemse D2 M VHV",
             "goals": 1,
@@ -67845,10 +67548,23 @@
             "lastGameGoals": 0
           },
           {
-            "player": "Thomas Vergote",
+            "player": "Seppe Stessens",
             "club": "Leuven D2 M VHV",
             "goals": 1,
-            "matchesPlayed": 1,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
+            "player": "Thijs Janssens",
+            "club": "Leuven D2 M VHV",
+            "goals": 1,
+            "matchesPlayed": 3,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
@@ -67874,20 +67590,7 @@
             "player": "Andres Lefever",
             "club": "Leuven D2 M VHV",
             "goals": 1,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Aldo Callens",
-            "club": "Leuven D2 M VHV",
-            "goals": 1,
-            "matchesPlayed": 2,
+            "matchesPlayed": 3,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
@@ -67935,6 +67638,12 @@
             "club": "Kwanten Arena D2 M VHV 1",
             "goals": 11,
             "date": "2026-09-20"
+          },
+          {
+            "player": "Leon Van Damme",
+            "club": "HK Waasmunster D2 M VHV",
+            "goals": 10,
+            "date": "2026-10-11"
           },
           {
             "player": "Sander De Schepper",
@@ -68007,15 +67716,14 @@
             "club": "Eeklo D2 M VHV",
             "goals": 7,
             "date": "2026-09-26"
-          },
-          {
-            "player": "Leon Van Damme",
-            "club": "HK Waasmunster D2 M VHV",
-            "goals": 7,
-            "date": "2026-09-12"
           }
         ],
         "travelRanking": [
+          {
+            "id": "t_hk_waasmunster_d2_m_vhv",
+            "name": "HK Waasmunster D2 M VHV",
+            "km": 296
+          },
           {
             "id": "t_lebbeke_d2_m_vhv",
             "name": "Lebbeke D2 M VHV",
@@ -68035,11 +67743,6 @@
             "id": "t_welta_d2_m_vhv",
             "name": "Welta D2 M VHV",
             "km": 226
-          },
-          {
-            "id": "t_hk_waasmunster_d2_m_vhv",
-            "name": "HK Waasmunster D2 M VHV",
-            "km": 219
           },
           {
             "id": "t_hc_overpelt_d2_m_vhv",
@@ -68078,7 +67781,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -72324,7 +72027,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -75954,7 +75657,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -77731,7 +77434,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -82178,7 +81881,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.931Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -82211,18 +81914,18 @@
             "clubeeId": 451693
           },
           {
-            "id": "t_evergem_d_m_vhv_owv_b",
-            "name": "Evergem D M VHV OWV-B",
-            "points": 0,
-            "homeBonus": "",
-            "clubeeId": 451379
-          },
-          {
             "id": "t_dendermonde_d_m_vhv_owv_b_1",
             "name": "Dendermonde D M VHV OWV-B 1",
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451622
+          },
+          {
+            "id": "t_evergem_d_m_vhv_owv_b",
+            "name": "Evergem D M VHV OWV-B",
+            "points": 0,
+            "homeBonus": "",
+            "clubeeId": 451379
           },
           {
             "id": "t_brugge_d_m_vhv_owv",
@@ -82322,7 +82025,7 @@
             "id": "f3",
             "gameId": "2851474",
             "homeIdx": 3,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -82379,7 +82082,7 @@
             "id": "f6",
             "gameId": "2851540",
             "homeIdx": 8,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -82455,7 +82158,7 @@
             "id": "f10",
             "gameId": "2851486",
             "homeIdx": 2,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -82511,7 +82214,7 @@
           {
             "id": "f13",
             "gameId": "2851497",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -82626,7 +82329,7 @@
             "id": "f19",
             "gameId": "2851542",
             "homeIdx": 8,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -82663,7 +82366,7 @@
           {
             "id": "f21",
             "gameId": "2851498",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
@@ -82672,9 +82375,9 @@
             "ovHW": "",
             "ovD": "",
             "ovAW": "",
-            "played": false,
-            "homeScore": null,
-            "awayScore": null,
+            "played": true,
+            "homeScore": 20,
+            "awayScore": 18,
             "week": 0,
             "date": "2026-10-11",
             "time": "18:30"
@@ -82721,7 +82424,7 @@
             "id": "f24",
             "gameId": "2851586",
             "homeIdx": 0,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -82777,7 +82480,7 @@
           {
             "id": "f27",
             "gameId": "2851531",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
@@ -82853,7 +82556,7 @@
           {
             "id": "f31",
             "gameId": "2851499",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
@@ -82872,7 +82575,7 @@
           {
             "id": "f32",
             "gameId": "2851532",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
@@ -82930,7 +82633,7 @@
             "id": "f35",
             "gameId": "2851565",
             "homeIdx": 9,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -82967,7 +82670,7 @@
           {
             "id": "f37",
             "gameId": "2851533",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
@@ -83043,7 +82746,7 @@
           {
             "id": "f41",
             "gameId": "2851500",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -83139,7 +82842,7 @@
             "id": "f46",
             "gameId": "2851522",
             "homeIdx": 10,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -83214,7 +82917,7 @@
           {
             "id": "f50",
             "gameId": "2851534",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
@@ -83272,7 +82975,7 @@
             "id": "f53",
             "gameId": "2851556",
             "homeIdx": 1,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -83290,7 +82993,7 @@
           {
             "id": "f54",
             "gameId": "2851535",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
@@ -83442,7 +83145,7 @@
           {
             "id": "f62",
             "gameId": "2851536",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
@@ -83499,8 +83202,8 @@
           {
             "id": "f65",
             "gameId": "2851503",
-            "homeIdx": 5,
-            "awayIdx": 4,
+            "homeIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -83594,7 +83297,7 @@
           {
             "id": "f70",
             "gameId": "2851537",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
@@ -83652,7 +83355,7 @@
             "id": "f73",
             "gameId": "2851581",
             "homeIdx": 6,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -83785,7 +83488,7 @@
             "id": "f80",
             "gameId": "2851559",
             "homeIdx": 1,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -83822,7 +83525,7 @@
           {
             "id": "f82",
             "gameId": "2851505",
-            "homeIdx": 5,
+            "homeIdx": 4,
             "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
@@ -83879,7 +83582,7 @@
           {
             "id": "f85",
             "gameId": "2851538",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
@@ -83899,7 +83602,7 @@
             "id": "f86",
             "gameId": "2851593",
             "homeIdx": 0,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -84012,7 +83715,7 @@
           {
             "id": "f92",
             "gameId": "2851539",
-            "homeIdx": 4,
+            "homeIdx": 5,
             "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
@@ -84089,7 +83792,7 @@
             "id": "f96",
             "gameId": "2851517",
             "homeIdx": 7,
-            "awayIdx": 4,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -84108,7 +83811,7 @@
             "id": "f97",
             "gameId": "2851495",
             "homeIdx": 2,
-            "awayIdx": 5,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -84213,6 +83916,18 @@
           },
           {
             "pos": 5,
+            "name": "Dendermonde D M VHV OWV-B 1",
+            "played": 2,
+            "won": 2,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 51,
+            "ga": 41,
+            "points": 4,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17253/logo/_1784646241.png"
+          },
+          {
+            "pos": 6,
             "name": "Evergem D M VHV OWV-B",
             "played": 3,
             "won": 1,
@@ -84222,18 +83937,6 @@
             "ga": 88,
             "points": 3,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17266/logo/_1785696874.png"
-          },
-          {
-            "pos": 6,
-            "name": "Dendermonde D M VHV OWV-B 1",
-            "played": 1,
-            "won": 1,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 31,
-            "ga": 23,
-            "points": 2,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17253/logo/_1784646241.png"
           },
           {
             "pos": 7,
@@ -84274,12 +83977,12 @@
           {
             "pos": 10,
             "name": "Lebbeke D M VHV OWV-B",
-            "played": 2,
+            "played": 3,
             "won": 0,
             "drawn": 1,
-            "lost": 1,
-            "gf": 36,
-            "ga": 50,
+            "lost": 2,
+            "gf": 54,
+            "ga": 70,
             "points": 1,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1787666591.png"
           },
@@ -84426,6 +84129,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
+          },
+          {
+            "player": "Daan Van Sande",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 13,
+            "matchesPlayed": 3,
+            "sevenMScored": 1,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Leo Soens",
@@ -84634,19 +84350,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 10
-          },
-          {
-            "player": "Daan Van Sande",
-            "club": "Lebbeke D M VHV OWV-B",
-            "goals": 10,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
           },
           {
             "player": "Matisse Demets",
@@ -85036,6 +84739,19 @@
             "lastGameGoals": 2
           },
           {
+            "player": "Jari Van Verdegem",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 7,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
             "player": "Thibaut Masscho",
             "club": "Evergem D M VHV OWV-B",
             "goals": 7,
@@ -85088,6 +84804,19 @@
             "lastGameGoals": 2
           },
           {
+            "player": "Hans Van Gaever",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 6,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
             "player": "Yoram Dierick",
             "club": "Lebbeke D M VHV OWV-B",
             "goals": 6,
@@ -85128,6 +84857,19 @@
           },
           {
             "player": "Arne Van der Elst",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 6,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 1,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 3
+          },
+          {
+            "player": "Arne Van der Elst",
             "club": "Dendermonde D M VHV OWV-B 2",
             "goals": 6,
             "matchesPlayed": 3,
@@ -85151,6 +84893,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
+          },
+          {
+            "player": "Maxim Merens",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 6,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Mauro Bouckhout",
@@ -85216,6 +84971,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 6
+          },
+          {
+            "player": "Manno Cassiman",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 6,
+            "matchesPlayed": 3,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Dries Van Straeten",
@@ -85311,14 +85079,14 @@
             "player": "Chris Mortier",
             "club": "Dendermonde D M VHV OWV-B 1",
             "goals": 5,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 5
+            "lastGameGoals": 0
           },
           {
             "player": "Tobias Chielens",
@@ -85373,19 +85141,6 @@
             "lastGameGoals": 5
           },
           {
-            "player": "Jari Van Verdegem",
-            "club": "Dendermonde D M VHV OWV-B 1",
-            "goals": 5,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 5
-          },
-          {
             "player": "Remie Vannieuwenhuyse",
             "club": "Besox Izegem D M VHV OWV",
             "goals": 5,
@@ -85397,6 +85152,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
+          },
+          {
+            "player": "Matthias Vincke",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 5,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Achiel Denys",
@@ -85420,19 +85188,6 @@
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
-            "player": "Manno Cassiman",
-            "club": "Lebbeke D M VHV OWV-B",
-            "goals": 5,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 3
@@ -85516,19 +85271,6 @@
             "lastGameGoals": 5
           },
           {
-            "player": "Hans Van Gaever",
-            "club": "Dendermonde D M VHV OWV-B 1",
-            "goals": 4,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 4
-          },
-          {
             "player": "Ruben De Bal",
             "club": "HBC Apolloon Spurs D M VHV OWV",
             "goals": 4,
@@ -85607,6 +85349,19 @@
             "lastGameGoals": 2
           },
           {
+            "player": "Bram Cleynens",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 4,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
             "player": "Seppe Claeys",
             "club": "HBC Apolloon Spurs D M VHV OWV",
             "goals": 4,
@@ -85646,6 +85401,19 @@
             "lastGameGoals": 4
           },
           {
+            "player": "Daan Van De Voorde",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 4,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 4
+          },
+          {
             "player": "Mathias Huysman",
             "club": "Besox Izegem D M VHV OWV",
             "goals": 4,
@@ -85657,6 +85425,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 4
+          },
+          {
+            "player": "Jarno Saerens",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 4,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 1,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Thibeau Braes",
@@ -85744,32 +85525,6 @@
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 1,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
-            "player": "Arne Van der Elst",
-            "club": "Dendermonde D M VHV OWV-B 1",
-            "goals": 3,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 1,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
-            "player": "Bram Cleynens",
-            "club": "Dendermonde D M VHV OWV-B 1",
-            "goals": 3,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
@@ -85867,19 +85622,6 @@
             "lastGameGoals": 1
           },
           {
-            "player": "Jarno Saerens",
-            "club": "Lebbeke D M VHV OWV-B",
-            "goals": 3,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 1,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
             "player": "Matisse Van Hoeylandt",
             "club": "DB Gent D M VHV OWV",
             "goals": 3,
@@ -85945,6 +85687,19 @@
             "lastGameGoals": 1
           },
           {
+            "player": "Lars Ottoy",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 3,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
+          },
+          {
             "player": "Nathan Ghys",
             "club": "HBC Apolloon Spurs D M VHV OWV",
             "goals": 3,
@@ -85969,6 +85724,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
+          },
+          {
+            "player": "Laurens De Lanoeye",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 2,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Juul Vanaudenaerde",
@@ -86023,6 +85791,19 @@
             "lastGameGoals": 0
           },
           {
+            "player": "Bjorn De Sitter",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 2,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
             "player": "Wolf Desmet",
             "club": "HBC Apolloon Spurs D M VHV OWV",
             "goals": 2,
@@ -86057,6 +85838,19 @@
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 1,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
+          },
+          {
+            "player": "Eli Byl",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 2,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
@@ -86221,14 +86015,14 @@
             "player": "Glenn Van de Meersche",
             "club": "Dendermonde D M VHV OWV-B 1",
             "goals": 2,
-            "matchesPlayed": 1,
+            "matchesPlayed": 2,
             "sevenMScored": 0,
             "sevenMMissed": 0,
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
             "redCards": 0,
-            "lastGameGoals": 2
+            "lastGameGoals": 0
           },
           {
             "player": "Pieter-Jan Malfait",
@@ -86242,6 +86036,18 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 1
+          },
+          {
+            "player": "Stijn Van Caenegem",
+            "club": "Dendermonde D M VHV OWV-B 1",
+            "goals": 1,
+            "matchesPlayed": 1,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0
           },
           {
             "player": "Michiel Van De Woestyne",
@@ -86268,6 +86074,19 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 0
+          },
+          {
+            "player": "Kwinten Tirry",
+            "club": "Lebbeke D M VHV OWV-B",
+            "goals": 1,
+            "matchesPlayed": 2,
+            "sevenMScored": 0,
+            "sevenMMissed": 0,
+            "yellowCards": 0,
+            "twoMinSuspensions": 0,
+            "blueCards": 0,
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Bram Cleynens",
@@ -86309,20 +86128,7 @@
             "lastGameGoals": 0
           },
           {
-            "player": "Maxim Merens",
-            "club": "Lebbeke D M VHV OWV-B",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Bjorn De Sitter",
+            "player": "Jef Hiel",
             "club": "Lebbeke D M VHV OWV-B",
             "goals": 1,
             "matchesPlayed": 1,
@@ -86350,19 +86156,6 @@
           {
             "player": "Tristan Smekens",
             "club": "Lebbeke D M VHV OWV-B",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Eli Byl",
-            "club": "Dendermonde D M VHV OWV-B 1",
             "goals": 1,
             "matchesPlayed": 1,
             "sevenMScored": 0,
@@ -86413,8 +86206,8 @@
             "lastGameGoals": 1
           },
           {
-            "player": "Lars Ottoy",
-            "club": "Lebbeke D M VHV OWV-B",
+            "player": "Kenyo De Graef",
+            "club": "Dendermonde D M VHV OWV-B 1",
             "goals": 1,
             "matchesPlayed": 1,
             "sevenMScored": 0,
@@ -86611,7 +86404,7 @@
           {
             "id": "t_lebbeke_d_m_vhv_owv_b",
             "name": "Lebbeke D M VHV OWV-B",
-            "km": 0
+            "km": 9
           }
         ]
       },
@@ -87870,7 +87663,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -90165,7 +89958,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T17:44:58.284Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -96219,7 +96012,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -104519,7 +104312,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.931Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -113574,7 +113367,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.931Z",
         "dataVersion": 2,
         "live": false,
         "teams": [
@@ -115397,7 +115190,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -121325,7 +121118,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.931Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -138756,7 +138549,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T17:44:58.285Z",
+        "updatedAt": "2026-10-11T21:58:18.930Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
