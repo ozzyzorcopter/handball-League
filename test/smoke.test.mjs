@@ -3,6 +3,8 @@
 // "rendered fewer hooks than expected" black screen when opening a league)
 // before they are deployed.
 import test from "node:test";
+import { createRequire as _cr } from "node:module";
+const { splitFederations } = _cr(import.meta.url)("../.github/scripts/split-data.js");
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import { JSDOM } from "jsdom";
@@ -44,7 +46,15 @@ async function loadApp() {
   w.React = require("react");
   w.ReactDOM = require("react-dom/client");
   globalThis.IS_REACT_ACT_ENVIRONMENT = true;
-  w.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve(data) });
+  // Serve the new layout: a small index, then one file per league, on demand.
+  const { index, leagues } = splitFederations(data);
+  w.fetched = [];
+  w.fetch = (url) => {
+    w.fetched.push(String(url));
+    const m = String(url).match(/data\/leagues\/([^/]+)\.json$/);
+    const body = /data\/index\.json$/.test(url) ? index : m ? leagues.get(decodeURIComponent(m[1])) : null;
+    return Promise.resolve(body ? { ok: true, json: () => Promise.resolve(body) } : { ok: false, status: 404, json: () => Promise.reject(new Error("404")) });
+  };
   const out = await build({
     entryPoints: ["app.js"], bundle: true, write: false, outfile: "o.js",
     loader: { ".js": "jsx" }, define: { __SHARE__: "false", __MC_WORKER_SRC__: '""' }, logLevel: "silent",
@@ -119,6 +129,21 @@ test("follow, language, league tabs and predictions", async () => {
   // Back to the list.
   await click(w, act, byText(w, "button", "← All Leagues"));
   assert.match(text(w), /My teams/);
+
+  // Lazy loading: the index came first, the league file on demand, the old single file never.
+  assert.ok(w.fetched[0].endsWith("data/index.json"), "index is fetched first");
+  assert.ok(w.fetched.some((u) => u.endsWith("data/leagues/101.json")), "league file fetched when needed");
+  assert.ok(!w.fetched.some((u) => u.includes("vhv-data.json")), "old big file not used");
+});
+
+test("split data: stubs have no fixtures, full leagues keep everything", () => {
+  const { index, leagues } = splitFederations(data);
+  const stub = index.federations.VHV["101"];
+  assert.equal(stub.fixtures, undefined);
+  assert.equal(stub.teams.length, league.teams.length);
+  assert.equal(stub.played + stub.pending, league.fixtures.length);
+  assert.equal(leagues.get("101").fixtures.length, league.fixtures.length);
+  assert.ok(JSON.stringify(index).length < JSON.stringify(data).length / 2);
 });
 
 test("goal model gives sensible probabilities", async () => {

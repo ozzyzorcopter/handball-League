@@ -5,7 +5,7 @@ import { calcProbs, calcProbsNeutral, fixProbs, predictMatch, weekBounds } from 
 import { calcStats } from "./src/standings.js";
 import { runMCAsync } from "./src/mcRunner.js";
 
-const { useState, useMemo, useRef, useEffect } = React;
+const { useState, useMemo, useRef, useEffect, useCallback } = React;
 const MEDALS = ["🥇", "🥈", "🥉"];
 const IS_SHARE = __SHARE__; // injected at build time by build.mjs (esbuild --define); true only for the share page
 
@@ -2749,6 +2749,9 @@ function LeagueEditor({ league, onChange }) {
 }
 
 // ── BELGIAN HANDBALL SCREEN ───────────────────────────────────────────────────
+const DATA_BASE = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/data/";
+const VHV_INDEX_URL = DATA_BASE + "index.json";
+// Old single-file layout: still used as a fallback until the first fetch run has written data/.
 const VHV_DATA_URL = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/vhv-data.json";
 
 const FED_META = {
@@ -2757,16 +2760,47 @@ const FED_META = {
   "URBH-KBHB": { label: "URBH-KBHB", color: "#fbbf24", desc: "Union Royale Belge de Handball" },
 };
 
+// Loads the small league index first; full leagues (fixtures, scorers, ...) are fetched
+// on demand with loadLeague(id). In `data.federations`, a league without `fixtures` is a stub.
 function useVhvData() {
-  const [data, setData] = useState(null);
+  const [index, setIndex] = useState(null);
+  const [loaded, setLoaded] = useState({});
+  const [failed, setFailed] = useState({});
   const [error, setError] = useState(false);
+  const requested = useRef(new Set());
+
   useEffect(() => {
-    fetch(VHV_DATA_URL)
-      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-      .then(d => setData(d))
-      .catch(() => setError(true));
+    let dead = false;
+    const json = r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); };
+    fetch(VHV_INDEX_URL).then(json)
+      .then(d => { if (!d || !d.federations) throw new Error("bad index"); return d; })
+      .catch(() => fetch(VHV_DATA_URL).then(json))   // fallback: the old single file (every league already full)
+      .then(d => { if (!dead) setIndex(d); })
+      .catch(() => { if (!dead) setError(true); });
+    return () => { dead = true; };
   }, []);
-  return { data, error };
+
+  const loadLeague = useCallback(id => {
+    id = String(id);
+    if (requested.current.has(id)) return;
+    requested.current.add(id);
+    fetch(DATA_BASE + "leagues/" + encodeURIComponent(id) + ".json")
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(lg => setLoaded(m => ({ ...m, [id]: lg })))
+      .catch(() => { requested.current.delete(id); setFailed(m => ({ ...m, [id]: true })); });
+  }, []);
+
+  const data = useMemo(() => {
+    if (!index) return null;
+    const federations = {};
+    for (const [fed, byId] of Object.entries(index.federations || {})) {
+      federations[fed] = {};
+      for (const [id, lg] of Object.entries(byId || {})) federations[fed][id] = loaded[String(lg.serieId || id)] || lg;
+    }
+    return { ...index, federations };
+  }, [index, loaded]);
+
+  return { data, error, loadLeague, failed };
 }
 
 // Keeps a render error in one league from blanking the whole app.
@@ -2862,7 +2896,7 @@ function ClubPicker({ data, follow, onClose }) {
 
 // The top-level Belgian screen — federation picker with division sub-groups
 function BelgianScreen({ onBack }) {
-  const { data, error } = useVhvData();
+  const { data, error, loadLeague, failed } = useVhvData();
   const { lang, t } = useLang();
   const [fed, setFed]       = useState(null);
   const [league, setLeague] = useState(null);
@@ -2886,6 +2920,25 @@ function BelgianScreen({ onBack }) {
       return snap ? { key, lg, snap } : null;
     }).filter(Boolean).sort((a, b) => (b.key === follow.main) - (a.key === follow.main));
   }, [data, follow.ids, follow.main]);
+  // Load the full data for every league you follow (the rest stays on the server until opened).
+  const ready = !!data;
+  useEffect(() => {
+    if (!ready) return;
+    follow.ids.forEach(k => { const cut = k.indexOf(":"); if (cut > 0) loadLeague(k.slice(0, cut)); });
+  }, [ready, follow.ids, loadLeague]);
+  // Opening a league from the list: fetch it if only the stub is known.
+  useEffect(() => { if (league && !league.fixtures) loadLeague(league.serieId); }, [league, loadLeague]);
+  const openLeague = useMemo(() => {
+    if (!league) return null;
+    if (league.fixtures) return league;
+    if (!data) return null;
+    for (const f of Object.values(data.federations || {})) {
+      const lg = f && f[String(league.serieId)];
+      if (lg && lg.fixtures) return lg;
+    }
+    return null;
+  }, [league, data]);
+
   const weekGames = useMemo(() => {
     if (!data) return [];
     const { cur, next } = weekBounds();
@@ -2918,7 +2971,15 @@ function BelgianScreen({ onBack }) {
     return out.sort((x, y) => (x.date < y.date ? -1 : x.date > y.date ? 1 : 0));
   }, [data, follow.ids]);
 
-  if (league) return <ErrorBoundary onBack={() => setLeague(null)}><BelgianLeagueView league={league} onBack={() => setLeague(null)} /></ErrorBoundary>;
+  if (league && openLeague) return <ErrorBoundary onBack={() => setLeague(null)}><BelgianLeagueView league={openLeague} onBack={() => setLeague(null)} /></ErrorBoundary>;
+  if (league) return (
+    <div className="panel">
+      <button className="btn btn-ghost" onClick={() => setLeague(null)}>{t("← Back")}</button>
+      {failed[String(league.serieId)]
+        ? <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>{t("Could not load data.")}</div>
+        : <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>{t("Loading data…")}</div>}
+    </div>
+  );
 
   const feds = data ? Object.keys(data.federations || {}) : [];
   return (
@@ -3036,8 +3097,8 @@ function BelgianScreen({ onBack }) {
                     <div className="sub-ttl" style={{ marginBottom: ".75rem", color: meta.color }}>{division}</div>
                     <div className="card-grid">
                       {leagues.map(lg => {
-                        const played  = (lg.fixtures || []).filter(f => f.played).length;
-                        const pending = (lg.fixtures || []).filter(f => !f.played).length;
+                        const played  = lg.fixtures ? lg.fixtures.filter(f => f.played).length : (lg.played || 0);
+                        const pending = lg.fixtures ? lg.fixtures.filter(f => !f.played).length : (lg.pending || 0);
                         return (
                           <div key={lg.serieId || lg.id} className="card" onClick={() => setLeague(lg)}>
                             <div className="card-badge badge-std" style={{ borderColor: meta.color + "44", color: meta.color, background: meta.color + "18" }}>

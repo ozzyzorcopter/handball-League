@@ -1410,6 +1410,11 @@ async function main() {
 
   fresh.updatedAt = new Date().toISOString();
   fs.writeFileSync(vhvDataPath, JSON.stringify(fresh, null, 2));
+  // Also publish a small index + one file per league (the app loads leagues on demand).
+  try {
+    const r = require("./split-data.js").writeSplit(fresh, path.join(root, "data"));
+    log(`Wrote data/index.json and ${r.leagues} league file(s)`);
+  } catch (e) { warn(`Could not write split data: ${e.message}`); }
 
   fs.writeFileSync(boxscoreCachePath, JSON.stringify(boxCache, null, 2));
   const totalCached = Object.keys(boxCache.games).length;
