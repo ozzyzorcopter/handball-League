@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T10:48:35.279Z",
+  "updatedAt": "2026-10-11T10:58:36.419Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,8 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -2575,7 +2576,8 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -5503,7 +5505,8 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -9302,7 +9305,8 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -13182,7 +13186,8 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -16828,7 +16833,8 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -20008,7 +20014,8 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -23666,7 +23673,8 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": false,
         "teams": [
           {
@@ -27323,7 +27331,8 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -31397,7 +31406,8 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -33885,7 +33895,8 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -36517,7 +36528,8 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -37274,7 +37286,8 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -38404,7 +38417,8 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -39122,7 +39136,8 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -44029,7 +44044,8 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -48210,7 +48226,8 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -51982,7 +51999,8 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -53258,7 +53276,8 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -54677,7 +54696,8 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -59698,7 +59718,8 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -63956,7 +63977,8 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -68149,7 +68171,8 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -71778,7 +71801,8 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -73492,7 +73516,8 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -77938,7 +77963,8 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -82313,7 +82339,8 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -83562,7 +83589,8 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.378Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -85753,7 +85781,8 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -90619,7 +90648,8 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -91805,7 +91835,8 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -98356,7 +98387,8 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -100090,7 +100122,8 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -108458,7 +108491,8 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -109143,7 +109177,8 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -110815,27 +110850,10 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
-          {
-            "id": "t_besox_izegem_g16_vhv_r_2",
-            "name": "Besox Izegem G16 VHV R 2",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_dhc_overpelt_g16_vhv_r_b",
-            "name": "DHC Overpelt G16 VHV R B",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_dhc_overpelt_g16_vhv_r_a",
-            "name": "DHC Overpelt G16 VHV R A",
-            "points": 0,
-            "homeBonus": ""
-          },
           {
             "id": "t_besox_izegem_g16_vhv_r_2",
             "name": "Besox Izegem G16 VHV R 2",
@@ -110856,24 +110874,6 @@
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451412
-          },
-          {
-            "id": "t_dhc_waasmunster_g16_vhv_r",
-            "name": "DHC Waasmunster G16 VHV R",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_dhc_meeuwen_g16_vhv_b_r",
-            "name": "DHC Meeuwen G16 VHV-B R",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_derdaele_sp_pelt_g16_vhv_r",
-            "name": "Derdaele Sp. Pelt G16 VHV R",
-            "points": 0,
-            "homeBonus": ""
           },
           {
             "id": "t_dhc_waasmunster_g16_vhv_r",
@@ -110900,24 +110900,6 @@
             "id": "t_lebbeke_g16_vhv_r",
             "name": "Lebbeke G16 VHV R",
             "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_p_kortessem_g16_vhv_r",
-            "name": "P. Kortessem G16 VHV R",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_sezoens_achilles_bocholt_g16_vhv_r",
-            "name": "Sezoens Achilles Bocholt G16 VHV R",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_lebbeke_g16_vhv_r",
-            "name": "Lebbeke G16 VHV R",
-            "points": 0,
             "homeBonus": "",
             "clubeeId": 451542
           },
@@ -110934,24 +110916,6 @@
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451190
-          },
-          {
-            "id": "t_besox_izegem_g16_vhv_r_1",
-            "name": "Besox Izegem G16 VHV R 1",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_united_west_l_g16_vhv_r",
-            "name": "United West L G16 VHV R",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_uilenspiegel_g16_vhv_r",
-            "name": "Uilenspiegel G16 VHV R",
-            "points": 0,
-            "homeBonus": ""
           },
           {
             "id": "t_besox_izegem_g16_vhv_r_1",
@@ -110978,24 +110942,6 @@
             "id": "t_lokeren_g16_vhv_b_r_1",
             "name": "Lokeren G16 VHV-B R 1",
             "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_h_bilzen_g16_vhv_r_2",
-            "name": "H. Bilzen G16 VHV R 2",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_hubo_g16_vhv_r",
-            "name": "Hubo G16 VHV R",
-            "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_lokeren_g16_vhv_b_r_1",
-            "name": "Lokeren G16 VHV-B R 1",
-            "points": 0,
             "homeBonus": "",
             "clubeeId": 451863
           },
@@ -111017,12 +110963,6 @@
             "id": "t_h_bilzen_g16_vhv_r_1",
             "name": "H. Bilzen G16 VHV R 1",
             "points": 0,
-            "homeBonus": ""
-          },
-          {
-            "id": "t_h_bilzen_g16_vhv_r_1",
-            "name": "H. Bilzen G16 VHV R 1",
-            "points": 0,
             "homeBonus": "",
             "clubeeId": 451239
           }
@@ -111031,8 +110971,8 @@
           {
             "id": "f0",
             "gameId": "2850618",
-            "homeIdx": 29,
-            "awayIdx": 11,
+            "homeIdx": 14,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111050,8 +110990,8 @@
           {
             "id": "f1",
             "gameId": "2850578",
-            "homeIdx": 22,
-            "awayIdx": 4,
+            "homeIdx": 10,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111069,8 +111009,8 @@
           {
             "id": "f2",
             "gameId": "2850613",
-            "homeIdx": 23,
-            "awayIdx": 31,
+            "homeIdx": 11,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111088,8 +111028,8 @@
           {
             "id": "f3",
             "gameId": "2850608",
-            "homeIdx": 17,
-            "awayIdx": 5,
+            "homeIdx": 8,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111107,8 +111047,8 @@
           {
             "id": "f4",
             "gameId": "2952319",
-            "homeIdx": 3,
-            "awayIdx": 15,
+            "homeIdx": 0,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111126,8 +111066,8 @@
           {
             "id": "f5",
             "gameId": "2850583",
-            "homeIdx": 16,
-            "awayIdx": 28,
+            "homeIdx": 7,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111145,8 +111085,8 @@
           {
             "id": "f6",
             "gameId": "2952320",
-            "homeIdx": 27,
-            "awayIdx": 9,
+            "homeIdx": 12,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111164,8 +111104,8 @@
           {
             "id": "f7",
             "gameId": "2952329",
-            "homeIdx": 15,
-            "awayIdx": 27,
+            "homeIdx": 6,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111183,8 +111123,8 @@
           {
             "id": "f8",
             "gameId": "2850598",
-            "homeIdx": 11,
-            "awayIdx": 17,
+            "homeIdx": 5,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111202,8 +111142,8 @@
           {
             "id": "f9",
             "gameId": "2850593",
-            "homeIdx": 31,
-            "awayIdx": 29,
+            "homeIdx": 15,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111221,8 +111161,8 @@
           {
             "id": "f10",
             "gameId": "2850563",
-            "homeIdx": 28,
-            "awayIdx": 10,
+            "homeIdx": 13,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111240,8 +111180,8 @@
           {
             "id": "f11",
             "gameId": "2850944",
-            "homeIdx": 21,
-            "awayIdx": 3,
+            "homeIdx": 9,
+            "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111259,8 +111199,8 @@
           {
             "id": "f12",
             "gameId": "2850603",
-            "homeIdx": 5,
-            "awayIdx": 23,
+            "homeIdx": 2,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111278,8 +111218,8 @@
           {
             "id": "f13",
             "gameId": "2850573",
-            "homeIdx": 4,
-            "awayIdx": 16,
+            "homeIdx": 1,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111297,8 +111237,8 @@
           {
             "id": "f14",
             "gameId": "2850564",
-            "homeIdx": 28,
-            "awayIdx": 4,
+            "homeIdx": 13,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111316,8 +111256,8 @@
           {
             "id": "f15",
             "gameId": "2850609",
-            "homeIdx": 17,
-            "awayIdx": 29,
+            "homeIdx": 8,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111335,8 +111275,8 @@
           {
             "id": "f16",
             "gameId": "2850594",
-            "homeIdx": 31,
-            "awayIdx": 5,
+            "homeIdx": 15,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111354,8 +111294,8 @@
           {
             "id": "f17",
             "gameId": "2952328",
-            "homeIdx": 9,
-            "awayIdx": 15,
+            "homeIdx": 3,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111373,8 +111313,8 @@
           {
             "id": "f18",
             "gameId": "2850614",
-            "homeIdx": 23,
-            "awayIdx": 11,
+            "homeIdx": 11,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111392,8 +111332,8 @@
           {
             "id": "f19",
             "gameId": "2952322",
-            "homeIdx": 27,
-            "awayIdx": 21,
+            "homeIdx": 12,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111411,8 +111351,8 @@
           {
             "id": "f20",
             "gameId": "2850579",
-            "homeIdx": 22,
-            "awayIdx": 10,
+            "homeIdx": 10,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111430,8 +111370,8 @@
           {
             "id": "f21",
             "gameId": "2850945",
-            "homeIdx": 21,
-            "awayIdx": 15,
+            "homeIdx": 9,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111449,8 +111389,8 @@
           {
             "id": "f22",
             "gameId": "2850619",
-            "homeIdx": 29,
-            "awayIdx": 23,
+            "homeIdx": 14,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111468,8 +111408,8 @@
           {
             "id": "f23",
             "gameId": "2850599",
-            "homeIdx": 11,
-            "awayIdx": 5,
+            "homeIdx": 5,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111487,8 +111427,8 @@
           {
             "id": "f24",
             "gameId": "2850589",
-            "homeIdx": 10,
-            "awayIdx": 16,
+            "homeIdx": 4,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111506,8 +111446,8 @@
           {
             "id": "f25",
             "gameId": "2850941",
-            "homeIdx": 3,
-            "awayIdx": 9,
+            "homeIdx": 0,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111525,8 +111465,8 @@
           {
             "id": "f26",
             "gameId": "2850610",
-            "homeIdx": 17,
-            "awayIdx": 31,
+            "homeIdx": 8,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111544,8 +111484,8 @@
           {
             "id": "f27",
             "gameId": "2850580",
-            "homeIdx": 22,
-            "awayIdx": 28,
+            "homeIdx": 10,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111563,8 +111503,8 @@
           {
             "id": "f28",
             "gameId": "2850574",
-            "homeIdx": 4,
-            "awayIdx": 10,
+            "homeIdx": 1,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111582,8 +111522,8 @@
           {
             "id": "f29",
             "gameId": "2850615",
-            "homeIdx": 23,
-            "awayIdx": 17,
+            "homeIdx": 11,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111601,8 +111541,8 @@
           {
             "id": "f30",
             "gameId": "2850604",
-            "homeIdx": 5,
-            "awayIdx": 29,
+            "homeIdx": 2,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111620,8 +111560,8 @@
           {
             "id": "f31",
             "gameId": "2850595",
-            "homeIdx": 31,
-            "awayIdx": 11,
+            "homeIdx": 15,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111639,8 +111579,8 @@
           {
             "id": "f32",
             "gameId": "2850585",
-            "homeIdx": 16,
-            "awayIdx": 22,
+            "homeIdx": 7,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111658,8 +111598,8 @@
           {
             "id": "f33",
             "gameId": "2952324",
-            "homeIdx": 27,
-            "awayIdx": 3,
+            "homeIdx": 12,
+            "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111678,8 +111618,8 @@
           {
             "id": "f34",
             "gameId": "2952325",
-            "homeIdx": 9,
-            "awayIdx": 21,
+            "homeIdx": 3,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111697,8 +111637,8 @@
           {
             "id": "f35",
             "gameId": "2850575",
-            "homeIdx": 4,
-            "awayIdx": 22,
+            "homeIdx": 1,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111716,8 +111656,8 @@
           {
             "id": "f36",
             "gameId": "2952331",
-            "homeIdx": 9,
-            "awayIdx": 27,
+            "homeIdx": 3,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111735,8 +111675,8 @@
           {
             "id": "f37",
             "gameId": "2850605",
-            "homeIdx": 5,
-            "awayIdx": 17,
+            "homeIdx": 2,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111754,8 +111694,8 @@
           {
             "id": "f38",
             "gameId": "2850566",
-            "homeIdx": 28,
-            "awayIdx": 16,
+            "homeIdx": 13,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111773,8 +111713,8 @@
           {
             "id": "f39",
             "gameId": "2850600",
-            "homeIdx": 11,
-            "awayIdx": 29,
+            "homeIdx": 5,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111792,8 +111732,8 @@
           {
             "id": "f40",
             "gameId": "2952330",
-            "homeIdx": 15,
-            "awayIdx": 3,
+            "homeIdx": 6,
+            "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111811,8 +111751,8 @@
           {
             "id": "f41",
             "gameId": "2850596",
-            "homeIdx": 31,
-            "awayIdx": 23,
+            "homeIdx": 15,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111830,8 +111770,8 @@
           {
             "id": "f42",
             "gameId": "2952321",
-            "homeIdx": 27,
-            "awayIdx": 15,
+            "homeIdx": 12,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111849,8 +111789,8 @@
           {
             "id": "f43",
             "gameId": "2850942",
-            "homeIdx": 3,
-            "awayIdx": 21,
+            "homeIdx": 0,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111868,8 +111808,8 @@
           {
             "id": "f44",
             "gameId": "2850590",
-            "homeIdx": 10,
-            "awayIdx": 28,
+            "homeIdx": 4,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111887,8 +111827,8 @@
           {
             "id": "f45",
             "gameId": "2850620",
-            "homeIdx": 29,
-            "awayIdx": 31,
+            "homeIdx": 14,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111906,8 +111846,8 @@
           {
             "id": "f46",
             "gameId": "2850611",
-            "homeIdx": 17,
-            "awayIdx": 11,
+            "homeIdx": 8,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111925,8 +111865,8 @@
           {
             "id": "f47",
             "gameId": "2850616",
-            "homeIdx": 23,
-            "awayIdx": 5,
+            "homeIdx": 11,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111944,8 +111884,8 @@
           {
             "id": "f48",
             "gameId": "2850586",
-            "homeIdx": 16,
-            "awayIdx": 4,
+            "homeIdx": 7,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111963,8 +111903,8 @@
           {
             "id": "f49",
             "gameId": "2850621",
-            "homeIdx": 29,
-            "awayIdx": 17,
+            "homeIdx": 14,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -111982,8 +111922,8 @@
           {
             "id": "f50",
             "gameId": "2850601",
-            "homeIdx": 11,
-            "awayIdx": 23,
+            "homeIdx": 5,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112001,8 +111941,8 @@
           {
             "id": "f51",
             "gameId": "2850952",
-            "homeIdx": 15,
-            "awayIdx": 9,
+            "homeIdx": 6,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112020,8 +111960,8 @@
           {
             "id": "f52",
             "gameId": "2850606",
-            "homeIdx": 5,
-            "awayIdx": 31,
+            "homeIdx": 2,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112039,8 +111979,8 @@
           {
             "id": "f53",
             "gameId": "2952335",
-            "homeIdx": 21,
-            "awayIdx": 27,
+            "homeIdx": 9,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112058,8 +111998,8 @@
           {
             "id": "f54",
             "gameId": "2850576",
-            "homeIdx": 4,
-            "awayIdx": 28,
+            "homeIdx": 1,
+            "awayIdx": 13,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112077,8 +112017,8 @@
           {
             "id": "f55",
             "gameId": "2850591",
-            "homeIdx": 10,
-            "awayIdx": 22,
+            "homeIdx": 4,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112096,8 +112036,8 @@
           {
             "id": "f56",
             "gameId": "2850607",
-            "homeIdx": 5,
-            "awayIdx": 11,
+            "homeIdx": 2,
+            "awayIdx": 5,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112115,8 +112055,8 @@
           {
             "id": "f57",
             "gameId": "2850567",
-            "homeIdx": 28,
-            "awayIdx": 22,
+            "homeIdx": 13,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112134,8 +112074,8 @@
           {
             "id": "f58",
             "gameId": "2952323",
-            "homeIdx": 15,
-            "awayIdx": 21,
+            "homeIdx": 6,
+            "awayIdx": 9,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112153,8 +112093,8 @@
           {
             "id": "f59",
             "gameId": "2850939",
-            "homeIdx": 9,
-            "awayIdx": 3,
+            "homeIdx": 3,
+            "awayIdx": 0,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112172,8 +112112,8 @@
           {
             "id": "f60",
             "gameId": "2850587",
-            "homeIdx": 16,
-            "awayIdx": 10,
+            "homeIdx": 7,
+            "awayIdx": 4,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112191,8 +112131,8 @@
           {
             "id": "f61",
             "gameId": "2850597",
-            "homeIdx": 31,
-            "awayIdx": 17,
+            "homeIdx": 15,
+            "awayIdx": 8,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112210,8 +112150,8 @@
           {
             "id": "f62",
             "gameId": "2850617",
-            "homeIdx": 23,
-            "awayIdx": 29,
+            "homeIdx": 11,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112229,8 +112169,8 @@
           {
             "id": "f63",
             "gameId": "2850602",
-            "homeIdx": 11,
-            "awayIdx": 31,
+            "homeIdx": 5,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112248,8 +112188,8 @@
           {
             "id": "f64",
             "gameId": "2850622",
-            "homeIdx": 29,
-            "awayIdx": 5,
+            "homeIdx": 14,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112267,8 +112207,8 @@
           {
             "id": "f65",
             "gameId": "2850582",
-            "homeIdx": 22,
-            "awayIdx": 16,
+            "homeIdx": 10,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112286,8 +112226,8 @@
           {
             "id": "f66",
             "gameId": "2850612",
-            "homeIdx": 17,
-            "awayIdx": 23,
+            "homeIdx": 8,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112305,8 +112245,8 @@
           {
             "id": "f67",
             "gameId": "2952326",
-            "homeIdx": 3,
-            "awayIdx": 27,
+            "homeIdx": 0,
+            "awayIdx": 12,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112324,8 +112264,8 @@
           {
             "id": "f68",
             "gameId": "2952327",
-            "homeIdx": 21,
-            "awayIdx": 9,
+            "homeIdx": 9,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112343,8 +112283,8 @@
           {
             "id": "f69",
             "gameId": "2850592",
-            "homeIdx": 10,
-            "awayIdx": 4,
+            "homeIdx": 4,
+            "awayIdx": 1,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -112398,42 +112338,6 @@
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1788436473.jpg"
           },
           {
-            "pos": 1,
-            "name": "Besox Izegem G16 VHV R 2",
-            "played": 4,
-            "won": 3,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 113,
-            "ga": 79,
-            "points": 6,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17257/logo/_1786370041.jpg"
-          },
-          {
-            "pos": 1,
-            "name": "DHC Overpelt G16 VHV R B",
-            "played": 4,
-            "won": 4,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 136,
-            "ga": 65,
-            "points": 8,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1788436490.jpg"
-          },
-          {
-            "pos": 1,
-            "name": "DHC Overpelt G16 VHV R A",
-            "played": 5,
-            "won": 5,
-            "drawn": 0,
-            "lost": 0,
-            "gf": 158,
-            "ga": 110,
-            "points": 10,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1788436473.jpg"
-          },
-          {
             "pos": 2,
             "name": "DHC Waasmunster G16 VHV R",
             "played": 3,
@@ -112468,78 +112372,6 @@
             "ga": 101,
             "points": 8,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17241/logo/_1787081207.jpg"
-          },
-          {
-            "pos": 2,
-            "name": "DHC Waasmunster G16 VHV R",
-            "played": 3,
-            "won": 2,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 85,
-            "ga": 62,
-            "points": 4,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17274/logo/96x96_dhc-waasmunster_1788956206.png"
-          },
-          {
-            "pos": 2,
-            "name": "DHC Meeuwen G16 VHV-B R",
-            "played": 4,
-            "won": 3,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 118,
-            "ga": 60,
-            "points": 6,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790172089.png"
-          },
-          {
-            "pos": 2,
-            "name": "Derdaele Sp. Pelt G16 VHV R",
-            "played": 5,
-            "won": 4,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 116,
-            "ga": 101,
-            "points": 8,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17241/logo/_1787081207.jpg"
-          },
-          {
-            "pos": 3,
-            "name": "Lebbeke G16 VHV R",
-            "played": 3,
-            "won": 1,
-            "drawn": 0,
-            "lost": 2,
-            "gf": 80,
-            "ga": 75,
-            "points": 2,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1787666772.png"
-          },
-          {
-            "pos": 3,
-            "name": "P. Kortessem G16 VHV R",
-            "played": 4,
-            "won": 2,
-            "drawn": 0,
-            "lost": 2,
-            "gf": 120,
-            "ga": 90,
-            "points": 4,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17265/logo/96x96_hc-pentagoon-kortessem_1788026184.png"
-          },
-          {
-            "pos": 3,
-            "name": "Sezoens Achilles Bocholt G16 VHV R",
-            "played": 5,
-            "won": 3,
-            "drawn": 0,
-            "lost": 2,
-            "gf": 121,
-            "ga": 108,
-            "points": 6,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17272/logo/_1785848323.png"
           },
           {
             "pos": 3,
@@ -112614,42 +112446,6 @@
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17226/logo/96x96_uilenspiegel-hv_1789756375.png"
           },
           {
-            "pos": 4,
-            "name": "Besox Izegem G16 VHV R 1",
-            "played": 2,
-            "won": 1,
-            "drawn": 0,
-            "lost": 1,
-            "gf": 47,
-            "ga": 49,
-            "points": 2,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17257/logo/_1786367820.jpg"
-          },
-          {
-            "pos": 4,
-            "name": "United West L G16 VHV R",
-            "played": 4,
-            "won": 1,
-            "drawn": 0,
-            "lost": 3,
-            "gf": 131,
-            "ga": 109,
-            "points": 2,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17286/logo/96x96_handbal-lummen_1786174877.png"
-          },
-          {
-            "pos": 4,
-            "name": "Uilenspiegel G16 VHV R",
-            "played": 5,
-            "won": 2,
-            "drawn": 0,
-            "lost": 3,
-            "gf": 122,
-            "ga": 126,
-            "points": 4,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17226/logo/96x96_uilenspiegel-hv_1789756375.png"
-          },
-          {
             "pos": 5,
             "name": "Lokeren G16 VHV-B R 1",
             "played": 2,
@@ -112684,54 +112480,6 @@
             "ga": 124,
             "points": 2,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17243/logo/_1787124628.png"
-          },
-          {
-            "pos": 5,
-            "name": "Lokeren G16 VHV-B R 1",
-            "played": 2,
-            "won": 0,
-            "drawn": 0,
-            "lost": 2,
-            "gf": 18,
-            "ga": 78,
-            "points": 0,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17277/logo/_1785747897.png"
-          },
-          {
-            "pos": 5,
-            "name": "H. Bilzen G16 VHV R 2",
-            "played": 4,
-            "won": 0,
-            "drawn": 0,
-            "lost": 4,
-            "gf": 20,
-            "ga": 201,
-            "points": 0,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17284/logo/_1786200437.png"
-          },
-          {
-            "pos": 5,
-            "name": "Hubo G16 VHV R",
-            "played": 5,
-            "won": 1,
-            "drawn": 0,
-            "lost": 4,
-            "gf": 84,
-            "ga": 124,
-            "points": 2,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17243/logo/_1787124628.png"
-          },
-          {
-            "pos": 6,
-            "name": "H. Bilzen G16 VHV R 1",
-            "played": 5,
-            "won": 0,
-            "drawn": 0,
-            "lost": 5,
-            "gf": 94,
-            "ga": 126,
-            "points": 0,
-            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17284/logo/_1786200417.png"
           },
           {
             "pos": 6,
@@ -115062,88 +114810,8 @@
             "km": 1
           },
           {
-            "id": "t_besox_izegem_g16_vhv_r_1",
-            "name": "Besox Izegem G16 VHV R 1",
-            "km": 0
-          },
-          {
-            "id": "t_besox_izegem_g16_vhv_r_2",
-            "name": "Besox Izegem G16 VHV R 2",
-            "km": 0
-          },
-          {
-            "id": "t_derdaele_sp_pelt_g16_vhv_r",
-            "name": "Derdaele Sp. Pelt G16 VHV R",
-            "km": 0
-          },
-          {
-            "id": "t_dhc_meeuwen_g16_vhv_b_r",
-            "name": "DHC Meeuwen G16 VHV-B R",
-            "km": 0
-          },
-          {
-            "id": "t_dhc_overpelt_g16_vhv_r_a",
-            "name": "DHC Overpelt G16 VHV R A",
-            "km": 0
-          },
-          {
-            "id": "t_dhc_overpelt_g16_vhv_r_b",
-            "name": "DHC Overpelt G16 VHV R B",
-            "km": 0
-          },
-          {
-            "id": "t_dhc_waasmunster_g16_vhv_r",
-            "name": "DHC Waasmunster G16 VHV R",
-            "km": 0
-          },
-          {
-            "id": "t_h_bilzen_g16_vhv_r_1",
-            "name": "H. Bilzen G16 VHV R 1",
-            "km": 0
-          },
-          {
-            "id": "t_h_bilzen_g16_vhv_r_2",
-            "name": "H. Bilzen G16 VHV R 2",
-            "km": 0
-          },
-          {
-            "id": "t_hubo_g16_vhv_r",
-            "name": "Hubo G16 VHV R",
-            "km": 0
-          },
-          {
-            "id": "t_lebbeke_g16_vhv_r",
-            "name": "Lebbeke G16 VHV R",
-            "km": 0
-          },
-          {
             "id": "t_lokeren_g16_vhv_b_r_1",
             "name": "Lokeren G16 VHV-B R 1",
-            "km": 0
-          },
-          {
-            "id": "t_lokeren_g16_vhv_b_r_1",
-            "name": "Lokeren G16 VHV-B R 1",
-            "km": 0
-          },
-          {
-            "id": "t_p_kortessem_g16_vhv_r",
-            "name": "P. Kortessem G16 VHV R",
-            "km": 0
-          },
-          {
-            "id": "t_sezoens_achilles_bocholt_g16_vhv_r",
-            "name": "Sezoens Achilles Bocholt G16 VHV R",
-            "km": 0
-          },
-          {
-            "id": "t_uilenspiegel_g16_vhv_r",
-            "name": "Uilenspiegel G16 VHV R",
-            "km": 0
-          },
-          {
-            "id": "t_united_west_l_g16_vhv_r",
-            "name": "United West L G16 VHV R",
             "km": 0
           }
         ]
@@ -115153,7 +114821,8 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -115527,7 +115196,8 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -117108,7 +116778,8 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -126401,7 +126072,8 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -127145,7 +126817,8 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -132709,7 +132382,8 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -133303,7 +132977,8 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -134157,7 +133832,8 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-10T15:48:20.659Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
@@ -134532,7 +134208,8 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-11T10:48:35.245Z",
+        "updatedAt": "2026-10-11T10:58:36.379Z",
+        "dataVersion": 2,
         "live": true,
         "teams": [
           {
