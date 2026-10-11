@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
-const { refreshReason } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
+const { refreshReason, DATA_VERSION } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
 
 const NOW = new Date("2026-10-10T12:00:00Z");
-const mk = (fixtures, updatedAt = "2026-10-10T08:00:00Z") => ({ updatedAt, fixtures });
+const mk = (fixtures, updatedAt = "2026-10-10T08:00:00Z", dataVersion = DATA_VERSION) => ({ updatedAt, dataVersion, fixtures });
 
 test("no previous data -> refresh", () => {
   assert.equal(refreshReason(undefined, NOW), "no previous data");
@@ -19,6 +19,12 @@ test("unplayed game in the past -> refresh", () => {
 });
 test("quiet league with fresh data -> skipped", () => {
   assert.equal(refreshReason(mk([{ date: "2026-10-03T20:00:00", played: true }, { date: "2026-10-17T20:00:00", played: false }]), NOW), null);
+});
+test("game within two days -> refresh (kick-off time may have changed)", () => {
+  assert.equal(refreshReason(mk([{ date: "2026-10-12T20:00:00", played: false }]), NOW), "game soon (time may change)");
+});
+test("older data format -> refresh once so new fields appear", () => {
+  assert.equal(refreshReason(mk([{ date: "2026-10-30", played: false }], "2026-10-10T08:00:00Z", 1), NOW), "data format updated");
 });
 test("stale data -> daily refresh", () => {
   assert.equal(refreshReason(mk([{ date: "2026-10-17T20:00:00", played: false }], "2026-10-09T01:00:00Z"), NOW), "daily refresh");

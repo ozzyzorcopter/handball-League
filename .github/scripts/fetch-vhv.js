@@ -1058,19 +1058,26 @@ let venueResolutionBudget = 20;
 // skipped when the number of played games hasn't changed since last time.
 const FORCE_FULL = process.env.FORCE_FULL === "1" || process.env.FORCE_FULL === "true";
 const FULL_REFRESH_HOURS = 20;
+// Bump when the stored league format gains new fields (kick-off times, team ids, ...):
+// every league whose saved data has an older version is re-fetched once on the next run,
+// even if it is otherwise "quiet".
+const DATA_VERSION = 2;
 function brusselsDate(d = new Date()) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
 }
 function refreshReason(prev, now = new Date()) {
   if (FORCE_FULL) return "forced";
   if (!prev || !Array.isArray(prev.fixtures) || !prev.fixtures.length) return "no previous data";
+  if (prev.dataVersion !== DATA_VERSION) return "data format updated";
   if (!prev.updatedAt || now - new Date(prev.updatedAt) > FULL_REFRESH_HOURS * 3600e3) return "daily refresh";
   const today = brusselsDate(now);
   const yesterday = brusselsDate(new Date(now.getTime() - 86400e3));
+  const inTwoDays = brusselsDate(new Date(now.getTime() + 2 * 86400e3));
   for (const f of prev.fixtures) {
     const d = f.date && f.date.slice(0, 10);
     if (!d) continue;
     if (d === today || d === yesterday) return "game today/yesterday";
+    if (!f.played && d > today && d <= inTwoDays) return "game soon (time may change)";
     if (!f.played && d < today) return "result pending";
   }
   return null;
@@ -1170,7 +1177,7 @@ async function main() {
       }
       let times = extractGameTimes(rawGames);
       const { fixtures } = parseGamesHtml(gamesHtml, ranking, times);
-      log(`    Embedded game data: ${flightGames.size} game(s) for ${fixtures.length} parsed fixture(s)`);
+      log(`    Embedded game data: ${flightGames.size} game(s) for ${fixtures.length} parsed fixture(s); kick-off time known for ${fixtures.filter(f => f.time).length}`);
 
       // Scorer pages and boxscores only change when a game was played, so skip
       // them when the played count is the same as last time.
@@ -1396,7 +1403,7 @@ async function main() {
     if (!fresh.federations[cfg.federation]) fresh.federations[cfg.federation] = {};
     fresh.federations[cfg.federation][cfg.id] = {
       serieId: cfg.id, name: cfg.name, federation: cfg.federation,
-      division: cfg.division, updatedAt: new Date().toISOString(),
+      division: cfg.division, updatedAt: new Date().toISOString(), dataVersion: DATA_VERSION,
       live: pending > 0, teams, fixtures, ranking, scorers,
       topSingleGamePlayers: topSingleGamePlayers || [],
       travelRanking: travelRanking || [],
@@ -1436,7 +1443,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { LEAGUES, refreshReason, extractGameTimes, extractFlightGames };
+module.exports = { LEAGUES, refreshReason, extractGameTimes, extractFlightGames, DATA_VERSION };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }
