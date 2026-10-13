@@ -1179,6 +1179,19 @@ async function main() {
       const { fixtures } = parseGamesHtml(gamesHtml, ranking, times);
       log(`    Embedded game data: ${flightGames.size} game(s) for ${fixtures.length} parsed fixture(s); kick-off time known for ${fixtures.filter(f => f.time).length}`);
 
+      {
+        // Diagnose missing kick-off times for upcoming games (next 14 days).
+        const today = brusselsDate(new Date()), limit = brusselsDate(new Date(Date.now() + 14 * 864e5));
+        const rows = fixtures.filter(f => !f.played && !f.time && f.date && f.date >= today && f.date <= limit);
+        for (const f of rows.slice(0, 15)) {
+          const g = f.gameId ? flightGames.get(String(f.gameId)) : null;
+          const why = !f.gameId ? "no gameId" : !g ? "gameId not in embedded data" : g.cancelled ? "cancelled" : g.date !== f.date ? `date differs (embedded ${g.date})` : "embedded time is 00:00 / missing";
+          const h = ranking[f.homeIdx] && ranking[f.homeIdx].name, a = ranking[f.awayIdx] && ranking[f.awayIdx].name;
+          log(`    No time: ${f.date} ${h} - ${a} [${f.gameId || "-"}] → ${why}`);
+        }
+        if (rows.length) log(`    Upcoming games without time: ${rows.length}`);
+      }
+
       // Scorer pages and boxscores only change when a game was played, so skip
       // them when the played count is the same as last time.
       const playedNow = fixtures.filter(f => f.played).length;
@@ -1226,6 +1239,16 @@ async function main() {
       });
       if (venuesFromClubee) log(`    Venues taken from game data: ${venuesFromClubee}`);
       log(`    Clubee team ids: ${teams.filter(t => t.clubeeId != null).length}/${teams.length} teams`);
+      {
+        const noId = teams.filter(t => t.clubeeId == null);
+        if (noId.length) {
+          const fx = fixtures.filter(f => teams[f.homeIdx] && teams[f.awayIdx]);
+          const noGameId = fx.filter(f => !f.gameId).length;
+          const noMatch = fx.filter(f => f.gameId && !flightGames.has(String(f.gameId))).length;
+          log(`    Teams without Clubee id (${noId.length}): ${noId.map(t => t.name).join(" | ")}`);
+          log(`    Fixtures: ${fx.length} total, ${noGameId} without gameId, ${noMatch} gameId not in embedded data`);
+        }
+      }
 
       // Per-game boxscores — only fetch games not already in the cache from
       // a previous run. Powers "goals in last game" on the scorer panel and
