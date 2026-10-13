@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T17:43:51.365Z",
+  "updatedAt": "2026-10-13T18:04:54.632Z",
   "federations": {
     "URBH-KBHB": {
       "18700": {
@@ -7,7 +7,7 @@
         "name": "Lotto Cup Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -5809,7 +5809,7 @@
         "name": "Lotto Cup Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -8740,7 +8740,7 @@
         "name": "First Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -11938,456 +11938,6 @@
             "blueCards": 0,
             "redCards": 0,
             "lastGameGoals": 2
-          },
-          {
-            "player": "Jeroen Guillierme",
-            "club": "HBC Apolloon Spurs D1 M",
-            "goals": 3,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Mattéo Pucci",
-            "club": "Renaissance Montegnée D1 M",
-            "goals": 3,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Alen Obarcanin",
-            "club": "Kraainem D1 M",
-            "goals": 3,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Wim Zimmermann",
-            "club": "Eynatten-Raeren D1 M",
-            "goals": 3,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Loris Schumacher",
-            "club": "Eynatten-Raeren D1 M",
-            "goals": 3,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Marc MWAMBA",
-            "club": "Estudiantes Tournai D1 M",
-            "goals": 3,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 3
-          },
-          {
-            "player": "Kasper Verbelen",
-            "club": "Lebbeke D1 M",
-            "goals": 2,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Dimitri Van Dorpe",
-            "club": "HBC Apolloon Spurs D1 M",
-            "goals": 2,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 1,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
-            "player": "Timo Luypaert",
-            "club": "Biobest Sasja D1 M",
-            "goals": 2,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Wout Detailleur",
-            "club": "Lebbeke D1 M",
-            "goals": 2,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 2,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Joachim Daenekindt",
-            "club": "HBC Apolloon Spurs D1 M",
-            "goals": 2,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Luca De Nil",
-            "club": "Kraainem D1 M",
-            "goals": 2,
-            "matchesPlayed": 1,
-            "sevenMScored": 2,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 2
-          },
-          {
-            "player": "Mahdi Meziani",
-            "club": "Renaissance Montegnée D1 M",
-            "goals": 2,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Nathan Lischetti",
-            "club": "Kraainem D1 M",
-            "goals": 2,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Sacha Rodric",
-            "club": "Renaissance Montegnée D1 M",
-            "goals": 2,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Tido Bierkens",
-            "club": "Sezoens Achilles Bocholt D1 M",
-            "goals": 2,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Toon De Vis",
-            "club": "Lebbeke D1 M",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Ilias Van Thielen",
-            "club": "Derdaele Sp. Pelt D1 M",
-            "goals": 1,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Wout Boonen",
-            "club": "Sezoens Achilles Bocholt D1 M",
-            "goals": 1,
-            "matchesPlayed": 2,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Simon Ulenaers",
-            "club": "Derdaele Sp. Pelt D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Bram Heyndrickx",
-            "club": "Sezoens Achilles Bocholt D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Jort Serdons",
-            "club": "Hubo D1 M",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Cisse Brands",
-            "club": "Sezoens Achilles Bocholt D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Tuur Roeffelaer",
-            "club": "Hubo D1 M",
-            "goals": 1,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Nick Van Der Ent",
-            "club": "Biobest Sasja D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Quentin Lorea",
-            "club": "Kraainem D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 3,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Axel Jasselette",
-            "club": "Renaissance Montegnée D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 1,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
-          },
-          {
-            "player": "Robin Meulders",
-            "club": "Kraainem D1 M",
-            "goals": 1,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Emil Jacobs",
-            "club": "Eynatten-Raeren D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Joshua Schmitz",
-            "club": "Eynatten-Raeren D1 M",
-            "goals": 1,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Grégoire Lazarevic",
-            "club": "Kraainem D1 M",
-            "goals": 1,
-            "matchesPlayed": 3,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Tanguy LEFEBVRE",
-            "club": "Estudiantes Tournai D1 M",
-            "goals": 1,
-            "matchesPlayed": 4,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Emilien SOYEZ",
-            "club": "Estudiantes Tournai D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 0
-          },
-          {
-            "player": "Colin Baten",
-            "club": "Sezoens Achilles Bocholt D1 M",
-            "goals": 1,
-            "matchesPlayed": 5,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 1,
-            "blueCards": 0,
-            "redCards": 0
-          },
-          {
-            "player": "Jonas Nowé",
-            "club": "HBC Apolloon Spurs D1 M",
-            "goals": 1,
-            "matchesPlayed": 1,
-            "sevenMScored": 0,
-            "sevenMMissed": 0,
-            "yellowCards": 0,
-            "twoMinSuspensions": 0,
-            "blueCards": 0,
-            "redCards": 0,
-            "lastGameGoals": 1
           }
         ],
         "topSingleGamePlayers": [
@@ -12540,7 +12090,7 @@
         "name": "Second Division Men",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -16421,7 +15971,7 @@
         "name": "First Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -20068,7 +19618,7 @@
         "name": "Division 1 Women Reserves",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -23249,7 +22799,7 @@
         "name": "Second Division Women",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -26931,7 +26481,7 @@
         "name": "Friendly Games",
         "federation": "URBH-KBHB",
         "division": "National",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": false,
         "teams": [
@@ -30589,7 +30139,7 @@
         "name": "D1 LFH Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -34664,7 +34214,7 @@
         "name": "D1 LFH Women",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -37244,7 +36794,7 @@
         "name": "U18 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -39877,7 +39427,7 @@
         "name": "U18 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -40635,7 +40185,7 @@
         "name": "U16 Liège Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -41766,7 +41316,7 @@
         "name": "U14 Women",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -42485,7 +42035,7 @@
         "name": "Promo Liège Men",
         "federation": "LFH",
         "division": "Seniors",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -47492,72 +47042,2136 @@
         "name": "U16 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
-        "live": false,
+        "live": true,
         "teams": [
           {
             "id": "t_vis_bm_u16_lg",
             "name": "Visé BM U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451814
           },
           {
             "id": "t_hc_herstal_u16_lg",
             "name": "HC Herstal U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451824
           },
           {
             "id": "t_eupen_u16_lg",
             "name": "Eupen U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451114
           },
           {
             "id": "t_eynatten_raeren_u16_lg",
             "name": "Eynatten-Raeren U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451770
           },
           {
             "id": "t_sprimont_u16_lg",
             "name": "Sprimont U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451754
           },
           {
             "id": "t_villers_amay_u16_lg",
             "name": "Villers-Amay U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451730
           },
           {
             "id": "t_union_beynoise_u16_lg",
             "name": "Union Beynoise U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451801
           },
           {
             "id": "t_malmedy_u16_lg",
             "name": "Malmedy U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451742
           },
           {
             "id": "t_js_herstal_u16_lg",
             "name": "JS Herstal U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451785
           },
           {
             "id": "t_renaissance_montegn_e_u16_lg",
             "name": "Renaissance Montegnée U16 Lg",
             "points": 0,
-            "homeBonus": ""
+            "homeBonus": "",
+            "clubeeId": 451251
           }
         ],
-        "fixtures": [],
+        "fixtures": [
+          {
+            "id": "f0",
+            "gameId": "2851925",
+            "homeIdx": 5,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 34,
+            "awayScore": 18,
+            "week": 0,
+            "date": "2026-09-05",
+            "time": "15:00"
+          },
+          {
+            "id": "f1",
+            "gameId": "2851912",
+            "homeIdx": 4,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 36,
+            "awayScore": 21,
+            "week": 0,
+            "date": "2026-09-06",
+            "time": "15:00"
+          },
+          {
+            "id": "f2",
+            "gameId": "2851938",
+            "homeIdx": 1,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-16",
+            "time": "10:30"
+          },
+          {
+            "id": "f3",
+            "gameId": "2851952",
+            "homeIdx": 0,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 22,
+            "awayScore": 28,
+            "week": 0,
+            "date": "2026-09-13",
+            "time": "10:00"
+          },
+          {
+            "id": "f4",
+            "gameId": "2851964",
+            "homeIdx": 0,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 31,
+            "awayScore": 30,
+            "week": 0,
+            "date": "2026-09-13",
+            "time": "11:30"
+          },
+          {
+            "id": "f5",
+            "gameId": "2852003",
+            "homeIdx": 9,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 17,
+            "awayScore": 42,
+            "week": 0,
+            "date": "2026-09-13",
+            "time": "13:00"
+          },
+          {
+            "id": "f6",
+            "gameId": "2851990",
+            "homeIdx": 6,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 37,
+            "awayScore": 3,
+            "week": 0,
+            "date": "2026-09-13",
+            "time": "14:30"
+          },
+          {
+            "id": "f7",
+            "gameId": "2851977",
+            "homeIdx": 7,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 13,
+            "awayScore": 32,
+            "week": 0,
+            "date": "2026-09-13",
+            "time": "16:00"
+          },
+          {
+            "id": "f8",
+            "gameId": "2851926",
+            "homeIdx": 5,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 24,
+            "awayScore": 41,
+            "week": 0,
+            "date": "2026-09-19",
+            "time": "15:00"
+          },
+          {
+            "id": "f9",
+            "gameId": "2851887",
+            "homeIdx": 3,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 43,
+            "awayScore": 26,
+            "week": 0,
+            "date": "2026-09-20",
+            "time": "13:30"
+          },
+          {
+            "id": "f10",
+            "gameId": "2851913",
+            "homeIdx": 4,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 13,
+            "awayScore": 36,
+            "week": 0,
+            "date": "2026-09-20",
+            "time": "14:00"
+          },
+          {
+            "id": "f11",
+            "gameId": "2851900",
+            "homeIdx": 8,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-30",
+            "time": "13:15"
+          },
+          {
+            "id": "f12",
+            "gameId": "2851953",
+            "homeIdx": 0,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 33,
+            "awayScore": 16,
+            "week": 0,
+            "date": "2026-09-26",
+            "time": "11:00"
+          },
+          {
+            "id": "f13",
+            "gameId": "2851927",
+            "homeIdx": 5,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 31,
+            "awayScore": 20,
+            "week": 0,
+            "date": "2026-09-26",
+            "time": "15:30"
+          },
+          {
+            "id": "f14",
+            "gameId": "2852004",
+            "homeIdx": 9,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 17,
+            "awayScore": 49,
+            "week": 0,
+            "date": "2026-09-26",
+            "time": "16:50"
+          },
+          {
+            "id": "f15",
+            "gameId": "2851939",
+            "homeIdx": 1,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": null,
+            "time": "16:15",
+            "cancelled": true
+          },
+          {
+            "id": "f16",
+            "gameId": "2852005",
+            "homeIdx": 9,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 21,
+            "awayScore": 22,
+            "week": 0,
+            "date": "2026-10-03",
+            "time": "12:00"
+          },
+          {
+            "id": "f17",
+            "gameId": "2851901",
+            "homeIdx": 8,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 9,
+            "awayScore": 39,
+            "week": 0,
+            "date": "2026-10-03",
+            "time": "13:15"
+          },
+          {
+            "id": "f18",
+            "gameId": "2851875",
+            "homeIdx": 2,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 41,
+            "awayScore": 29,
+            "week": 0,
+            "date": "2026-10-04",
+            "time": "14:00"
+          },
+          {
+            "id": "f19",
+            "gameId": "2851888",
+            "homeIdx": 3,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 35,
+            "awayScore": 28,
+            "week": 0,
+            "date": "2026-10-04",
+            "time": "15:00"
+          },
+          {
+            "id": "f20",
+            "gameId": "2851966",
+            "homeIdx": 0,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 32,
+            "awayScore": 40,
+            "week": 0,
+            "date": "2026-10-11",
+            "time": "15:30"
+          },
+          {
+            "id": "f21",
+            "gameId": "2851979",
+            "homeIdx": 7,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 17,
+            "awayScore": 37,
+            "week": 0,
+            "date": "2026-10-11",
+            "time": "16:00"
+          },
+          {
+            "id": "f22",
+            "gameId": "2851954",
+            "homeIdx": 0,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 48,
+            "awayScore": 8,
+            "week": 0,
+            "date": "2026-10-11",
+            "time": "17:00"
+          },
+          {
+            "id": "f23",
+            "gameId": "2851902",
+            "homeIdx": 8,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-17",
+            "time": "13:15"
+          },
+          {
+            "id": "f24",
+            "gameId": "2851992",
+            "homeIdx": 6,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-24",
+            "time": "16:00"
+          },
+          {
+            "id": "f25",
+            "gameId": "2852006",
+            "homeIdx": 9,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-24",
+            "time": "16:50"
+          },
+          {
+            "id": "f26",
+            "gameId": "2851876",
+            "homeIdx": 2,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-25",
+            "time": "12:00"
+          },
+          {
+            "id": "f27",
+            "gameId": "2851980",
+            "homeIdx": 7,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-25",
+            "time": "16:00"
+          },
+          {
+            "id": "f28",
+            "gameId": "2851903",
+            "homeIdx": 8,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-31",
+            "time": "13:15"
+          },
+          {
+            "id": "f29",
+            "gameId": "2851929",
+            "homeIdx": 5,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-31",
+            "time": "15:00"
+          },
+          {
+            "id": "f30",
+            "gameId": "2851955",
+            "homeIdx": 0,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-31",
+            "time": "18:30"
+          },
+          {
+            "id": "f31",
+            "gameId": "2851915",
+            "homeIdx": 4,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-01",
+            "time": "16:00"
+          },
+          {
+            "id": "f32",
+            "gameId": "2851941",
+            "homeIdx": 1,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-01",
+            "time": "16:15"
+          },
+          {
+            "id": "f33",
+            "gameId": "2851967",
+            "homeIdx": 0,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-08",
+            "time": "11:30"
+          },
+          {
+            "id": "f34",
+            "gameId": "2851956",
+            "homeIdx": 0,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-08",
+            "time": "13:00"
+          },
+          {
+            "id": "f35",
+            "gameId": "2851993",
+            "homeIdx": 6,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-14",
+            "time": "12:00"
+          },
+          {
+            "id": "f36",
+            "gameId": "2851877",
+            "homeIdx": 2,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-15",
+            "time": "16:00"
+          },
+          {
+            "id": "f37",
+            "gameId": "2851981",
+            "homeIdx": 7,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-15",
+            "time": "18:00"
+          },
+          {
+            "id": "f38",
+            "gameId": "2851916",
+            "homeIdx": 4,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-21",
+            "time": "12:00"
+          },
+          {
+            "id": "f39",
+            "gameId": "2851890",
+            "homeIdx": 3,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-22",
+            "time": "14:30"
+          },
+          {
+            "id": "f40",
+            "gameId": "2851930",
+            "homeIdx": 5,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-22",
+            "time": "15:30"
+          },
+          {
+            "id": "f41",
+            "gameId": "2851904",
+            "homeIdx": 8,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-03",
+            "time": "13:15"
+          },
+          {
+            "id": "f42",
+            "gameId": "2851994",
+            "homeIdx": 6,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-28",
+            "time": "10:00"
+          },
+          {
+            "id": "f43",
+            "gameId": "2851931",
+            "homeIdx": 5,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-28",
+            "time": "15:00"
+          },
+          {
+            "id": "f44",
+            "gameId": "2851878",
+            "homeIdx": 2,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-29",
+            "time": "16:00"
+          },
+          {
+            "id": "f45",
+            "gameId": "2851942",
+            "homeIdx": 1,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-29",
+            "time": "16:15"
+          },
+          {
+            "id": "f46",
+            "gameId": "2851995",
+            "homeIdx": 6,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-05",
+            "time": "12:00"
+          },
+          {
+            "id": "f47",
+            "gameId": "2851905",
+            "homeIdx": 8,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-05",
+            "time": "13:15"
+          },
+          {
+            "id": "f48",
+            "gameId": "2852008",
+            "homeIdx": 9,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-05",
+            "time": "16:50"
+          },
+          {
+            "id": "f49",
+            "gameId": "2851891",
+            "homeIdx": 3,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-06",
+            "time": "16:00"
+          },
+          {
+            "id": "f50",
+            "gameId": "2851958",
+            "homeIdx": 0,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-12",
+            "time": "16:30"
+          },
+          {
+            "id": "f51",
+            "gameId": "2851969",
+            "homeIdx": 0,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-12",
+            "time": "18:00"
+          },
+          {
+            "id": "f52",
+            "gameId": "2851879",
+            "homeIdx": 2,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-13",
+            "time": "16:00"
+          },
+          {
+            "id": "f53",
+            "gameId": "2851943",
+            "homeIdx": 1,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-12-13",
+            "time": "16:15"
+          },
+          {
+            "id": "f54",
+            "gameId": "2851983",
+            "homeIdx": 7,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 8,
+            "awayScore": 50,
+            "week": 0,
+            "date": "2026-09-06",
+            "time": "16:00"
+          },
+          {
+            "id": "f55",
+            "gameId": "2851996",
+            "homeIdx": 6,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-16",
+            "time": "10:00"
+          },
+          {
+            "id": "f56",
+            "gameId": "2852009",
+            "homeIdx": 9,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-16",
+            "time": "14:30"
+          },
+          {
+            "id": "f57",
+            "gameId": "2851907",
+            "homeIdx": 8,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-23",
+            "time": "13:15"
+          },
+          {
+            "id": "f58",
+            "gameId": "2851918",
+            "homeIdx": 4,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-23",
+            "time": "14:30"
+          },
+          {
+            "id": "f59",
+            "gameId": "2851892",
+            "homeIdx": 3,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-24",
+            "time": "14:30"
+          },
+          {
+            "id": "f60",
+            "gameId": "2851944",
+            "homeIdx": 1,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-24",
+            "time": "16:15"
+          },
+          {
+            "id": "f61",
+            "gameId": "2851933",
+            "homeIdx": 5,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-24",
+            "time": "16:30"
+          },
+          {
+            "id": "f62",
+            "gameId": "2851971",
+            "homeIdx": 0,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": true,
+            "homeScore": 50,
+            "awayScore": 10,
+            "week": 0,
+            "date": "2026-09-19",
+            "time": "16:00"
+          },
+          {
+            "id": "f63",
+            "gameId": "2851959",
+            "homeIdx": 0,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-10-17",
+            "time": "14:30"
+          },
+          {
+            "id": "f64",
+            "gameId": "2851984",
+            "homeIdx": 7,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-31",
+            "time": "16:00"
+          },
+          {
+            "id": "f65",
+            "gameId": "2851945",
+            "homeIdx": 1,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-01-31",
+            "time": "16:15"
+          },
+          {
+            "id": "f66",
+            "gameId": "2851908",
+            "homeIdx": 8,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-06",
+            "time": "13:15"
+          },
+          {
+            "id": "f67",
+            "gameId": "2851919",
+            "homeIdx": 4,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-06",
+            "time": "15:30"
+          },
+          {
+            "id": "f68",
+            "gameId": "2851881",
+            "homeIdx": 2,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-06",
+            "time": "15:30"
+          },
+          {
+            "id": "f69",
+            "gameId": "2851893",
+            "homeIdx": 3,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-07",
+            "time": "16:00"
+          },
+          {
+            "id": "f70",
+            "gameId": "2851998",
+            "homeIdx": 6,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-13",
+            "time": "10:00"
+          },
+          {
+            "id": "f71",
+            "gameId": "2851934",
+            "homeIdx": 5,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-13",
+            "time": "15:00"
+          },
+          {
+            "id": "f72",
+            "gameId": "2851920",
+            "homeIdx": 4,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-14",
+            "time": "12:00"
+          },
+          {
+            "id": "f73",
+            "gameId": "2851985",
+            "homeIdx": 7,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-14",
+            "time": "14:00"
+          },
+          {
+            "id": "f74",
+            "gameId": "2851999",
+            "homeIdx": 6,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-27",
+            "time": "10:00"
+          },
+          {
+            "id": "f75",
+            "gameId": "2852011",
+            "homeIdx": 9,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-27",
+            "time": "16:50"
+          },
+          {
+            "id": "f76",
+            "gameId": "2851882",
+            "homeIdx": 2,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-28",
+            "time": "14:00"
+          },
+          {
+            "id": "f77",
+            "gameId": "2851894",
+            "homeIdx": 3,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-02-28",
+            "time": "14:30"
+          },
+          {
+            "id": "f78",
+            "gameId": "2851935",
+            "homeIdx": 5,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-06",
+            "time": "15:00"
+          },
+          {
+            "id": "f79",
+            "gameId": "2851961",
+            "homeIdx": 0,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-06",
+            "time": "16:30"
+          },
+          {
+            "id": "f80",
+            "gameId": "2851973",
+            "homeIdx": 0,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-06",
+            "time": "18:00"
+          },
+          {
+            "id": "f81",
+            "gameId": "2851947",
+            "homeIdx": 1,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-07",
+            "time": "16:15"
+          },
+          {
+            "id": "f82",
+            "gameId": "2852000",
+            "homeIdx": 6,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-13",
+            "time": "10:00"
+          },
+          {
+            "id": "f83",
+            "gameId": "2852012",
+            "homeIdx": 9,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-13",
+            "time": "13:30"
+          },
+          {
+            "id": "f84",
+            "gameId": "2851974",
+            "homeIdx": 0,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-13",
+            "time": "14:00"
+          },
+          {
+            "id": "f85",
+            "gameId": "2851883",
+            "homeIdx": 2,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-14",
+            "time": "14:00"
+          },
+          {
+            "id": "f86",
+            "gameId": "2851986",
+            "homeIdx": 7,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-14",
+            "time": "16:00"
+          },
+          {
+            "id": "f87",
+            "gameId": "2851910",
+            "homeIdx": 8,
+            "awayIdx": 7,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-20",
+            "time": "13:15"
+          },
+          {
+            "id": "f88",
+            "gameId": "2851922",
+            "homeIdx": 4,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-20",
+            "time": "14:00"
+          },
+          {
+            "id": "f89",
+            "gameId": "2851936",
+            "homeIdx": 5,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-20",
+            "time": "16:00"
+          },
+          {
+            "id": "f90",
+            "gameId": "2851896",
+            "homeIdx": 3,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-21",
+            "time": "14:00"
+          },
+          {
+            "id": "f91",
+            "gameId": "2851948",
+            "homeIdx": 1,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-03-21",
+            "time": "16:15"
+          },
+          {
+            "id": "f92",
+            "gameId": "2851962",
+            "homeIdx": 0,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2026-11-21",
+            "time": "16:00"
+          },
+          {
+            "id": "f93",
+            "gameId": "2851975",
+            "homeIdx": 0,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-03",
+            "time": "17:30"
+          },
+          {
+            "id": "f94",
+            "gameId": "2851884",
+            "homeIdx": 2,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-04",
+            "time": "16:00"
+          },
+          {
+            "id": "f95",
+            "gameId": "2851949",
+            "homeIdx": 1,
+            "awayIdx": 4,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-04",
+            "time": "16:15"
+          },
+          {
+            "id": "f96",
+            "gameId": "2851911",
+            "homeIdx": 8,
+            "awayIdx": 5,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-10",
+            "time": "13:15"
+          },
+          {
+            "id": "f97",
+            "gameId": "2852014",
+            "homeIdx": 9,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-10",
+            "time": "14:00"
+          },
+          {
+            "id": "f98",
+            "gameId": "2851897",
+            "homeIdx": 3,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-11",
+            "time": "14:30"
+          },
+          {
+            "id": "f99",
+            "gameId": "2851923",
+            "homeIdx": 4,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-11",
+            "time": "16:00"
+          },
+          {
+            "id": "f100",
+            "gameId": "2851976",
+            "homeIdx": 0,
+            "awayIdx": 9,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-17",
+            "time": "15:30"
+          },
+          {
+            "id": "f101",
+            "gameId": "2851924",
+            "homeIdx": 4,
+            "awayIdx": 3,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-17",
+            "time": "16:00"
+          },
+          {
+            "id": "f102",
+            "gameId": "2851988",
+            "homeIdx": 7,
+            "awayIdx": 6,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-18",
+            "time": "16:00"
+          },
+          {
+            "id": "f103",
+            "gameId": "2851885",
+            "homeIdx": 2,
+            "awayIdx": 8,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-04-18",
+            "time": "16:00"
+          },
+          {
+            "id": "f104",
+            "gameId": "2852002",
+            "homeIdx": 6,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-05-08",
+            "time": "10:00"
+          },
+          {
+            "id": "f105",
+            "gameId": "2852015",
+            "homeIdx": 9,
+            "awayIdx": 1,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-05-08",
+            "time": "13:30"
+          },
+          {
+            "id": "f106",
+            "gameId": "2851898",
+            "homeIdx": 3,
+            "awayIdx": 2,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-05-09",
+            "time": "14:30"
+          },
+          {
+            "id": "f107",
+            "gameId": "2851989",
+            "homeIdx": 7,
+            "awayIdx": 0,
+            "homeWin": 50,
+            "draw": 6,
+            "awayWin": 44,
+            "overrideOn": false,
+            "ovHW": "",
+            "ovD": "",
+            "ovAW": "",
+            "played": false,
+            "homeScore": null,
+            "awayScore": null,
+            "week": 0,
+            "date": "2027-05-09",
+            "time": "16:00"
+          }
+        ],
         "ranking": [
           {
             "pos": 1,
@@ -47703,7 +49317,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 13
           },
           {
             "player": "Emile Herbecq",
@@ -47715,7 +49330,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 13
           },
           {
             "player": "Nathan Gérard",
@@ -47727,7 +49343,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 9
           },
           {
             "player": "Nathan Gallo",
@@ -47751,7 +49368,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 11
           },
           {
             "player": "Victor Mercier",
@@ -47763,7 +49381,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 7
           },
           {
             "player": "Léo Colson",
@@ -47775,7 +49394,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 9
           },
           {
             "player": "Martin Daerden",
@@ -47787,7 +49407,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 10
           },
           {
             "player": "Aron Voss",
@@ -47799,7 +49420,8 @@
             "yellowCards": 1,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 6
           },
           {
             "player": "Martin Greatti",
@@ -47811,7 +49433,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Liam Bergeret",
@@ -47823,7 +49446,8 @@
             "yellowCards": 1,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Valentino Scheiff",
@@ -47835,7 +49459,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 11
           },
           {
             "player": "Valentin Moor",
@@ -47847,7 +49472,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 10
           },
           {
             "player": "Ugo Rentmeesters",
@@ -47859,7 +49485,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 4
           },
           {
             "player": "Ethan Nerrinck",
@@ -47871,7 +49498,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 4
           },
           {
             "player": "Matt Villa",
@@ -47883,7 +49511,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Nico Raaff",
@@ -47895,7 +49524,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Romain Lenaerts",
@@ -47907,7 +49537,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Orelio Marecek",
@@ -47919,7 +49550,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Matteo Demeester-Pace",
@@ -47931,7 +49563,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Louis Dewalque",
@@ -47943,7 +49576,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Enzo Ressaissi",
@@ -47967,7 +49601,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 6
           },
           {
             "player": "Maxime L'Hoest",
@@ -47979,7 +49614,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Mirko Greco",
@@ -47991,7 +49627,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 8
           },
           {
             "player": "Nathan Docquier-Decsi",
@@ -48003,7 +49640,8 @@
             "yellowCards": 1,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Nathan Laurent",
@@ -48015,7 +49653,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Manoé Cran",
@@ -48027,7 +49666,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Maurice Woolf",
@@ -48039,7 +49679,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Loïs Fischer",
@@ -48051,7 +49692,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Achille Wegnez",
@@ -48063,7 +49705,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 11
           },
           {
             "player": "Sebastian Bilke",
@@ -48075,7 +49718,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Guillaume Frippiat",
@@ -48087,7 +49731,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Aymeric Mozin",
@@ -48111,7 +49756,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 4
           },
           {
             "player": "Carmelo Capitano",
@@ -48123,7 +49769,8 @@
             "yellowCards": 1,
             "twoMinSuspensions": 3,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 6
           },
           {
             "player": "Loric Saccasyn",
@@ -48135,7 +49782,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Steffen Schmitz",
@@ -48147,7 +49795,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Timéo Flamand",
@@ -48159,7 +49808,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Timéo Albarino Fernandez",
@@ -48171,7 +49821,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 6
           },
           {
             "player": "Mathieu Fays",
@@ -48183,7 +49834,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 7
           },
           {
             "player": "Benjamin Alexandre",
@@ -48207,7 +49859,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 4
           },
           {
             "player": "Julien De Zanet",
@@ -48219,7 +49872,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Maëlle Dorthu",
@@ -48231,7 +49885,8 @@
             "yellowCards": 1,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Jan Peters",
@@ -48243,7 +49898,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 7
           },
           {
             "player": "Loïc Englebert",
@@ -48279,7 +49935,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Flavio Carcione",
@@ -48291,7 +49948,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Alessandro Costa",
@@ -48315,7 +49973,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Zoéline Dubois",
@@ -48327,7 +49986,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Romain Lennerts",
@@ -48339,7 +49999,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Tao Counet",
@@ -48351,7 +50012,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Eliot Ernst",
@@ -48363,7 +50025,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Ruben Martin Virseda",
@@ -48375,7 +50038,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Arthur Delooz",
@@ -48387,7 +50051,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Liam Havenith",
@@ -48399,7 +50064,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Simon Otoul",
@@ -48423,7 +50089,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Janelle Jadoul",
@@ -48435,7 +50102,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Valentin Moor",
@@ -48447,7 +50115,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 10
           },
           {
             "player": "Lea Mors",
@@ -48459,7 +50128,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Bastien Habay",
@@ -48471,7 +50141,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Thomas Dessart",
@@ -48483,7 +50154,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Owen Labrot",
@@ -48495,7 +50167,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 4
           },
           {
             "player": "Lucas Liu",
@@ -48507,7 +50180,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Gabriel Poisket",
@@ -48519,7 +50193,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 4
           },
           {
             "player": "Tassilo Berges",
@@ -48531,7 +50206,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 6
           },
           {
             "player": "Alexandre Delooz",
@@ -48543,7 +50219,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Maxence Szczepanczyk",
@@ -48555,7 +50232,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Antoine Maréchal",
@@ -48567,7 +50245,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Adrian Mignon",
@@ -48579,7 +50258,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Aurélien Stappers",
@@ -48591,7 +50271,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 3,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Robin Louis",
@@ -48603,7 +50284,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 3,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 4
           },
           {
             "player": "Flore Mignolet",
@@ -48627,7 +50309,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Charly Demonceau",
@@ -48639,7 +50322,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Martin Bernimoulin",
@@ -48663,7 +50347,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Hilane Bie Emane",
@@ -48687,7 +50372,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Loïc Bastjaens",
@@ -48699,7 +50385,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Nathan Pospiszil",
@@ -48711,7 +50398,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Eliott Dumont",
@@ -48723,7 +50411,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Maximilian Klinkenberg",
@@ -48735,7 +50424,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Levi Ramjoie",
@@ -48747,7 +50437,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Tom Schlüter",
@@ -48759,7 +50450,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Judith Hossay",
@@ -48771,7 +50463,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Thomas Streel",
@@ -48795,7 +50488,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Ethan Labrot",
@@ -48807,7 +50501,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Moritz Weynand",
@@ -48819,7 +50514,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Louis Butaye",
@@ -48831,7 +50527,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Léa Brunelli",
@@ -48843,7 +50540,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Noâm Dabo",
@@ -48855,7 +50553,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Alexis Gelmini",
@@ -48867,7 +50566,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Tom Stankovic",
@@ -48879,7 +50579,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Leo Jacobson",
@@ -48891,7 +50592,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Noah Chevalier",
@@ -48903,7 +50605,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Eliot Vicqueray",
@@ -48915,7 +50618,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 3
           },
           {
             "player": "Sacha Perings",
@@ -48927,7 +50631,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Nasrat Nawabi",
@@ -48939,7 +50644,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Félicien Lomma",
@@ -48951,7 +50657,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Timéo Flamand",
@@ -48963,7 +50670,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Maurice Woolf",
@@ -48975,7 +50683,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 5
           },
           {
             "player": "Sacha Sintino",
@@ -48999,7 +50708,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Benjamin Klinkenberg",
@@ -49011,7 +50721,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Aylin Baldemir",
@@ -49023,7 +50734,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Samuel Nguyen",
@@ -49035,7 +50747,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Rosalie Rencia Mitogo",
@@ -49047,7 +50760,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Harold Germain Ayikoe Gabiam",
@@ -49071,7 +50785,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Lea Grandry",
@@ -49083,7 +50798,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Antoine Ruban",
@@ -49095,7 +50811,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Lena Sonnet",
@@ -49107,7 +50824,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "Maeva Mombo",
@@ -49119,7 +50837,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 2,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 2
           },
           {
             "player": "William Laruelle",
@@ -49131,7 +50850,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Calogero Capitane",
@@ -49143,7 +50863,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Antoine Dekrock",
@@ -49155,7 +50876,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Elias Kalff",
@@ -49167,7 +50889,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Alexis Georges",
@@ -49179,7 +50902,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Theo Peters",
@@ -49191,7 +50915,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Simon Michotte",
@@ -49203,7 +50928,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Mirwais Nawabi",
@@ -49215,7 +50941,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Elena Martin Suarez",
@@ -49227,7 +50954,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 3,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Félix Merenne",
@@ -49239,7 +50967,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Bastien Habay",
@@ -49251,7 +50980,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Arwen Diplo",
@@ -49263,7 +50993,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Bastien Roland",
@@ -49275,7 +51006,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Adrian Mignon",
@@ -49287,7 +51019,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Xiyuan Xu",
@@ -49299,7 +51032,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Loukas Chard'Homme",
@@ -49311,7 +51045,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Ismaël Insar",
@@ -49323,7 +51058,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 1
           },
           {
             "player": "Tao Counet",
@@ -49335,7 +51071,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 1,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Emilien Verstraelen",
@@ -49347,7 +51084,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Issatou Sylla",
@@ -49359,7 +51097,8 @@
             "yellowCards": 0,
             "twoMinSuspensions": 0,
             "blueCards": 0,
-            "redCards": 0
+            "redCards": 0,
+            "lastGameGoals": 0
           },
           {
             "player": "Leandro Pallisco",
@@ -49386,56 +51125,147 @@
             "redCards": 0
           }
         ],
-        "topSingleGamePlayers": [],
+        "topSingleGamePlayers": [
+          {
+            "player": "Aron Voss",
+            "club": "HC Herstal U16 Lg",
+            "goals": 13,
+            "date": "2026-09-06"
+          },
+          {
+            "player": "Emile Herbecq",
+            "club": "Union Beynoise U16 Lg",
+            "goals": 13,
+            "date": "2026-10-11"
+          },
+          {
+            "player": "Arthus Nyssen",
+            "club": "Eupen U16 Lg",
+            "goals": 13,
+            "date": "2026-10-11"
+          },
+          {
+            "player": "Nathan Gérard",
+            "club": "Villers-Amay U16 Lg",
+            "goals": 11,
+            "date": "2026-09-13"
+          },
+          {
+            "player": "Romain Lenaerts",
+            "club": "Villers-Amay U16 Lg",
+            "goals": 11,
+            "date": "2026-09-05"
+          },
+          {
+            "player": "Victor Mercier",
+            "club": "Visé BM U16 Lg",
+            "goals": 11,
+            "date": "2026-09-26"
+          },
+          {
+            "player": "Matteo Demeester-Pace",
+            "club": "HC Herstal U16 Lg",
+            "goals": 11,
+            "date": "2026-09-06"
+          },
+          {
+            "player": "Valentino Scheiff",
+            "club": "Eynatten-Raeren U16 Lg",
+            "goals": 11,
+            "date": "2026-10-04"
+          },
+          {
+            "player": "Achille Wegnez",
+            "club": "Union Beynoise U16 Lg",
+            "goals": 11,
+            "date": "2026-10-11"
+          },
+          {
+            "player": "Basil Sehovic",
+            "club": "Eupen U16 Lg",
+            "goals": 11,
+            "date": "2026-10-11"
+          },
+          {
+            "player": "Liam Bergeret",
+            "club": "Villers-Amay U16 Lg",
+            "goals": 10,
+            "date": "2026-09-26"
+          },
+          {
+            "player": "Valentin Moor",
+            "club": "Visé BM U16 Lg",
+            "goals": 10,
+            "date": "2026-10-11"
+          },
+          {
+            "player": "Martin Greatti",
+            "club": "Visé BM U16 Lg R",
+            "goals": 10,
+            "date": "2026-09-19"
+          },
+          {
+            "player": "Martin Daerden",
+            "club": "HC Herstal U16 Lg",
+            "goals": 10,
+            "date": "2026-09-19"
+          },
+          {
+            "player": "Matt Villa",
+            "club": "Eupen U16 Lg",
+            "goals": 10,
+            "date": "2026-09-26"
+          }
+        ],
         "travelRanking": [
           {
-            "id": "t_eupen_u16_lg",
-            "name": "Eupen U16 Lg",
-            "km": 0
-          },
-          {
-            "id": "t_eynatten_raeren_u16_lg",
-            "name": "Eynatten-Raeren U16 Lg",
-            "km": 0
-          },
-          {
-            "id": "t_hc_herstal_u16_lg",
-            "name": "HC Herstal U16 Lg",
-            "km": 0
-          },
-          {
-            "id": "t_js_herstal_u16_lg",
-            "name": "JS Herstal U16 Lg",
-            "km": 0
-          },
-          {
-            "id": "t_malmedy_u16_lg",
-            "name": "Malmedy U16 Lg",
-            "km": 0
-          },
-          {
-            "id": "t_renaissance_montegn_e_u16_lg",
-            "name": "Renaissance Montegnée U16 Lg",
-            "km": 0
+            "id": "t_villers_amay_u16_lg",
+            "name": "Villers-Amay U16 Lg",
+            "km": 109
           },
           {
             "id": "t_sprimont_u16_lg",
             "name": "Sprimont U16 Lg",
-            "km": 0
+            "km": 107
+          },
+          {
+            "id": "t_eynatten_raeren_u16_lg",
+            "name": "Eynatten-Raeren U16 Lg",
+            "km": 82
           },
           {
             "id": "t_union_beynoise_u16_lg",
             "name": "Union Beynoise U16 Lg",
-            "km": 0
+            "km": 72
           },
           {
-            "id": "t_villers_amay_u16_lg",
-            "name": "Villers-Amay U16 Lg",
-            "km": 0
+            "id": "t_eupen_u16_lg",
+            "name": "Eupen U16 Lg",
+            "km": 70
+          },
+          {
+            "id": "t_malmedy_u16_lg",
+            "name": "Malmedy U16 Lg",
+            "km": 40
+          },
+          {
+            "id": "t_hc_herstal_u16_lg",
+            "name": "HC Herstal U16 Lg",
+            "km": 37
+          },
+          {
+            "id": "t_renaissance_montegn_e_u16_lg",
+            "name": "Renaissance Montegnée U16 Lg",
+            "km": 27
           },
           {
             "id": "t_vis_bm_u16_lg",
             "name": "Visé BM U16 Lg",
+            "km": 27
+          },
+          {
+            "id": "t_js_herstal_u16_lg",
+            "name": "JS Herstal U16 Lg",
             "km": 0
           }
         ]
@@ -49445,10 +51275,22 @@
         "name": "U14 Men",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
+          {
+            "id": "t_eynatten_raeren_u14_lg",
+            "name": "Eynatten-Raeren U14 Lg",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_vis_bm_u14_lg",
+            "name": "Visé BM U14 Lg",
+            "points": 0,
+            "homeBonus": ""
+          },
           {
             "id": "t_eynatten_raeren_u14_lg",
             "name": "Eynatten-Raeren U14 Lg",
@@ -49462,6 +51304,18 @@
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451817
+          },
+          {
+            "id": "t_eupen_u14_lg_1",
+            "name": "Eupen U14 Lg 1",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_malmedy_u14_lg",
+            "name": "Malmedy U14 Lg",
+            "points": 0,
+            "homeBonus": ""
           },
           {
             "id": "t_eupen_u14_lg_1",
@@ -49481,6 +51335,18 @@
             "id": "t_union_beynoise_u14_lg",
             "name": "Union Beynoise U14 Lg",
             "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_verviers_u14_lg",
+            "name": "Verviers U14 Lg",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_union_beynoise_u14_lg",
+            "name": "Union Beynoise U14 Lg",
+            "points": 0,
             "homeBonus": "",
             "clubeeId": 451829
           },
@@ -49490,6 +51356,18 @@
             "points": 0,
             "homeBonus": "",
             "clubeeId": 451835
+          },
+          {
+            "id": "t_eupen_u14_lg_2",
+            "name": "Eupen U14 Lg 2",
+            "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_villers_amay_u14_lg",
+            "name": "Villers-Amay U14 Lg",
+            "points": 0,
+            "homeBonus": ""
           },
           {
             "id": "t_eupen_u14_lg_2",
@@ -49509,6 +51387,12 @@
             "id": "t_renaissance_montegn_e_u14_lg",
             "name": "Renaissance Montegnée U14 Lg",
             "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_renaissance_montegn_e_u14_lg",
+            "name": "Renaissance Montegnée U14 Lg",
+            "points": 0,
             "homeBonus": "",
             "clubeeId": 451252
           },
@@ -49516,8 +51400,20 @@
             "id": "t_sprimont_u14_lg",
             "name": "Sprimont U14 Lg",
             "points": 0,
+            "homeBonus": ""
+          },
+          {
+            "id": "t_sprimont_u14_lg",
+            "name": "Sprimont U14 Lg",
+            "points": 0,
             "homeBonus": "",
             "clubeeId": 451755
+          },
+          {
+            "id": "t_fl_malle_u14_lg",
+            "name": "Flémalle U14 Lg",
+            "points": 0,
+            "homeBonus": ""
           },
           {
             "id": "t_fl_malle_u14_lg",
@@ -49531,8 +51427,8 @@
           {
             "id": "f0",
             "gameId": "2852069",
-            "homeIdx": 8,
-            "awayIdx": 2,
+            "homeIdx": 17,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49550,8 +51446,8 @@
           {
             "id": "f1",
             "gameId": "2852125",
-            "homeIdx": 7,
-            "awayIdx": 4,
+            "homeIdx": 15,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49569,8 +51465,8 @@
           {
             "id": "f2",
             "gameId": "2852076",
-            "homeIdx": 9,
-            "awayIdx": 10,
+            "homeIdx": 19,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49588,8 +51484,8 @@
           {
             "id": "f3",
             "gameId": "2852062",
-            "homeIdx": 4,
-            "awayIdx": 1,
+            "homeIdx": 10,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49607,8 +51503,8 @@
           {
             "id": "f4",
             "gameId": "2852055",
-            "homeIdx": 0,
-            "awayIdx": 6,
+            "homeIdx": 2,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49626,8 +51522,8 @@
           {
             "id": "f5",
             "gameId": "2852132",
-            "homeIdx": 9,
-            "awayIdx": 5,
+            "homeIdx": 19,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49645,8 +51541,8 @@
           {
             "id": "f6",
             "gameId": "2852118",
-            "homeIdx": 3,
-            "awayIdx": 1,
+            "homeIdx": 7,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49664,8 +51560,8 @@
           {
             "id": "f7",
             "gameId": "2852077",
-            "homeIdx": 9,
-            "awayIdx": 8,
+            "homeIdx": 19,
+            "awayIdx": 17,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49683,8 +51579,8 @@
           {
             "id": "f8",
             "gameId": "2852133",
-            "homeIdx": 9,
-            "awayIdx": 7,
+            "homeIdx": 19,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49702,8 +51598,8 @@
           {
             "id": "f9",
             "gameId": "2852097",
-            "homeIdx": 1,
-            "awayIdx": 0,
+            "homeIdx": 3,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49721,8 +51617,8 @@
           {
             "id": "f10",
             "gameId": "2852153",
-            "homeIdx": 1,
-            "awayIdx": 0,
+            "homeIdx": 3,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49740,8 +51636,8 @@
           {
             "id": "f11",
             "gameId": "2852090",
-            "homeIdx": 2,
-            "awayIdx": 6,
+            "homeIdx": 6,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49759,8 +51655,8 @@
           {
             "id": "f12",
             "gameId": "2852139",
-            "homeIdx": 5,
-            "awayIdx": 3,
+            "homeIdx": 11,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49778,8 +51674,8 @@
           {
             "id": "f13",
             "gameId": "2852083",
-            "homeIdx": 10,
-            "awayIdx": 4,
+            "homeIdx": 21,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49797,8 +51693,8 @@
           {
             "id": "f14",
             "gameId": "2852112",
-            "homeIdx": 0,
-            "awayIdx": 4,
+            "homeIdx": 2,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49816,8 +51712,8 @@
           {
             "id": "f15",
             "gameId": "2852104",
-            "homeIdx": 6,
-            "awayIdx": 9,
+            "homeIdx": 14,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49835,8 +51731,8 @@
           {
             "id": "f16",
             "gameId": "2852098",
-            "homeIdx": 1,
-            "awayIdx": 10,
+            "homeIdx": 3,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49854,8 +51750,8 @@
           {
             "id": "f17",
             "gameId": "2852063",
-            "homeIdx": 4,
-            "awayIdx": 8,
+            "homeIdx": 10,
+            "awayIdx": 17,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49873,8 +51769,8 @@
           {
             "id": "f18",
             "gameId": "2852154",
-            "homeIdx": 1,
-            "awayIdx": 5,
+            "homeIdx": 3,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49892,8 +51788,8 @@
           {
             "id": "f19",
             "gameId": "2852119",
-            "homeIdx": 3,
-            "awayIdx": 7,
+            "homeIdx": 7,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49911,8 +51807,8 @@
           {
             "id": "f20",
             "gameId": "2852056",
-            "homeIdx": 0,
-            "awayIdx": 2,
+            "homeIdx": 2,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49930,8 +51826,8 @@
           {
             "id": "f21",
             "gameId": "2852134",
-            "homeIdx": 9,
-            "awayIdx": 4,
+            "homeIdx": 19,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49949,8 +51845,8 @@
           {
             "id": "f22",
             "gameId": "2852078",
-            "homeIdx": 9,
-            "awayIdx": 2,
+            "homeIdx": 19,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49968,8 +51864,8 @@
           {
             "id": "f23",
             "gameId": "2852126",
-            "homeIdx": 7,
-            "awayIdx": 1,
+            "homeIdx": 15,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -49987,8 +51883,8 @@
           {
             "id": "f24",
             "gameId": "2852070",
-            "homeIdx": 8,
-            "awayIdx": 1,
+            "homeIdx": 17,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50006,8 +51902,8 @@
           {
             "id": "f25",
             "gameId": "2852140",
-            "homeIdx": 5,
-            "awayIdx": 0,
+            "homeIdx": 11,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50025,8 +51921,8 @@
           {
             "id": "f26",
             "gameId": "2852064",
-            "homeIdx": 4,
-            "awayIdx": 6,
+            "homeIdx": 10,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50044,8 +51940,8 @@
           {
             "id": "f27",
             "gameId": "2852084",
-            "homeIdx": 10,
-            "awayIdx": 0,
+            "homeIdx": 21,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50063,8 +51959,8 @@
           {
             "id": "f28",
             "gameId": "2852113",
-            "homeIdx": 0,
-            "awayIdx": 9,
+            "homeIdx": 2,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50082,8 +51978,8 @@
           {
             "id": "f29",
             "gameId": "2852147",
-            "homeIdx": 4,
-            "awayIdx": 3,
+            "homeIdx": 10,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50101,8 +51997,8 @@
           {
             "id": "f30",
             "gameId": "2852099",
-            "homeIdx": 1,
-            "awayIdx": 6,
+            "homeIdx": 3,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50120,8 +52016,8 @@
           {
             "id": "f31",
             "gameId": "2852085",
-            "homeIdx": 10,
-            "awayIdx": 8,
+            "homeIdx": 21,
+            "awayIdx": 17,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50139,8 +52035,8 @@
           {
             "id": "f32",
             "gameId": "2852141",
-            "homeIdx": 5,
-            "awayIdx": 7,
+            "homeIdx": 11,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50158,8 +52054,8 @@
           {
             "id": "f33",
             "gameId": "2852091",
-            "homeIdx": 2,
-            "awayIdx": 4,
+            "homeIdx": 6,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50177,8 +52073,8 @@
           {
             "id": "f34",
             "gameId": "2852057",
-            "homeIdx": 0,
-            "awayIdx": 9,
+            "homeIdx": 2,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50196,8 +52092,8 @@
           {
             "id": "f35",
             "gameId": "2852127",
-            "homeIdx": 7,
-            "awayIdx": 0,
+            "homeIdx": 15,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50215,8 +52111,8 @@
           {
             "id": "f36",
             "gameId": "2852071",
-            "homeIdx": 8,
-            "awayIdx": 0,
+            "homeIdx": 17,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50234,8 +52130,8 @@
           {
             "id": "f37",
             "gameId": "2852065",
-            "homeIdx": 4,
-            "awayIdx": 9,
+            "homeIdx": 10,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50253,8 +52149,8 @@
           {
             "id": "f38",
             "gameId": "2852156",
-            "homeIdx": 1,
-            "awayIdx": 4,
+            "homeIdx": 3,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50272,8 +52168,8 @@
           {
             "id": "f39",
             "gameId": "2852105",
-            "homeIdx": 6,
-            "awayIdx": 10,
+            "homeIdx": 14,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50291,8 +52187,8 @@
           {
             "id": "f40",
             "gameId": "2852100",
-            "homeIdx": 1,
-            "awayIdx": 2,
+            "homeIdx": 3,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50310,8 +52206,8 @@
           {
             "id": "f41",
             "gameId": "2852121",
-            "homeIdx": 3,
-            "awayIdx": 9,
+            "homeIdx": 7,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50329,8 +52225,8 @@
           {
             "id": "f42",
             "gameId": "2852114",
-            "homeIdx": 0,
-            "awayIdx": 3,
+            "homeIdx": 2,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50348,8 +52244,8 @@
           {
             "id": "f43",
             "gameId": "2852079",
-            "homeIdx": 9,
-            "awayIdx": 1,
+            "homeIdx": 19,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50367,8 +52263,8 @@
           {
             "id": "f44",
             "gameId": "2852072",
-            "homeIdx": 8,
-            "awayIdx": 6,
+            "homeIdx": 17,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50386,8 +52282,8 @@
           {
             "id": "f45",
             "gameId": "2852135",
-            "homeIdx": 9,
-            "awayIdx": 1,
+            "homeIdx": 19,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50405,8 +52301,8 @@
           {
             "id": "f46",
             "gameId": "2852142",
-            "homeIdx": 5,
-            "awayIdx": 4,
+            "homeIdx": 11,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50424,8 +52320,8 @@
           {
             "id": "f47",
             "gameId": "2852086",
-            "homeIdx": 10,
-            "awayIdx": 2,
+            "homeIdx": 21,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50443,8 +52339,8 @@
           {
             "id": "f48",
             "gameId": "2852058",
-            "homeIdx": 0,
-            "awayIdx": 4,
+            "homeIdx": 2,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50462,8 +52358,8 @@
           {
             "id": "f49",
             "gameId": "2852157",
-            "homeIdx": 1,
-            "awayIdx": 3,
+            "homeIdx": 3,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50481,8 +52377,8 @@
           {
             "id": "f50",
             "gameId": "2852101",
-            "homeIdx": 1,
-            "awayIdx": 4,
+            "homeIdx": 3,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50500,8 +52396,8 @@
           {
             "id": "f51",
             "gameId": "2852143",
-            "homeIdx": 5,
-            "awayIdx": 9,
+            "homeIdx": 11,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50519,8 +52415,8 @@
           {
             "id": "f52",
             "gameId": "2852092",
-            "homeIdx": 2,
-            "awayIdx": 8,
+            "homeIdx": 6,
+            "awayIdx": 17,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50538,8 +52434,8 @@
           {
             "id": "f53",
             "gameId": "2852106",
-            "homeIdx": 6,
-            "awayIdx": 0,
+            "homeIdx": 14,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50557,8 +52453,8 @@
           {
             "id": "f54",
             "gameId": "2852148",
-            "homeIdx": 4,
-            "awayIdx": 7,
+            "homeIdx": 10,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50576,8 +52472,8 @@
           {
             "id": "f55",
             "gameId": "2852087",
-            "homeIdx": 10,
-            "awayIdx": 9,
+            "homeIdx": 21,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50595,8 +52491,8 @@
           {
             "id": "f56",
             "gameId": "2852073",
-            "homeIdx": 8,
-            "awayIdx": 9,
+            "homeIdx": 17,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50614,8 +52510,8 @@
           {
             "id": "f57",
             "gameId": "2852129",
-            "homeIdx": 7,
-            "awayIdx": 9,
+            "homeIdx": 15,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50633,8 +52529,8 @@
           {
             "id": "f58",
             "gameId": "2852066",
-            "homeIdx": 4,
-            "awayIdx": 10,
+            "homeIdx": 10,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50652,8 +52548,8 @@
           {
             "id": "f59",
             "gameId": "2852107",
-            "homeIdx": 6,
-            "awayIdx": 2,
+            "homeIdx": 14,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50671,8 +52567,8 @@
           {
             "id": "f60",
             "gameId": "2852122",
-            "homeIdx": 3,
-            "awayIdx": 5,
+            "homeIdx": 7,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50690,8 +52586,8 @@
           {
             "id": "f61",
             "gameId": "2852115",
-            "homeIdx": 0,
-            "awayIdx": 1,
+            "homeIdx": 2,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50709,8 +52605,8 @@
           {
             "id": "f62",
             "gameId": "2852059",
-            "homeIdx": 0,
-            "awayIdx": 1,
+            "homeIdx": 2,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50728,8 +52624,8 @@
           {
             "id": "f63",
             "gameId": "2852149",
-            "homeIdx": 4,
-            "awayIdx": 0,
+            "homeIdx": 10,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50747,8 +52643,8 @@
           {
             "id": "f64",
             "gameId": "2852074",
-            "homeIdx": 8,
-            "awayIdx": 4,
+            "homeIdx": 17,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50766,8 +52662,8 @@
           {
             "id": "f65",
             "gameId": "2852144",
-            "homeIdx": 5,
-            "awayIdx": 1,
+            "homeIdx": 11,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50785,8 +52681,8 @@
           {
             "id": "f66",
             "gameId": "2852088",
-            "homeIdx": 10,
-            "awayIdx": 1,
+            "homeIdx": 21,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50804,8 +52700,8 @@
           {
             "id": "f67",
             "gameId": "2852093",
-            "homeIdx": 2,
-            "awayIdx": 0,
+            "homeIdx": 6,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50823,8 +52719,8 @@
           {
             "id": "f68",
             "gameId": "2852130",
-            "homeIdx": 7,
-            "awayIdx": 3,
+            "homeIdx": 15,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50842,8 +52738,8 @@
           {
             "id": "f69",
             "gameId": "2852080",
-            "homeIdx": 9,
-            "awayIdx": 6,
+            "homeIdx": 19,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50861,8 +52757,8 @@
           {
             "id": "f70",
             "gameId": "2852060",
-            "homeIdx": 0,
-            "awayIdx": 10,
+            "homeIdx": 2,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50880,8 +52776,8 @@
           {
             "id": "f71",
             "gameId": "2852116",
-            "homeIdx": 0,
-            "awayIdx": 5,
+            "homeIdx": 2,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50899,8 +52795,8 @@
           {
             "id": "f72",
             "gameId": "2852094",
-            "homeIdx": 2,
-            "awayIdx": 9,
+            "homeIdx": 6,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50918,8 +52814,8 @@
           {
             "id": "f73",
             "gameId": "2852158",
-            "homeIdx": 1,
-            "awayIdx": 7,
+            "homeIdx": 3,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50937,8 +52833,8 @@
           {
             "id": "f74",
             "gameId": "2852108",
-            "homeIdx": 6,
-            "awayIdx": 4,
+            "homeIdx": 14,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50956,8 +52852,8 @@
           {
             "id": "f75",
             "gameId": "2852102",
-            "homeIdx": 1,
-            "awayIdx": 8,
+            "homeIdx": 3,
+            "awayIdx": 17,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50975,8 +52871,8 @@
           {
             "id": "f76",
             "gameId": "2852150",
-            "homeIdx": 4,
-            "awayIdx": 9,
+            "homeIdx": 10,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -50994,8 +52890,8 @@
           {
             "id": "f77",
             "gameId": "2852131",
-            "homeIdx": 7,
-            "awayIdx": 5,
+            "homeIdx": 15,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51013,8 +52909,8 @@
           {
             "id": "f78",
             "gameId": "2852075",
-            "homeIdx": 8,
-            "awayIdx": 10,
+            "homeIdx": 17,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51032,8 +52928,8 @@
           {
             "id": "f79",
             "gameId": "2852067",
-            "homeIdx": 4,
-            "awayIdx": 2,
+            "homeIdx": 10,
+            "awayIdx": 6,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51051,8 +52947,8 @@
           {
             "id": "f80",
             "gameId": "2852123",
-            "homeIdx": 3,
-            "awayIdx": 4,
+            "homeIdx": 7,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51070,8 +52966,8 @@
           {
             "id": "f81",
             "gameId": "2852109",
-            "homeIdx": 6,
-            "awayIdx": 1,
+            "homeIdx": 14,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51089,8 +52985,8 @@
           {
             "id": "f82",
             "gameId": "2852081",
-            "homeIdx": 9,
-            "awayIdx": 0,
+            "homeIdx": 19,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51108,8 +53004,8 @@
           {
             "id": "f83",
             "gameId": "2852137",
-            "homeIdx": 9,
-            "awayIdx": 0,
+            "homeIdx": 19,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51127,8 +53023,8 @@
           {
             "id": "f84",
             "gameId": "2852117",
-            "homeIdx": 0,
-            "awayIdx": 7,
+            "homeIdx": 2,
+            "awayIdx": 15,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51146,8 +53042,8 @@
           {
             "id": "f85",
             "gameId": "2852082",
-            "homeIdx": 9,
-            "awayIdx": 4,
+            "homeIdx": 19,
+            "awayIdx": 10,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51165,8 +53061,8 @@
           {
             "id": "f86",
             "gameId": "2852089",
-            "homeIdx": 10,
-            "awayIdx": 6,
+            "homeIdx": 21,
+            "awayIdx": 14,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51184,8 +53080,8 @@
           {
             "id": "f87",
             "gameId": "2852138",
-            "homeIdx": 9,
-            "awayIdx": 3,
+            "homeIdx": 19,
+            "awayIdx": 7,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51203,8 +53099,8 @@
           {
             "id": "f88",
             "gameId": "2852151",
-            "homeIdx": 4,
-            "awayIdx": 1,
+            "homeIdx": 10,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51222,8 +53118,8 @@
           {
             "id": "f89",
             "gameId": "2852095",
-            "homeIdx": 2,
-            "awayIdx": 1,
+            "homeIdx": 6,
+            "awayIdx": 3,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51241,8 +53137,8 @@
           {
             "id": "f90",
             "gameId": "2852061",
-            "homeIdx": 0,
-            "awayIdx": 8,
+            "homeIdx": 2,
+            "awayIdx": 17,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51260,8 +53156,8 @@
           {
             "id": "f91",
             "gameId": "2852159",
-            "homeIdx": 1,
-            "awayIdx": 9,
+            "homeIdx": 3,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51279,8 +53175,8 @@
           {
             "id": "f92",
             "gameId": "2852103",
-            "homeIdx": 1,
-            "awayIdx": 9,
+            "homeIdx": 3,
+            "awayIdx": 19,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51298,8 +53194,8 @@
           {
             "id": "f93",
             "gameId": "2852152",
-            "homeIdx": 4,
-            "awayIdx": 5,
+            "homeIdx": 10,
+            "awayIdx": 11,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51317,8 +53213,8 @@
           {
             "id": "f94",
             "gameId": "2852068",
-            "homeIdx": 4,
-            "awayIdx": 0,
+            "homeIdx": 10,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51336,8 +53232,8 @@
           {
             "id": "f95",
             "gameId": "2852124",
-            "homeIdx": 3,
-            "awayIdx": 0,
+            "homeIdx": 7,
+            "awayIdx": 2,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51355,8 +53251,8 @@
           {
             "id": "f96",
             "gameId": "2852096",
-            "homeIdx": 2,
-            "awayIdx": 10,
+            "homeIdx": 6,
+            "awayIdx": 21,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51374,8 +53270,8 @@
           {
             "id": "f97",
             "gameId": "2852110",
-            "homeIdx": 6,
-            "awayIdx": 8,
+            "homeIdx": 14,
+            "awayIdx": 17,
             "homeWin": 50,
             "draw": 6,
             "awayWin": 44,
@@ -51415,6 +53311,54 @@
             "ga": 0,
             "points": 6,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17239/logo/96x96_hc-vise-bm_1790346013.png"
+          },
+          {
+            "pos": 1,
+            "name": "Eynatten-Raeren U14 Lg",
+            "played": 5,
+            "won": 5,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 40,
+            "ga": 0,
+            "points": 10,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17247/logo/_1786967432.jpg"
+          },
+          {
+            "pos": 1,
+            "name": "Visé BM U14 Lg",
+            "played": 3,
+            "won": 3,
+            "drawn": 0,
+            "lost": 0,
+            "gf": 24,
+            "ga": 0,
+            "points": 6,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17239/logo/96x96_hc-vise-bm_1790346013.png"
+          },
+          {
+            "pos": 2,
+            "name": "Eupen U14 Lg 1",
+            "played": 5,
+            "won": 4,
+            "drawn": 0,
+            "lost": 1,
+            "gf": 32,
+            "ga": 8,
+            "points": 8,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17224/logo/96x96_ktsv-eupen_1784463503.png"
+          },
+          {
+            "pos": 2,
+            "name": "Malmedy U14 Lg",
+            "played": 3,
+            "won": 1,
+            "drawn": 1,
+            "lost": 1,
+            "gf": 10,
+            "ga": 14,
+            "points": 3,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17291/logo/96x96_hc-malmedy_1788090227.png"
           },
           {
             "pos": 2,
@@ -51465,6 +53409,54 @@
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790353180.png"
           },
           {
+            "pos": 3,
+            "name": "Union Beynoise U14 Lg",
+            "played": 5,
+            "won": 3,
+            "drawn": 1,
+            "lost": 1,
+            "gf": 25,
+            "ga": 15,
+            "points": 7,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790352332.png"
+          },
+          {
+            "pos": 3,
+            "name": "Verviers U14 Lg",
+            "played": 3,
+            "won": 1,
+            "drawn": 0,
+            "lost": 2,
+            "gf": 7,
+            "ga": 17,
+            "points": 2,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790353180.png"
+          },
+          {
+            "pos": 4,
+            "name": "Eupen U14 Lg 2",
+            "played": 5,
+            "won": 2,
+            "drawn": 1,
+            "lost": 2,
+            "gf": 20,
+            "ga": 20,
+            "points": 5,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17224/logo/96x96_ktsv-eupen_1784463503.png"
+          },
+          {
+            "pos": 4,
+            "name": "Villers-Amay U14 Lg",
+            "played": 3,
+            "won": 0,
+            "drawn": 1,
+            "lost": 2,
+            "gf": 7,
+            "ga": 17,
+            "points": 1,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/16181/logo/_1790352868.png"
+          },
+          {
             "pos": 4,
             "name": "Eupen U14 Lg 2",
             "played": 5,
@@ -51501,6 +53493,18 @@
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17231/logo/hcrm-u12-r-458115_1788520606.png"
           },
           {
+            "pos": 5,
+            "name": "Renaissance Montegnée U14 Lg",
+            "played": 5,
+            "won": 2,
+            "drawn": 0,
+            "lost": 3,
+            "gf": 12,
+            "ga": 28,
+            "points": 4,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17231/logo/hcrm-u12-r-458115_1788520606.png"
+          },
+          {
             "pos": 6,
             "name": "Sprimont U14 Lg",
             "played": 6,
@@ -51511,6 +53515,30 @@
             "ga": 37,
             "points": 2,
             "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17294/logo/_1786519988.png"
+          },
+          {
+            "pos": 6,
+            "name": "Sprimont U14 Lg",
+            "played": 6,
+            "won": 1,
+            "drawn": 0,
+            "lost": 5,
+            "gf": 11,
+            "ga": 37,
+            "points": 2,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17294/logo/_1786519988.png"
+          },
+          {
+            "pos": 7,
+            "name": "Flémalle U14 Lg",
+            "played": 5,
+            "won": 0,
+            "drawn": 0,
+            "lost": 5,
+            "gf": 4,
+            "ga": 36,
+            "points": 0,
+            "logoKey": "https://clubee-websites-prod.s3.eu-central-1.amazonaws.com/17225/logo/_1786053508.jpg"
           },
           {
             "pos": 7,
@@ -53259,6 +55287,61 @@
             "id": "t_verviers_u14_lg",
             "name": "Verviers U14 Lg",
             "km": 31
+          },
+          {
+            "id": "t_eupen_u14_lg_1",
+            "name": "Eupen U14 Lg 1",
+            "km": 0
+          },
+          {
+            "id": "t_eupen_u14_lg_2",
+            "name": "Eupen U14 Lg 2",
+            "km": 0
+          },
+          {
+            "id": "t_eynatten_raeren_u14_lg",
+            "name": "Eynatten-Raeren U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_fl_malle_u14_lg",
+            "name": "Flémalle U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_malmedy_u14_lg",
+            "name": "Malmedy U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_renaissance_montegn_e_u14_lg",
+            "name": "Renaissance Montegnée U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_sprimont_u14_lg",
+            "name": "Sprimont U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_union_beynoise_u14_lg",
+            "name": "Union Beynoise U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_verviers_u14_lg",
+            "name": "Verviers U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_villers_amay_u14_lg",
+            "name": "Villers-Amay U14 Lg",
+            "km": 0
+          },
+          {
+            "id": "t_vis_bm_u14_lg",
+            "name": "Visé BM U14 Lg",
+            "km": 0
           }
         ]
       },
@@ -53267,7 +55350,7 @@
         "name": "U16 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -54600,7 +56683,7 @@
         "name": "U14 Brabant",
         "federation": "LFH",
         "division": "Jeunes",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -56091,7 +58174,7 @@
         "name": "Liga Heren 1",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -61113,7 +63196,7 @@
         "name": "Liga Heren 2",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -65502,7 +67585,7 @@
         "name": "Liga Heren 3",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -69748,7 +71831,7 @@
         "name": "Liga Dames",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -73379,7 +75462,7 @@
         "name": "Heren Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.330Z",
+        "updatedAt": "2026-10-13T18:04:54.587Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -75135,7 +77218,7 @@
         "name": "Heren Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -79582,7 +81665,7 @@
         "name": "Heren Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -84114,7 +86197,7 @@
         "name": "Dames Regio AVB",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -85364,7 +87447,7 @@
         "name": "Dames Regio Limburg",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -87659,7 +89742,7 @@
         "name": "Dames Regio OWv",
         "federation": "VHV",
         "division": "Senioren",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -92526,7 +94609,7 @@
         "name": "VHV Q-Tornooien J18",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -93713,7 +95796,7 @@
         "name": "U18 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -100278,7 +102361,7 @@
         "name": "VHV Q-Tornooien JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -102013,7 +104096,7 @@
         "name": "U16 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -110382,7 +112465,7 @@
         "name": "Beker Regio JM16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -111068,7 +113151,7 @@
         "name": "VHV Q-Tornooien M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": false,
         "teams": [
@@ -112891,7 +114974,7 @@
         "name": "U16 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -116862,7 +118945,7 @@
         "name": "Beker Regio M16",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -117237,7 +119320,7 @@
         "name": "VHV Q-Tornooien JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -118819,7 +120902,7 @@
         "name": "U14 Jongens",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -128114,7 +130197,7 @@
         "name": "Beker Regio JM14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -128859,7 +130942,7 @@
         "name": "U14 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -134424,7 +136507,7 @@
         "name": "Beker M14",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -135019,7 +137102,7 @@
         "name": "Beker Regio JM12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -135874,7 +137957,7 @@
         "name": "Beker Regio M12",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
@@ -136250,7 +138333,7 @@
         "name": "U18 Meisjes",
         "federation": "VHV",
         "division": "Jeugd",
-        "updatedAt": "2026-10-13T17:43:51.331Z",
+        "updatedAt": "2026-10-13T18:04:54.588Z",
         "dataVersion": 2,
         "live": true,
         "teams": [
