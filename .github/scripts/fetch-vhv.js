@@ -1225,6 +1225,7 @@ async function main() {
         }
       });
       if (venuesFromClubee) log(`    Venues taken from game data: ${venuesFromClubee}`);
+      log(`    Clubee team ids: ${teams.filter(t => t.clubeeId != null).length}/${teams.length} teams`);
 
       // Per-game boxscores — only fetch games not already in the cache from
       // a previous run. Powers "goals in last game" on the scorer panel and
