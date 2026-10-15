@@ -1303,7 +1303,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
         {lastMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>{t("No games last week.")}</div>}
         {lastMatches.map((f, k) => (
           <div key={f.id || k} className="mini-row" style={{ gap: ".5rem" }}>
-            <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{fmtMatchDate(f.date)}</span>
+            <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: f.time ? "4.6rem" : "2.6rem" }}>{fmtMatchDate(f.date)}{f.time ? " " + f.time : ""}</span>
             <span style={{ fontSize: ".78rem" }}>
               <span style={{ fontWeight: +f.homeScore > +f.awayScore ? 700 : 400 }}>{nm(f.homeIdx)}</span>
               <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{f.homeScore}–{f.awayScore}</span>
@@ -1320,7 +1320,7 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
         {nextMatches.length === 0 && <div className="muted" style={{ fontSize: ".78rem" }}>{t("No games this week.")}</div>}
         {nextMatches.map((f, k) => (
           <div key={f.id || k} className="mini-row" style={{ gap: ".5rem" }}>
-            <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: "2.6rem" }}>{fmtMatchDate(f.date)}</span>
+            <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: f.time ? "4.6rem" : "2.6rem" }}>{fmtMatchDate(f.date)}{f.time ? " " + f.time : ""}</span>
             <span style={{ fontSize: ".78rem" }}>
               {(() => {
                 const done = f.played && f.homeScore != null && f.awayScore != null;
