@@ -13,7 +13,7 @@ import { useArchiveFile, useArchiveIndex, useArchiveSeason, useStandaloneLeagues
 import { ErrorBoundary } from "./src/ErrorBoundary.js";
 import { PlayersTab } from "./src/PlayersTab.js";
 
-const { useState, useMemo, useRef, useEffect, useCallback } = React;
+const { useState, useMemo, useRef, useEffect } = React;
 const MEDALS = ["🥇", "🥈", "🥉"];
 const IS_SHARE = __SHARE__; // injected at build time by build.mjs (esbuild --define); true only for the share page
 
@@ -323,9 +323,7 @@ function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchivable, o
                 <span style={{ display: "inline-block", marginLeft: ".4rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
               )}
               {lg.type === "playoff" && (() => {
-                const poPlayed = (lg.playoffs?.fixtures || []).filter(f => f.played).length;
                 const poPending = (lg.playoffs?.fixtures || []).filter(f => !f.played).length;
-                const pdPlayed = (lg.playdowns?.fixtures || []).filter(f => f.played).length;
                 const pdPending = (lg.playdowns?.fixtures || []).filter(f => !f.played).length;
                 const poNotGen = !lg.playoffs;
                 const pdNotGen = !lg.playdowns;
@@ -794,7 +792,6 @@ function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, high
   }, [fixtures, teams]);
 
   // Top 3 tough for mini card
-  const topTough = toughRanking.slice(0, 3);
 
   // Home GD ranking: sum of (homeScore - awayScore) for every played home fixture per team
   const homeGDRanking = useMemo(() => {
@@ -1854,8 +1851,6 @@ function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, on
     return groups;
   }, [filtered]);
 
-  const pending = filtered.filter(f => !f.played);
-  const played  = filtered.filter(f =>  f.played);
 
   return (
     <div>
@@ -1997,7 +1992,6 @@ function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm, onUndo
   if (match.played && match.homeScore != null) {
     const hs = +match.homeScore, as_ = +match.awayScore;
     const res = hs > as_ ? "home" : hs < as_ ? "away" : "draw";
-    const col = res === "home" ? "#4ade80" : res === "away" ? "#f87171" : "#facc15";
     return (
       <div className={"bracket-match done" + (match.neutral ? " neutral" : "") + (isTbd ? " tbd" : "")}>
         <div className="bm-teams">
@@ -2301,7 +2295,6 @@ function SimStep({ league, setLeague, onBack }) {
   // Detail lookup
   function openDetail(idx) { setDetail({ source: "regular", idx }); }
 
-  const detailTeam = detail ? (detail.source === "regular" ? teams[detail.idx] : null) : null;
 
   return (
     <div>
@@ -3087,7 +3080,7 @@ function ArchiveBelgianSeasonView({ filename, season, onBack }) {
 
 function ArchiveLeagueView({ league, scorers, season, onBack }) {
   const [detail, setDetail] = useState(null);
-  const { teams, fixtures, settings, type, playoffs, playdowns } = league;
+  const { teams, fixtures, type, playoffs, playdowns } = league;
   const [phase, setPhase] = useState("regular");
 
   // Cached scorer data from archive
