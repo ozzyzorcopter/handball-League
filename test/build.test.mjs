@@ -8,11 +8,11 @@ import { execFileSync } from "node:child_process";
 test("build output is a working PWA", () => {
   execFileSync("node", ["build.mjs"], { stdio: "pipe" });
   const html = fs.readFileSync("dist/index.html", "utf8");
-  assert.match(html, /rel="manifest" href="\.\/manifest\.webmanifest"/);
+  assert.match(html, /rel="manifest" href="\.\/manifest\.json"/);
   assert.match(html, /serviceWorker/);
   assert.doesNotMatch(html, /cdnjs|googleapis/, "no third-party hosts");
 
-  const manifest = JSON.parse(fs.readFileSync("dist/manifest.webmanifest", "utf8"));
+  const manifest = JSON.parse(fs.readFileSync("dist/manifest.json", "utf8"));
   assert.equal(manifest.display, "standalone");
   for (const icon of manifest.icons) assert.ok(fs.existsSync("dist/" + icon.src), icon.src + " missing");
   assert.ok(fs.existsSync("dist/apple-touch-icon.png"));

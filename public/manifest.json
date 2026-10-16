@@ -4,6 +4,7 @@
   "description": "Belgian handball league tables, fixtures, players and a Monte Carlo simulator",
   "start_url": "./",
   "scope": "./",
+  "id": "./",
   "display": "standalone",
   "background_color": "#08090c",
   "theme_color": "#08090c",
