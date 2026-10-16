@@ -80,7 +80,7 @@ const I18N = {
     "🎯 Most Goals (Player)": "🎯 Meeste goals (speler)",
     "💀 Toughest Teams": "💀 Moeilijkst te verslaan",
     "🎯 Most Clutch": "🎯 Meest beslissend",
-    "😤 Most Unlucky": "😤 Meest pech",
+    "😤 Most Unlucky": "😤 Meeste pech",
     "🚗 Distance Travelled": "🚗 Afgelegde afstand",
     "Total goals scored across all played fixtures.": "Totaal aantal gescoorde doelpunten in alle gespeelde wedstrijden.",
     "Fewest goals conceded across all played fixtures.": "Minste doelpunten tegen in alle gespeelde wedstrijden.",
