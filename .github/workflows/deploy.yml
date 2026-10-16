@@ -11,6 +11,7 @@ on:
       - src/**
       - styles.css
       - index.template.html
+      - public/**
       - build.mjs
       - package.json
       - package-lock.json

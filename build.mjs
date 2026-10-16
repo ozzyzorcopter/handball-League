@@ -86,6 +86,14 @@ async function main() {
     console.log(`built ${p.file} -> ${jsName} (${(js.length / 1024).toFixed(0)} kB)`);
   }
 
+  // PWA files (public/): manifest and icons are copied as they are; the service
+  // worker gets a build id so every deploy replaces the previous cache.
+  const buildId = hash(fs.readdirSync(DIST).sort().join("|"));
+  for (const f of fs.readdirSync("public")) {
+    const data = fs.readFileSync(path.join("public", f));
+    fs.writeFileSync(path.join(DIST, f), f === "sw.js" ? data.toString("utf8").replace("__BUILD__", buildId) : data);
+  }
+
   // Files the app loads from the Pages origin.
   for (const f of ["scorer-data.json"]) {
     if (fs.existsSync(f)) fs.copyFileSync(f, path.join(DIST, f));
