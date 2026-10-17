@@ -3,12 +3,11 @@
 // Standings: /standings-371073v4/leagues/ID/seasons/0  → { elements, total }
 // Games:     /games-371075v4/leagues/ID/seasons/0      → { elements, total }
 // Stats:     /stats-371072v4/leagues/ID/seasons/0      → HTML page (scraped)
-// Writes vhv-data.json grouped by federation/division.
+// Writes data/index.json + data/leagues/<serieId>.json, grouped by federation.
 
 const fs   = require("fs");
 const path = require("path");
 const root        = process.cwd();
-const vhvDataPath = path.join(root, "vhv-data.json");
 const boxscoreCachePath = path.join(root, "boxscore-cache.json");
 const venueCachePath = path.join(root, "venue-cache.json");
 
@@ -1094,12 +1093,12 @@ async function main() {
   // Previous run's output, used to skip leagues that can't have changed.
   const prevLeagues = new Map();
   try {
-    const prevData = JSON.parse(fs.readFileSync(vhvDataPath, "utf8"));
+    const prevData = require("./split-data.js").loadLeagueData(root) || { federations: {} };
     for (const fed of Object.values(prevData.federations || {})) for (const lg of Object.values(fed)) prevLeagues.set(String(lg.serieId), lg);
   } catch { /* first run */ }
 
   // Boxscore cache: keyed by gameId, persisted to disk and committed
-  // alongside vhv-data.json so repeat runs only fetch NEWLY played games
+  // alongside data/ so repeat runs only fetch NEWLY played games
   // instead of re-fetching a whole season's worth of boxscores every time.
   let boxCache = { games: {} };
   try {
@@ -1446,8 +1445,7 @@ async function main() {
     const r = pr.applyPriors(fresh, pr.latestArchive(path.join(root, "archive")));
     log(`Last-season priors: ${r.matched}/${r.teams} teams in ${r.leagues} league(s)`);
   } catch (e) { warn(`Could not add last-season priors: ${e.message}`); }
-  fs.writeFileSync(vhvDataPath, JSON.stringify(fresh, null, 2));
-  // Also publish a small index + one file per league (the app loads leagues on demand).
+  // Publish a small index + one file per league (the app loads leagues on demand).
   try {
     const r = require("./split-data.js").writeSplit(fresh, path.join(root, "data"));
     log(`Wrote data/index.json and ${r.leagues} league file(s)`);

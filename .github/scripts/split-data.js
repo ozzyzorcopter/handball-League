@@ -48,9 +48,33 @@ function writeSplit(data, dir) {
   return { leagues: leagues.size };
 }
 
-module.exports = { splitFederations, writeSplit, makeStub };
+// Reads dir/index.json + dir/leagues/*.json back into { updatedAt, federations } with FULL leagues.
+// A league whose file is missing is left out (the index only holds a stub of it).
+function readSplit(dir) {
+  const index = JSON.parse(fs.readFileSync(path.join(dir, "index.json"), "utf8"));
+  const out = { updatedAt: index.updatedAt || null, federations: {} };
+  for (const [fed, byId] of Object.entries(index.federations || {})) {
+    out.federations[fed] = {};
+    for (const id of Object.keys(byId || {})) {
+      const file = path.join(dir, "leagues", `${id}.json`);
+      if (fs.existsSync(file)) out.federations[fed][id] = JSON.parse(fs.readFileSync(file, "utf8"));
+    }
+  }
+  return out;
+}
 
-// CLI: node split-data.js [vhv-data.json] [outDir]  (handy for the first run / backfill)
+// The league data as the pipeline currently stores it: data/ under `root` (preferred),
+// or the old single vhv-data.json while a repo has not been through a fetch run yet.
+function loadLeagueData(root) {
+  if (fs.existsSync(path.join(root, "data", "index.json"))) return readSplit(path.join(root, "data"));
+  const legacy = path.join(root, "vhv-data.json");
+  if (fs.existsSync(legacy)) return JSON.parse(fs.readFileSync(legacy, "utf8"));
+  return null;
+}
+
+module.exports = { splitFederations, writeSplit, makeStub, readSplit, loadLeagueData };
+
+// CLI: node split-data.js [vhv-data.json] [outDir]  (one-off: turn an old single file into data/)
 if (require.main === module) {
   const src = process.argv[2] || "vhv-data.json", out = process.argv[3] || "data";
   const r = writeSplit(JSON.parse(fs.readFileSync(src, "utf8")), out);

@@ -2,8 +2,6 @@ const { useState, useRef, useEffect, useCallback, useMemo } = React;
 // ── BELGIAN HANDBALL SCREEN ───────────────────────────────────────────────────
 export const DATA_BASE = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/data/";
 export const VHV_INDEX_URL = DATA_BASE + "index.json";
-// Old single-file layout: still used as a fallback until the first fetch run has written data/.
-export const VHV_DATA_URL = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/vhv-data.json";
 
 export const FED_META = {
   "VHV":       { label: "VHV",       color: "#22d3ee", desc: "Vlaamse Handbalfederatie" },
@@ -25,7 +23,6 @@ export function useVhvData() {
     const json = r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); };
     fetch(VHV_INDEX_URL).then(json)
       .then(d => { if (!d || !d.federations) throw new Error("bad index"); return d; })
-      .catch(() => fetch(VHV_DATA_URL).then(json))   // fallback: the old single file (every league already full)
       .then(d => { if (!dead) setIndex(d); })
       .catch(() => { if (!dead) setError(true); });
     return () => { dead = true; };

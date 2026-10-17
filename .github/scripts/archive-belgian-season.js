@@ -1,5 +1,5 @@
 // .github/scripts/archive-belgian-season.js
-// Snapshots vhv-data.json into archive/belgian-season-YYYY-YYYY.json
+// Snapshots the current league data (data/) into archive/belgian-season-YYYY-YYYY.json
 // and updates archive/index.json under the "belgianSeasons" key.
 // Never overwrites existing data — only adds new leagues.
 // Run automatically on 31 May each year via GitHub Actions cron.
@@ -8,7 +8,7 @@ const fs   = require("fs");
 const path = require("path");
 
 const root        = process.cwd();
-const vhvDataPath = path.join(root, "vhv-data.json");
+const { loadLeagueData } = require("./split-data.js");
 const archiveDir  = path.join(root, "archive");
 const indexPath   = path.join(archiveDir, "index.json");
 
@@ -21,17 +21,16 @@ function deriveSeasonLabel(now = new Date()) {
   return `${startYear} - ${startYear + 1}`;
 }
 
-if (!fs.existsSync(vhvDataPath)) {
-  console.error("vhv-data.json not found — nothing to archive");
+const vhvData = loadLeagueData(root);
+if (!vhvData) {
+  console.error("No league data found (data/index.json) — nothing to archive");
   process.exit(1);
 }
-
-const vhvData = JSON.parse(fs.readFileSync(vhvDataPath, "utf8"));
 const federations = vhvData.federations || {};
 const totalLeagues = Object.values(federations).reduce((n, fed) => n + Object.keys(fed).length, 0);
 
 if (totalLeagues === 0) {
-  console.log("No Belgian leagues in vhv-data.json — skipping archive");
+  console.log("No Belgian leagues in data/ — skipping archive");
   process.exit(0);
 }
 

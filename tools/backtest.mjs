@@ -1,6 +1,6 @@
 // Backtest of the goal model behind the match percentages.
 //
-//   node tools/backtest.mjs [vhv-data.json] [minPlayed]
+//   node tools/backtest.mjs [data-dir | file.json] [minPlayed]   (default: data/)
 //
 // Replays every league day by day: each played game is predicted using only the
 // games played on earlier days, then compared with what happened. Reports how
@@ -12,9 +12,10 @@ import { createRequire } from "node:module";
 import { predictMatch, calcProbs } from "../src/probabilities.js";
 const { applyPriors, latestArchive } = createRequire(import.meta.url)("../.github/scripts/priors.js");
 
-const file = process.argv[2] || "vhv-data.json";
-const minPlayed = +(process.argv[3] || 40);
-const data = JSON.parse(fs.readFileSync(file, "utf8"));
+const { readSplit } = createRequire(import.meta.url)("../.github/scripts/split-data.js");
+const src = process.argv[2] && !process.argv[2].startsWith("--") ? process.argv[2] : "data";
+const minPlayed = +(process.argv[3] && !process.argv[3].startsWith("--") ? process.argv[3] : 40);
+const data = fs.statSync(src).isDirectory() ? readSplit(src) : JSON.parse(fs.readFileSync(src, "utf8"));
 // Last season's strength, exactly as the data pipeline adds it (archive/ folder); `--no-priors` skips it.
 const pri = process.argv.includes("--no-priors") ? null : applyPriors(data, latestArchive("archive"));
 if (pri) console.log(`Priors from the archive: ${pri.matched}/${pri.teams} teams in ${pri.leagues} league(s)`);
@@ -63,7 +64,7 @@ for (const fed of Object.values(data.federations || {})) {
 }
 
 const fmt = (st) => st.n ? `n=${st.n}  right ${(100 * st.hit / st.n).toFixed(1)}%  Brier ${(st.brier / st.n).toFixed(3)}  logloss ${(st.ll / st.n).toFixed(3)}` : "no games";
-console.log(`Backtest on ${file} (leagues with >= ${minPlayed} played games)\n`);
+console.log(`Backtest on ${src} (leagues with >= ${minPlayed} played games)\n`);
 console.log("goal model :", fmt(models.goal));
 if (pri) console.log("  without last-season priors:", fmt(models.goal0));
 console.log("rank model :", fmt(models.rank));
