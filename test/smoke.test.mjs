@@ -177,6 +177,16 @@ test("archive screens open without crashing (real archive files)", async () => {
   await click(w, act, byText(w, "button", "Play-offs"));
   assert.match(text(w), /Play-offs/);
   assert.ok(w.document.querySelectorAll("table tbody tr").length >= 4, "play-off table renders");
+  // A tournament-style play-off league (SHL) shows its knockout rounds.
+  await click(w, act, byText(w, "button", "← All Leagues"));
+  await act(async () => { await new Promise((r) => setTimeout(r, 30)); });
+  const shl = [...w.document.querySelectorAll(".card")].find((e) => /SHL/.test(e.textContent));
+  assert.ok(shl, "SHL listed");
+  await click(w, act, shl);
+  await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+  await click(w, act, byText(w, ".tab", "Play-offs"));
+  assert.match(text(w), /Round 1/);
+  assert.match(text(w), /Sporting Pelt/);
   root.unmount();
 });
 

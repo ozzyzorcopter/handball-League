@@ -3,6 +3,7 @@ import { githubDispatch } from "./github.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { BelgianLeagueView } from "./belgian.js";
 import { LeagueTable } from "./LeagueTable.js";
+import { resolveRef } from "./tournament.js";
 import { TeamDetail } from "./TeamDetail.js";
 const { useState, useRef, useEffect, useMemo } = React;
 // ── ARCHIVE OPTIONS MENU ──────────────────────────────────────────────────────
@@ -294,6 +295,55 @@ function ArchivePhasedLeague({ lg, full, onBack }) {
   );
 }
 
+// Read-only knockout rounds of a tournament-style phase: every duel with its leg scores and the winner.
+function ArchiveRounds({ rounds, teams }) {
+  const name = ref => { const i = resolveRef(ref, teams, rounds); return i != null && teams[i] ? teams[i].name : "TBD"; };
+  return (
+    <div>
+      {rounds.map(r => {
+        const duels = [];
+        const seen = new Set();
+        (r.matches || []).forEach(m => {
+          const key = m.duelId || m.id;
+          if (seen.has(key)) return;
+          seen.add(key);
+          duels.push((r.matches || []).filter(x => (x.duelId || x.id) === key).sort((a, b) => (a.leg || 1) - (b.leg || 1)));
+        });
+        return (
+          <div key={r.id} style={{ marginBottom: "1.25rem" }}>
+            <div className="sub-ttl" style={{ marginBottom: ".5rem" }}>{r.label}</div>
+            {duels.map(legs => {
+              const first = legs[0];
+              const a = name(first.homeRef), b = name(first.awayRef);
+              const done = legs.every(l => l.played);
+              let ga = 0, gb = 0;
+              legs.forEach((l, i) => {
+                const hs = +l.homeScore || 0, as = +l.awayScore || 0;
+                if (i === 0) { ga += hs; gb += as; } else { ga += as; gb += hs; }
+              });
+              return (
+                <div key={first.duelId || first.id} className="mini-box" style={{ marginBottom: ".5rem" }}>
+                  <div style={{ display: "flex", gap: ".6rem", flexWrap: "wrap", alignItems: "baseline" }}>
+                    <span style={{ fontWeight: 700, minWidth: "14rem" }}>
+                      <span style={{ color: done && ga > gb ? "#4ade80" : undefined }}>{a}</span>
+                      {" – "}
+                      <span style={{ color: done && gb > ga ? "#4ade80" : undefined }}>{b}</span>
+                    </span>
+                    {done && legs.length > 1 && <span className="mini-val" style={{ color: "#fbbf24" }}>{ga}–{gb}</span>}
+                    <span className="muted" style={{ fontSize: ".78rem", fontFamily: "DM Mono,monospace" }}>
+                      {legs.map(l => l.played ? name(l.homeRef) + " " + l.homeScore + "–" + l.awayScore + " " + name(l.awayRef) : "not played").join("  ·  ")}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function ArchiveLeagueView({ league, scorers, season, onBack }) {
   const [detail, setDetail] = useState(null);
   const { teams, fixtures, type, playoffs, playdowns } = league;
@@ -339,6 +389,9 @@ export function ArchiveLeagueView({ league, scorers, season, onBack }) {
         </div>
       )}
 
+      {phase !== "regular" && !(currentFixtures || []).length && ((phase === "playoff" ? playoffs : playdowns)?.rounds || []).length > 0 ? (
+        <ArchiveRounds rounds={(phase === "playoff" ? playoffs : playdowns).rounds} teams={currentTeams} />
+      ) : (
       <LeagueTable
         teams={currentTeams}
         fixtures={currentFixtures}
@@ -351,6 +404,7 @@ export function ArchiveLeagueView({ league, scorers, season, onBack }) {
         aliases={league.scorerAliases || {}}
         archiveScorers={archiveScorers}
       />
+      )}
 
       {detail && (() => {
         const tms = detail.phase === "playoff" && playoffs ? playoffs.teams
