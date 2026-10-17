@@ -156,12 +156,17 @@ test("archive screens open without crashing (real archive files)", async () => {
   assert.ok(card, "a season card is listed");
   await click(w, act, card);
   await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
-  const lg = [...w.document.querySelectorAll(".card")].find((e) => /Liga|Nationale|SHL/.test(e.textContent));
+  const lg = [...w.document.querySelectorAll(".card")].find((e) => /Liga 3/.test(e.textContent));
   assert.ok(lg, "season lists its leagues");
   await click(w, act, lg);
   await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
   assert.match(text(w), /read only/);
   assert.ok(w.document.querySelectorAll("table tbody tr").length >= 4, "archived league table renders");
+  const tabNames = [...w.document.querySelectorAll(".tab")].map((x) => x.textContent);
+  assert.ok(tabNames.some((n) => /Games|Wedstrijden/.test(n)) && tabNames.some((n) => /Players|Spelers/.test(n)), "archived league has games and players tabs");
+  await click(w, act, [...w.document.querySelectorAll(".tab")].find((x) => /Players|Spelers/.test(x.textContent)));
+  assert.ok(w.document.querySelectorAll(".ltbl tbody tr").length > 0, "archived scorers listed");
+  await click(w, act, [...w.document.querySelectorAll(".tab")].find((x) => /Games|Wedstrijden/.test(x.textContent)));
   root.unmount();
 });
 

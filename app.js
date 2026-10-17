@@ -2535,57 +2535,6 @@ function BelgianScreen({ onBack }) {
           {pickerOpen && (follow.ids.length === 0 || pickerForced) && (
             <ClubPicker data={data} follow={follow} onClose={saved => { setPickerForced(false); if (!saved) setPickerOpen(false); }} />
           )}
-          {/* My teams */}
-          <div className="mini-box" style={{ marginBottom: "1.25rem" }}>
-            <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".5rem", display: "flex", justifyContent: "space-between" }}>
-              <span>{t("★ My teams")}</span>
-              <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={() => { setPickerOpen(true); setPickerForced(true); }}>{t("＋ Add club")}</button>
-            </div>
-            {myTeams.length === 0 && (
-              <div className="muted" style={{ fontSize: ".8rem" }}>{t("Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.")}</div>
-            )}
-            {myTeams.map(({ key, lg, snap }) => (
-              <div key={key} className="mini-row" style={{ gap: ".6rem", flexWrap: "wrap", cursor: "pointer", padding: ".45rem 0" }} onClick={() => setLeague(lg)}>
-                <span style={{ minWidth: "9rem", fontWeight: 700 }}>
-                  {key === follow.main && <span title={t("Main team")} style={{ color: "#fbbf24", marginRight: ".3rem" }}>★</span>}
-                  {snap.name}
-                  <span className="muted" style={{ display: "block", fontWeight: 400, fontSize: ".68rem" }}>{lg.name}</span>
-                </span>
-                <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".8rem" }}>{snap.pos}/{snap.of} · {snap.pts} {t("pts")}</span>
-                <span style={{ whiteSpace: "nowrap" }}>
-                  {snap.form.map((res, k) => (
-                    <span key={k} style={{ display: "inline-block", width: "1.1rem", textAlign: "center", fontWeight: 700, fontSize: ".78rem",
-                      color: res === "W" ? "#4ade80" : res === "D" ? "#9ca3af" : "#f87171" }}>{res === "W" ? "✓" : res === "D" ? "D" : "–"}</span>
-                  ))}
-                </span>
-                <span className="muted" style={{ fontSize: ".76rem", flex: 1 }}>
-                  {snap.next ? t("Next") + ": " + (snap.next.date ? snap.next.date.slice(8, 10) + "/" + snap.next.date.slice(5, 7) + " " + (snap.next.time ? snap.next.time + " " : "") : "") + (snap.next.home ? t("vs") + " " : t("at") + " ") + snap.next.opp : t("No upcoming game")}
-                </span>
-                {key !== follow.main && (
-                  <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }}
-                    onClick={e => { e.stopPropagation(); follow.setMain(key); }}>{t("Make main")}</button>
-                )}
-              </div>
-            ))}
-            {weekGames.length > 0 && (
-              <div style={{ marginTop: ".7rem", borderTop: "1px solid #2a2f3a", paddingTop: ".5rem" }}>
-                <div className="muted" style={{ fontSize: ".7rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".06em", marginBottom: ".3rem" }}>{t("This week · all my teams")}</div>
-                {weekGames.map(g => (
-                  <div key={g.id} className="mini-row" style={{ gap: ".5rem", flexWrap: "wrap", cursor: "pointer" }} onClick={() => setLeague(g.lg)}>
-                    <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: g.time ? "4.6rem" : "2.6rem" }}>{g.date.slice(8, 10)}/{g.date.slice(5, 7)}{g.time ? " " + g.time : ""}</span>
-                    <span style={{ fontSize: ".8rem" }}>
-                      <span style={{ fontWeight: g.hm ? 700 : 400 }}>{g.hm ? "★ " : ""}{g.home}</span>
-                      {g.done ? <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{g.hs}–{g.as}</span> : <span className="muted" style={{ margin: "0 .4rem" }}>{t("vs")}</span>}
-                      <span style={{ fontWeight: g.am ? 700 : 400 }}>{g.am ? "★ " : ""}{g.away}</span>
-                      <span className="muted" style={{ display: "block", fontSize: ".66rem" }}>{g.lg.name}</span>
-                    </span>
-                    {g.pred && <span className="muted" title={t("Goal model: home win / draw / away win chance, expected score")} style={{ fontFamily: "DM Mono,monospace", fontSize: ".66rem" }}>{g.pred.homeWin}% · {g.pred.draw}% · {g.pred.awayWin}% ({g.pred.eh}–{g.pred.ea})</span>}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
           {/* Federation tabs */}
           <div style={{ display: "flex", gap: ".5rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
             {Object.keys(FED_META).map(f => {
@@ -2656,6 +2605,56 @@ function BelgianScreen({ onBack }) {
           {!fed && feds.length > 0 && (
             <div className="muted" style={{ padding: "1rem", textAlign: "center" }}>{t("Select a federation above to browse leagues.")}</div>
           )}
+          {/* My teams */}
+          <div className="mini-box" style={{ marginBottom: "1.25rem" }}>
+            <div className="mini-ttl" style={{ color: "#fbbf24", marginBottom: ".5rem", display: "flex", justifyContent: "space-between" }}>
+              <span>{t("★ My teams")}</span>
+              <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }} onClick={() => { setPickerOpen(true); setPickerForced(true); }}>{t("＋ Add club")}</button>
+            </div>
+            {myTeams.length === 0 && (
+              <div className="muted" style={{ fontSize: ".8rem" }}>{t("Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.")}</div>
+            )}
+            {myTeams.map(({ key, lg, snap }) => (
+              <div key={key} className="mini-row" style={{ gap: ".6rem", flexWrap: "wrap", cursor: "pointer", padding: ".45rem 0" }} onClick={() => setLeague(lg)}>
+                <span style={{ minWidth: "9rem", fontWeight: 700 }}>
+                  {key === follow.main && <span title={t("Main team")} style={{ color: "#fbbf24", marginRight: ".3rem" }}>★</span>}
+                  {snap.name}
+                  <span className="muted" style={{ display: "block", fontWeight: 400, fontSize: ".68rem" }}>{lg.name}</span>
+                </span>
+                <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".8rem" }}>{snap.pos}/{snap.of} · {snap.pts} {t("pts")}</span>
+                <span style={{ whiteSpace: "nowrap" }}>
+                  {snap.form.map((res, k) => (
+                    <span key={k} style={{ display: "inline-block", width: "1.1rem", textAlign: "center", fontWeight: 700, fontSize: ".78rem",
+                      color: res === "W" ? "#4ade80" : res === "D" ? "#9ca3af" : "#f87171" }}>{res === "W" ? "✓" : res === "D" ? "D" : "–"}</span>
+                  ))}
+                </span>
+                <span className="muted" style={{ fontSize: ".76rem", flex: 1 }}>
+                  {snap.next ? t("Next") + ": " + (snap.next.date ? snap.next.date.slice(8, 10) + "/" + snap.next.date.slice(5, 7) + " " + (snap.next.time ? snap.next.time + " " : "") : "") + (snap.next.home ? t("vs") + " " : t("at") + " ") + snap.next.opp : t("No upcoming game")}
+                </span>
+                {key !== follow.main && (
+                  <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".15rem .5rem" }}
+                    onClick={e => { e.stopPropagation(); follow.setMain(key); }}>{t("Make main")}</button>
+                )}
+              </div>
+            ))}
+            {weekGames.length > 0 && (
+              <div style={{ marginTop: ".7rem", borderTop: "1px solid #2a2f3a", paddingTop: ".5rem" }}>
+                <div className="muted" style={{ fontSize: ".7rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: ".06em", marginBottom: ".3rem" }}>{t("This week · all my teams")}</div>
+                {weekGames.map(g => (
+                  <div key={g.id} className="mini-row" style={{ gap: ".5rem", flexWrap: "wrap", cursor: "pointer" }} onClick={() => setLeague(g.lg)}>
+                    <span className="muted" style={{ fontFamily: "DM Mono,monospace", fontSize: ".7rem", minWidth: g.time ? "4.6rem" : "2.6rem" }}>{g.date.slice(8, 10)}/{g.date.slice(5, 7)}{g.time ? " " + g.time : ""}</span>
+                    <span style={{ fontSize: ".8rem" }}>
+                      <span style={{ fontWeight: g.hm ? 700 : 400 }}>{g.hm ? "★ " : ""}{g.home}</span>
+                      {g.done ? <span className="mini-val" style={{ margin: "0 .4rem", color: "#fbbf24" }}>{g.hs}–{g.as}</span> : <span className="muted" style={{ margin: "0 .4rem" }}>{t("vs")}</span>}
+                      <span style={{ fontWeight: g.am ? 700 : 400 }}>{g.am ? "★ " : ""}{g.away}</span>
+                      <span className="muted" style={{ display: "block", fontSize: ".66rem" }}>{g.lg.name}</span>
+                    </span>
+                    {g.pred && <span className="muted" title={t("Goal model: home win / draw / away win chance, expected score")} style={{ fontFamily: "DM Mono,monospace", fontSize: ".66rem" }}>{g.pred.homeWin}% · {g.pred.draw}% · {g.pred.awayWin}% ({g.pred.eh}–{g.pred.ea})</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
@@ -3005,6 +3004,11 @@ function ArchiveSeasonView({ filename, onBack }) {
 
   if (activeLeague !== null) {
     const lg = data.leagues[activeLeague];
+    // Plain leagues get the full league view (table, games, players); play-off leagues keep the phase view.
+    if (lg.type !== "playoff") {
+      const full = { ...lg, federation: "📦 " + data.season + " · read only", live: false, scorers: (data.scorers || {})[lg.name] || null };
+      return <ErrorBoundary onBack={() => setActiveLeague(null)}><BelgianLeagueView league={full} onBack={() => setActiveLeague(null)} /></ErrorBoundary>;
+    }
     return <ArchiveLeagueView league={lg} scorers={data.scorers} season={data.season} onBack={() => setActiveLeague(null)} />;
   }
 
