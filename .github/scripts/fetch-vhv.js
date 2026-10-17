@@ -248,6 +248,26 @@ async function fetchHtml(page, url) {
   return page.content();
 }
 
+// Plain HTTP first, browser only as a fallback. Clubee serves the standings and games pages
+// fully rendered to a plain request (confirmed from GitHub Actions with the probe), so the
+// browser is only needed when a plain request fails or comes back without the expected content.
+const plainStats = { plain: 0, browser: 0 };
+async function fetchPlain(url) {
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36", "Accept-Language": "nl-BE,nl;q=0.9" },
+      signal: AbortSignal.timeout(30000),
+    });
+    return res.ok ? await res.text() : null;
+  } catch { return null; }
+}
+async function fetchHtmlSmart(page, url, looksComplete) {
+  const text = await fetchPlain(url);
+  if (text && (looksComplete(text) || /No information added yet/i.test(text))) { plainStats.plain++; return text; }
+  plainStats.browser++;
+  return fetchHtml(page, url);
+}
+
 // Club logo <img> URLs for the same team can differ between pages (Next.js
 // image optimizer query params like width/quality vary by where the logo is
 // rendered), even though they point at the same underlying image. This pulls
@@ -1157,9 +1177,9 @@ async function main() {
       log(`\n  ${cfg.name} (${cfg.id}) — refreshing (${reason})`);
 
       log(`    Fetching standings…`);
-      const standingsHtml = await fetchHtml(page, cfg.standingsUrl);
+      const standingsHtml = await fetchHtmlSmart(page, cfg.standingsUrl, t => parseStandingsHtml(t).length > 0);
       log(`    Fetching games…`);
-      const gamesHtml     = await fetchHtml(page, cfg.gamesUrl);
+      const gamesHtml     = await fetchHtmlSmart(page, cfg.gamesUrl, t => /\/games\/\d+/.test(t));
 
       const ranking      = parseStandingsHtml(standingsHtml);
 
@@ -1459,6 +1479,7 @@ async function main() {
   const unresolvedVenues = Object.values(venueCache.venues).filter(v => v.lat == null).length;
   log(`Venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s) total, ${unresolvedVenues} still unresolved (budget spent this run: ${20 - venueResolutionBudget}/20)`);
 
+  log(`Standings/games pages: ${plainStats.plain} by plain request, ${plainStats.browser} needed the browser`);
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;
   log(`\nDone — ${ok}/${results.length} succeeded`);

@@ -122,6 +122,22 @@ function describe(value, depth = 0, maxDepth = 3) {
     log(`script src (${scripts.length}): ${scripts.slice(0, 12).map(s => shorten(s, 90)).join(" | ")}`);
   }
 
+  // Extra samples for the "less browser" work: a second stats page and one match lineup page,
+  // fetched with plain requests to see whether they come back complete without a browser.
+  {
+    const extra = { "stats-p2": PAGES.stats + "?page=2" };
+    const gamesFile = path.join(OUT, "games.html");
+    if (fs.existsSync(gamesFile)) {
+      const m = fs.readFileSync(gamesFile, "utf8").match(/\/games\/(\d+)/);
+      if (m) extra.lineup = `${BASE}/games/${m[1]}/lineup`;
+    }
+    for (const [name, url] of Object.entries(extra)) {
+      const r = await get(url);
+      log(`\n=== ${name}: ${url}\nstatus ${r.status} · ${r.type} · ${r.text.length} bytes · table rows: ${(r.text.match(/<tr[\s>]/gi) || []).length} · member links: ${(r.text.match(/\/members\//g) || []).length}`);
+      if (r.text) fs.writeFileSync(path.join(OUT, `${name}.html`), r.text);
+    }
+  }
+
   // 4. Next.js data route, if we found a buildId
   if (buildId) {
     log(`\n=== trying _next/data routes with buildId ${buildId}`);
