@@ -228,30 +228,13 @@ const LEAGUES = [
 
 
 // ── UTILS ─────────────────────────────────────────────────────────────────────
-const { chromium } = require("playwright-core");
 function log(msg)  { console.log(`[fetch-vhv] ${msg}`); }
 function warn(msg) { console.warn(`[fetch-vhv] ⚠ ${msg}`); }
 
-// Navigate to URL and return raw HTML, waiting for content to render
-async function fetchHtml(page, url) {
-  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
-  try {
-    await page.waitForFunction(() => {
-      const hasTr    = document.querySelector("table tr td") !== null;
-      // Games/stats pages render into divs — GameCard or stats table rows
-      const hasCards = document.querySelector("a[href*='/games/']") !== null;
-      const hasStats = document.querySelector("a[href*='/members/']") !== null;
-      const noData   = document.body.innerText.includes("No information added yet");
-      return hasTr || hasCards || hasStats || noData;
-    }, { timeout: 15000 });
-  } catch { /* timeout — return what we have */ }
-  return page.content();
-}
-
-// Plain HTTP first, browser only as a fallback. Clubee serves the standings and games pages
-// fully rendered to a plain request (confirmed from GitHub Actions with the probe), so the
-// browser is only needed when a plain request fails or comes back without the expected content.
-const plainStats = { plain: 0, browser: 0 };
+// Clubee serves every page we read (standings, games, stats, lineups, match pages) fully rendered
+// to a plain HTTP request, so no browser is needed. A request is retried a few times; a page that
+// still comes back without the expected content is an error for the caller to deal with.
+const plainStats = { ok: 0, failed: 0 };
 async function fetchPlain(url) {
   try {
     const res = await fetch(url, {
@@ -261,11 +244,14 @@ async function fetchPlain(url) {
     return res.ok ? await res.text() : null;
   } catch { return null; }
 }
-async function fetchHtmlSmart(page, url, looksComplete) {
-  const text = await fetchPlain(url);
-  if (text && (looksComplete(text) || /No information added yet/i.test(text))) { plainStats.plain++; return text; }
-  plainStats.browser++;
-  return fetchHtml(page, url);
+async function fetchHtmlSmart(url, looksComplete, attempts = 3) {
+  for (let i = 0; i < attempts; i++) {
+    if (i > 0) await sleep(1500 * i);
+    const text = await fetchPlain(url);
+    if (text && (looksComplete(text) || /No information added yet/i.test(text))) { plainStats.ok++; return text; }
+  }
+  plainStats.failed++;
+  throw new Error(`No complete page from ${url}`);
 }
 
 // Club logo <img> URLs for the same team can differ between pages (Next.js
@@ -611,7 +597,7 @@ function parseLineupHtml(html) {
 
 const looksLikeStatsTable = h => /<tr[\s>]/i.test(h) && /data-is-header="true"/.test(h);
 
-async function parseStatsAllPages(page, leagueId, ranking = []) {
+async function parseStatsAllPages(leagueId, ranking = []) {
   const BASE = "https://www.clubee.com/handballbelgium";
   // The scorer table's club logo has no alt text, so the club is found by matching the logo URL
   // against the logos on the standings page.
@@ -624,7 +610,7 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
   for (let pageNum = 1; pageNum <= 30; pageNum++) {
     const url = `${BASE}/stats-371072v4/leagues/${leagueId}/seasons/0?page=${pageNum}`;
     let html;
-    try { html = await fetchHtmlSmart(page, url, looksLikeStatsTable); } catch { break; }
+    try { html = await fetchHtmlSmart(url, looksLikeStatsTable); } catch { break; }
     const res = parseStatsHtml(html, logoMap);
     if (pageNum === 1) console.log(`[DBG stats ${leagueId}] page 1: ${res.realRows} rows, ${res.scorers.length} with goals`);
     if (res.realRows === 0) break;
@@ -639,10 +625,10 @@ async function parseStatsAllPages(page, leagueId, ranking = []) {
 
 // Per-game boxscore (lineup page): per-player goals for ONE match. Returns null when the page
 // can't be fetched (the caller retries next run).
-async function fetchGameLineup(page, gameId) {
+async function fetchGameLineup(gameId) {
   const url = `https://www.clubee.com/handballbelgium/games/${gameId}/lineup`;
   try {
-    const html = await fetchHtmlSmart(page, url, looksLikeStatsTable);
+    const html = await fetchHtmlSmart(url, looksLikeStatsTable);
     return parseLineupHtml(html);
   } catch { return null; }
 }
@@ -654,13 +640,12 @@ async function fetchGameLineup(page, gameId) {
 // plain-text address, regardless of which one the site renders for a given
 // browser/locale — matching on that is more robust than trying to pin down
 // the exact heading markup, which we can't verify without live access.
-async function fetchVenueAddress(page, gameId) {
+async function fetchVenueAddress(gameId) {
   const url = `https://www.clubee.com/handballbelgium/games/${gameId}`;
   let html;
-  // Plain request first; the browser only when the page came back without a directions link.
   // A complete match page without a directions link simply has no venue (cups and tournaments),
-  // so it counts as complete and is not retried in the browser.
-  try { html = await fetchHtmlSmart(page, url, h => /daddr=/i.test(h) || (/<title>[^<]*- Match - /i.test(h) && /<\/html>/i.test(h))); } catch { return null; }
+  // so it counts as complete.
+  try { html = await fetchHtmlSmart(url, h => /daddr=/i.test(h) || (/<title>[^<]*- Match - /i.test(h) && /<\/html>/i.test(h))); } catch { return null; }
   return parseVenueAddress(html);
 }
 
@@ -881,30 +866,12 @@ async function main() {
   } catch { venueCache = { venues: {}, distances: {} }; }
   log(`Loaded venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s)`);
 
-  // Each "worker" is just a browser page doing sequential page.goto() calls —
-  // no shared rate-limited resource like Nominatim/OSRM is involved here, so
-  // this scales with runner CPU/network, not an external API limit. Bumped
-  // from 4 → 8 to cut wall-clock time; the geocoding/routing throttles further
-  // down stay global and unaffected by this number.
-  const CONCURRENCY = 8; // parallel browser pages
-  const browser = await chromium.launch({ headless: true });
+  // Each worker does sequential plain HTTP requests; no shared rate-limited resource like
+  // Nominatim/OSRM is involved, so this scales with runner CPU/network. The geocoding/routing
+  // throttles further down stay global and unaffected by this number.
+  const CONCURRENCY = 8;
 
-  // Shared context — one context for all leagues (shared cookies after warm-up)
-  const context = await browser.newContext({
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
-    locale: "nl-BE",
-  });
-
-  // Warm-up: one page visits the main site to seed cookies for the whole context
-  log(`Warming up session…`);
-  const warmPage = await context.newPage();
-  try {
-    await warmPage.goto("https://www.clubee.com/handballbelgium/", { waitUntil: "domcontentloaded", timeout: 30000 });
-    await warmPage.waitForTimeout(2000);
-  } catch (e) { warn(`Warm-up failed: ${e.message}`); }
-  await warmPage.close();
-
-  // Process one league — each call gets its own page from the shared context
+  // Process one league
   async function processLeague(cfg) {
     const prev = prevLeagues.get(String(cfg.id));
     const reason = refreshReason(prev);
@@ -912,14 +879,13 @@ async function main() {
       log(`\n  ${cfg.name} (${cfg.id}) — unchanged, reusing previous data`);
       return { cfg, ok: true, reuse: prev };
     }
-    const page = await context.newPage();
     try {
       log(`\n  ${cfg.name} (${cfg.id}) — refreshing (${reason})`);
 
       log(`    Fetching standings…`);
-      const standingsHtml = await fetchHtmlSmart(page, cfg.standingsUrl, t => parseStandingsHtml(t).length > 0);
+      const standingsHtml = await fetchHtmlSmart(cfg.standingsUrl, t => parseStandingsHtml(t).length > 0);
       log(`    Fetching games…`);
-      const gamesHtml     = await fetchHtmlSmart(page, cfg.gamesUrl, t => /\/games\/\d+/.test(t));
+      const gamesHtml     = await fetchHtmlSmart(cfg.gamesUrl, t => /\/games\/\d+/.test(t));
 
       const ranking      = parseStandingsHtml(standingsHtml);
 
@@ -963,7 +929,7 @@ async function main() {
         log(`    Stats unchanged (${playedNow} games played) — reusing scorers`);
       } else {
         log(`    Fetching stats…`);
-        try { scorers = await parseStatsAllPages(page, cfg.id, ranking); } catch {}
+        try { scorers = await parseStatsAllPages(cfg.id, ranking); } catch {}
       }
 
       const teams = ranking.map(r => ({
@@ -1016,7 +982,7 @@ async function main() {
       let newBoxscores = 0, failedBoxscores = 0;
       for (const f of playedWithGameId) {
         if (reuseStats || boxCache.games[f.gameId]) continue;
-        const players = await fetchGameLineup(page, f.gameId);
+        const players = await fetchGameLineup(f.gameId);
         if (players && players.length > 0) {
           boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players };
           newBoxscores++;
@@ -1094,7 +1060,7 @@ async function main() {
         venueResolutionBudget--;
 
         const resolution = (async () => {
-          const address = await fetchVenueAddress(page, homeFx.gameId);
+          const address = await fetchVenueAddress(homeFx.gameId);
           console.log(`[DBG venue] team="${t.name}" gameId=${homeFx.gameId} address=${address ? `"${address}"` : "NOT FOUND"}`);
           if (!address) { venueCache.venues[vk] = { name: t.name, address: null, lat: null, lon: null }; return; }
           const coords = await geocodeAddress(address);
@@ -1147,8 +1113,6 @@ async function main() {
     } catch (err) {
       console.error(`    ✗ ${cfg.name}: ${err.message}`);
       return { cfg, ok: false, error: err.message };
-    } finally {
-      await page.close();
     }
   }
 
@@ -1194,10 +1158,6 @@ async function main() {
     results.push({ id: cfg.id, name: cfg.name, ok: true, teams: teams.length, fixtures: fixtures.length, played, pending, scorers: scorers.length });
   }
 
-  await context.close();
-
-  await browser.close();
-
   fresh.updatedAt = new Date().toISOString();
   // Last season's strength for teams that can be matched (see priors.js).
   try {
@@ -1219,7 +1179,7 @@ async function main() {
   const unresolvedVenues = Object.values(venueCache.venues).filter(v => v.lat == null).length;
   log(`Venue cache: ${Object.keys(venueCache.venues).length} venue(s), ${Object.keys(venueCache.distances).length} distance(s) total, ${unresolvedVenues} still unresolved (budget spent this run: ${20 - venueResolutionBudget}/20)`);
 
-  log(`Standings/games pages: ${plainStats.plain} by plain request, ${plainStats.browser} needed the browser`);
+  log(`Pages fetched: ${plainStats.ok} ok, ${plainStats.failed} failed after retries`);
   const ok  = results.filter(r => r.ok).length;
   const bad = results.filter(r => !r.ok).length;
   log(`\nDone — ${ok}/${results.length} succeeded`);
