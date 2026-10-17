@@ -658,7 +658,9 @@ async function fetchVenueAddress(page, gameId) {
   const url = `https://www.clubee.com/handballbelgium/games/${gameId}`;
   let html;
   // Plain request first; the browser only when the page came back without a directions link.
-  try { html = await fetchHtmlSmart(page, url, h => /daddr=/i.test(h)); } catch { return null; }
+  // A complete match page without a directions link simply has no venue (cups and tournaments),
+  // so it counts as complete and is not retried in the browser.
+  try { html = await fetchHtmlSmart(page, url, h => /daddr=/i.test(h) || (/<title>[^<]*- Match - /i.test(h) && /<\/html>/i.test(h))); } catch { return null; }
   return parseVenueAddress(html);
 }
 
