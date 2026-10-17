@@ -189,10 +189,16 @@ export function ArchiveSeasonView({ filename, onBack }) {
 
   if (activeLeague !== null) {
     const lg = data.leagues[activeLeague];
-    // Plain leagues get the full league view (table, games, players); play-off leagues keep the phase view.
+    // Leagues played as round-robin (plain, or play-off leagues whose phases have fixtures) get the full
+    // league view (table, games, players); tournament-style phases keep the older phase view.
+    const hasFixtures = ph => ph && (ph.fixtures || []).length > 0;
+    const full = (x, label) => ({ ...x, name: lg.name + (label ? " · " + label : ""), federation: "📦 " + data.season + " · read only", live: false,
+      scorers: (data.scorers || {})[lg.name] || null });
     if (lg.type !== "playoff") {
-      const full = { ...lg, federation: "📦 " + data.season + " · read only", live: false, scorers: (data.scorers || {})[lg.name] || null };
-      return <ErrorBoundary onBack={() => setActiveLeague(null)}><BelgianLeagueView league={full} onBack={() => setActiveLeague(null)} /></ErrorBoundary>;
+      return <ErrorBoundary onBack={() => setActiveLeague(null)}><BelgianLeagueView league={full(lg)} onBack={() => setActiveLeague(null)} /></ErrorBoundary>;
+    }
+    if (hasFixtures(lg.playoffs) && hasFixtures(lg.playdowns)) {
+      return <ArchivePhasedLeague lg={lg} full={full} onBack={() => setActiveLeague(null)} />;
     }
     return <ArchiveLeagueView league={lg} scorers={data.scorers} season={data.season} onBack={() => setActiveLeague(null)} />;
   }
@@ -263,6 +269,26 @@ export function ArchiveBelgianSeasonView({ filename, season, onBack }) {
           ))
         )}
       </div>
+    </div>
+  );
+}
+
+// Play-off league with round-robin phases: switch between regular season, play-offs and play-downs,
+// each shown in the full league view.
+function ArchivePhasedLeague({ lg, full, onBack }) {
+  const [phase, setPhase] = useState("regular");
+  const label = { regular: "", playoff: "Play-offs", playdown: "Play-downs" }[phase];
+  const src = phase === "playoff" ? { ...lg, ...lg.playoffs, type: "standard" } : phase === "playdown" ? { ...lg, ...lg.playdowns, type: "standard" } : { ...lg, type: "standard" };
+  return (
+    <div>
+      <div className="tabs" style={{ marginBottom: ".75rem" }}>
+        {["regular", "playoff", "playdown"].map(p => (
+          <button key={p} className={"tab" + (phase === p ? " on" : "")} onClick={() => setPhase(p)}>
+            {p === "regular" ? "Regular Season" : p === "playoff" ? "Play-offs" : "Play-downs"}
+          </button>
+        ))}
+      </div>
+      <ErrorBoundary onBack={onBack}><BelgianLeagueView key={phase} league={full(src, label)} onBack={onBack} /></ErrorBoundary>
     </div>
   );
 }

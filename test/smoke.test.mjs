@@ -167,6 +167,16 @@ test("archive screens open without crashing (real archive files)", async () => {
   await click(w, act, [...w.document.querySelectorAll(".tab")].find((x) => /Players|Spelers/.test(x.textContent)));
   assert.ok(w.document.querySelectorAll(".ltbl tbody tr").length > 0, "archived scorers listed");
   await click(w, act, [...w.document.querySelectorAll(".tab")].find((x) => /Games|Wedstrijden/.test(x.textContent)));
+  // A play-off league (1e Nationale) opens with a phase switch and the full league view.
+  await click(w, act, byText(w, "button", "← All Leagues"));
+  await act(async () => { await new Promise((r) => setTimeout(r, 30)); });
+  const po = [...w.document.querySelectorAll(".card")].find((e) => /1e Nationale/.test(e.textContent));
+  assert.ok(po, "play-off league listed");
+  await click(w, act, po);
+  await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+  await click(w, act, byText(w, "button", "Play-offs"));
+  assert.match(text(w), /Play-offs/);
+  assert.ok(w.document.querySelectorAll("table tbody tr").length >= 4, "play-off table renders");
   root.unmount();
 });
 
