@@ -656,14 +656,14 @@ async function fetchGameLineup(page, gameId) {
 // the exact heading markup, which we can't verify without live access.
 async function fetchVenueAddress(page, gameId) {
   const url = `https://www.clubee.com/handballbelgium/games/${gameId}`;
-  try {
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
-  } catch {
-    return null;
-  }
   let html;
-  try { html = await page.content(); } catch { return null; }
-  const m = html.match(/daddr=([^"&]+)/i);
+  // Plain request first; the browser only when the page came back without a directions link.
+  try { html = await fetchHtmlSmart(page, url, h => /daddr=/i.test(h)); } catch { return null; }
+  return parseVenueAddress(html);
+}
+
+function parseVenueAddress(html) {
+  const m = (html || "").match(/daddr=([^"&]+)/i);
   if (!m) return null;
   try {
     const addr = decodeURIComponent(m[1].replace(/\+/g, " ")).trim();
@@ -1230,7 +1230,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { parseStatsHtml, parseLineupHtml, LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
+module.exports = { parseVenueAddress, parseStatsHtml, parseLineupHtml, LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }

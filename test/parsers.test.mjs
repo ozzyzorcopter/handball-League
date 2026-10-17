@@ -113,3 +113,9 @@ test("stats parsers return nothing for a page without tables", () => {
   assert.deepEqual(parseStatsHtml("<html><body>No information added yet</body></html>").scorers, []);
   assert.deepEqual(parseLineupHtml("<html></html>"), []);
 });
+
+test("venue address comes from the directions link", async () => {
+  const { parseVenueAddress } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
+  assert.equal(parseVenueAddress('<a href="https://maps.google.com/?daddr=Sporthal+De+Gryse%2C+Schapenstraat+45a%2C+Oostende">x</a>'), "Sporthal De Gryse, Schapenstraat 45a, Oostende");
+  assert.equal(parseVenueAddress("<html>no link</html>"), null);
+});
