@@ -251,6 +251,7 @@ async function fetchHtmlSmart(url, looksComplete, attempts = 3) {
     if (text && (looksComplete(text) || /No information added yet/i.test(text))) { plainStats.ok++; return text; }
   }
   plainStats.failed++;
+  warn(`No complete page after ${attempts} tries: ${url}`);
   throw new Error(`No complete page from ${url}`);
 }
 
@@ -645,8 +646,8 @@ async function fetchVenueAddress(gameId) {
   let html;
   // A complete match page without a directions link simply has no venue (cups and tournaments),
   // so it counts as complete.
-  try { html = await fetchHtmlSmart(url, h => /daddr=/i.test(h) || (/<title>[^<]*- Match - /i.test(h) && /<\/html>/i.test(h))); } catch { return null; }
-  return parseVenueAddress(html);
+  try { html = await fetchHtmlSmart(url, h => /daddr=/i.test(h) || (/<title>[^<]*- Match - /i.test(h) && /<\/html>/i.test(h))); } catch { return undefined; } // undefined = could not fetch, retry next run
+  return parseVenueAddress(html); // null = page fine, no venue
 }
 
 function parseVenueAddress(html) {
@@ -986,6 +987,8 @@ async function main() {
         if (players && players.length > 0) {
           boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players };
           newBoxscores++;
+        } else if (players === null) {
+          failedBoxscores++; // could not fetch the page: not remembered, so the next run tries again
         } else {
           // Remember the attempt so we don't refetch a broken/empty page
           // every single run — a future run can still retry by manually
@@ -1061,6 +1064,7 @@ async function main() {
 
         const resolution = (async () => {
           const address = await fetchVenueAddress(homeFx.gameId);
+          if (address === undefined) { console.log(`[DBG venue] team="${t.name}" gameId=${homeFx.gameId} page not fetched, will retry next run`); return; }
           console.log(`[DBG venue] team="${t.name}" gameId=${homeFx.gameId} address=${address ? `"${address}"` : "NOT FOUND"}`);
           if (!address) { venueCache.venues[vk] = { name: t.name, address: null, lat: null, lon: null }; return; }
           const coords = await geocodeAddress(address);
