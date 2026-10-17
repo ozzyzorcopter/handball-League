@@ -503,410 +503,148 @@ function parseGamesHtml(html, ranking, times) {
   return { fixtures };
 }
 
-// ── STATS PARSER (HTML page, top scorers) ─────────────────────────────────────
-// Stats page columns: # | Player | MP | Goals | YC | RC | ...
-// Club comes from team logo alt text.
-// Paginated: ?page=N
-async function parseStatsAllPages(page, leagueId, ranking = []) {
-  const BASE = "https://www.clubee.com/handballbelgium";
-  // The scorer table's club logo <img> has no alt text at all (confirmed on
-  // real captured markup), so club always came out as "" and the app's
-  // per-team "Team Scorers" panel could never match anyone. Build a
-  // logo-URL → team-name map from the standings page (which we already
-  // parsed) so we can identify a scorer's club from their row's logo image
-  // instead, even with no alt text to read.
-  const logoMap = new Map();
-  for (const r of ranking) {
-    if (r.logoKey) logoMap.set(r.logoKey, r.name);
-  }
-  const scorers = [];
-  let pageNum = 1;
-  // We no longer trust a regex over the static HTML to find "page=N" links to
-  // determine how many pages exist — that only works if pagination is
-  // rendered as real <a href> links in the initial markup. If it's
-  // client-side buttons instead (no such links ever appear), that regex
-  // finds nothing and we'd silently stop after page 1, capping every league
-  // at whatever the page size is (seen live: 10 scorers, even when more
-  // exist). Instead we just keep fetching subsequent pages until one comes
-  // back with zero real player rows, bounded by a safety cap.
-  const MAX_PAGES_SAFETY_CAP = 30;
-  // Guards against a site that clamps an out-of-range page request back to
-  // the last valid page (returning the SAME rows again) instead of an empty
-  // page — without this we'd re-add the same scorers on every iteration up
-  // to the safety cap instead of stopping.
-  let prevPageSignature = null;
+// ── STATS / LINEUP TABLES (plain HTML, no browser) ────────────────────────────
+// Clubee serves both the season stats pages and the per-game lineup pages fully rendered to a
+// plain request (verified from GitHub Actions with the probe), so these are pure HTML parsers.
+// Columns: # | Player | MP | G | 7MS | 7MM | YC | 2MIN | BC | RC. Only the first columns carry a
+// header label on the season stats page, so the other positions are the fixed fallbacks.
+const STAT_COLS = { player: 1, mp: 2, g: 3, s7: 4, m7: 5, yc: 6, min2: 7, bc: 8, rc: 9 };
 
-  while (pageNum <= MAX_PAGES_SAFETY_CAP) {
-    const url = `${BASE}/stats-371072v4/leagues/${leagueId}/seasons/0?page=${pageNum}`;
-    let html;
-    try { html = await fetchHtml(page, url); }
-    catch { break; }
-
-    if (pageNum === 1) {
-      // DEBUG: the old version logged html.slice(0,200), which is always just
-      // the <!DOCTYPE>/<head> boilerplate and tells us nothing about the table
-      // markup. Log structural facts instead, plus a snippet anchored on the
-      // "Player" column header (or the first player-like row) so we can see
-      // the ACTUAL markup (table/tr/td vs. div-grid vs. something else).
-      let structInfo;
-      try {
-        structInfo = await page.evaluate(() => {
-          const tableCount = document.querySelectorAll("table").length;
-          const trCount    = document.querySelectorAll("tr").length;
-          const tdCount    = document.querySelectorAll("td").length;
-          const memberLinkCount = document.querySelectorAll(
-            "a[href*='/member'], a[href*='/player'], a[href*='/profile']"
-          ).length;
-          const roleRowCount = document.querySelectorAll("[role='row']").length;
-
-          // Find the smallest element whose own text is exactly "Player"
-          // (the column header), then walk up to something table/grid-like
-          // and grab its outerHTML so we can see real markup around the data.
-          let headerAnchorHtml = "";
-          const all = document.querySelectorAll("body *");
-          for (const el of all) {
-            if (el.children.length === 0 && el.textContent.trim() === "Player") {
-              const container =
-                el.closest("table") ||
-                el.closest("[role='table']") ||
-                el.closest("div[class]") ||
-                el.parentElement;
-              headerAnchorHtml = (container ? container.outerHTML : el.outerHTML).slice(0, 2000);
-              break;
-            }
-          }
-
-          // Grab the first BODY row (not the header) specifically, since the
-          // header-anchored snippet above never reaches into <tbody> before
-          // its 2000-char cutoff. Report each of its cells' tag name, class,
-          // and text so we can see exactly how data rows differ from the
-          // header row we already inspected.
-          const bodyRows = Array.from(document.querySelectorAll("table tbody tr"));
-          const firstBodyRow = bodyRows[0] || null;
-          const firstBodyRowCells = firstBodyRow
-            ? Array.from(firstBodyRow.children).map(c => ({
-                tag: c.tagName,
-                cls: (c.className || "").toString().slice(0, 60),
-                text: (c.textContent || "").replace(/\s+/g, " ").trim().slice(0, 60),
-              }))
-            : [];
-          const firstBodyRowHtml = firstBodyRow ? firstBodyRow.outerHTML.slice(0, 2500) : "";
-          const bodyRowCount = bodyRows.length;
-
-          return {
-            tableCount, trCount, tdCount, memberLinkCount, roleRowCount, headerAnchorHtml,
-            bodyRowCount, firstBodyRowCells, firstBodyRowHtml,
-          };
-        });
-      } catch (e) {
-        structInfo = { error: String(e) };
-      }
-      console.log(
-        `[DBG stats ${leagueId}] url=${url} html_len=${html.length} ` +
-        `tables=${structInfo.tableCount} trs=${structInfo.trCount} tds=${structInfo.tdCount} ` +
-        `memberLinks=${structInfo.memberLinkCount} roleRows=${structInfo.roleRowCount} ` +
-        `bodyRows=${structInfo.bodyRowCount}`
-      );
-      console.log(
-        `[DBG stats ${leagueId}] firstBodyRowCells=${JSON.stringify(structInfo.firstBodyRowCells || [])}`
-      );
-      console.log(
-        `[DBG stats ${leagueId}] firstBodyRowHtml="${(structInfo.firstBodyRowHtml || "").replace(/\s+/g, " ")}"`
-      );
-    }
-    // NOTE: we intentionally do NOT break here based on a page-wide text
-    // search for "No information added yet". That phrase can appear
-    // anywhere on the page (an unrelated empty-state widget, a hidden
-    // placeholder present in the initial markup, etc.) even when the stats
-    // table itself has real rows — this was confirmed to be exactly what
-    // was causing every league to report 0 scorers: the debug block above
-    // (structInfo, read from the live DOM) showed real row data, but this
-    // check fired first and broke out of the loop before the row-gathering
-    // code below ever ran. Instead we only decide "no data" from the
-    // actual DOM rows we gather further down.
-
-    // Primary strategy: parse via the live DOM (page.evaluate) rather than
-    // regex over serialized HTML. This is robust to attribute quoting,
-    // nested tags, and whitespace that broke the old regex-based split, and
-    // it works whether rows are real <tr>/<td> or ARIA "row"/"cell" divs.
-    let domRows = [];
-    let headerLabels = [];
-    try {
-      const evalResult = await page.evaluate(() => {
-        function cellsOf(rowEl, cellSelector) {
-          return Array.from(rowEl.querySelectorAll(cellSelector)).map(td => {
-            // Don't require an alt attribute to exist — the scorer table's
-            // club logo <img> has none, so we also grab its src/data-src to
-            // match against the standings page's logos instead.
-            const img = td.querySelector("img");
-            return {
-              text: (td.textContent || "").replace(/\s+/g, " ").trim(),
-              alt: img ? img.getAttribute("alt") || "" : "",
-              src: img ? (img.getAttribute("src") || img.getAttribute("data-src") || "") : "",
-            };
-          });
-        }
-
-        // Read the real header labels instead of assuming a fixed column
-        // order — some leagues may not track every stat (e.g. no 7m shots
-        // at lower levels), which would shift column positions.
-        const headerRow =
-          document.querySelector("table thead tr") ||
-          document.querySelector("tr[data-is-header='true']");
-        const headerLabels = headerRow
-          ? Array.from(headerRow.querySelectorAll("th, td")).map(c =>
-              (c.textContent || "").replace(/\s+/g, " ").trim().toLowerCase()
-            )
-          : [];
-
-        // Some leagues render TWO copies of the stats table in the DOM (seen
-        // live: tables=2). We don't know in general which one (if either)
-        // is a partial/sticky-columns mirror missing the data columns, so
-        // rather than guess by table position, gather rows from ALL tables
-        // and de-duplicate identical rows below by content instead.
-        let rowEls = Array.from(document.querySelectorAll("table tr"));
-        let cellSel = "td";
-        if (rowEls.length === 0) {
-          rowEls = Array.from(document.querySelectorAll("[role='row']"));
-          cellSel = "[role='cell'], [role='gridcell']";
-        }
-
-        const rows = rowEls.map(row => cellsOf(row, cellSel)).filter(cells => cells.length > 0);
-        return { headerLabels, rows };
-      });
-      domRows = evalResult.rows;
-      headerLabels = evalResult.headerLabels;
-    } catch { domRows = []; headerLabels = []; }
-
-    // Map header labels to column indices, falling back to the fixed
-    // positions confirmed from real captured markup
-    // (# | Player | MP | G | 7MS | 7MM | YC | 2MIN | BC | RC) if the header
-    // row couldn't be read or doesn't contain a label we recognize.
-    function colIdx(labels, fallback) {
-      const idx = headerLabels.indexOf(labels);
-      return idx !== -1 ? idx : fallback;
-    }
-    const cMP    = colIdx("mp", 2);
-    const cGoals = colIdx("g", 3);
-    const c7MS   = colIdx("7ms", 4);
-    const c7MM   = colIdx("7mm", 5);
-    const cYC    = colIdx("yc", 6);
-    const c2MIN  = colIdx("2min", 7);
-    const cBC    = colIdx("bc", 8);
-    const cRC    = colIdx("rc", 9);
-
-    if (pageNum === 1) {
-      console.log(`[DBG stats ${leagueId}] headerLabels=${JSON.stringify(headerLabels)}`);
-    }
-    console.log(`[DBG stats ${leagueId}] page=${pageNum} domRows=${domRows.length} sampleRow0=${JSON.stringify((domRows[0] || []).map(c => c.text))} sampleRow1=${JSON.stringify((domRows[1] || []).map(c => c.text))}`);
-
-    const pageSignature = domRows.map(cells => cells.map(c => c.text).join("\u0001")).join("\u0002");
-    if (pageNum > 1 && pageSignature === prevPageSignature) {
-      // Site clamped back to the last valid page instead of returning an
-      // empty one — same content as the previous page, so stop here.
-      break;
-    }
-    prevPageSignature = pageSignature;
-
-    // Track how many real player rows this page actually had (regardless of
-    // the goals>0 filter below) so we know whether to bother fetching the
-    // next page — this replaces the old, unreliable "page=N link" detection.
-    let realRowsThisPage = 0;
-
-    const seenRowKey = new Set();
-    for (const cells of domRows) {
-      const texts = cells.map(c => c.text);
-      const rowKey = texts.join("\u0001");
-      if (seenRowKey.has(rowKey)) continue; // duplicate row (mirrored table) — skip
-      let club = cells.find(c => c.alt)?.alt.trim() || "";
-      if (!club) {
-        const withSrc = cells.find(c => c.src);
-        if (withSrc) club = logoMap.get(normalizeLogoSrc(withSrc.src)) || "";
-      }
-      if (texts.length >= 4 && /^\d+$/.test(texts[0]) && texts[1] && /^\d+$/.test(texts[cGoals])) {
-        seenRowKey.add(rowKey);
-        realRowsThisPage++;
-        const goals = parseInt(texts[cGoals]) || 0;
-        if (goals > 0) {
-          scorers.push({
-            player: texts[1],
-            club,
-            goals,
-            matchesPlayed:     parseInt(texts[cMP])   || 0,
-            sevenMScored:       parseInt(texts[c7MS])  || 0,
-            sevenMMissed:        parseInt(texts[c7MM])  || 0,
-            yellowCards:       parseInt(texts[cYC])   || 0,
-            twoMinSuspensions: parseInt(texts[c2MIN]) || 0,
-            blueCards:         parseInt(texts[cBC])   || 0,
-            redCards:          parseInt(texts[cRC])   || 0,
-          });
-        }
-      }
-    }
-
-    // Fallback: old regex-based parser, in case the DOM pass above found
-    // nothing (e.g. page.evaluate failed) but the raw HTML still has a
-    // parseable <table>. Kept only as a safety net.
-    if (domRows.length === 0) {
-      const chunks = html.split(/<tr[\s>]/i);
-      for (const chunk of chunks) {
-        const rowContent = chunk.split(/<\/tr>/i)[0];
-        const altM = rowContent.match(/alt="([^"]+)"/i);
-        let club = altM ? altM[1].trim() : "";
-        if (!club) {
-          const srcM = rowContent.match(/<img[^>]*\s(?:data-)?src="([^"]+)"/i);
-          if (srcM) club = logoMap.get(normalizeLogoSrc(srcM[1])) || "";
-        }
-        const cells = [];
-        const tdRe  = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-        let td;
-        while ((td = tdRe.exec(rowContent)) !== null) {
-          const text = (td[1] ?? "").replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
-            .replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/&[a-z0-9#]+;/gi," ")
-            .replace(/\s+/g," ").trim();
-          cells.push(text);
-        }
-        if (cells.length >= 4 && /^\d+$/.test(cells[0]) && cells[1] && /^\d+$/.test(cells[cGoals])) {
-          realRowsThisPage++;
-          const goals = parseInt(cells[cGoals]) || 0;
-          if (goals > 0) {
-            scorers.push({
-              player: cells[1],
-              club,
-              goals,
-              matchesPlayed:     parseInt(cells[cMP])   || 0,
-              sevenMScored:       parseInt(cells[c7MS])  || 0,
-              sevenMMissed:        parseInt(cells[c7MM])  || 0,
-              yellowCards:       parseInt(cells[cYC])   || 0,
-              twoMinSuspensions: parseInt(cells[c2MIN]) || 0,
-              blueCards:         parseInt(cells[cBC])   || 0,
-              redCards:          parseInt(cells[cRC])   || 0,
-            });
-          }
-        }
-      }
-    }
-
-    console.log(`[DBG stats ${leagueId}] page=${pageNum} realRowsThisPage=${realRowsThisPage}`);
-
-    if (realRowsThisPage === 0) break; // no more real player rows — stop paginating
-
-    pageNum++;
-  }
-
-  const withClub = scorers.filter(s => s.club).length;
-  console.log(`[DBG stats ${leagueId}] clubMatch=${withClub}/${scorers.length} logoMapSize=${logoMap.size}`);
-
-  return scorers.sort((a, b) => b.goals - a.goals);
+function cleanCellText(s) {
+  return s.replace(/<svg[\s\S]*?<\/svg>/gi, "").replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'")
+    .replace(/&[a-z0-9#]+;/gi, " ").replace(/\s+/g, " ").trim();
 }
 
-// ── PER-GAME BOXSCORE (lineup page, per-player goals for ONE match) ───────────
-// Confirmed live structure (games/{id}/lineup): two separate <table>s, one per
-// team, each preceded by a plain-text team-name heading (no logo-matching
-// needed here, unlike the season stats page) — same columns as the season
-// stats table: # | Player | MP | G | 7MS | 7MM | YC | 2MIN | BC | RC.
-// Powers "goals in last game" and the "most goals in a single game" ranking.
-async function fetchGameLineup(page, gameId) {
-  const url = `https://www.clubee.com/handballbelgium/games/${gameId}/lineup`;
-  try {
-    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
-    try {
-      await page.waitForFunction(
-        () => document.querySelector("table tr td") !== null,
-        { timeout: 15000 }
-      );
-    } catch { /* timeout — parse whatever's there */ }
-  } catch {
-    return null; // navigation failed — caller marks this game as failed, retried next run
-  }
-
-  let tables;
-  try {
-    tables = await page.evaluate(() => {
-      const out = [];
-      for (const table of Array.from(document.querySelectorAll("table"))) {
-        // Walk backwards through siblings/ancestors for the nearest bit of
-        // real text — that's the team-name heading above this table.
-        let teamName = "";
-        let el = table.previousElementSibling;
-        let hops = 0;
-        while (el && hops < 8 && !teamName) {
-          const t = (el.textContent || "").replace(/\s+/g, " ").trim();
-          if (t && t.length < 80) teamName = t;
-          el = el.previousElementSibling;
-          hops++;
-        }
-        if (!teamName) {
-          let p = table.parentElement, hops2 = 0;
-          while (p && hops2 < 4 && !teamName) {
-            const sib = p.previousElementSibling;
-            if (sib) {
-              const t = (sib.textContent || "").replace(/\s+/g, " ").trim();
-              if (t && t.length < 80) teamName = t;
-            }
-            p = p.parentElement;
-            hops2++;
-          }
-        }
-        teamName = teamName.replace(/\s*\([^)]*\)\s*$/, "").trim();
-
-        const headerRow = table.querySelector("thead tr") || table.querySelector("tr[data-is-header='true']");
-        const headerLabels = headerRow
-          ? Array.from(headerRow.querySelectorAll("th, td")).map(c =>
-              (c.textContent || "").replace(/\s+/g, " ").trim().toLowerCase()
-            )
-          : [];
-        // Skip tables that clearly aren't the player-stats table (e.g. a
-        // staff/coach list rendered as a <table> too).
-        if (!headerLabels.includes("player") && !headerLabels.includes("g")) continue;
-
-        const bodyRows = Array.from(table.querySelectorAll("tbody tr")).map(row =>
-          Array.from(row.querySelectorAll("td")).map(td =>
-            (td.textContent || "").replace(/\s+/g, " ").trim()
-          )
-        );
-        out.push({ teamName, headerLabels, rows: bodyRows });
+// All <table>s in the page: { before: nearest text above, header: labels, rows: [[{text, src}]] }
+function parseStatTables(html) {
+  const out = [];
+  const tableRe = /<table[\s\S]*?<\/table>/gi;
+  let tm;
+  while ((tm = tableRe.exec(html)) !== null) {
+    const tableHtml = tm[0];
+    // Nearest text node above the table (the team heading on lineup pages).
+    const above = html.slice(Math.max(0, tm.index - 3000), tm.index).replace(/<svg[\s\S]*?<\/svg>/gi, "");
+    const texts = above.split(/<[^>]+>/).map(t => t.replace(/&amp;/g, "&").replace(/\s+/g, " ").trim()).filter(Boolean);
+    const before = texts.length ? texts[texts.length - 1] : "";
+    let header = [];
+    const rows = [];
+    const rowRe = /<tr[\s>][\s\S]*?<\/tr>/gi;
+    let rm;
+    while ((rm = rowRe.exec(tableHtml)) !== null) {
+      const rowHtml = rm[0];
+      const cells = [];
+      const tdRe = /<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi;
+      let cm;
+      while ((cm = tdRe.exec(rowHtml)) !== null) {
+        const srcM = cm[1].match(/<img[^>]*?\s(?:data-)?src="([^"]+)"/i);
+        cells.push({ text: cleanCellText(cm[1]), src: srcM ? srcM[1] : "" });
       }
-      return out;
-    });
-  } catch {
-    return null;
-  }
-
-  const players = [];
-  for (const t of tables) {
-    function colIdx(label, fallback) {
-      const idx = t.headerLabels.indexOf(label);
-      return idx !== -1 ? idx : fallback;
+      if (!cells.length) continue;
+      if (/data-is-header="true"/.test(rowHtml) || /^<tr[^>]*>\s*<th/i.test(rowHtml)) header = cells.map(c => c.text.toLowerCase());
+      else rows.push(cells);
     }
-    const cPlayer = colIdx("player", 1);
-    const cMP     = colIdx("mp", 2);
-    const cGoals  = colIdx("g", 3);
-    const c7MS    = colIdx("7ms", 4);
-    const c7MM    = colIdx("7mm", 5);
-    const cYC     = colIdx("yc", 6);
-    const c2MIN   = colIdx("2min", 7);
-    const cBC     = colIdx("bc", 8);
-    const cRC     = colIdx("rc", 9);
+    out.push({ before, header, rows });
+  }
+  return out;
+}
 
+function statCols(header) {
+  const col = (label, fb) => { const i = header.indexOf(label); return i !== -1 ? i : fb; };
+  return {
+    player: col("player", STAT_COLS.player), mp: col("mp", STAT_COLS.mp), g: col("g", STAT_COLS.g),
+    s7: col("7ms", STAT_COLS.s7), m7: col("7mm", STAT_COLS.m7), yc: col("yc", STAT_COLS.yc),
+    min2: col("2min", STAT_COLS.min2), bc: col("bc", STAT_COLS.bc), rc: col("rc", STAT_COLS.rc),
+  };
+}
+
+function statRow(texts, c, club) {
+  return {
+    player: texts[c.player], club, goals: parseInt(texts[c.g]) || 0,
+    matchesPlayed: parseInt(texts[c.mp]) || 0, sevenMScored: parseInt(texts[c.s7]) || 0,
+    sevenMMissed: parseInt(texts[c.m7]) || 0, yellowCards: parseInt(texts[c.yc]) || 0,
+    twoMinSuspensions: parseInt(texts[c.min2]) || 0, blueCards: parseInt(texts[c.bc]) || 0,
+    redCards: parseInt(texts[c.rc]) || 0,
+  };
+}
+
+// One season-stats page → { scorers (goals > 0), realRows (all player rows), signature }
+function parseStatsHtml(html, logoMap = new Map()) {
+  const scorers = [];
+  let realRows = 0;
+  const seen = new Set();
+  const sig = [];
+  for (const t of parseStatTables(html)) {
+    const c = statCols(t.header);
     for (const cells of t.rows) {
-      if (cells.length < 4 || !cells[cPlayer] || !/^\d+$/.test(cells[cGoals] ?? "")) continue;
-      const goals = parseInt(cells[cGoals]) || 0;
-      players.push({
-        player: cells[cPlayer],
-        club: t.teamName,
-        goals,
-        matchesPlayed:     parseInt(cells[cMP])   || 0,
-        sevenMScored:       parseInt(cells[c7MS])  || 0,
-        sevenMMissed:        parseInt(cells[c7MM])  || 0,
-        yellowCards:       parseInt(cells[cYC])   || 0,
-        twoMinSuspensions: parseInt(cells[c2MIN]) || 0,
-        blueCards:         parseInt(cells[cBC])   || 0,
-        redCards:          parseInt(cells[cRC])   || 0,
-      });
+      const texts = cells.map(x => x.text);
+      const key = texts.join("\u0001");
+      if (seen.has(key)) continue;
+      if (texts.length >= 4 && /^\d+$/.test(texts[0]) && texts[c.player] && /^\d+$/.test(texts[c.g])) {
+        seen.add(key); sig.push(key); realRows++;
+        let club = "";
+        const withSrc = cells.find(x => x.src);
+        if (withSrc) club = logoMap.get(normalizeLogoSrc(withSrc.src)) || "";
+        const row = statRow(texts, c, club);
+        if (row.goals > 0) scorers.push(row);
+      }
+    }
+  }
+  return { scorers, realRows, signature: sig.join("\u0002") };
+}
+
+// One lineup page → players of both teams (goals may be 0), club = heading above each table
+function parseLineupHtml(html) {
+  const players = [];
+  for (const t of parseStatTables(html)) {
+    if (!t.header.includes("player") && !t.header.includes("g")) continue;
+    const c = statCols(t.header);
+    const club = t.before.replace(/\s*\([^)]*\)\s*$/, "").trim();
+    for (const cells of t.rows) {
+      const texts = cells.map(x => x.text);
+      if (texts.length < 4 || !texts[c.player] || !/^\d+$/.test(texts[c.g] ?? "")) continue;
+      players.push(statRow(texts, c, club));
     }
   }
   return players;
+}
+
+const looksLikeStatsTable = h => /<tr[\s>]/i.test(h) && /data-is-header="true"/.test(h);
+
+async function parseStatsAllPages(page, leagueId, ranking = []) {
+  const BASE = "https://www.clubee.com/handballbelgium";
+  // The scorer table's club logo has no alt text, so the club is found by matching the logo URL
+  // against the logos on the standings page.
+  const logoMap = new Map();
+  for (const r of ranking) if (r.logoKey) logoMap.set(r.logoKey, r.name);
+  const scorers = [];
+  let prevSignature = null;
+  // Keep going until a page has no player rows (or repeats the previous one: the site clamps an
+  // out-of-range page back to the last valid page). Bounded by a safety cap.
+  for (let pageNum = 1; pageNum <= 30; pageNum++) {
+    const url = `${BASE}/stats-371072v4/leagues/${leagueId}/seasons/0?page=${pageNum}`;
+    let html;
+    try { html = await fetchHtmlSmart(page, url, looksLikeStatsTable); } catch { break; }
+    const res = parseStatsHtml(html, logoMap);
+    if (pageNum === 1) console.log(`[DBG stats ${leagueId}] page 1: ${res.realRows} rows, ${res.scorers.length} with goals`);
+    if (res.realRows === 0) break;
+    if (pageNum > 1 && res.signature === prevSignature) break;
+    prevSignature = res.signature;
+    scorers.push(...res.scorers);
+  }
+  const withClub = scorers.filter(s => s.club).length;
+  console.log(`[DBG stats ${leagueId}] clubMatch=${withClub}/${scorers.length} logoMapSize=${logoMap.size}`);
+  return scorers.sort((a, b) => b.goals - a.goals);
+}
+
+// Per-game boxscore (lineup page): per-player goals for ONE match. Returns null when the page
+// can't be fetched (the caller retries next run).
+async function fetchGameLineup(page, gameId) {
+  const url = `https://www.clubee.com/handballbelgium/games/${gameId}/lineup`;
+  try {
+    const html = await fetchHtmlSmart(page, url, looksLikeStatsTable);
+    return parseLineupHtml(html);
+  } catch { return null; }
 }
 
 // ── VENUE / TRAVEL DISTANCE ─────────────────────────────────────────────────────
@@ -1492,7 +1230,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
+module.exports = { parseStatsHtml, parseLineupHtml, LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }

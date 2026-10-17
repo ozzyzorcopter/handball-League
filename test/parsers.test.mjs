@@ -7,7 +7,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
-const { parseStandingsHtml, parseGamesHtml, extractFlightGames, extractGameTimes } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
+const { parseStatsHtml, parseLineupHtml, parseStandingsHtml, parseGamesHtml, extractFlightGames, extractGameTimes } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
 
 const standingsHtml = `<table><tbody>
 <tr><th>#</th><th>Club</th></tr>
@@ -84,4 +84,32 @@ test("REAL games page parses into fixtures that match the standings", { skip: !(
   assert.equal(flight.size, fixtures.length, "the embedded game data covers the same games");
   assert.ok(fixtures.every(f => flight.has(f.gameId)), "and the same ids");
   assert.ok(fixtures.filter(f => f.time).length > 0, "kick-off times are found");
+});
+
+const have = (...f) => f.every(x => fs.existsSync(real(x)));
+const rd = f => fs.readFileSync(real(f), "utf8");
+
+test("REAL stats pages: scorers per page, clubs matched through the standings logos", { skip: !have("stats.html", "stats-p2.html", "standings.html") && "needs stats.html, stats-p2.html, standings.html" }, () => {
+  const logoMap = new Map(parseStandingsHtml(rd("standings.html")).map(r => [r.logoKey, r.name]));
+  const p1 = parseStatsHtml(rd("stats.html"), logoMap), p2 = parseStatsHtml(rd("stats-p2.html"), logoMap);
+  assert.equal(p1.realRows, 10);
+  assert.equal(p2.realRows, 10);
+  assert.notEqual(p1.signature, p2.signature, "page 2 differs from page 1");
+  const all = [...p1.scorers, ...p2.scorers];
+  assert.ok(all.every(s => s.player && s.goals > 0 && s.matchesPlayed > 0));
+  assert.ok(all.every((s, i) => i === 0 || all[i - 1].goals >= s.goals), "sorted by goals descending");
+  assert.ok(all.every(s => s.club), "every scorer's club found: " + all.filter(s => !s.club).map(s => s.player));
+});
+
+test("REAL lineup page: both teams, named from the headings", { skip: !have("lineup.html") && "needs lineup.html" }, () => {
+  const players = parseLineupHtml(rd("lineup.html"));
+  const clubs = new Set(players.map(p => p.club));
+  assert.equal(clubs.size, 2, [...clubs].join(" | "));
+  assert.ok(players.length >= 10 && players.every(p => p.player && !/\(/.test(p.club)));
+  assert.ok(players.reduce((a, p) => a + p.goals, 0) > 0, "goals are counted");
+});
+
+test("stats parsers return nothing for a page without tables", () => {
+  assert.deepEqual(parseStatsHtml("<html><body>No information added yet</body></html>").scorers, []);
+  assert.deepEqual(parseLineupHtml("<html></html>"), []);
 });
