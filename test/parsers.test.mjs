@@ -77,5 +77,11 @@ test("REAL games page parses into fixtures that match the standings", { skip: !(
   assert.ok(fixtures.length > 0, "fixtures found");
   const playedGames = fixtures.filter(f => f.played && f.homeScore != null);
   const sum = rank.reduce((a, r) => a + r.played, 0) / 2;
-  assert.ok(Math.abs(playedGames.length - sum) <= 2, `played games ${playedGames.length} vs standings ${sum}`);
+  assert.equal(playedGames.length, sum, "played games match the standings");
+  assert.equal(new Set(fixtures.map(f => f.gameId)).size, fixtures.length, "every game id appears once");
+  assert.ok(fixtures.every(f => f.homeIdx !== f.awayIdx && f.date), "every fixture has two different teams and a date");
+  const flight = extractFlightGames(html);
+  assert.equal(flight.size, fixtures.length, "the embedded game data covers the same games");
+  assert.ok(fixtures.every(f => flight.has(f.gameId)), "and the same ids");
+  assert.ok(fixtures.filter(f => f.time).length > 0, "kick-off times are found");
 });
