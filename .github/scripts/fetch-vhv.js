@@ -1440,6 +1440,12 @@ async function main() {
   await browser.close();
 
   fresh.updatedAt = new Date().toISOString();
+  // Last season's strength for teams that can be matched (see priors.js).
+  try {
+    const pr = require("./priors.js");
+    const r = pr.applyPriors(fresh, pr.latestArchive(path.join(root, "archive")));
+    log(`Last-season priors: ${r.matched}/${r.teams} teams in ${r.leagues} league(s)`);
+  } catch (e) { warn(`Could not add last-season priors: ${e.message}`); }
   fs.writeFileSync(vhvDataPath, JSON.stringify(fresh, null, 2));
   // Also publish a small index + one file per league (the app loads leagues on demand).
   try {

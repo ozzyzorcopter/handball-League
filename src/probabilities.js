@@ -57,15 +57,25 @@ export function predictMatch(homeIdx, awayIdx, teams, fixtures) {
   const gds = played.map(f => +f.homeScore - +f.awayScore);
   const mean = gds.reduce((a, b) => a + b, 0) / gds.length;
   const sd = Math.max(5, Math.sqrt(gds.reduce((a, b) => a + (b - mean) * (b - mean), 0) / gds.length));
-  const K = 4;
+  // How strongly a team's attack/defence is pulled towards its starting point while it has few games.
+  // Without a prior the starting point is the league average (K = 1: backtested on played games with
+  // tools/backtest.mjs, 1 predicts clearly better than 4). With last season's strength (team.prior,
+  // added by .github/scripts/priors.js, carried over at 70%) a longer pull is better (K = 3).
+  const K = 1, K_PRIOR = 3, CARRY = 0.7;
   const rate = idx => {
     let gf = 0, ga = 0, n = 0;
     played.forEach(f => {
       if (f.homeIdx === idx) { gf += +f.homeScore; ga += +f.awayScore; n++; }
       else if (f.awayIdx === idx) { gf += +f.awayScore; ga += +f.homeScore; n++; }
     });
-    const w = n / (n + K);
-    return { att: 1 + ((n ? gf / n / lg : 1) - 1) * w, def: 1 + ((n ? ga / n / lg : 1) - 1) * w };
+    const pr = teams[idx] && teams[idx].prior;
+    const start = pr && isFinite(pr.att) && isFinite(pr.def)
+      ? { att: 1 + (pr.att - 1) * CARRY, def: 1 + (pr.def - 1) * CARRY } : { att: 1, def: 1 };
+    const w = n / (n + (pr ? K_PRIOR : K));
+    return {
+      att: start.att + ((n ? gf / n / lg : start.att) - start.att) * w,
+      def: start.def + ((n ? ga / n / lg : start.def) - start.def) * w,
+    };
   };
   const h = rate(homeIdx), a = rate(awayIdx);
   const eh = lgH * h.att * a.def, ea = lgA * a.att * h.def;
