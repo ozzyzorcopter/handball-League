@@ -170,6 +170,31 @@ test("archive screens open without crashing (real archive files)", async () => {
   root.unmount();
 });
 
+test("manual league: create, set up teams and fixtures, reach the simulator", async () => {
+  const w = await loadApp();
+  const { act } = require("react-dom/test-utils");
+  const setVal = async (el, v) => act(async () => {
+    Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype, "value").set.call(el, v);
+    el.dispatchEvent(new w.Event("input", { bubbles: true }));
+  });
+  await act(async () => { await new Promise((r) => setTimeout(r, 20)); });
+  await click(w, act, [...w.document.querySelectorAll(".card-new")].find((e) => /New League/.test(e.textContent)));
+  await setVal(w.document.querySelector(".modal input.inp"), "My test league");
+  await click(w, act, byText(w, "button", "Create"));
+  assert.match(text(w), /League Setup/);
+  for (let i = 0; i < 4; i++) await click(w, act, byText(w, "button", "+ Add Team"));
+  const names = [...w.document.querySelectorAll(".team-name-inp")];
+  assert.ok(names.length >= 4, "teams added");
+  for (let i = 0; i < names.length; i++) await setVal(w.document.querySelectorAll(".team-name-inp")[i], "Team" + String.fromCharCode(65 + i));
+  await click(w, act, [...w.document.querySelectorAll("button")].find((b) => /Set Fixtures/.test(b.textContent)));
+  assert.match(text(w), /Fixtures/);
+  await click(w, act, byText(w, "button", "⚡ Auto 2-round robin"));
+  await click(w, act, [...w.document.querySelectorAll("button")].find((b) => /Continue/.test(b.textContent)));
+  assert.match(text(w), /Standings|Table|Games/);
+  const tabs = [...w.document.querySelectorAll(".tab")].map((x) => x.textContent);
+  assert.ok(tabs.length >= 3, "league editor tabs: " + tabs.join("|"));
+});
+
 test("split data: stubs have no fixtures, full leagues keep everything", () => {
   const { index, leagues } = splitFederations(data);
   const stub = index.federations.VHV["101"];
