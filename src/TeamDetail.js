@@ -1,5 +1,5 @@
 import { cleanTeamName } from "./names.js";
-import { ScorerPanel, useScorers } from "./scorers.js";
+import { ScorerPanel } from "./scorers.js";
 const { useState } = React;
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
 export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers, phase }) {
@@ -219,7 +219,7 @@ export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, 
 
         </div>
 
-        {(leagueId || (Array.isArray(archiveScorers) && archiveScorers.length > 0)) && <TeamScorers leagueId={leagueId} teamName={team?.name} aliases={aliases} archiveScorers={archiveScorers} phase={phase} />}
+        {(Array.isArray(archiveScorers) && archiveScorers.length > 0) && <TeamScorers leagueId={leagueId} teamName={team?.name} aliases={aliases} archiveScorers={archiveScorers} phase={phase} />}
 
       </div>
     </>
@@ -227,8 +227,5 @@ export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, 
 }
 
 export function TeamScorers({ leagueId, teamName, aliases, archiveScorers, phase }) {
-  const live = useScorers(archiveScorers !== undefined ? null : leagueId, phase);
-  const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
-  const error = archiveScorers !== undefined ? false : live.error;
-  return <ScorerPanel scorers={scorers} error={error} filterClub={teamName} title={cleanTeamName(teamName) + " Scorers"} maxRows={5} aliases={aliases} />;
+  return <ScorerPanel scorers={archiveScorers} error={false} filterClub={teamName} title={cleanTeamName(teamName) + " Scorers"} maxRows={5} aliases={aliases} />;
 }

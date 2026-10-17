@@ -1,7 +1,7 @@
 import { useLang } from "./i18n.js";
 import { MEDALS } from "./config.js";
 import { buildClubIndex, cleanTeamName, resolveClubName } from "./names.js";
-import { ScorerPanel, useScorers } from "./scorers.js";
+import { ScorerPanel } from "./scorers.js";
 const { useState, useMemo } = React;
 export function ToughPanel({ ranking }) {
   const { t } = useLang();
@@ -33,9 +33,8 @@ export function ToughPanel({ ranking }) {
 }
 
 export function LeagueScorers({ leagueId, teams, aliases, archiveScorers, phaseTeams, phase, title, maxRows }) {
-  const live = useScorers(archiveScorers !== undefined ? null : leagueId, phase);
-  const scorers = archiveScorers !== undefined ? archiveScorers : live.scorers;
-  const error = archiveScorers !== undefined ? false : live.error;
+  const scorers = archiveScorers;
+  const error = false;
   const relevantTeams = phaseTeams || teams;
   const clubIndex = useMemo(() => buildClubIndex(scorers), [scorers]);
   const clubNames = useMemo(() => new Set(relevantTeams.map(t => resolveClubName(t.name, aliases, clubIndex))), [relevantTeams, aliases, clubIndex]);

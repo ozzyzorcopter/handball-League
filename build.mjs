@@ -94,10 +94,6 @@ async function main() {
     fs.writeFileSync(path.join(DIST, f), f === "sw.js" ? data.toString("utf8").replace("__BUILD__", buildId) : data);
   }
 
-  // Files the app loads from the Pages origin.
-  for (const f of ["scorer-data.json"]) {
-    if (fs.existsSync(f)) fs.copyFileSync(f, path.join(DIST, f));
-  }
   fs.writeFileSync(path.join(DIST, ".nojekyll"), "");
 }
 

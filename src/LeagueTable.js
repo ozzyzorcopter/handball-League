@@ -337,7 +337,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
           </div>
         ))}
       </div>
-      {!hideScorers && (leagueId || Array.isArray(archiveScorers)) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
+      {!hideScorers && Array.isArray(archiveScorers) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {hasPlayed && (
         <>
           {/* Row 1: Attackers + Defenders */}

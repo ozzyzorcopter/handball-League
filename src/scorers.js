@@ -2,43 +2,6 @@ import { useLang } from "./i18n.js";
 import { buildClubIndex, cleanTeamName, resolveClubName } from "./names.js";
 const { useState, useEffect, useMemo } = React;
 // ── SCORER DATA ──────────────────────────────────────────────────────────────
-export const SCORER_JSON_URL = "https://ozzyzorcopter.github.io/handball-League/scorer-data.json";
-
-export let scorerDataCache = null;
-export let scorerDataPromise = null;
-
-export function fetchScorerData() {
-  if (scorerDataCache) return Promise.resolve(scorerDataCache);
-  if (scorerDataPromise) return scorerDataPromise;
-  scorerDataPromise = fetch(SCORER_JSON_URL)
-    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-    .then(data => { scorerDataCache = data; return data; })
-    .catch(e => { scorerDataPromise = null; throw e; });
-  return scorerDataPromise;
-}
-
-export function useScorers(leagueId, phase) {
-  const [scorers, setScorers] = useState(null);
-  const [error, setError] = useState(false);
-  useEffect(() => {
-    if (!leagueId) { setScorers([]); return; }
-    setScorers(null);
-    setError(false);
-    fetchScorerData()
-      .then(data => {
-        const ph = phase || "regular";
-        const league = (data.leagues || []).find(l =>
-          (l.phase || "regular") === ph &&
-          (l.leagueId === leagueId || l.name === leagueId)
-        );
-        setScorers(league ? league.scorers : []);
-      })
-      .catch(() => { setError(true); setScorers([]); });
-  }, [leagueId, phase]);
-  return { scorers, error };
-}
-
-
 export function ScorerPanel({ scorers, error, filterClub, title, maxRows = 10, aliases }) {
   const { t } = useLang();
   const [expanded, setExpanded] = useState(false);

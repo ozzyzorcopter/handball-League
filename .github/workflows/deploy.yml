@@ -15,7 +15,6 @@ on:
       - build.mjs
       - package.json
       - package-lock.json
-      - scorer-data.json
       - test/**
       - .github/workflows/deploy.yml
   workflow_dispatch:
