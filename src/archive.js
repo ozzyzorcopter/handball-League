@@ -2,7 +2,8 @@ import { useArchiveFile, useArchiveIndex, useArchiveSeason, useStandaloneLeagues
 import { githubDispatch } from "./github.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { BelgianLeagueView } from "./belgian.js";
-import { LeagueTable, TeamDetail } from "./LeagueTable.js";
+import { LeagueTable } from "./LeagueTable.js";
+import { TeamDetail } from "./TeamDetail.js";
 const { useState, useRef, useEffect, useMemo } = React;
 // ── ARCHIVE OPTIONS MENU ──────────────────────────────────────────────────────
 export function ArchiveOptionsMenu({ label, onOpen, onDelete, style }) {
