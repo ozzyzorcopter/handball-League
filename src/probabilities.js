@@ -40,8 +40,9 @@ export function fixProbs(f, teams, fixtures, settings) {
 // ── GOAL MODEL (match predictions) ──────────────────────────────────────────────
 // Expected goals from each side's attack/defence relative to the league average
 // (shrunk towards average while a team has few games), then a normal model on
-// the goal difference gives win / draw / loss chances. Independent of the
-// Monte Carlo settings, which keep their own rank-based probabilities.
+// the goal difference gives win / draw / loss chances. Used for every Belgian
+// league (predictions and Monte Carlo); the rank model with its settings is
+// kept for self-made leagues.
 function normCdf(x) {
   const t = 1 / (1 + 0.2316419 * Math.abs(x));
   const d = 0.3989423 * Math.exp(-x * x / 2);
@@ -86,6 +87,18 @@ export function predictMatch(homeIdx, awayIdx, teams, fixtures) {
   const hw = pct(homeWin), dr = pct(draw);
   return { homeWin: hw, draw: dr, awayWin: Math.max(0, 100 - hw - dr), eh: Math.round(eh), ea: Math.round(ea) };
 }
+// Win / draw / loss chances for a pending fixture. model "goal" (Belgian leagues) uses the goal model and
+// falls back to the settings-driven rank model while a league has too few played games; model "rank"
+// (self-made leagues) always uses the rank model and its settings.
+export function modelProbs(f, teams, fixtures, settings, model = "rank") {
+  if (f.overrideOn && f.ovHW !== "") return fixProbs(f, teams, fixtures, settings);
+  if (model === "goal") {
+    const g = predictMatch(f.homeIdx, f.awayIdx, teams, fixtures);
+    if (g) return { homeWin: g.homeWin, draw: g.draw, awayWin: g.awayWin };
+  }
+  return calcProbs(f.homeIdx, f.awayIdx, teams, fixtures, settings);
+}
+
 export function weekBounds() {
   const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   const now = new Date();

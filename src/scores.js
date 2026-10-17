@@ -1,7 +1,7 @@
 import { cleanTeamName } from "./names.js";
 import { useLang } from "./i18n.js";
 import { calcStats } from "./standings.js";
-import { fixProbs } from "./probabilities.js";
+import { modelProbs } from "./probabilities.js";
 import { runMCAsync } from "./mcRunner.js";
 import { fmtPct, heatColor } from "./format.js";
 import { resolveRef } from "./tournament.js";
@@ -128,7 +128,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
 }
 
 // ── MONTE CARLO TAB ───────────────────────────────────────────────────────────
-export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onConfirmed, ranking }) {
+export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom, onConfirmed, ranking, model = "rank" }) {
   const { t: tr } = useLang();
   const [results, setResults] = useState(null);
   const [running, setRunning] = useState(false);
@@ -154,7 +154,7 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
   const pendingRef = useRef([]);
   const teamsRef = useRef([]);
   const playedRef = useRef([]);
-  pendingRef.current = pending.map(f => ({ ...f, ...fixProbs(f, teams_, fixtures, settings) }));
+  pendingRef.current = pending.map(f => ({ ...f, ...modelProbs(f, teams_, fixtures, settings, model) }));
   teamsRef.current = teams_;
   playedRef.current = playedFixtures;
 

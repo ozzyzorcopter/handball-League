@@ -55,15 +55,21 @@ export function SettingsPanel({ settings, onChange, showTiebreakers, league, onL
     <div>
       <div className="sbox">
         <div className="sub-ttl">{tr("Probability settings")}</div>
-        <div className="sgrid" style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
-          {pf.map(({ k, l, n }) => (
-            <div key={k} className="sfield">
-              <span className="lbl">{tr(l)}</span>
-              <input className="sinp" type="number" min="0" max="100" value={settings[k] || 0} onChange={e => onChange(k, parseFloat(e.target.value) || 0)} />
-              <span className="snote">{tr(n)}</span>
-            </div>
-          ))}
-        </div>
+        {belgian ? (
+          <div className="muted" style={{ fontSize: ".8rem", lineHeight: 1.5 }}>
+            {tr("Belgian leagues are predicted with the goal model, which works from each team's goals scored and conceded (and last season's strength early on). These sliders only apply to self-made leagues.")}
+          </div>
+        ) : (
+          <div className="sgrid" style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
+            {pf.map(({ k, l, n }) => (
+              <div key={k} className="sfield">
+                <span className="lbl">{tr(l)}</span>
+                <input className="sinp" type="number" min="0" max="100" value={settings[k] || 0} onChange={e => onChange(k, parseFloat(e.target.value) || 0)} />
+                <span className="snote">{tr(n)}</span>
+              </div>
+            ))}
+          </div>
+        )}
         <hr className="sdivider" />
         <div className="sub-ttl">{tr("Quick result scores")}</div>
         <div className="sgrid" style={{ gridTemplateColumns: "1fr 1fr 1fr" }}>

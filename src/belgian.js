@@ -2,7 +2,7 @@ import { FED_META, useVhvData } from "./vhvData.js";
 import { LANG_LOCALE, LangSwitch, useLang } from "./i18n.js";
 import { teamSnapshot, useFollow } from "./follow.js";
 import { ClubPicker, PICKER_DISMISS_KEY } from "./ClubPicker.js";
-import { fixProbs, predictMatch, weekBounds } from "./probabilities.js";
+import { modelProbs, predictMatch, weekBounds } from "./probabilities.js";
 import { cleanTeamName } from "./names.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { LeagueTable } from "./LeagueTable.js";
@@ -292,7 +292,7 @@ export function BelgianLeagueView({ league, onBack }) {
 
   const liveProbs = useMemo(() => {
     const m = {};
-    pending.forEach(f => { m[f.id] = fixProbs(f, teams, fixtures, settings); });
+    pending.forEach(f => { m[f.id] = modelProbs(f, teams, fixtures, settings, "goal"); });
     return m;
   }, [pending, teams, fixtures, settings]);
 
@@ -370,6 +370,7 @@ export function BelgianLeagueView({ league, onBack }) {
             teams={teams}
             fixtures={fixtures}
             settings={settings}
+            model="goal"
             ranking={ranking}
             highlightTop={hlTop}
             highlightBottom={hlBot}
