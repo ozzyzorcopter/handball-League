@@ -136,6 +136,35 @@ test("follow, language, league tabs and predictions", async () => {
   assert.ok(!w.fetched.some((u) => u.includes("vhv-data.json")), "old big file not used");
 });
 
+test("archive screens open without crashing (real archive files)", async () => {
+  const fs = await import("node:fs");
+  const w = await loadApp();
+  const { act } = require("react-dom/test-utils");
+  w.fetch = (url) => {
+    const m = String(url).match(/archive\/([^/?]+\.json)$/);
+    const f = m && "archive/" + m[1];
+    if (f && fs.existsSync(f)) { const body = JSON.parse(fs.readFileSync(f, "utf8")); return Promise.resolve({ ok: true, json: () => Promise.resolve(body) }); }
+    return Promise.resolve({ ok: false, status: 404, json: () => Promise.reject(new Error("404")) });
+  };
+  const host = w.document.createElement("div");
+  w.document.body.appendChild(host);
+  const root = w.ReactDOM.createRoot(host);
+  await act(async () => { root.render(w.React.createElement(w.__t.ArchiveScreen, { onBack() {} })); });
+  await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+  assert.match(text(w), /Archive/);
+  const card = w.document.querySelector(".season-card");
+  assert.ok(card, "a season card is listed");
+  await click(w, act, card);
+  await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+  const lg = [...w.document.querySelectorAll(".card")].find((e) => /Liga|Nationale|SHL/.test(e.textContent));
+  assert.ok(lg, "season lists its leagues");
+  await click(w, act, lg);
+  await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+  assert.match(text(w), /read only/);
+  assert.ok(w.document.querySelectorAll("table tbody tr").length >= 4, "archived league table renders");
+  root.unmount();
+});
+
 test("split data: stubs have no fixtures, full leagues keep everything", () => {
   const { index, leagues } = splitFederations(data);
   const stub = index.federations.VHV["101"];

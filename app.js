@@ -3268,7 +3268,7 @@ function App() {
 
 // Test hook: lets test/ reach internals without exporting them in production.
 if (typeof window !== "undefined" && typeof window.__LEAGUESIM_TEST__ === "function") {
-  window.__LEAGUESIM_TEST__({ BelgianScreen, BelgianLeagueView, predictMatch });
+  window.__LEAGUESIM_TEST__({ BelgianScreen, BelgianLeagueView, ArchiveScreen, predictMatch });
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
