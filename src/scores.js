@@ -5,6 +5,7 @@ import { modelProbs } from "./probabilities.js";
 import { runMCAsync } from "./mcRunner.js";
 import { fmtPct, heatColor } from "./format.js";
 import { resolveRef } from "./tournament.js";
+import { ProbBar } from "./ProbBar.js";
 const { useState, useMemo, useRef, useEffect } = React;
 // ── SCORE ROW ─────────────────────────────────────────────────────────────────
 export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange }) {
@@ -59,17 +60,18 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
         <span className="res-lbl" style={{ color: col }}>{lbl}</span>
         {onWeekChange && (
           <div style={{ display: "flex", alignItems: "center", gap: ".3rem" }}>
-            <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50" }}>W</span>
+            <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#7d8597" }}>W</span>
             <input type="number" min="1" max="999" value={f.week ?? ""} placeholder="—"
               onChange={e => onWeekChange(f.id, e.target.value === "" ? null : parseInt(e.target.value) || null)}
               style={{ width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }} />
           </div>
         )}
-        <button className="btn-undo" onClick={() => onUndo(f.id)}>↩ Undo</button>
+        {onUndo && <button className="btn-undo" onClick={() => onUndo(f.id)}>↩ Undo</button>}
       </div>
     );
   }
 
+  const readOnly = !onConfirm;
   const ovrTotal = (parseFloat(f.ovHW) || 0) + (parseFloat(f.ovD) || 0) + (parseFloat(f.ovAW) || 0);
   const ovrOk = !f.overrideOn || Math.abs(ovrTotal - 100) <= 0.5;
 
@@ -81,25 +83,31 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
           <span className="vs">vs</span>
           <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.awayIdx)}>{an}</button>
         </div>
-        <div className="fix-probs">
-          {f.overrideOn && f.ovHW !== "" && <span className="ovr-tag">override</span>}
-          <span className="ph-col">{probs.homeWin}%</span>
-          <span className="pd-col">{probs.draw}%</span>
-          <span className="pa-col">{probs.awayWin}%</span>
-        </div>
-        <button className={"ovr-btn" + (f.overrideOn ? " active" : "")} onClick={() => onOverride(f.id, "toggle")}>
-          {f.overrideOn ? "✓ Override" : "Override %"}
-        </button>
+        {readOnly ? (
+          <ProbBar h={probs.homeWin} d={probs.draw} a={probs.awayWin} eh={probs.eh} ea={probs.ea} />
+        ) : (
+          <div className="fix-probs">
+            {f.overrideOn && f.ovHW !== "" && <span className="ovr-tag">override</span>}
+            <span className="ph-col">{probs.homeWin}%</span>
+            <span className="pd-col">{probs.draw}%</span>
+            <span className="pa-col">{probs.awayWin}%</span>
+          </div>
+        )}
+        {onOverride && (
+          <button className={"ovr-btn" + (f.overrideOn ? " active" : "")} onClick={() => onOverride(f.id, "toggle")}>
+            {f.overrideOn ? "✓ Override" : "Override %"}
+          </button>
+        )}
         {onWeekChange && (
           <div style={{ display: "flex", alignItems: "center", gap: ".3rem", marginLeft: "auto" }}>
-            <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#3a3f50" }}>W</span>
+            <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#7d8597" }}>W</span>
             <input type="number" min="1" max="999" value={f.week ?? ""} placeholder="—"
               onChange={e => onWeekChange(f.id, e.target.value === "" ? null : parseInt(e.target.value) || null)}
               style={{ width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }} />
           </div>
         )}
       </div>
-      {f.overrideOn && (
+      {onOverride && f.overrideOn && (
         <div className="ovr-row">
           <span className="muted" style={{ fontSize: ".7rem" }}>{hn.split(" ")[0]} W:</span>
           <input className="ovr-inp" type="number" min="0" max="100" value={f.ovHW} onChange={e => onOverride(f.id, "hw", e.target.value)} placeholder="0" />
@@ -114,7 +122,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
           )}
         </div>
       )}
-      <div style={{ display: "flex", alignItems: "center", gap: ".38rem", flexWrap: "wrap" }}>
+      {onConfirm && <div style={{ display: "flex", alignItems: "center", gap: ".38rem", flexWrap: "wrap" }}>
         <button className="qbtn hw" onClick={() => onConfirm(f.id, ws, ls)}>{hn.split(" ")[0]} W</button>
         <button className="qbtn dr" onClick={() => onConfirm(f.id, ds, ds)}>Draw</button>
         <button className="qbtn aw" onClick={() => onConfirm(f.id, ls, ws)}>{an.split(" ")[0]} W</button>
@@ -122,7 +130,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
         <span className="score-sep">&mdash;</span>
         <input className="score-inp" type="number" min="0" value={ag} onChange={e => setAg(e.target.value)} placeholder="0" />
         <button className="confirm-btn" disabled={hg === "" || ag === ""} onClick={() => { if (hg !== "" && ag !== "") onConfirm(f.id, +hg, +ag); }}>Confirm</button>
-      </div>
+      </div>}
     </div>
   );
 }
@@ -346,7 +354,7 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
             {pendingGroups.map(g => renderGroup(g))}
             {olderCompleted.length > 0 && (
               <div>
-                <div style={{ borderTop: "1px solid #1c1f27", margin: "1rem 0 .5rem", fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#3a3f50", textTransform: "uppercase", letterSpacing: ".08em" }}>
+                <div style={{ borderTop: "1px solid #1c1f27", margin: "1rem 0 .5rem", fontFamily: "DM Mono,monospace", fontSize: ".68rem", color: "#7d8597", textTransform: "uppercase", letterSpacing: ".08em" }}>
                   Completed weeks
                 </div>
                 {olderCompleted.map(g => renderGroup(g))}

@@ -5,6 +5,7 @@ import { calcStats } from "./standings.js";
 import { teamKey, useFollow } from "./follow.js";
 import { predictMatch } from "./probabilities.js";
 import { LeagueScorers } from "./panels.js";
+import { ProbBar } from "./ProbBar.js";
 const { useState, useMemo } = React;
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
 export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey, hideScorers }) {
@@ -241,8 +242,8 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               <th title={t("Won")}>W</th>
               <th title={t("Draw")}>D</th>
               <th title={t("Lost")}>L</th>
-              <th title={t("Goals For")}>GF</th>
-              <th title={t("Goals Against")}>GA</th>
+              <th className="hide-sm" title={t("Goals For")}>GF</th>
+              <th className="hide-sm" title={t("Goals Against")}>GA</th>
               <th className="tgd" title={t("Goal Difference")}>GD</th>
               <th className="tpts" title={t("Points")}>Pts</th>
               <th title={t("Last 5 games (oldest → newest)")}>{t("Form")}</th>
@@ -254,7 +255,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               const bg = rowBg(i, r);
               const gdc = r.GD > 0 ? "gdp" : r.GD < 0 ? "gdn" : "gd0";
               return (
-                <tr key={r.id} style={{ ...(bg ? { background: bg } : {}), ...(isMine(r.id) ? { boxShadow: "inset 3px 0 0 #fbbf24" } : {}) }}>
+                <tr key={r.id} style={{ ...(bg ? { background: bg, "--rb": bg } : {}), ...(isMine(r.id) ? { boxShadow: "inset 3px 0 0 #fbbf24" } : {}) }}>
                   <td className="tpos" style={bg ? { color: "rgba(255,255,255,0.85)", fontWeight: 700 } : {}}>{i + 1}</td>
                   <td className="tl">
                     {followKey && (
@@ -269,8 +270,8 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                   <td style={{ color: "#4ade80" }}>{r.W}</td>
                   <td style={{ color: "#facc15" }}>{r.D}</td>
                   <td style={{ color: "#f87171" }}>{r.L}</td>
-                  <td>{r.GF}</td>
-                  <td>{r.GA}</td>
+                  <td className="hide-sm">{r.GF}</td>
+                  <td className="hide-sm">{r.GA}</td>
                   <td className={gdc}>{r.GD > 0 ? "+" + r.GD : r.GD}</td>
                   <td className="tpts">{r.totalPts}</td>
                   <td style={{ whiteSpace: "nowrap" }}>
@@ -326,8 +327,8 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                       : <span className="muted" style={{ margin: "0 .4rem" }}>{t("vs")}</span>}
                     <span style={{ fontWeight: done && +f.awayScore > +f.homeScore ? 700 : 400 }}>{nm(f.awayIdx)}</span>
                     {!done && preds[f.id] && (
-                      <span className="muted" title={t("Goal model: home win / draw / away win chance, expected score")} style={{ marginLeft: ".6rem", fontFamily: "DM Mono,monospace", fontSize: ".66rem" }}>
-                        {preds[f.id].homeWin}% · {preds[f.id].draw}% · {preds[f.id].awayWin}% ({preds[f.id].eh}–{preds[f.id].ea})
+                      <span style={{ display: "block", marginTop: ".25rem", maxWidth: "13rem" }}>
+                        <ProbBar title={t("Goal model: home win / draw / away win chance, expected score")} h={preds[f.id].homeWin} d={preds[f.id].draw} a={preds[f.id].awayWin} eh={preds[f.id].eh} ea={preds[f.id].ea} />
                       </span>
                     )}
                   </>
@@ -357,10 +358,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               </div>
               {rankingPanel === "attackers" && (
                 <div className="ranking-expand">
-                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Total goals scored across all played fixtures.")}</div>
+                  <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Total goals scored across all played fixtures.")}</div>
                   {allAttackers.map((r, i) => (
                     <div key={r.id} className="mini-row">
-                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#f87171" }}>{r.GF} GF</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
@@ -384,10 +385,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               </div>
               {rankingPanel === "defenders" && (
                 <div className="ranking-expand">
-                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Fewest goals conceded across all played fixtures.")}</div>
+                  <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Fewest goals conceded across all played fixtures.")}</div>
                   {allDefenders.map((r, i) => (
                     <div key={r.id} className="mini-row">
-                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#4ade80" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#4ade80" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#4ade80" }}>{r.GA} GA</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
@@ -415,10 +416,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               </div>
               {rankingPanel === "home" && (
                 <div className="ranking-expand">
-                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Combined goal difference across all home fixtures.")}</div>
+                  <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Combined goal difference across all home fixtures.")}</div>
                   {homeGDRanking.map((r, i) => (
                     <div key={r.id} className="mini-row">
-                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fb923c" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fb923c" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#fb923c" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
@@ -442,10 +443,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               </div>
               {rankingPanel === "away" && (
                 <div className="ranking-expand">
-                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Combined goal difference across all away fixtures.")}</div>
+                  <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Combined goal difference across all away fixtures.")}</div>
                   {awayGDRanking.map((r, i) => (
                     <div key={r.id} className="mini-row">
-                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#a78bfa" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#a78bfa" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#a78bfa" }}>{r.gd > 0 ? "+" : ""}{r.gd} GD</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.P}g)</span>
@@ -476,10 +477,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               </div>
               {rankingPanel === "highgame" && (
                 <div className="ranking-expand">
-                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Highest score by a team in a single match.")}</div>
+                  <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Highest score by a team in a single match.")}</div>
                   {highGameRanking.map((r, i) => (
                     <div key={r.id} className="mini-row">
-                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#22d3ee" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#22d3ee" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
                       <span className="mini-val" style={{ color: "#22d3ee" }}>{r.score}</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>vs {cleanTeamName(r.vs)}</span>
@@ -506,10 +507,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
               </div>
               {rankingPanel === "highgameplayer" && (
                 <div className="ranking-expand">
-                  <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Most goals scored by a player in a single match.")}</div>
+                  <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Most goals scored by a player in a single match.")}</div>
                   {(topSingleGamePlayers || []).map((r, i) => (
                     <div key={i} className="mini-row">
-                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f472b6" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f472b6" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                       <span className="mini-name">{r.player}</span>
                       <span className="mini-val" style={{ color: "#f472b6" }}>{r.goals}</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>{r.club}</span>
@@ -538,10 +539,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 </div>
                 {rankingPanel === "tough" && (
                   <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("How tough a team is to beat, scored by total GD opponents face against them.")}</div>
+                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("How tough a team is to beat, scored by total GD opponents face against them.")}</div>
                     {toughRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
                       </div>
@@ -567,10 +568,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 </div>
                 {rankingPanel === "tough" && (
                   <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("How tough a team is to beat, scored by total GD opponents face against them.")}</div>
+                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("How tough a team is to beat, scored by total GD opponents face against them.")}</div>
                     {toughRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#f87171" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#f87171" }}>{r.pts} pts</span>
                       </div>
@@ -593,10 +594,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 </div>
                 {rankingPanel === "clutch" && (
                   <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Number of wins by 1 or 2 goals.")}</div>
+                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Number of wins by 1 or 2 goals.")}</div>
                     {clutchRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#3a3f50" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#7d8597" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
                       </div>
@@ -626,10 +627,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                   </div>
                   {rankingPanel === "unlucky" && (
                     <div className="ranking-expand">
-                      <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt.")}</div>
+                      <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt.")}</div>
                       {unluckyRanking.map((r, i) => (
                         <div key={r.id} className="mini-row">
-                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                           <span className="mini-name">{cleanTeamName(r.name)}</span>
                           <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
                           <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.pts} pts)</span>
@@ -653,10 +654,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                   </div>
                   {rankingPanel === "clutch" && (
                     <div className="ranking-expand">
-                      <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Number of wins by 1 or 2 goals.")}</div>
+                      <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Number of wins by 1 or 2 goals.")}</div>
                       {clutchRanking.map((r, i) => (
                         <div key={r.id} className="mini-row">
-                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#3a3f50" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
+                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#7d8597" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
                           <span className="mini-name">{cleanTeamName(r.name)}</span>
                           <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
                         </div>
@@ -681,10 +682,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 </div>
                 {rankingPanel === "unlucky" && (
                   <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt.")}</div>
+                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Draw = 3 pts · Loss 1GD = 2 pts · Loss 2GD = 1 pt.")}</div>
                     {unluckyRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#94a3b8" }}>{r.draws}D {r.losses1 + r.losses2}L</span>
                         <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>({r.pts} pts)</span>
@@ -710,10 +711,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 </div>
                 {rankingPanel === "travel" && (
                   <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Driving distance from each team's home venue to every away game played this season.")}</div>
+                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Driving distance from each team's home venue to every away game played this season.")}</div>
                     {travelRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
                       </div>
@@ -742,10 +743,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 </div>
                 {rankingPanel === "travel" && (
                   <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#4a5060", marginBottom: ".5rem" }}>{t("Driving distance from each team's home venue to every away game played this season.")}</div>
+                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Driving distance from each team's home venue to every away game played this season.")}</div>
                     {travelRanking.map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#3a3f50" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
                         <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
                       </div>
