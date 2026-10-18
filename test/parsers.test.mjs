@@ -119,3 +119,14 @@ test("venue address comes from the directions link", async () => {
   assert.equal(parseVenueAddress('<a href="https://maps.google.com/?daddr=Sporthal+De+Gryse%2C+Schapenstraat+45a%2C+Oostende">x</a>'), "Sporthal De Gryse, Schapenstraat 45a, Oostende");
   assert.equal(parseVenueAddress("<html>no link</html>"), null);
 });
+
+test("team names with an apostrophe (hex-encoded) still match between standings and games", () => {
+  const rank = parseStandingsHtml(`<table><tbody>
+    <tr><td>1.</td><td>HVH &#x27;t Noorden (Senior M)</td><td>1</td><td>1</td><td>0</td><td>0</td><td>30</td><td>20</td><td>10</td><td>2</td></tr>
+    <tr><td>2.</td><td>HC Other</td><td>1</td><td>0</td><td>0</td><td>1</td><td>20</td><td>30</td><td>-10</td><td>0</td></tr></tbody></table>`);
+  assert.equal(rank[0].name, "HVH 't Noorden");
+  const card = (id, h, a) => `<a href="/handballbelgium/games/${id}"><div class="teamInnerParapraph"><strong>${h}</strong></div><h3>30 : 20</h3><p>05.09.2026</p><div class="teamInnerParapraphSecond"><strong>${a}</strong></div></a>`;
+  const { fixtures } = parseGamesHtml(card(1, "HVH &#x27;t Noorden", "HC Other") + card(2, "HC Other", "HVH &#39;t Noorden"), rank, new Map());
+  assert.equal(fixtures.length, 2);
+  assert.ok(fixtures.every(f => f.homeIdx !== f.awayIdx));
+});

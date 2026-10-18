@@ -255,6 +255,19 @@ async function fetchHtmlSmart(url, looksComplete, attempts = 3) {
   throw new Error(`No complete page from ${url}`);
 }
 
+// HTML text -> plain text. Handles named entities and numeric ones in decimal and hex form
+// (React writes an apostrophe as &#x27;, so "HVH 't Noorden" must not turn into "HVH  t Noorden").
+function decodeEntities(s) {
+  const named = { amp: "&", nbsp: " ", quot: '"', apos: "'", lt: "<", gt: ">" };
+  return s.replace(/<[^>]+>/g, " ")
+    .replace(/&(?:#x([0-9a-f]+)|#(\d+)|([a-z]+));/gi, (m, hex, dec, name) => {
+      if (hex) return String.fromCodePoint(parseInt(hex, 16));
+      if (dec) return String.fromCodePoint(parseInt(dec, 10));
+      return Object.prototype.hasOwnProperty.call(named, name.toLowerCase()) ? named[name.toLowerCase()] : " ";
+    })
+    .replace(/\s+/g, " ").trim();
+}
+
 // Club logo <img> URLs for the same team can differ between pages (Next.js
 // image optimizer query params like width/quality vary by where the logo is
 // rendered), even though they point at the same underlying image. This pulls
@@ -285,12 +298,7 @@ function parseStandingsHtml(html) {
     let td;
     while ((td = tdRe.exec(rowContent)) !== null) {
       const inner = td[1] ?? "";
-      const text = inner
-        .replace(/<[^>]+>/g, " ")
-        .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
-        .replace(/&#39;/g, "'").replace(/&#x27;/g, "'")
-        .replace(/&[a-z0-9#]+;/gi, " ")
-        .replace(/\s+/g, " ").trim();
+      const text = decodeEntities(inner);
       cells.push(text);
     }
     // Expect at least 10 cells; first cell is position number (may have trailing dot: "1.")
@@ -402,11 +410,7 @@ function parseGamesHtml(html, ranking, times) {
   const teamNames = ranking.map(r => r.name);
   const nameIdx   = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
 
-  function stripText(s) {
-    return s.replace(/<[^>]+>/g, " ").replace(/&amp;/g,"&").replace(/&nbsp;/g," ")
-            .replace(/&#39;/g,"'").replace(/&[a-z0-9#]+;/gi," ")
-            .replace(/\s+/g," ").trim();
-  }
+  const stripText = decodeEntities;
   function coreClubName(name) {
     return name
       .replace(/\([^)]*\)/g, "")
@@ -420,6 +424,9 @@ function parseGamesHtml(html, ranking, times) {
     const clean = raw.replace(/\s*\([^)]*\)\s*$/, "").trim();
     const lower = clean.toLowerCase();
     if (nameIdx.has(lower)) return nameIdx.get(lower);
+    const flat = x => x.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
+    const flatMatch = teamNames.findIndex(n => flat(n) === flat(clean));
+    if (flatMatch >= 0) return flatMatch;
     const core = coreClubName(clean);
     if (core && coreIdx.has(core)) return coreIdx.get(core);
     for (const [sc, idx] of coreIdx) {
@@ -474,7 +481,10 @@ function parseGamesHtml(html, ranking, times) {
 
     const homeIdx = resolveTeam(homeName);
     const awayIdx = resolveTeam(awayName);
-    if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) continue;
+    if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) {
+      if (homeIdx < 0 || awayIdx < 0) warn(`Game ${gameId}: no team match for ${homeIdx < 0 ? `"${homeName}"` : ""} ${awayIdx < 0 ? `"${awayName}"` : ""} - game skipped`);
+      continue;
+    }
 
     fixtures.push({
       id: `f${counter++}`, gameId,
@@ -498,9 +508,7 @@ function parseGamesHtml(html, ranking, times) {
 const STAT_COLS = { player: 1, mp: 2, g: 3, s7: 4, m7: 5, yc: 6, min2: 7, bc: 8, rc: 9 };
 
 function cleanCellText(s) {
-  return s.replace(/<svg[\s\S]*?<\/svg>/gi, "").replace(/<[^>]+>/g, " ")
-    .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ").replace(/&#39;|&#x27;/g, "'")
-    .replace(/&[a-z0-9#]+;/gi, " ").replace(/\s+/g, " ").trim();
+  return decodeEntities(s.replace(/<svg[\s\S]*?<\/svg>/gi, ""));
 }
 
 // All <table>s in the page: { before: nearest text above, header: labels, rows: [[{text, src}]] }
