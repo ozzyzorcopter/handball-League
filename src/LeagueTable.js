@@ -6,9 +6,10 @@ import { teamKey, useFollow } from "./follow.js";
 import { predictMatch } from "./probabilities.js";
 import { LeagueScorers } from "./panels.js";
 import { ProbBar } from "./ProbBar.js";
+import { PositionChart } from "./PositionChart.js";
 const { useState, useMemo } = React;
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey, hideScorers }) {
+export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey, hideScorers, section = "all" }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
   const follow = useFollow();
   const { t } = useLang();
@@ -232,6 +233,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
 
   return (
     <div>
+      {section !== "fun" && (<>
       <div className="tbl-wrap">
         <table className="ltbl">
           <thead>
@@ -290,6 +292,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
         </table>
       </div>
       <p className="note">{t("Click a team name for match details")}{followKey ? " · " + t("☆ follows a team (saved on this device)") : ""}</p>
+      <PositionChart teams={teams} fixtures={fixtures} mine={new Set(teams.filter(tm => isMine(tm.id)).map(tm => tm.id))} />
       <div className="mini-box" style={{ marginTop: "1rem" }}>
         <div className="mini-ttl" style={{ color: "#fdda24", display: "flex", justifyContent: "space-between" }}>
           <span>{t("🗓 Games last week")}</span>
@@ -338,8 +341,9 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
           </div>
         ))}
       </div>
+      </>)}
       {!hideScorers && Array.isArray(archiveScorers) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
-      {hasPlayed && (
+      {section !== "table" && hasPlayed && (
         <>
           {/* Row 1: Attackers + Defenders */}
           <div className="mini-rankings" style={{ marginTop: "1rem" }}>

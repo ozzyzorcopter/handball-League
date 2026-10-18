@@ -374,9 +374,9 @@ export function BelgianLeagueView({ league, onBack }) {
       <div className="panel">
         <div className="tabs tabs-top" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
           <button className="tab" onClick={onBack} title={tr("Back to My teams and all leagues")}>{tr("⌂ Home")}</button>
-          {["table", "scores", "players", "monte"].map(tabId => (
+          {["table", "scores", "players", "stats", "monte"].map(tabId => (
             <button key={tabId} className={"tab" + (tab === tabId ? " on" : "")} onClick={() => setTab(tabId)}>
-              {tr(tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : "Simulator")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
+              {tr(tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : tabId === "stats" ? "Stats" : "Simulator")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
             </button>
           ))}
         </div>
@@ -401,6 +401,31 @@ export function BelgianLeagueView({ league, onBack }) {
             travelRanking={travelRanking}
             followKey={String(league.serieId ?? league.id)}
             hideScorers
+            section="table"
+          />
+        )}
+
+        {tab === "stats" && (
+          <LeagueTable
+            teams={teams}
+            fixtures={fixtures}
+            ranking={ranking}
+            onTeamClick={idx => setDetail({ idx })}
+            highlightTop={hlTop}
+            highlightBottom={hlBot}
+            confirmedTop={confirmedTop}
+            confirmedBottom={confirmedBottom}
+            leagueId={leagueScorers ? null : null}
+            aliases={leagueState.scorerAliases || {}}
+            archiveScorers={leagueScorers}
+            phaseTeams={null}
+            phase="regular"
+            toughFullWidth={false}
+            topSingleGamePlayers={topSingleGamePlayers}
+            travelRanking={travelRanking}
+            followKey={String(league.serieId ?? league.id)}
+            hideScorers
+            section="fun"
           />
         )}
 
@@ -490,7 +515,7 @@ export function BelgianLeagueView({ league, onBack }) {
       </div>
 
       <nav className="bnav" aria-label={tr("Main navigation")}>
-        {[["home", "🏠", "Home"], ["table", "📊", "Table"], ["scores", "⚽", "Games"], ["players", "👥", "Players"], ["monte", "🎲", "Simulator"]].map(([id, icon, label]) => (
+        {[["home", "🏠", "Home"], ["table", "📊", "Table"], ["scores", "⚽", "Games"], ["players", "👥", "Players"], ["stats", "🏅", "Stats"], ["monte", "🎲", "Sim"]].map(([id, icon, label]) => (
           <button key={id} className={"bnav-btn" + (tab === id ? " on" : "")} aria-current={tab === id ? "page" : undefined}
             onClick={() => (id === "home" ? onBack() : setTab(id))}>
             <span className="bnav-ic" aria-hidden="true">{icon}</span>
