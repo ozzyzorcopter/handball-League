@@ -1,6 +1,7 @@
 import { useArchiveFile, useArchiveIndex, useArchiveSeason, useStandaloneLeagues } from "./archiveData.js";
 import { githubDispatch } from "./github.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
+import { Skeleton } from "./Skeleton.js";
 import { BelgianLeagueView } from "./belgian.js";
 import { LeagueTable } from "./LeagueTable.js";
 import { resolveRef } from "./tournament.js";
@@ -105,7 +106,7 @@ export function ArchiveScreen({ onBack }) {
         </div>
       </div>
 
-      {loading && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>Loading archive…</div>}
+      {loading && <Skeleton label="Loading archive…" />}
       {error   && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load archive.</div>}
       {index && !hasAny && (
         <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>No archived leagues or seasons yet.</div>
@@ -187,7 +188,7 @@ export function ArchiveSeasonView({ filename, onBack }) {
       <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load season data.</div>
     </div>
   );
-  if (!data) return <div className="muted" style={{ padding: "3rem", textAlign: "center" }}>Loading season…</div>;
+  if (!data) return <Skeleton rows={8} label="Loading season…" />;
 
   if (activeLeague !== null) {
     const lg = data.leagues[activeLeague];
@@ -242,7 +243,7 @@ export function ArchiveBelgianSeasonView({ filename, season, onBack }) {
       <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>Could not load season data.</div>
     </div>
   );
-  if (!data) return <div className="muted" style={{ padding: "3rem", textAlign: "center" }}>Loading season…</div>;
+  if (!data) return <Skeleton rows={8} label="Loading season…" />;
 
   const feds = Object.keys(data.federations || {});
   const allLeagues = feds.flatMap(fed => Object.values(data.federations[fed] || {}));

@@ -248,7 +248,8 @@ body{font-family:'DM Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;back
   .masthead{margin-bottom:1rem;}
   .logo{font-size:1.6rem;}
   .card{padding:1rem;}
-  .ph{margin-bottom:1rem;padding-bottom:.9rem;}
+  .ph{margin-bottom:1rem;padding-bottom:.9rem;flex-wrap:wrap;}
+  .ph > span{margin-left:0!important;}
   .section{margin-bottom:1.1rem;padding-bottom:1.1rem;}
   /* 16px stops iOS Safari zooming into focused fields */
   input,select,textarea{font-size:16px!important;}
@@ -302,3 +303,16 @@ body{font-family:'DM Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;back
   .stbl.cmp td{font-size:.7rem;}
 }
 @media(prefers-reduced-motion:reduce){.detail-panel{animation:none!important;}}
+
+/* ── Batch 3: loading skeletons, offline notice, light theme ─────────────── */
+html{background:#08090c;}
+.skel-wrap{padding:.5rem 0;}
+.skel{border-radius:6px;background:linear-gradient(90deg,#14171f 0%,#1d212b 50%,#14171f 100%);background-size:200% 100%;animation:skel 1.3s ease-in-out infinite;}
+@keyframes skel{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+@media(prefers-reduced-motion:reduce){.skel{animation:none;}}
+.offline-banner{background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);color:#fbbf24;border-radius:8px;padding:.5rem .8rem;margin-bottom:1rem;font-size:.78rem;font-family:'DM Mono',monospace;}
+/* Light theme: the page is drawn dark, so the whole thing is inverted and the
+   hues turned back. Every colour in the app, inline ones included, flips to a
+   matching light tone without a second colour list to maintain. */
+html[data-theme="light"]{filter:invert(1) hue-rotate(180deg);}
+html[data-theme="light"] .skel{background:linear-gradient(90deg,#14171f 0%,#1d212b 50%,#14171f 100%);}

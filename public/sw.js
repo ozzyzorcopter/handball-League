@@ -5,7 +5,12 @@
 // so those are served from the cache first.
 const CACHE = "leaguesim-__BUILD__";
 
-self.addEventListener("install", () => self.skipWaiting());
+// Keep the app shell so the very first offline visit after installing works too.
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE).then((c) => c.addAll(["./", "./index.html", "./manifest.json"])).catch(() => {}).then(() => self.skipWaiting())
+  );
+});
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(

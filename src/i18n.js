@@ -1,4 +1,5 @@
 // NL / FR / EN support. English text is the key.
+import { ThemeSwitch } from "./theme.js";
 const { useState, useEffect } = React;
 
 // ── LANGUAGE (NL / FR / EN) ───────────────────────────────────────────────────
@@ -22,7 +23,7 @@ const I18N = {
     "Which club do you follow?": "Welke club volg je?", "Skip": "Overslaan", "Search": "Zoek in", "clubs": "clubs", "No club found.": "Geen club gevonden.",
     "Type to search all clubs.": "Typ om alle clubs te doorzoeken.", "Choose the teams to follow. You can change this any time with ☆ in a table.": "Kies de teams die je wilt volgen. Je kan dit altijd aanpassen met ☆ in een klassement.",
     "Follow selected": "Volg geselecteerde",
-    "Table": "Klassement", "Games": "Wedstrijden", "Players": "Spelers", "Cards & suspensions": "Kaarten & schorsingen", "Simulator": "Simulator", "Sim settings": "Sim-instellingen", "Home": "Start", "Settings": "Instellingen", "Title": "Titel", "Promotion": "Promotie", "Relegation": "Degradatie", "Avg pos.": "Gem. pos.", "Full grid": "Volledig raster", "Compact view": "Compact", "Close": "Sluiten", "Main navigation": "Hoofdmenu", "Sim": "Sim", "Promo": "Promo", "Releg.": "Degr.",
+    "Table": "Klassement", "Games": "Wedstrijden", "Players": "Spelers", "Cards & suspensions": "Kaarten & schorsingen", "Simulator": "Simulator", "Sim settings": "Sim-instellingen", "Home": "Start", "Settings": "Instellingen", "Title": "Titel", "Promotion": "Promotie", "Relegation": "Degradatie", "Avg pos.": "Gem. pos.", "Full grid": "Volledig raster", "Compact view": "Compact", "Close": "Sluiten", "Main navigation": "Hoofdmenu", "Teams": "Teams", "Leagues": "Reeksen", "Menu": "Menu", "You're offline. Showing the last saved data.": "Je bent offline. De laatst bewaarde gegevens worden getoond.", "Sim": "Sim", "Promo": "Promo", "Releg.": "Degr.",
     "Team": "Team", "Form": "Vorm", "🗓 Games last week": "🗓 Wedstrijden vorige week", "⏭ Games this week": "⏭ Wedstrijden deze week",
     "No games last week.": "Geen wedstrijden vorige week.", "No games this week.": "Geen wedstrijden deze week.",
     "Click a team name for match details": "Klik op een teamnaam voor details", "☆ follows a team (saved on this device)": "☆ volgt een team (bewaard op dit toestel)",
@@ -121,7 +122,7 @@ const I18N = {
     "Which club do you follow?": "Quel club suivez-vous ?", "Skip": "Passer", "Search": "Rechercher parmi", "clubs": "clubs", "No club found.": "Aucun club trouvé.",
     "Type to search all clubs.": "Tapez pour chercher parmi tous les clubs.", "Choose the teams to follow. You can change this any time with ☆ in a table.": "Choisissez les équipes à suivre. Modifiable à tout moment avec ☆ dans un classement.",
     "Follow selected": "Suivre la sélection",
-    "Table": "Classement", "Games": "Matchs", "Players": "Joueurs", "Cards & suspensions": "Cartons & suspensions", "Simulator": "Simulateur", "Sim settings": "Paramètres sim.", "Home": "Accueil", "Settings": "Paramètres", "Title": "Titre", "Promotion": "Promotion", "Relegation": "Relégation", "Avg pos.": "Pos. moy.", "Full grid": "Grille complète", "Compact view": "Vue compacte", "Close": "Fermer", "Main navigation": "Menu principal", "Sim": "Sim", "Promo": "Promo", "Releg.": "Relég.",
+    "Table": "Classement", "Games": "Matchs", "Players": "Joueurs", "Cards & suspensions": "Cartons & suspensions", "Simulator": "Simulateur", "Sim settings": "Paramètres sim.", "Home": "Accueil", "Settings": "Paramètres", "Title": "Titre", "Promotion": "Promotion", "Relegation": "Relégation", "Avg pos.": "Pos. moy.", "Full grid": "Grille complète", "Compact view": "Vue compacte", "Close": "Fermer", "Main navigation": "Menu principal", "Teams": "Équipes", "Leagues": "Séries", "Menu": "Menu", "You're offline. Showing the last saved data.": "Hors ligne. Dernières données enregistrées affichées.", "Sim": "Sim", "Promo": "Promo", "Releg.": "Relég.",
     "Team": "Équipe", "Form": "Forme", "🗓 Games last week": "🗓 Matchs de la semaine dernière", "⏭ Games this week": "⏭ Matchs de cette semaine",
     "No games last week.": "Aucun match la semaine dernière.", "No games this week.": "Aucun match cette semaine.",
     "Click a team name for match details": "Cliquez sur une équipe pour les détails", "☆ follows a team (saved on this device)": "☆ suit une équipe (enregistré sur cet appareil)",
@@ -226,12 +227,15 @@ export function useLang() {
 export function LangSwitch() {
   const { lang, setLang } = useLang();
   return (
+    <span style={{ display: "inline-flex", gap: ".4rem", alignItems: "center" }}>
     <div role="group" aria-label="Language" style={{ display: "inline-flex", gap: ".15rem" }}>
       {LANGS.map(l => (
         <button key={l} aria-pressed={lang === l} className={"btn" + (lang === l ? "" : " btn-ghost")}
           style={{ fontSize: ".7rem", padding: ".2rem .5rem", minWidth: "2.2rem" }} onClick={() => setLang(l)}>{l.toUpperCase()}</button>
       ))}
     </div>
+    <ThemeSwitch />
+    </span>
   );
 }
 

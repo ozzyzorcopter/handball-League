@@ -5,6 +5,7 @@ import { loadData, makeLeague, saveData } from "./src/leagueModel.js";
 import { BelgianLeagueView, BelgianScreen } from "./src/belgian.js";
 import { ArchiveScreen } from "./src/archive.js";
 import { HomeScreen } from "./src/HomeScreen.js";
+import { OfflineBanner } from "./src/Offline.js";
 import { LeagueEditor } from "./src/manualLeague.js";
 
 const { useState, useRef, useEffect } = React;
@@ -78,11 +79,12 @@ function App() {
 
   const active = store.leagues.find(lg => lg.id === activeId) || null;
 
-  if (showBelgian) return <div className="app"><BelgianScreen onBack={() => setShowBelgian(false)} /></div>;
-  if (showArchive) return <div className="app"><ArchiveScreen onBack={() => setShowArchive(false)} /></div>;
+  if (showBelgian) return <div className="app"><OfflineBanner /><BelgianScreen onBack={() => setShowBelgian(false)} /></div>;
+  if (showArchive) return <div className="app"><OfflineBanner /><ArchiveScreen onBack={() => setShowArchive(false)} /></div>;
 
   return (
     <div className="app">
+      <OfflineBanner />
       <div className="masthead">
         <div>
           <div className="logo">League<span>Sim</span></div>

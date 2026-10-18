@@ -5,6 +5,7 @@ import { ClubPicker, PICKER_DISMISS_KEY } from "./ClubPicker.js";
 import { modelProbs, predictMatch, weekBounds } from "./probabilities.js";
 import { cleanTeamName } from "./names.js";
 import { ProbBar } from "./ProbBar.js";
+import { Skeleton } from "./Skeleton.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { LeagueTable } from "./LeagueTable.js";
 import { TeamDetail } from "./TeamDetail.js";
@@ -95,7 +96,7 @@ export function BelgianScreen({ onBack }) {
       <button className="btn btn-ghost" onClick={() => setLeague(null)}>{t("← Back")}</button>
       {failed[String(league.serieId)]
         ? <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>{t("Could not load data.")}</div>
-        : <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>{t("Loading data…")}</div>}
+        : <Skeleton label={t("Loading data…")} />}
     </div>
   );
 
@@ -115,7 +116,7 @@ export function BelgianScreen({ onBack }) {
         <span style={{ marginLeft: "auto", display: "inline-flex", gap: ".6rem", alignItems: "center" }}><LangSwitch /><button className="btn btn-ghost" onClick={onBack}>{t("← Back")}</button></span>
       </div>
 
-      {!data && !error && <div className="muted" style={{ padding: "2rem", textAlign: "center" }}>{t("Loading data…")}</div>}
+      {!data && !error && <Skeleton rows={8} label={t("Loading data…")} />}
       {error && <div style={{ color: "#f87171", padding: "2rem", textAlign: "center" }}>{t("Could not load data.")}</div>}
 
       {data && (
@@ -175,7 +176,7 @@ export function BelgianScreen({ onBack }) {
             )}
           </div>
           {/* Federation tabs */}
-          <div style={{ display: "flex", gap: ".5rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+          <div id="fed-tabs" style={{ display: "flex", gap: ".5rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
             {Object.keys(FED_META).map(f => {
               const available = feds.includes(f);
               const meta = FED_META[f];
@@ -246,6 +247,18 @@ export function BelgianScreen({ onBack }) {
           )}
                   </>
       )}
+
+      <nav className="bnav" aria-label={t("Main navigation")}>
+        <button className="bnav-btn on" aria-current="page" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <span className="bnav-ic" aria-hidden="true">★</span><span className="bnav-lbl">{t("Teams")}</span>
+        </button>
+        <button className="bnav-btn" onClick={() => { const el = document.getElementById("fed-tabs"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
+          <span className="bnav-ic" aria-hidden="true">🏆</span><span className="bnav-lbl">{t("Leagues")}</span>
+        </button>
+        <button className="bnav-btn" onClick={onBack}>
+          <span className="bnav-ic" aria-hidden="true">☰</span><span className="bnav-lbl">{t("Menu")}</span>
+        </button>
+      </nav>
     </div>
   );
 }
