@@ -1,19 +1,10 @@
 name: Fetch VHV Data
 
 on:
-  # GitHub cron runs in UTC only, and Belgium switches between UTC+1 and UTC+2.
-  # So every wanted local time is scheduled at BOTH possible UTC hours and the
-  # "gate" job below keeps only the runs that land on the intended Brussels
-  # time. Minutes are off the :00/:30 marks on purpose: GitHub documents that
-  # the scheduler is busiest there and runs get delayed or dropped.
-  #
-  # Wanted (Brussels time):
-  #   Mon-Fri  once at night (03:17 / 04:17), and once in the evening (~22:35)
-  #   Sat-Sun  hourly from 14:05 to 23:05
-  schedule:
-    - cron: "17 2 * * 1-5"          # 03:17 (winter) / 04:17 (summer) - any hour 01-06 is fine
-    - cron: "35 20,21 * * 1-5"      # evening: gate keeps the one that is 22:35 local
-    - cron: "5 12-22 * * 6,0"       # weekend: gate keeps 14:05-23:05 local
+  # Started by an external timer (cron-job.org, time zone Europe/Brussels) that calls the
+  # workflow_dispatch API, because GitHub's own cron starts late and drops runs.
+  # Wanted (Brussels time): Mon-Fri once at night (01-06) and once at 22:30;
+  # Sat-Sun hourly from 14:00 to 23:00. Manual runs work the same way.
   workflow_dispatch:
     inputs:
       force_full:
@@ -25,29 +16,9 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  # Decides whether a scheduled run falls on a wanted Brussels time. Manual runs always go ahead.
-  gate:
-    runs-on: ubuntu-latest
-    outputs:
-      run: ${{ steps.g.outputs.run }}
-    steps:
-      - id: g
-        run: |
-          if [ "${{ github.event_name }}" != "schedule" ]; then echo "run=true" >> "$GITHUB_OUTPUT"; exit 0; fi
-          dow=$(TZ=Europe/Brussels date +%u); hour=$(TZ=Europe/Brussels date +%-H)
-          echo "Brussels time now: $(TZ=Europe/Brussels date '+%a %H:%M')"
-          ok=false
-          if [ "$dow" -ge 6 ] && [ "$hour" -ge 14 ] && [ "$hour" -le 23 ]; then ok=true; fi
-          if [ "$dow" -le 5 ] && [ "$hour" -ge 1 ] && [ "$hour" -le 6 ]; then ok=true; fi
-          if [ "$dow" -le 5 ] && [ "$hour" -eq 22 ]; then ok=true; fi
-          echo "run=$ok" >> "$GITHUB_OUTPUT"
-
   fetch:
-    needs: gate
-    if: needs.gate.outputs.run == 'true'
     # If a run is still going when the next trigger fires, cancel the stale one
-    # instead of letting two runs fight over the same git push. (Per job, so the
-    # skipped off-hour triggers never cancel a real run.)
+    # instead of letting two runs fight over the same git push.
     concurrency:
       group: fetch-vhv
       cancel-in-progress: true
