@@ -316,7 +316,7 @@ export function BelgianLeagueView({ league, onBack }) {
       </div>
 
       <div className="panel">
-        <div className="tabs" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
+        <div className="tabs tabs-top" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
           <button className="tab" onClick={onBack} title={tr("Back to My teams and all leagues")}>{tr("⌂ Home")}</button>
           {["table", "scores", "players", "monte", "settings"].map(tabId => (
             <button key={tabId} className={"tab" + (tab === tabId ? " on" : "")} onClick={() => setTab(tabId)}>
@@ -391,6 +391,16 @@ export function BelgianLeagueView({ league, onBack }) {
           />
         )}
       </div>
+
+      <nav className="bnav" aria-label={tr("Main navigation")}>
+        {[["home", "🏠", "Home"], ["table", "📊", "Table"], ["scores", "⚽", "Games"], ["players", "👥", "Players"], ["monte", "🎲", "Sim"], ["settings", "⚙️", "Settings"]].map(([id, icon, label]) => (
+          <button key={id} className={"bnav-btn" + (tab === id ? " on" : "")} aria-current={tab === id ? "page" : undefined}
+            onClick={() => (id === "home" ? onBack() : setTab(id))}>
+            <span className="bnav-ic" aria-hidden="true">{icon}</span>
+            <span className="bnav-lbl">{tr(label)}{id === "scores" && pending.length ? " " + pending.length : ""}</span>
+          </button>
+        ))}
+      </nav>
 
       {detail != null && (
         <TeamDetail

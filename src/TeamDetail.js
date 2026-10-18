@@ -3,6 +3,14 @@ import { ScorerPanel } from "./scorers.js";
 const { useState } = React;
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
 export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers, phase }) {
+  // Phones show this as a bottom sheet; dragging the grip down closes it.
+  const [dragY, setDragY] = useState(0);
+  const dragStart = React.useRef(null);
+  const grip = {
+    onTouchStart: e => { dragStart.current = e.touches[0].clientY; },
+    onTouchMove: e => { if (dragStart.current != null) setDragY(Math.max(0, e.touches[0].clientY - dragStart.current)); },
+    onTouchEnd: () => { const y = dragY; dragStart.current = null; setDragY(0); if (y > 90) onClose(); },
+  };
   const mine = fixtures.filter(f => f.homeIdx === teamIdx || f.awayIdx === teamIdx);
 
   const sorted = [...mine].sort((a, b) => {
@@ -98,10 +106,11 @@ export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, 
   return (
     <>
       <div className="detail-overlay" onClick={onClose} />
-      <div className="detail-panel">
-        <div className="detail-h">
+      <div className="detail-panel" role="dialog" aria-modal="true" style={dragY ? { transform: "translateY(" + dragY + "px)", transition: "none" } : undefined}>
+        <div className="sheet-grip" {...grip}><span /></div>
+        <div className="detail-h" {...grip}>
           <h3>{cleanTeamName(team?.name)}</h3>
-          <button className="detail-close" onClick={onClose}>✕</button>
+          <button className="detail-close" aria-label="Close" onClick={onClose}>✕</button>
         </div>
 
         <div className="detail-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", alignItems: "start" }}>

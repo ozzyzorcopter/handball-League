@@ -140,6 +140,11 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
   const { t: tr } = useLang();
   const [results, setResults] = useState(null);
   const [running, setRunning] = useState(false);
+  // Phones get the short table (title / promotion / relegation); the full
+  // position-by-position grid is one tap away.
+  const [full, setFull] = useState(() => {
+    try { return !(typeof window !== "undefined" && window.matchMedia && window.matchMedia("(max-width: 600px)").matches); } catch (e) { return true; }
+  });
   const pending = fixtures.filter(f => !f.played);
 
   // The League Table tab shows points recomputed from actual played-game
@@ -199,6 +204,48 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
       {!running && pending.length === 0 && <div className="empty">{tr("All fixtures played — nothing to simulate.")}</div>}
       {!running && results && (
         <div>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: ".5rem" }}>
+            <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".3rem .7rem" }} onClick={() => setFull(v => !v)}>
+              {full ? tr("Compact view") : tr("Full grid")}
+            </button>
+          </div>
+          {!full && (() => {
+            const n = teams_.length;
+            const sum = (arr) => arr.reduce((a, v) => a + v, 0);
+            const showPromo = highlightTop > 1, showRel = highlightBottom > 0;
+            return (
+              <div className="tbl-wrap">
+                <table className="stbl cmp">
+                  <thead>
+                    <tr>
+                      <th className="tl">{tr("Team")}</th>
+                      <th>{tr("Pts")}</th>
+                      <th>{tr("Title")}</th>
+                      {showPromo && <th>{tr("Promo")}</th>}
+                      {showRel && <th>{tr("Releg.")}</th>}
+                      <th>{tr("Avg pos.")}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {sorted.map(t => {
+                      const r = results[t.idx];
+                      return (
+                        <tr key={t.idx}>
+                          <td className="tl">{cleanTeamName(t.name)}</td>
+                          <td className="dm">{t.points}</td>
+                          <td style={{ background: heatColor(r[0]) }}>{fmtPct(r[0])}</td>
+                          {showPromo && <td style={{ background: heatColor(sum(r.slice(0, highlightTop))) }}>{fmtPct(sum(r.slice(0, highlightTop)))}</td>}
+                          {showRel && <td style={{ background: heatColor(sum(r.slice(n - highlightBottom))) }}>{fmtPct(sum(r.slice(n - highlightBottom)))}</td>}
+                          <td className="dm">{t.avg.toFixed(1)}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })()}
+          {full && (
           <div className="tbl-wrap">
             <table className="stbl">
               <thead>
@@ -221,6 +268,7 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
               </tbody>
             </table>
           </div>
+          )}
           <div className="legend">
             <span className="muted" style={{ fontSize: ".7rem" }}>{tr("Low")}</span>
             <div className="leg-grad" />
