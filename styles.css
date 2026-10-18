@@ -268,3 +268,4 @@ body{font-family:'DM Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;back
   .ltbl td.tl{max-width:11rem;}
   .stbl td,.stbl th{padding-left:.22rem;padding-right:.22rem;}
 }
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}

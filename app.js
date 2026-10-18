@@ -78,8 +78,8 @@ function App() {
 
   const active = store.leagues.find(lg => lg.id === activeId) || null;
 
-  if (showBelgian) return <BelgianScreen onBack={() => setShowBelgian(false)} />;
-  if (showArchive) return <ArchiveScreen onBack={() => setShowArchive(false)} />;
+  if (showBelgian) return <div className="app"><BelgianScreen onBack={() => setShowBelgian(false)} /></div>;
+  if (showArchive) return <div className="app"><ArchiveScreen onBack={() => setShowArchive(false)} /></div>;
 
   return (
     <div className="app">
