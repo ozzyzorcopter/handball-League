@@ -292,7 +292,6 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
         </table>
       </div>
       <p className="note">{t("Click a team name for match details")}{followKey ? " · " + t("☆ follows a team (saved on this device)") : ""}</p>
-      <PositionChart teams={teams} fixtures={fixtures} mine={new Set(teams.filter(tm => isMine(tm.id)).map(tm => tm.id))} />
       <div className="mini-box" style={{ marginTop: "1rem" }}>
         <div className="mini-ttl" style={{ color: "#fdda24", display: "flex", justifyContent: "space-between" }}>
           <span>{t("🗓 Games last week")}</span>
@@ -341,6 +340,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
           </div>
         ))}
       </div>
+      <PositionChart teams={teams} fixtures={fixtures} mine={new Set(teams.filter(tm => isMine(tm.id)).map(tm => tm.id))} />
       </>)}
       {!hideScorers && Array.isArray(archiveScorers) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
       {section !== "table" && hasPlayed && (
