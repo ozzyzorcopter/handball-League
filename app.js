@@ -7,6 +7,7 @@ import { ArchiveScreen } from "./src/archive.js";
 import { HomeScreen } from "./src/HomeScreen.js";
 import { OfflineBanner } from "./src/Offline.js";
 import { ThemeSwitch } from "./src/theme.js";
+import { useBackLayer } from "./src/backNav.js";
 import { LeagueEditor } from "./src/manualLeague.js";
 
 const { useState, useRef, useEffect } = React;
@@ -79,6 +80,9 @@ function App() {
   }
 
   const active = store.leagues.find(lg => lg.id === activeId) || null;
+  useBackLayer(showBelgian, () => setShowBelgian(false));
+  useBackLayer(showArchive, () => setShowArchive(false));
+  useBackLayer(!!active, () => setActiveId(null));
 
   if (showBelgian) return <div className="app"><OfflineBanner /><BelgianScreen onBack={() => setShowBelgian(false)} /></div>;
   if (showArchive) return <div className="app"><OfflineBanner /><ArchiveScreen onBack={() => setShowArchive(false)} /></div>;

@@ -1,3 +1,4 @@
+import { useBackLayer } from "./backNav.js";
 import { FED_META, useVhvData } from "./vhvData.js";
 import { LANG_LOCALE, LangSwitch, useLang } from "./i18n.js";
 import { teamSnapshot, useFollow } from "./follow.js";
@@ -32,6 +33,7 @@ export function BelgianScreen({ onBack }) {
   const { lang, t } = useLang();
   const [fed, setFed]       = useState(null);
   const [league, setLeague] = useState(null);
+  useBackLayer(!!league, () => setLeague(null));
 
   const follow = useFollow();
   const [pickerForced, setPickerForced] = useState(false);
@@ -285,6 +287,8 @@ export function BelgianLeagueView({ league, onBack }) {
   const { t: tr } = useLang();
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
+  useBackLayer(!!detail, () => setDetail(null));
+  useBackLayer(tab !== "table", () => setTab("table"));
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
   const [confirmedTop, setConfirmedTop]       = useState(null);
   const [confirmedBottom, setConfirmedBottom] = useState(null);

@@ -1,3 +1,4 @@
+import { useBackLayer } from "./backNav.js";
 import { useArchiveFile, useArchiveIndex, useArchiveSeason, useStandaloneLeagues } from "./archiveData.js";
 import { githubDispatch } from "./github.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
@@ -58,6 +59,7 @@ export function ArchiveScreen({ onBack }) {
   const { index, error } = useArchiveIndex();
   const { data: standaloneData } = useStandaloneLeagues();
   const [view, setView] = useState(null);
+  useBackLayer(!!view, () => setView(null));
   // view: { type: "belgian", filename, season }
   //     | { type: "standalone", league, scorers }
   //     | { type: "legacy", filename }
@@ -181,6 +183,7 @@ export function ArchiveScreen({ onBack }) {
 export function ArchiveSeasonView({ filename, onBack }) {
   const { data, error } = useArchiveSeason(filename);
   const [activeLeague, setActiveLeague] = useState(null);
+  useBackLayer(activeLeague !== null, () => setActiveLeague(null));
 
   if (error) return (
     <div className="panel">
