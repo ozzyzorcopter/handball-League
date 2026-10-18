@@ -348,3 +348,11 @@ html[data-theme="light"] .logo span{display:inline-block;}
   .outcome.done > :not(.week-badge):not(.res-lbl):not(.oteams){order:4;flex-shrink:0;}
   .outcome .oteams .otbtn{text-align:left;white-space:normal;}
 }
+
+/* ── Simulator sub-tabs and what-if note ─────────────────────────────────── */
+.subtabs{display:flex;gap:.4rem;margin-bottom:1rem;}
+.subtab{flex:1;padding:.6rem .4rem;border-radius:6px;font-family:'Syne',sans-serif;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;border:1px solid #252830;background:#10121a;color:#8b93a5;min-height:44px;}
+.subtab.on{background:#fdda24;color:#08090c;border-color:#fdda24;}
+.subtab:hover:not(.on){color:#d4d8e0;}
+.whatif-note{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;background:rgba(253,218,36,.07);border:1px solid rgba(253,218,36,.25);border-radius:8px;padding:.5rem .8rem;margin-bottom:.9rem;font-size:.78rem;color:#d4d8e0;}
+html[data-theme="light"] .subtab.on{filter:invert(1) hue-rotate(180deg);}

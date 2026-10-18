@@ -98,7 +98,7 @@ test("follow, language, league tabs and predictions", async () => {
   const tabs = () => [...w.document.querySelectorAll(".tab")].map((x) => x.textContent);
   assert.deepEqual(tabs().slice(0, 4), ["⌂ Start", "Klassement", "Wedstrijden (1)", "Spelers"]);
   await click(w, act, byText(w, "button", "EN"));
-  assert.deepEqual(tabs(), ["⌂ Home", "Table", "Games (1)", "Players", "Simulator", "Sim settings"]);
+  assert.deepEqual(tabs(), ["⌂ Home", "Table", "Games (1)", "Players", "Simulator"]);
 
   // Star to follow another team.
   await click(w, act, w.document.querySelector("button[aria-label='Follow Schoten']"));
@@ -106,7 +106,7 @@ test("follow, language, league tabs and predictions", async () => {
 
   // One Players tab: a single table, narrowed by chips (7m, cards & suspensions) and sortable.
   await click(w, act, byText(w, ".tab", "Players"));
-  assert.equal(w.document.querySelectorAll(".tab").length, 6, "no separate cards tab any more");
+  assert.equal(w.document.querySelectorAll(".tab").length, 5, "no separate cards tab any more");
   const rowsText = () => [...w.document.querySelectorAll(".ltbl tbody tr")].map((r) => r.textContent);
   assert.equal(rowsText().length, 2);
   assert.match(w.document.querySelector(".ltbl thead").textContent, /G.*7m.*🟨.*2'.*🟥/s, "one table has goals, 7m and card columns");

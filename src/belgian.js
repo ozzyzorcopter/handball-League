@@ -326,6 +326,33 @@ export function BelgianLeagueView({ league, onBack }) {
     return m;
   }, [pending, teams, fixtures, settings]);
 
+  // What-if scenario for the simulator: future games set to a result (and optional % overrides).
+  // Nothing here touches the real table or the real games, only the simulator's input.
+  const [whatIf, setWhatIf] = useState({});
+  const [ovr, setOvr] = useState({});
+  const [simTab, setSimTab] = useState("results");
+  const simFixtures = useMemo(() => fixtures.map(f => {
+    let g = f;
+    if (ovr[f.id]) g = { ...g, ...ovr[f.id] };
+    if (whatIf[f.id] && !f.played) g = { ...g, played: true, homeScore: whatIf[f.id].hs, awayScore: whatIf[f.id].as, whatIf: true };
+    return g;
+  }), [fixtures, whatIf, ovr]);
+  const simUpcoming = useMemo(() => {
+    const ids = new Set(pending.map(f => f.id));
+    return simFixtures.filter(f => ids.has(f.id));
+  }, [simFixtures, pending.length]); // eslint-disable-line
+  const nWhatIf = Object.keys(whatIf).length;
+  const simKey = JSON.stringify(whatIf) + JSON.stringify(ovr);
+  const simConfirm = (id, hs, as) => setWhatIf(w => ({ ...w, [id]: { hs, as } }));
+  const simUndo = id => setWhatIf(w => { const n = { ...w }; delete n[id]; return n; });
+  const simOverride = (id, field, val) => setOvr(o => {
+    const cur = o[id] || { overrideOn: false, ovHW: "", ovD: "", ovAW: "" };
+    const next = field === "toggle" ? { ...cur, overrideOn: !cur.overrideOn }
+      : field === "hw" ? { ...cur, ovHW: val } : field === "d" ? { ...cur, ovD: val } : field === "aw" ? { ...cur, ovAW: val } : cur;
+    return { ...o, [id]: next };
+  });
+  const simReset = () => { setWhatIf({}); setOvr({}); };
+
   const hlTop = leagueState.promoTop ?? 2;
   const hlBot = leagueState.demotBot ?? 2;
 
@@ -347,9 +374,9 @@ export function BelgianLeagueView({ league, onBack }) {
       <div className="panel">
         <div className="tabs tabs-top" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
           <button className="tab" onClick={onBack} title={tr("Back to My teams and all leagues")}>{tr("⌂ Home")}</button>
-          {["table", "scores", "players", "monte", "settings"].map(tabId => (
+          {["table", "scores", "players", "monte"].map(tabId => (
             <button key={tabId} className={"tab" + (tab === tabId ? " on" : "")} onClick={() => setTab(tabId)}>
-              {tr(tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : tabId === "monte" ? "Simulator" : "Sim settings")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
+              {tr(tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : "Simulator")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
             </button>
           ))}
         </div>
@@ -396,34 +423,74 @@ export function BelgianLeagueView({ league, onBack }) {
 
 
         {tab === "monte" && (
-          <MCTab
-            key={played.length}
-            teams={teams}
-            fixtures={fixtures}
-            settings={settings}
-            model="goal"
-            ranking={ranking}
-            highlightTop={hlTop}
-            highlightBottom={hlBot}
-            onConfirmed={(ct, cb) => { setConfirmedTop(ct); setConfirmedBottom(cb); }}
-          />
-        )}
+          <div>
+            <div className="subtabs" role="tablist">
+              {[["results", "Results"], ["games", "Games"], ["settings", "Settings"]].map(([id, label]) => (
+                <button key={id} role="tab" aria-selected={simTab === id} className={"subtab" + (simTab === id ? " on" : "")} onClick={() => setSimTab(id)}>
+                  {tr(label)}{id === "games" && simUpcoming.length ? " (" + simUpcoming.length + ")" : ""}
+                </button>
+              ))}
+            </div>
 
-        {tab === "settings" && (
-          <SettingsPanel
-            settings={settings}
-            onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))}
-            showTiebreakers={true}
-            belgian
-            league={leagueState}
-            onLeagueChange={u => setLeagueState(s => typeof u === "function" ? u(s) : u)}
-            readOnly={false}
-          />
+            {simTab === "results" && (
+              <>
+                {nWhatIf > 0 && (
+                  <div className="whatif-note">
+                    <span>✎ {nWhatIf} {tr("what-if results applied")}</span>
+                    <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".25rem .7rem" }} onClick={simReset}>{tr("Reset all")}</button>
+                  </div>
+                )}
+                <MCTab
+                  key={simKey}
+                  teams={teams}
+                  fixtures={simFixtures}
+                  settings={settings}
+                  model="goal"
+                  ranking={ranking}
+                  highlightTop={hlTop}
+                  highlightBottom={hlBot}
+                  onConfirmed={nWhatIf > 0 ? undefined : (ct, cb) => { setConfirmedTop(ct); setConfirmedBottom(cb); }}
+                />
+              </>
+            )}
+
+            {simTab === "games" && (
+              <>
+                <div className="whatif-note">
+                  <span>{tr("Set the result of upcoming games and see how the odds change. The real table and games stay untouched.")}</span>
+                  {(nWhatIf > 0 || Object.keys(ovr).length > 0) && <button className="btn btn-ghost" style={{ fontSize: ".7rem", padding: ".25rem .7rem" }} onClick={simReset}>{tr("Reset all")}</button>}
+                </div>
+                <ScoresTab
+                  teams={teams}
+                  fixtures={simUpcoming}
+                  liveProbs={liveProbs}
+                  settings={settings}
+                  onConfirm={simConfirm}
+                  onUndo={simUndo}
+                  onOverride={simOverride}
+                  onTeamClick={idx => setDetail({ idx })}
+                  onWeekChange={null}
+                />
+              </>
+            )}
+
+            {simTab === "settings" && (
+              <SettingsPanel
+                settings={settings}
+                onChange={(k, v) => setSettings(s => ({ ...s, [k]: v }))}
+                showTiebreakers={true}
+                belgian
+                league={leagueState}
+                onLeagueChange={u => setLeagueState(s => typeof u === "function" ? u(s) : u)}
+                readOnly={false}
+              />
+            )}
+          </div>
         )}
       </div>
 
       <nav className="bnav" aria-label={tr("Main navigation")}>
-        {[["home", "🏠", "Home"], ["table", "📊", "Table"], ["scores", "⚽", "Games"], ["players", "👥", "Players"], ["monte", "🎲", "Sim"], ["settings", "⚙️", "Settings"]].map(([id, icon, label]) => (
+        {[["home", "🏠", "Home"], ["table", "📊", "Table"], ["scores", "⚽", "Games"], ["players", "👥", "Players"], ["monte", "🎲", "Simulator"]].map(([id, icon, label]) => (
           <button key={id} className={"bnav-btn" + (tab === id ? " on" : "")} aria-current={tab === id ? "page" : undefined}
             onClick={() => (id === "home" ? onBack() : setTab(id))}>
             <span className="bnav-ic" aria-hidden="true">{icon}</span>
