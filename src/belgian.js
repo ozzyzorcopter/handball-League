@@ -3,6 +3,7 @@ import { LANG_LOCALE, LangSwitch, useLang } from "./i18n.js";
 import { teamSnapshot, useFollow } from "./follow.js";
 import { ClubPicker, PICKER_DISMISS_KEY } from "./ClubPicker.js";
 import { modelProbs, predictMatch, weekBounds } from "./probabilities.js";
+import { assignWeeks } from "./weeks.js";
 import { cleanTeamName } from "./names.js";
 import { ProbBar } from "./ProbBar.js";
 import { Skeleton } from "./Skeleton.js";
@@ -15,6 +16,18 @@ import { SettingsPanel } from "./SettingsPanel.js";
 const { useState, useMemo, useEffect } = React;
 // The top-level Belgian screen — federation picker with division sub-groups
 export function BelgianScreen({ onBack }) {
+  // Bottom bar follows the page: "Leagues" lights up once the federation buttons reach the top half.
+  const [navSel, setNavSel] = useState("teams");
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.getElementById("fed-tabs");
+      if (!el) return;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      setNavSel(el.getBoundingClientRect().top < window.innerHeight * 0.5 && (window.scrollY > 40 || atBottom) ? "leagues" : "teams");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const { data, error, loadLeague, failed } = useVhvData();
   const { lang, t } = useLang();
   const [fed, setFed]       = useState(null);
@@ -249,10 +262,12 @@ export function BelgianScreen({ onBack }) {
       )}
 
       <nav className="bnav" aria-label={t("Main navigation")}>
-        <button className="bnav-btn on" aria-current="page" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <button className={"bnav-btn" + (navSel === "teams" ? " on" : "")} aria-current={navSel === "teams" ? "page" : undefined}
+          onClick={() => { setNavSel("teams"); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
           <span className="bnav-ic" aria-hidden="true">★</span><span className="bnav-lbl">{t("Teams")}</span>
         </button>
-        <button className="bnav-btn" onClick={() => { const el = document.getElementById("fed-tabs"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
+        <button className={"bnav-btn" + (navSel === "leagues" ? " on" : "")} aria-current={navSel === "leagues" ? "page" : undefined}
+          onClick={() => { setNavSel("leagues"); const el = document.getElementById("fed-tabs"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }}>
           <span className="bnav-ic" aria-hidden="true">🏆</span><span className="bnav-lbl">{t("Leagues")}</span>
         </button>
         <button className="bnav-btn" onClick={onBack}>
@@ -265,7 +280,8 @@ export function BelgianScreen({ onBack }) {
 
 // Read-only league view for Belgian Handball data
 export function BelgianLeagueView({ league, onBack }) {
-  const { teams: initTeams = [], fixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [], travelRanking = [] } = league;
+  const { teams: initTeams = [], fixtures: rawFixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [], travelRanking = [] } = league;
+  const fixtures = useMemo(() => assignWeeks(rawFixtures), [rawFixtures]);
   const { t: tr } = useLang();
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
@@ -318,7 +334,7 @@ export function BelgianLeagueView({ league, onBack }) {
       <div className="masthead" style={{ marginBottom: "1rem" }}>
         <div>
           <div className="logo" style={{ fontSize: "1.1rem" }}>{league.name}</div>
-          <div className="sub" style={{ color: "#22d3ee" }}>
+          <div className="sub" style={{ color: "#fdda24" }}>
             {league.federation}
             {league.live && (
               <span style={{ display: "inline-block", marginLeft: ".5rem", fontSize: ".65rem", fontWeight: 700, color: "#4ade80", border: "1px solid #4ade80", borderRadius: "3px", padding: ".05rem .3rem", letterSpacing: ".04em" }}>● LIVE</span>
@@ -372,6 +388,7 @@ export function BelgianLeagueView({ league, onBack }) {
             onOverride={null}
             onTeamClick={idx => setDetail({ idx })}
             onWeekChange={null}
+            showPlayedPredictions
           />
         )}
 

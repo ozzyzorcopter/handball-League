@@ -6,6 +6,7 @@ import { BelgianLeagueView, BelgianScreen } from "./src/belgian.js";
 import { ArchiveScreen } from "./src/archive.js";
 import { HomeScreen } from "./src/HomeScreen.js";
 import { OfflineBanner } from "./src/Offline.js";
+import { ThemeSwitch } from "./src/theme.js";
 import { LeagueEditor } from "./src/manualLeague.js";
 
 const { useState, useRef, useEffect } = React;
@@ -91,6 +92,7 @@ function App() {
           <div className="sub">{active ? active.name : store.leagues.length + " league" + (store.leagues.length !== 1 ? "s" : "")}</div>
         </div>
         <div className="top-btns">
+          <ThemeSwitch />
           {IS_SHARE ? (
             <>
               {loadStatus === "loading" && <span className="muted">⏳ Loading data…</span>}

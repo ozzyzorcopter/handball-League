@@ -45,11 +45,11 @@ export function HomeScreen({ leagues, onOpen, onCreate, onDelete, onToggleArchiv
                 return (
                   <span>
                     {" · "}
-                    <span style={{ color: poNotGen ? "#f87171" : poPending > 0 ? "#facc15" : "#4ade80" }}>
+                    <span style={{ color: poNotGen ? "#f87171" : poPending > 0 ? "#94a3b8" : "#4ade80" }}>
                       PO: {poNotGen ? "not generated" : poPending > 0 ? poPending + " pending" : "done"}
                     </span>
                     {" · "}
-                    <span style={{ color: pdNotGen ? "#f87171" : pdPending > 0 ? "#facc15" : "#4ade80" }}>
+                    <span style={{ color: pdNotGen ? "#f87171" : pdPending > 0 ? "#94a3b8" : "#4ade80" }}>
                       PD: {pdNotGen ? "not generated" : pdPending > 0 ? pdPending + " pending" : "done"}
                     </span>
                   </span>

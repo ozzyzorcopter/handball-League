@@ -133,7 +133,7 @@ export function FixturesStep({ teams, fixtures, setFixtures, settings, setSettin
                       const v = e.target.value === "" ? null : parseInt(e.target.value) || null;
                       setFixtures(prev => prev.map(x => x.id === f.id ? { ...x, week: v } : x));
                     }}
-                    style={{ width: "3rem", textAlign: "center", padding: ".22rem .3rem", fontFamily: "DM Mono,monospace", fontSize: ".8rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }}
+                    style={{ width: "3rem", textAlign: "center", padding: ".22rem .3rem", fontFamily: "DM Mono,monospace", fontSize: ".8rem", background: "#0d1117", border: "1px solid #252830", color: "#fdda24", borderRadius: "4px", outline: "none" }}
                   />
                 </div>
                 <div className="fix-teams"><b>{cleanTeamName(teams[f.homeIdx]?.name)}</b><span className="vs">vs</span><b>{cleanTeamName(teams[f.awayIdx]?.name)}</b></div>

@@ -1,5 +1,6 @@
 import { cleanTeamName } from "./names.js";
 import { ScorerPanel } from "./scorers.js";
+import { matchStamp } from "./weeks.js";
 const { useState } = React;
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
 export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers, phase }) {
@@ -36,13 +37,13 @@ export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, 
   function resColor(f) {
     const home = f.homeIdx === teamIdx;
     const hg = +f.homeScore, ag = +f.awayScore;
-    if (hg === ag) return "#facc15";
+    if (hg === ag) return "#94a3b8";
     return (home ? hg > ag : ag > hg) ? "#4ade80" : "#f87171";
   }
 
   function HaBadge({ isHome }) {
-    const col = isHome ? "#22d3ee" : "#a78bfa";
-    const bg = isHome ? "rgba(34,211,238,.1)" : "rgba(167,139,250,.1)";
+    const col = isHome ? "#fdda24" : "#a78bfa";
+    const bg = isHome ? "rgba(253,218,36,.1)" : "rgba(167,139,250,.1)";
     return (
       <span className="ha-badge" style={{ color: col, background: bg, border: "1px solid " + col }}>
         {isHome ? "HOME" : "AWAY"}
@@ -124,7 +125,7 @@ export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, 
                 {/* Header row */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: ".3rem", padding: ".2rem 0", marginBottom: ".15rem" }}>
                   <span></span>
-                  <span style={{ textAlign: "center", fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#22d3ee", fontWeight: 700 }}>HOME</span>
+                  <span style={{ textAlign: "center", fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#fdda24", fontWeight: 700 }}>HOME</span>
                   <span style={{ textAlign: "center", fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#a78bfa", fontWeight: 700 }}>AWAY</span>
                 </div>
                 <StatRow label="Games" homeVal={homePlayed.length || null} awayVal={awayPlayed.length || null} color="#d4d8e0" />
@@ -210,8 +211,8 @@ export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, 
               const opp = isHome ? teams[f.awayIdx]?.name : teams[f.homeIdx]?.name;
               return (
                 <div key={f.id} className="detail-match" style={{ opacity: f.played ? 1 : 0.6 }}>
-                  {f.week != null && (
-                    <span className="week-badge" style={{ fontSize: ".6rem", padding: ".08rem .3rem" }}>W{f.week}</span>
+                  {(matchStamp(f) || f.week > 0) && (
+                    <span className="week-badge" style={{ fontSize: ".6rem", padding: ".08rem .3rem" }}>{matchStamp(f) || "W" + f.week}</span>
                   )}
                   <HaBadge isHome={isHome} />
                   <span className="detail-opp" style={{ color: f.played ? "#d4d8e0" : "#5a6070" }}>{opp}</span>

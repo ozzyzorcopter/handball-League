@@ -87,6 +87,13 @@ export function predictMatch(homeIdx, awayIdx, teams, fixtures) {
   const hw = pct(homeWin), dr = pct(draw);
   return { homeWin: hw, draw: dr, awayWin: Math.max(0, 100 - hw - dr), eh: Math.round(eh), ea: Math.round(ea) };
 }
+// What the goal model would have predicted for a game that has been played, using
+// only games played on earlier dates (so the result itself never leaks in).
+export function predictPlayed(f, teams, fixtures) {
+  if (!f.date) return null;
+  const before = fixtures.filter(g => g.date && g.date < f.date);
+  return predictMatch(f.homeIdx, f.awayIdx, teams, before);
+}
 // Win / draw / loss chances for a pending fixture. model "goal" (Belgian leagues) uses the goal model and
 // falls back to the settings-driven rank model while a league has too few played games; model "rank"
 // (self-made leagues) always uses the rank model and its settings.

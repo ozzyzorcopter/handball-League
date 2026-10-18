@@ -263,7 +263,7 @@ export function ArchiveBelgianSeasonView({ filename, season, onBack }) {
         {feds.flatMap(fed =>
           Object.values(data.federations[fed] || {}).map(lg => (
             <div key={`${fed}-${lg.serieId}`} className="card" onClick={() => setLeague(lg)}>
-              <div className="card-badge badge-std" style={{ color: "#22d3ee", borderColor: "#22d3ee44", background: "#22d3ee18" }}>{fed}</div>
+              <div className="card-badge badge-std" style={{ color: "#fdda24", borderColor: "#fdda2444", background: "#fdda2418" }}>{fed}</div>
               <div className="card-name">{lg.name}</div>
               <div className="card-meta">
                 {(lg.teams || []).length} teams · {(lg.fixtures || []).filter(f => f.played).length} played

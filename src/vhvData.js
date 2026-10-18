@@ -4,7 +4,7 @@ export const DATA_BASE = "https://raw.githubusercontent.com/ozzyzorcopter/handba
 export const VHV_INDEX_URL = DATA_BASE + "index.json";
 
 export const FED_META = {
-  "VHV":       { label: "VHV",       color: "#22d3ee", desc: "Vlaamse Handbalfederatie" },
+  "VHV":       { label: "VHV",       color: "#fdda24", desc: "Vlaamse Handbalfederatie" },
   "LFH":       { label: "LFH",       color: "#a78bfa", desc: "Ligue Francophone de Handball" },
   "URBH-KBHB": { label: "URBH-KBHB", color: "#fbbf24", desc: "Union Royale Belge de Handball" },
 };

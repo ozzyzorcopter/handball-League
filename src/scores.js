@@ -1,16 +1,19 @@
 import { cleanTeamName } from "./names.js";
 import { useLang } from "./i18n.js";
 import { calcStats } from "./standings.js";
-import { modelProbs } from "./probabilities.js";
+import { modelProbs, predictPlayed } from "./probabilities.js";
+import { matchStamp, weekRange } from "./weeks.js";
 import { runMCAsync } from "./mcRunner.js";
 import { fmtPct, heatColor } from "./format.js";
 import { resolveRef } from "./tournament.js";
 import { ProbBar } from "./ProbBar.js";
 const { useState, useMemo, useRef, useEffect } = React;
 // ── SCORE ROW ─────────────────────────────────────────────────────────────────
-export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange }) {
+export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange, pred }) {
   const [hg, setHg] = useState("");
   const [ag, setAg] = useState("");
+  const stamp = matchStamp(f) || (f.week ? "W" + f.week : null);
+  const badge = stamp ? <span className="week-badge" style={{ fontSize: ".6rem" }}>{stamp}</span> : null;
   const hn = cleanTeamName(teams[f.homeIdx]?.name) || "?";
   const an = cleanTeamName(teams[f.awayIdx]?.name) || "?";
   const ws = settings?.winScore || 30;
@@ -22,7 +25,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
     // Game has been played but score not entered in Clubee — show as completed with unknown score
     return (
       <div className="outcome done">
-        {f.week != null && <span className="week-badge" style={{ fontSize: ".6rem" }}>W{f.week}</span>}
+        {badge}
         <div className="oteams">
           <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.homeIdx)}>{hn}</button>
           <span className="vs">vs</span>
@@ -43,19 +46,22 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
     const hs = +f.homeScore, as_ = +f.awayScore;
     const res = hs > as_ ? "home" : hs < as_ ? "away" : "draw";
     const lbl = res === "home" ? hn + " Win" : res === "away" ? an + " Win" : "Draw";
-    const col = res === "home" ? "#4ade80" : res === "away" ? "#f87171" : "#facc15";
+    const col = res === "home" ? "#4ade80" : res === "away" ? "#f87171" : "#94a3b8";
     return (
       <div className="outcome done">
-        {f.week != null && <span className="week-badge" style={{ fontSize: ".6rem" }}>W{f.week}</span>}
+        {badge}
         <div className="oteams">
           <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.homeIdx)}>{hn}</button>
           <span className="vs">vs</span>
           <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.awayIdx)}>{an}</button>
         </div>
-        <div className="score-done">
-          <span style={{ color: res === "home" ? "#4ade80" : res === "draw" ? "#facc15" : "#d4d8e0" }}>{f.homeScore}</span>
-          <span className="score-sep">&mdash;</span>
-          <span style={{ color: res === "away" ? "#f87171" : res === "draw" ? "#facc15" : "#d4d8e0" }}>{f.awayScore}</span>
+        <div style={{ textAlign: "center" }}>
+          <div className="score-done">
+            <span style={{ color: res === "home" ? "#4ade80" : res === "draw" ? "#94a3b8" : "#d4d8e0" }}>{f.homeScore}</span>
+            <span className="score-sep">&mdash;</span>
+            <span style={{ color: res === "away" ? "#f87171" : res === "draw" ? "#94a3b8" : "#d4d8e0" }}>{f.awayScore}</span>
+          </div>
+          {pred && <div className="muted" title="Goal model prediction before the game" style={{ fontFamily: "DM Mono,monospace", fontSize: ".66rem", marginTop: ".1rem" }}>({pred.eh}–{pred.ea})</div>}
         </div>
         <span className="res-lbl" style={{ color: col }}>{lbl}</span>
         {onWeekChange && (
@@ -63,7 +69,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
             <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#7d8597" }}>W</span>
             <input type="number" min="1" max="999" value={f.week ?? ""} placeholder="—"
               onChange={e => onWeekChange(f.id, e.target.value === "" ? null : parseInt(e.target.value) || null)}
-              style={{ width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }} />
+              style={{ width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#fdda24", borderRadius: "4px", outline: "none" }} />
           </div>
         )}
         {onUndo && <button className="btn-undo" onClick={() => onUndo(f.id)}>↩ Undo</button>}
@@ -78,6 +84,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
   return (
     <div className="outcome" style={{ flexDirection: "column", alignItems: "stretch", gap: ".42rem" }}>
       <div style={{ display: "flex", alignItems: "center", gap: ".5rem", flexWrap: "wrap" }}>
+        {badge}
         <div className="oteams">
           <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.homeIdx)}>{hn}</button>
           <span className="vs">vs</span>
@@ -103,7 +110,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
             <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#7d8597" }}>W</span>
             <input type="number" min="1" max="999" value={f.week ?? ""} placeholder="—"
               onChange={e => onWeekChange(f.id, e.target.value === "" ? null : parseInt(e.target.value) || null)}
-              style={{ width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#22d3ee", borderRadius: "4px", outline: "none" }} />
+              style={{ width: "2.8rem", textAlign: "center", padding: ".2rem .25rem", fontFamily: "DM Mono,monospace", fontSize: ".78rem", background: "#0d1117", border: "1px solid #252830", color: "#fdda24", borderRadius: "4px", outline: "none" }} />
           </div>
         )}
       </div>
@@ -116,7 +123,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
           <span className="muted">{an.split(" ")[0]} W:</span>
           <input className="ovr-inp" type="number" min="0" max="100" value={f.ovAW} onChange={e => onOverride(f.id, "aw", e.target.value)} placeholder="0" />
           {f.ovHW !== "" && (
-            <span style={{ fontSize: ".7rem", color: ovrOk ? "#22d3ee" : "#f87171", fontFamily: "DM Mono,monospace" }}>
+            <span style={{ fontSize: ".7rem", color: ovrOk ? "#fdda24" : "#f87171", fontFamily: "DM Mono,monospace" }}>
               {ovrTotal}% {ovrOk ? "✓" : "⚠ must = 100"}
             </span>
           )}
@@ -193,6 +200,23 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
   }, []); // runs once on mount — parent re-mounts this via key= when fixtures change
 
   const n = teams_.length;
+  // Which final positions are still technically reachable for each team, from
+  // points alone: the best case is winning every remaining game, the worst
+  // case losing them all. A team is certain to finish above another only when
+  // its points now beat the other's maximum. Ties count as possible, so a
+  // position the simulation rarely or never draws still shows "<0.1%".
+  const reach = useMemo(() => {
+    const rem = teams_.map(() => 0);
+    pending.forEach(f => { if (rem[f.homeIdx] != null) rem[f.homeIdx]++; if (rem[f.awayIdx] != null) rem[f.awayIdx]++; });
+    const pts = teams_.map(t => t.points || 0);
+    const max = pts.map((p, i) => p + 2 * rem[i]);
+    return teams_.map((_, i) => {
+      let above = 0, below = 0;
+      teams_.forEach((__, j) => { if (j === i) return; if (pts[j] > max[i]) above++; if (max[j] < pts[i]) below++; });
+      return { best: 1 + above, worst: n - below };
+    });
+  }, [teams_, pending.length]); // eslint-disable-line
+  const fmtReach = (p, ok) => (p >= 0.1 ? p.toFixed(1) + "%" : ok ? "<0.1%" : "");
   const sorted = useMemo(() => {
     if (!results) return [];
     return teams_.map((t, i) => ({ ...t, idx: i, avg: results[i].reduce((s, p, pos) => s + (p / 100) * (pos + 1), 0) })).sort((a, b) => a.avg - b.avg);
@@ -233,9 +257,9 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
                         <tr key={t.idx}>
                           <td className="tl">{cleanTeamName(t.name)}</td>
                           <td className="dm">{t.points}</td>
-                          <td style={{ background: heatColor(r[0]) }}>{fmtPct(r[0])}</td>
-                          {showPromo && <td style={{ background: heatColor(sum(r.slice(0, highlightTop))) }}>{fmtPct(sum(r.slice(0, highlightTop)))}</td>}
-                          {showRel && <td style={{ background: heatColor(sum(r.slice(n - highlightBottom))) }}>{fmtPct(sum(r.slice(n - highlightBottom)))}</td>}
+                          <td style={{ background: heatColor(r[0]) }}>{fmtReach(r[0], reach[t.idx].best === 1)}</td>
+                          {showPromo && <td style={{ background: heatColor(sum(r.slice(0, highlightTop))) }}>{fmtReach(sum(r.slice(0, highlightTop)), reach[t.idx].best <= highlightTop)}</td>}
+                          {showRel && <td style={{ background: heatColor(sum(r.slice(n - highlightBottom))) }}>{fmtReach(sum(r.slice(n - highlightBottom)), reach[t.idx].worst > n - highlightBottom)}</td>}
                           <td className="dm">{t.avg.toFixed(1)}</td>
                         </tr>
                       );
@@ -261,7 +285,7 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
                     <td className="tl">{cleanTeamName(t.name)}</td>
                     <td className="dm">{t.points}</td>
                     {results[t.idx].map((p, pos) => (
-                      <td key={pos} style={{ background: heatColor(p) }}>{fmtPct(p)}</td>
+                      <td key={pos} style={{ background: heatColor(p) }}>{fmtReach(p, pos + 1 >= reach[t.idx].best && pos + 1 <= reach[t.idx].worst)}</td>
                     ))}
                   </tr>
                 ))}
@@ -281,7 +305,7 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
 }
 
 // ── SCORES TAB ───────────────────────────────────────────────────────────────
-export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange }) {
+export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange, showPlayedPredictions }) {
   const { t: tr } = useLang();
   const [selectedTeam, setSelectedTeam] = useState("all");
   const [selectedWeek, setSelectedWeek] = useState("all");
@@ -293,6 +317,18 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
   }, [fixtures]);
 
   const hasWeeks = weeks.length > 0;
+
+  // Pre-match predicted score for games already played (Belgian view only).
+  const playedPreds = useMemo(() => {
+    const m = {};
+    if (!showPlayedPredictions) return m;
+    fixtures.forEach(f => {
+      if (f.played && f.homeScore != null) {
+        try { const p = predictPlayed(f, teams, fixtures); if (p) m[f.id] = p; } catch (e) {}
+      }
+    });
+    return m;
+  }, [fixtures, teams, showPlayedPredictions]);
 
   const filtered = useMemo(() => {
     let fs = fixtures;
@@ -306,7 +342,7 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
     const sorted = [...filtered].sort((a, b) => {
       const wa = a.week ?? 99999, wb = b.week ?? 99999;
       if (wa !== wb) return wa - wb;
-      return 0;
+      return ((a.date || "9999") + (a.time || "")).localeCompare((b.date || "9999") + (b.time || ""));
     });
     const groups = [];
     let cur = null;
@@ -349,13 +385,15 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
             const gPlayed  = group.fixtures.filter(f =>  f.played);
             return (
               <div key={group.week ?? "none"}>
-                {group.week != null && <div className="week-header">{tr("Week")} {group.week}</div>}
+                {group.week != null
+                  ? <div className="week-header">{tr("Week")} {group.week}{weekRange(group.fixtures) ? <span className="muted" style={{ fontWeight: 400, marginLeft: ".5rem" }}>{weekRange(group.fixtures)}</span> : null}</div>
+                  : (hasWeeks ? <div className="week-header">{tr("No date yet")}</div> : null)}
                 {gPending.map(f => (
-                  <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} settings={settings}
+                  <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
                     onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
                 ))}
                 {gPlayed.map(f => (
-                  <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} settings={settings}
+                  <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
                     onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
                 ))}
               </div>
@@ -382,14 +420,16 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
               {group.week != null && (
                 <div className="week-header" style={allDone ? { color: "#4ade80" } : {}}>
                   {tr("Week")} {group.week}{allDone ? " ✓" : ""}
+                  {weekRange(group.fixtures) && <span className="muted" style={{ fontWeight: 400, marginLeft: ".5rem" }}>{weekRange(group.fixtures)}</span>}
                 </div>
               )}
+              {group.week == null && hasWeeks && <div className="week-header">{tr("No date yet")}</div>}
               {gPending.map(f => (
-                <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} settings={settings}
+                <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
                   onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
               ))}
               {gPlayed.map(f => (
-                <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} settings={settings}
+                <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
                   onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
               ))}
             </div>
@@ -467,9 +507,9 @@ export function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm,
           <span style={{ color: res === "away" ? "#f87171" : "#d4d8e0" }}>{an}</span>
         </div>
         <div className="bm-score">
-          <span style={{ color: res === "home" ? "#4ade80" : res === "draw" ? "#facc15" : "#d4d8e0" }}>{match.homeScore}</span>
+          <span style={{ color: res === "home" ? "#4ade80" : res === "draw" ? "#94a3b8" : "#d4d8e0" }}>{match.homeScore}</span>
           <span className="score-sep">&mdash;</span>
-          <span style={{ color: res === "away" ? "#f87171" : res === "draw" ? "#facc15" : "#d4d8e0" }}>{match.awayScore}</span>
+          <span style={{ color: res === "away" ? "#f87171" : res === "draw" ? "#94a3b8" : "#d4d8e0" }}>{match.awayScore}</span>
           {aggText && <span className="bm-agg">{aggText}</span>}
         </div>
         {legLabel && <span className="bm-label">{legLabel}</span>}
@@ -519,7 +559,7 @@ export function MatchRow({ match, teams, rounds, liveProbs, settings, onConfirm,
           <input className="ovr-inp" type="number" min="0" max="100" value={match.ovD} onChange={e => onOverride(match.id, "d", e.target.value)} placeholder="0" />
           <span className="muted">{an.split(" ")[0]} W:</span>
           <input className="ovr-inp" type="number" min="0" max="100" value={match.ovAW} onChange={e => onOverride(match.id, "aw", e.target.value)} placeholder="0" />
-          {match.ovHW !== "" && <span style={{ fontSize: ".7rem", color: ovrOk ? "#22d3ee" : "#f87171", fontFamily: "DM Mono,monospace" }}>{ovrTotal}% {ovrOk ? "✓" : "⚠"}</span>}
+          {match.ovHW !== "" && <span style={{ fontSize: ".7rem", color: ovrOk ? "#fdda24" : "#f87171", fontFamily: "DM Mono,monospace" }}>{ovrTotal}% {ovrOk ? "✓" : "⚠"}</span>}
         </div>
       )}
       {aggText && <div style={{ fontSize: ".72rem", color: "#a78bfa", fontFamily: "DM Mono,monospace" }}>{aggText}</div>}

@@ -1,13 +1,15 @@
 import { useLang } from "./i18n.js";
 import { buildClubIndex, cleanTeamName, resolveClubName } from "./names.js";
 const { useState, useMemo } = React;
-// Players tab: ONE big table with everything we know about each player (goals,
-// games, average, 7m, cards and suspensions). The chips above it narrow the same
-// table: all goals / excluding 7m / 7m only / cards & suspensions. Any column
-// header sorts; the search box and the club menu filter rows.
+// Players tab: opens on ONE overall table with everything we know about each
+// player (goals, games, average, 7m, cards and suspensions). Picking a chip
+// (all goals / excluding 7m / 7m only / cards & suspensions) drops the other
+// stats and shows just that one. The player name is sticky with the club under
+// it, so the numbers are always next to the name. Any column header sorts; the
+// search box and the club menu filter rows.
 export function PlayersTab({ scorers, teams, aliases }) {
   const { t } = useLang();
-  const [mode, setMode] = useState("all");
+  const [mode, setMode] = useState("overall");
   const [sort, setSort] = useState(null);       // { key, dir } or null = the chip's default order
   const [q, setQ] = useState("");
   const [club, setClub] = useState("");
@@ -40,7 +42,7 @@ export function PlayersTab({ scorers, teams, aliases }) {
     let r = list.map(s => {
       const seven = num(s.sevenMScored);
       const g = mode === "open" ? (s.goals || 0) - seven : mode === "seven" ? seven : (s.goals || 0);
-      return { ...s, g, last: mode === "all" ? s.lastGameGoals : null };
+      return { ...s, g, last: (mode === "overall" || mode === "all") ? s.lastGameGoals : null };
     });
     if (mode === "open" || mode === "seven") r = r.filter(s => s.g > 0);
     if (mode === "cards") r = r.filter(s => s.yellowCards > 0 || s.twoMinSuspensions > 0 || s.blueCards > 0 || s.redCards > 0);
@@ -74,7 +76,15 @@ export function PlayersTab({ scorers, teams, aliases }) {
     <th className={cls} title={title} style={{ cursor: "pointer", userSelect: "none" }} onClick={() => clickSort(k)}>{children}{arrow(k)}</th>
   );
 
-  const chips = [["all", "All goals"], ...(hasSeven ? [["open", "Excl. 7m"], ["seven", "7m only"]] : []), ...(hasCards ? [["cards", "Cards & suspensions"]] : [])];
+  // Which columns the current chip shows: overall = everything, a chip = only its own stat.
+  const showAll = mode === "overall";
+  const showG = mode !== "cards";
+  const showCards = showAll || mode === "cards";
+  const sh = {
+    mp: cols.mp && showAll, seven: cols.seven && showAll,
+    yc: cols.yc && showCards, two: cols.two && showCards, bc: cols.bc && showCards, rc: cols.rc && showCards,
+  };
+  const chips = [["overall", "Overall"], ["all", "All goals"], ...(hasSeven ? [["open", "Excl. 7m"], ["seven", "7m only"]] : []), ...(hasCards ? [["cards", "Cards & suspensions"]] : [])];
   const MAX = 25;
   const shown = expanded ? view : view.slice(0, MAX);
   const gTitle = mode === "open" ? "Goals excluding 7m" : mode === "seven" ? "7m goals" : "Goals (goals in last game)";
@@ -125,34 +135,37 @@ export function PlayersTab({ scorers, teams, aliases }) {
                 <tr>
                   <th style={{ width: "2rem" }}>#</th>
                   <th className="tl">{t("Player")}</th>
-                  <th className="tl" style={{ minWidth: 0 }}>{t("Club")}</th>
-                  <Th k="g" cls="tpts" title={gTitle}>G</Th>
-                  {cols.mp && <Th k="mp" title="Matches played">MP</Th>}
-                  {cols.mp && <Th k="avg" title="Goals per game">Avg</Th>}
-                  {cols.seven && <Th k="seven" title="7m scored / attempted">7m</Th>}
-                  {cols.yc && <Th k="yc" title="Yellow cards">🟨</Th>}
-                  {cols.two && <Th k="two" title="2-minute suspensions">2'</Th>}
-                  {cols.bc && <Th k="bc" title="Blue cards">🟦</Th>}
-                  {cols.rc && <Th k="rc" title="Red cards">🟥</Th>}
+                  {showG && <Th k="g" cls="tpts" title={gTitle}>G</Th>}
+                  {sh.mp && <Th k="mp" title="Matches played">MP</Th>}
+                  {sh.mp && <Th k="avg" title="Goals per game">Avg</Th>}
+                  {sh.seven && <Th k="seven" title="7m scored / attempted">7m</Th>}
+                  {sh.yc && <Th k="yc" title="Yellow cards">🟨</Th>}
+                  {sh.two && <Th k="two" title="2-minute suspensions">2'</Th>}
+                  {sh.bc && <Th k="bc" title="Blue cards">🟦</Th>}
+                  {sh.rc && <Th k="rc" title="Red cards">🟥</Th>}
                 </tr>
               </thead>
               <tbody>
                 {shown.map((s, i) => (
                   <tr key={s.player + "|" + s.club + "|" + i}>
-                    <td className="tpos">{!sort && mode !== "cards" && !q && !club && i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1}</td>
-                    <td className="tl">{s.player}</td>
-                    <td className="tl" style={{ fontFamily: "DM Sans,sans-serif", fontWeight: 400, color: "#6b7280", fontSize: ".72rem" }}>{cleanTeamName(s.club || "")}</td>
-                    <td className="tpts" style={{ color: "#fbbf24" }}>
-                      {s.g}
-                      {s.last != null && <span style={{ fontSize: ".68rem", marginLeft: ".2rem", color: "#9ca3af", fontWeight: 400 }}>({s.last})</span>}
+                    <td className="tpos">{!sort && showG && !q && !club && i < 3 ? ["🥇", "🥈", "🥉"][i] : i + 1}</td>
+                    <td className="tl pl">
+                      <div className="pl-name">{s.player}</div>
+                      <div className="pl-club">{cleanTeamName(s.club || "")}</div>
                     </td>
-                    {cols.mp && <td>{s.matchesPlayed > 0 ? s.matchesPlayed : ""}</td>}
-                    {cols.mp && <td>{s.matchesPlayed > 0 ? (s.g / s.matchesPlayed).toFixed(2) : ""}</td>}
-                    {cols.seven && <td>{(s.sevenMScored > 0 || s.sevenMMissed > 0) ? `${s.sevenMScored || 0}/${(s.sevenMScored || 0) + (s.sevenMMissed || 0)}` : ""}</td>}
-                    {cols.yc && <td>{s.yellowCards > 0 ? s.yellowCards : ""}</td>}
-                    {cols.two && <td>{s.twoMinSuspensions > 0 ? s.twoMinSuspensions : ""}</td>}
-                    {cols.bc && <td>{s.blueCards > 0 ? s.blueCards : ""}</td>}
-                    {cols.rc && <td>{s.redCards > 0 ? s.redCards : ""}</td>}
+                    {showG && (
+                      <td className="tpts" style={{ color: "#fbbf24" }}>
+                        {s.g}
+                        {s.last != null && <span style={{ fontSize: ".68rem", marginLeft: ".2rem", color: "#9ca3af", fontWeight: 400 }}>({s.last})</span>}
+                      </td>
+                    )}
+                    {sh.mp && <td>{s.matchesPlayed > 0 ? s.matchesPlayed : ""}</td>}
+                    {sh.mp && <td>{s.matchesPlayed > 0 ? (s.g / s.matchesPlayed).toFixed(2) : ""}</td>}
+                    {sh.seven && <td>{(s.sevenMScored > 0 || s.sevenMMissed > 0) ? `${s.sevenMScored || 0}/${(s.sevenMScored || 0) + (s.sevenMMissed || 0)}` : ""}</td>}
+                    {sh.yc && <td>{s.yellowCards > 0 ? s.yellowCards : ""}</td>}
+                    {sh.two && <td>{s.twoMinSuspensions > 0 ? s.twoMinSuspensions : ""}</td>}
+                    {sh.bc && <td>{s.blueCards > 0 ? s.blueCards : ""}</td>}
+                    {sh.rc && <td>{s.redCards > 0 ? s.redCards : ""}</td>}
                   </tr>
                 ))}
               </tbody>
