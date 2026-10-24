@@ -38,9 +38,10 @@
     },
     "hsc tubize": {
       "name": "HSC Tubize",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "Allée des Sports, 7, 1480, Tubize",
+      "lat": 50.684083,
+      "lon": 4.1994647,
+      "source": "clubee"
     },
     "heist o/d berg cup m": {
       "name": "Heist o/d Berg Cup M",
@@ -3351,9 +3352,10 @@
     },
     "united brussels sélection coupe dames": {
       "name": "United Brussels HC Sélection Coupe Dames",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "300 Avenue des Anciens Combattants, 1140, Evere",
+      "lat": 50.8694405,
+      "lon": 4.4070789,
+      "source": "clubee"
     },
     "ktsv eupen damen 1 pokal": {
       "name": "KTSV Eupen Damen 1 Pokal",
@@ -3406,6 +3408,59 @@
       "address": "Sporthal Alverberg",
       "lat": 0,
       "lon": 0,
+      "source": "clubee"
+    },
+    "apolloon spurs cup m": {
+      "name": "Apolloon Spurs Cup M",
+      "address": "Bad Godesberglaan 22, 8500, Kortrijk",
+      "lat": 50.8062078,
+      "lon": 3.3005745,
+      "source": "clubee"
+    },
+    "eynatten-raeren cup": {
+      "name": "HC Eynatten-Raeren Cup",
+      "address": "24 Lichtenbuscher Straße, 4731, Raeren",
+      "lat": 50.6922467,
+      "lon": 6.0855388,
+      "source": "clubee"
+    },
+    "ehc tournai cup": {
+      "name": "EHC Tournai Cup",
+      "address": null,
+      "lat": null,
+      "lon": null
+    },
+    "renaissance montegnée cup": {
+      "name": "Renaissance Montegnée HC Cup",
+      "address": null,
+      "lat": null,
+      "lon": null
+    },
+    "hazebrouck 1": {
+      "name": "Hazebrouck (FR) 1",
+      "address": "Lichtenbuscher Strasse, 24, 4731, Eynatten",
+      "lat": 50.6922467,
+      "lon": 6.0855388,
+      "source": "clubee"
+    },
+    "visé bm shl": {
+      "name": "HC Visé BM SHL",
+      "address": "Rue de Berneau, 30, 4600, Visé",
+      "lat": 50.7371507,
+      "lon": 5.7078233,
+      "source": "clubee"
+    },
+    "visé bm cup": {
+      "name": "HC Visé BM Cup",
+      "address": null,
+      "lat": null,
+      "lon": null
+    },
+    "db gent u12 vhv r 2": {
+      "name": "DB Gent U12 VHV R 2",
+      "address": "Ter Linden 29, 9053, Zwijnaarde",
+      "lat": 51.0029934,
+      "lon": 3.7108282,
       "source": "clubee"
     }
   },
@@ -4428,6 +4483,13 @@
     "renaissance montegnée d1 m lfh|tubize d1 m lfh": 122.31,
     "dhc overpelt d w vhv lim-b|hubo d w vhv lim": 62.9437,
     "dhc waasmunster d1 w vhv|gbsk d1 w vhv": 54.591300000000004,
-    "entente du centre d1 m lfh|mont-sur-marchienne d1 m lfh": 19.9941
+    "entente du centre d1 m lfh|mont-sur-marchienne d1 m lfh": 19.9941,
+    "entente du centre clh|united brussels sélection coupe dames": 59.817,
+    "apolloon spurs cup m|heist o/d berg cup m": 134.0959,
+    "eynatten-raeren cup|kraainem": 129.8446,
+    "hsc tubize|union beynoise handball cup": 134.1496,
+    "btb aachen 1|hazebrouck 1": 49.5075,
+    "db gent u16 vhv q|dendermonde u16 vhv q": 0,
+    "lebbeke u16 vhv q|olse merksem u16 vhv q": 0
   }
 }
