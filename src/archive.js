@@ -1,6 +1,7 @@
 import { useBackLayer } from "./backNav.js";
 import { useArchiveFile, useArchiveIndex, useArchiveSeason, useStandaloneLeagues } from "./archiveData.js";
 import { githubDispatch } from "./github.js";
+import { PATSettings } from "./SettingsPanel.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { Skeleton } from "./Skeleton.js";
 import { BelgianLeagueView } from "./belgian.js";
@@ -175,6 +176,10 @@ export function ArchiveScreen({ onBack }) {
           </div>
         </>
       )}
+      <details style={{ marginTop: "2rem" }}>
+        <summary className="muted" style={{ cursor: "pointer", fontSize: ".78rem" }}>GitHub token (needed to delete archive entries)</summary>
+        <div className="sbox" style={{ marginTop: ".6rem" }}><PATSettings /></div>
+      </details>
     </div>
   );
 }

@@ -2,10 +2,9 @@
 //
 //   node build.mjs
 //
-// - bundles app.js twice with esbuild: the normal app and the read-only "share"
-//   page (esbuild --define flips __SHARE__, no sed on the source)
+// - bundles app.js with esbuild
 // - names every asset with a hash of its content (app.<hash>.js, ...) and writes
-//   index.html / index-share.html pointing at them, so a browser can never keep
+//   index.html pointing at them, so a browser can never keep
 //   running an old script after a deploy
 // - copies the static files the app fetches from the Pages origin
 import { build } from "esbuild";
@@ -27,7 +26,7 @@ export async function bundleWorker() {
   return result.outputFiles[0].text;
 }
 
-export async function bundle({ share, workerSrc }) {
+export async function bundle({ workerSrc }) {
   const result = await build({
     entryPoints: ["app.js"],
     bundle: true,
@@ -35,7 +34,7 @@ export async function bundle({ share, workerSrc }) {
     write: false,
     outfile: "app.out.js",
     loader: { ".js": "jsx" },
-    define: { __SHARE__: String(share), __MC_WORKER_SRC__: JSON.stringify(workerSrc ?? "") },
+    define: { __MC_WORKER_SRC__: JSON.stringify(workerSrc ?? "") },
     target: "es2020",
     legalComments: "none",
     logLevel: "warning",
@@ -74,17 +73,11 @@ async function main() {
 
   const workerSrc = await bundleWorker();
   const template = fs.readFileSync("index.template.html", "utf8");
-  const pages = [
-    { file: "index.html", share: false, prefix: "app" },
-    { file: "index-share.html", share: true, prefix: "app.share" },
-  ];
-  for (const p of pages) {
-    const js = await bundle({ share: p.share, workerSrc });
-    const jsName = `${p.prefix}.${hash(js)}.js`;
-    fs.writeFileSync(path.join(DIST, jsName), js);
-    fs.writeFileSync(path.join(DIST, p.file), template.replace("%CSS%", `./${cssName}`).replace("%JS%", `./${jsName}`).replace("%REACT%", `./${reactName}`).replace("%REACTDOM%", `./${reactDomName}`));
-    console.log(`built ${p.file} -> ${jsName} (${(js.length / 1024).toFixed(0)} kB)`);
-  }
+  const js = await bundle({ workerSrc });
+  const jsName = `app.${hash(js)}.js`;
+  fs.writeFileSync(path.join(DIST, jsName), js);
+  fs.writeFileSync(path.join(DIST, "index.html"), template.replace("%CSS%", `./${cssName}`).replace("%JS%", `./${jsName}`).replace("%REACT%", `./${reactName}`).replace("%REACTDOM%", `./${reactDomName}`));
+  console.log(`built index.html -> ${jsName} (${(js.length / 1024).toFixed(0)} kB)`);
 
   // PWA files (public/): manifest and icons are copied as they are; the service
   // worker gets a build id so every deploy replaces the previous cache.

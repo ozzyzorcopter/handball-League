@@ -57,7 +57,7 @@ async function loadApp() {
   };
   const out = await build({
     entryPoints: ["app.js"], bundle: true, write: false, outfile: "o.js",
-    loader: { ".js": "jsx" }, define: { __SHARE__: "false", __MC_WORKER_SRC__: '""' }, logLevel: "silent",
+    loader: { ".js": "jsx" }, define: { __MC_WORKER_SRC__: '""' }, logLevel: "silent",
   });
   w.__LEAGUESIM_TEST__ = (x) => { w.__t = x; };
   w.eval(out.outputFiles[0].text);

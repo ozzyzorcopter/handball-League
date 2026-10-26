@@ -1,6 +1,5 @@
 import { GITHUB_PAT_KEY } from "./github.js";
 import { useLang } from "./i18n.js";
-import { IS_SHARE } from "./config.js";
 const { useState } = React;
 // ── PAT SETTINGS ─────────────────────────────────────────────────────────────
 export function PATSettings() {
@@ -178,15 +177,6 @@ export function SettingsPanel({ settings, onChange, showTiebreakers, league, onL
               <li key={i}><span className="tb-num">{i + 1}.</span>{tr(tb)}</li>
             ))}
           </ul>
-        </div>
-      )}
-      {!IS_SHARE && !belgian && (
-        <div className="sbox">
-          <div className="sub-ttl">GitHub PAT <span style={{ fontSize: ".72rem", fontWeight: 400, color: "#5a6070" }}>— required for archiving leagues</span></div>
-          <div style={{ fontSize: ".78rem", color: "#5a6070", marginBottom: ".6rem" }}>
-            Create a Personal Access Token with <strong>repo</strong> scope at github.com/settings/tokens and paste it here. Stored locally in your browser only.
-          </div>
-          <PATSettings />
         </div>
       )}
     </div>
