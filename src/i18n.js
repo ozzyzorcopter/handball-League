@@ -1,5 +1,6 @@
 // NL / FR / EN support. English text is the key.
 import { ThemeSwitch } from "./theme.js";
+import { TOURNEY_NL, TOURNEY_FR } from "./tourneyI18n.js";
 const { useState, useEffect } = React;
 
 // ── LANGUAGE (NL / FR / EN) ───────────────────────────────────────────────────
@@ -216,6 +217,8 @@ function detectLang() {
   const nav = (typeof navigator !== "undefined" && (navigator.language || "") || "").slice(0, 2).toLowerCase();
   return LANGS.includes(nav) ? nav : "en";
 }
+// Tournament strings: existing keys (Teams, Team, Home, ...) keep their earlier translation.
+I18N.nl = { ...TOURNEY_NL, ...I18N.nl }; I18N.fr = { ...TOURNEY_FR, ...I18N.fr };
 const langListeners = new Set();
 export function useLang() {
   const [lang, setLangState] = useState(detectLang);

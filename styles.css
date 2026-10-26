@@ -356,3 +356,43 @@ html[data-theme="light"] .logo span{display:inline-block;}
 .subtab:hover:not(.on){color:#d4d8e0;}
 .whatif-note{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;background:rgba(253,218,36,.07);border:1px solid rgba(253,218,36,.25);border-radius:8px;padding:.5rem .8rem;margin-bottom:.9rem;font-size:.78rem;color:#d4d8e0;}
 html[data-theme="light"] .subtab.on{filter:invert(1) hue-rotate(180deg);}
+
+/* Theme switch: bold, high-contrast pill so it stays findable in bright sunlight */
+.theme-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:2.4rem;padding:.35rem .85rem;border-radius:999px;border:2px solid #fff;background:#ffd400;color:#000;font-weight:800;font-size:.85rem;line-height:1;font-family:inherit;letter-spacing:.02em;cursor:pointer;box-shadow:0 0 0 2px #000,0 2px 8px rgba(0,0,0,.5);}
+.theme-btn .theme-ico{font-size:1.15rem;line-height:1;}
+.theme-btn:active{transform:scale(.96);}
+
+/* ── Tournaments ─────────────────────────────────────────────────────────── */
+.tn-wiz{width:430px;max-height:92vh;overflow-y:auto;}
+.tn-kinds{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.tn-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+.tn-champ{background:rgba(253,218,36,.12);border:1px solid #fdda24;border-radius:8px;padding:.7rem .9rem;margin-bottom:1rem;color:#fdda24;font-size:1rem;}
+.tn-stage{margin-top:1.4rem;}
+.tn-stagehead{display:flex;gap:.5rem;align-items:center;margin-bottom:.7rem;}
+.tn-stagehead h3{font-family:'Syne',sans-serif;font-size:1rem;color:#fff;}
+.tn-group{margin-bottom:.9rem;}
+.tn-md{font-size:.7rem;color:#8b93a5;text-transform:uppercase;letter-spacing:.06em;margin:.8rem 0 .35rem;}
+.tn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.5rem;}
+.tn-match{position:relative;background:#10121a;border:1px solid #252830;border-radius:8px;padding:.35rem .5rem;display:flex;flex-direction:column;gap:.2rem;}
+.tn-match.bye{opacity:.6;}
+.tn-tag{font-size:.65rem;color:#a78bfa;text-transform:uppercase;letter-spacing:.06em;}
+.tn-side{display:flex;align-items:center;gap:.4rem;min-height:2rem;}
+.tn-side .tn-nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.88rem;}
+.tn-side.win .tn-nm{font-weight:800;color:#fdda24;}
+.tn-sc{width:3.1rem;text-align:center;background:#08090c;border:1px solid #252830;color:#fff;border-radius:5px;padding:.3rem .2rem;font-family:'DM Mono',monospace;font-size:.95rem;-moz-appearance:textfield;}
+.tn-sc::-webkit-outer-spin-button,.tn-sc::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.tn-pen{display:flex;gap:.3rem;align-items:center;flex-wrap:wrap;font-size:.7rem;color:#8b93a5;padding-top:.2rem;}
+.tn-sel{width:auto;flex:1;min-width:0;padding:.3rem .3rem;}
+.tn-x{position:absolute;top:.15rem;right:.2rem;background:none;border:none;color:#f87171;cursor:pointer;font-size:.9rem;padding:.2rem .35rem;}
+.tn-match .tn-x{top:-.45rem;right:-.3rem;background:#10121a;border:1px solid #252830;border-radius:50%;line-height:1;}
+.tn-add{margin-top:.6rem;padding:.4rem .9rem;font-size:.75rem;}
+.tn-opts{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;margin-bottom:.7rem;}
+.tn-teamrow{display:flex;gap:.35rem;align-items:center;margin-bottom:.35rem;}
+.tn-teamrow .inp:first-child{flex:2;min-width:0;}
+.tn-addstage{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #1c1f27;}
+.tn-bracket{display:flex;gap:.8rem;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:.4rem .2rem 1rem;scroll-snap-type:x proximity;}
+.tn-round{flex:0 0 min(240px,78vw);scroll-snap-align:start;display:flex;flex-direction:column;}
+.tn-rname{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:#fdda24;margin-bottom:.5rem;display:flex;gap:.3rem;align-items:center;position:relative;}
+.tn-rmatches{display:flex;flex-direction:column;justify-content:space-around;gap:.8rem;flex:1;}
+@media(max-width:600px){.tn-kinds{grid-template-columns:1fr;}.tn-wiz{padding:1.1rem;}}
+.tn-stagehead .btn{white-space:nowrap;padding:.5rem .8rem;font-size:.72rem;}

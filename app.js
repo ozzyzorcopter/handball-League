@@ -1,8 +1,8 @@
 import { predictMatch } from "./src/probabilities.js";
 import { githubDispatch } from "./src/github.js";
 import { IS_SHARE } from "./src/config.js";
-import { loadData, makeLeague, saveData } from "./src/leagueModel.js";
 import { BelgianLeagueView, BelgianScreen } from "./src/belgian.js";
+import { TournamentsScreen } from "./src/tourneyUI.js";
 import { ArchiveScreen } from "./src/archive.js";
 import { HomeScreen } from "./src/HomeScreen.js";
 import { OfflineBanner } from "./src/Offline.js";
@@ -10,7 +10,7 @@ import { ThemeSwitch } from "./src/theme.js";
 import { useBackLayer } from "./src/backNav.js";
 import { LeagueEditor } from "./src/manualLeague.js";
 
-const { useState, useRef, useEffect } = React;
+const { useState, useEffect } = React;
 // ── ROOT APP ──────────────────────────────────────────────────────────────────
 const LEAGUESIM_DATA_URL = "https://raw.githubusercontent.com/ozzyzorcopter/handball-League/refs/heads/main/leaguesim-data.json";
 
@@ -19,6 +19,7 @@ function App() {
   const [activeId, setActiveId]   = useState(null);
   const [showArchive, setShowArchive] = useState(false);
   const [showBelgian, setShowBelgian] = useState(false);
+  const [showTournaments, setShowTournaments] = useState(false);
   const [archiveMsg, setArchiveMsg]   = useState(null); // { text, color }
 
   // ── Share mode: auto-load from repo ──────────────────────────────────────
@@ -36,23 +37,6 @@ function App() {
       .catch(e => { console.error(e); setLoadStatus("error"); });
   }, []);
 
-  // ── Edit mode: manual save/load ───────────────────────────────────────────
-  const [msg, setMsg] = useState("");
-  const msgTimer = useRef(null);
-  function flash(m) { setMsg(m); clearTimeout(msgTimer.current); msgTimer.current = setTimeout(() => setMsg(""), 2500); }
-  function handleSave() { saveData(store); flash("Downloading…"); }
-  function handleLoad() {
-    loadData().then(data => {
-      if (!data.leagues) throw new Error("Not a LeagueSim file");
-      setStore(data); setActiveId(null); flash("Loaded!");
-    }).catch(e => alert("Could not load: " + e));
-  }
-
-  function createLeague(name, type, poSize, pdSize, phaseFormat, archivable) {
-    const lg = makeLeague(name, type, poSize, pdSize, phaseFormat, archivable);
-    setStore(s => ({ ...s, leagues: [...s.leagues, lg] }));
-    setActiveId(lg.id);
-  }
   function deleteLeague(id) {
     if (!confirm("Delete this league?")) return;
     setStore(s => ({ ...s, leagues: s.leagues.filter(lg => lg.id !== id) }));
@@ -81,10 +65,12 @@ function App() {
 
   const active = store.leagues.find(lg => lg.id === activeId) || null;
   useBackLayer(showBelgian, () => setShowBelgian(false));
+  useBackLayer(showTournaments, () => setShowTournaments(false));
   useBackLayer(showArchive, () => setShowArchive(false));
   useBackLayer(!!active, () => setActiveId(null));
 
   if (showBelgian) return <div className="app"><OfflineBanner /><BelgianScreen onBack={() => setShowBelgian(false)} /></div>;
+  if (showTournaments) return <div className="app"><OfflineBanner /><TournamentsScreen onBack={() => setShowTournaments(false)} /></div>;
   if (showArchive) return <div className="app"><OfflineBanner /><ArchiveScreen onBack={() => setShowArchive(false)} /></div>;
 
   return (
@@ -106,9 +92,6 @@ function App() {
           ) : (
             <>
               {archiveMsg && <span style={{ fontSize: ".78rem", color: archiveMsg.color }}>{archiveMsg.text}</span>}
-              {!archiveMsg && msg && <span className="muted">{msg}</span>}
-              <button className="btn btn-cyan" onClick={handleSave}>💾 Save</button>
-              <button className="btn btn-ghost" onClick={handleLoad}>📂 Load</button>
               {active && <button className="btn btn-ghost" onClick={() => setActiveId(null)}>← All Leagues</button>}
             </>
           )}
@@ -118,11 +101,11 @@ function App() {
         <HomeScreen
           leagues={store.leagues}
           onOpen={setActiveId}
-          onCreate={createLeague}
           onDelete={deleteLeague}
           onToggleArchivable={toggleArchivable}
           onOpenArchive={() => setShowArchive(true)}
           onOpenBelgian={() => setShowBelgian(true)}
+          onOpenTournaments={() => setShowTournaments(true)}
           onArchiveLeague={archiveLeague}
         />
       )}
