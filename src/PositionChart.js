@@ -34,7 +34,7 @@ export function PositionChart({ teams, fixtures, mine }) {
     } else {
       const own = new Map(), by = new Map();
       scored.map((f, i) => ({ f, i }))
-        .sort((x, y) => String(x.f.date || "9999").localeCompare(String(y.f.date || "9999")) || String(x.f.time || "").localeCompare(String(y.f.time || "")) || x.i - y.i)
+        .sort((x, y) => (x.f.date && y.f.date ? String(x.f.date).localeCompare(String(y.f.date)) || String(x.f.time || "").localeCompare(String(y.f.time || "")) : 0) || x.i - y.i)
         .forEach(({ f }) => {
           const h = (own.get(f.homeIdx) || 0) + 1, a = (own.get(f.awayIdx) || 0) + 1;
           own.set(f.homeIdx, h); own.set(f.awayIdx, a); by.set(f, Math.max(h, a));

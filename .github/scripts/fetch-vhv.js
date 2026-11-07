@@ -469,8 +469,10 @@ function parseGamesHtml(html, ranking, times) {
     const scoreM = h3.match(/(\d+)\s*[-:]\s*(\d+)/);
 
     // Date from <p>: "22.08.2026"
-    const dateM = card.match(/<p[^>]*>(\d{2})\.(\d{2})\.(\d{4})<\/p>/);
-    const date  = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : null;
+    // Fallbacks when Clubee changes the card markup: any dd.mm.yyyy in the card text, then the
+    // start_date from the embedded game data (the same source the kick-off time comes from).
+    const dateM = card.match(/<p[^>]*>\s*(\d{2})\.(\d{2})\.(\d{4})\s*<\/p>/) || stripText(card).match(/(\d{2})\.(\d{2})\.(\d{4})/);
+    const date  = dateM ? `${dateM[3]}-${dateM[2]}-${dateM[1]}` : ((times && times.get(gameId) && times.get(gameId).date) || null);
 
     // A game is played if: (a) score entered in h3, OR (b) game date is in the past
     const today = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
@@ -814,7 +816,7 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
-const DATA_VERSION = 2;
+const DATA_VERSION = 3; // bumped: forces one full refresh so dates missing from the old data get filled in
 function brusselsDate(d = new Date()) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
 }

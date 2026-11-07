@@ -37,3 +37,9 @@ export function weekRange(fixtures) {
   const s = d => { const m = DATE.exec(d); return `${m[3]}/${m[2]}`; };
   return ds[0] === ds[ds.length - 1] ? s(ds[0]) : `${s(ds[0])} – ${s(ds[ds.length - 1])}`;
 }
+
+// True when every dated game of the group is on a Friday, Saturday or Sunday (a "match weekend").
+export function isWeekend(fixtures) {
+  const ds = fixtures.map(f => DATE.exec(f.date || "")).filter(Boolean);
+  return ds.length > 0 && ds.every(m => [5, 6, 0].includes(new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).getUTCDay()));
+}

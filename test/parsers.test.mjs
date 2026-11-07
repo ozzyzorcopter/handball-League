@@ -50,6 +50,16 @@ test("games: kick-off time is added from the embedded data, 00:00 is ignored", (
   assert.equal("time" in fixtures[1], false);
 });
 
+test("games: the date still comes through when Clubee changes the date markup", () => {
+  const html = card(401, "Club B", "Gamma", "- : -", "05.12.2099").replace("<p>05.12.2099</p>", "<span>05.12.2099</span>");
+  assert.equal(parseGamesHtml(html, ranking, new Map()).fixtures[0].date, "2099-12-05");
+  // no date in the card at all: use the embedded start_date
+  const bare = card(402, "Club B", "Gamma", "- : -", "").replace("<p></p>", "");
+  const times = new Map([["402", { date: "2099-12-06", time: "20:00" }]]);
+  const f = parseGamesHtml(bare, ranking, times).fixtures[0];
+  assert.deepEqual([f.date, f.time], ["2099-12-06", "20:00"]);
+});
+
 test("embedded game data: times and games are read from the escaped page payload", () => {
   const flightGames = JSON.stringify({ games: [{ id: 301, start_date: "2026-09-05T19:30:00+00:00", completed: true, score1: 30, score2: 28, cancelled: false, team1: { id: 11 }, team2: { id: 22 } }] });
   const chunk = JSON.stringify("1:" + flightGames);

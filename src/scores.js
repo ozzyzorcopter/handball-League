@@ -2,7 +2,7 @@ import { cleanTeamName } from "./names.js";
 import { useLang } from "./i18n.js";
 import { calcStats } from "./standings.js";
 import { modelProbs, predictPlayed } from "./probabilities.js";
-import { matchStamp, weekRange } from "./weeks.js";
+import { isWeekend, matchStamp, weekRange } from "./weeks.js";
 import { runMCAsync } from "./mcRunner.js";
 import { fmtPct, heatColor } from "./format.js";
 import { resolveRef } from "./tournament.js";
@@ -317,6 +317,7 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
   }, [fixtures]);
 
   const hasWeeks = weeks.length > 0;
+  const weekTitle = g => (isWeekend(g.fixtures) ? tr("Weekend") : tr("Week")) + " " + g.week;
 
   // Pre-match predicted score for games already played (Belgian view only).
   const playedPreds = useMemo(() => {
@@ -386,7 +387,7 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
             return (
               <div key={group.week ?? "none"}>
                 {group.week != null
-                  ? <div className="week-header">{tr("Week")} {group.week}{weekRange(group.fixtures) ? <span className="muted" style={{ fontWeight: 400, marginLeft: ".5rem" }}>{weekRange(group.fixtures)}</span> : null}</div>
+                  ? <div className="week-header">{weekTitle(group)}{weekRange(group.fixtures) ? <span className="muted" style={{ fontWeight: 400, marginLeft: ".5rem" }}>{weekRange(group.fixtures)}</span> : null}</div>
                   : (hasWeeks ? <div className="week-header">{tr("No date yet")}</div> : null)}
                 {gPending.map(f => (
                   <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
@@ -419,7 +420,7 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
             <div key={group.week ?? "none"}>
               {group.week != null && (
                 <div className="week-header" style={allDone ? { color: "#4ade80" } : {}}>
-                  {tr("Week")} {group.week}{allDone ? " ✓" : ""}
+                  {weekTitle(group)}{allDone ? " ✓" : ""}
                   {weekRange(group.fixtures) && <span className="muted" style={{ fontWeight: 400, marginLeft: ".5rem" }}>{weekRange(group.fixtures)}</span>}
                 </div>
               )}
