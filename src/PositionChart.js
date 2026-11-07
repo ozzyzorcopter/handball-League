@@ -7,8 +7,15 @@ const { useState, useMemo } = React;
 // games). All lines start grey; tap a team (line or name) to colour it, and
 // teams you follow are coloured from the start. The same numbers sit in a
 // table under the chart.
-const SERIES = ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#008300", "#9085e9", "#e66767"]; // dark-surface steps, fixed order per team
-const W = 360, ROW = 21, PAD_T = 14, PAD_B = 22, PAD_L = 22, PAD_R = 92;
+// One colour per team, spread round the colour wheel. Neighbouring teams (by index) get far-apart hues and
+// alternating lightness, so lines that run next to each other stay easy to tell apart.
+const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+function palette(n) {
+  let step = Math.max(1, Math.round(n * 0.382)); while (gcd(step, n) !== 1) step++;
+  const L = [62, 48, 75];
+  return Array.from({ length: n }, (_, i) => { const k = (i * step) % n; return `hsl(${Math.round((360 * k) / n + 8) % 360} 80% ${L[k % 3]}%)`; });
+}
+const W = 360, ROW = 21, PAD_T = 14, PAD_B = 22, PAD_L = 22, PAD_R = 100;
 
 export function PositionChart({ teams, fixtures, mine }) {
   const { t } = useLang();
@@ -16,28 +23,33 @@ export function PositionChart({ teams, fixtures, mine }) {
 
   const data = useMemo(() => {
     const scored = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
-    // Matchday of a game: its numbered week when every played game has one. Leagues that play
-    // everything in one weekend (tournaments) or have undated games fall back to "the Nth game of
-    // each team", so the chart still shows how the table built up.
-    let round = f => f.week;
+    // Matchday of a game = its numbered week. Games without a week (no date yet) count in the last column,
+    // so the chart ends on the real table. Leagues with fewer than two played weeks (a tournament weekend)
+    // fall back to "after each team's Nth game".
     let weeks = [...new Set(scored.map(f => f.week))].filter(w => w > 0).sort((a, b) => a - b);
-    if (scored.some(f => !(f.week > 0)) || weeks.length < 2) {
-      const count = new Map(), by = new Map();
+    let round;
+    if (weeks.length >= 2) {
+      const lastWeek = weeks[weeks.length - 1];
+      round = f => (f.week > 0 ? f.week : lastWeek);
+    } else {
+      const own = new Map(), by = new Map();
       scored.map((f, i) => ({ f, i }))
         .sort((x, y) => String(x.f.date || "9999").localeCompare(String(y.f.date || "9999")) || String(x.f.time || "").localeCompare(String(y.f.time || "")) || x.i - y.i)
         .forEach(({ f }) => {
-          const r = Math.max(count.get(f.homeIdx) || 0, count.get(f.awayIdx) || 0) + 1;
-          count.set(f.homeIdx, r); count.set(f.awayIdx, r); by.set(f, r);
+          const h = (own.get(f.homeIdx) || 0) + 1, a = (own.get(f.awayIdx) || 0) + 1;
+          own.set(f.homeIdx, h); own.set(f.awayIdx, a); by.set(f, Math.max(h, a));
         });
       round = f => by.get(f);
       weeks = [...new Set(scored.map(round))].sort((a, b) => a - b);
     }
     if (weeks.length < 2) return null;
-    const pos = {};       // team id -> [position per matchday]
-    teams.forEach(tm => { pos[tm.id] = []; });
-    weeks.forEach(w => {
+    const pos = {};       // team id -> [position per matchday, or null before its first game]
+    teams.forEach(tm => { pos[tm.id] = Array(weeks.length).fill(null); });
+    weeks.forEach((w, wi) => {
       const order = calcStats(teams, scored.filter(f => round(f) <= w));
-      order.forEach((r, i) => { if (pos[r.id]) pos[r.id].push(i + 1); });
+      const played = order.filter(r => r.P > 0), idle = order.filter(r => !(r.P > 0));
+      played.forEach((r, i) => { if (pos[r.id]) pos[r.id][wi] = i + 1; });
+      if (wi === weeks.length - 1) idle.forEach((r, i) => { if (pos[r.id]) pos[r.id][wi] = played.length + i + 1; });
     });
     return { weeks, pos };
   }, [teams, fixtures]);
@@ -50,7 +62,8 @@ export function PositionChart({ teams, fixtures, mine }) {
   const y = p => PAD_T + (p - 1) * ROW;
   const hot = id => (mine && mine.has(id)) || picked.includes(id);
   const anyHot = teams.some(tm => hot(tm.id));
-  const colorOf = idx => SERIES[idx % SERIES.length];
+  const colors = palette(teams.length);
+  const colorOf = idx => colors[idx];
   const toggle = id => setPicked(p => (p.includes(id) ? p.filter(v => v !== id) : [...p, id]));
   const step = weeks.length > 14 ? 2 : 1;
   const short = nm => { const s = cleanTeamName(nm); return s.length > 13 ? s.slice(0, 12) + "…" : s; };
@@ -73,21 +86,23 @@ export function PositionChart({ teams, fixtures, mine }) {
         ))}
         {order.map(ti => {
           const tm = teams[ti], p = pos[tm.id] || [];
-          if (!p.length) return null;
+          const pts = p.map((v, i) => (v == null ? null : [i, v])).filter(Boolean);
+          if (!pts.length) return null;
           const on = hot(tm.id);
-          const col = on ? colorOf(ti) : "#4a5060";
-          const pts = p.map((v, i) => `${x(i)},${y(v)}`).join(" ");
-          const last = p[p.length - 1];
+          const col = colorOf(ti);
+          const line = pts.map(([i, v]) => `${x(i)},${y(v)}`).join(" ");
+          const [li, last] = pts[pts.length - 1];
           const dim = anyHot && !on;
           return (
-            <g key={tm.id} opacity={dim ? 0.55 : 1} style={{ cursor: "pointer" }} onClick={() => toggle(tm.id)}>
-              <polyline points={pts} fill="none" stroke="transparent" strokeWidth="14" strokeLinejoin="round" />
-              <polyline points={pts} fill="none" stroke={col} strokeWidth={on ? 2.2 : 1.2} strokeLinejoin="round" strokeLinecap="round" />
-              {on && p.map((v, i) => (
+            <g key={tm.id} opacity={dim ? 0.3 : 1} style={{ cursor: "pointer" }} onClick={() => toggle(tm.id)}>
+              <polyline points={line} fill="none" stroke="transparent" strokeWidth="14" strokeLinejoin="round" />
+              <polyline points={line} fill="none" stroke={col} strokeWidth={on ? 2.8 : 1.5} strokeLinejoin="round" strokeLinecap="round" />
+              {on && pts.map(([i, v]) => (
                 <circle key={i} cx={x(i)} cy={y(v)} r="3" fill={col} stroke="#10121a" strokeWidth="1.5"><title>{`${cleanTeamName(tm.name)} · ${t("Matchday")} ${i + 1}: #${v}`}</title></circle>
               ))}
-              <circle cx={x(p.length - 1)} cy={y(last)} r={on ? 3.5 : 2.5} fill={col} stroke="#10121a" strokeWidth="1.5" />
-              <text x={x(weeks.length - 1) + 8} y={y(last) + 3} fontSize="9" fill={on ? "#f0efec" : "#8b93a5"} fontWeight={on ? 700 : 400} fontFamily="DM Sans, sans-serif">{short(tm.name)}</text>
+              <circle cx={x(li)} cy={y(last)} r={on ? 3.5 : 2.6} fill={col} stroke="#10121a" strokeWidth="1.5" />
+              <rect x={x(weeks.length - 1) + 7} y={y(last) - 3.5} width="7" height="7" rx="2" fill={col} />
+              <text x={x(weeks.length - 1) + 17} y={y(last) + 3} fontSize="9" fill={on ? "#f0efec" : "#aeb5c4"} fontWeight={on ? 700 : 400} fontFamily="DM Sans, sans-serif">{short(tm.name)}</text>
             </g>
           );
         })}
@@ -100,7 +115,7 @@ export function PositionChart({ teams, fixtures, mine }) {
             <thead><tr><th className="tl">{t("Team")}</th>{weeks.map((w, i) => <th key={w}>{i + 1}</th>)}</tr></thead>
             <tbody>
               {[...teams].sort((a, b) => ((pos[a.id] || [])[weeks.length - 1] || 99) - ((pos[b.id] || [])[weeks.length - 1] || 99)).map(tm => (
-                <tr key={tm.id}><td className="tl">{cleanTeamName(tm.name)}</td>{(pos[tm.id] || []).map((v, i) => <td key={i}>{v}</td>)}</tr>
+                <tr key={tm.id}><td className="tl">{cleanTeamName(tm.name)}</td>{(pos[tm.id] || []).map((v, i) => <td key={i}>{v == null ? "–" : v}</td>)}</tr>
               ))}
             </tbody>
           </table>
