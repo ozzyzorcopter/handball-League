@@ -15,13 +15,28 @@ export function PositionChart({ teams, fixtures, mine }) {
   const [picked, setPicked] = useState([]);   // team ids tapped on top of the followed ones
 
   const data = useMemo(() => {
-    const scored = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null && f.week > 0);
-    const weeks = [...new Set(scored.map(f => f.week))].sort((a, b) => a - b);
+    const scored = fixtures.filter(f => f.played && f.homeScore != null && f.awayScore != null);
+    // Matchday of a game: its numbered week when every played game has one. Leagues that play
+    // everything in one weekend (tournaments) or have undated games fall back to "the Nth game of
+    // each team", so the chart still shows how the table built up.
+    let round = f => f.week;
+    let weeks = [...new Set(scored.map(f => f.week))].filter(w => w > 0).sort((a, b) => a - b);
+    if (scored.some(f => !(f.week > 0)) || weeks.length < 2) {
+      const count = new Map(), by = new Map();
+      scored.map((f, i) => ({ f, i }))
+        .sort((x, y) => String(x.f.date || "9999").localeCompare(String(y.f.date || "9999")) || String(x.f.time || "").localeCompare(String(y.f.time || "")) || x.i - y.i)
+        .forEach(({ f }) => {
+          const r = Math.max(count.get(f.homeIdx) || 0, count.get(f.awayIdx) || 0) + 1;
+          count.set(f.homeIdx, r); count.set(f.awayIdx, r); by.set(f, r);
+        });
+      round = f => by.get(f);
+      weeks = [...new Set(scored.map(round))].sort((a, b) => a - b);
+    }
     if (weeks.length < 2) return null;
     const pos = {};       // team id -> [position per matchday]
     teams.forEach(tm => { pos[tm.id] = []; });
     weeks.forEach(w => {
-      const order = calcStats(teams, scored.filter(f => f.week <= w));
+      const order = calcStats(teams, scored.filter(f => round(f) <= w));
       order.forEach((r, i) => { if (pos[r.id]) pos[r.id].push(i + 1); });
     });
     return { weeks, pos };
