@@ -9,7 +9,7 @@ import { resolveRef } from "./tournament.js";
 import { ProbBar } from "./ProbBar.js";
 const { useState, useMemo, useRef, useEffect } = React;
 // ── SCORE ROW ─────────────────────────────────────────────────────────────────
-export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange, pred }) {
+export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange, pred, onMatchClick }) {
   const [hg, setHg] = useState("");
   const [ag, setAg] = useState("");
   const stamp = matchStamp(f) || (f.week ? "W" + f.week : null);
@@ -47,13 +47,16 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
     const res = hs > as_ ? "home" : hs < as_ ? "away" : "draw";
     const lbl = res === "home" ? hn + " Win" : res === "away" ? an + " Win" : "Draw";
     const col = res === "home" ? "#4ade80" : res === "away" ? "#f87171" : "#94a3b8";
+    const open = onMatchClick && f.gameId ? () => onMatchClick(f) : null;
+    const stop = fn => e => { e.stopPropagation(); fn(); };
     return (
-      <div className="outcome done">
+      <div className={"outcome done" + (open ? " clickable" : "")} onClick={open || undefined}
+        {...(open ? { role: "button", tabIndex: 0, onKeyDown: e => { if (e.key === "Enter") open(); } } : {})}>
         {badge}
         <div className="oteams">
-          <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.homeIdx)}>{hn}</button>
+          <button className="otbtn" onClick={stop(() => onTeamClick && onTeamClick(f.homeIdx))}>{hn}</button>
           <span className="vs">vs</span>
-          <button className="otbtn" onClick={() => onTeamClick && onTeamClick(f.awayIdx)}>{an}</button>
+          <button className="otbtn" onClick={stop(() => onTeamClick && onTeamClick(f.awayIdx))}>{an}</button>
         </div>
         <div style={{ textAlign: "center" }}>
           <div className="score-done">
@@ -63,7 +66,7 @@ export function ScoreRow({ f, teams, liveP, settings, onConfirm, onUndo, onOverr
           </div>
           {pred && <div className="muted" title="Goal model prediction before the game" style={{ fontFamily: "DM Mono,monospace", fontSize: ".66rem", marginTop: ".1rem" }}>({pred.eh}–{pred.ea})</div>}
         </div>
-        <span className="res-lbl" style={{ color: col }}>{lbl}</span>
+        <span className="res-lbl" style={{ color: col }}>{lbl}{open ? " 📋" : ""}</span>
         {onWeekChange && (
           <div style={{ display: "flex", alignItems: "center", gap: ".3rem" }}>
             <span style={{ fontFamily: "DM Mono,monospace", fontSize: ".65rem", color: "#7d8597" }}>W</span>
@@ -305,7 +308,7 @@ export function MCTab({ teams, fixtures, settings, highlightTop, highlightBottom
 }
 
 // ── SCORES TAB ───────────────────────────────────────────────────────────────
-export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange, showPlayedPredictions }) {
+export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onUndo, onOverride, onTeamClick, onWeekChange, showPlayedPredictions, onMatchClick }) {
   const { t: tr } = useLang();
   const [selectedTeam, setSelectedTeam] = useState("all");
   const [selectedWeek, setSelectedWeek] = useState("all");
@@ -391,11 +394,11 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
                   : (hasWeeks ? <div className="week-header">{tr("No date yet")}</div> : null)}
                 {gPending.map(f => (
                   <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
-                    onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
+                    onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} onMatchClick={onMatchClick} />
                 ))}
                 {gPlayed.map(f => (
                   <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
-                    onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
+                    onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} onMatchClick={onMatchClick} />
                 ))}
               </div>
             );
@@ -427,11 +430,11 @@ export function ScoresTab({ teams, fixtures, liveProbs, settings, onConfirm, onU
               {group.week == null && hasWeeks && <div className="week-header">{tr("No date yet")}</div>}
               {gPending.map(f => (
                 <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
-                  onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
+                  onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} onMatchClick={onMatchClick} />
               ))}
               {gPlayed.map(f => (
                 <ScoreRow key={f.id} f={f} teams={teams} liveP={liveProbs[f.id]} pred={playedPreds[f.id]} settings={settings}
-                  onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} />
+                  onConfirm={onConfirm} onUndo={onUndo} onOverride={onOverride} onTeamClick={onTeamClick} onWeekChange={onWeekChange} onMatchClick={onMatchClick} />
               ))}
             </div>
           );

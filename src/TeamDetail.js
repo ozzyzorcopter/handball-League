@@ -3,7 +3,7 @@ import { ScorerPanel } from "./scorers.js";
 import { matchStamp } from "./weeks.js";
 const { useState } = React;
 // ── TEAM DETAIL PANEL ─────────────────────────────────────────────────────────
-export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers, phase }) {
+export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, aliases, archiveScorers, phase, onMatchClick }) {
   // Phones show this as a bottom sheet; dragging the grip down closes it.
   const [dragY, setDragY] = useState(0);
   const dragStart = React.useRef(null);
@@ -210,7 +210,8 @@ export function TeamDetail({ team, teamIdx, teams, fixtures, onClose, leagueId, 
               const isHome = f.homeIdx === teamIdx;
               const opp = isHome ? teams[f.awayIdx]?.name : teams[f.homeIdx]?.name;
               return (
-                <div key={f.id} className="detail-match" style={{ opacity: f.played ? 1 : 0.6 }}>
+                <div key={f.id} className={"detail-match" + (onMatchClick && f.gameId && f.played && f.homeScore != null ? " clickable" : "")} style={{ opacity: f.played ? 1 : 0.6 }}
+                  onClick={onMatchClick && f.gameId && f.played && f.homeScore != null ? () => onMatchClick(f) : undefined}>
                   {(matchStamp(f) || f.week > 0) && (
                     <span className="week-badge" style={{ fontSize: ".6rem", padding: ".08rem .3rem" }}>{matchStamp(f) || "W" + f.week}</span>
                   )}

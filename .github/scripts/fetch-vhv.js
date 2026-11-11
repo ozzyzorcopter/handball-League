@@ -541,7 +541,7 @@ function parseStatTables(html) {
       if (/data-is-header="true"/.test(rowHtml) || /^<tr[^>]*>\s*<th/i.test(rowHtml)) header = cells.map(c => c.text.toLowerCase());
       else rows.push(cells);
     }
-    out.push({ before, header, rows });
+    out.push({ before, header, rows, start: tm.index, end: tm.index + tableHtml.length });
   }
   return out;
 }
@@ -606,6 +606,37 @@ function parseLineupHtml(html) {
   return players;
 }
 
+// Full line-up page for the app: per team the players (shirt number, goals, 7m, cards), staff and captain.
+// The first table is the home team. Staff and captain sit in the markup right after each table.
+function parseLineupFull(html) {
+  const tables = parseStatTables(html).filter(t => t.header.includes("player") || t.header.includes("g"));
+  const teams = [];
+  tables.forEach((t, i) => {
+    const c = statCols(t.header);
+    const club = t.before.replace(/\s*\([^)]*\)\s*$/, "").trim();
+    const players = [];
+    for (const cells of t.rows) {
+      const x = cells.map(y => y.text);
+      if (x.length < 4 || !x[c.player] || !/^\d+$/.test(x[c.g] ?? "")) continue;
+      const n = parseInt(x[0]);
+      players.push({
+        n: Number.isFinite(n) && c.player > 0 ? n : null, name: x[c.player], g: parseInt(x[c.g]) || 0,
+        s7: parseInt(x[c.s7]) || 0, m7: parseInt(x[c.m7]) || 0, yc: parseInt(x[c.yc]) || 0,
+        m2: parseInt(x[c.min2]) || 0, bc: parseInt(x[c.bc]) || 0, rc: parseInt(x[c.rc]) || 0,
+      });
+    }
+    const next = tables[i + 1] ? tables[i + 1].start : t.end + 8000;
+    const seg = html.slice(t.end, Math.min(next, t.end + 8000)).replace(/<!--[\s\S]*?-->/g, "");
+    const staff = [];
+    const staffRe = /<p[^>]*>\s*([^<]+?)\s*<span>\s*\(\s*([^<)]+?)\s*\)\s*<\/span>\s*<\/p>/g;
+    let m;
+    while ((m = staffRe.exec(seg)) !== null) staff.push({ name: m[1].replace(/\s+/g, " "), role: m[2].trim() });
+    const cap = seg.match(/Team captain<\/strong><\/p><\/div><p[^>]*>\s*([^<]+?)\s*<\/p>/);
+    teams.push({ club, players, staff, captain: cap ? cap[1].replace(/\s+/g, " ") : "" });
+  });
+  return teams;
+}
+
 const looksLikeStatsTable = h => /<tr[\s>]/i.test(h) && /data-is-header="true"/.test(h);
 
 async function parseStatsAllPages(leagueId, ranking = []) {
@@ -640,7 +671,7 @@ async function fetchGameLineup(gameId) {
   const url = `https://www.clubee.com/handballbelgium/games/${gameId}/lineup`;
   try {
     const html = await fetchHtmlSmart(url, looksLikeStatsTable);
-    return parseLineupHtml(html);
+    return { players: parseLineupHtml(html), lineup: parseLineupFull(html) };
   } catch { return null; }
 }
 
@@ -816,6 +847,7 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
+const LINEUP_BACKFILL_PER_RUN = 80; // games cached before line-ups existed get theirs a few per run, newest first
 const DATA_VERSION = 3; // bumped: forces one full refresh so dates missing from the old data get filled in
 function brusselsDate(d = new Date()) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
@@ -989,15 +1021,16 @@ async function main() {
       // Per-game boxscores — only fetch games not already in the cache from
       // a previous run. Powers "goals in last game" on the scorer panel and
       // the "most goals in a single game" player ranking.
-      const playedWithGameId = fixtures.filter(f => f.played && f.gameId);
+      const playedWithGameId = fixtures.filter(f => f.played && f.gameId).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
       let newBoxscores = 0, failedBoxscores = 0;
       for (const f of playedWithGameId) {
         if (reuseStats || boxCache.games[f.gameId]) continue;
-        const players = await fetchGameLineup(f.gameId);
+        const got = await fetchGameLineup(f.gameId);
+        const players = got && got.players;
         if (players && players.length > 0) {
-          boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players };
+          boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players, lineup: got.lineup };
           newBoxscores++;
-        } else if (players === null) {
+        } else if (got === null) {
           failedBoxscores++; // could not fetch the page: not remembered, so the next run tries again
         } else {
           // Remember the attempt so we don't refetch a broken/empty page
@@ -1185,6 +1218,35 @@ async function main() {
     log(`Wrote data/index.json and ${r.leagues} league file(s)`);
   } catch (e) { warn(`Could not write split data: ${e.message}`); }
 
+  // Games cached before line-ups existed: add the line-up a few per run, newest first.
+  {
+    const todo = Object.entries(boxCache.games)
+      .filter(([, g]) => !g.lineup && !g.failed)
+      .sort((a, b) => (b[1].date || "").localeCompare(a[1].date || ""))
+      .slice(0, LINEUP_BACKFILL_PER_RUN);
+    let done = 0;
+    for (const [gid, g] of todo) {
+      const got = await fetchGameLineup(gid);
+      if (got && got.lineup && got.lineup.length) { g.lineup = got.lineup; done++; }
+    }
+    const left = Object.values(boxCache.games).filter(g => !g.lineup && !g.failed).length;
+    if (todo.length) log(`Line-ups added to cached games: ${done}/${todo.length} (${left} still to do)`);
+  }
+
+  // One small file per league with every cached line-up: data/lineups/<serieId>.json
+  try {
+    const byLeague = new Map();
+    for (const [gid, g] of Object.entries(boxCache.games)) {
+      if (!g.lineup || !g.lineup.length) continue;
+      if (!byLeague.has(g.leagueId)) byLeague.set(g.leagueId, {});
+      byLeague.get(g.leagueId)[gid] = g.lineup;
+    }
+    const dir = path.join(root, "data", "lineups");
+    fs.mkdirSync(dir, { recursive: true });
+    for (const [id, obj] of byLeague) fs.writeFileSync(path.join(dir, `${id}.json`), JSON.stringify(obj));
+    log(`Wrote line-ups for ${byLeague.size} league(s)`);
+  } catch (e) { warn(`Could not write line-ups: ${e.message}`); }
+
   fs.writeFileSync(boxscoreCachePath, JSON.stringify(boxCache, null, 2));
   const totalCached = Object.keys(boxCache.games).length;
   log(`Boxscore cache: ${totalCached} game(s) total (was ${cachedGameCount} before this run)`);
@@ -1206,7 +1268,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { parseVenueAddress, parseStatsHtml, parseLineupHtml, LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
+module.exports = { parseVenueAddress, parseStatsHtml, parseLineupHtml, parseLineupFull, LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }

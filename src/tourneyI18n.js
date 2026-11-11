@@ -25,6 +25,9 @@ export const TOURNEY_NL = {
   "Group stage": "Groepsfase", "Knock-out from groups": "Knock-out uit de poules", "Knock-out with all teams": "Knock-out met alle ploegen",
   "Winner": "Winnaar", "Loser": "Verliezer", "Quarter-finals": "Kwartfinales", "Semi-finals": "Halve finales", "Final": "Finale", "Round of": "Laatste",
   "Group places": "Plaatsen in poule", "Earlier matches": "Eerdere wedstrijden", "Triangle": "Driehoek", "League": "Competitie",
+  "Line-up": "Opstelling", "Player": "Speler", "Goals": "Doelpunten", "goals": "doelpunten", "7m goals / shots": "7m doelpunten / pogingen",
+  "Team captain": "Ploegkapitein", "The line-up lists": "De opstelling telt", "No line-up available for this game yet.": "Nog geen opstelling beschikbaar voor deze wedstrijd.",
+  "scored / taken": "gescoord / genomen", "yellow": "geel", "2 minutes": "2 minuten", "blue": "blauw", "red": "rood", "Loading…": "Laden…",
 };
 export const TOURNEY_FR = {
   "Tournaments": "Tournois", "Make your own tournament and keep score. Saved on this device.": "Crée ton propre tournoi et note les scores. Enregistré sur cet appareil.",
@@ -52,4 +55,7 @@ export const TOURNEY_FR = {
   "Group stage": "Phase de groupes", "Knock-out from groups": "Élimination depuis les poules", "Knock-out with all teams": "Élimination avec toutes les équipes",
   "Winner": "Vainqueur", "Loser": "Perdant", "Quarter-finals": "Quarts de finale", "Semi-finals": "Demi-finales", "Final": "Finale", "Round of": "Tour de",
   "Group places": "Places en poule", "Earlier matches": "Matchs précédents", "Triangle": "Triangulaire", "League": "Championnat",
+  "Line-up": "Composition", "Player": "Joueur", "Goals": "Buts", "goals": "buts", "7m goals / shots": "Buts / tirs de 7m",
+  "Team captain": "Capitaine", "The line-up lists": "La composition compte", "No line-up available for this game yet.": "Pas encore de composition pour ce match.",
+  "scored / taken": "marqués / tirés", "yellow": "jaune", "2 minutes": "2 minutes", "blue": "bleu", "red": "rouge", "Loading…": "Chargement…",
 };

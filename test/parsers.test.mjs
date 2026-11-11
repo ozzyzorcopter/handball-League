@@ -7,7 +7,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
-const { parseStatsHtml, parseLineupHtml, parseStandingsHtml, parseGamesHtml, extractFlightGames, extractGameTimes } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
+const { parseStatsHtml, parseLineupHtml, parseLineupFull, parseStandingsHtml, parseGamesHtml, extractFlightGames, extractGameTimes } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
 
 const standingsHtml = `<table><tbody>
 <tr><th>#</th><th>Club</th></tr>
@@ -139,4 +139,19 @@ test("team names with an apostrophe (hex-encoded) still match between standings 
   const { fixtures } = parseGamesHtml(card(1, "HVH &#x27;t Noorden", "HC Other") + card(2, "HC Other", "HVH &#39;t Noorden"), rank, new Map());
   assert.equal(fixtures.length, 2);
   assert.ok(fixtures.every(f => f.homeIdx !== f.awayIdx));
+});
+
+test("line-up page: players with shirt numbers, staff and captain per team", () => {
+  const html = fs.readFileSync(new URL("./fixtures/clubee/lineup.html", import.meta.url), "utf8");
+  const teams = parseLineupFull(html);
+  assert.equal(teams.length, 2);
+  assert.equal(teams[0].club, "Biobest Sasja D1 M VHV");
+  assert.equal(teams[0].players.reduce((s, p) => s + p.g, 0), 23); // the saved page itself lists 23 goals for a 26-25 game
+  assert.equal(teams[1].players.reduce((s, p) => s + p.g, 0), 24);
+  const lam = teams[0].players.find(p => p.name === "Maxime Lambreghts");
+  assert.deepEqual([lam.n, lam.g], [6, 7]);
+  assert.deepEqual(teams[0].staff, [{ name: "Patrick Van Herle", role: "Assistant Coach" }, { name: "Herman Van Leugenhaege", role: "Head Coach" }]);
+  assert.equal(teams[0].captain, "Sten Dielen");
+  assert.equal(teams[1].captain, "Jari Van Verdegem");
+  assert.equal(teams[1].staff[0].name, "Jo Bytebier");
 });

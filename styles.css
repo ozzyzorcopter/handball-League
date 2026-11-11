@@ -396,3 +396,38 @@ html[data-theme="light"] .subtab.on{filter:invert(1) hue-rotate(180deg);}
 .tn-rmatches{display:flex;flex-direction:column;justify-content:space-around;gap:.8rem;flex:1;}
 @media(max-width:600px){.tn-kinds{grid-template-columns:1fr;}.tn-wiz{padding:1.1rem;}}
 .tn-stagehead .btn{white-space:nowrap;padding:.5rem .8rem;font-size:.72rem;}
+
+/* ── Line-up sheet ───────────────────────────────────────────────────────── */
+.outcome.clickable,.detail-match.clickable{cursor:pointer;}
+.outcome.clickable:active,.detail-match.clickable:active{background:rgba(253,218,36,.06);}
+.lu-over{z-index:70!important;}
+.lu-panel{z-index:71!important;}
+.lu-head{display:flex;align-items:center;justify-content:center;gap:.7rem;text-align:center;flex-wrap:wrap;}
+.lu-hn{font-family:'Syne',sans-serif;font-weight:700;color:#fff;font-size:.95rem;}
+.lu-hscore{font-family:'DM Mono',monospace;font-size:1.25rem;font-weight:700;color:#fdda24;white-space:nowrap;}
+.lu-when{text-align:center;font-size:.72rem;margin-top:-.4rem;}
+.lu-cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;}
+@media(max-width:700px){.lu-cols{grid-template-columns:1fr;}}
+.lu-team{background:#08090c;border:1px solid #1c1f27;border-radius:8px;padding:.6rem .7rem;}
+.lu-team-h{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;margin-bottom:.4rem;}
+.lu-team-name{font-family:'Syne',sans-serif;font-weight:700;color:#fdda24;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;}
+.lu-team-score{font-family:'DM Mono',monospace;font-size:1rem;color:#8b93a5;}
+.lu-team-score.win{color:#4ade80;font-weight:700;}
+.lu-tbl{width:100%;border-collapse:collapse;font-size:.82rem;}
+.lu-tbl th{font-family:'DM Mono',monospace;font-size:.62rem;font-weight:500;color:#7d8597;text-transform:uppercase;padding:.2rem .3rem;text-align:center;border-bottom:1px solid #1c1f27;}
+.lu-tbl th.tl,.lu-tbl td.tl{text-align:left;}
+.lu-tbl td{padding:.28rem .3rem;border-bottom:1px solid #12141a;text-align:center;}
+.lu-n{color:#7d8597;font-family:'DM Mono',monospace;width:1.8rem;}
+.lu-name{color:#d4d8e0;}
+.lu-quiet .lu-name{color:#8b93a5;}
+.lu-g{font-family:'DM Mono',monospace;font-weight:700;color:#fdda24;width:2rem;}
+.lu-quiet .lu-g{color:#4a5060;font-weight:400;}
+.lu-7{font-family:'DM Mono',monospace;color:#a78bfa;width:2.6rem;font-size:.75rem;}
+.lu-cards{display:inline-flex;gap:.25rem;margin-left:.4rem;vertical-align:middle;}
+.lu-card{display:inline-block;min-width:.55rem;height:.8rem;border-radius:2px;font-size:.55rem;line-height:.8rem;text-align:center;color:#000;font-weight:700;}
+.lu-y{background:#facc15;}.lu-b{background:#3b82f6;color:#fff;}.lu-r{background:#ef4444;color:#fff;}
+.lu-2m{font-family:'DM Mono',monospace;font-size:.62rem;color:#fb923c;border:1px solid #fb923c;border-radius:3px;padding:0 .2rem;}
+.lu-cap{display:inline-block;margin-left:.35rem;font-size:.58rem;font-weight:800;color:#000;background:#fdda24;border-radius:50%;width:1rem;height:1rem;line-height:1rem;text-align:center;vertical-align:middle;}
+.lu-staff{font-size:.75rem;color:#c4c9d4;margin-top:.45rem;}
+.lu-note{font-size:.66rem;margin-top:.3rem;}
+.lu-legend{font-size:.66rem;text-align:center;margin-top:.2rem;}

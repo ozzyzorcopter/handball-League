@@ -11,6 +11,7 @@ import { Skeleton } from "./Skeleton.js";
 import { ErrorBoundary } from "./ErrorBoundary.js";
 import { LeagueTable } from "./LeagueTable.js";
 import { TeamDetail } from "./TeamDetail.js";
+import { LineupSheet } from "./LineupSheet.js";
 import { MCTab, ScoresTab } from "./scores.js";
 import { PlayersTab } from "./PlayersTab.js";
 import { SettingsPanel } from "./SettingsPanel.js";
@@ -287,6 +288,8 @@ export function BelgianLeagueView({ league, onBack }) {
   const { t: tr } = useLang();
   const [detail, setDetail]           = useState(null);
   const [tab, setTab]                 = useState("table");
+  const [lineup, setLineup]         = useState(null);
+  useBackLayer(!!lineup, () => setLineup(null));
   useBackLayer(!!detail, () => setDetail(null));
   useBackLayer(tab !== "table", () => setTab("table"));
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
@@ -445,6 +448,7 @@ export function BelgianLeagueView({ league, onBack }) {
             onTeamClick={idx => setDetail({ idx })}
             onWeekChange={null}
             showPlayedPredictions
+            onMatchClick={f => setLineup(f)}
           />
         )}
 
@@ -539,8 +543,10 @@ export function BelgianLeagueView({ league, onBack }) {
           aliases={leagueState.scorerAliases || {}}
           archiveScorers={leagueScorers}
           phase="regular"
+          onMatchClick={f => setLineup(f)}
         />
       )}
+      {lineup && <LineupSheet fixture={lineup} teams={teams} leagueId={league.serieId} onClose={() => setLineup(null)} />}
     </div>
   );
 }
