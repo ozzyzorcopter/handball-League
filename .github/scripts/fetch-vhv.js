@@ -847,7 +847,8 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
-const LINEUP_BACKFILL_PER_RUN = 80; // games cached before line-ups existed get theirs a few per run, newest first
+const LINEUP_BACKFILL_PER_RUN = 2000; // effectively all; the time budget below is the real limit
+const LINEUP_BACKFILL_MINUTES = 20; // games cached before line-ups existed get theirs a few per run, newest first
 const DATA_VERSION = 3; // bumped: forces one full refresh so dates missing from the old data get filled in
 function brusselsDate(d = new Date()) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
@@ -1221,16 +1222,22 @@ async function main() {
   // Games cached before line-ups existed: add the line-up a few per run, newest first.
   {
     const todo = Object.entries(boxCache.games)
-      .filter(([, g]) => !g.lineup && !g.failed)
+      .filter(([, g]) => (!g.lineup || !g.lineup.length) && !g.failed)
       .sort((a, b) => (b[1].date || "").localeCompare(a[1].date || ""))
       .slice(0, LINEUP_BACKFILL_PER_RUN);
-    let done = 0;
-    for (const [gid, g] of todo) {
-      const got = await fetchGameLineup(gid);
-      if (got && got.lineup && got.lineup.length) { g.lineup = got.lineup; done++; }
+    const deadline = Date.now() + LINEUP_BACKFILL_MINUTES * 60000;
+    let done = 0, tried = 0;
+    for (let i = 0; i < todo.length; i += 4) {
+      if (Date.now() > deadline) { warn("Line-up backfill: time budget reached, continuing next run"); break; }
+      const batch = todo.slice(i, i + 4);
+      await Promise.all(batch.map(async ([gid, g]) => {
+        tried++;
+        const got = await fetchGameLineup(gid);
+        if (got && got.lineup && got.lineup.length) { g.lineup = got.lineup; done++; }
+      }));
     }
-    const left = Object.values(boxCache.games).filter(g => !g.lineup && !g.failed).length;
-    if (todo.length) log(`Line-ups added to cached games: ${done}/${todo.length} (${left} still to do)`);
+    const left = Object.values(boxCache.games).filter(g => (!g.lineup || !g.lineup.length) && !g.failed).length;
+    if (todo.length) log(`Line-ups added to cached games: ${done}/${tried} (${left} still to do)`);
   }
 
   // One small file per league with every cached line-up: data/lineups/<serieId>.json
