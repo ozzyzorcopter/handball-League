@@ -12,6 +12,8 @@ import { ErrorBoundary } from "./ErrorBoundary.js";
 import { LeagueTable } from "./LeagueTable.js";
 import { TeamDetail } from "./TeamDetail.js";
 import { LineupSheet } from "./LineupSheet.js";
+import { CupView } from "./CupView.js";
+import { isCupLeague } from "./cupRounds.js";
 import { MCTab, ScoresTab } from "./scores.js";
 import { PlayersTab } from "./PlayersTab.js";
 import { SettingsPanel } from "./SettingsPanel.js";
@@ -287,11 +289,13 @@ export function BelgianLeagueView({ league, onBack }) {
   const fixtures = useMemo(() => assignWeeks(rawFixtures), [rawFixtures]);
   const { t: tr } = useLang();
   const [detail, setDetail]           = useState(null);
-  const [tab, setTab]                 = useState("table");
+  const isCup = isCupLeague(league);
+  const homeTab = isCup ? "cup" : "table";
+  const [tab, setTab]                 = useState(homeTab);
   const [lineup, setLineup]         = useState(null);
   useBackLayer(!!lineup, () => setLineup(null));
   useBackLayer(!!detail, () => setDetail(null));
-  useBackLayer(tab !== "table", () => setTab("table"));
+  useBackLayer(tab !== homeTab, () => setTab(homeTab));
   const [settings, setSettings]       = useState({ baseWin: 47, baseDraw: 6, homeBonus: 10, rankBonus: 3, winScore: 30, lossScore: 25, drawScore: 25 });
   const [confirmedTop, setConfirmedTop]       = useState(null);
   const [confirmedBottom, setConfirmedBottom] = useState(null);
@@ -381,12 +385,14 @@ export function BelgianLeagueView({ league, onBack }) {
       <div className="panel">
         <div className="tabs tabs-top" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
           <button className="tab" onClick={onBack} title={tr("Back to My teams and all leagues")}>{tr("⌂ Home")}</button>
-          {["table", "scores", "players", "stats", "monte"].map(tabId => (
+          {(isCup ? ["cup", "players"] : ["table", "scores", "players", "stats", "monte"]).map(tabId => (
             <button key={tabId} className={"tab" + (tab === tabId ? " on" : "")} onClick={() => setTab(tabId)}>
-              {tr(tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : tabId === "stats" ? "Stats" : "Simulator")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
+              {tr(tabId === "cup" ? "Cup" : tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : tabId === "stats" ? "Stats" : "Simulator")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
             </button>
           ))}
         </div>
+
+        {tab === "cup" && <CupView league={{ ...league, fixtures: rawFixtures }} onMatchClick={f => setLineup(f)} />}
 
         {tab === "table" && (
           <LeagueTable
@@ -523,7 +529,7 @@ export function BelgianLeagueView({ league, onBack }) {
       </div>
 
       <nav className="bnav" aria-label={tr("Main navigation")}>
-        {[["home", "🏠", "Home"], ["table", "📊", "Table"], ["scores", "⚽", "Games"], ["players", "👥", "Players"], ["stats", "🏅", "Stats"], ["monte", "🎲", "Sim"]].map(([id, icon, label]) => (
+        {(isCup ? [["home", "🏠", "Home"], ["cup", "🏆", "Cup"], ["players", "👥", "Players"]] : [["home", "🏠", "Home"], ["table", "📊", "Table"], ["scores", "⚽", "Games"], ["players", "👥", "Players"], ["stats", "🏅", "Stats"], ["monte", "🎲", "Sim"]]).map(([id, icon, label]) => (
           <button key={id} className={"bnav-btn" + (tab === id ? " on" : "")} aria-current={tab === id ? "page" : undefined}
             onClick={() => (id === "home" ? onBack() : setTab(id))}>
             <span className="bnav-ic" aria-hidden="true">{icon}</span>

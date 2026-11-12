@@ -23,19 +23,29 @@ export function stripPrefix(name) {
 // one token, so a name can never be stripped down to nothing.
 const TEAM_CODE_TOKEN = /^[A-Z0-9]+(-[A-Z0-9]+)?$/;
 
+// Cup competitions append their own label to every team ("Kwanten Arena Cup M", "Jeunesse Jemeppe Lotto Cup",
+// "DHC Waasmunster Beker Van Belgie", "United Brussels HC Sélection Coupe Dames"): drop it for display.
+const CUP_SUFFIX = /\s+(?:Lotto\s+Cup|Cup|Pokal|Coupe(?:\s+Dames)?|Beker\s+[Vv]an\s+Belgi[eë](?:\s+Dames)?)$/;
+
 export function cleanTeamName(name) {
   if (!name) return name;
   // Drop a trailing parenthetical annotation entirely, e.g. "(M14-Beker)".
-  const noParen = name.trim().replace(/\s*\([^)]*\)\s*$/, "");
-  const tokens = (noParen || name.trim()).split(/\s+/);
-  let end = tokens.length;
-  while (end > 1) {
-    const tok = tokens[end - 1];
-    if (TEAM_CODE_TOKEN.test(tok) || tok === "Lg") { end--; continue; }
-    break;
+  let cur = name.trim().replace(/\s*\([^)]*\)\s*$/, "") || name.trim();
+  for (let guard = 0; guard < 6; guard++) {
+    const tokens = cur.split(/\s+/);
+    let end = tokens.length;
+    while (end > 1) {
+      const tok = tokens[end - 1];
+      if (TEAM_CODE_TOKEN.test(tok) || tok === "Lg") { end--; continue; }
+      break;
+    }
+    let next = tokens.slice(0, end).join(" ").trim();
+    const noCup = next.replace(CUP_SUFFIX, "").trim();
+    if (noCup) next = noCup;
+    if (next === cur) break;
+    cur = next;
   }
-  const cleaned = tokens.slice(0, end).join(" ").trim();
-  return cleaned || name;
+  return cur || name;
 }
 
 // Build a lookup from scorer club names indexed by their stripped form
