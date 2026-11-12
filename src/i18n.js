@@ -12,7 +12,7 @@ export const LANG_LOCALE = { nl: "nl-BE", fr: "fr-BE", en: "en-GB" };
 const I18N = {
   nl: {
     "Belgian Handball": "Belgisch handbal", "Live competition data": "Live competitiegegevens", "updated": "bijgewerkt",
-    "← Back": "← Terug", "← All Leagues": "← Alle reeksen", "⌂ Home": "⌂ Start", "Back to My teams and all leagues": "Terug naar mijn teams en alle reeksen",
+    "← Back": "← Terug", "← All Leagues": "← Alle reeksen", "Back to My teams and all leagues": "Terug naar mijn teams en alle reeksen",
     "Loading data…": "Gegevens laden…", "Could not load data.": "Kon de gegevens niet laden.",
     "★ My teams": "★ Mijn teams", "＋ Add club": "＋ Club toevoegen",
     "Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.": "Open een reeks en tik op ☆ naast een team om het te volgen. Je teams verschijnen hier met positie, vorm en volgende wedstrijd.",
@@ -111,7 +111,7 @@ const I18N = {
   },
   fr: {
     "Belgian Handball": "Handball belge", "Live competition data": "Données de compétition en direct", "updated": "mis à jour",
-    "← Back": "← Retour", "← All Leagues": "← Toutes les séries", "⌂ Home": "⌂ Accueil", "Back to My teams and all leagues": "Retour à mes équipes et à toutes les séries",
+    "← Back": "← Retour", "← All Leagues": "← Toutes les séries", "Back to My teams and all leagues": "Retour à mes équipes et à toutes les séries",
     "Loading data…": "Chargement des données…", "Could not load data.": "Impossible de charger les données.",
     "★ My teams": "★ Mes équipes", "＋ Add club": "＋ Ajouter un club",
     "Open any league and tap ☆ next to a team to follow it. Your teams show up here, with position, form and next match.": "Ouvrez une série et touchez ☆ à côté d'une équipe pour la suivre. Vos équipes apparaissent ici avec position, forme et prochain match.",

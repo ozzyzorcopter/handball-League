@@ -96,9 +96,9 @@ test("follow, language, league tabs and predictions", async () => {
   await click(w, act, byText(w, "button", "VHV"));
   await click(w, act, [...w.document.querySelectorAll(".card")].find((e) => /Liga 3/.test(e.textContent)));
   const tabs = () => [...w.document.querySelectorAll(".tab")].map((x) => x.textContent);
-  assert.deepEqual(tabs().slice(0, 4), ["⌂ Start", "Klassement", "Wedstrijden (1)", "Spelers"]);
+  assert.deepEqual(tabs().slice(0, 4), ["Start", "Klassement", "Wedstrijden (1)", "Spelers"]);
   await click(w, act, byText(w, "button", "EN"));
-  assert.deepEqual(tabs(), ["⌂ Home", "Table", "Games (1)", "Players", "Stats", "Simulator"]);
+  assert.deepEqual(tabs(), ["Home", "Table", "Games (1)", "Players", "Stats", "Simulator"]);
 
   // Star to follow another team.
   await click(w, act, w.document.querySelector("button[aria-label='Follow Schoten']"));

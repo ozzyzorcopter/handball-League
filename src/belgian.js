@@ -384,7 +384,7 @@ export function BelgianLeagueView({ league, onBack }) {
 
       <div className="panel">
         <div className="tabs tabs-top" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
-          <button className="tab" onClick={onBack} title={tr("Back to My teams and all leagues")}>{tr("⌂ Home")}</button>
+          <button className="tab" onClick={onBack} title={tr("Back to My teams and all leagues")}>{tr("Home")}</button>
           {(isCup ? ["cup", "players"] : ["table", "scores", "players", "stats", "monte"]).map(tabId => (
             <button key={tabId} className={"tab" + (tab === tabId ? " on" : "")} onClick={() => setTab(tabId)}>
               {tr(tabId === "cup" ? "Cup" : tabId === "table" ? "Table" : tabId === "scores" ? "Games" : tabId === "players" ? "Players" : tabId === "stats" ? "Stats" : "Simulator")}{tabId === "scores" && pending.length ? " (" + pending.length + ")" : ""}
