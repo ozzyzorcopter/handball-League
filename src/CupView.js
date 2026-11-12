@@ -2,7 +2,7 @@
 import { cleanTeamName } from "./names.js";
 import { useLang } from "./i18n.js";
 import { matchStamp } from "./weeks.js";
-import { buildCupRounds, aliveTeams, winnerIdx } from "./cupRounds.js";
+import { buildCupRounds, aliveTeams, winnerIdx, nextPhase } from "./cupRounds.js";
 const { useMemo, useState } = React;
 
 function roundTitle(label, tr) {
@@ -40,6 +40,7 @@ export function CupView({ league, onMatchClick }) {
   const teams = league.teams || [];
   const rounds = useMemo(() => buildCupRounds(league.fixtures), [league.fixtures]);
   const alive = useMemo(() => aliveTeams(rounds), [rounds]);
+  const next = useMemo(() => nextPhase(rounds), [rounds]);
   // The round being played now = first with unplayed games, else the last.
   const current = Math.max(0, rounds.findIndex(r => r.played < r.count));
   const cur = rounds.length ? (rounds.findIndex(r => r.played < r.count) < 0 ? rounds.length - 1 : current) : -1;
@@ -77,6 +78,22 @@ export function CupView({ league, onMatchClick }) {
           </section>
         );
       })}
+      {next && (
+        <section className="cup-round cup-next">
+          <div className="cup-rh" style={{ cursor: "default" }}>
+            <span className="cup-rt">{roundTitle(next.label, tr)}</span>
+            <span className="muted cup-rd">{tr("Draw pending")}</span>
+            <span className="cup-rc">{next.teams.length}</span>
+          </div>
+          <div className="cup-chips">
+            {next.teams.map(idx => <span key={idx} className="cup-chip">{cleanTeamName(teams[idx]?.name) || "?"}</span>)}
+          </div>
+          <div className="muted cup-note">
+            {tr("Teams through so far; the fixtures appear once the draw has been made.")}
+            {next.open ? " " + next.open + " " + tr("games still to play") + "." : ""}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

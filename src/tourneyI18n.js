@@ -28,7 +28,7 @@ export const TOURNEY_NL = {
   "Line-up": "Opstelling", "Player": "Speler", "Goals": "Doelpunten", "goals": "doelpunten", "7m goals / shots": "7m doelpunten / pogingen",
   "Team captain": "Ploegkapitein", "The line-up lists": "De opstelling telt", "No line-up available for this game yet.": "Nog geen opstelling beschikbaar voor deze wedstrijd.",
   "scored / taken": "gescoord / genomen", "yellow": "geel", "2 minutes": "2 minuten", "blue": "blauw", "red": "rood", "Loading…": "Laden…",
-  "Cup": "Beker", "Round": "Ronde", "Round of 16": "Achtste finales", "1/16 finals": "1/16 finales", "1/32 finals": "1/32 finales", "1/64 finals": "1/64 finales", "Qualifying round": "Voorronde",
+  "Cup": "Beker", "Round": "Ronde", "Round of 16": "Achtste finales", "1/16 finals": "1/16 finales", "1/32 finals": "1/32 finales", "1/64 finals": "1/64 finales", "Qualifying round": "Voorronde", "Draw pending": "Loting volgt", "Teams through so far; the fixtures appear once the draw has been made.": "Teams die al door zijn; de wedstrijden verschijnen na de loting.", "games still to play": "wedstrijden nog te spelen",
   "teams still in the cup": "teams nog in de beker", "Knock-out: a defeat means elimination": "Knock-out: een nederlaag betekent uitschakeling",
   "No games have been published for this cup yet.": "Voor deze beker zijn nog geen wedstrijden gepubliceerd.", "No date yet": "Nog geen datum",
 };
@@ -61,7 +61,7 @@ export const TOURNEY_FR = {
   "Line-up": "Composition", "Player": "Joueur", "Goals": "Buts", "goals": "buts", "7m goals / shots": "Buts / tirs de 7m",
   "Team captain": "Capitaine", "The line-up lists": "La composition compte", "No line-up available for this game yet.": "Pas encore de composition pour ce match.",
   "scored / taken": "marqués / tirés", "yellow": "jaune", "2 minutes": "2 minutes", "blue": "bleu", "red": "rouge", "Loading…": "Chargement…",
-  "Cup": "Coupe", "Round": "Tour", "Round of 16": "Huitièmes de finale", "1/16 finals": "1/16 de finale", "1/32 finals": "1/32 de finale", "1/64 finals": "1/64 de finale", "Qualifying round": "Tour préliminaire",
+  "Cup": "Coupe", "Round": "Tour", "Round of 16": "Huitièmes de finale", "1/16 finals": "1/16 de finale", "1/32 finals": "1/32 de finale", "1/64 finals": "1/64 de finale", "Qualifying round": "Tour préliminaire", "Draw pending": "Tirage à venir", "Teams through so far; the fixtures appear once the draw has been made.": "Équipes déjà qualifiées; les matchs apparaissent après le tirage.", "games still to play": "matchs restant à jouer",
   "teams still in the cup": "équipes encore en coupe", "Knock-out: a defeat means elimination": "Élimination directe: une défaite = éliminé",
   "No games have been published for this cup yet.": "Aucun match publié pour cette coupe pour l'instant.", "No date yet": "Pas encore de date",
 };

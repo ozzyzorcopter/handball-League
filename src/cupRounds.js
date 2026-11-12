@@ -135,3 +135,24 @@ export function aliveTeams(rounds) {
   });
   return alive;
 }
+
+// The phase after the last scheduled round, before its draw: the teams that already won their game
+// in the last round. null when there is no next phase (the final) or nothing is decided yet.
+const NEXT_PHASE = {
+  "Qualifying round": "1/64 finals", "1/64 finals": "1/32 finals", "1/32 finals": "1/16 finals",
+  "1/16 finals": "Round of 16", "Round of 16": "Quarter-finals", "Quarter-finals": "Semi-finals", "Semi-finals": "Final",
+};
+export function nextPhase(rounds) {
+  const last = rounds[rounds.length - 1];
+  if (!last) return null;
+  const label = last.label.n ? { key: "Round", n: last.label.n + 1 } : NEXT_PHASE[last.label.key] ? { key: NEXT_PHASE[last.label.key] } : null;
+  if (!label) return null;
+  const teams = [];
+  let open = 0;
+  last.fixtures.forEach(f => {
+    const w = winnerIdx(f);
+    if (w != null) teams.push(w); else open++;
+  });
+  if (!teams.length) return null;
+  return { label, teams, open };
+}

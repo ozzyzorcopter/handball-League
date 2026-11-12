@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { buildCupRounds, aliveTeams, isCupLeague } from "../src/cupRounds.js";
+import { buildCupRounds, aliveTeams, isCupLeague, nextPhase } from "../src/cupRounds.js";
 import { cleanTeamName } from "../src/names.js";
 
 const fx = (h, a, date, hs = null, as = null) => ({ homeIdx: h, awayIdx: a, date, homeScore: hs, awayScore: as, played: hs != null });
@@ -38,4 +38,13 @@ test("cup labels disappear from team names", () => {
   assert.equal(cleanTeamName("Jeunesse Jemeppe Lotto Cup"), "Jeunesse Jemeppe");
   assert.equal(cleanTeamName("DHC Waasmunster Beker Van Belgie"), "DHC Waasmunster");
   assert.equal(cleanTeamName("HVH 't Noorden"), "HVH 't Noorden");
+});
+
+test("winners of the last round are listed in the next phase until it is drawn", () => {
+  const rounds = buildCupRounds([fx(0, 1, "2026-10-10", 30, 20), fx(2, 3, "2026-10-10", 20, 25), fx(4, 5, "2026-10-11")]);
+  const next = nextPhase(rounds);
+  assert.equal(rounds[0].label.key, "1/16 finals");
+  assert.equal(next.label.key, "Round of 16");
+  assert.deepEqual(next.teams, [0, 3]);
+  assert.equal(next.open, 1);
 });
