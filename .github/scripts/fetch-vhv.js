@@ -963,9 +963,13 @@ async function main() {
 
       // Scorer pages and boxscores only change when a game was played, so skip
       // them when the played count is the same as last time.
-      const playedNow = fixtures.filter(f => f.played).length;
-      const playedBefore = prev && prev.fixtures ? prev.fixtures.filter(f => f.played).length : -1;
-      const reuseStats = !FORCE_FULL && playedNow === playedBefore && Array.isArray(prev.scorers) && prev.scorers.length > 0;
+      // Count games WITH a score: a game whose date has passed counts as played before its score is
+      // entered, and the score arriving later must still trigger a fresh stats + line-up fetch.
+      const scored = f => f.played && f.homeScore != null;
+      const playedNow = fixtures.filter(scored).length;
+      const playedBefore = prev && prev.fixtures ? prev.fixtures.filter(scored).length : -1;
+      const missingBox = fixtures.some(f => scored(f) && f.gameId && !boxCache.games[f.gameId]);
+      const reuseStats = !FORCE_FULL && !missingBox && playedNow === playedBefore && Array.isArray(prev.scorers) && prev.scorers.length > 0;
 
       let scorers = [];
       if (reuseStats) {
