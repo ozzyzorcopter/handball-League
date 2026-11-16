@@ -847,6 +847,13 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
+// A game whose line-up page was empty when we looked (Clubee clubs fill it in hours or days later) is
+// tried again: always while the game is recent, otherwise up to 5 attempts in total.
+function retryable(entry, date) {
+  if (!entry || !entry.failed) return false;
+  const age = date ? (Date.now() - new Date(date + "T12:00:00Z").getTime()) / 864e5 : 999;
+  return age <= 21 || (entry.tries || 1) < 5;
+}
 const LINEUP_BACKFILL_PER_RUN = 2000; // effectively all; the time budget below is the real limit
 const LINEUP_BACKFILL_MINUTES = 20; // games cached before line-ups existed get theirs a few per run, newest first
 const DATA_VERSION = 3; // bumped: forces one full refresh so dates missing from the old data get filled in
@@ -968,7 +975,7 @@ async function main() {
       const scored = f => f.played && f.homeScore != null;
       const playedNow = fixtures.filter(scored).length;
       const playedBefore = prev && prev.fixtures ? prev.fixtures.filter(scored).length : -1;
-      const missingBox = fixtures.some(f => scored(f) && f.gameId && !boxCache.games[f.gameId]);
+      const missingBox = fixtures.some(f => scored(f) && f.gameId && (!boxCache.games[f.gameId] || retryable(boxCache.games[f.gameId], f.date)));
       const reuseStats = !FORCE_FULL && !missingBox && playedNow === playedBefore && Array.isArray(prev.scorers) && prev.scorers.length > 0;
 
       let scorers = [];
@@ -1027,9 +1034,11 @@ async function main() {
       // a previous run. Powers "goals in last game" on the scorer panel and
       // the "most goals in a single game" player ranking.
       const playedWithGameId = fixtures.filter(f => f.played && f.gameId).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      // Games cached while the dates were broken carry date:null; take the date from the fixture.
+      for (const f of playedWithGameId) { const g = boxCache.games[f.gameId]; if (g && f.date && g.date !== f.date) g.date = f.date; }
       let newBoxscores = 0, failedBoxscores = 0;
       for (const f of playedWithGameId) {
-        if (reuseStats || boxCache.games[f.gameId]) continue;
+        if (reuseStats || (boxCache.games[f.gameId] && !retryable(boxCache.games[f.gameId], f.date))) continue;
         const got = await fetchGameLineup(f.gameId);
         const players = got && got.players;
         if (players && players.length > 0) {
@@ -1041,7 +1050,8 @@ async function main() {
           // Remember the attempt so we don't refetch a broken/empty page
           // every single run — a future run can still retry by manually
           // clearing this entry (or the whole cache file).
-          boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players: [], failed: true };
+          const tries = ((boxCache.games[f.gameId] && boxCache.games[f.gameId].tries) || 0) + 1;
+          boxCache.games[f.gameId] = { date: f.date, leagueId: cfg.id, players: [], failed: true, tries };
           failedBoxscores++;
         }
       }
@@ -1063,12 +1073,23 @@ async function main() {
           playerGameLog.get(key).push({ date: g.date, goals: p.goals });
         }
       }
-      for (const s of scorers) {
-        const log_ = playerGameLog.get(`${s.player}|||${s.club}`);
-        if (log_ && log_.length) {
-          const mostRecent = [...log_].sort((a, b) => (b.date || "").localeCompare(a.date || ""))[0];
-          s.lastGameGoals = mostRecent.goals;
+      // "Goals in last game" = goals in the TEAM's most recent played game that has a line-up, not in
+      // the player's own last appearance (a player who sat out the last game shows nothing instead of
+      // an older game's number). playedWithGameId is newest first.
+      const lastBoxByTeam = new Map();
+      for (const f of playedWithGameId) {
+        const g = boxCache.games[f.gameId];
+        if (!g || !g.players || !g.players.length) continue;
+        for (const idx of [f.homeIdx, f.awayIdx]) {
+          const nm = teams[idx] && teams[idx].name;
+          if (nm && !lastBoxByTeam.has(nm)) lastBoxByTeam.set(nm, g);
         }
+      }
+      for (const s of scorers) {
+        const g = lastBoxByTeam.get(s.club);
+        if (!g) continue;
+        const p = g.players.find(x => x.player === s.player && x.club === s.club);
+        if (p) s.lastGameGoals = p.goals; else delete s.lastGameGoals;
       }
       const topSingleGamePlayers = Array.from(playerGameLog.entries())
         .map(([key, entries]) => {
