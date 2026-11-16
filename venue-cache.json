@@ -3453,9 +3453,10 @@
     },
     "visé bm cup": {
       "name": "HC Visé BM Cup",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "30 Rue de Berneau, 4600, Visé",
+      "lat": 50.7371507,
+      "lon": 5.7078233,
+      "source": "clubee"
     },
     "db gent u12 vhv r 2": {
       "name": "DB Gent U12 VHV R 2",
@@ -3496,6 +3497,20 @@
       "address": null,
       "lat": null,
       "lon": null
+    },
+    "besox izegem cup m": {
+      "name": "Besox Handbalclub Izegem Cup M",
+      "address": "Sport- en Recreatiecentrum De Krekel",
+      "lat": 0,
+      "lon": 0,
+      "source": "clubee"
+    },
+    "sporting pelt cup m": {
+      "name": "Sporting Pelt Cup M",
+      "address": "Toekomstlaan 5, 3910, Pelt",
+      "lat": 51.2308892,
+      "lon": 5.422153,
+      "source": "clubee"
     }
   },
   "distances": {
@@ -4783,6 +4798,10 @@
     "dhc meeuwen d2 w|p. kortessem d2 w 1": 30.1782,
     "derdaele sp. pelt d m vhv lim-b|sint-truiden d m vhv lim b 2": 57.4892,
     "dhc waasmunster d1 w vhv|roeselare d1 w vhv 1": 78.87339999999999,
-    "renaissance montegnée d1 m|sezoens achilles bocholt d1 m": 78.01910000000001
+    "renaissance montegnée d1 m|sezoens achilles bocholt d1 m": 78.01910000000001,
+    "eynatten-raeren cup|sporting pelt cup m": 108.9711,
+    "hsc tubize|visé bm cup": 137.6191,
+    "sprimont promo lg|visé bm cup": 37.890699999999995,
+    "biobest sasja d1 m vhv|p. kortessem d1 m vhv 1": 95.9052
   }
 }

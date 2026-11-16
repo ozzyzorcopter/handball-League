@@ -23324,8 +23324,729 @@
     "2849049": {
       "date": "2026-10-03",
       "leagueId": "18702",
-      "players": [],
-      "failed": true
+      "players": [
+        {
+          "player": "Bram Heyndrickx",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Michiel Lamers",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 6,
+          "matchesPlayed": 1,
+          "sevenMScored": 2,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 1,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jef Buteneers",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 5,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 1,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lars Evens",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Colin Baten",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Robbe Merken",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Koen Ravach",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Victor Vaes",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Wesley Snoeks",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Rein Baeten",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jorn Ceyssens",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 6,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 1,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lowie Weltjens",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Cisse Brands",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Victor Schurink Quintero",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 1,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mathis Geuens",
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "goals": 3,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Romain Delfosse",
+          "club": "Kraainem D1 M",
+          "goals": 2,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jolan Cornet",
+          "club": "Kraainem D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Nathan De Wit",
+          "club": "Kraainem D1 M",
+          "goals": 5,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Nathan Lischetti",
+          "club": "Kraainem D1 M",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Louis Delpire",
+          "club": "Kraainem D1 M",
+          "goals": 5,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 1,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Quentin Lorea",
+          "club": "Kraainem D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Baptiste Destrebecq",
+          "club": "Kraainem D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Louis Obry",
+          "club": "Kraainem D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Gabin Sannier",
+          "club": "Kraainem D1 M",
+          "goals": 2,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Robin Meulders",
+          "club": "Kraainem D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Simon Cruypenninck",
+          "club": "Kraainem D1 M",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Maxime Kerhousse",
+          "club": "Kraainem D1 M",
+          "goals": 5,
+          "matchesPlayed": 1,
+          "sevenMScored": 2,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Tanguy Delpire",
+          "club": "Kraainem D1 M",
+          "goals": 3,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Victor Vanslype",
+          "club": "Kraainem D1 M",
+          "goals": 5,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Sezoens Achilles Bocholt D1 M",
+          "players": [
+            {
+              "n": 1,
+              "name": "Bram Heyndrickx",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Michiel Lamers",
+              "g": 6,
+              "s7": 2,
+              "m7": 0,
+              "yc": 0,
+              "m2": 1,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Jef Buteneers",
+              "g": 5,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 1,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Lars Evens",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Colin Baten",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Robbe Merken",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 14,
+              "name": "Koen Ravach",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "Victor Vaes",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 16,
+              "name": "Wesley Snoeks",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 17,
+              "name": "Rein Baeten",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 24,
+              "name": "Jorn Ceyssens",
+              "g": 6,
+              "s7": 0,
+              "m7": 0,
+              "yc": 1,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 34,
+              "name": "Lowie Weltjens",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 44,
+              "name": "Cisse Brands",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 71,
+              "name": "Victor Schurink Quintero",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 1,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 99,
+              "name": "Mathis Geuens",
+              "g": 3,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Wout Peters",
+              "role": "Assistant Coach"
+            },
+            {
+              "name": "Jeroen De Beule",
+              "role": "Head Coach"
+            },
+            {
+              "name": "Stef Jaeken",
+              "role": "Physiotherapist"
+            },
+            {
+              "name": "Jonas Cox",
+              "role": "Staff"
+            },
+            {
+              "name": "Siebe Grossi",
+              "role": "Staff"
+            }
+          ],
+          "captain": ""
+        },
+        {
+          "club": "Kraainem D1 M",
+          "players": [
+            {
+              "n": 2,
+              "name": "Romain Delfosse",
+              "g": 2,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Jolan Cornet",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Nathan De Wit",
+              "g": 5,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Nathan Lischetti",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Louis Delpire",
+              "g": 5,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 1,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Quentin Lorea",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 12,
+              "name": "Baptiste Destrebecq",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 14,
+              "name": "Louis Obry",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 17,
+              "name": "Gabin Sannier",
+              "g": 2,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 18,
+              "name": "Robin Meulders",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 20,
+              "name": "Simon Cruypenninck",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 22,
+              "name": "Maxime Kerhousse",
+              "g": 5,
+              "s7": 2,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 28,
+              "name": "Tanguy Delpire",
+              "g": 3,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 37,
+              "name": "Victor Vanslype",
+              "g": 5,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Gert-Jan Mathijs",
+              "role": "Head Coach"
+            },
+            {
+              "name": "Zakaria Amarir",
+              "role": "Assistant Coach"
+            },
+            {
+              "name": "Luca De Nil",
+              "role": "Assistant Coach"
+            },
+            {
+              "name": "Ambrine Martin",
+              "role": "Physiotherapist"
+            }
+          ],
+          "captain": ""
+        }
+      ]
     },
     "2849050": {
       "date": "2026-10-24",
@@ -65666,7 +66387,8 @@
       "date": "2026-11-14",
       "leagueId": "18704",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2849182": {
       "date": "2026-09-05",
@@ -156906,6 +157628,13 @@
         }
       ]
     },
+    "2849446": {
+      "date": "2026-11-14",
+      "leagueId": "18707",
+      "players": [],
+      "failed": true,
+      "tries": 1
+    },
     "2849454": {
       "date": "2026-09-12",
       "leagueId": "18707",
@@ -247195,7 +247924,8 @@
       "date": "2026-11-14",
       "leagueId": "18705",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2849974": {
       "date": "2026-09-05",
@@ -262135,7 +262865,8 @@
       "date": "2026-10-31",
       "leagueId": "18705",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2850037": {
       "date": "2026-09-12",
@@ -277306,7 +278037,8 @@
       "date": "2026-11-07",
       "leagueId": "18712",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2850113": {
       "date": "2026-11-14",
@@ -357000,6 +357732,308 @@
         }
       ]
     },
+    "2850442": {
+      "date": "2026-11-15",
+      "leagueId": "18715",
+      "players": [
+        {
+          "player": "Liesbet Pirard",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Fitore Bajrami",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Zoë Driesen",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Britt Dorissen",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mirte Martens",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lore Dehaes",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Maithe Berden",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Britt Maes",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Fien Putzeys",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Daphne Conings 1",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Stien Goessens",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Silke Martens",
+          "club": "Sint-Truiden D W VHV LIM",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Sint-Truiden D W VHV LIM",
+          "players": [
+            {
+              "n": 1,
+              "name": "Liesbet Pirard",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 2,
+              "name": "Fitore Bajrami",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 3,
+              "name": "Zoë Driesen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "Britt Dorissen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Mirte Martens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Lore Dehaes",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Maithe Berden",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Britt Maes",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Fien Putzeys",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 12,
+              "name": "Daphne Conings 1",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "Stien Goessens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 20,
+              "name": "Silke Martens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Dorotka Gersz",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "Mirte Martens"
+        },
+        {
+          "club": "P. Kortessem D W VHV LIM-B 2",
+          "players": [],
+          "staff": [],
+          "captain": ""
+        }
+      ]
+    },
     "2850451": {
       "date": "2026-09-19",
       "leagueId": "18715",
@@ -364873,7 +365907,8 @@
       "date": "2026-10-10",
       "leagueId": "18738",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2850513": {
       "date": "2026-09-12",
@@ -367617,14 +368652,509 @@
     "2850524": {
       "date": "2026-10-04",
       "leagueId": "18738",
-      "players": [],
-      "failed": true
+      "players": [
+        {
+          "player": "Lauren de Windt",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 3,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lore Dreesen",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 6,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Fran Thijs",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Eloise Craeghs",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 4,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 1,
+          "yellowCards": 0,
+          "twoMinSuspensions": 1,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ieme Metten",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 2,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lena Boonen",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 8,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Hanne Hendriks",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 1,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Eline Plessers",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Sofie Vandael",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lore Coenjaerts",
+          "club": "DHC Overpelt G 18 VHV",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Eline Opowicz",
+          "club": "Schoten G 18 VHV",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 1,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mit Rubenska",
+          "club": "Schoten G 18 VHV",
+          "goals": 4,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 1,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mare Symoens",
+          "club": "Schoten G 18 VHV",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Fran Ams",
+          "club": "Schoten G 18 VHV",
+          "goals": 4,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Evelyn Saeys",
+          "club": "Schoten G 18 VHV",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Julie Salomez",
+          "club": "Schoten G 18 VHV",
+          "goals": 1,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Nienke Van De Peer",
+          "club": "Schoten G 18 VHV",
+          "goals": 5,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Dorien Willems",
+          "club": "Schoten G 18 VHV",
+          "goals": 3,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jolien Ogiers",
+          "club": "Schoten G 18 VHV",
+          "goals": 2,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Elona Geerts",
+          "club": "Schoten G 18 VHV",
+          "goals": 0,
+          "matchesPlayed": 1,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "DHC Overpelt G 18 VHV",
+          "players": [
+            {
+              "n": 2,
+              "name": "Lauren de Windt",
+              "g": 3,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 3,
+              "name": "Lore Dreesen",
+              "g": 6,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Fran Thijs",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 6,
+              "name": "Eloise Craeghs",
+              "g": 4,
+              "s7": 0,
+              "m7": 1,
+              "yc": 0,
+              "m2": 1,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Ieme Metten",
+              "g": 2,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Lena Boonen",
+              "g": 8,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Hanne Hendriks",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 1,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Eline Plessers",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Sofie Vandael",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "Lore Coenjaerts",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Zoran Pavicevic",
+              "role": "Head Coach"
+            },
+            {
+              "name": "Myrthe Snoekx",
+              "role": "Assistant Coach"
+            }
+          ],
+          "captain": "Lore Dreesen"
+        },
+        {
+          "club": "Schoten G 18 VHV",
+          "players": [
+            {
+              "n": 3,
+              "name": "Eline Opowicz",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 1,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "Mit Rubenska",
+              "g": 4,
+              "s7": 0,
+              "m7": 1,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Mare Symoens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 6,
+              "name": "Fran Ams",
+              "g": 4,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Evelyn Saeys",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Julie Salomez",
+              "g": 1,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Nienke Van De Peer",
+              "g": 5,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 12,
+              "name": "Dorien Willems",
+              "g": 3,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 13,
+              "name": "Jolien Ogiers",
+              "g": 2,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 16,
+              "name": "Elona Geerts",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Bo Baudewijn",
+              "role": "Head Coach"
+            },
+            {
+              "name": "Lora Behnam",
+              "role": "Assistant Coach"
+            }
+          ],
+          "captain": "Nienke Van De Peer"
+        }
+      ]
     },
     "2850525": {
       "date": "2026-10-11",
       "leagueId": "18738",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2850526": {
       "date": "2026-11-14",
@@ -428311,7 +429841,7 @@
       ]
     },
     "2850758": {
-      "date": "2026-10-31",
+      "date": "2026-11-15",
       "leagueId": "18718",
       "players": [
         {
@@ -434401,7 +435931,7 @@
       ]
     },
     "2850776": {
-      "date": "2026-11-07",
+      "date": "2026-11-15",
       "leagueId": "18718",
       "players": [],
       "failed": true
@@ -481549,7 +483079,8 @@
       "date": "2026-09-27",
       "leagueId": "18720",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2850910": {
       "date": "2026-09-12",
@@ -614055,7 +615586,8 @@
       "date": "2026-11-07",
       "leagueId": "18713",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2851485": {
       "date": "2026-09-12",
@@ -617833,7 +619365,8 @@
       "date": "2026-09-12",
       "leagueId": "18713",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2851508": {
       "date": "2026-09-26",
@@ -628328,6 +629861,13 @@
           "captain": "Jari Van Moorleghem"
         }
       ]
+    },
+    "2851565": {
+      "date": "2026-11-15",
+      "leagueId": "18713",
+      "players": [],
+      "failed": true,
+      "tries": 1
     },
     "2851573": {
       "date": "2026-09-20",
@@ -644139,7 +645679,8 @@
       "date": "2026-11-08",
       "leagueId": "18694",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2851637": {
       "date": "2026-09-15",
@@ -669980,7 +671521,8 @@
       "date": "2026-09-13",
       "leagueId": "18698",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2851718": {
       "date": "2026-09-19",
@@ -677317,7 +678859,8 @@
       "date": "2026-09-26",
       "leagueId": "18698",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2851784": {
       "date": "2026-10-11",
@@ -687187,6 +688730,13 @@
         }
       ]
     },
+    "2851863": {
+      "date": "2026-11-15",
+      "leagueId": "18698",
+      "players": [],
+      "failed": true,
+      "tries": 1
+    },
     "2851875": {
       "date": "2026-10-04",
       "leagueId": "18739",
@@ -695627,7 +697177,8 @@
       "date": "2026-09-27",
       "leagueId": "18739",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2851941": {
       "date": "2026-10-31",
@@ -734024,7 +735575,8 @@
       "date": "2026-10-10",
       "leagueId": "18740",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2852129": {
       "date": "2026-11-14",
@@ -739490,10 +741042,11 @@
       ]
     },
     "2852148": {
-      "date": null,
+      "date": "2026-11-07",
       "leagueId": "18740",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2852153": {
       "date": "2026-09-12",
@@ -740082,7 +741635,8 @@
       "date": "2026-09-20",
       "leagueId": "18740",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2852156": {
       "date": "2026-10-11",
@@ -743738,7 +745292,8 @@
       "date": "2026-10-31",
       "leagueId": "18714",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2852383": {
       "date": "2026-11-14",
@@ -802714,13 +804269,15 @@
       "date": "2026-08-29",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2852667": {
       "date": "2026-08-23",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2852669": {
       "date": "2026-08-22",
@@ -803264,7 +804821,8 @@
       "date": "2026-08-23",
       "leagueId": "18701",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2852672": {
       "date": "2026-08-22",
@@ -844214,7 +845772,8 @@
       "date": "2026-08-30",
       "leagueId": "18701",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2853530": {
       "date": "2026-08-27",
@@ -911876,7 +913435,8 @@
       "date": "2026-08-25",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2942101": {
       "date": "2026-10-18",
@@ -913810,7 +915370,8 @@
       "date": "2026-08-20",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2946373": {
       "date": "2026-08-22",
@@ -914945,13 +916506,15 @@
       "date": "2026-08-30",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2946377": {
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2946378": {
       "date": "2026-08-30",
@@ -915081,13 +916644,15 @@
       "date": "2026-08-09",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2948164": {
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949204": {
       "date": "2026-08-08",
@@ -915169,19 +916734,22 @@
       "date": "2026-08-16",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949207": {
       "date": "2026-08-12",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949642": {
       "date": "2026-08-29",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949643": {
       "date": "2026-08-06",
@@ -915397,7 +916965,8 @@
       "date": "2026-08-09",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949645": {
       "date": "2026-08-06",
@@ -915587,8 +917156,391 @@
     "2949647": {
       "date": "2026-08-09",
       "leagueId": "18743",
-      "players": [],
-      "failed": true
+      "players": [
+        {
+          "player": "Jens Dijkstra",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Pierre Brixhe",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Yannick Glorieux",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Alexandre Dubuc",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Kobe Serras",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mathijs Schellingen",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Arthur Vanhove",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Tuur Borgerhoff",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Louis Marchal",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Sébastien Danesi",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Samuel Degbey",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Joffry Van Der Sman",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Joris Gillé",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Simon Morrier",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jasper Ritzen",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mathis Mougin",
+          "club": "Hubo Scup M",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "BTB Aachen 1",
+          "players": [],
+          "staff": [],
+          "captain": ""
+        },
+        {
+          "club": "Hubo Scup M",
+          "players": [
+            {
+              "n": 1,
+              "name": "Jens Dijkstra",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "Pierre Brixhe",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Yannick Glorieux",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Alexandre Dubuc",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "Kobe Serras",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 20,
+              "name": "Mathijs Schellingen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 21,
+              "name": "Arthur Vanhove",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 22,
+              "name": "Tuur Borgerhoff",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 23,
+              "name": "Louis Marchal",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 26,
+              "name": "Sébastien Danesi",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 34,
+              "name": "Samuel Degbey",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 37,
+              "name": "Joffry Van Der Sman",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 42,
+              "name": "Joris Gillé",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 43,
+              "name": "Simon Morrier",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 44,
+              "name": "Jasper Ritzen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 67,
+              "name": "Mathis Mougin",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [],
+          "captain": ""
+        }
+      ]
     },
     "2949648": {
       "date": "2026-08-15",
@@ -916460,19 +918412,22 @@
       "date": "2026-08-15",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949653": {
       "date": "2026-08-16",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949654": {
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949655": {
       "date": "2026-08-17",
@@ -917039,19 +918994,22 @@
       "date": "2026-08-16",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949658": {
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949659": {
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949660": {
       "date": "2026-08-23",
@@ -917432,25 +919390,29 @@
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949662": {
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949663": {
       "date": "2026-08-29",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949664": {
       "date": "2026-08-29",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2949665": {
       "date": "2026-08-29",
@@ -918200,13 +920162,15 @@
       "date": "2026-08-25",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2951493": {
       "date": "2026-08-18",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2952319": {
       "date": "2026-09-06",
@@ -922312,7 +924276,8 @@
       "date": "2026-08-29",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2957003": {
       "date": "2026-08-29",
@@ -923056,7 +925021,8 @@
       "date": "2026-08-23",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2964917": {
       "date": "2026-08-30",
@@ -923664,7 +925630,8 @@
       "date": "2026-08-30",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2964919": {
       "date": "2026-08-30",
@@ -924617,13 +926584,15 @@
       "date": "2026-08-25",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "2965298": {
       "date": "2026-08-28",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3007387": {
       "date": "2026-09-17",
@@ -925008,7 +926977,8 @@
       "date": "2026-09-17",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3009542": {
       "date": "2026-10-10",
@@ -933112,7 +935082,8 @@
       "date": "2026-11-05",
       "leagueId": "18701",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3020772": {
       "date": "2026-10-18",
@@ -934325,13 +936296,15 @@
       "date": "2026-10-25",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3029957": {
       "date": "2026-10-25",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031137": {
       "date": "2026-10-24",
@@ -935383,61 +937356,71 @@
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031783": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031784": {
       "date": "2026-11-10",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031785": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031786": {
       "date": "2026-11-10",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031889": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031890": {
       "date": "2026-11-12",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031892": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031940": {
       "date": "2026-10-22",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3031941": {
       "date": "2026-10-22",
       "leagueId": "18743",
       "players": [],
-      "failed": true
+      "failed": true,
+      "tries": 1
     },
     "3032254": {
       "date": "2026-10-24",
