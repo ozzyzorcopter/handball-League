@@ -671,8 +671,10 @@ async function fetchGameLineup(gameId) {
   const url = `https://www.clubee.com/handballbelgium/games/${gameId}/lineup`;
   try {
     const html = await fetchHtmlSmart(url, looksLikeStatsTable);
-    return { players: parseLineupHtml(html), lineup: parseLineupFull(html) };
-  } catch { return null; }
+    const players = parseLineupHtml(html);
+    if (!players.length) console.log(`[DBG lineup ${gameId}] page fetched but no player rows (${/No information added yet/i.test(html) ? "Clubee: no information added yet" : "tables not recognised, " + html.length + " chars"})`);
+    return { players, lineup: parseLineupFull(html) };
+  } catch (e) { console.log(`[DBG lineup ${gameId}] page not fetched: ${e.message}`); return null; }
 }
 
 // ── VENUE / TRAVEL DISTANCE ─────────────────────────────────────────────────────
@@ -847,12 +849,22 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
-// A game whose line-up page was empty when we looked (Clubee clubs fill it in hours or days later) is
-// tried again: always while the game is recent, otherwise up to 5 attempts in total.
-function retryable(entry, date) {
-  if (!entry || !entry.failed) return false;
+// A cached line-up is fetched again when it can still change:
+//  - the page was empty when we looked (Clubee clubs fill it in hours or days later), or
+//  - the goals listed add up to fewer than the final score (clubs often publish the squad first and
+//    enter the goals afterwards, so everybody shows 0 until then).
+// An empty page keeps being tried while the game is recent (21 days), then up to 5 attempts in total;
+// a goal total that does not add up is only worth a retry while the game is recent.
+function retryable(entry, f) {
+  if (!entry) return false;
+  const date = f && f.date;
   const age = date ? (Date.now() - new Date(date + "T12:00:00Z").getTime()) / 864e5 : 999;
-  return age <= 21 || (entry.tries || 1) < 5;
+  const tries = entry.tries || 1;
+  if (entry.failed) return age <= 21 || tries < 5;
+  const total = f && f.homeScore != null && f.awayScore != null ? +f.homeScore + +f.awayScore : null;
+  if (total == null || !Array.isArray(entry.players)) return false;
+  const listed = entry.players.reduce((a, p) => a + (p.goals || 0), 0);
+  return listed < total && age <= 21;
 }
 const LINEUP_BACKFILL_PER_RUN = 2000; // effectively all; the time budget below is the real limit
 const LINEUP_BACKFILL_MINUTES = 20; // games cached before line-ups existed get theirs a few per run, newest first
@@ -975,7 +987,7 @@ async function main() {
       const scored = f => f.played && f.homeScore != null;
       const playedNow = fixtures.filter(scored).length;
       const playedBefore = prev && prev.fixtures ? prev.fixtures.filter(scored).length : -1;
-      const missingBox = fixtures.some(f => scored(f) && f.gameId && (!boxCache.games[f.gameId] || retryable(boxCache.games[f.gameId], f.date)));
+      const missingBox = fixtures.some(f => scored(f) && f.gameId && (!boxCache.games[f.gameId] || retryable(boxCache.games[f.gameId], f)));
       const reuseStats = !FORCE_FULL && !missingBox && playedNow === playedBefore && Array.isArray(prev.scorers) && prev.scorers.length > 0;
 
       let scorers = [];
@@ -1038,7 +1050,7 @@ async function main() {
       for (const f of playedWithGameId) { const g = boxCache.games[f.gameId]; if (g && f.date && g.date !== f.date) g.date = f.date; }
       let newBoxscores = 0, failedBoxscores = 0;
       for (const f of playedWithGameId) {
-        if (reuseStats || (boxCache.games[f.gameId] && !retryable(boxCache.games[f.gameId], f.date))) continue;
+        if (reuseStats || (boxCache.games[f.gameId] && !retryable(boxCache.games[f.gameId], f))) continue;
         const got = await fetchGameLineup(f.gameId);
         const players = got && got.players;
         if (players && players.length > 0) {
@@ -1089,7 +1101,7 @@ async function main() {
         const g = lastBoxByTeam.get(s.club);
         if (!g) continue;
         const p = g.players.find(x => x.player === s.player && x.club === s.club);
-        if (p) s.lastGameGoals = p.goals; else delete s.lastGameGoals;
+        if (p && p.matchesPlayed > 0) s.lastGameGoals = p.goals; else delete s.lastGameGoals;   // listed with 0 matches played = did not play
       }
       const topSingleGamePlayers = Array.from(playerGameLog.entries())
         .map(([key, entries]) => {
@@ -1263,6 +1275,13 @@ async function main() {
     }
     const left = Object.values(boxCache.games).filter(g => (!g.lineup || !g.lineup.length) && !g.failed).length;
     if (todo.length) log(`Line-ups added to cached games: ${done}/${tried} (${left} still to do)`);
+  }
+
+  // Which recently played games still have no line-up? (helps find out why one is not showing)
+  {
+    const cutoff = new Date(Date.now() - 14 * 864e5).toISOString().slice(0, 10);
+    const missing = Object.entries(boxCache.games).filter(([, g]) => g.date && g.date >= cutoff && (!g.lineup || !g.lineup.length));
+    if (missing.length) log(`Recent games (14 days) without line-up: ${missing.length} -> ${missing.slice(0, 15).map(([id, g]) => `${id}${g.failed ? "(empty page, try " + (g.tries || 1) + ")" : "(no data yet)"}`).join(", ")}`);
   }
 
   // One small file per league with every cached line-up: data/lineups/<serieId>.json
