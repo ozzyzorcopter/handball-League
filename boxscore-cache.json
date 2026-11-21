@@ -10545,7 +10545,7 @@
       "leagueId": "18702",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2849020": {
       "date": "2026-09-05",
@@ -66395,7 +66395,7 @@
       "leagueId": "18704",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2849182": {
       "date": "2026-09-05",
@@ -160516,7 +160516,7 @@
       "leagueId": "18707",
       "players": [],
       "failed": true,
-      "tries": 10
+      "tries": 11
     },
     "2849454": {
       "date": "2026-09-12",
@@ -217577,7 +217577,7 @@
       "leagueId": "18710",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2849717": {
       "date": "2026-10-10",
@@ -522719,6 +522719,10 @@
           ],
           "staff": [
             {
+              "name": "Bram Dewulf",
+              "role": "Head Coach"
+            },
+            {
               "name": "Achiel Somers",
               "role": "Assistant Coach"
             }
@@ -540006,8 +540010,8 @@
         {
           "player": "N... C...",
           "club": "Brugge U14 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540019,7 +540023,7 @@
           "player": "J... G...",
           "club": "Brugge U14 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540030,8 +540034,8 @@
         {
           "player": "K... B...",
           "club": "Brugge U14 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540042,8 +540046,8 @@
         {
           "player": "L... V...",
           "club": "Brugge U14 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540055,7 +540059,7 @@
           "player": "B... L...",
           "club": "Brugge U14 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540067,7 +540071,7 @@
           "player": "N... S...",
           "club": "Brugge U14 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540079,7 +540083,7 @@
           "player": "L... G...",
           "club": "Brugge U14 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540091,7 +540095,7 @@
           "player": "F... D...",
           "club": "Brugge U14 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540103,7 +540107,7 @@
           "player": "S... H...",
           "club": "Brugge U14 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540115,7 +540119,7 @@
           "player": "S... R...",
           "club": "Brugge U14 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540126,8 +540130,8 @@
         {
           "player": "L... D...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540138,8 +540142,8 @@
         {
           "player": "S... S...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540151,7 +540155,7 @@
           "player": "N... P...",
           "club": "Buggenhout U14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540162,8 +540166,8 @@
         {
           "player": "J... H...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 9,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540174,8 +540178,8 @@
         {
           "player": "O... H...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 12,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540186,8 +540190,8 @@
         {
           "player": "T... P...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540198,8 +540202,8 @@
         {
           "player": "F... V...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540210,8 +540214,8 @@
         {
           "player": "S... J...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540222,8 +540226,8 @@
         {
           "player": "C... R...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540235,7 +540239,7 @@
           "player": "C... D...",
           "club": "Buggenhout U14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540246,8 +540250,8 @@
         {
           "player": "F... O...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540258,8 +540262,8 @@
         {
           "player": "N... V...",
           "club": "Buggenhout U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -540275,7 +540279,7 @@
             {
               "n": 3,
               "name": "N... C...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540297,7 +540301,7 @@
             {
               "n": 5,
               "name": "K... B...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540308,7 +540312,7 @@
             {
               "n": 6,
               "name": "L... V...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540397,7 +540401,7 @@
             {
               "n": 22,
               "name": "L... D...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540408,7 +540412,7 @@
             {
               "n": 23,
               "name": "S... S...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540430,7 +540434,7 @@
             {
               "n": 25,
               "name": "J... H...",
-              "g": 0,
+              "g": 9,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540441,7 +540445,7 @@
             {
               "n": 26,
               "name": "O... H...",
-              "g": 0,
+              "g": 12,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540452,7 +540456,7 @@
             {
               "n": 27,
               "name": "T... P...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540463,7 +540467,7 @@
             {
               "n": 28,
               "name": "F... V...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540474,7 +540478,7 @@
             {
               "n": 29,
               "name": "S... J...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540485,7 +540489,7 @@
             {
               "n": 30,
               "name": "C... R...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540507,7 +540511,7 @@
             {
               "n": 32,
               "name": "F... O...",
-              "g": 0,
+              "g": 7,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -540518,7 +540522,7 @@
             {
               "n": 33,
               "name": "N... V...",
-              "g": 0,
+              "g": 7,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -641392,7 +641396,7 @@
       "leagueId": "18713",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2851485": {
       "date": "2026-09-12",
@@ -656232,7 +656236,7 @@
       "leagueId": "18713",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2851573": {
       "date": "2026-09-20",
@@ -769348,7 +769352,7 @@
       "leagueId": "18740",
       "players": [],
       "failed": true,
-      "tries": 10
+      "tries": 11
     },
     "2852149": {
       "date": "2026-11-21",
@@ -969932,21 +969936,21 @@
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 7
+      "tries": 8
     },
     "3053562": {
       "date": "2027-01-23",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 7
+      "tries": 8
     },
     "3053564": {
       "date": "2027-01-30",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 7
+      "tries": 8
     }
   }
 }
