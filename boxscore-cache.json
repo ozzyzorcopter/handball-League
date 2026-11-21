@@ -10545,7 +10545,7 @@
       "leagueId": "18702",
       "players": [],
       "failed": true,
-      "tries": 14
+      "tries": 15
     },
     "2849020": {
       "date": "2026-09-05",
@@ -162696,7 +162696,7 @@
       "leagueId": "18707",
       "players": [],
       "failed": true,
-      "tries": 16
+      "tries": 17
     },
     "2849454": {
       "date": "2026-09-12",
@@ -179003,6 +179003,713 @@
             }
           ],
           "captain": "Stijn Heeren"
+        }
+      ]
+    },
+    "2849513": {
+      "date": "2026-11-21",
+      "leagueId": "18707",
+      "players": [
+        {
+          "player": "T... V...",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Karel Heyndrickx",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Pepijn Neirynck",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Arne Van Overvelt",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Matisse Van Hoeylandt",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Wouter Koppen",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "L... L...",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Simon Evers",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Gérard Sovet",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Wannes Dedain",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Rahul Jaswal",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ferre Derave",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Simon Vanakker",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Thymen Evers",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Bartel Vertongen",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Thomas Lesage",
+          "club": "DB Gent D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Gilles Van Nieuwenhove",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Kobe Soetaert",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Liam Vanhaverbeke",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Daan Vanhaverbeke",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Kasper Declerck",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Stan Pauwels",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Bob Gevaert",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Vic Pauwels",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Kobe Lecluyse",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Rune Wullaert",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Senne Krohn",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ivan Fent",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Balder Snauwaert",
+          "club": "Besox Izegem D1 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "DB Gent D1 M VHV",
+          "players": [
+            {
+              "n": 2,
+              "name": "T... V...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Karel Heyndrickx",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 6,
+              "name": "Pepijn Neirynck",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Arne Van Overvelt",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Matisse Van Hoeylandt",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Wouter Koppen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "L... L...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 12,
+              "name": "Simon Evers",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 14,
+              "name": "Gérard Sovet",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 17,
+              "name": "Wannes Dedain",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 21,
+              "name": "Rahul Jaswal",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 22,
+              "name": "Ferre Derave",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 25,
+              "name": "Simon Vanakker",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 27,
+              "name": "Thymen Evers",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 31,
+              "name": "Bartel Vertongen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 34,
+              "name": "Thomas Lesage",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Andreas Zwaenepoel",
+              "role": "Assistant Coach"
+            },
+            {
+              "name": "johan christiaens",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "Bartel Vertongen"
+        },
+        {
+          "club": "Besox Izegem D1 M VHV",
+          "players": [
+            {
+              "n": 5,
+              "name": "Gilles Van Nieuwenhove",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Kobe Soetaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 18,
+              "name": "Liam Vanhaverbeke",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 22,
+              "name": "Daan Vanhaverbeke",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 23,
+              "name": "Kasper Declerck",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 24,
+              "name": "Stan Pauwels",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 34,
+              "name": "Bob Gevaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 36,
+              "name": "Vic Pauwels",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 42,
+              "name": "Kobe Lecluyse",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 54,
+              "name": "Rune Wullaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 60,
+              "name": "Senne Krohn",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 66,
+              "name": "Ivan Fent",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 99,
+              "name": "Balder Snauwaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Bernd Verbeke",
+              "role": "Assistant Coach"
+            },
+            {
+              "name": "Arnaud Mannechez",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "Kobe Soetaert"
         }
       ]
     },
@@ -220762,10 +221469,6 @@
             {
               "name": "Sander Gebruers",
               "role": "Head Coach"
-            },
-            {
-              "name": "Yentl Notte",
-              "role": "Assistant Coach"
             }
           ],
           "captain": ""
@@ -255779,7 +256482,7 @@
       "leagueId": "18705",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2849974": {
       "date": "2026-09-05",
@@ -428132,7 +428835,7 @@
           "player": "D... S...",
           "club": "P. Kortessem G14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428144,7 +428847,7 @@
           "player": "I... P...",
           "club": "P. Kortessem G14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428156,7 +428859,7 @@
           "player": "Y... E...",
           "club": "P. Kortessem G14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428168,7 +428871,7 @@
           "player": "L... H...",
           "club": "P. Kortessem G14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428179,9 +428882,9 @@
         {
           "player": "N... V...",
           "club": "P. Kortessem G14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
-          "sevenMScored": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
+          "sevenMScored": 2,
           "sevenMMissed": 0,
           "yellowCards": 0,
           "twoMinSuspensions": 0,
@@ -428192,7 +428895,7 @@
           "player": "H... P...",
           "club": "P. Kortessem G14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428203,8 +428906,8 @@
         {
           "player": "M... D...",
           "club": "P. Kortessem G14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428215,34 +428918,34 @@
         {
           "player": "C... P...",
           "club": "P. Kortessem G14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "O... E...",
           "club": "P. Kortessem G14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 6,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "T... J...",
           "club": "P. Kortessem G14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
-          "sevenMMissed": 0,
+          "sevenMMissed": 1,
           "yellowCards": 0,
           "twoMinSuspensions": 0,
           "blueCards": 0,
@@ -428252,7 +428955,7 @@
           "player": "B... S...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428264,7 +428967,7 @@
           "player": "L... S...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428276,7 +428979,7 @@
           "player": "N... D...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428287,8 +428990,8 @@
         {
           "player": "N... S...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428299,10 +429002,10 @@
         {
           "player": "M... S...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
-          "sevenMMissed": 0,
+          "sevenMMissed": 1,
           "yellowCards": 0,
           "twoMinSuspensions": 0,
           "blueCards": 0,
@@ -428311,32 +429014,32 @@
         {
           "player": "S... M...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
-          "sevenMScored": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
+          "sevenMScored": 1,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 2,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "J... P...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "L... V...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428347,8 +429050,8 @@
         {
           "player": "O... B...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428360,7 +429063,7 @@
           "player": "M... D...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428371,8 +429074,8 @@
         {
           "player": "M... M...",
           "club": "DHC Meeuwen G14 VHV-B R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -428432,8 +429135,8 @@
             {
               "n": 7,
               "name": "N... V...",
-              "g": 0,
-              "s7": 0,
+              "g": 2,
+              "s7": 2,
               "m7": 0,
               "yc": 0,
               "m2": 0,
@@ -428454,7 +429157,7 @@
             {
               "n": 10,
               "name": "M... D...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -428465,31 +429168,31 @@
             {
               "n": 11,
               "name": "C... P...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 13,
               "name": "O... E...",
-              "g": 0,
+              "g": 6,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 20,
               "name": "T... J...",
-              "g": 0,
+              "g": 7,
               "s7": 0,
-              "m7": 0,
+              "m7": 1,
               "yc": 0,
               "m2": 0,
               "bc": 0,
@@ -428543,7 +429246,7 @@
             {
               "n": 15,
               "name": "N... S...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -428554,9 +429257,9 @@
             {
               "n": 17,
               "name": "M... S...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
-              "m7": 0,
+              "m7": 1,
               "yc": 0,
               "m2": 0,
               "bc": 0,
@@ -428565,29 +429268,29 @@
             {
               "n": 20,
               "name": "S... M...",
-              "g": 0,
-              "s7": 0,
+              "g": 7,
+              "s7": 1,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 2,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 22,
               "name": "J... P...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 23,
               "name": "L... V...",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -428598,7 +429301,7 @@
             {
               "n": 24,
               "name": "O... B...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -428620,7 +429323,7 @@
             {
               "n": 29,
               "name": "M... M...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -457804,6 +458507,452 @@
             }
           ],
           "captain": "Ferre Heyzak"
+        }
+      ]
+    },
+    "2850774": {
+      "date": "2026-11-21",
+      "leagueId": "18718",
+      "players": [
+        {
+          "player": "Arne Haepers",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Dries Van Straeten",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Xyro Guns",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Briek Van Poucke",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Viktor Haeck",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Rens Bogaert",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Nand Van Damme",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Karel Ongenaert",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Cas Van Moorhem",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Torben Noens",
+          "club": "Lokeren B18 VHV R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Tommy Macarez",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ismael Fabbri",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Arthur Vanassche",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Gabin Delaby",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Louis Cockenpot",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jordan Dutrannois",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Gabriel Naessens",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Victor Vanassche",
+          "club": "Mouscron B18 VHV-B R",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Lokeren B18 VHV R",
+          "players": [
+            {
+              "n": 33,
+              "name": "Arne Haepers",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 40,
+              "name": "Dries Van Straeten",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 44,
+              "name": "Xyro Guns",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 77,
+              "name": "Briek Van Poucke",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 79,
+              "name": "Viktor Haeck",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 80,
+              "name": "Rens Bogaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 83,
+              "name": "Nand Van Damme",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 87,
+              "name": "Karel Ongenaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 90,
+              "name": "Cas Van Moorhem",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 99,
+              "name": "Torben Noens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Melvin Lange",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "Viktor Haeck"
+        },
+        {
+          "club": "Mouscron B18 VHV-B R",
+          "players": [
+            {
+              "n": 10,
+              "name": "Tommy Macarez",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 17,
+              "name": "Ismael Fabbri",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 41,
+              "name": "Arthur Vanassche",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 45,
+              "name": "Gabin Delaby",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 47,
+              "name": "Louis Cockenpot",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 51,
+              "name": "Jordan Dutrannois",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 54,
+              "name": "Gabriel Naessens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 58,
+              "name": "Victor Vanassche",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Damien Cockenpot",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "Ismael Fabbri"
         }
       ]
     },
@@ -498222,7 +499371,7 @@
           "player": "T... V...",
           "club": "Brugge U16 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498234,7 +499383,7 @@
           "player": "F... M...",
           "club": "Brugge U16 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498246,7 +499395,7 @@
           "player": "S... V...",
           "club": "Brugge U16 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498257,8 +499406,8 @@
         {
           "player": "S... P...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498269,8 +499418,8 @@
         {
           "player": "M... D...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498281,8 +499430,8 @@
         {
           "player": "P... F...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498293,8 +499442,8 @@
         {
           "player": "R... H...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498305,8 +499454,8 @@
         {
           "player": "R... M...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498317,8 +499466,8 @@
         {
           "player": "J... V...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498330,7 +499479,7 @@
           "player": "M... D...",
           "club": "Brugge U16 VHV-B R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498341,8 +499490,8 @@
         {
           "player": "S... S...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 8,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498353,9 +499502,9 @@
         {
           "player": "W... V...",
           "club": "Brugge U16 VHV-B R",
-          "goals": 0,
-          "matchesPlayed": 0,
-          "sevenMScored": 0,
+          "goals": 5,
+          "matchesPlayed": 1,
+          "sevenMScored": 1,
           "sevenMMissed": 0,
           "yellowCards": 0,
           "twoMinSuspensions": 0,
@@ -498365,8 +499514,8 @@
         {
           "player": "G... G...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498378,7 +499527,7 @@
           "player": "W... S...",
           "club": "Besox Izegem U16 VHV R 1",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498389,8 +499538,8 @@
         {
           "player": "K... M...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498401,8 +499550,8 @@
         {
           "player": "M... N...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 5,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498413,8 +499562,8 @@
         {
           "player": "W... N...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 5,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498425,8 +499574,8 @@
         {
           "player": "R... V...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 9,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498437,12 +499586,12 @@
         {
           "player": "G... W...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
@@ -498450,20 +499599,20 @@
           "player": "K... V...",
           "club": "Besox Izegem U16 VHV R 1",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "R... M...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
-          "sevenMScored": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
+          "sevenMScored": 1,
           "sevenMMissed": 0,
           "yellowCards": 0,
           "twoMinSuspensions": 0,
@@ -498473,8 +499622,8 @@
         {
           "player": "V... V...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 8,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498485,8 +499634,8 @@
         {
           "player": "L... V...",
           "club": "Besox Izegem U16 VHV R 1",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498498,7 +499647,7 @@
           "player": "N... D...",
           "club": "Besox Izegem U16 VHV R 1",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -498547,7 +499696,7 @@
             {
               "n": 7,
               "name": "S... P...",
-              "g": 0,
+              "g": 7,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498558,7 +499707,7 @@
             {
               "n": 8,
               "name": "M... D...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498569,7 +499718,7 @@
             {
               "n": 9,
               "name": "P... F...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498580,7 +499729,7 @@
             {
               "n": 10,
               "name": "R... H...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498591,7 +499740,7 @@
             {
               "n": 11,
               "name": "R... M...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498602,7 +499751,7 @@
             {
               "n": 12,
               "name": "J... V...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498624,7 +499773,7 @@
             {
               "n": 14,
               "name": "S... S...",
-              "g": 0,
+              "g": 8,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498635,8 +499784,8 @@
             {
               "n": 15,
               "name": "W... V...",
-              "g": 0,
-              "s7": 0,
+              "g": 5,
+              "s7": 1,
               "m7": 0,
               "yc": 0,
               "m2": 0,
@@ -498644,7 +499793,16 @@
               "rc": 0
             }
           ],
-          "staff": [],
+          "staff": [
+            {
+              "name": "Alex Van Haverbeke",
+              "role": "Timekeeper"
+            },
+            {
+              "name": "Hewitt De Craemer",
+              "role": "Head Coach"
+            }
+          ],
           "captain": "S... S..."
         },
         {
@@ -498653,7 +499811,7 @@
             {
               "n": 3,
               "name": "G... G...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498675,7 +499833,7 @@
             {
               "n": 18,
               "name": "K... M...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498686,7 +499844,7 @@
             {
               "n": 26,
               "name": "M... N...",
-              "g": 0,
+              "g": 5,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498697,7 +499855,7 @@
             {
               "n": 51,
               "name": "W... N...",
-              "g": 0,
+              "g": 5,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498708,7 +499866,7 @@
             {
               "n": 62,
               "name": "R... V...",
-              "g": 0,
+              "g": 9,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498719,11 +499877,11 @@
             {
               "n": 67,
               "name": "G... W...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
@@ -498734,15 +499892,15 @@
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 82,
               "name": "R... M...",
-              "g": 0,
-              "s7": 0,
+              "g": 2,
+              "s7": 1,
               "m7": 0,
               "yc": 0,
               "m2": 0,
@@ -498752,7 +499910,7 @@
             {
               "n": 84,
               "name": "V... V...",
-              "g": 0,
+              "g": 8,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -498763,7 +499921,7 @@
             {
               "n": 89,
               "name": "L... V...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -723270,7 +724428,7 @@
       "leagueId": "18698",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2851875": {
       "date": "2026-10-04",
@@ -777425,7 +778583,7 @@
       "leagueId": "18740",
       "players": [],
       "failed": true,
-      "tries": 16
+      "tries": 17
     },
     "2852149": {
       "date": "2026-11-21",
@@ -978657,21 +979815,21 @@
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 13
+      "tries": 14
     },
     "3053562": {
       "date": "2027-01-23",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 13
+      "tries": 14
     },
     "3053564": {
       "date": "2027-01-30",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 13
+      "tries": 14
     }
   }
 }
