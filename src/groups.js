@@ -15,15 +15,22 @@ export function groupsOf(league) {
 }
 
 // The league as it looks when only one pool is shown: its teams re-indexed, its games, its table.
+// teams and ranking are in the same order (the fetch builds one from the other), so a pool is picked by
+// position, not by name: a team listed in two pools is then in each pool once.
 export function leagueForGroup(league, group) {
-  const names = new Set(group.teamNames);
-  const oldToNew = new Map();
-  const teams = [];
-  (league.teams || []).forEach((t, i) => { if (names.has(t.name)) { oldToNew.set(i, teams.length); teams.push(t); } });
+  const rk = league.ranking || [];
+  const all = league.teams || [];
+  const aligned = rk.length === all.length && rk.every((r, i) => all[i] && all[i].name === r.name);
+  const inGroup = (r, i) => (r.group ?? 0) === group.id;
+  const idx = aligned ? rk.map((r, i) => (inGroup(r, i) ? i : -1)).filter(i => i >= 0)
+    : all.map((t, i) => (group.teamNames.includes(t.name) ? i : -1)).filter(i => i >= 0);
+  const oldToNew = new Map(idx.map((o, n) => [o, n]));
+  const teams = idx.map(i => all[i]);
   const fixtures = (league.fixtures || [])
     .filter(f => oldToNew.has(f.homeIdx) && oldToNew.has(f.awayIdx))
     .map(f => ({ ...f, homeIdx: oldToNew.get(f.homeIdx), awayIdx: oldToNew.get(f.awayIdx) }));
-  const ranking = (league.ranking || []).filter(r => names.has(r.name)).map((r, i) => ({ ...r, pos: i + 1 }));
+  const names = new Set(teams.map(t => t.name));
+  const ranking = rk.filter((r, i) => (aligned ? inGroup(r, i) : names.has(r.name))).map((r, i) => ({ ...r, pos: i + 1 }));
   const byClub = list => (Array.isArray(list) ? list.filter(x => names.has(x.club)) : list);
   return {
     ...league,

@@ -42,3 +42,16 @@ test("a league in pools becomes one small league per pool", () => {
   assert.deepEqual(b.ranking.map(r => [r.name, r.pos]), [["B1", 1], ["B2", 2]]);
   assert.deepEqual(b.scorers.map(s => s.club), ["B2"]);
 });
+
+test("a team that is listed in two pools is in each pool once, with the games of that pool", () => {
+  const ranking = [
+    { pos: 1, name: "X", group: 0 }, { pos: 2, name: "Y", group: 0 },
+    { pos: 1, name: "X", group: 1 }, { pos: 2, name: "Z", group: 1 },
+  ];
+  const league = { teams: ranking.map(r => ({ name: r.name })), ranking, fixtures: [{ homeIdx: 0, awayIdx: 1 }, { homeIdx: 2, awayIdx: 3 }] };
+  const [a, b] = groupsOf(league).map(g => leagueForGroup(league, g));
+  assert.deepEqual(a.teams.map(t => t.name), ["X", "Y"]);
+  assert.deepEqual(b.teams.map(t => t.name), ["X", "Z"]);
+  assert.equal(a.fixtures.length, 1);
+  assert.equal(b.fixtures.length, 1);
+});

@@ -467,11 +467,37 @@ function makeTeamResolver(teamNames) {
   };
 }
 
+// A team can be listed in more than one pool of the standings (a regional league with a second phase, or
+// a cup with group stages): the standings list then holds several entries with the same name. A game
+// belongs to the pool where BOTH teams are listed; when two pools both hold the pair, the earliest pool
+// that has fewer than two games between them (a double round robin) gets the game.
+function makePairPicker(ranking) {
+  const byName = new Map();
+  ranking.forEach((r, i) => { if (!byName.has(r.name)) byName.set(r.name, []); byName.get(r.name).push(i); });
+  const used = new Map();
+  return function pick(hi, ai) {
+    const hc = byName.get(ranking[hi].name) || [hi], ac = byName.get(ranking[ai].name) || [ai];
+    if (hc.length < 2 && ac.length < 2) return [hi, ai];
+    const options = [];
+    for (const h of hc) for (const a of ac) {
+      if ((ranking[h].group ?? 0) !== (ranking[a].group ?? 0)) continue;
+      const key = h < a ? h + "-" + a : a + "-" + h;
+      options.push({ h, a, key, n: used.get(key) || 0, g: ranking[h].group ?? 0 });
+    }
+    if (!options.length) return [hi, ai];
+    options.sort((x, y) => x.g - y.g);
+    const best = options.find(o => o.n < 2) || options.reduce((m, o) => (o.n < m.n ? o : m), options[0]);
+    used.set(best.key, best.n + 1);
+    return [best.h, best.a];
+  };
+}
+
 // Games built from the data Clubee embeds in the page (the same list the cards are drawn from):
 // used for every game the card reader did not find, so a change in the card markup cannot make
 // games disappear. ids = game ids to add.
 function fixturesFromFlight(flightGames, ranking, ids, startCounter = 0) {
   const resolve = makeTeamResolver(ranking.map(r => r.name));
+  const pick = makePairPicker(ranking);
   const today = new Date().toISOString().slice(0, 10);
   const out = [];
   let counter = startCounter;
@@ -485,6 +511,7 @@ function fixturesFromFlight(flightGames, ranking, ids, startCounter = 0) {
       if (hi < 0 || ai < 0) warn(`Game ${id}: no team match for ${hi < 0 ? `"${g.homeName}"` : ""} ${ai < 0 ? `"${g.awayName}"` : ""} - game skipped`);
       continue;
     }
+    [hi, ai] = pick(hi, ai);
     const both = g.score1 != null && g.score2 != null;
     const hasResult = !!(g.completed || (both && (+g.score1 > 0 || +g.score2 > 0)));
     const played = hasResult || !!(g.date && g.date < today);
@@ -505,6 +532,7 @@ function parseGamesHtml(html, ranking, times) {
   const teamNames = ranking.map(r => r.name);
   const stripText = decodeEntities;
   const resolveTeam = makeTeamResolver(teamNames);
+  const pickPair = makePairPicker(ranking);
 
   const fixtures = [];
   let counter = 0;
@@ -555,8 +583,9 @@ function parseGamesHtml(html, ranking, times) {
     const homeScore = scoreM ? parseInt(scoreM[1]) : null;
     const awayScore = scoreM ? parseInt(scoreM[2]) : null;
 
-    const homeIdx = resolveTeam(homeName);
-    const awayIdx = resolveTeam(awayName);
+    let homeIdx = resolveTeam(homeName);
+    let awayIdx = resolveTeam(awayName);
+    if (homeIdx >= 0 && awayIdx >= 0 && homeIdx !== awayIdx) [homeIdx, awayIdx] = pickPair(homeIdx, awayIdx);
     if (homeIdx < 0 || awayIdx < 0 || homeIdx === awayIdx) {
       if (homeIdx < 0 || awayIdx < 0) warn(`Game ${gameId}: no team match for ${homeIdx < 0 ? `"${homeName}"` : ""} ${awayIdx < 0 ? `"${awayName}"` : ""} - game skipped`);
       continue;
@@ -923,7 +952,7 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
-const DATA_VERSION = 4;
+const DATA_VERSION = 5;
 
 // A cached line-up is fetched again when it can still change:
 //  - the page was empty when we looked (Clubee clubs fill it in hours or days later), or
