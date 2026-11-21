@@ -10545,7 +10545,7 @@
       "leagueId": "18702",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2849020": {
       "date": "2026-09-05",
@@ -66395,7 +66395,7 @@
       "leagueId": "18704",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2849182": {
       "date": "2026-09-05",
@@ -159816,7 +159816,7 @@
       "leagueId": "18707",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2849454": {
       "date": "2026-09-12",
@@ -216189,7 +216189,7 @@
       "leagueId": "18710",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2849717": {
       "date": "2026-10-10",
@@ -277451,12 +277451,7 @@
               "rc": 0
             }
           ],
-          "staff": [
-            {
-              "name": "Melvin Poldervaart",
-              "role": "Head Coach"
-            }
-          ],
+          "staff": [],
           "captain": "Maxim Maesen"
         }
       ]
@@ -292667,20 +292662,20 @@
         {
           "player": "Lucas Reweghs",
           "club": "H. Bilzen D M VHV LIM-B",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 5,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "Wout Martens",
           "club": "H. Bilzen D M VHV LIM-B",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292691,8 +292686,8 @@
         {
           "player": "Xander Rondas",
           "club": "H. Bilzen D M VHV LIM-B",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292704,7 +292699,7 @@
           "player": "Kai Neulens",
           "club": "H. Bilzen D M VHV LIM-B",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292716,19 +292711,19 @@
           "player": "Artyon Kasparov",
           "club": "H. Bilzen D M VHV LIM-B",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 2,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "Jesse Colson",
           "club": "H. Bilzen D M VHV LIM-B",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292740,31 +292735,31 @@
           "player": "A... B...",
           "club": "H. Bilzen D M VHV LIM-B",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "Brent Mewissen",
           "club": "H. Bilzen D M VHV LIM-B",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 6,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
-          "sevenMMissed": 0,
+          "sevenMMissed": 1,
           "yellowCards": 0,
           "twoMinSuspensions": 0,
           "blueCards": 0,
-          "redCards": 0
+          "redCards": 1
         },
         {
           "player": "Maarten Moris",
           "club": "H. Bilzen D M VHV LIM-B",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292776,7 +292771,7 @@
           "player": "Warre Gielkens",
           "club": "H. Bilzen D M VHV LIM-B",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292787,20 +292782,20 @@
         {
           "player": "Robbe Slenders",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "Wouter Deelkens",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292812,7 +292807,7 @@
           "player": "Brent Haels",
           "club": "HC Overpelt D M VHV LIM",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292823,8 +292818,8 @@
         {
           "player": "B... C...",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292835,8 +292830,8 @@
         {
           "player": "Mike Vandersanden",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292847,8 +292842,8 @@
         {
           "player": "Niels Tielens",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 6,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292860,7 +292855,7 @@
           "player": "Christophe Oeyen",
           "club": "HC Overpelt D M VHV LIM",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292871,8 +292866,8 @@
         {
           "player": "Jan Geusens",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 6,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292883,8 +292878,8 @@
         {
           "player": "Gus Franssen",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292895,10 +292890,10 @@
         {
           "player": "Wim Geusens",
           "club": "HC Overpelt D M VHV LIM",
-          "goals": 0,
-          "matchesPlayed": 0,
-          "sevenMScored": 0,
-          "sevenMMissed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
+          "sevenMScored": 2,
+          "sevenMMissed": 1,
           "yellowCards": 0,
           "twoMinSuspensions": 0,
           "blueCards": 0,
@@ -292908,7 +292903,7 @@
           "player": "Ferre Geens",
           "club": "HC Overpelt D M VHV LIM",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -292924,18 +292919,18 @@
             {
               "n": 3,
               "name": "Lucas Reweghs",
-              "g": 0,
+              "g": 5,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 4,
               "name": "Wout Martens",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -292946,7 +292941,7 @@
             {
               "n": 6,
               "name": "Xander Rondas",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -292972,14 +292967,14 @@
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 2,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 23,
               "name": "Jesse Colson",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -292994,25 +292989,25 @@
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 36,
               "name": "Brent Mewissen",
-              "g": 0,
+              "g": 6,
               "s7": 0,
-              "m7": 0,
+              "m7": 1,
               "yc": 0,
               "m2": 0,
               "bc": 0,
-              "rc": 0
+              "rc": 1
             },
             {
               "n": 38,
               "name": "Maarten Moris",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -293046,18 +293041,18 @@
             {
               "n": 3,
               "name": "Robbe Slenders",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 4,
               "name": "Wouter Deelkens",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -293079,7 +293074,7 @@
             {
               "n": 6,
               "name": "B... C...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -293090,7 +293085,7 @@
             {
               "n": 7,
               "name": "Mike Vandersanden",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -293101,7 +293096,7 @@
             {
               "n": 10,
               "name": "Niels Tielens",
-              "g": 0,
+              "g": 6,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -293123,7 +293118,7 @@
             {
               "n": 13,
               "name": "Jan Geusens",
-              "g": 0,
+              "g": 6,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -293134,7 +293129,7 @@
             {
               "n": 14,
               "name": "Gus Franssen",
-              "g": 0,
+              "g": 7,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -293145,9 +293140,9 @@
             {
               "n": 15,
               "name": "Wim Geusens",
-              "g": 0,
-              "s7": 0,
-              "m7": 0,
+              "g": 3,
+              "s7": 2,
+              "m7": 1,
               "yc": 0,
               "m2": 0,
               "bc": 0,
@@ -485732,8 +485727,8 @@
         {
           "player": "B... D...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485744,8 +485739,8 @@
         {
           "player": "S... R...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485756,20 +485751,20 @@
         {
           "player": "T... G...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 9,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
         {
           "player": "L... N...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485780,8 +485775,8 @@
         {
           "player": "J... N...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485792,8 +485787,8 @@
         {
           "player": "E... V...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485804,8 +485799,8 @@
         {
           "player": "J... V...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485816,8 +485811,8 @@
         {
           "player": "I... L...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 8,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485828,8 +485823,8 @@
         {
           "player": "E... V...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485840,8 +485835,8 @@
         {
           "player": "T... L...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485852,8 +485847,8 @@
         {
           "player": "J... F...",
           "club": "DB Gent U16 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485864,8 +485859,8 @@
         {
           "player": "J... V...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485876,8 +485871,8 @@
         {
           "player": "D... J...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485888,8 +485883,8 @@
         {
           "player": "T... V...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485900,8 +485895,8 @@
         {
           "player": "V... H...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485912,12 +485907,12 @@
         {
           "player": "L... H...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "twoMinSuspensions": 2,
           "blueCards": 0,
           "redCards": 0
         },
@@ -485925,7 +485920,7 @@
           "player": "N... G...",
           "club": "Desselgemse U16 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485936,8 +485931,8 @@
         {
           "player": "N... T...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485948,12 +485943,12 @@
         {
           "player": "D... D...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
-          "yellowCards": 0,
-          "twoMinSuspensions": 0,
+          "yellowCards": 1,
+          "twoMinSuspensions": 1,
           "blueCards": 0,
           "redCards": 0
         },
@@ -485961,7 +485956,7 @@
           "player": "M... V...",
           "club": "Desselgemse U16 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485973,7 +485968,7 @@
           "player": "J... V...",
           "club": "Desselgemse U16 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -485984,11 +485979,11 @@
         {
           "player": "V... B...",
           "club": "Desselgemse U16 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
-          "yellowCards": 0,
+          "yellowCards": 1,
           "twoMinSuspensions": 0,
           "blueCards": 0,
           "redCards": 0
@@ -485997,7 +485992,7 @@
           "player": "F... D...",
           "club": "Desselgemse U16 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -486009,7 +486004,7 @@
           "player": "L... S...",
           "club": "Desselgemse U16 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -486025,7 +486020,7 @@
             {
               "n": 4,
               "name": "B... D...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486036,7 +486031,7 @@
             {
               "n": 6,
               "name": "S... R...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486047,18 +486042,18 @@
             {
               "n": 8,
               "name": "T... G...",
-              "g": 0,
+              "g": 9,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
             {
               "n": 10,
               "name": "L... N...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486069,7 +486064,7 @@
             {
               "n": 13,
               "name": "J... N...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486080,7 +486075,7 @@
             {
               "n": 14,
               "name": "E... V...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486091,7 +486086,7 @@
             {
               "n": 15,
               "name": "J... V...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486102,7 +486097,7 @@
             {
               "n": 16,
               "name": "I... L...",
-              "g": 0,
+              "g": 8,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486113,7 +486108,7 @@
             {
               "n": 17,
               "name": "E... V...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486124,7 +486119,7 @@
             {
               "n": 23,
               "name": "T... L...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486135,7 +486130,7 @@
             {
               "n": 29,
               "name": "J... F...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486158,7 +486153,7 @@
             {
               "n": 3,
               "name": "J... V...",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486169,7 +486164,7 @@
             {
               "n": 4,
               "name": "D... J...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486180,7 +486175,7 @@
             {
               "n": 5,
               "name": "T... V...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486191,7 +486186,7 @@
             {
               "n": 6,
               "name": "V... H...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486202,11 +486197,11 @@
             {
               "n": 7,
               "name": "L... H...",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
-              "m2": 0,
+              "m2": 2,
               "bc": 0,
               "rc": 0
             },
@@ -486224,7 +486219,7 @@
             {
               "n": 9,
               "name": "N... T...",
-              "g": 0,
+              "g": 7,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -486235,11 +486230,11 @@
             {
               "n": 11,
               "name": "D... D...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
-              "yc": 0,
-              "m2": 0,
+              "yc": 1,
+              "m2": 1,
               "bc": 0,
               "rc": 0
             },
@@ -486268,10 +486263,10 @@
             {
               "n": 14,
               "name": "V... B...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
-              "yc": 0,
+              "yc": 1,
               "m2": 0,
               "bc": 0,
               "rc": 0
@@ -724333,6 +724328,483 @@
         }
       ]
     },
+    "2851962": {
+      "date": "2026-11-21",
+      "leagueId": "18739",
+      "players": [
+        {
+          "player": "Jahmaël Mauricia",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Simon Michotte",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Tao Counet",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Victor Mercier",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ruben Martin Virseda",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Janelle Jadoul",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Adrian Mignon",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Martin Greatti",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Arthur Delooz",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Alexandre Delooz",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ytan Lurkin",
+          "club": "Visé BM U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ayélé Ruth agbodji",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Célia Mombo",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Arwen Diplo",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Nasrat Nawabi",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mirwais Nawabi",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Maeva Mombo",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "N... P...",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mozamile Nawabi",
+          "club": "JS Herstal U16 Lg",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Visé BM U16 Lg",
+          "players": [
+            {
+              "n": 1,
+              "name": "Jahmaël Mauricia",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 13,
+              "name": "Simon Michotte",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 38,
+              "name": "Tao Counet",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 42,
+              "name": "Victor Mercier",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 45,
+              "name": "Ruben Martin Virseda",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 47,
+              "name": "Janelle Jadoul",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 48,
+              "name": "Adrian Mignon",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 57,
+              "name": "Martin Greatti",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 72,
+              "name": "Arthur Delooz",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 90,
+              "name": "Alexandre Delooz",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 96,
+              "name": "Ytan Lurkin",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Maël De Novellis",
+              "role": "Assistant Coach"
+            },
+            {
+              "name": "Simon Ribas Y Sanchez",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": ""
+        },
+        {
+          "club": "JS Herstal U16 Lg",
+          "players": [
+            {
+              "n": 3,
+              "name": "Ayélé Ruth agbodji",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Célia Mombo",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 6,
+              "name": "Arwen Diplo",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Nasrat Nawabi",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Mirwais Nawabi",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 13,
+              "name": "Maeva Mombo",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 14,
+              "name": "N... P...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 16,
+              "name": "Mozamile Nawabi",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Sandrine Lovinfosse",
+              "role": "Head Coach"
+            },
+            {
+              "name": "Gabrielle Legat",
+              "role": "Assistant Coach"
+            }
+          ],
+          "captain": ""
+        }
+      ]
+    },
     "2851964": {
       "date": "2026-09-13",
       "leagueId": "18739",
@@ -764221,7 +764693,7 @@
       "leagueId": "18740",
       "players": [],
       "failed": true,
-      "tries": 8
+      "tries": 9
     },
     "2852149": {
       "date": "2026-11-21",
@@ -964805,21 +965277,21 @@
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3053562": {
       "date": "2027-01-23",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3053564": {
       "date": "2027-01-30",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     }
   }
 }
