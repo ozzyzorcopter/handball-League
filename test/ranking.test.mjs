@@ -53,3 +53,20 @@ test("MC: certain outcomes give 100% to the expected positions and rows sum to 1
   const colSum = [0, 1, 2].map(p => res.reduce((a, r) => a + r[p], 0));
   colSum.forEach(c => assert.ok(Math.abs(c - 100) < 1e-9));
 });
+
+test("three teams level: the one split off first, the other two ranked by their own game", () => {
+  // Real case (Liga Heren 3): Thor beat Schoten 27-25, Schoten beat Lebbeke 28-18, Lebbeke beat Thor 32-26.
+  // Everyone has 2 head-to-head points; Schoten leads on head-to-head goal difference (+8),
+  // Thor and Lebbeke are both on -4, so their own game (Lebbeke won) decides, before away goals.
+  const n = 3; // 0 Thor, 1 Lebbeke, 2 Schoten
+  const h2hPts = new Int32Array(9), h2hGF = new Int32Array(9), h2hAwayGF = new Int32Array(9), met = new Uint8Array(9);
+  const game = (h, a, hg, ag) => {
+    met[h * n + a] = met[a * n + h] = 1;
+    h2hGF[h * n + a] += hg; h2hGF[a * n + h] += ag; h2hAwayGF[a * n + h] += ag;
+    if (hg > ag) h2hPts[h * n + a] += 2; else h2hPts[a * n + h] += 2;
+  };
+  game(0, 2, 27, 25); game(2, 1, 28, 18); game(1, 0, 32, 26);
+  const d = { pts: [4, 4, 4], wins: [2, 2, 2], gf: [149, 124, 171], ga: [175, 145, 183], h2hPts, h2hGF, h2hAwayGF, met };
+  const order = rankIndices(n, d, (a, b) => (a === 0 ? -1 : b === 0 ? 1 : 0)); // fallback would favour Thor
+  assert.deepEqual(order, [2, 1, 0]);
+});

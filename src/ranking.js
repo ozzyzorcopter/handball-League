@@ -58,15 +58,39 @@ function breakTie(group, n, d, finalCompare) {
       h2h.set(m, { pts, gd, away });
     }
   }
-  return group.slice().sort((a, b) => {
-    if (complete) {
-      const ha = h2h.get(a), hb = h2h.get(b);
-      if (hb.pts !== ha.pts) return hb.pts - ha.pts;
-      if (hb.gd !== ha.gd) return hb.gd - ha.gd;
-      if (hb.away !== ha.away) return hb.away - ha.away;
-    }
+  const byGoals = list => list.slice().sort((a, b) => {
     const gdA = d.gf[a] - d.ga[a], gdB = d.gf[b] - d.ga[b];
     if (gdB !== gdA) return gdB - gdA;
     return finalCompare ? finalCompare(a, b) : 0;
   });
+  if (!complete) return byGoals(group);
+  // Head-to-head points, then head-to-head goal difference. Teams still level while others have
+  // been separated are compared again by the games among themselves only (A, B, C tied: C is split
+  // off, then A and B are ranked by their own game). If nobody got separated: away goals, then overall.
+  const sorted = group.slice().sort((a, b) => {
+    const ha = h2h.get(a), hb = h2h.get(b);
+    return (hb.pts - ha.pts) || (hb.gd - ha.gd);
+  });
+  const same = (a, b) => h2h.get(a).pts === h2h.get(b).pts && h2h.get(a).gd === h2h.get(b).gd;
+  const out = [];
+  let i = 0;
+  while (i < sorted.length) {
+    let j = i + 1;
+    while (j < sorted.length && same(sorted[i], sorted[j])) j++;
+    const run = sorted.slice(i, j);
+    if (run.length === 1) out.push(run[0]);
+    else if (run.length < group.length) out.push(...breakTie(run, n, d, finalCompare));
+    else {
+      const byAway = run.slice().sort((x, y) => h2h.get(y).away - h2h.get(x).away);
+      let k = 0;
+      while (k < byAway.length) {
+        let m = k + 1;
+        while (m < byAway.length && h2h.get(byAway[m]).away === h2h.get(byAway[k]).away) m++;
+        out.push(...byGoals(byAway.slice(k, m)));
+        k = m;
+      }
+    }
+    i = j;
+  }
+  return out;
 }
