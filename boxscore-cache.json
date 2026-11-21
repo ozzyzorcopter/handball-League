@@ -10545,7 +10545,7 @@
       "leagueId": "18702",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2849020": {
       "date": "2026-09-05",
@@ -66395,7 +66395,7 @@
       "leagueId": "18704",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2849182": {
       "date": "2026-09-05",
@@ -158286,7 +158286,7 @@
       "leagueId": "18707",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2849454": {
       "date": "2026-09-12",
@@ -214659,7 +214659,7 @@
       "leagueId": "18710",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2849717": {
       "date": "2026-10-10",
@@ -249054,7 +249054,7 @@
       "leagueId": "18705",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2849974": {
       "date": "2026-09-05",
@@ -313719,6 +313719,590 @@
         }
       ]
     },
+    "2850310": {
+      "date": "2026-11-21",
+      "leagueId": "18726",
+      "players": [
+        {
+          "player": "R... F...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "M... S...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "A... M...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "D... T...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "A... V...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "R... S...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "M... T...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "M... K...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "G... B...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "K... E...",
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "S... V...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "F... K...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "T... T...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "K... B...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "C... B...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "L... V...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "N... W...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "D... B...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "L... M...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "K... V...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "E... P...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "R... S...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "L... W...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "L... W...",
+          "club": "H. Bilzen U14 VHV R 1",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Derdaele Sp. Pelt U14 VHV R 1",
+          "players": [
+            {
+              "n": 1,
+              "name": "R... F...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "M... S...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 28,
+              "name": "A... M...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 51,
+              "name": "D... T...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 52,
+              "name": "A... V...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 54,
+              "name": "R... S...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 68,
+              "name": "M... T...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 70,
+              "name": "M... K...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 73,
+              "name": "G... B...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 88,
+              "name": "K... E...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Vladimir Tasevski",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "K... E..."
+        },
+        {
+          "club": "H. Bilzen U14 VHV R 1",
+          "players": [
+            {
+              "n": 3,
+              "name": "S... V...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "F... K...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "T... T...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 14,
+              "name": "K... B...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 19,
+              "name": "C... B...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 25,
+              "name": "L... V...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 26,
+              "name": "N... W...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 30,
+              "name": "D... B...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 34,
+              "name": "L... M...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 35,
+              "name": "K... V...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 39,
+              "name": "E... P...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 42,
+              "name": "R... S...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 54,
+              "name": "L... W...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 60,
+              "name": "L... W...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Guillaume Janssen",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "C... B..."
+        }
+      ]
+    },
     "2850311": {
       "date": "2026-09-05",
       "leagueId": "18726",
@@ -373962,7 +374546,7 @@
       "leagueId": "18738",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2850507": {
       "date": "2026-11-21",
@@ -377785,7 +378369,7 @@
       "leagueId": "18738",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2850526": {
       "date": "2026-11-14",
@@ -601500,7 +602084,7 @@
       "leagueId": "18716",
       "players": [],
       "failed": true,
-      "tries": 3
+      "tries": 4
     },
     "2851395": {
       "date": "2026-10-10",
@@ -625718,6 +626302,571 @@
         }
       ]
     },
+    "2851457": {
+      "date": "2026-11-21",
+      "leagueId": "18716",
+      "players": [
+        {
+          "player": "Nore raes",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ylluna DE RIDDER",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Margo De Saedeleir",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Anita Ironsa-Niyonzima",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Tille wijns",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Axelle Penninger",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Larisa Ademovic",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Laura Degraeve",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Marwa HAYEF",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Hadelijn Gilis",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ecaterina David",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Laura Philips",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ajla Useini",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Zita Dooremont",
+          "club": "Lebbeke D W VHV OWV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Nuria Machado",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ieme De Wintere",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lore Bonné",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Sterre Tytgat",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Alara Nalli",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Febe Bonné",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Esther Allaert",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Stefanie Bossuyt",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Miet Dujardin",
+          "club": "Desselgemse D W VHV OWV-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Lebbeke D W VHV OWV",
+          "players": [
+            {
+              "n": 3,
+              "name": "Nore raes",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "Ylluna DE RIDDER",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 6,
+              "name": "Margo De Saedeleir",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Anita Ironsa-Niyonzima",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Tille wijns",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "Axelle Penninger",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 18,
+              "name": "Larisa Ademovic",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 23,
+              "name": "Laura Degraeve",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 25,
+              "name": "Marwa HAYEF",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 30,
+              "name": "Hadelijn Gilis",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 33,
+              "name": "Ecaterina David",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 57,
+              "name": "Laura Philips",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 82,
+              "name": "Ajla Useini",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 91,
+              "name": "Zita Dooremont",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Dirk Goossens",
+              "role": "Head Coach"
+            },
+            {
+              "name": "Jonay Herrera Y Steendam",
+              "role": "Assistant Coach"
+            }
+          ],
+          "captain": "Axelle Penninger"
+        },
+        {
+          "club": "Desselgemse D W VHV OWV-B",
+          "players": [
+            {
+              "n": 3,
+              "name": "Nuria Machado",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "Ieme De Wintere",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 6,
+              "name": "Lore Bonné",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Sterre Tytgat",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Alara Nalli",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Febe Bonné",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Esther Allaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 13,
+              "name": "Stefanie Bossuyt",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 14,
+              "name": "Miet Dujardin",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Lieven Tytgat",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": ""
+        }
+      ]
+    },
     "2851459": {
       "date": "2026-09-13",
       "leagueId": "18716",
@@ -632839,7 +633988,7 @@
       "leagueId": "18713",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2851485": {
       "date": "2026-09-12",
@@ -647119,7 +648268,7 @@
       "leagueId": "18713",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2851573": {
       "date": "2026-09-20",
@@ -663470,7 +664619,7 @@
       "leagueId": "18694",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2851637": {
       "date": "2026-09-15",
@@ -706526,7 +707675,7 @@
       "leagueId": "18698",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2851875": {
       "date": "2026-10-04",
@@ -715607,7 +716756,7 @@
       "leagueId": "18739",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2851941": {
       "date": "2026-10-31",
@@ -759758,7 +760907,7 @@
       "leagueId": "18740",
       "players": [],
       "failed": true,
-      "tries": 6
+      "tries": 7
     },
     "2852149": {
       "date": "2026-11-21",
@@ -764450,7 +765599,7 @@
       "leagueId": "18714",
       "players": [],
       "failed": true,
-      "tries": 4
+      "tries": 5
     },
     "2852383": {
       "date": "2026-11-14",
@@ -769855,7 +771004,7 @@
       "leagueId": "18711",
       "players": [],
       "failed": true,
-      "tries": 2
+      "tries": 3
     },
     "2852492": {
       "date": "2026-09-05",
@@ -823689,7 +824838,7 @@
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 3
+      "tries": 4
     },
     "2852669": {
       "date": "2026-08-22",
@@ -956573,7 +957722,7 @@
       "leagueId": "18701",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3020772": {
       "date": "2026-10-18",
@@ -958847,56 +959996,56 @@
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031783": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031784": {
       "date": "2026-11-10",
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031785": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031786": {
       "date": "2026-11-10",
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031889": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031890": {
       "date": "2026-11-12",
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031892": {
       "date": "2026-11-11",
       "leagueId": "18700",
       "players": [],
       "failed": true,
-      "tries": 5
+      "tries": 6
     },
     "3031940": {
       "date": "2026-10-22",
