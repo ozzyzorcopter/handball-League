@@ -453,3 +453,8 @@ html[data-theme="light"] .subtab.on{filter:invert(1) hue-rotate(180deg);}
 .cup-chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:0 .8rem .5rem;}
 .cup-chip{font-size:.8rem;border:1px solid #1c1f27;border-radius:999px;padding:.2rem .65rem;background:#0d0f14;}
 .cup-note{font-size:.72rem;padding:0 .8rem .7rem;}
+
+/* ── Pools of a split league ── */
+.grp-bar{display:flex;gap:.4rem;overflow-x:auto;padding:.5rem .2rem;margin-bottom:.4rem;}
+.grp-chip{flex:0 0 auto;font:inherit;font-size:.78rem;font-weight:700;color:inherit;background:#0d0f14;border:1px solid #1c1f27;border-radius:999px;padding:.3rem .8rem;cursor:pointer;white-space:nowrap;}
+.grp-chip.on{color:#000;background:#fdda24;border-color:#fdda24;}

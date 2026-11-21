@@ -288,43 +288,74 @@ function normalizeLogoSrc(src) {
 
 // ── STANDINGS: parse from rendered HTML table ──────────────────────────────────
 // Columns: # | Club (with img) | MP | W | D | L | GS | GA | GD | Pts | (empty)
+// Youth and regional leagues are split in pools: the standings page then holds one table per pool (or one
+// table whose positions start again at 1). Every row gets `group` (0, 1, 2 ... in page order) and, when
+// there are several, `groupName` (the heading above its table, if it looks like one). Rows are sorted by
+// group, then position; a league with one table is unchanged.
 function parseStandingsHtml(html) {
   const rows = [];
-  const chunks = html.split(/<tr[\s>]/i);
-  for (const chunk of chunks) {
-    const rowContent = chunk.split(/<\/tr>/i)[0];
-    const cells = [];
-    const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
-    let td;
-    while ((td = tdRe.exec(rowContent)) !== null) {
-      const inner = td[1] ?? "";
-      const text = decodeEntities(inner);
-      cells.push(text);
+  const tables = html.split(/<table[\s>]/i);
+  let group = -1, seen = new Set();
+  const names = [];
+  tables.forEach((seg, ti) => {
+    let startedGroup = false;
+    const chunks = seg.split(/<tr[\s>]/i);
+    for (const chunk of chunks) {
+      const rowContent = chunk.split(/<\/tr>/i)[0];
+      const cells = [];
+      const tdRe = /<td[^>]*>([\s\S]*?)<\/td>/gi;
+      let td;
+      while ((td = tdRe.exec(rowContent)) !== null) {
+        const inner = td[1] ?? "";
+        const text = decodeEntities(inner);
+        cells.push(text);
+      }
+      // Expect at least 10 cells; first cell is position number (may have trailing dot: "1.")
+      if (cells.length < 10) continue;
+      const posStr = (cells[0] ?? "").replace(/\.$/, "");
+      if (/^\d+$/.test(posStr) && cells[1]) {
+        const pos = parseInt(posStr);
+        if (!startedGroup || seen.has(pos)) {
+          // a new table, or a position that is already taken inside one table (the numbering started
+          // again): a new pool
+          group++; startedGroup = true; seen = new Set();
+          // heading = last text above this table
+          let heading = "";
+          if (ti > 0) {
+            const above = tables[ti - 1].replace(/<svg[\s\S]*?<\/svg>/gi, "").split(/<[^>]+>/).map(t => decodeEntities(t).replace(/\s+/g, " ").trim()).filter(Boolean);
+            heading = above.length ? above[above.length - 1] : "";
+          }
+          names[group] = heading && heading.length <= 40 && !/^\d+\.?$/.test(heading) ? heading : "";
+        }
+        seen.add(pos);
+        // Grab the club logo <img> (src or data-src, whichever is set — some
+        // lazy-loading setups only populate data-src until the image scrolls
+        // into view) so we can later match it against the stats page's logos,
+        // which have no usable alt text.
+        const imgM = rowContent.match(/<img[^>]*\s(?:data-)?src="([^"]+)"/i);
+        rows.push({
+          pos,
+          name:   cells[1].replace(/\s*\([^)]*\)\s*$/, "").trim(),
+          played: parseInt(cells[2])  || 0,
+          won:    parseInt(cells[3])  || 0,
+          drawn:  parseInt(cells[4])  || 0,
+          lost:   parseInt(cells[5])  || 0,
+          gf:     parseInt(cells[6])  || 0,
+          ga:     parseInt(cells[7])  || 0,
+          points: parseInt(cells[9])  || 0,
+          logoKey: imgM ? normalizeLogoSrc(imgM[1]) : "",
+          group,
+        });
+      }
     }
-    // Expect at least 10 cells; first cell is position number (may have trailing dot: "1.")
-    if (cells.length < 10) continue;
-    const posStr = (cells[0] ?? "").replace(/\.$/, "");
-    if (/^\d+$/.test(posStr) && cells[1]) {
-      // Grab the club logo <img> (src or data-src, whichever is set — some
-      // lazy-loading setups only populate data-src until the image scrolls
-      // into view) so we can later match it against the stats page's logos,
-      // which have no usable alt text.
-      const imgM = rowContent.match(/<img[^>]*\s(?:data-)?src="([^"]+)"/i);
-      rows.push({
-        pos:    parseInt(posStr),
-        name:   cells[1].replace(/\s*\([^)]*\)\s*$/, "").trim(),
-        played: parseInt(cells[2])  || 0,
-        won:    parseInt(cells[3])  || 0,
-        drawn:  parseInt(cells[4])  || 0,
-        lost:   parseInt(cells[5])  || 0,
-        gf:     parseInt(cells[6])  || 0,
-        ga:     parseInt(cells[7])  || 0,
-        points: parseInt(cells[9])  || 0,
-        logoKey: imgM ? normalizeLogoSrc(imgM[1]) : "",
-      });
-    }
+  });
+  const several = group > 0;
+  if (several) {
+    // pool names: a heading shared by every pool (e.g. the page title) is no name
+    const uniq = new Set(names.filter(Boolean));
+    rows.forEach(r => { if (names[r.group] && uniq.size === group + 1) r.groupName = names[r.group]; });
   }
-  return rows.sort((a, b) => a.pos - b.pos);
+  return rows.sort((a, b) => a.group - b.group || a.pos - b.pos);
 }
 
 // ── GAMES: parse from rendered div-based GameCard components ──────────────────
@@ -892,7 +923,7 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
-const DATA_VERSION = 3;
+const DATA_VERSION = 4;
 
 // A cached line-up is fetched again when it can still change:
 //  - the page was empty when we looked (Clubee clubs fill it in hours or days later), or

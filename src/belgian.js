@@ -13,6 +13,7 @@ import { LeagueTable } from "./LeagueTable.js";
 import { TeamDetail } from "./TeamDetail.js";
 import { LineupSheet } from "./LineupSheet.js";
 import { CupView } from "./CupView.js";
+import { groupsOf, leagueForGroup } from "./groups.js";
 import { isCupLeague } from "./cupRounds.js";
 import { MCTab, ScoresTab } from "./scores.js";
 import { PlayersTab } from "./PlayersTab.js";
@@ -284,7 +285,30 @@ export function BelgianScreen({ onBack }) {
 }
 
 // Read-only league view for Belgian Handball data
+// A league split in pools (youth and regional leagues) shows one pool at a time, picked with the chips on top.
 export function BelgianLeagueView({ league, onBack }) {
+  const { t: tr } = useLang();
+  const groups = useMemo(() => (isCupLeague(league) ? null : groupsOf(league)), [league]);
+  const [gi, setGi] = useState(0);
+  const g = groups ? groups[Math.min(gi, groups.length - 1)] : null;
+  const shown = useMemo(() => (g ? leagueForGroup(league, g) : league), [league, g]);
+  return (
+    <>
+      {groups && (
+        <div className="grp-bar" role="tablist" aria-label={tr("Pools")}>
+          {groups.map((x, i) => (
+            <button key={x.id} role="tab" aria-selected={x === g} className={"grp-chip" + (x === g ? " on" : "")} onClick={() => setGi(i)}>
+              {x.name || tr("Pool") + " " + x.letter}
+            </button>
+          ))}
+        </div>
+      )}
+      <BelgianLeagueInner key={g ? g.id : "all"} league={shown} onBack={onBack} />
+    </>
+  );
+}
+
+function BelgianLeagueInner({ league, onBack }) {
   const { teams: initTeams = [], fixtures: rawFixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [], travelRanking = [] } = league;
   const fixtures = useMemo(() => assignWeeks(rawFixtures), [rawFixtures]);
   const { t: tr } = useLang();
