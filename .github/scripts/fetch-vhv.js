@@ -380,6 +380,8 @@ function extractFlightGames(html) {
       const lat = parseFloat(g.venue_lat ?? g.facility?.lat), lon = parseFloat(g.venue_lng ?? g.facility?.lng);
       games.set(String(g.id), {
         homeId: g.team1.id, awayId: g.team2.id,
+        homeName: g.team1.full_name || g.team1.name || "", awayName: g.team2.full_name || g.team2.name || "",
+        homeShort: g.team1.name || "", awayShort: g.team2.name || "",
         date: m ? m[1] : null, time: m && m[2] !== "00:00" ? m[2] : null,
         cancelled: !!g.cancelled, completed: !!g.completed,
         score1: g.score1 ?? null, score2: g.score2 ?? null,
@@ -406,11 +408,9 @@ function extractGameTimes(html) {
   return times;
 }
 
-function parseGamesHtml(html, ranking, times) {
-  const teamNames = ranking.map(r => r.name);
+// Maps a Clubee team name to its index in the standings list (exact, flat, club-core and prefix matches).
+function makeTeamResolver(teamNames) {
   const nameIdx   = new Map(teamNames.map((n, i) => [n.toLowerCase(), i]));
-
-  const stripText = decodeEntities;
   function coreClubName(name) {
     return name
       .replace(/\([^)]*\)/g, "")
@@ -419,7 +419,7 @@ function parseGamesHtml(html, ranking, times) {
   }
   const coreIdx = new Map(teamNames.map((n, i) => [coreClubName(n), i]));
 
-  function resolveTeam(raw) {
+  return function resolveTeam(raw) {
     // Strip division suffix like "(Senior M)" first
     const clean = raw.replace(/\s*\([^)]*\)\s*$/, "").trim();
     const lower = clean.toLowerCase();
@@ -433,17 +433,60 @@ function parseGamesHtml(html, ranking, times) {
       if (core && sc && (sc.startsWith(core) || core.startsWith(sc))) return idx;
     }
     return -1;
+  };
+}
+
+// Games built from the data Clubee embeds in the page (the same list the cards are drawn from):
+// used for every game the card reader did not find, so a change in the card markup cannot make
+// games disappear. ids = game ids to add.
+function fixturesFromFlight(flightGames, ranking, ids, startCounter = 0) {
+  const resolve = makeTeamResolver(ranking.map(r => r.name));
+  const today = new Date().toISOString().slice(0, 10);
+  const out = [];
+  let counter = startCounter;
+  for (const id of ids) {
+    const g = flightGames.get(String(id));
+    if (!g) continue;
+    let hi = resolve(g.homeName || ""), ai = resolve(g.awayName || "");
+    if (hi < 0 && g.homeShort) hi = resolve(g.homeShort);
+    if (ai < 0 && g.awayShort) ai = resolve(g.awayShort);
+    if (hi < 0 || ai < 0 || hi === ai) {
+      if (hi < 0 || ai < 0) warn(`Game ${id}: no team match for ${hi < 0 ? `"${g.homeName}"` : ""} ${ai < 0 ? `"${g.awayName}"` : ""} - game skipped`);
+      continue;
+    }
+    const both = g.score1 != null && g.score2 != null;
+    const hasResult = !!(g.completed || (both && (+g.score1 > 0 || +g.score2 > 0)));
+    const played = hasResult || !!(g.date && g.date < today);
+    out.push({
+      id: `f${counter++}`, gameId: String(id),
+      homeIdx: hi, awayIdx: ai,
+      homeWin: 50, draw: 6, awayWin: 44,
+      overrideOn: false, ovHW: "", ovD: "", ovAW: "",
+      played, homeScore: hasResult && both ? +g.score1 : null, awayScore: hasResult && both ? +g.score2 : null,
+      week: 0, date: g.date || null,
+      ...(g.time ? { time: g.time } : {}),
+    });
   }
+  return out;
+}
+
+function parseGamesHtml(html, ranking, times) {
+  const teamNames = ranking.map(r => r.name);
+  const stripText = decodeEntities;
+  const resolveTeam = makeTeamResolver(teamNames);
 
   const fixtures = [];
   let counter = 0;
 
   // Split HTML on game-card anchor starts: <a href="...games/ID"
   // Each chunk runs from one anchor to the next, so regexes stay within one card.
-  const anchorRe = /<a[^>]+href="[^"]*\/games\/(\d+)"[^>]*>/gi;
+  // The link may point at a sub page (/games/ID/gamesheet) and a card may hold several links to the
+  // same game: only the first link of a run starts the card.
+  const anchorRe = /<a[^>]+href="[^"]*\/games\/(\d+)(?:\/[A-Za-z-]+)?(?:[?#][^"]*)?"[^>]*>/gi;
   const anchors = [];
   let am;
   while ((am = anchorRe.exec(html)) !== null) {
+    if (anchors.length && anchors[anchors.length - 1].gameId === am[1]) continue;
     anchors.push({ gameId: am[1], start: am.index });
   }
 
@@ -849,6 +892,8 @@ const FULL_REFRESH_HOURS = 20;
 // Bump when the stored league format gains new fields (kick-off times, team ids, ...):
 // every league whose saved data has an older version is re-fetched once on the next run,
 // even if it is otherwise "quiet".
+const DATA_VERSION = 3;
+
 // A cached line-up is fetched again when it can still change:
 //  - the page was empty when we looked (Clubee clubs fill it in hours or days later), or
 //  - the goals listed add up to fewer than the final score (clubs often publish the squad first and
@@ -867,8 +912,7 @@ function retryable(entry, f) {
   return listed < total && age <= 21;
 }
 const LINEUP_BACKFILL_PER_RUN = 2000; // effectively all; the time budget below is the real limit
-const LINEUP_BACKFILL_MINUTES = 20; // games cached before line-ups existed get theirs a few per run, newest first
-const DATA_VERSION = 3; // bumped: forces one full refresh so dates missing from the old data get filled in
+const LINEUP_BACKFILL_MINUTES = 20;
 function brusselsDate(d = new Date()) {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
 }
@@ -964,7 +1008,21 @@ async function main() {
         } catch { /* embedded data is optional */ }
       }
       let times = extractGameTimes(rawGames);
-      const { fixtures } = parseGamesHtml(gamesHtml, ranking, times);
+      // Kick-off times also come from the embedded game list (works even if the id/start_date layout changes).
+      for (const [id, g] of flightGames) if (!times.has(id) && g.date) times.set(id, { date: g.date, time: g.time || "00:00" });
+      const cardParse = parseGamesHtml(gamesHtml, ranking, times);
+      let fixtures = cardParse.fixtures;
+      {
+        const have = new Set(fixtures.map(f => String(f.gameId)));
+        const missingIds = [...flightGames.keys()].filter(id => !have.has(id));
+        const hrefs = [...gamesHtml.matchAll(/href="([^"]*\/games\/\d+[^"]*)"/g)].map(m => m[1]);
+        log(`    Cards: ${fixtures.length} read from the page, ${missingIds.length} of ${flightGames.size} embedded game(s) not found as cards (${hrefs.length} game link(s) in the page${hrefs[0] ? ", e.g. " + hrefs[0] : ""})`);
+        if (missingIds.length) {
+          const extra = fixturesFromFlight(flightGames, ranking, missingIds, fixtures.length);
+          fixtures = fixtures.concat(extra);
+          log(`    Added ${extra.length} game(s) from the embedded game data (${extra.filter(f => f.played).length} played)`);
+        }
+      }
       log(`    Embedded game data: ${flightGames.size} game(s) for ${fixtures.length} parsed fixture(s); kick-off time known for ${fixtures.filter(f => f.time).length}`);
 
       {
@@ -1256,7 +1314,7 @@ async function main() {
     log(`Wrote data/index.json and ${r.leagues} league file(s)`);
   } catch (e) { warn(`Could not write split data: ${e.message}`); }
 
-  // Games cached before line-ups existed: add the line-up a few per run, newest first.
+  // Games cached before line-ups existed: add the line-up, newest first, within a time budget.
   {
     const todo = Object.entries(boxCache.games)
       .filter(([, g]) => (!g.lineup || !g.lineup.length) && !g.failed)
@@ -1319,7 +1377,7 @@ async function main() {
   if (bad > 0 && bad === results.length) process.exit(1);
 }
 
-module.exports = { parseVenueAddress, parseStatsHtml, parseLineupHtml, parseLineupFull, LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
+module.exports = { makeTeamResolver, fixturesFromFlight, parseVenueAddress, parseStatsHtml, parseLineupHtml, parseLineupFull, LEAGUES, refreshReason, extractGameTimes, extractFlightGames, parseStandingsHtml, parseGamesHtml, decodeFlight, DATA_VERSION };
 if (require.main === module) {
   main().catch(err => { console.error(err); process.exit(1); });
 }

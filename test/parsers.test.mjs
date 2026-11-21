@@ -7,7 +7,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
-const { parseStatsHtml, parseLineupHtml, parseLineupFull, parseStandingsHtml, parseGamesHtml, extractFlightGames, extractGameTimes } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
+const { parseStatsHtml, parseLineupHtml, parseLineupFull, parseStandingsHtml, parseGamesHtml, extractFlightGames, extractGameTimes, fixturesFromFlight } = createRequire(import.meta.url)("../.github/scripts/fetch-vhv.js");
 
 const standingsHtml = `<table><tbody>
 <tr><th>#</th><th>Club</th></tr>
@@ -154,4 +154,31 @@ test("line-up page: players with shirt numbers, staff and captain per team", () 
   assert.equal(teams[0].captain, "Sten Dielen");
   assert.equal(teams[1].captain, "Jari Van Verdegem");
   assert.equal(teams[1].staff[0].name, "Jo Bytebier");
+});
+
+// When Clubee changes the markup of the game cards (all games vanished from the app, 72 embedded games
+// but 0 read), the games are rebuilt from the data embedded in the page.
+const realGames = "test/fixtures/clubee/games.html", realStandings = "test/fixtures/clubee/standings.html";
+test("games are rebuilt from the embedded data when the card markup changes", { skip: !fs.existsSync(realGames) || !fs.existsSync(realStandings) }, () => {
+  const html = fs.readFileSync(realGames, "utf8");
+  const ranking = parseStandingsHtml(fs.readFileSync(realStandings, "utf8"));
+  const before = parseGamesHtml(html, ranking, extractGameTimes(html)).fixtures;
+  assert.ok(before.length > 50, "cards are read normally");
+  const broken = html.replace(/teamInnerParapraph/g, "x1").replace(/href="([^"]*\/games\/\d+)"/g, 'href="$1/gamesheet"');
+  assert.equal(parseGamesHtml(broken, ranking, new Map()).fixtures.length, 0, "no team names without the old class names");
+  const flight = extractFlightGames(broken);
+  const rebuilt = fixturesFromFlight(flight, ranking, [...flight.keys()]);
+  assert.equal(rebuilt.length, before.length);
+  const sample = before.find(f => f.played && f.homeScore != null);
+  const same = rebuilt.find(f => f.gameId === sample.gameId);
+  assert.deepEqual([same.homeIdx, same.awayIdx, same.homeScore, same.awayScore, same.date], [sample.homeIdx, sample.awayIdx, sample.homeScore, sample.awayScore, sample.date]);
+  assert.equal(rebuilt.filter(f => f.played).length, before.filter(f => f.played).length);
+});
+
+test("a link to a game sub page still starts a card", () => {
+  const card = (id, h, a) => `<a href="/handballbelgium/games/${id}/gamesheet"><div class="teamInnerParapraph"><strong>${h}</strong></div><div class="teamInnerParapraphSecond"><strong>${a}</strong></div><h3>10 : 8</h3><p>05.09.2026</p></a>`;
+  const rank = [{ name: "Club A" }, { name: "Club B" }];
+  const { fixtures } = parseGamesHtml(card(7, "Club A", "Club B"), rank, new Map());
+  assert.equal(fixtures.length, 1);
+  assert.deepEqual([fixtures[0].gameId, fixtures[0].homeScore, fixtures[0].awayScore], ["7", 10, 8]);
 });
