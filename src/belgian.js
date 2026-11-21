@@ -292,9 +292,7 @@ export function BelgianLeagueView({ league, onBack }) {
   const [gi, setGi] = useState(0);
   const g = groups ? groups[Math.min(gi, groups.length - 1)] : null;
   const shown = useMemo(() => (g ? leagueForGroup(league, g) : league), [league, g]);
-  return (
-    <>
-      {groups && (
+  const poolBar = groups && (
         <div className="grp-bar" role="tablist" aria-label={tr("Pools")}>
           {groups.map((x, i) => (
             <button key={x.id} role="tab" aria-selected={x === g} className={"grp-chip" + (x === g ? " on" : "")} onClick={() => setGi(i)}>
@@ -302,13 +300,15 @@ export function BelgianLeagueView({ league, onBack }) {
             </button>
           ))}
         </div>
-      )}
-      <BelgianLeagueInner key={g ? g.id : "all"} league={shown} onBack={onBack} />
+  );
+  return (
+    <>
+      <BelgianLeagueInner key={g ? g.id : "all"} league={shown} onBack={onBack} poolBar={poolBar} />
     </>
   );
 }
 
-function BelgianLeagueInner({ league, onBack }) {
+function BelgianLeagueInner({ league, onBack, poolBar = null }) {
   const { teams: initTeams = [], fixtures: rawFixtures = [], scorers: leagueScorers = null, ranking = [], topSingleGamePlayers = [], travelRanking = [] } = league;
   const fixtures = useMemo(() => assignWeeks(rawFixtures), [rawFixtures]);
   const { t: tr } = useLang();
@@ -405,6 +405,8 @@ function BelgianLeagueInner({ league, onBack }) {
         </div>
         <span style={{ display: "inline-flex", gap: ".6rem", alignItems: "center" }}><LangSwitch /><button className="btn btn-ghost" onClick={onBack}>{tr("← All Leagues")}</button></span>
       </div>
+
+      {poolBar}
 
       <div className="panel">
         <div className="tabs tabs-top" style={{ overflowX: "auto", flexWrap: "nowrap", whiteSpace: "nowrap" }}>
