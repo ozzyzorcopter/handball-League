@@ -3511,6 +3511,58 @@
       "lat": 51.2308892,
       "lon": 5.422153,
       "source": "clubee"
+    },
+    "perwez promo bh r": {
+      "name": "Perwez Promo BH R",
+      "address": "Rue des Marronniers, 17, 1360, Perwez",
+      "lat": 50.6252281,
+      "lon": 4.8052028,
+      "source": "clubee"
+    },
+    "tubize promo bh": {
+      "name": "Tubize Promo BH",
+      "address": "Allée des Sports, 7, 1480, Tubize",
+      "lat": 50.684083,
+      "lon": 4.1994647,
+      "source": "clubee"
+    },
+    "dhc waasmunster m14 regionale beker": {
+      "name": "DHC Waasmunster M14 Regionale Beker",
+      "address": "Abdij Van Roosenberglaan 6, 9250, Waasmunster",
+      "lat": 51.1071461,
+      "lon": 4.0880763,
+      "source": "clubee"
+    },
+    "derdaele sp. pelt 2": {
+      "name": "derdaele Sp. Pelt 2",
+      "address": null,
+      "lat": null,
+      "lon": null
+    },
+    "eagles aarschot m16": {
+      "name": "Handbalclub Eagles Aarschot M16",
+      "address": null,
+      "lat": null,
+      "lon": null
+    },
+    "eeklo 1": {
+      "name": "Eeklo 1",
+      "address": null,
+      "lat": null,
+      "lon": null
+    },
+    "heist o/d berg 2": {
+      "name": "Heist o/d Berg 2",
+      "address": null,
+      "lat": null,
+      "lon": null
+    },
+    "uilenspiegel j14p": {
+      "name": "Uilenspiegel J14P",
+      "address": "72 Mechelsevest, 3000, Leuven",
+      "lat": 50.8860287,
+      "lon": 4.6900309,
+      "source": "clubee"
     }
   },
   "distances": {
@@ -4802,6 +4854,15 @@
     "eynatten-raeren cup|sporting pelt cup m": 108.9711,
     "hsc tubize|visé bm cup": 137.6191,
     "sprimont promo lg|visé bm cup": 37.890699999999995,
-    "biobest sasja d1 m vhv|p. kortessem d1 m vhv 1": 95.9052
+    "biobest sasja d1 m vhv|p. kortessem d1 m vhv 1": 95.9052,
+    "eynatten-raeren g18 lfh|fémina visé g18 lfh": 43.9313,
+    "herstal u16 lg|sprimont u16 lg": 27.2482,
+    "aalst d1 w vhv|olse merksem d1 w vhv": 58.0481,
+    "h. bilzen d m vhv lim-b|overpelt d m vhv lim": 53.1579,
+    "hubo g 18 vhv|sezoens achilles bocholt g 18 vhv": 55.8828,
+    "brugge d m vhv owv|lokeren d m vhv owv-b 2": 56.499199999999995,
+    "besox izegem g16 vhv r 1|lebbeke g16 vhv r": 90.0007,
+    "merksplas u16 vhv r|schoten u16 vhv r": 38.610699999999994,
+    "hhv meeuwen u14 vhv r|hubo u14 vhv r 3": 43.628
   }
 }
