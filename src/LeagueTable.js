@@ -6,9 +6,10 @@ import { teamKey, useFollow } from "./follow.js";
 import { predictMatch } from "./probabilities.js";
 import { LeagueScorers } from "./panels.js";
 import { ProbBar } from "./ProbBar.js";
+import { PositionChart } from "./PositionChart.js";
 const { useState, useMemo } = React;
 // ── LEAGUE TABLE ──────────────────────────────────────────────────────────────
-export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey, hideScorers, onMatchClick }) {
+export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTop, highlightBottom, confirmedTop, confirmedBottom, leagueId, aliases, archiveScorers, phaseTeams, phase, toughFullWidth, topSingleGamePlayers, travelRanking, followKey, hideScorers, section = "all", onMatchClick }) {
   const rows = useMemo(() => calcStats(teams, fixtures, ranking), [teams, fixtures, ranking]);
   const follow = useFollow();
   const { t } = useLang();
@@ -238,6 +239,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
 
   return (
     <div>
+      {section !== "fun" && (<>
       <div className="tbl-wrap">
         <table className="ltbl">
           <thead>
@@ -274,7 +276,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                   </td>
                   <td>{r.P}</td>
                   <td style={{ color: "#4ade80" }}>{r.W}</td>
-                  <td style={{ color: "#facc15" }}>{r.D}</td>
+                  <td style={{ color: "#94a3b8" }}>{r.D}</td>
                   <td style={{ color: "#f87171" }}>{r.L}</td>
                   <td className="hide-sm">{r.GF}</td>
                   <td className="hide-sm">{r.GA}</td>
@@ -297,7 +299,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
       </div>
       <p className="note">{t("Click a team name for match details")}{followKey ? " · " + t("☆ follows a team (saved on this device)") : ""}</p>
       <div className="mini-box" style={{ marginTop: "1rem" }}>
-        <div className="mini-ttl" style={{ color: "#22d3ee", display: "flex", justifyContent: "space-between" }}>
+        <div className="mini-ttl" style={{ color: "#fdda24", display: "flex", justifyContent: "space-between" }}>
           <span>{t("🗓 Games last week")}</span>
           <span className="muted" style={{ fontWeight: 400, fontSize: ".7rem" }}>{fmtShort(weekWindow.prev)} – {fmtShort(weekWindow.prevEnd)}</span>
         </div>
@@ -344,8 +346,10 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
           </div>
         ))}
       </div>
+      <PositionChart teams={teams} fixtures={fixtures} mine={new Set(teams.filter(tm => isMine(tm.id)).map(tm => tm.id))} />
+      </>)}
       {!hideScorers && Array.isArray(archiveScorers) && <LeagueScorers leagueId={leagueId} teams={teams} aliases={aliases} archiveScorers={archiveScorers} phaseTeams={phaseTeams} phase={phase} />}
-      {hasPlayed && (
+      {section !== "table" && hasPlayed && (
         <>
           {/* Row 1: Attackers + Defenders */}
           <div className="mini-rankings" style={{ marginTop: "1rem" }}>
@@ -467,7 +471,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
           <div className="mini-rankings" style={{ marginTop: ".75rem" }}>
             <div>
               <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "highgame" ? null : "highgame")}>
-                <div className="mini-ttl" style={{ color: "#22d3ee", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                <div className="mini-ttl" style={{ color: "#fdda24", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
                   <span>{t("🔥 Most Goals (Game)")}</span><span>{rankingPanel === "highgame" ? "▲" : "▼"}</span>
                 </div>
                 {topHighGame.length === 0 && (
@@ -477,7 +481,7 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                   <div key={r.id} className="mini-row">
                     <span className="mini-pos">{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                     <span className="mini-name">{cleanTeamName(r.name)}</span>
-                    <span className="mini-val" style={{ color: "#22d3ee" }}>{r.score}</span>
+                    <span className="mini-val" style={{ color: "#fdda24" }}>{r.score}</span>
                   </div>
                 ))}
               </div>
@@ -486,9 +490,9 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                   <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Highest score by a team in a single match.")}</div>
                   {highGameRanking.map((r, i) => (
                     <div key={r.id} className="mini-row">
-                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#22d3ee" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                      <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#fdda24" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
                       <span className="mini-name">{cleanTeamName(r.name)}</span>
-                      <span className="mini-val" style={{ color: "#22d3ee" }}>{r.score}</span>
+                      <span className="mini-val" style={{ color: "#fdda24" }}>{r.score}</span>
                       <span className="muted" style={{ fontSize: ".72rem", marginLeft: ".25rem" }}>vs {cleanTeamName(r.vs)}</span>
                     </div>
                   ))}
@@ -585,32 +589,34 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                   </div>
                 )}
               </div>
-              <div>
-                <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")}>
-                  <div className="mini-ttl" style={{ color: "#facc15", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
-                    <span>{t("🎯 Most Clutch")}</span><span>{rankingPanel === "clutch" ? "▲" : "▼"}</span>
-                  </div>
-                  {topClutch.map((r, i) => (
-                    <div key={r.id} className="mini-row">
-                      <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
-                      <span className="mini-name">{cleanTeamName(r.name)}</span>
-                      <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
+              {(travelRanking || []).length > 0 && (
+                <div>
+                  <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "travel" ? null : "travel")}>
+                    <div className="mini-ttl" style={{ color: "#38bdf8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                      <span>{t("🚗 Distance Travelled")}</span><span>{rankingPanel === "travel" ? "▲" : "▼"}</span>
                     </div>
-                  ))}
-                </div>
-                {rankingPanel === "clutch" && (
-                  <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Number of wins by 1 or 2 goals.")}</div>
-                    {clutchRanking.map((r, i) => (
+                    {travelRanking.slice(0, 3).map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#7d8597" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
+                        <span className="mini-pos">{MEDALS[i]}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
-                        <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
+                        <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
                       </div>
                     ))}
                   </div>
-                )}
-              </div>
+                  {rankingPanel === "travel" && (
+                    <div className="ranking-expand">
+                      <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Driving distance from each team's home venue to every away game played this season.")}</div>
+                      {travelRanking.map((r, i) => (
+                        <div key={r.id} className="mini-row">
+                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                          <span className="mini-name">{cleanTeamName(r.name)}</span>
+                          <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
@@ -647,14 +653,14 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 </div>
                 <div>
                   <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")}>
-                    <div className="mini-ttl" style={{ color: "#facc15", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                    <div className="mini-ttl" style={{ color: "#94a3b8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
                       <span>{t("🎯 Most Clutch")}</span><span>{rankingPanel === "clutch" ? "▲" : "▼"}</span>
                     </div>
                     {topClutch.map((r, i) => (
                       <div key={r.id} className="mini-row">
                         <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
-                        <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
+                        <span className="mini-val" style={{ color: "#94a3b8" }}>{r.wins}W</span>
                       </div>
                     ))}
                   </div>
@@ -663,9 +669,9 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                       <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Number of wins by 1 or 2 goals.")}</div>
                       {clutchRanking.map((r, i) => (
                         <div key={r.id} className="mini-row">
-                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#facc15" : "#7d8597" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
+                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#7d8597" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
                           <span className="mini-name">{cleanTeamName(r.name)}</span>
-                          <span className="mini-val" style={{ color: "#facc15" }}>{r.wins}W</span>
+                          <span className="mini-val" style={{ color: "#94a3b8" }}>{r.wins}W</span>
                         </div>
                       ))}
                     </div>
@@ -701,33 +707,33 @@ export function LeagueTable({ teams, fixtures, ranking, onTeamClick, highlightTo
                 )}
               </div>
             )}
-            {!toughFullWidth && (travelRanking || []).length > 0 && (
-              <div>
-                <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "travel" ? null : "travel")}>
-                  <div className="mini-ttl" style={{ color: "#38bdf8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
-                    <span>{t("🚗 Distance Travelled")}</span><span>{rankingPanel === "travel" ? "▲" : "▼"}</span>
-                  </div>
-                  {travelRanking.slice(0, 3).map((r, i) => (
-                    <div key={r.id} className="mini-row">
-                      <span className="mini-pos">{MEDALS[i]}</span>
-                      <span className="mini-name">{cleanTeamName(r.name)}</span>
-                      <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
+            {!toughFullWidth && (
+                <div>
+                  <div className="mini-box" style={{ cursor: "pointer" }} onClick={() => setRankingPanel(rankingPanel === "clutch" ? null : "clutch")}>
+                    <div className="mini-ttl" style={{ color: "#94a3b8", userSelect: "none", display: "flex", justifyContent: "space-between" }}>
+                      <span>{t("🎯 Most Clutch")}</span><span>{rankingPanel === "clutch" ? "▲" : "▼"}</span>
                     </div>
-                  ))}
-                </div>
-                {rankingPanel === "travel" && (
-                  <div className="ranking-expand">
-                    <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Driving distance from each team's home venue to every away game played this season.")}</div>
-                    {travelRanking.map((r, i) => (
+                    {topClutch.map((r, i) => (
                       <div key={r.id} className="mini-row">
-                        <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#38bdf8" : "#7d8597" }}>{i < 3 ? MEDALS[i] : (i+1)+"."}</span>
+                        <span className="mini-pos">{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
                         <span className="mini-name">{cleanTeamName(r.name)}</span>
-                        <span className="mini-val" style={{ color: "#38bdf8" }}>{(r.estimatedLegs || r.missingLegs) ? "~" : ""}{r.km} km</span>
+                        <span className="mini-val" style={{ color: "#94a3b8" }}>{r.wins}W</span>
                       </div>
                     ))}
                   </div>
-                )}
-              </div>
+                  {rankingPanel === "clutch" && (
+                    <div className="ranking-expand">
+                      <div style={{ fontSize: ".72rem", color: "#8b93a5", marginBottom: ".5rem" }}>{t("Number of wins by 1 or 2 goals.")}</div>
+                      {clutchRanking.map((r, i) => (
+                        <div key={r.id} className="mini-row">
+                          <span className="mini-pos" style={{ minWidth: "1.8rem", color: i < 3 ? "#94a3b8" : "#7d8597" }}>{r.tied ? "—" : (i < 3 ? MEDALS[i] : (i+1)+".")}</span>
+                          <span className="mini-name">{cleanTeamName(r.name)}</span>
+                          <span className="mini-val" style={{ color: "#94a3b8" }}>{r.wins}W</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
             )}
           </div>
 
