@@ -426,6 +426,7 @@ function BelgianLeagueInner({ league, onBack, poolBar = null }) {
             fixtures={fixtures}
             ranking={ranking}
             onTeamClick={idx => setDetail({ idx })}
+            onMatchClick={f => setLineup(f)}
             highlightTop={hlTop}
             highlightBottom={hlBot}
             confirmedTop={confirmedTop}
@@ -450,6 +451,7 @@ function BelgianLeagueInner({ league, onBack, poolBar = null }) {
             fixtures={fixtures}
             ranking={ranking}
             onTeamClick={idx => setDetail({ idx })}
+            onMatchClick={f => setLineup(f)}
             highlightTop={hlTop}
             highlightBottom={hlBot}
             confirmedTop={confirmedTop}

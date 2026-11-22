@@ -400,6 +400,9 @@ html[data-theme="light"] .subtab.on{filter:invert(1) hue-rotate(180deg);}
 /* ── Line-up sheet ───────────────────────────────────────────────────────── */
 .outcome.clickable,.detail-match.clickable{cursor:pointer;}
 .outcome.clickable:active,.detail-match.clickable:active{background:rgba(253,218,36,.06);}
+.mini-row.clickable{cursor:pointer;}
+.mini-row.clickable:active{background:rgba(253,218,36,.06);}
+.mini-row.clickable:focus-visible{outline:1px solid #fdda24;}
 .lu-over{z-index:70!important;}
 .lu-panel{z-index:71!important;}
 .lu-head{display:flex;align-items:center;justify-content:center;gap:.7rem;text-align:center;flex-wrap:wrap;}
