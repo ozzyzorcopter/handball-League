@@ -10545,7 +10545,7 @@
       "leagueId": "18702",
       "players": [],
       "failed": true,
-      "tries": 59
+      "tries": 60
     },
     "2849020": {
       "date": "2026-09-05",
@@ -175305,7 +175305,7 @@
       "leagueId": "18707",
       "players": [],
       "failed": true,
-      "tries": 61
+      "tries": 62
     },
     "2849454": {
       "date": "2026-09-12",
@@ -229838,6 +229838,754 @@
             }
           ],
           "captain": "Nuri De Backer"
+        }
+      ]
+    },
+    "2849656": {
+      "date": "2026-11-22",
+      "leagueId": "18708",
+      "players": [
+        {
+          "player": "Milo Rigolle",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ayoze Vandewalle",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jordy Van Moorleghem",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jenten Lefever",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Rune Hellings",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Louis Lavens",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jari Van Moorleghem",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Joren Vanthournout",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Arthur Hellings",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Pierre Gryp",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Emiel Huyghe",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mathias Goerlandt",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Benoit Gryp",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Matisse Demets",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Arne Bruyneel",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lieven Tytgat",
+          "club": "Desselgemse D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jelle De Sutter",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Simon Callebaut",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Simon Roels",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Eowynn Lievens",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jarne Maenhout",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jonas Bruggeman",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lennert Van Waes",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Haldan Chinitor",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jannes Dejonckheere",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Miel De Roo",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Wannes Van De Voorde",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Aico Pieters",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Dominique Jocque",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Matteo De Pauw",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "simon Fraeyman",
+          "club": "Eeklo D2 M VHV",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Desselgemse D2 M VHV",
+          "players": [
+            {
+              "n": 1,
+              "name": "Milo Rigolle",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 3,
+              "name": "Ayoze Vandewalle",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "Jordy Van Moorleghem",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Jenten Lefever",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 6,
+              "name": "Rune Hellings",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Louis Lavens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Jari Van Moorleghem",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Joren Vanthournout",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Arthur Hellings",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 13,
+              "name": "Pierre Gryp",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "Emiel Huyghe",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 17,
+              "name": "Mathias Goerlandt",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 24,
+              "name": "Benoit Gryp",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 25,
+              "name": "Matisse Demets",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 33,
+              "name": "Arne Bruyneel",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 82,
+              "name": "Lieven Tytgat",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Marnix Froyen",
+              "role": "Head Coach"
+            },
+            {
+              "name": "Filip Lefever",
+              "role": "Third assistant coach"
+            },
+            {
+              "name": "Dimitri Denys",
+              "role": "Second assistant coach"
+            }
+          ],
+          "captain": "Milo Rigolle"
+        },
+        {
+          "club": "Eeklo D2 M VHV",
+          "players": [
+            {
+              "n": 7,
+              "name": "Jelle De Sutter",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Simon Callebaut",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "Simon Roels",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 12,
+              "name": "Eowynn Lievens",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 17,
+              "name": "Jarne Maenhout",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 20,
+              "name": "Jonas Bruggeman",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 21,
+              "name": "Lennert Van Waes",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 22,
+              "name": "Haldan Chinitor",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 24,
+              "name": "Jannes Dejonckheere",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 26,
+              "name": "Miel De Roo",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 29,
+              "name": "Wannes Van De Voorde",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 30,
+              "name": "Aico Pieters",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 31,
+              "name": "Dominique Jocque",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 70,
+              "name": "Matteo De Pauw",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 99,
+              "name": "simon Fraeyman",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [],
+          "captain": ""
         }
       ]
     },
@@ -766854,7 +767602,7 @@
       "leagueId": "18698",
       "players": [],
       "failed": true,
-      "tries": 15
+      "tries": 16
     },
     "2851875": {
       "date": "2026-10-04",
@@ -824502,7 +825250,7 @@
       "leagueId": "18740",
       "players": [],
       "failed": true,
-      "tries": 61
+      "tries": 62
     },
     "2852149": {
       "date": "2026-11-21",
@@ -1031017,21 +1031765,21 @@
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 58
+      "tries": 59
     },
     "3053562": {
       "date": "2027-01-23",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 58
+      "tries": 59
     },
     "3053564": {
       "date": "2027-01-30",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 58
+      "tries": 59
     }
   }
 }
