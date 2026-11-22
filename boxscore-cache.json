@@ -10545,7 +10545,7 @@
       "leagueId": "18702",
       "players": [],
       "failed": true,
-      "tries": 38
+      "tries": 39
     },
     "2849020": {
       "date": "2026-09-05",
@@ -172542,7 +172542,7 @@
       "leagueId": "18707",
       "players": [],
       "failed": true,
-      "tries": 40
+      "tries": 41
     },
     "2849454": {
       "date": "2026-09-12",
@@ -266388,6 +266388,475 @@
             },
             {
               "name": "Caroline Fohn",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": ""
+        }
+      ]
+    },
+    "2849943": {
+      "date": "2026-11-22",
+      "leagueId": "18697",
+      "players": [
+        {
+          "player": "E... S...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "L... C...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "H... K...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ida Weling",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "E... E...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "C... H...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "L... A...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "N... H...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "P... N...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "C... B...",
+          "club": "Eynatten-Raeren G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Mila Steins",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Anaya Labrozzo",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Livia LABROZZO",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Gabrielle Kimmes",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Elisa Vervier",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Chloé Garnier Le Bihan",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Angela Midjrato",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Noémie Brimioulle",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Louisa Amouzoune",
+          "club": "Fémina Visé G14 LFH",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Eynatten-Raeren G14 LFH",
+          "players": [
+            {
+              "n": 1,
+              "name": "E... S...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 2,
+              "name": "L... C...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "H... K...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Ida Weling",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "E... E...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 10,
+              "name": "C... H...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 12,
+              "name": "L... A...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 14,
+              "name": "N... H...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "P... N...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 18,
+              "name": "C... B...",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Françoise Kück",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": ""
+        },
+        {
+          "club": "Fémina Visé G14 LFH",
+          "players": [
+            {
+              "n": 1,
+              "name": "Mila Steins",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 2,
+              "name": "Anaya Labrozzo",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 3,
+              "name": "Livia LABROZZO",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 4,
+              "name": "Gabrielle Kimmes",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Elisa Vervier",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 7,
+              "name": "Chloé Garnier Le Bihan",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Angela Midjrato",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 11,
+              "name": "Noémie Brimioulle",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 24,
+              "name": "Louisa Amouzoune",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Nico Walch",
               "role": "Head Coach"
             }
           ],
@@ -604583,7 +605052,7 @@
           "player": "M... V...",
           "club": "Leuven U14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604594,8 +605063,8 @@
         {
           "player": "O... S...",
           "club": "Leuven U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 15,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604606,8 +605075,8 @@
         {
           "player": "O... F...",
           "club": "Leuven U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604619,7 +605088,7 @@
           "player": "V... H...",
           "club": "Leuven U14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604630,8 +605099,8 @@
         {
           "player": "B... D...",
           "club": "Leuven U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 2,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604642,8 +605111,8 @@
         {
           "player": "W... B...",
           "club": "Leuven U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604655,7 +605124,7 @@
           "player": "N... A...",
           "club": "Leuven U14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604667,7 +605136,7 @@
           "player": "C... H...",
           "club": "Leuven U14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604678,8 +605147,8 @@
         {
           "player": "K... D...",
           "club": "Leuven U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604690,8 +605159,8 @@
         {
           "player": "S... V...",
           "club": "Leuven U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604703,7 +605172,7 @@
           "player": "T... B...",
           "club": "Leuven U14 VHV R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604714,11 +605183,11 @@
         {
           "player": "K... F...",
           "club": "Leuven U14 VHV R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 3,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
-          "yellowCards": 0,
+          "yellowCards": 1,
           "twoMinSuspensions": 0,
           "blueCards": 0,
           "redCards": 0
@@ -604726,8 +605195,8 @@
         {
           "player": "K... G...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604738,8 +605207,8 @@
         {
           "player": "J... B...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604750,8 +605219,8 @@
         {
           "player": "S... B...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604762,8 +605231,8 @@
         {
           "player": "T... E...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604775,7 +605244,7 @@
           "player": "L... C...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604786,8 +605255,8 @@
         {
           "player": "V... V...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 8,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604799,7 +605268,7 @@
           "player": "T... J...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604810,8 +605279,8 @@
         {
           "player": "J... T...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 4,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604822,8 +605291,8 @@
         {
           "player": "C... A...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 7,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604834,8 +605303,8 @@
         {
           "player": "M... B...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604846,8 +605315,8 @@
         {
           "player": "S... C...",
           "club": "Derdaele Sp. Pelt U14 VHV R 2",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 17,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -604874,7 +605343,7 @@
             {
               "n": 13,
               "name": "O... S...",
-              "g": 0,
+              "g": 15,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -604885,7 +605354,7 @@
             {
               "n": 16,
               "name": "O... F...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -604907,7 +605376,7 @@
             {
               "n": 30,
               "name": "B... D...",
-              "g": 0,
+              "g": 2,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -604918,7 +605387,7 @@
             {
               "n": 33,
               "name": "W... B...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -604951,7 +605420,7 @@
             {
               "n": 47,
               "name": "K... D...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -604962,7 +605431,7 @@
             {
               "n": 49,
               "name": "S... V...",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -604984,10 +605453,10 @@
             {
               "n": 53,
               "name": "K... F...",
-              "g": 0,
+              "g": 3,
               "s7": 0,
               "m7": 0,
-              "yc": 0,
+              "yc": 1,
               "m2": 0,
               "bc": 0,
               "rc": 0
@@ -605011,7 +605480,7 @@
             {
               "n": 5,
               "name": "K... G...",
-              "g": 0,
+              "g": 7,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605022,7 +605491,7 @@
             {
               "n": 7,
               "name": "J... B...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605033,7 +605502,7 @@
             {
               "n": 9,
               "name": "S... B...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605044,7 +605513,7 @@
             {
               "n": 11,
               "name": "T... E...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605066,7 +605535,7 @@
             {
               "n": 14,
               "name": "V... V...",
-              "g": 0,
+              "g": 8,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605088,7 +605557,7 @@
             {
               "n": 25,
               "name": "J... T...",
-              "g": 0,
+              "g": 4,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605099,7 +605568,7 @@
             {
               "n": 29,
               "name": "C... A...",
-              "g": 0,
+              "g": 7,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605110,7 +605579,7 @@
             {
               "n": 31,
               "name": "M... B...",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -605121,7 +605590,7 @@
             {
               "n": 44,
               "name": "S... C...",
-              "g": 0,
+              "g": 17,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784356,8 +784825,8 @@
         {
           "player": "Alessandro Castrogiovanni",
           "club": "Flémalle U14 Lg",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784369,7 +784838,7 @@
           "player": "Hugo DECLERCQ",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784381,7 +784850,7 @@
           "player": "Florian Loré",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784393,7 +784862,7 @@
           "player": "Astou CAMARA",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784405,7 +784874,7 @@
           "player": "Radon Marlaire",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784417,7 +784886,7 @@
           "player": "M... P...",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784429,7 +784898,7 @@
           "player": "Antonio MAINARDI",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784441,7 +784910,7 @@
           "player": "Sandro Ressaissi",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784452,8 +784921,8 @@
         {
           "player": "Maxime Peterkenne",
           "club": "Flémalle U14 Lg",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784465,7 +784934,7 @@
           "player": "Maher ABID",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784477,7 +784946,7 @@
           "player": "Théo Haas",
           "club": "Flémalle U14 Lg",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784489,7 +784958,7 @@
           "player": "Victor Cauwenberghs",
           "club": "Visé BM U14 Lg R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784501,7 +784970,7 @@
           "player": "Charlie Braine-Demarche",
           "club": "Visé BM U14 Lg R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784512,8 +784981,8 @@
         {
           "player": "Yliann Paulus",
           "club": "Visé BM U14 Lg R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784524,8 +784993,8 @@
         {
           "player": "Louis Delobbe",
           "club": "Visé BM U14 Lg R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784536,8 +785005,8 @@
         {
           "player": "Milo Flamand",
           "club": "Visé BM U14 Lg R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784549,7 +785018,7 @@
           "player": "Robin Libert",
           "club": "Visé BM U14 Lg R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784560,8 +785029,8 @@
         {
           "player": "Martin Habran",
           "club": "Visé BM U14 Lg R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784572,8 +785041,8 @@
         {
           "player": "Maxime Moyaerts",
           "club": "Visé BM U14 Lg R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784585,7 +785054,7 @@
           "player": "Victoria Roufosse",
           "club": "Visé BM U14 Lg R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784596,8 +785065,8 @@
         {
           "player": "Tom Braine",
           "club": "Visé BM U14 Lg R",
-          "goals": 0,
-          "matchesPlayed": 0,
+          "goals": 1,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784609,7 +785078,7 @@
           "player": "Eliot Palmaers",
           "club": "Visé BM U14 Lg R",
           "goals": 0,
-          "matchesPlayed": 0,
+          "matchesPlayed": 1,
           "sevenMScored": 0,
           "sevenMMissed": 0,
           "yellowCards": 0,
@@ -784625,7 +785094,7 @@
             {
               "n": 1,
               "name": "Alessandro Castrogiovanni",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784713,7 +785182,7 @@
             {
               "n": 14,
               "name": "Maxime Peterkenne",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784780,7 +785249,7 @@
             {
               "n": 49,
               "name": "Yliann Paulus",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784791,7 +785260,7 @@
             {
               "n": 54,
               "name": "Louis Delobbe",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784802,7 +785271,7 @@
             {
               "n": 55,
               "name": "Milo Flamand",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784824,7 +785293,7 @@
             {
               "n": 59,
               "name": "Martin Habran",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784835,7 +785304,7 @@
             {
               "n": 60,
               "name": "Maxime Moyaerts",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -784857,7 +785326,7 @@
             {
               "n": 79,
               "name": "Tom Braine",
-              "g": 0,
+              "g": 1,
               "s7": 0,
               "m7": 0,
               "yc": 0,
@@ -803202,7 +803671,7 @@
       "leagueId": "18740",
       "players": [],
       "failed": true,
-      "tries": 40
+      "tries": 41
     },
     "2852149": {
       "date": "2026-11-21",
@@ -808927,6 +809396,475 @@
             }
           ],
           "captain": "Dafne Kiebooms"
+        }
+      ]
+    },
+    "2852397": {
+      "date": "2026-11-22",
+      "leagueId": "18714",
+      "players": [
+        {
+          "player": "Nele Van De Vliet",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Evi Loozen",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Ine Mosselmans",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Karen Clauwaert",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Fatima Labbane",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Geertrui Vautmans",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lynn Van Den Broeck",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Elena Garcia Del Pino",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Lisa Fox",
+          "club": "Welta D W VHV AVB",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Janne De Schutter",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Cato Laurijssen",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Katlijn Van Den Corput",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Alix Boutsen",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Bo Baudewijn",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Sofie Van Den Corput",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Jolien Ogiers",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Nele Vijgen",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Xanne Brys",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        },
+        {
+          "player": "Inge Verschooten",
+          "club": "Schoten D W VHV AVB-B",
+          "goals": 0,
+          "matchesPlayed": 0,
+          "sevenMScored": 0,
+          "sevenMMissed": 0,
+          "yellowCards": 0,
+          "twoMinSuspensions": 0,
+          "blueCards": 0,
+          "redCards": 0
+        }
+      ],
+      "lineup": [
+        {
+          "club": "Welta D W VHV AVB",
+          "players": [
+            {
+              "n": 4,
+              "name": "Nele Van De Vliet",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 5,
+              "name": "Evi Loozen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 8,
+              "name": "Ine Mosselmans",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 9,
+              "name": "Karen Clauwaert",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 12,
+              "name": "Fatima Labbane",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 15,
+              "name": "Geertrui Vautmans",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 16,
+              "name": "Lynn Van Den Broeck",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 17,
+              "name": "Elena Garcia Del Pino",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 19,
+              "name": "Lisa Fox",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Erik Van Regenmortel",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "Nele Van De Vliet"
+        },
+        {
+          "club": "Schoten D W VHV AVB-B",
+          "players": [
+            {
+              "n": 7,
+              "name": "Janne De Schutter",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 18,
+              "name": "Cato Laurijssen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 22,
+              "name": "Katlijn Van Den Corput",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 23,
+              "name": "Alix Boutsen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 29,
+              "name": "Bo Baudewijn",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 32,
+              "name": "Sofie Van Den Corput",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 33,
+              "name": "Jolien Ogiers",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 34,
+              "name": "Nele Vijgen",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 38,
+              "name": "Xanne Brys",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            },
+            {
+              "n": 39,
+              "name": "Inge Verschooten",
+              "g": 0,
+              "s7": 0,
+              "m7": 0,
+              "yc": 0,
+              "m2": 0,
+              "bc": 0,
+              "rc": 0
+            }
+          ],
+          "staff": [
+            {
+              "name": "Bryan Adams",
+              "role": "Head Coach"
+            }
+          ],
+          "captain": "Xanne Brys"
         }
       ]
     },
@@ -1006740,21 +1007678,21 @@
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 37
+      "tries": 38
     },
     "3053562": {
       "date": "2027-01-23",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 37
+      "tries": 38
     },
     "3053564": {
       "date": "2027-01-30",
       "leagueId": "18726",
       "players": [],
       "failed": true,
-      "tries": 37
+      "tries": 38
     }
   }
 }
