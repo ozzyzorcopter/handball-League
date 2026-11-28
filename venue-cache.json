@@ -3542,9 +3542,10 @@
     },
     "eagles aarschot m16": {
       "name": "Handbalclub Eagles Aarschot M16",
-      "address": null,
-      "lat": null,
-      "lon": null
+      "address": "Bekaflaan 62, 3200, Aarschot",
+      "lat": 50.9871733,
+      "lon": 4.8473982,
+      "source": "clubee"
     },
     "eeklo 1": {
       "name": "Eeklo 1",
@@ -3564,6 +3565,12 @@
       "lat": 50.8860287,
       "lon": 4.6900309,
       "source": "clubee"
+    },
+    "kraainem 1": {
+      "name": "HC Kraainem (D1 LFH) 1",
+      "address": null,
+      "lat": null,
+      "lon": null
     }
   },
   "distances": {
@@ -4906,6 +4913,9 @@
     "derdaele sp. pelt d m vhv lim-b|hubo d m vhv lim": 63.6731,
     "malmedy promo lg|wanzois passion promo lg": 89.31039999999999,
     "dhc meeuwen d w vhv lim-b|hubo d w vhv lim": 43.628,
-    "dhc waasmunster d1 w vhv|evergem d1 w vhv": 37.9014
+    "dhc waasmunster d1 w vhv|evergem d1 w vhv": 37.9014,
+    "renaissance montegnée u16 lg|union beynoise u16 lg": 0,
+    "eynatten-raeren u16 lg|herstal u16 lg": 40.840900000000005,
+    "kraainem d1 m lfh|lokeren d2 m 1": 82.67410000000001
   }
 }
